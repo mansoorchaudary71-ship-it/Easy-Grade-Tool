@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -15,8 +15,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-24.04
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}
 
     steps:
       - name: Checkout code
@@ -28,11 +31,9 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Setup GitHub Pages
+      - name: Setup GitHub Pages Metadata
         id: pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
         continue-on-error: true
 
       - name: Install Dependencies
@@ -44,18 +45,23 @@ jobs:
           GITHUB_PAGES: "true"
           VITE_BASE_URL: ${{ steps.pages.outputs.base_path }}
 
-      - name: Upload artifact
+      # Strategy 1: Deploy to gh-pages branch (Always succeeds with contents: write)
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          keep_files: false
+          force_orphan: true
+
+      # Strategy 2: Direct GitHub Actions Pages Deployment (when Source is set to GitHub Actions in settings)
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
+        continue-on-error: true
         with:
           path: ./dist
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages via Actions
         id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true

@@ -15,26 +15,22 @@ import { ThemeProvider } from './context/ThemeContext';
 import { TOOLS_LIST, TOOL_PATHS, getToolKeyFromPath } from './data/constants';
 import { ToolKey } from './types';
 import { GradeCalculator } from './components/GradeCalculator';
+import { GpaCalculator } from './components/GpaCalculator';
+import { CgpaToPercentage } from './components/CgpaToPercentage';
+import { TipCalculator } from './components/TipCalculator';
+import { PercentageCalculator } from './components/PercentageCalculator';
+import { LoanCalculator } from './components/LoanCalculator';
+import { MortgageCalculator } from './components/MortgageCalculator';
+import { PasswordGenerator } from './components/PasswordGenerator';
+import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { TermsOfService } from './components/TermsOfService';
+import { AboutMethodology } from './components/AboutMethodology';
+import { ProgrammaticCalculatorView } from './components/ProgrammaticCalculatorView';
+import { CommandPalette } from './components/CommandPalette';
 import { NotFound } from './components/NotFound';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
 import { preloadAllTools } from './utils/toolPreloader';
-
-// Non-active calculator components are lazy-loaded to optimize initial page speed and defer scripts/DOM until navigation
-const LazyGpaCalculator = lazy(() => import('./components/GpaCalculator').then(m => ({ default: m.GpaCalculator })));
-const LazyCgpaToPercentage = lazy(() => import('./components/CgpaToPercentage').then(m => ({ default: m.CgpaToPercentage })));
-const LazyTipCalculator = lazy(() => import('./components/TipCalculator').then(m => ({ default: m.TipCalculator })));
-const LazyPercentageCalculator = lazy(() => import('./components/PercentageCalculator').then(m => ({ default: m.PercentageCalculator })));
-const LazyLoanCalculator = lazy(() => import('./components/LoanCalculator').then(m => ({ default: m.LoanCalculator })));
-const LazyMortgageCalculator = lazy(() => import('./components/MortgageCalculator').then(m => ({ default: m.MortgageCalculator })));
-const LazyPasswordGenerator = lazy(() => import('./components/PasswordGenerator').then(m => ({ default: m.PasswordGenerator })));
-const LazyPrivacyPolicy = lazy(() => import('./components/PrivacyPolicy').then(m => ({ default: m.PrivacyPolicy })));
-const LazyTermsOfService = lazy(() => import('./components/TermsOfService').then(m => ({ default: m.TermsOfService })));
-const LazyAboutMethodology = lazy(() => import('./components/AboutMethodology').then(m => ({ default: m.AboutMethodology })));
-const LazyProgrammaticCalculatorView = lazy(() => import('./components/ProgrammaticCalculatorView').then(m => ({ default: m.ProgrammaticCalculatorView })));
-
-// Modals and command palette are lazy-loaded to keep initial execution lightweight
-const CommandPalette = lazy(() => import('./components/CommandPalette').then(m => ({ default: m.CommandPalette })));
 
 // Zero CLS loading placeholder for lazy routes
 const CalculatorSkeleton: React.FC = () => (
@@ -70,19 +66,19 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   const [toastMessage, setToastMessage] = useState<string>('');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
 
-  // Component resolution: prioritize sync components for SSR/prerender, otherwise defer non-active tools with lazy loading
+  // Component resolution: prioritize sync components for SSR/prerender, with direct component fallbacks
   const CompGrade = syncComponents?.GradeCalculator || GradeCalculator;
-  const CompGpa = syncComponents?.GpaCalculator || LazyGpaCalculator;
-  const CompCgpa = syncComponents?.CgpaToPercentage || LazyCgpaToPercentage;
-  const CompTip = syncComponents?.TipCalculator || LazyTipCalculator;
-  const CompPct = syncComponents?.PercentageCalculator || LazyPercentageCalculator;
-  const CompLoan = syncComponents?.LoanCalculator || LazyLoanCalculator;
-  const CompMortgage = syncComponents?.MortgageCalculator || LazyMortgageCalculator;
-  const CompPassword = syncComponents?.PasswordGenerator || LazyPasswordGenerator;
-  const CompPrivacy = syncComponents?.PrivacyPolicy || LazyPrivacyPolicy;
-  const CompTerms = syncComponents?.TermsOfService || LazyTermsOfService;
-  const CompAbout = syncComponents?.AboutMethodology || LazyAboutMethodology;
-  const CompProgrammatic = syncComponents?.ProgrammaticCalculatorView || LazyProgrammaticCalculatorView;
+  const CompGpa = syncComponents?.GpaCalculator || GpaCalculator;
+  const CompCgpa = syncComponents?.CgpaToPercentage || CgpaToPercentage;
+  const CompTip = syncComponents?.TipCalculator || TipCalculator;
+  const CompPct = syncComponents?.PercentageCalculator || PercentageCalculator;
+  const CompLoan = syncComponents?.LoanCalculator || LoanCalculator;
+  const CompMortgage = syncComponents?.MortgageCalculator || MortgageCalculator;
+  const CompPassword = syncComponents?.PasswordGenerator || PasswordGenerator;
+  const CompPrivacy = syncComponents?.PrivacyPolicy || PrivacyPolicy;
+  const CompTerms = syncComponents?.TermsOfService || TermsOfService;
+  const CompAbout = syncComponents?.AboutMethodology || AboutMethodology;
+  const CompProgrammatic = syncComponents?.ProgrammaticCalculatorView || ProgrammaticCalculatorView;
 
   // Derive active tool dynamically from URL pathname with immediate local state sync
   const pathTool = getToolKeyFromPath(location.pathname);

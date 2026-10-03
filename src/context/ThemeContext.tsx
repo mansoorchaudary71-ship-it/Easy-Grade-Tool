@@ -14,35 +14,27 @@ const THEME_STORAGE_KEY = 'easy_grade_theme_preference';
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<ThemeMode>(() => {
+  const [theme, setThemeState] = useState<ThemeMode>('system');
+  const [systemIsDark, setSystemIsDark] = useState<boolean>(false);
+
+  // Restore stored user theme preference and sync system color scheme after mount
+  useEffect(() => {
     try {
       const saved = localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null;
       if (saved === 'light' || saved === 'dark' || saved === 'system') {
-        return saved;
+        setThemeState(saved);
       }
-    } catch {
-      // ignore
-    }
-    return 'system';
-  });
+    } catch {}
 
-  const [systemIsDark, setSystemIsDark] = useState<boolean>(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      setSystemIsDark(mediaQuery.matches);
+      const handler = (e: MediaQueryListEvent) => {
+        setSystemIsDark(e.matches);
+      };
+      mediaQuery.addEventListener('change', handler);
+      return () => mediaQuery.removeEventListener('change', handler);
     }
-    return false;
-  });
-
-  // Listen to OS system theme changes
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.matchMedia) return;
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = (e: MediaQueryListEvent) => {
-      setSystemIsDark(e.matches);
-    };
-
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
   const resolvedTheme: 'light' | 'dark' =

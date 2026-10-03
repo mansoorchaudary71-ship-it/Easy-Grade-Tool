@@ -66,12 +66,18 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => cancelAnimationFrame(rafId);
   }, [activeTool]);
 
+  const [mounted, setMounted] = React.useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const isMac = useMemo(() => {
     return (
+      mounted &&
       typeof navigator !== 'undefined' &&
       /Mac|iPod|iPhone|iPad/i.test(navigator.userAgent || '')
     );
-  }, []);
+  }, [mounted]);
 
   const cycleTheme = () => {
     if (theme === 'system') {

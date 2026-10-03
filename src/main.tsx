@@ -40,12 +40,26 @@ const container = document.getElementById('root')!;
 // Seamlessly hydrate pre-rendered HTML if present (from SSG / pre-render),
 // otherwise fall back gracefully to client createRoot
 if (container.hasChildNodes()) {
-  hydrateRoot(
-    container,
-    <StrictMode>
-      <App />
-    </StrictMode>
-  );
+  try {
+    hydrateRoot(
+      container,
+      <StrictMode>
+        <App />
+      </StrictMode>,
+      {
+        onRecoverableError(error) {
+          // Suppress uncaught hydration mismatch error from breaking the page
+          console.warn('Hydration discrepancy handled gracefully:', error);
+        },
+      }
+    );
+  } catch {
+    createRoot(container).render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    );
+  }
 } else {
   createRoot(container).render(
     <StrictMode>
