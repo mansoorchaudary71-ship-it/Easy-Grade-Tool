@@ -43,7 +43,7 @@ jobs:
         run: npm run build
         env:
           GITHUB_PAGES: "true"
-          VITE_BASE_URL: ${{ steps.pages.outputs.base_path }}
+          VITE_BASE_URL: ${{ steps.pages.outputs.base_path || '/Easy-Grade-Tool/' }}
 
       # Strategy 1: Deploy to gh-pages branch (Always succeeds with contents: write)
       - name: Deploy to gh-pages branch

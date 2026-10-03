@@ -103,10 +103,13 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
       const redirectTarget = sessionStorage.getItem('spa_redirect_target');
       if (redirectTarget) {
         sessionStorage.removeItem('spa_redirect_target');
-        const base = (typeof import.meta !== 'undefined' && import.meta?.env?.BASE_URL) || '/';
+        const base = getClientBasename();
         let targetRoute = redirectTarget;
-        if (base !== '/' && targetRoute.startsWith(base)) {
-          targetRoute = targetRoute.slice(base.length - 1);
+        if (base && targetRoute.startsWith(base)) {
+          targetRoute = targetRoute.slice(base.length);
+        }
+        if (targetRoute && !targetRoute.startsWith('/')) {
+          targetRoute = `/${targetRoute}`;
         }
         if (targetRoute && targetRoute !== location.pathname) {
           navigate(targetRoute, { replace: true });
@@ -288,6 +291,26 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   );
 }
 
+/**
+ * Resolves the client application router basename dynamically,
+ * ensuring seamless routing both on root domains and GitHub Pages subpaths.
+ */
+export function getClientBasename(): string {
+  if (typeof window === 'undefined') return '';
+  const viteBase = typeof import.meta !== 'undefined' && import.meta?.env?.BASE_URL;
+  if (viteBase && viteBase !== '/' && viteBase !== './') {
+    return viteBase.replace(/\/+$/, '');
+  }
+  // Auto-detect GitHub Pages repository subpath: e.g. /Easy-Grade-Tool
+  if (window.location.hostname.endsWith('github.io')) {
+    const parts = window.location.pathname.split('/').filter(Boolean);
+    if (parts.length > 0 && !parts[0].includes('.')) {
+      return `/${parts[0]}`;
+    }
+  }
+  return '';
+}
+
 export interface AppProps {
   initialUrl?: string;
   syncComponents?: AppSyncComponents;
@@ -295,13 +318,14 @@ export interface AppProps {
 
 export default function App({ initialUrl, syncComponents }: AppProps) {
   const isServer = typeof window === 'undefined' || !!initialUrl;
+  const basename = getClientBasename();
 
   const RouterWrapper = isServer
     ? ({ children }: { children: React.ReactNode }) => (
         <MemoryRouter initialEntries={[initialUrl || '/']}>{children}</MemoryRouter>
       )
     : ({ children }: { children: React.ReactNode }) => (
-        <BrowserRouter basename={(typeof import.meta !== 'undefined' && import.meta?.env?.BASE_URL) || '/'}>{children}</BrowserRouter>
+        <BrowserRouter basename={basename}>{children}</BrowserRouter>
       );
 
   return (

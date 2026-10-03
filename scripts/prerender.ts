@@ -208,13 +208,20 @@ export async function runPrerender(): Promise<void> {
       `<head>\n    <meta name="robots" content="noindex, follow" />\n    <script>
       (function(){
         try {
-          var p = window.location.pathname;
-          var s = window.location.search || '';
-          var h = window.location.hash || '';
-          if (p && p !== '/' && !p.endsWith('/404.html')) {
+          var l = window.location;
+          var p = l.pathname;
+          var s = l.search || '';
+          var h = l.hash || '';
+          
+          var isGitHubIo = l.hostname.endsWith('github.io');
+          var segments = p.split('/').filter(Boolean);
+          var repoPrefix = (isGitHubIo && segments.length > 0 && !segments[0].includes('.')) 
+            ? '/' + segments[0] + '/' 
+            : '${prefix}';
+
+          if (p && p !== repoPrefix && !p.endsWith('/404.html')) {
             sessionStorage.setItem('spa_redirect_target', p + s + h);
-            var targetBase = '${prefix}';
-            window.location.replace(targetBase);
+            l.replace(repoPrefix);
           }
         } catch (_) {}
       })();
@@ -232,7 +239,7 @@ export async function runPrerender(): Promise<void> {
       <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-8 leading-relaxed">
         The calculator or page you requested could not be found. Please check the address or return to our calculation suite.
       </p>
-      <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95">
+      <a href="${prefix}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95">
         &larr; Return to Easy Grade Calculator
       </a>
     </div>
