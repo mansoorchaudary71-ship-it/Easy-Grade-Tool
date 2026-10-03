@@ -105,8 +105,9 @@ export const PRERENDER_ROUTES: PrerenderRouteDef[] = [
 function getBasePrefix(): string {
   if (process.env.VITE_BASE_URL) {
     const raw = process.env.VITE_BASE_URL.trim();
-    if (!raw || raw === '/') return '/';
-    return raw.endsWith('/') ? raw : `${raw}/`;
+    if (raw && raw !== '/') {
+      return raw.endsWith('/') ? raw : `${raw}/`;
+    }
   }
   if (process.env.GITHUB_ACTIONS === 'true' || process.env.GITHUB_PAGES === 'true') {
     if (process.env.GITHUB_REPOSITORY) {
@@ -242,6 +243,11 @@ export async function runPrerender(): Promise<void> {
   );
   fs.writeFileSync(dist404Path, notFoundHtml, 'utf-8');
   console.log(`✅ [SSG] Generated clean GitHub Pages fallback with noindex: ${dist404Path}`);
+
+  // Guarantee .nojekyll in dist/ to disable Jekyll processing on GitHub Pages
+  const distNoJekyllPath = path.resolve(distDir, '.nojekyll');
+  fs.writeFileSync(distNoJekyllPath, '', 'utf-8');
+  console.log(`✅ [SSG] Generated .nojekyll flag file in dist/ for GitHub Pages.`);
 
   let successCount = 0;
 

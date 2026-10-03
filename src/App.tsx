@@ -18,6 +18,7 @@ import { GradeCalculator } from './components/GradeCalculator';
 import { NotFound } from './components/NotFound';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
+import { preloadAllTools } from './utils/toolPreloader';
 
 // Non-active calculator components are lazy-loaded to optimize initial page speed and defer scripts/DOM until navigation
 const LazyGpaCalculator = lazy(() => import('./components/GpaCalculator').then(m => ({ default: m.GpaCalculator })));
@@ -118,10 +119,15 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
     } catch (_) {}
   }, [navigate, location.pathname]);
 
-  // Automatically scroll smoothly to top whenever route changes so footer and nav clicks immediately show the target view
+  // Automatically scroll to top whenever route changes so footer and nav clicks immediately show the target view
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [location.pathname]);
+
+  // Warm up all calculator tool chunks during idle time for 0ms instantaneous switching
+  useEffect(() => {
+    preloadAllTools();
+  }, []);
 
   // Auto-dismiss toast after 2.6 seconds
   useEffect(() => {
@@ -163,14 +169,12 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
 
   const handleSelectTool = useCallback(
     (tool: ToolKey) => {
-      startTransition(() => {
-        setActiveTool(tool);
-        const targetPath = TOOL_PATHS[tool] || '/grade-calculator';
-        navigate(targetPath);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setActiveTool(tool);
+      const targetPath = TOOL_PATHS[tool] || '/grade-calculator';
+      navigate(targetPath);
+      window.scrollTo({ top: 0, behavior: 'instant' });
     },
-    [navigate, startTransition]
+    [navigate]
   );
 
   return (

@@ -36,6 +36,31 @@ export function preloadTool(tool: ToolKey | string): void {
   }
 
   switch (tool) {
+    case 'quick':
+    case 'grade':
+      import('../components/GradeCalculator');
+      break;
+    case 'gpa':
+      import('../components/GpaCalculator');
+      break;
+    case 'cgpa':
+      import('../components/CgpaToPercentage');
+      break;
+    case 'tip':
+      import('../components/TipCalculator');
+      break;
+    case 'percentage':
+      import('../components/PercentageCalculator');
+      break;
+    case 'loan':
+      import('../components/LoanCalculator');
+      break;
+    case 'mortgage':
+      import('../components/MortgageCalculator');
+      break;
+    case 'password':
+      import('../components/PasswordGenerator');
+      break;
     case 'command-palette':
       import('../components/CommandPalette');
       break;
@@ -54,8 +79,26 @@ export function preloadPdf(): void {
 }
 
 /**
- * Lightweight post-mount hook (no eager image decoding on initial load to preserve LCP & bandwidth).
+ * Background preloader that warms all tool chunks during browser idle time
+ * ensuring 0ms instantaneous switching when a user taps any calculator.
  */
 export function preloadAllTools(): void {
-  // Intentionally left lightweight so below-the-fold images use native lazy-loading (`loading="lazy"`).
+  if (typeof window === 'undefined') return;
+
+  const warmAll = () => {
+    preloadTool('gpa');
+    preloadTool('cgpa');
+    preloadTool('tip');
+    preloadTool('percentage');
+    preloadTool('loan');
+    preloadTool('mortgage');
+    preloadTool('password');
+    preloadTool('command-palette');
+  };
+
+  if ('requestIdleCallback' in window) {
+    (window as any).requestIdleCallback(warmAll, { timeout: 1500 });
+  } else {
+    setTimeout(warmAll, 200);
+  }
 }

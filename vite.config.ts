@@ -86,12 +86,15 @@ function viteClientSafeSendPlugin(): Plugin {
 }
 
 function resolveBaseUrl(): string {
+  // If explicitly set via env var (and not just empty or root)
   if (process.env.VITE_BASE_URL) {
     const raw = process.env.VITE_BASE_URL.trim();
-    if (!raw || raw === '/') return '/';
-    return raw.endsWith('/') ? raw : `${raw}/`;
+    if (raw && raw !== '/') {
+      return raw.endsWith('/') ? raw : `${raw}/`;
+    }
   }
 
+  // Automatic GitHub Pages / Actions repository path detection
   if (process.env.GITHUB_ACTIONS === 'true' || process.env.GITHUB_PAGES === 'true') {
     if (process.env.GITHUB_REPOSITORY) {
       const parts = process.env.GITHUB_REPOSITORY.split('/');

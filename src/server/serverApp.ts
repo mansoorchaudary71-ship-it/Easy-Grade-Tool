@@ -869,7 +869,7 @@ function isKnownRoute(rawPath: string): boolean {
 export async function setupServer() {
   const distPath = path.resolve(rootDir, 'dist');
   const hasDist = fs.existsSync(path.join(distPath, 'index.html'));
-  const useDist = IS_PROD || hasDist;
+  const useDist = hasDist;
 
   if (useDist) {
     console.log('[Easy Grade Calculator] Serving ultra-fast pre-rendered build from dist/');
@@ -877,12 +877,37 @@ export async function setupServer() {
     // High-performance in-memory cache for instantaneous route delivery (< 0.1ms)
     const htmlMemoryCache = new Map<string, string>();
 
+    // Pre-warm in-memory cache for all pre-rendered static routes on boot
+    try {
+      const walkAndCache = (dir: string, baseRoute = '') => {
+        if (!fs.existsSync(dir)) return;
+        const entries = fs.readdirSync(dir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(dir, entry.name);
+          if (entry.isDirectory() && entry.name !== 'assets') {
+            walkAndCache(fullPath, `${baseRoute}/${entry.name}`);
+          } else if (entry.isFile() && entry.name === 'index.html') {
+            const route = baseRoute || '/';
+            const content = fs.readFileSync(fullPath, 'utf-8');
+            htmlMemoryCache.set(route.toLowerCase(), content);
+          }
+        }
+      };
+      walkAndCache(distPath);
+      console.log(`[Easy Grade Calculator] In-memory cache pre-warmed with ${htmlMemoryCache.size} pre-rendered routes.`);
+    } catch (e) {
+      console.warn('Failed to pre-warm HTML memory cache:', e);
+    }
+
     // Immutable 1-year cache for Vite hashed bundles (/assets/*)
     app.use(
       '/assets',
       express.static(path.join(distPath, 'assets'), {
-        maxAge: '31536000000',
+        maxAge: 31536000000,
         immutable: true,
+        setHeaders: (res) => {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        },
       })
     );
 

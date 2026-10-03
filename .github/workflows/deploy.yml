@@ -31,15 +31,18 @@ jobs:
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
+        continue-on-error: true
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci || npm install
 
       - name: Build Project
         run: npm run build
         env:
           GITHUB_PAGES: "true"
-          VITE_BASE_URL: ${{ steps.pages.outputs.base_path }}/
+          VITE_BASE_URL: ${{ steps.pages.outputs.base_path }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
