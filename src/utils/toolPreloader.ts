@@ -1,5 +1,5 @@
 import { ToolKey } from '../types';
-import { GUIDE_IMAGES } from '../data/guideImages';
+import { GUIDE_IMAGES, getGuideImageUrl, RAW_GUIDE_IMAGES } from '../data/guideImages';
 
 const preloadedSet = new Set<string>();
 const preloadedImages = new Set<string>();
@@ -30,7 +30,7 @@ export function preloadTool(tool: ToolKey | string): void {
   preloadedSet.add(tool);
 
   // Preload corresponding semantic guide image on hover/touch
-  const imageSrc = GUIDE_IMAGES[tool];
+  const imageSrc = getGuideImageUrl(tool);
   if (imageSrc) {
     preloadGuideImage(imageSrc);
   }
@@ -94,6 +94,11 @@ export function preloadAllTools(): void {
     preloadTool('mortgage');
     preloadTool('password');
     preloadTool('command-palette');
+
+    // Pre-warm all HD educational guide images in browser memory cache
+    Object.keys(RAW_GUIDE_IMAGES).forEach((key) => {
+      preloadGuideImage(getGuideImageUrl(key));
+    });
   };
 
   if ('requestIdleCallback' in window) {
