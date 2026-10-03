@@ -37,6 +37,7 @@ import { TOOLS_LIST, getToolKeyFromPath, CONTACT_EMAIL } from '../data/constants
 import { ToolKey } from '../types';
 import { preloadTool } from '../utils/toolPreloader';
 import { SITE_URL } from '../data/seoConfig';
+import { Logo } from './Logo';
 
 export interface FooterProps {
   activeTool?: ToolKey;
@@ -793,14 +794,9 @@ export const Footer: React.FC<FooterProps> = ({
                   if (onSelectTool) onSelectTool('quick');
                 }}
                 className="group flex items-center gap-3 text-left cursor-pointer transition-transform active:scale-95 focus:outline-none"
-                title="Go to Easy Grade Calculator Home"
+                title="Go to Easy Grade Tool Home"
               >
-                <span className="w-9 h-9 rounded-full bg-[#191C1E] dark:bg-teal-600 flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
-                  <Sparkles className="w-4 h-4" aria-hidden="true" />
-                </span>
-                <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">
-                  Easy Grade Calculator
-                </span>
+                <Logo size="md" />
               </Link>
 
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">

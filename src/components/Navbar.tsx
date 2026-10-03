@@ -1,11 +1,12 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sparkles, Sun, Moon, Laptop, Search } from 'lucide-react';
+import { Sun, Moon, Laptop, Search } from 'lucide-react';
 import { TOOLS_LIST } from '../data/constants';
 import { ToolKey } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { PWAInstallButton } from './PWAInstallButton';
 import { preloadTool } from '../utils/toolPreloader';
+import { Logo } from './Logo';
 
 interface NavbarProps {
   activeTool: ToolKey;
@@ -101,12 +102,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           onMouseEnter={() => preloadTool('quick')}
           onPointerDown={() => preloadTool('quick')}
           onTouchStart={() => preloadTool('quick')}
-          aria-label="Go to Easy Grade Calculator Home"
+          aria-label="Easy Grade Tool Home"
         >
-          <span className="brand-mark">
-            <Sparkles aria-hidden="true" />
-          </span>
-          <span className="brand-name font-bold tracking-tight">Easy Grade</span>
+          <Logo />
         </Link>
 
         <div className="topbar-right">

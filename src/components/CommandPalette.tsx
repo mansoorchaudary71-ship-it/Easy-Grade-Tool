@@ -19,6 +19,7 @@ import {
 import { ToolKey } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { preloadTool } from '../utils/toolPreloader';
+import { Logo } from './Logo';
 
 export interface CommandPaletteProps {
   isOpen: boolean;
@@ -649,8 +650,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           </div>
 
           <div className="command-palette-footer-brand">
-            <Sparkles aria-hidden="true" />
-            <span>Easy Grade Palette ({isMac ? '⌘K' : 'Ctrl+K'})</span>
+            <Logo iconOnly size="sm" />
+            <span>Easy Grade Tool ({isMac ? '⌘K' : 'Ctrl+K'})</span>
           </div>
         </div>
       </div>
