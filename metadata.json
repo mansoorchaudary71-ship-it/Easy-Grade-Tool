@@ -1,0 +1,8 @@
+{
+  "name": "Easy Grade Tool",
+  "description": "Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

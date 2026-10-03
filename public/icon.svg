@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#097362" />
+      <stop offset="50%" stop-color="#085e50" />
+      <stop offset="100%" stop-color="#053e34" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#fbbf24" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#021f1a" flood-opacity="0.45" />
+    </filter>
+  </defs>
+
+  <!-- Background rounded card -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)" />
+
+  <!-- Subtle ambient inner glow -->
+  <circle cx="410" cy="100" r="140" fill="#34d399" opacity="0.18" />
+  <circle cx="100" cy="420" r="160" fill="#f59e0b" opacity="0.12" />
+
+  <!-- Calculator Main Body -->
+  <g filter="url(#shadow)">
+    <rect x="116" y="96" width="280" height="330" rx="36" fill="#0f2b26" stroke="#10b981" stroke-width="6" stroke-opacity="0.5" />
+    
+    <!-- Screen Display -->
+    <rect x="146" y="132" width="220" height="76" rx="16" fill="#041814" stroke="#10b981" stroke-width="2" stroke-opacity="0.3" />
+    <!-- Screen Text: "A+ 100%" -->
+    <text x="166" y="184" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="34" font-weight="900" fill="url(#goldGrad)" letter-spacing="1">A+</text>
+    <text x="344" y="184" text-anchor="end" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="800" fill="url(#accentGrad)">100%</text>
+
+    <!-- Keypad Grid (3x3 grid) -->
+    <!-- Row 1 -->
+    <rect x="146" y="230" width="58" height="46" rx="12" fill="#1b423b" />
+    <text x="175" y="261" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">7</text>
+
+    <rect x="227" y="230" width="58" height="46" rx="12" fill="#1b423b" />
+    <text x="256" y="261" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">8</text>
+
+    <rect x="308" y="230" width="58" height="46" rx="12" fill="#059669" />
+    <text x="337" y="261" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#ffffff">÷</text>
+
+    <!-- Row 2 -->
+    <rect x="146" y="292" width="58" height="46" rx="12" fill="#1b423b" />
+    <text x="175" y="323" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">4</text>
+
+    <rect x="227" y="292" width="58" height="46" rx="12" fill="#1b423b" />
+    <text x="256" y="323" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">5</text>
+
+    <rect x="308" y="292" width="58" height="46" rx="12" fill="#059669" />
+    <text x="337" y="323" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#ffffff">×</text>
+
+    <!-- Row 3 -->
+    <rect x="146" y="354" width="58" height="46" rx="12" fill="#1b423b" />
+    <text x="175" y="385" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">1</text>
+
+    <rect x="227" y="354" width="58" height="46" rx="12" fill="#1b423b" />
+    <text x="256" y="385" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="20" font-weight="700" fill="#e2e8f0">2</text>
+
+    <rect x="308" y="354" width="58" height="46" rx="12" fill="url(#goldGrad)" />
+    <text x="337" y="385" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="22" font-weight="800" fill="#041814">=</text>
+  </g>
+
+  <!-- Sparkle floating accent in top right -->
+  <path d="M410 70 L416 88 L434 94 L416 100 L410 118 L404 100 L386 94 L404 88 Z" fill="url(#goldGrad)" />
+</svg>
