@@ -94,17 +94,7 @@ function resolveBaseUrl(): string {
     }
   }
 
-  // Automatic GitHub Pages / Actions repository path detection
-  if (process.env.GITHUB_ACTIONS === 'true' || process.env.GITHUB_PAGES === 'true') {
-    if (process.env.GITHUB_REPOSITORY) {
-      const parts = process.env.GITHUB_REPOSITORY.split('/');
-      const repoName = parts[1];
-      if (repoName && !repoName.toLowerCase().endsWith('.github.io')) {
-        return `/${repoName}/`;
-      }
-    }
-  }
-
+  // FORCE ROOT PATH FOR CUSTOM DOMAIN
   return '/';
 }
 
