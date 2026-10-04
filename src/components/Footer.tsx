@@ -37,6 +37,7 @@ import { TOOLS_LIST, getToolKeyFromPath, CONTACT_EMAIL } from '../data/constants
 import { ToolKey } from '../types';
 import { preloadTool } from '../utils/toolPreloader';
 import { SITE_URL } from '../data/seoConfig';
+import { submitForm } from '../utils/formSubmit';
 import { Logo } from './Logo';
 
 export interface FooterProps {
@@ -312,32 +313,15 @@ export const Footer: React.FC<FooterProps> = ({
     setSubscribeMessage(null);
 
     try {
-      const res = await fetch(`${API_BASE}/api/subscribe`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({ email: clean }),
-      });
-
-      const isJson = res.headers.get('content-type')?.includes('application/json');
-      if (res.ok && isJson) {
-        const data = await res.json();
-        setSubscribeMessage({ text: data.message || 'Subscribed successfully! Thank you.', isError: false });
-        setSubscribeEmail('');
-        if (setToast) setToast(data.message || 'Subscribed to Easy Grade updates!');
-      } else {
-        saveLocalOfflineSubmission('easygrade_subscribers_offline', { email: clean });
-        setSubscribeMessage({ text: 'Subscribed successfully! You will receive future calculator updates.', isError: false });
+      const result = await submitForm('subscribe', { email: clean }, API_BASE);
+      if (result.ok) {
+        setSubscribeMessage({ text: result.message || 'Subscribed! Thank you.', isError: false });
         setSubscribeEmail('');
         if (setToast) setToast('Subscribed to Easy Grade updates!');
+      } else {
+        setSubscribeMessage({ text: `We could not send that right now. Please email ${CONTACT_EMAIL} directly.`, isError: true });
+        if (setToast) setToast('Could not subscribe right now.');
       }
-    } catch {
-      saveLocalOfflineSubmission('easygrade_subscribers_offline', { email: clean });
-      setSubscribeMessage({ text: 'Subscribed successfully! You will receive future calculator updates.', isError: false });
-      setSubscribeEmail('');
-      if (setToast) setToast('Subscribed to Easy Grade updates!');
     } finally {
       setSubscribeLoading(false);
     }
@@ -364,35 +348,18 @@ export const Footer: React.FC<FooterProps> = ({
     };
 
     try {
-      const res = await fetch(`${API_BASE}/api/contact`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const isJson = res.headers.get('content-type')?.includes('application/json');
-      if (res.ok && isJson) {
-        const data = await res.json();
-        setContactSuccess(data.message || 'Thank you! Your message was sent to our team.');
+      const result = await submitForm('contact', payload, API_BASE);
+      if (result.ok) {
+        setContactSuccess(result.message || 'Thank you! Your message was sent to our team.');
+        setContactMessage('');
+        if (setToast) setToast('Message sent successfully!');
+        setTimeout(() => {
+          setActiveModal(null);
+          setContactSuccess(null);
+        }, 2200);
       } else {
-        saveLocalOfflineSubmission('easygrade_contacts_offline', payload);
-        setContactSuccess('Your message was saved! Our team will review it.');
+        setContactError(`We could not send that right now. Please email ${CONTACT_EMAIL} directly.`);
       }
-      setContactMessage('');
-      if (setToast) setToast('Message sent successfully!');
-      setTimeout(() => {
-        setActiveModal(null);
-        setContactSuccess(null);
-      }, 2200);
-    } catch {
-      saveLocalOfflineSubmission('easygrade_contacts_offline', payload);
-      setContactSuccess('Your message was saved! Our team will review it.');
-      setContactMessage('');
-      if (setToast) setToast('Message recorded successfully!');
-      setTimeout(() => {
-        setActiveModal(null);
-        setContactSuccess(null);
-      }, 2000);
     } finally {
       setContactLoading(false);
     }
@@ -418,36 +385,19 @@ export const Footer: React.FC<FooterProps> = ({
     };
 
     try {
-      const res = await fetch(`${API_BASE}/api/report-issue`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const isJson = res.headers.get('content-type')?.includes('application/json');
-      if (res.ok && isJson) {
-        const data = await res.json();
-        setIssueSuccess(data.message || `Ticket ${data.ticketId || 'created'}! Thank you.`);
+      const result = await submitForm('report-issue', payload, API_BASE);
+      if (result.ok) {
+        setIssueSuccess(result.message || 'Thank you! Your report was sent.');
+        setIssueDescription('');
+        setIssueTitle('');
+        if (setToast) setToast('Bug report submitted!');
+        setTimeout(() => {
+          setActiveModal(null);
+          setIssueSuccess(null);
+        }, 2200);
       } else {
-        saveLocalOfflineSubmission('easygrade_issues_offline', payload);
-        setIssueSuccess('Issue recorded locally! Our team will inspect it.');
+        setIssueError(`We could not send that right now. Please email ${CONTACT_EMAIL} directly.`);
       }
-      setIssueDescription('');
-      setIssueTitle('');
-      if (setToast) setToast('Bug report submitted!');
-      setTimeout(() => {
-        setActiveModal(null);
-        setIssueSuccess(null);
-      }, 2200);
-    } catch {
-      saveLocalOfflineSubmission('easygrade_issues_offline', payload);
-      setIssueSuccess('Issue recorded locally! Our team will inspect it.');
-      setIssueDescription('');
-      if (setToast) setToast('Bug report logged!');
-      setTimeout(() => {
-        setActiveModal(null);
-        setIssueSuccess(null);
-      }, 2000);
     } finally {
       setIssueLoading(false);
     }
@@ -473,37 +423,19 @@ export const Footer: React.FC<FooterProps> = ({
     };
 
     try {
-      const res = await fetch(`${API_BASE}/api/suggest-feature`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const isJson = res.headers.get('content-type')?.includes('application/json');
-      if (res.ok && isJson) {
-        const data = await res.json();
-        setFeatureSuccess(data.message || 'Thank you! Your feature idea has been recorded.');
+      const result = await submitForm('suggest-feature', payload, API_BASE);
+      if (result.ok) {
+        setFeatureSuccess(result.message || 'Thank you! Your feature idea was sent.');
+        setFeatureName('');
+        setFeatureDescription('');
+        if (setToast) setToast('Feature request sent!');
+        setTimeout(() => {
+          setActiveModal(null);
+          setFeatureSuccess(null);
+        }, 2200);
       } else {
-        saveLocalOfflineSubmission('easygrade_suggestions_offline', payload);
-        setFeatureSuccess('Suggestion saved! Thank you for helping improve Easy Grade.');
+        setFeatureError(`We could not send that right now. Please email ${CONTACT_EMAIL} directly.`);
       }
-      setFeatureName('');
-      setFeatureDescription('');
-      if (setToast) setToast('Feature request sent!');
-      setTimeout(() => {
-        setActiveModal(null);
-        setFeatureSuccess(null);
-      }, 2200);
-    } catch {
-      saveLocalOfflineSubmission('easygrade_suggestions_offline', payload);
-      setFeatureSuccess('Suggestion saved! Thank you for helping improve Easy Grade.');
-      setFeatureName('');
-      setFeatureDescription('');
-      if (setToast) setToast('Suggestion recorded!');
-      setTimeout(() => {
-        setActiveModal(null);
-        setFeatureSuccess(null);
-      }, 2000);
     } finally {
       setFeatureLoading(false);
     }

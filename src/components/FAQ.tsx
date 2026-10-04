@@ -1,7 +1,7 @@
 import React, { useState, useId, useEffect } from 'react';
 import { ChevronDown, Search, HelpCircle, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from '../utils/helmet';
 import { ToolKey } from '../types';
 
 export interface FAQItem {

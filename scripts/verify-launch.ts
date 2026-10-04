@@ -148,8 +148,8 @@ export function runVerifyLaunch(): boolean {
     const content = fs.readFileSync(htmlFile, 'utf-8');
     const relativeHtmlPath = path.relative(distDir, htmlFile);
 
-    // Skip 404 page for standard SEO checks
-    if (relativeHtmlPath === '404.html') continue;
+    // Skip noindex error pages (404 / 500) for standard SEO checks
+    if (relativeHtmlPath === '404.html' || relativeHtmlPath === '500.html') continue;
 
     // 1. Title
     const titleMatch = content.match(/<title>([^<]+)<\/title>/i);

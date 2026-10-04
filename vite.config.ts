@@ -265,6 +265,11 @@ export default defineConfig({
                 maxEntries: 20,
                 maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year immutable
               },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
           // Images and icons cache (Stale-While-Revalidate)
           {
             urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
