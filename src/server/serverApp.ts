@@ -247,17 +247,20 @@ function sameSiteOriginCheck(req: express.Request, res: express.Response, next: 
   next();
 }
 
-// Rate limiter for public form submission endpoints using express-rate-limit
-const submissionLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 15, // 15 requests per 5 minutes per IP
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: {
-    success: false,
-    error: 'Too many submissions from this connection. Please wait 5 minutes before trying again.',
-  },
-});
+// Rate limiter factory for public form submission endpoints (express-rate-limit).
+// Usage: submissionRateLimiter(maxRequests, windowMs)
+function submissionRateLimiter(max = 15, windowMs = 5 * 60 * 1000) {
+  return rateLimit({
+    windowMs,
+    max,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+      success: false,
+      error: 'Too many submissions from this connection. Please wait a few minutes before trying again.',
+    },
+  });
+}
 
 // ==========================================
 // BACKEND API ROUTES FOR FOOTER & APP

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useId } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from '../utils/helmet';
 import {
   Calculator,
   CheckCircle2,

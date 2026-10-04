@@ -8,7 +8,7 @@ import {
   BrowserRouter,
   MemoryRouter,
 } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider } from './utils/helmet';
 import { Navbar } from './components/Navbar';
 import { Toast } from './components/Toast';
 import { ThemeProvider } from './context/ThemeContext';
