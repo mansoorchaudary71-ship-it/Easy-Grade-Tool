@@ -1,58 +1,58 @@
 {
   "/": {
-    "hash": "f82334cc729767e5",
+    "hash": "de419a8d620cf63f",
     "lastmod": "2026-10-02"
   },
   "/grade-calculator": {
-    "hash": "bf8ca638c3fb8d85",
+    "hash": "ec03e53dc055e0b1",
     "lastmod": "2026-10-02"
   },
   "/gpa-calculator": {
-    "hash": "858f67aa0a6fb09e",
+    "hash": "1d765ddb64f9d9a3",
     "lastmod": "2026-10-02"
   },
   "/cgpa-to-percentage-calculator": {
-    "hash": "a3008446e79a350d",
+    "hash": "833fb4f6d86b6a8d",
     "lastmod": "2026-10-02"
   },
   "/tip-calculator": {
-    "hash": "778661efb08a2e20",
+    "hash": "2be6e0373d2810d9",
     "lastmod": "2026-10-02"
   },
   "/percentage-calculator": {
-    "hash": "73bc7dbbb5caeaf1",
+    "hash": "caa899d541756970",
     "lastmod": "2026-10-02"
   },
   "/loan-calculator": {
-    "hash": "71dcefc6aa170f71",
+    "hash": "2c394c11a1f97af2",
     "lastmod": "2026-10-02"
   },
   "/mortgage-calculator": {
-    "hash": "ef431df0f03e300a",
+    "hash": "ec7e3c97e81c638d",
     "lastmod": "2026-10-02"
   },
   "/password-generator": {
-    "hash": "e83c04f8affb80cd",
+    "hash": "bdce92fd4d215781",
     "lastmod": "2026-10-02"
   },
   "/about": {
-    "hash": "910df8569e8856cd",
+    "hash": "cc7f2c241d35c3a4",
     "lastmod": "2026-10-02"
   },
   "/privacy": {
-    "hash": "38e5a6601b18c5c7",
+    "hash": "3dc81f269d0752f8",
     "lastmod": "2026-10-02"
   },
   "/terms": {
-    "hash": "dc3f3c9573f52efd",
+    "hash": "f9fd9edcc968b6cb",
     "lastmod": "2026-10-02"
   },
   "/easy-grade-calculator/final-exam-grade-calculator": {
-    "hash": "1dc1d60b4e8aa705",
+    "hash": "1540146f92ee16ea",
     "lastmod": "2026-10-02"
   },
   "/easy-grade-calculator/ez-grader": {
-    "hash": "10ce5a85ad74a549",
+    "hash": "789c2965b9729ea5",
     "lastmod": "2026-10-02"
   }
 }

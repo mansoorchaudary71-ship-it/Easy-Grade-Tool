@@ -177,7 +177,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   );
 
   return (
-    <div className={`app-shell tool-theme-${activeTool} w-full max-w-full overflow-x-hidden`}>
+    <div className={`app-shell tool-theme-${activeTool} w-full max-w-full overflow-x-clip`}>
       {!isProgrammaticRoute && <SEOHead tool={activeTool} />}
       <Navbar
         activeTool={activeTool}

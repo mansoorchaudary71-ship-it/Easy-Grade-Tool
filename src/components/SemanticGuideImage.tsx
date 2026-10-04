@@ -20,7 +20,7 @@ export const SemanticGuideImage: React.FC<SemanticGuideImageProps> = ({
   toolKey,
   alt,
   className = '',
-  priority = true,
+  priority = false,
 }) => {
   const src = getGuideImageUrl(toolKey);
   const placeholder = GUIDE_PLACEHOLDERS[toolKey] || GUIDE_PLACEHOLDERS.quick;
