@@ -154,7 +154,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       <nav
-        className="tool-nav sticky top-0 z-50 bg-[hsl(var(--background))]"
+        className="tool-nav"
         aria-label="Calculator tools"
       >
         <div className="tool-nav-inner" ref={navInnerRef}>

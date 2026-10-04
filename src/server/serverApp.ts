@@ -107,7 +107,6 @@ app.use(
 // Canonical Host, HTTPS, Lowercase & Trailing Slash 301-Redirect Middleware
 // The ONLY canonical host is https://www.easygradetool.com
 // 301-redirects non-www (easygradetool.com) to www (www.easygradetool.com)
-// 301-redirects legacy domains (easygradecalculator.com, www.easygradecalculator.com) to https://www.easygradetool.com
 // Forces HTTPS in production
 // 301-redirects uppercase paths to lowercase, preserving query
 // 301-redirects trailing-slash variants to consistent no-slash form (root / preserved), preserving query
@@ -115,8 +114,6 @@ const CANONICAL_ORIGIN = 'https://www.easygradetool.com';
 const CANONICAL_HOST = 'www.easygradetool.com';
 const REDIRECT_HOSTS = new Set([
   'easygradetool.com',
-  'easygradecalculator.com',
-  'www.easygradecalculator.com',
 ]);
 
 app.use((req, res, next) => {

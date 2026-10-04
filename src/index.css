@@ -139,9 +139,13 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light dark;
+  /* `clip` (unlike `hidden`) does not create a scroll container, so the sticky header keeps working */
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
+  /* Keep in-page anchors and scrollIntoView targets from hiding under the sticky header */
+  scroll-padding-top: 132px;
 }
 
 body {
@@ -155,6 +159,7 @@ body {
   line-height: 1.6;
   letter-spacing: -0.01em;
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
   transition: background-color var(--duration-normal) var(--ease-spring), color var(--duration-normal) var(--ease-spring);
@@ -191,20 +196,33 @@ h1 {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   width: 100%;
 }
 
 /* Header & Top Navigation */
+/* The <header class="topbar"> wraps BOTH the brand row and the horizontal tools strip,
+   so this one sticky element keeps the whole header on screen while scrolling.
+   It is slightly see-through with a blur so page content shows faintly beneath it. */
 .topbar {
-  border-bottom: 1px solid hsl(var(--border) / 0.8);
-  background: hsl(var(--background) / 0.82);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  border-bottom: 1px solid hsl(var(--border) / 0.7);
+  background: hsl(var(--background) / 0.74);
+  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  backdrop-filter: blur(14px) saturate(1.5);
+  box-shadow: 0 1px 0 hsl(var(--border) / 0.35), 0 6px 20px -12px rgb(15 23 42 / 0.25);
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
-  z-index: 40;
-  transition: all var(--duration-normal) var(--ease-spring);
+  z-index: 50;
+  transition: background-color var(--duration-normal) var(--ease-spring), box-shadow var(--duration-normal) var(--ease-spring);
+}
+
+/* Browsers without backdrop-filter get a more solid bar so text stays readable */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .topbar {
+    background: hsl(var(--background) / 0.96);
+  }
 }
 
 .topbar-inner {
@@ -392,7 +410,7 @@ h1 {
 
 /* Secondary Tool Navigation Bar */
 .tool-nav {
-  border-top: 1px solid rgba(231, 229, 228, 0.8);
+  border-top: 1px solid hsl(var(--border) / 0.5);
   background: transparent;
 }
 
@@ -6060,6 +6078,7 @@ input[type="number"]:focus {
   }
 
   .topbar,
+  header.topbar,
   .tool-nav,
   .footer,
   .seo-content,
