@@ -463,7 +463,7 @@ export const Footer: React.FC<FooterProps> = ({
         [
           JSON.stringify(
             {
-              app: 'Easy Grade Calculator',
+              app: 'Easy Grade Tool',
               exportDate: new Date().toISOString(),
               version: '1.2.0',
               data: dump,
@@ -540,7 +540,7 @@ export const Footer: React.FC<FooterProps> = ({
     if (typeof navigator !== 'undefined' && navigator.share) {
       navigator
         .share({
-          title: 'Easy Grade Calculator',
+          title: 'Easy Grade Tool',
           text: 'Calculate weighted grades, semester GPA, and needed final exam scores easily.',
           url: currentUrl,
         })
@@ -737,7 +737,7 @@ export const Footer: React.FC<FooterProps> = ({
                   if (onSelectTool) onSelectTool('quick');
                 }}
                 className="group flex items-center gap-3 text-left cursor-pointer transition-transform active:scale-95 focus:outline-none"
-                title="Go to Easy Grade Calculator Home"
+                title="Go to Easy Grade Tool Home"
               >
                 <Logo size="md" />
               </Link>
@@ -804,7 +804,7 @@ export const Footer: React.FC<FooterProps> = ({
                             : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
                         }`}
                         aria-current={isActive ? 'page' : undefined}
-                        title={`Open ${tool.label} Calculator`}
+                        title={`Open ${tool.key === 'password' ? 'Password Generator' : tool.label + ' Calculator'}`}
                       >
                         <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} />
                         <span className="truncate">{tool.label}</span>
@@ -1047,7 +1047,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Minimal Bottom Bar */}
           <div className="pt-6 border-t border-stone-200/60 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500 dark:text-slate-400 font-sans">
             <p className="m-0 text-center sm:text-left">
-              &copy; {currentYear} Easy Grade Calculator. Free client-side calculation suite.
+              &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite.
             </p>
             <div className="flex items-center gap-1.5 text-xs">
               <span>Engineered with</span>

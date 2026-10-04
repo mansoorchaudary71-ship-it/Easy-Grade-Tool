@@ -42,13 +42,13 @@ export function getCgpaHowToSchema(canonicalOrigin: string = BASE_CANONICAL_ORIG
     dateModified: SITE_LAST_MODIFIED,
     author: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url,
       email: CONTACT_EMAIL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${cleanOrigin}/`,
     },
     step: [

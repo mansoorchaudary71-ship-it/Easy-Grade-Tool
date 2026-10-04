@@ -1,4 +1,4 @@
-// Easy Grade Calculator - Service Worker
+// Easy Grade Tool - Service Worker
 // Strategy: Stale-While-Revalidate with Auto-Purging of Deprecated Caches
 
 const CACHE_VERSION = 'v1.3.0';

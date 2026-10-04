@@ -1,62 +1,6 @@
-# Robots.txt for Easy Grade Calculator (Interactive Web Application)
-# Optimized for Googlebot, Bingbot, Applebot, and modern client-side rendering engines
-
+# robots.txt for Easy Grade Tool (www.easygradetool.com)
 User-agent: *
 Allow: /
-
-# Grant search engine crawlers unrestricted access to all essential JavaScript, CSS, and asset files
-Allow: /assets/
-Allow: /public/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.svg$
-Allow: /*.webp$
-Allow: /*.ico$
-Allow: /*.woff2$
-Allow: /*.woff$
-Allow: /*.ttf$
-Allow: /*.json$
-Allow: /sitemap.xml
-
-# Disallow internal backend proxy routes and transient states
 Disallow: /api/
 
-# Specialized Crawler Configurations
-User-agent: Googlebot
-Allow: /
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-
-User-agent: Googlebot-Image
-Allow: /
-Allow: /assets/
-Allow: /*.png$
-Allow: /*.svg$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.webp$
-Allow: /*.ico$
-
-User-agent: Bingbot
-Allow: /
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-
-User-agent: Applebot
-Allow: /
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-
-# Host and Sitemap discovery
-Host: www.easygradetool.com
 Sitemap: https://www.easygradetool.com/sitemap.xml

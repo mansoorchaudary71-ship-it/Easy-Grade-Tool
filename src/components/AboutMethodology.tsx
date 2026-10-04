@@ -49,13 +49,13 @@ export const AboutMethodology: React.FC = () => {
               <span>Mission &amp; Transparency</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 dark:text-white tracking-tight m-0">
-              Why We Built Easy Grade Calculator
+              Why We Built Easy Grade Tool
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
               Grading policies vary dramatically across schools, departments, and professors. Some syllabi use pure point totals; others assign percentage weights to exams, lab work, and homework; and colleges evaluate transcripts using weighted GPA credit hours.
             </p>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
-              We created <strong>Easy Grade Calculator</strong> to provide students, parents, and educators with an immediate, mathematically rigorous, and tracker-free toolset—including our <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">4.0 GPA Calculator</Link>, and <Link to="/cgpa-to-percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>. Every formula on this site is documented below and covered by our <Link to="/privacy" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Client-Side Privacy Policy</Link>.
+              We created <strong>Easy Grade Tool</strong> to provide students, parents, and educators with an immediate, mathematically rigorous, and tracker-free toolset—including our <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">4.0 GPA Calculator</Link>, and <Link to="/cgpa-to-percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>. Every formula on this site is documented below and covered by our <Link to="/privacy" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Client-Side Privacy Policy</Link>.
             </p>
           </section>
 
@@ -334,7 +334,7 @@ export const AboutMethodology: React.FC = () => {
             </div>
 
             <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
-              <strong>Easy Grade Calculator</strong> is actively designed and maintained by a dedicated software engineer specializing in offline-first web technologies, mathematical algorithms, and student utility tools.
+              <strong>Easy Grade Tool</strong> is actively designed and maintained by a dedicated software engineer specializing in offline-first web technologies, mathematical algorithms, and student utility tools.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

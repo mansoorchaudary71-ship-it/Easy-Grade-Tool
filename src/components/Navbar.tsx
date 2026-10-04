@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           onMouseEnter={() => preloadTool('quick')}
           onPointerDown={() => preloadTool('quick')}
           onTouchStart={() => preloadTool('quick')}
-          aria-label="Easy Grade Calculator Home"
+          aria-label="Easy Grade Tool Home"
         >
           <Logo />
         </Link>
@@ -179,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 data-tool={tool.key}
                 data-active={isActive}
                 aria-current={isActive ? 'page' : undefined}
-                title={`${tool.label} Calculator`}
+                title={`${tool.key === 'password' ? 'Password Generator' : tool.label + ' Calculator'}`}
               >
                 <Icon aria-hidden="true" />
                 <span>{tool.label}</span>

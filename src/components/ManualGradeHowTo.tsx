@@ -105,13 +105,13 @@ export function getHowToSchema(
     dateModified: SITE_LAST_MODIFIED,
     author: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${cleanOrigin}/`,
       email: CONTACT_EMAIL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${cleanOrigin}/`,
       logo: {
         '@type': 'ImageObject',
