@@ -52,7 +52,7 @@ export function runVerifyLaunch(): boolean {
   }
 
   const htmlFiles = getAllHtmlFiles(distDir);
-  const prodHost = 'https://easygradecalculator.com';
+  const prodHost = 'https://www.easygradetool.com';
 
   // =========================================================================
   // CHECK 1: og:image & twitter:image Verification

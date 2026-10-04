@@ -7,12 +7,12 @@ interface LogoProps {
 }
 
 /**
- * Official Easy Grade Tool Logo Component.
+ * Official Easy Grade Calculator Logo Component.
  * Features:
  * - Geometric squircle icon in dark teal (#004851)
  * - White "A+" insignia with ascending 3-bar histogram crossbar
  * - Upper-right 4-point sparkle accent
- * - Bold wordmark "Easy Grade Tool"
+ * - Bold wordmark "Easy Grade Calculator"
  */
 export const Logo: React.FC<LogoProps> = ({
   className = '',
@@ -80,7 +80,7 @@ export const Logo: React.FC<LogoProps> = ({
         <span
           className={`font-extrabold tracking-tight text-[#004851] dark:text-white transition-colors leading-none ${textClasses}`}
         >
-          Easy Grade Tool
+          Easy Grade Calculator
         </span>
       )}
     </div>

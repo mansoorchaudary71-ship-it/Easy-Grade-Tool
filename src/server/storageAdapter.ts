@@ -182,7 +182,7 @@ export class StorageAdapter {
     this.destinationEmail =
       process.env.FEEDBACK_DESTINATION_EMAIL?.trim() ||
       process.env.CONTACT_EMAIL?.trim() ||
-      'support@easygradecalculator.com';
+      'support@easygradetool.com';
   }
 
   /**
@@ -330,7 +330,7 @@ export class StorageAdapter {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Easy Grade Notifications <notifications@easygradecalculator.com>',
+          from: 'Easy Grade Notifications <notifications@easygradetool.com>',
           to: [this.destinationEmail],
           subject,
           html: htmlBody,

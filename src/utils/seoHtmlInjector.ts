@@ -324,13 +324,13 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     dateModified: SITE_LAST_MODIFIED,
     author: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: config.canonicalUrl,
       email: CONTACT_EMAIL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${BASE_CANONICAL_ORIGIN}/`,
       logo: {
         '@type': 'ImageObject',
@@ -360,7 +360,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Easy Grade Calculator',
+            name: 'Easy Grade Tool',
             item: `${BASE_CANONICAL_ORIGIN}/`,
           },
         ]
@@ -368,7 +368,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Easy Grade Calculator',
+            name: 'Easy Grade Tool',
             item: `${BASE_CANONICAL_ORIGIN}/`,
           },
           {
@@ -384,7 +384,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${BASE_CANONICAL_ORIGIN}/#organization`,
-    name: 'Easy Grade Calculator',
+    name: 'Easy Grade Tool',
     url: `${BASE_CANONICAL_ORIGIN}/`,
     email: CONTACT_EMAIL,
     logo: {

@@ -764,6 +764,17 @@ export const Footer: React.FC<FooterProps> = ({
                   )}
                 </button>
               </form>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 m-0 px-2 text-center sm:text-left">
+                By subscribing, you agree to our{' '}
+                <Link
+                  to="/privacy"
+                  onClick={scrollToTop}
+                  className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600 transition-colors"
+                >
+                  Privacy Policy
+                </Link>{' '}
+                and consent to receive email updates. Unsubscribe anytime.
+              </p>
               {subscribeMessage && (
                 <div
                   className={`text-xs font-medium px-4 py-2 rounded-full text-center sm:text-left transition-all flex items-center gap-1.5 ${
@@ -794,7 +805,7 @@ export const Footer: React.FC<FooterProps> = ({
                   if (onSelectTool) onSelectTool('quick');
                 }}
                 className="group flex items-center gap-3 text-left cursor-pointer transition-transform active:scale-95 focus:outline-none"
-                title="Go to Easy Grade Tool Home"
+                title="Go to Easy Grade Calculator Home"
               >
                 <Logo size="md" />
               </Link>
@@ -1104,7 +1115,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Minimal Bottom Bar */}
           <div className="pt-6 border-t border-stone-200/60 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500 dark:text-slate-400 font-sans">
             <p className="m-0 text-center sm:text-left">
-              &copy; {currentYear} Easy Grade Calculator. Real-time Express backend &amp; client-side calculation suite.
+              &copy; {currentYear} Easy Grade Calculator. Free client-side calculation suite.
             </p>
             <div className="flex items-center gap-1.5 text-xs">
               <span>Engineered with</span>

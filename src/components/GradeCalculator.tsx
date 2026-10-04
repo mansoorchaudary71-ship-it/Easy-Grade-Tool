@@ -378,7 +378,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           tabIndex={0}
           className="w-full max-w-full overflow-x-hidden pt-1 focus:outline-none"
         >
-          {/* Restored Quick Grade matching competitor easygradecalculator.com */}
+          {/* Quick Grade and Test Scoring Chart */}
           <QuickGrader setToast={setToast} />
 
           {/* Secondary Switch to Weighted / Target Calculator */}

@@ -434,7 +434,7 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         category: 'security',
         question: 'Are password managers safe to store generated passwords?',
         answer:
-          'Yes! Reputable password managers employ zero-knowledge architecture using military-grade encryption (like AES-256). Even if the service\'s servers are breached, your data cannot be decrypted without your private master password and secret recovery key.',
+          'Yes! Reputable password managers employ end-to-end encryption using military-grade standards (like AES-256). Even if the service\'s servers are breached, your data cannot be decrypted without your private master password and secret recovery key.',
       },
       {
         id: 'password-reuse-danger',

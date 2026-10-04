@@ -651,7 +651,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
           <div className="command-palette-footer-brand">
             <Logo iconOnly size="sm" />
-            <span>Easy Grade Tool ({isMac ? '⌘K' : 'Ctrl+K'})</span>
+            <span>Easy Grade Calculator ({isMac ? '⌘K' : 'Ctrl+K'})</span>
           </div>
         </div>
       </div>

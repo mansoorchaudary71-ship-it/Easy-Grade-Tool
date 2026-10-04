@@ -15,12 +15,13 @@ import { AssessmentItem, CourseItem, FaqItem, ScaleGrade, ToolKey } from '../typ
 export const CONTACT_EMAIL =
   (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_CONTACT_EMAIL) ||
   (typeof process !== 'undefined' && process.env?.CONTACT_EMAIL) ||
-  'support@easygradecalculator.com';
+  'support@easygradetool.com';
 
 /**
- * Single source of truth for the base canonical origin.
+ * Single source of truth for the canonical site URL and origin.
  */
-export const BASE_CANONICAL_ORIGIN = 'https://easygradecalculator.com';
+export const SITE_URL = 'https://www.easygradetool.com';
+export const BASE_CANONICAL_ORIGIN = SITE_URL;
 
 export const INITIAL_ASSESSMENTS: AssessmentItem[] = [
   { id: 1, name: 'Weekly quiz', score: '18', max: '20', weight: '15' },

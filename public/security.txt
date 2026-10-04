@@ -1,0 +1,5 @@
+Contact: mailto:support@easygradetool.com
+Expires: 2027-10-04T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://www.easygradetool.com/.well-known/security.txt
+Policy: https://www.easygradetool.com/privacy

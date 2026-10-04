@@ -58,5 +58,5 @@ Allow: /*.mjs$
 Allow: /*.css$
 
 # Host and Sitemap discovery
-Host: easygradecalculator.com
-Sitemap: https://easygradecalculator.com/sitemap.xml
+Host: www.easygradetool.com
+Sitemap: https://www.easygradetool.com/sitemap.xml

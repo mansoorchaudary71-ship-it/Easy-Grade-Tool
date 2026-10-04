@@ -1,6 +1,7 @@
 import { ToolKey } from '../types.ts';
 export type { ToolKey };
-export { CONTACT_EMAIL } from './constants.ts';
+export { CONTACT_EMAIL, SITE_URL, BASE_CANONICAL_ORIGIN } from './constants.ts';
+import { SITE_URL, BASE_CANONICAL_ORIGIN } from './constants.ts';
 import { PROGRAMMATIC_SEO_REGISTRY } from './programmaticSeoData.ts';
 
 export interface RouteSeoConfig {
@@ -17,52 +18,12 @@ export interface RouteSeoConfig {
 }
 
 /**
- * Single source of truth for the site URL.
- * Reads from the APP_URL or VITE_APP_URL environment variable,
- * falling back to the official production domain: https://easygradecalculator.com.
- * Never falls back to a temporary preview or container URL.
- */
-function resolveSiteUrl(): string {
-  let envUrl: string | undefined;
-
-  if (typeof process !== 'undefined' && process.env) {
-    envUrl = process.env.SITE_URL || process.env.VITE_SITE_URL || process.env.APP_URL || process.env.VITE_APP_URL;
-  }
-  if (!envUrl && typeof import.meta !== 'undefined' && import.meta.env) {
-    envUrl =
-      (import.meta.env.VITE_SITE_URL as string) ||
-      (import.meta.env.APP_URL as string) ||
-      (import.meta.env.VITE_APP_URL as string);
-  }
-
-  if (envUrl) {
-    const trimmed = envUrl.trim().replace(/\/+$/, '');
-    // Disallow container or preview domains from becoming the canonical origin
-    const disallowed = [
-      ['r', 'u', 'n', '.', 'a', 'p', 'p'].join(''),
-      ['a', 'i', 's', '-', 'p', 'r', 'e'].join(''),
-      ['a', 'i', 's', '-', 'd', 'e', 'v'].join(''),
-      'localhost',
-      '127.0.0.1',
-    ];
-    if (trimmed && trimmed !== 'MY_APP_URL' && !disallowed.some((d) => trimmed.includes(d))) {
-      return trimmed;
-    }
-  }
-
-  return 'https://easygradecalculator.com';
-}
-
-export const SITE_URL: string = resolveSiteUrl();
-export const BASE_CANONICAL_ORIGIN: string = SITE_URL;
-
-/**
  * Single source of truth for platform launch and structured data timestamps (ISO 8601).
  * SITE_LAUNCH_DATE represents the initial platform publication date.
  * SITE_LAST_MODIFIED represents the date of the latest content, formula, and methodology review.
  */
 export const SITE_LAUNCH_DATE: string = '2024-01-15T00:00:00Z';
-export const SITE_LAST_MODIFIED: string = '2026-09-30T00:00:00Z';
+export const SITE_LAST_MODIFIED: string = '2026-10-04T00:00:00Z';
 
 /**
  * Returns the resolved canonical origin.
@@ -143,7 +104,7 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
   privacy: {
     title: 'Privacy Policy — Easy Grade Calculator',
     description:
-      'Easy Grade Calculator privacy policy. 100% private, client-side calculations with zero server tracking, database storage, or third-party cookies.',
+      'Easy Grade Calculator privacy policy. Transparent client-side calculations, clear data retention policies for voluntary submissions, and user rights.',
     canonicalPath: '/privacy',
     canonicalUrl: `${BASE_CANONICAL_ORIGIN}/privacy`,
     ogImagePlaceholder: OG_IMAGES.default,
@@ -153,13 +114,13 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
       'client side calculations',
       'student privacy',
       'secure grade calculator',
-      'no tracking privacy policy',
+      'data retention policy',
     ],
     schemaType: 'WebApplication',
     applicationCategory: 'EducationalApplication',
     featureList: [
-      'Zero-Knowledge Client-Side Architecture',
-      'No Server Storage of Grades or Financial Data',
+      'Private Client-Side Browser Calculations',
+      'Transparent Voluntary Form Data Handling',
       'No Behavioral Tracking or Third-Party Ad Cookies',
     ],
   },
@@ -388,7 +349,7 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
       'Cryptographically Secure Random Generation (Web Crypto API)',
       'Configurable Character Sets (Letters, Digits, Symbols)',
       'Look-Alike Character Filtering (Excludes I, O, l, 1, 0)',
-      '100% Client-Side Privacy (Zero Server Transmissions)',
+      '100% In-Browser Cryptographic Generation',
     ],
   },
 };

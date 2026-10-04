@@ -120,13 +120,13 @@ export const SEO: React.FC<SEOProps> = ({
     dateModified: SITE_LAST_MODIFIED,
     author: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: resolvedCanonical,
       email: CONTACT_EMAIL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${BASE_CANONICAL_ORIGIN}/`,
       logo: {
         '@type': 'ImageObject',
@@ -154,7 +154,7 @@ export const SEO: React.FC<SEOProps> = ({
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Easy Grade Calculator',
+            name: 'Easy Grade Tool',
             item: `${BASE_CANONICAL_ORIGIN}/`,
           },
         ]
@@ -162,7 +162,7 @@ export const SEO: React.FC<SEOProps> = ({
           {
             '@type': 'ListItem',
             position: 1,
-            name: 'Easy Grade Calculator',
+            name: 'Easy Grade Tool',
             item: `${BASE_CANONICAL_ORIGIN}/`,
           },
           {
@@ -178,7 +178,7 @@ export const SEO: React.FC<SEOProps> = ({
     '@context': 'https://schema.org',
     '@type': 'Organization',
     '@id': `${BASE_CANONICAL_ORIGIN}/#organization`,
-    name: 'Easy Grade Calculator',
+    name: 'Easy Grade Tool',
     url: `${BASE_CANONICAL_ORIGIN}/`,
     email: CONTACT_EMAIL,
     logo: {
@@ -237,7 +237,7 @@ export const SEO: React.FC<SEOProps> = ({
     updateMeta('property', 'og:image:width', '1200');
     updateMeta('property', 'og:image:height', '630');
     updateMeta('property', 'og:image:alt', title);
-    updateMeta('property', 'og:site_name', 'Easy Grade Calculator');
+    updateMeta('property', 'og:site_name', 'Easy Grade Tool');
 
     // Twitter Card direct sync
     updateMeta('name', 'twitter:card', twitterCard);

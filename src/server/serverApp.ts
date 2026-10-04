@@ -4,11 +4,12 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import compression from 'compression';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import {
   storageAdapter,
   sanitizeString,
   validateEmail,
-  checkRateLimit,
   ContactSubmission,
   IssueSubmission,
   SuggestionSubmission,
@@ -38,7 +39,7 @@ const rootDir = path.resolve(__dirname, '../../');
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const IS_PROD = process.env.NODE_ENV === 'production';
-const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'support@easygradecalculator.com';
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'support@easygradetool.com';
 
 // Enable trust proxy for Google Cloud Run / container reverse proxies
 app.set('trust proxy', 1);
@@ -47,26 +48,45 @@ app.set('trust proxy', 1);
 app.disable('x-powered-by');
 app.set('etag', 'strong');
 
-// Comprehensive HTTP Security Headers Middleware
-app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+// Comprehensive Security Headers with Helmet
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'"],
+        fontSrc: ["'self'", 'data:'],
+        imgSrc: ["'self'", 'data:'],
+        connectSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        baseUri: ["'self'"],
+        formAction: ["'self'"],
+        frameAncestors: IS_PROD ? ["'none'"] : ["'self'", 'https://*.google.com', 'https://*.run.app'],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: { policy: 'same-origin' },
+    crossOriginResourcePolicy: { policy: 'same-origin' },
+    dnsPrefetchControl: { allow: false },
+    frameguard: { action: IS_PROD ? 'deny' : 'sameorigin' },
+    hsts: IS_PROD
+      ? {
+          maxAge: 31536000,
+          includeSubDomains: true,
+          preload: true,
+        }
+      : false,
+    ieNoOpen: true,
+    noSniff: true,
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    xssFilter: true,
+  })
+);
+
+// Explicit Permissions-Policy
+app.use((_req, res, next) => {
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-
-  // HSTS: Only send in production over HTTPS; do not include preload
-  const isHttps = req.secure || req.headers['x-forwarded-proto'] === 'https';
-  if (IS_PROD && isHttps) {
-    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  }
-
-  // Content-Security-Policy-Report-Only
-  res.setHeader(
-    'Content-Security-Policy-Report-Only',
-    "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'; form-action 'self';"
-  );
-
   next();
 });
 
@@ -83,6 +103,75 @@ app.use(
     },
   })
 );
+
+// Canonical Host, HTTPS, Lowercase & Trailing Slash 301-Redirect Middleware
+// The ONLY canonical host is https://www.easygradetool.com
+// 301-redirects non-www (easygradetool.com) to www (www.easygradetool.com)
+// 301-redirects legacy domains (easygradecalculator.com, www.easygradecalculator.com) to https://www.easygradetool.com
+// Forces HTTPS in production
+// 301-redirects uppercase paths to lowercase, preserving query
+// 301-redirects trailing-slash variants to consistent no-slash form (root / preserved), preserving query
+const CANONICAL_ORIGIN = 'https://www.easygradetool.com';
+const CANONICAL_HOST = 'www.easygradetool.com';
+const REDIRECT_HOSTS = new Set([
+  'easygradetool.com',
+  'easygradecalculator.com',
+  'www.easygradecalculator.com',
+]);
+
+app.use((req, res, next) => {
+  // Extract Host header without port (case-insensitive)
+  const hostHeader = (req.headers.host || req.hostname || '').trim();
+  const rawHost = hostHeader.split(':')[0].toLowerCase();
+
+  // Extract path and query from originalUrl
+  const originalUrl = req.originalUrl || req.url || '/';
+  const qIndex = originalUrl.indexOf('?');
+  const rawPath = qIndex >= 0 ? originalUrl.slice(0, qIndex) : originalUrl;
+  const queryString = qIndex >= 0 ? originalUrl.slice(qIndex) : '';
+
+  // Bypass internal vite/dev assets
+  if (rawPath.startsWith('/@') || rawPath.startsWith('/__vite') || rawPath.startsWith('/node_modules')) {
+    return next();
+  }
+
+  // Canonicalize path: lowercase and strip trailing slash for non-root paths
+  const lowerPath = rawPath.toLowerCase();
+  const cleanPath = lowerPath.length > 1 ? lowerPath.replace(/\/+$/, '') : lowerPath;
+
+  const isNonCanonicalHost = REDIRECT_HOSTS.has(rawHost);
+  const isHttps = req.secure || req.headers['x-forwarded-proto'] === 'https';
+  const needsHttps = IS_PROD && !isHttps;
+  const pathNeedsRedirect = cleanPath !== rawPath;
+
+  // Case 1: Host is non-canonical (e.g. non-www easygradetool.com or legacy domain) OR requires HTTPS in production
+  if (isNonCanonicalHost || needsHttps) {
+    const targetUrl = `${CANONICAL_ORIGIN}${cleanPath}${queryString}`;
+    return res.redirect(301, targetUrl);
+  }
+
+  // Case 2: Path has trailing slashes or uppercase letters that need to be normalized
+  if (pathNeedsRedirect) {
+    if (rawHost === CANONICAL_HOST) {
+      return res.redirect(301, `${CANONICAL_ORIGIN}${cleanPath}${queryString}`);
+    }
+    return res.redirect(301, `${cleanPath}${queryString}`);
+  }
+
+  next();
+});
+
+// RFC 9116 security.txt endpoints
+app.get(['/.well-known/security.txt', '/security.txt'], (_req, res) => {
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=86400');
+  res.send(`Contact: mailto:${CONTACT_EMAIL}
+Expires: 2027-10-04T00:00:00.000Z
+Preferred-Languages: en
+Canonical: ${CANONICAL_ORIGIN}/.well-known/security.txt
+Policy: ${CANONICAL_ORIGIN}/privacy
+`);
+});
 
 // Ensure data storage directory exists
 const DATA_DIR = path.resolve(rootDir, 'server-data');
@@ -116,71 +205,59 @@ function readJsonFile<T>(filename: string, fallback: T): T {
   return fallback;
 }
 
-// Body parsing middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
-app.use(express.text({ type: ['text/*', 'application/json'] }));
+// Strict body parsing middleware (limit 10kb to reject oversized payloads)
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: false, limit: '10kb' }));
 
-// Helper to safely extract body payload regardless of transmission format
+// Helper to safely extract body payload
 function extractPayload(req: express.Request): Record<string, any> {
-  let body: any = req.body;
-  if (typeof body === 'string' && body.trim()) {
-    try {
-      body = JSON.parse(body);
-    } catch {
-      try {
-        const params = new URLSearchParams(body);
-        const obj: Record<string, any> = {};
-        params.forEach((v, k) => {
-          obj[k] = v;
-        });
-        if (Object.keys(obj).length > 0) body = obj;
-      } catch {}
-    }
-  }
+  const body = req.body;
   return { ...(req.query || {}), ...(body && typeof body === 'object' ? body : {}) };
 }
 
-// Simple CORS and security headers for API (allows cross-origin calls from GitHub Pages or client apps)
-app.use('/api', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, HEAD');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, X-Requested-With');
-  res.setHeader('Access-Control-Max-Age', '86400');
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(204);
+// Same-Site Origin Check for form submission mutations
+function sameSiteOriginCheck(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (req.method === 'POST') {
+    const origin = (req.headers.origin || req.headers.referer || '').trim();
+    if (origin) {
+      try {
+        const originUrl = new URL(origin);
+        const host = originUrl.host.toLowerCase();
+        const allowedHosts = new Set([
+          'www.easygradetool.com',
+          'easygradetool.com',
+          req.headers.host?.toLowerCase() || '',
+          'localhost:3000',
+          '127.0.0.1:3000',
+        ]);
+        if (!allowedHosts.has(host) && !host.endsWith('.run.app')) {
+          return res.status(403).json({
+            success: false,
+            error: 'Forbidden: Request origin is not authorized.',
+          });
+        }
+      } catch {
+        return res.status(403).json({
+          success: false,
+          error: 'Forbidden: Invalid request origin header.',
+        });
+      }
+    }
   }
   next();
-});
-
-// Rate limiter middleware for public submission endpoints (default 15 requests / 5 min per IP)
-function submissionRateLimiter(maxRequests = 15, windowMs = 5 * 60 * 1000) {
-  return (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    if (req.method === 'GET' || req.method === 'OPTIONS' || req.method === 'HEAD') {
-      return next();
-    }
-    const clientIp =
-      (req.headers['x-forwarded-for'] as string)?.split(',')[0]?.trim() ||
-      req.socket.remoteAddress ||
-      'anonymous_client';
-
-    const check = checkRateLimit(clientIp, maxRequests, windowMs);
-    res.setHeader('X-RateLimit-Limit', maxRequests);
-    res.setHeader('X-RateLimit-Remaining', check.remaining);
-
-    if (!check.allowed) {
-      res.setHeader('Retry-After', String(check.retryAfterSeconds));
-      return res.status(429).json({
-        success: false,
-        error: `Too many submissions from this connection. Please wait ${check.retryAfterSeconds} seconds before trying again.`,
-        retryAfter: check.retryAfterSeconds,
-      });
-    }
-
-    next();
-  };
 }
+
+// Rate limiter for public form submission endpoints using express-rate-limit
+const submissionLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 15, // 15 requests per 5 minutes per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    success: false,
+    error: 'Too many submissions from this connection. Please wait 5 minutes before trying again.',
+  },
+});
 
 // ==========================================
 // BACKEND API ROUTES FOR FOOTER & APP
@@ -834,7 +911,9 @@ const PERMANENT_REDIRECTS: Record<string, string> = {
 app.use((req, res, next) => {
   const clean = (req.path.split('?')[0].replace(/\/+$/, '') || '/').toLowerCase();
   if (PERMANENT_REDIRECTS[clean]) {
-    return res.redirect(301, PERMANENT_REDIRECTS[clean]);
+    const qIndex = req.originalUrl.indexOf('?');
+    const query = qIndex >= 0 ? req.originalUrl.slice(qIndex) : '';
+    return res.redirect(301, PERMANENT_REDIRECTS[clean] + query);
   }
   next();
 });

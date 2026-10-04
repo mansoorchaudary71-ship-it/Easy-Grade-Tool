@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           onMouseEnter={() => preloadTool('quick')}
           onPointerDown={() => preloadTool('quick')}
           onTouchStart={() => preloadTool('quick')}
-          aria-label="Easy Grade Tool Home"
+          aria-label="Easy Grade Calculator Home"
         >
           <Logo />
         </Link>
@@ -153,7 +153,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      <nav className="tool-nav" aria-label="Calculator tools">
+      <nav
+        className="tool-nav sticky top-0 z-50 bg-[hsl(var(--background))]"
+        aria-label="Calculator tools"
+      >
         <div className="tool-nav-inner" ref={navInnerRef}>
           {TOOLS_LIST.map((tool) => {
             const Icon = tool.icon;

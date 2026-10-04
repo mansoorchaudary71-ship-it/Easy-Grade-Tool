@@ -76,7 +76,7 @@ export function runSelfTest(): boolean {
       // Inject redirected URL into sitemap
       const dirtySitemap = backup.content.replace(
         '</urlset>',
-        '  <url>\n    <loc>https://easygradecalculator.com/easy-grade-calculator/gpa</loc>\n  </url>\n</urlset>'
+        '  <url>\n    <loc>https://www.easygradetool.com/easy-grade-calculator/gpa</loc>\n  </url>\n</urlset>'
       );
       fs.writeFileSync(path.join(distDir, sitemapFile), dirtySitemap, 'utf-8');
 

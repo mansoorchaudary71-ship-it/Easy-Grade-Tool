@@ -122,8 +122,8 @@ export default defineConfig({
       ],
       manifest: {
         id: base,
-        name: 'Easy Grade Calculator',
-        short_name: 'EasyGrade',
+        name: 'Easy Grade Tool',
+        short_name: 'Easy Grade Tool',
         description: 'Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more.',
         theme_color: '#097362',
         background_color: '#ffffff',
@@ -208,29 +208,29 @@ export default defineConfig({
         clientsClaim: true,
         skipWaiting: true,
         runtimeCaching: [
-          // Network-first navigation routes so fresh content is retrieved when online,
-          // but cached app shell / prerendered routes are instantly served when offline
+          // Network-first navigation routes: never cache HTML shell forever (max 24 hours)
+          // Excludes /api and non-GET requests entirely
           {
-            urlPattern: ({ request }) => request.mode === 'navigate',
+            urlPattern: ({ request, url }) => request.mode === 'navigate' && !url.pathname.startsWith('/api'),
             handler: 'NetworkFirst',
             options: {
-              cacheName: 'app-pages-cache',
+              cacheName: 'v2-easygradetool-pages',
               networkTimeoutSeconds: 3,
               expiration: {
-                maxEntries: 50,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+                maxEntries: 30,
+                maxAgeSeconds: 24 * 60 * 60, // 24 hours max - never cache HTML shell forever
               },
               cacheableResponse: {
                 statuses: [0, 200],
               },
             },
           },
-          // Manifest file: Stale-While-Revalidate so updates to icons, colors, or scope take effect immediately
+          // Manifest file: Stale-While-Revalidate
           {
             urlPattern: ({ url }) => url.pathname.endsWith('/manifest.json') || url.pathname === '/manifest.json',
             handler: 'StaleWhileRevalidate',
             options: {
-              cacheName: 'manifest-cache',
+              cacheName: 'v2-easygradetool-manifest',
               expiration: {
                 maxEntries: 1,
                 maxAgeSeconds: 24 * 60 * 60, // 24 hours
@@ -240,30 +240,12 @@ export default defineConfig({
               },
             },
           },
-          // API GET Routes only (Stats & Health): NetworkFirst with quick fallback so live backend is always prioritized
-          {
-            urlPattern: ({ request, url }) =>
-              request.method === 'GET' &&
-              (url.pathname.startsWith('/api/stats') || url.pathname.startsWith('/api/health')),
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'api-cache',
-              networkTimeoutSeconds: 2,
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60, // 1 minute
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          // Static JS & CSS bundles: Stale-While-Revalidate ensures instant app load with background updates
+          // Static JS & CSS bundles: Stale-While-Revalidate
           {
             urlPattern: /\.(?:js|css)$/i,
             handler: 'StaleWhileRevalidate',
             options: {
-              cacheName: 'static-bundles-cache',
+              cacheName: 'v2-easygradetool-static-bundles',
               expiration: {
                 maxEntries: 60,
                 maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
@@ -273,58 +255,22 @@ export default defineConfig({
               },
             },
           },
-          // Same-origin dynamic assets & route requests (StaleWhileRevalidate)
+          // Local Self-Hosted Fonts: CacheFirst for optimal performance
           {
-            urlPattern: ({ sameOrigin, url }) =>
-              sameOrigin && !url.pathname.match(/\.(?:js|css|woff2?|png|jpg|jpeg|svg|gif|ico)$/),
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'app-data-cache',
-              expiration: {
-                maxEntries: 60,
-                maxAgeSeconds: 14 * 24 * 60 * 60, // 14 days
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          // Google Fonts Stylesheets
-          {
-            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'google-fonts-stylesheets',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 365 * 24 * 60 * 60,
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          // Google Fonts Webfonts
-          {
-            urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+            urlPattern: /\/fonts\/.*\.(?:woff|woff2|ttf|eot)$/i,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'gstatic-fonts-cache',
+              cacheName: 'v2-easygradetool-fonts',
               expiration: {
-                maxEntries: 30,
-                maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+                maxEntries: 20,
+                maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year immutable
               },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
           // Images and icons cache (Stale-While-Revalidate)
           {
             urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
             handler: 'StaleWhileRevalidate',
             options: {
-              cacheName: 'images-cache',
+              cacheName: 'v2-easygradetool-images',
               expiration: {
                 maxEntries: 60,
                 maxAgeSeconds: 30 * 24 * 60 * 60,

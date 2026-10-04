@@ -217,13 +217,13 @@ const coreRoutes = [
 ];
 
 for (const r of coreRoutes) {
-  assert('Sitemap', `Sitemap contains core route: ${r}`, sitemapContent.includes(`<loc>https://easygradecalculator.com${r === '/' ? '/' : r}</loc>`));
+  assert('Sitemap', `Sitemap contains core route: ${r}`, sitemapContent.includes(`<loc>https://www.easygradetool.com${r === '/' ? '/' : r}</loc>`));
 }
 
 const robotsContent = fs.readFileSync(path.join(rootDir, 'public', 'robots.txt'), 'utf-8');
 assert('Robots.txt', 'Robots.txt allows search crawlers', robotsContent.includes('User-agent: *') && robotsContent.includes('Allow: /'));
 assert('Robots.txt', 'Robots.txt protects backend /api/', robotsContent.includes('Disallow: /api/'));
-assert('Robots.txt', 'Robots.txt points to sitemap.xml', robotsContent.includes('Sitemap: https://easygradecalculator.com/sitemap.xml'));
+assert('Robots.txt', 'Robots.txt points to sitemap.xml', robotsContent.includes('Sitemap: https://www.easygradetool.com/sitemap.xml'));
 
 // ==========================================
 // 4. HEADING ORDER & HIERARCHY AUDIT

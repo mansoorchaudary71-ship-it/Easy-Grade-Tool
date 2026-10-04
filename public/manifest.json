@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Easy Grade Calculator",
-  "short_name": "EasyGrade",
+  "name": "Easy Grade Tool",
+  "short_name": "Easy Grade Tool",
   "description": "Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more.",
   "start_url": "/",
   "scope": "/",
