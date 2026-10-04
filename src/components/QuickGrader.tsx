@@ -1,5 +1,5 @@
 import React, { useState, useMemo, memo, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Printer, Settings, Check, SlidersHorizontal, Hash, SearchX, RotateCcw, ChevronDown } from 'lucide-react';
 import { parseNumber } from '../utils/formatters';
 import { GRADING_SCALES } from '../data/constants';
@@ -61,6 +61,8 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
   const [scaleType, setScaleType] = useState<GradingScaleType>('standard');
   const [isScaleModalOpen, setIsScaleModalOpen] = useState<boolean>(false);
   const [searchFilter, setSearchFilter] = useState<string>('');
+  const { pathname } = useLocation();
+  const isEzGraderPage = pathname.replace(/\/+$/, '') === '/easy-grade-calculator/ez-grader';
 
   // Custom threshold overrides (defaults: A: 90, B: 80, C: 70, D: 60)
   const [thresholds, setThresholds] = useState<{ A: number; B: number; C: number; D: number }>({
@@ -205,6 +207,10 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
 
   const hasMoreItems = totalCalculatedItems > VIRTUALIZE_THRESHOLD && renderedCount < totalCalculatedItems;
 
+  // The print-only copy of the chart is only needed when the on-screen list is chunked.
+  // For normal tests the screen view prints as-is, so the chart appears once in the page HTML.
+  const needsPrintView = totalCalculatedItems > VIRTUALIZE_THRESHOLD;
+
   const handleShowMore = () => {
     triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
     setRenderedCount((prev) => Math.min(totalCalculatedItems, prev + CHUNK_SIZE));
@@ -321,6 +327,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           <p className="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base mt-1 m-0">
             Set total questions and customize grading scale cutoffs.
           </p>
+          {!isEzGraderPage && (
           <div className="mt-2 pt-2 border-t border-slate-200/50 dark:border-slate-800/60">
             <Link
               to="/easy-grade-calculator/ez-grader"
@@ -329,6 +336,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               <span>Grading classroom quizzes? View the complete EZ Grader Online Chart table &rarr;</span>
             </Link>
           </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-5">
@@ -558,7 +566,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           {/* Grouped Letter Grade Sections */}
           <div className="space-y-6 max-h-[680px] overflow-y-auto pr-1">
             {/* Screen View: Rendered in progressive chunks up to renderedCount */}
-            <div className="space-y-6 print:hidden">
+            <div className={`space-y-6 ${needsPrintView ? 'print:hidden' : ''}`}>
               {visibleLetterGroups.map((group) => {
                 const badgeClass = getBadgeClasses(group.letter);
                 const pctColorClass = getPctColor(group.letter);
@@ -633,7 +641,8 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               )}
             </div>
 
-            {/* Print View: Guarantees 100% of questions are included when printing */}
+            {/* Print View: only rendered for long tests where the screen list is chunked */}
+            {needsPrintView && (
             <div className="hidden print:block space-y-6">
               {letterGroups.map((group) => {
                 const badgeClass = getBadgeClasses(group.letter);
@@ -673,6 +682,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 );
               })}
             </div>
+            )}
 
             {letterGroups.length === 0 && (
               <div

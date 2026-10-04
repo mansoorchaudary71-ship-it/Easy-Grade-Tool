@@ -43,7 +43,7 @@ export const TermsOfService: React.FC = () => {
               <span>Terms of Service Overview</span>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
-              Welcome to <strong>Easy Grade Calculator</strong>. By accessing or using our website, tools, and calculators, you agree to comply with and be bound by these Terms of Service. If you disagree with any portion of these terms, please do not use our services.
+              Welcome to <strong>Easy Grade Tool</strong>. By accessing or using our website, tools, and calculators, you agree to comply with and be bound by these Terms of Service. If you disagree with any portion of these terms, please do not use our services.
             </p>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-mono">
               Last updated: September 30, 2026 • Effective immediately
@@ -83,7 +83,7 @@ export const TermsOfService: React.FC = () => {
                 1. Acceptance of Terms
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-                By visiting, viewing, or interacting with <strong>Easy Grade Calculator</strong> (located at <a href={BASE_CANONICAL_ORIGIN} className="text-teal-700 dark:text-teal-400 underline font-semibold">{BASE_CANONICAL_ORIGIN}</a>), you acknowledge that you have read, understood, and agreed to be legally bound by these Terms of Service and our accompanying <Link to="/privacy" className="text-teal-700 dark:text-teal-400 underline font-semibold">Privacy Policy</Link>.
+                By visiting, viewing, or interacting with <strong>Easy Grade Tool</strong> (located at <a href={BASE_CANONICAL_ORIGIN} className="text-teal-700 dark:text-teal-400 underline font-semibold">{BASE_CANONICAL_ORIGIN}</a>), you acknowledge that you have read, understood, and agreed to be legally bound by these Terms of Service and our accompanying <Link to="/privacy" className="text-teal-700 dark:text-teal-400 underline font-semibold">Privacy Policy</Link>.
               </p>
             </div>
 
@@ -92,7 +92,7 @@ export const TermsOfService: React.FC = () => {
                 2. Educational Use License
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base mb-3">
-                Permission is hereby granted to access and use Easy Grade Calculator for personal, academic, classroom, and non-commercial educational purposes. Under this grant of license, you may:
+                Permission is hereby granted to access and use Easy Grade Tool for personal, academic, classroom, and non-commercial educational purposes. Under this grant of license, you may:
               </p>
               <ul className="list-disc pl-6 space-y-1.5 text-slate-600 dark:text-slate-300 text-sm">
                 <li>Calculate individual, semester, or cumulative grades, weighted course averages, and target exam scores;</li>
@@ -138,7 +138,7 @@ export const TermsOfService: React.FC = () => {
                 6. Intellectual Property
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-                The user interface design, logos, graphics, instructional guides, and algorithmic implementations of Easy Grade Calculator are protected by applicable copyright and trademark laws. You retain full, exclusive ownership of any original course names, grades, or personal notes you enter into the application.
+                The user interface design, logos, graphics, instructional guides, and algorithmic implementations of Easy Grade Tool are protected by applicable copyright and trademark laws. You retain full, exclusive ownership of any original course names, grades, or personal notes you enter into the application.
               </p>
             </div>
 
@@ -156,7 +156,7 @@ export const TermsOfService: React.FC = () => {
                 8. No Warranties (&ldquo;As Is&rdquo;)
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-                Easy Grade Calculator is provided strictly on an &ldquo;AS IS&rdquo; and &ldquo;AS AVAILABLE&rdquo; basis, without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that calculations will be uninterrupted, error-free, or entirely bug-free under all browser configurations.
+                Easy Grade Tool is provided strictly on an &ldquo;AS IS&rdquo; and &ldquo;AS AVAILABLE&rdquo; basis, without warranties of any kind, whether express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not warrant that calculations will be uninterrupted, error-free, or entirely bug-free under all browser configurations.
               </p>
             </div>
 
@@ -165,7 +165,7 @@ export const TermsOfService: React.FC = () => {
                 9. Limitation of Liability
               </h2>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-sm sm:text-base">
-                In no event shall the authors, operators, or contributors of Easy Grade Calculator be liable for any indirect, incidental, consequential, special, or punitive damages—including academic penalties, loss of scholarship eligibility, GPA recalculation discrepancies, or financial losses—arising out of or related to your use of or inability to use this site or its calculation models.
+                In no event shall the authors, operators, or contributors of Easy Grade Tool be liable for any indirect, incidental, consequential, special, or punitive damages—including academic penalties, loss of scholarship eligibility, GPA recalculation discrepancies, or financial losses—arising out of or related to your use of or inability to use this site or its calculation models.
               </p>
             </div>
 

@@ -7,7 +7,7 @@ export const NotFound: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans">
       <Helmet>
-        <title>404 — Page Not Found | Easy Grade Calculator</title>
+        <title>404 — Page Not Found | Easy Grade Tool</title>
         <meta name="robots" content="noindex, follow" />
       </Helmet>
       <div className="w-16 h-16 rounded-3xl bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 flex items-center justify-center mb-4 shadow-sm">
@@ -27,7 +27,7 @@ export const NotFound: React.FC = () => {
         className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-        <span>Return to Easy Grade Calculator</span>
+        <span>Return to Easy Grade Tool</span>
       </Link>
     </div>
   );

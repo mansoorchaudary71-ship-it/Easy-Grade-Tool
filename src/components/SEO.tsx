@@ -281,6 +281,11 @@ export const SEO: React.FC<SEOProps> = ({
     }
     orgTag.textContent = JSON.stringify(organizationSchema, null, 2);
 
+    // WebSite schema belongs to the home page only
+    if (typeof window !== 'undefined' && window.location.pathname.replace(/\/+$/, '') !== '') {
+      document.querySelector('script#schema-org-website')?.remove();
+    }
+
     // Ensure static informational pages (/about, /privacy) do not retain FAQ or HowTo schemas
     if (resolvedCanonical.endsWith('/about') || resolvedCanonical.endsWith('/privacy')) {
       document.querySelector('script#schema-org-faq')?.remove();

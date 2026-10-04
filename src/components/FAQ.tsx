@@ -105,7 +105,7 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         category: 'weighted',
         question: 'Can I calculate my grade if weights do not add up to 100%?',
         answer:
-          'Yes! Our Easy Grade Calculator automatically normalizes relative weights. The algorithm divides your accumulated weighted score by the sum of currently active weights entered. This ensures mathematically precise tracking at any point during the semester, even when future assignments or final exam weights have not yet occurred.',
+          'Yes! Our Easy Grade Tool automatically normalizes relative weights. The algorithm divides your accumulated weighted score by the sum of currently active weights entered. This ensures mathematically precise tracking at any point during the semester, even when future assignments or final exam weights have not yet occurred.',
       },
       {
         id: 'rounding-percentages',

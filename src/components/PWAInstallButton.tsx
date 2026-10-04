@@ -56,7 +56,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
             ? 'bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95'
             : 'bg-emerald-700 hover:bg-emerald-800 text-white border border-emerald-600/60 hover:border-emerald-500 active:scale-95'
         } ${className}`}
-        aria-label={isIOS ? 'Install Easy Grade Calculator on iOS' : 'Install Easy Grade App for offline use'}
+        aria-label={isIOS ? 'Install Easy Grade Tool on iOS' : 'Install Easy Grade App for offline use'}
         title="Install app to your home screen for full offline access"
       >
         <Download className="w-3.5 h-3.5" aria-hidden="true" />

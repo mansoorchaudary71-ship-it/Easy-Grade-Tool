@@ -47,7 +47,7 @@ export const PrivacyPolicy: React.FC = () => {
               <span>Core Privacy Architecture</span>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
-              Easy Grade Calculator is designed to provide powerful, immediate academic tools while maintaining complete transparency. Calculations execute directly within your browser, while voluntary communications (such as newsletter subscriptions and support tickets) are handled securely on our server with defined retention limits.
+              Easy Grade Tool is designed to provide powerful, immediate academic tools while maintaining complete transparency. Calculations execute directly within your browser, while voluntary communications (such as newsletter subscriptions and support tickets) are handled securely on our server with defined retention limits.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">

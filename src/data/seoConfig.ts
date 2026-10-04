@@ -49,9 +49,9 @@ export const OG_IMAGES: Record<ToolKey | 'default', string> = {
 export const OG_IMAGE_PLACEHOLDERS = OG_IMAGES;
 
 export const SEO_HOME: RouteSeoConfig = {
-  title: 'Easy Grade Calculator — Quick Grade & EZ Grader Chart',
+  title: 'Easy Grade Calculator & EZ Grader Chart | Easy Grade Tool',
   description:
-    'Calculate test scores, percentages, and letter grades instantly with our free Easy Grade Calculator, customizable EZ grader chart, and academic tools.',
+    'Free easy grade calculator and EZ grader chart. Enter the number of questions to see percentage scores, letter grades and a printable chart for any test.',
   canonicalPath: '/',
   canonicalUrl: `${BASE_CANONICAL_ORIGIN}/`,
   ogImagePlaceholder: OG_IMAGES.quick,
@@ -77,9 +77,9 @@ export const SEO_HOME: RouteSeoConfig = {
 
 export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoConfig> = {
   about: {
-    title: 'About & Grading Methodology — Easy Grade Calculator',
+    title: 'About & Grading Methodology — Easy Grade Tool',
     description:
-      'Learn the mathematical formulas behind Easy Grade Calculator: weighted course grades, 4.0 US GPA, CGPA to percentage ordinances, and global scales.',
+      'Learn the mathematical formulas behind Easy Grade Tool: weighted course grades, 4.0 US GPA, CGPA to percentage ordinances, and global scales.',
     canonicalPath: '/about',
     canonicalUrl: `${BASE_CANONICAL_ORIGIN}/about`,
     ogImagePlaceholder: OG_IMAGES.default,
@@ -102,9 +102,9 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
     ],
   },
   privacy: {
-    title: 'Privacy Policy — Easy Grade Calculator',
+    title: 'Privacy Policy — Easy Grade Tool',
     description:
-      'Easy Grade Calculator privacy policy. Transparent client-side calculations, clear data retention policies for voluntary submissions, and user rights.',
+      'Easy Grade Tool privacy policy. Transparent client-side calculations, clear data retention policies for voluntary submissions, and user rights.',
     canonicalPath: '/privacy',
     canonicalUrl: `${BASE_CANONICAL_ORIGIN}/privacy`,
     ogImagePlaceholder: OG_IMAGES.default,
@@ -125,9 +125,9 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
     ],
   },
   terms: {
-    title: 'Terms of Service — Easy Grade Calculator',
+    title: 'Terms of Service — Easy Grade Tool',
     description:
-      'Read the terms of service, calculation disclaimers, educational license, and usage policies for Easy Grade Calculator\'s suite of academic tools.',
+      'Read the terms of service, calculation disclaimers, educational license, and usage policies for Easy Grade Tool\'s suite of academic tools.',
     canonicalPath: '/terms',
     canonicalUrl: `${BASE_CANONICAL_ORIGIN}/terms`,
     ogImagePlaceholder: OG_IMAGES.default,
@@ -478,67 +478,11 @@ export function generateRobotsTxt(origin: string = SITE_URL): string {
   const sitemapUrl = `${cleanOrigin}/sitemap.xml`;
   const domainHost = cleanOrigin.replace(/^https?:\/\//, '');
 
-  return `# Robots.txt for Easy Grade Calculator (Interactive Web Application)
-# Optimized for Googlebot, Bingbot, Applebot, and modern client-side rendering engines
-
+  return `# robots.txt for Easy Grade Tool (${domainHost})
 User-agent: *
 Allow: /
-
-# Grant search engine crawlers unrestricted access to all essential JavaScript, CSS, and asset files
-Allow: /assets/
-Allow: /public/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.svg$
-Allow: /*.webp$
-Allow: /*.ico$
-Allow: /*.woff2$
-Allow: /*.woff$
-Allow: /*.ttf$
-Allow: /*.json$
-Allow: /sitemap.xml
-
-# Disallow internal backend proxy routes and transient states
 Disallow: /api/
 
-# Specialized Crawler Configurations
-User-agent: Googlebot
-Allow: /
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-
-User-agent: Googlebot-Image
-Allow: /
-Allow: /assets/
-Allow: /*.png$
-Allow: /*.svg$
-Allow: /*.jpg$
-Allow: /*.jpeg$
-Allow: /*.webp$
-Allow: /*.ico$
-
-User-agent: Bingbot
-Allow: /
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-
-User-agent: Applebot
-Allow: /
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.mjs$
-Allow: /*.css$
-
-# Host and Sitemap discovery
-Host: ${domainHost}
 Sitemap: ${sitemapUrl}
 `;
 }

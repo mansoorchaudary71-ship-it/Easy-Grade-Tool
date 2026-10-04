@@ -1,5 +1,5 @@
 /**
- * Easy Grade Calculator — Full-Stack Server Entry Point
+ * Easy Grade Tool — Full-Stack Server Entry Point
  * 
  * Supports all execution environments:
  * 1. Direct Node.js (`node server.ts` or `npm start`): transparently launches with tsx ESM loader

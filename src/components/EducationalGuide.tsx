@@ -46,13 +46,13 @@ export function getEducationalGuideSchema(
     image: `${cleanOrigin}/images/easy-grade-calculator-guide.webp`,
     author: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${cleanOrigin}/`,
       email: CONTACT_EMAIL,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Easy Grade Calculator',
+      name: 'Easy Grade Tool',
       url: `${cleanOrigin}/`,
       logo: {
         '@type': 'ImageObject',
@@ -167,7 +167,7 @@ export const EducationalGuide: React.FC<EducationalGuideProps> = ({ activeTool =
     );
   }
 
-  // If activeTool is 'quick' on homepage '/', display the Easy Grade Calculator / EZ Grader educational guide along with Quick Grade FAQs
+  // If activeTool is 'quick' on homepage '/', display the Easy Grade Tool / EZ Grader educational guide along with Quick Grade FAQs
   if (activeTool === 'quick') {
     return (
       <>

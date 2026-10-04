@@ -230,7 +230,7 @@ export async function runPrerender(): Promise<void> {
   }
   notFoundHtml = notFoundHtml.replace(
     /<title>.*?<\/title>/i,
-    '<title>404 — Page Not Found | Easy Grade Calculator</title>'
+    '<title>404 — Page Not Found | Easy Grade Tool</title>'
   );
   const notFoundBody = `
     <div class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans">
@@ -240,7 +240,7 @@ export async function runPrerender(): Promise<void> {
         The calculator or page you requested could not be found. Please check the address or return to our calculation suite.
       </p>
       <a href="${prefix}" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95">
-        &larr; Return to Easy Grade Calculator
+        &larr; Return to Easy Grade Tool
       </a>
     </div>
   `;

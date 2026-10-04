@@ -272,7 +272,7 @@ app.all('/api/health', (req, res) => {
   const uptimeSeconds = Math.floor((Date.now() - serverStartTime) / 1000);
   res.json({
     status: 'operational',
-    service: 'Easy Grade Calculator Backend',
+    service: 'Easy Grade Tool Backend',
     contactEmail: CONTACT_EMAIL,
     uptime: uptimeSeconds,
     uptimeHuman: `${Math.floor(uptimeSeconds / 60)}m ${uptimeSeconds % 60}s`,
@@ -954,7 +954,7 @@ export async function setupServer() {
   const useDist = hasDist;
 
   if (useDist) {
-    console.log('[Easy Grade Calculator] Serving ultra-fast pre-rendered build from dist/');
+    console.log('[Easy Grade Tool] Serving ultra-fast pre-rendered build from dist/');
 
     // High-performance in-memory cache for instantaneous route delivery (< 0.1ms)
     const htmlMemoryCache = new Map<string, string>();
@@ -976,7 +976,7 @@ export async function setupServer() {
         }
       };
       walkAndCache(distPath);
-      console.log(`[Easy Grade Calculator] In-memory cache pre-warmed with ${htmlMemoryCache.size} pre-rendered routes.`);
+      console.log(`[Easy Grade Tool] In-memory cache pre-warmed with ${htmlMemoryCache.size} pre-rendered routes.`);
     } catch (e) {
       console.warn('Failed to pre-warm HTML memory cache:', e);
     }
@@ -1115,7 +1115,7 @@ export async function setupServer() {
             );
             template = template.replace(
               /<title>.*?<\/title>/i,
-              '<title>404 — Page Not Found | Easy Grade Calculator</title>'
+              '<title>404 — Page Not Found | Easy Grade Tool</title>'
             );
             const notFoundBody = `
               <div class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans">
@@ -1125,7 +1125,7 @@ export async function setupServer() {
                   The calculator or page you requested could not be found. Please check the address or return to our calculation suite.
                 </p>
                 <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95">
-                  &larr; Return to Easy Grade Calculator
+                  &larr; Return to Easy Grade Tool
                 </a>
               </div>
             `;
@@ -1155,8 +1155,8 @@ export async function setupServer() {
   }
 
   const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Easy Grade Calculator] Express server running at http://0.0.0.0:${PORT}`);
-    console.log(`[Easy Grade Calculator] Mode: ${IS_PROD ? 'Production' : 'Development'}`);
+    console.log(`[Easy Grade Tool] Express server running at http://0.0.0.0:${PORT}`);
+    console.log(`[Easy Grade Tool] Mode: ${IS_PROD ? 'Production' : 'Development'}`);
   });
 
   return { app, server };

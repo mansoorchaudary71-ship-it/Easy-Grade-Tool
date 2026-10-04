@@ -395,11 +395,28 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     },
   };
 
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${BASE_CANONICAL_ORIGIN}/#website`,
+    name: 'Easy Grade Tool',
+    alternateName: ['Easy Grade Calculator', 'EasyGradeTool'],
+    url: `${BASE_CANONICAL_ORIGIN}/`,
+    inLanguage: 'en',
+    publisher: { '@id': `${BASE_CANONICAL_ORIGIN}/#organization` },
+  };
+
   const scripts: string[] = [
     `<script id="schema-org-webapp" type="application/ld+json">\n${JSON.stringify(webAppSchema, null, 2)}\n</script>`,
     `<script id="schema-org-breadcrumb" type="application/ld+json">\n${JSON.stringify(breadcrumbSchema, null, 2)}\n</script>`,
     `<script id="schema-org-organization" type="application/ld+json">\n${JSON.stringify(organizationSchema, null, 2)}\n</script>`,
   ];
+
+  if (cleanPath === '/' || cleanPath === '') {
+    scripts.push(
+      `<script id="schema-org-website" type="application/ld+json">\n${JSON.stringify(websiteSchema, null, 2)}\n</script>`
+    );
+  }
 
   if (hasFaq) {
     const faqSchema = customFaqItems
