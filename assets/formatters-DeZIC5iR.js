@@ -1,0 +1,1 @@
+import"./seoConfig-CaPGn7mj.js";function i(r,n=0){const e=Number(r);return Number.isFinite(e)?e:n}function u(r){return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(Number.isFinite(r)?r:0)}export{i as n,u as t};

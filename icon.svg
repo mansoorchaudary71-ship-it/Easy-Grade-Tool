@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Rounded squircle background -->
+  <rect width="512" height="512" rx="118" fill="#004851" />
+
+  <!-- Letter A with Chart Crossbar -->
+  <g fill="#ffffff">
+    <!-- Left diagonal leg of A -->
+    <polygon points="110,400 134,400 220,132 194,132" />
+    <!-- Right diagonal leg of A -->
+    <polygon points="278,400 254,400 168,132 194,132" />
+    <!-- Top apex cap -->
+    <circle cx="194" cy="132" r="4" />
+
+    <!-- Chart Base Bar inside A -->
+    <rect x="136" y="312" width="116" height="14" rx="3" />
+
+    <!-- 3 Bar Chart Columns (Ascending) -->
+    <!-- Bar 1 (Short) -->
+    <rect x="148" y="280" width="18" height="32" rx="2" />
+    <!-- Bar 2 (Medium) -->
+    <rect x="176" y="254" width="18" height="58" rx="2" />
+    <!-- Bar 3 (Tall) -->
+    <rect x="204" y="226" width="18" height="86" rx="2" />
+
+    <!-- Bold Plus Sign -->
+    <!-- Horizontal arm -->
+    <rect x="306" y="246" width="102" height="28" rx="4" />
+    <!-- Vertical arm -->
+    <rect x="343" y="209" width="28" height="102" rx="4" />
+
+    <!-- Sparkle Star in top right -->
+    <path d="M 412,126 Q 412,142 428,142 Q 412,142 412,158 Q 412,142 396,142 Q 412,142 412,126 Z" />
+  </g>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Full bleed background for PWA maskable icon -->
+  <rect width="512" height="512" fill="#004851" />
+
+  <!-- Centered within 80% safe zone (center at 256, 256) -->
+  <g fill="#FFFFFF" transform="translate(256, 256) scale(0.82) translate(-256, -256)">
+    <!-- Left Leg of A -->
+    <polygon points="106,400 134,400 220,132 192,132" />
+    <!-- Right Leg of A -->
+    <polygon points="278,400 250,400 164,132 192,132" />
+    <!-- Apex Cap -->
+    <circle cx="192" cy="132" r="5" />
+
+    <!-- Chart Base Bar inside A -->
+    <rect x="134" y="312" width="118" height="14" rx="3" />
+
+    <!-- 3 Ascending Bar Chart Columns -->
+    <rect x="146" y="280" width="18" height="32" rx="2" />
+    <rect x="174" y="252" width="18" height="60" rx="2" />
+    <rect x="202" y="222" width="18" height="90" rx="2" />
+
+    <!-- Plus Sign -->
+    <rect x="306" y="246" width="102" height="28" rx="4" />
+    <rect x="343" y="209" width="28" height="102" rx="4" />
+
+    <!-- 4-point Sparkle Star -->
+    <path d="M 412,126 Q 412,142 428,142 Q 412,142 412,158 Q 412,142 396,142 Q 412,142 412,126 Z" />
+  </g>
+</svg>

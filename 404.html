@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="robots" content="noindex, follow" />
+    <script>
+      (function(){
+        try {
+          var l = window.location;
+          var p = l.pathname;
+          var s = l.search || '';
+          var h = l.hash || '';
+          
+          var isGitHubIo = l.hostname.endsWith('github.io');
+          var segments = p.split('/').filter(Boolean);
+          var repoPrefix = (isGitHubIo && segments.length > 0 && !segments[0].includes('.')) 
+            ? '/' + segments[0] + '/' 
+            : '/Easy-Grade-Tool/';
+
+          if (p && p !== repoPrefix && !p.endsWith('/404.html')) {
+            sessionStorage.setItem('spa_redirect_target', p + s + h);
+            l.replace(repoPrefix);
+          }
+        } catch (_) {}
+      })();
+    </script>
+    <script>
+      /* Ensure window.fetch is writable and configurable */
+      (function() {
+        try {
+          var _origFetch = typeof window !== 'undefined' && window.fetch ? window.fetch.bind(window) : undefined;
+          var _assignedFetch = null;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return _assignedFetch || _origFetch;
+            },
+            set: function(fn) {
+              _assignedFetch = typeof fn === 'function' ? fn.bind(window) : fn;
+            },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (_) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>404 — Page Not Found | Easy Grade Calculator</title>
+    <meta name="description" content="Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more." />
+    <meta name="theme-color" content="#F3F4F6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="EasyGrade" />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="canonical" href="https://easygradecalculator.com/" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" /></noscript>
+    <meta property="og:title" content="Easy Grade Calculator" />
+    <meta property="og:description" content="Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://easygradecalculator.com/" />
+    <meta property="og:site_name" content="Easy Grade Calculator" />
+    <meta property="og:image" content="https://easygradecalculator.com/og-cards/grade-calculator-1200x630.png" />
+    <meta property="og:image:secure_url" content="https://easygradecalculator.com/og-cards/grade-calculator-1200x630.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Easy Grade Calculator — Quick Grade & EZ Grader Chart" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Easy Grade Calculator" />
+    <meta name="twitter:description" content="Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more." />
+    <meta name="twitter:image" content="https://easygradecalculator.com/og-cards/grade-calculator-1200x630.png" />
+    <meta name="twitter:image:alt" content="Easy Grade Calculator — Quick Grade & EZ Grader Chart" />
+    <script id="schema-org-webapp" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://easygradecalculator.com/#webapp",
+      "name": "Easy Grade Calculator",
+      "url": "https://easygradecalculator.com/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0.0",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "description": "Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more.",
+      "datePublished": "2024-01-15T00:00:00Z",
+      "dateModified": "2026-09-30T00:00:00Z",
+      "author": {
+        "@type": "Organization",
+        "name": "Easy Grade Calculator",
+        "url": "https://easygradecalculator.com/",
+        "email": "support@easygradecalculator.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Easy Grade Calculator",
+        "url": "https://easygradecalculator.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://easygradecalculator.com/icon.svg"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Weighted & Points-based Grade Calculation",
+        "Target Final Exam Score Simulator",
+        "Customizable Standard and Plus/Minus Grading Scales",
+        "Semester & Cumulative 4.0 GPA Calculation",
+        "Offline PWA Utility Support"
+      ]
+    }
+    </script>
+    <script id="schema-org-breadcrumb" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://easygradecalculator.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Easy Grade Calculator",
+          "item": "https://easygradecalculator.com/"
+        }
+      ]
+    }
+    </script>
+    <script id="schema-org-organization" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://easygradecalculator.com/#organization",
+      "name": "Easy Grade Calculator",
+      "url": "https://easygradecalculator.com/",
+      "email": "support@easygradecalculator.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://easygradecalculator.com/icon.svg",
+        "width": 512,
+        "height": 512
+      }
+    }
+    </script>
+    <script id="schema-org-faq" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the Easy Grade Calculator (Quick Grade) work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply enter the total number of questions on your test or quiz and the number of wrong answers. The calculator immediately computes your percentage score and letter grade using the formula: Percentage = ((Total Questions − Wrong Answers) ÷ Total Questions) × 100."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I calculate what I need on my final exam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Enter your current course grade, your target overall grade, and the percentage weight of your final exam. The calculator solves for your required final exam score using: Required Score = (Target Grade − Current Grade × (1 − Final Weight)) ÷ Final Weight."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="module" crossorigin src="/Easy-Grade-Tool/assets/index-DG-SRooJ.js"></script>
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/rolldown-runtime-DS2seoW7.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/vendor-icons-D7T1tnfT.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/vendor-motion-CB_bwGDP.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/vendor-react-CuwPdl5t.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/seoConfig-CaPGn7mj.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/guideImages-DaACZIdZ.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/SemanticGuideImage-zEmOxFl9.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/formatters-DeZIC5iR.js">
+    <link rel="modulepreload" crossorigin href="/Easy-Grade-Tool/assets/ScrollableTableContainer-UzjRiF_t.js">
+    <link rel="stylesheet" crossorigin href="/Easy-Grade-Tool/assets/index-Dh_kux8O.css">
+  <link rel="manifest" href="/Easy-Grade-Tool/manifest.json"></head>
+  <body class="bg-[#F3F4F6] text-stone-900">
+    <div id="root">
+    <div class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans">
+      <span class="text-xs font-mono font-bold tracking-widest uppercase text-teal-700 dark:text-teal-400 mb-2">Error 404</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">Page Not Found</h1>
+      <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-8 leading-relaxed">
+        The calculator or page you requested could not be found. Please check the address or return to our calculation suite.
+      </p>
+      <a href="/Easy-Grade-Tool/" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95">
+        &larr; Return to Easy Grade Calculator
+      </a>
+    </div>
+  </div>
+  </body>
+</html>
+
