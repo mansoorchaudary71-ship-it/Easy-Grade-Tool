@@ -280,18 +280,18 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
 
   const getTierWrapperClass = (letter: string) => {
     if (letter.startsWith('A')) {
-      return 'bg-[#E6F2EE] dark:bg-teal-950/30 border border-[#BDE0D5] dark:border-teal-800/40 rounded-[24px] p-4';
+      return 'bg-[#CFE9DF] dark:bg-teal-950/55 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-4';
     }
     if (letter.startsWith('B')) {
-      return 'bg-[#E8EEFF] dark:bg-indigo-950/30 border border-[#C6D4F9] dark:border-indigo-800/40 rounded-[24px] p-4';
+      return 'bg-[#D6E1FF] dark:bg-indigo-950/55 border border-[#A5BCF0] dark:border-indigo-800/60 rounded-[24px] p-4';
     }
     if (letter.startsWith('C')) {
-      return 'bg-[#FFF5E5] dark:bg-amber-950/30 border border-[#FDE0B2] dark:border-amber-800/40 rounded-[24px] p-4';
+      return 'bg-[#FFE8C2] dark:bg-amber-950/55 border border-[#F5C77A] dark:border-amber-800/60 rounded-[24px] p-4';
     }
     if (letter.startsWith('D')) {
       return 'bg-[#F0F2F5] dark:bg-slate-800/50 border border-[#D1D5DB] dark:border-slate-700/50 rounded-[24px] p-4';
     }
-    return 'bg-[#FCEAEF] dark:bg-rose-950/30 border border-[#F7C6D5] dark:border-rose-800/40 rounded-[24px] p-4';
+    return 'bg-[#F9D6E1] dark:bg-rose-950/55 border border-[#EDA3BB] dark:border-rose-800/60 rounded-[24px] p-4';
   };
 
   const getPctColor = (letter: string) => {
@@ -474,7 +474,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
 
           {/* Quick Metrics / Scoring Summary */}
           <div className="grid grid-cols-2 gap-3 pt-1">
-            <div className="bg-[#E6F2EE] dark:bg-teal-950/40 rounded-[20px] p-4 border border-[#BDE0D5] dark:border-teal-800/50 shadow-sm">
+            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 rounded-[20px] p-4 border border-[#96CDB8] dark:border-teal-800/50 shadow-sm">
               <span className="text-[11px] font-semibold text-slate-500 dark:text-teal-300 uppercase tracking-wider block">
                 Each Worth
               </span>
@@ -484,7 +484,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               <span className="text-[11px] text-slate-500 dark:text-teal-400/80">Value per question</span>
             </div>
 
-            <div className="bg-[#FFF5E5] dark:bg-amber-950/40 rounded-[20px] p-4 border border-[#FEE3B8] dark:border-amber-800/50 shadow-sm">
+            <div className="bg-[#FFE8C2] dark:bg-amber-950/60 rounded-[20px] p-4 border border-[#F5C77A] dark:border-amber-800/50 shadow-sm">
               <span className="text-[11px] font-semibold text-slate-500 dark:text-amber-300 uppercase tracking-wider block">
                 Passing Cutoff (D)
               </span>
@@ -506,7 +506,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
       >
         <div>
           {/* Output Card Header - Master Highlight Container */}
-          <div className="bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block mb-1">
                 Scoring Output

@@ -221,7 +221,7 @@ const GradeScaleModalDialog: React.FC<{
             </div>
 
             {thresholdValidationError && (
-              <div className="text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50/90 dark:bg-rose-950/40 border border-rose-200/80 dark:border-rose-900/50 rounded-2xl p-2.5 flex items-start gap-2 animate-in fade-in duration-150">
+              <div className="text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50/90 dark:bg-rose-950/60 border border-rose-200/80 dark:border-rose-900/50 rounded-2xl p-2.5 flex items-start gap-2 animate-in fade-in duration-150">
                 <span className="shrink-0 text-sm">⚠️</span>
                 <span className="leading-snug">{thresholdValidationError}</span>
               </div>

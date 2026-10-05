@@ -133,18 +133,18 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
   const getTierRowBg = (letter: string) => {
     if (letter.startsWith('A')) {
-      return 'bg-[#E6F2EE] hover:bg-[#d9ebe5] border border-[#BDE0D5]/50';
+      return 'bg-[#CFE9DF] hover:bg-[#C0E0D3] border border-[#96CDB8]/50';
     }
     if (letter.startsWith('B')) {
-      return 'bg-[#E8EEFF] hover:bg-[#dbe4ff] border border-[#C6D4F9]/50';
+      return 'bg-[#D6E1FF] hover:bg-[#C8D6FF] border border-[#A5BCF0]/50';
     }
     if (letter.startsWith('C')) {
-      return 'bg-[#FFF5E5] hover:bg-[#ffedcc] border border-[#FDE0B2]/50';
+      return 'bg-[#FFE8C2] hover:bg-[#FFDFA8] border border-[#F5C77A]/50';
     }
     if (letter.startsWith('D')) {
       return 'bg-[#F0F2F5] hover:bg-[#e4e7eb] border border-[#D1D5DB]/50';
     }
-    return 'bg-[#FCEAEF] hover:bg-[#fbd9e2] border border-[#F7C6D5]/50';
+    return 'bg-[#F9D6E1] hover:bg-[#F5C3D3] border border-[#EDA3BB]/50';
   };
 
   return (
@@ -260,7 +260,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
           {/* Quick Metrics & Actions */}
           <div className="flex flex-col justify-between space-y-4">
-            <div className="bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
+            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
               <span className="text-[11px] font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
                 Points Per Question
               </span>

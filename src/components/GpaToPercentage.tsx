@@ -411,7 +411,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
           </div>
 
           {/* Animated Circular Progress Gauge - Master Output */}
-          <div className="bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
+          <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
             <div className="gpa-gauge-container">
               <svg
                 className="gpa-gauge-svg"
@@ -493,11 +493,11 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
 
           {/* Quick Metrics Comparison Table */}
           <div className="grid grid-cols-2 gap-3 mt-4">
-            <div className="bg-[#FFF5E5] dark:bg-amber-950/30 rounded-[20px] p-4 border border-black/5 dark:border-amber-800/30 shadow-xs text-center">
+            <div className="bg-[#FFE8C2] dark:bg-amber-950/55 rounded-[20px] p-4 border border-black/5 dark:border-amber-800/50 shadow-xs text-center">
               <strong className="block text-xl font-bold text-slate-800 dark:text-white font-mono">{calculatedGpa.toFixed(2)}</strong>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Equivalent GPA</span>
             </div>
-            <div className="bg-[#E8EEFF] dark:bg-indigo-950/30 rounded-[20px] p-4 border border-black/5 dark:border-indigo-800/30 shadow-xs text-center">
+            <div className="bg-[#D6E1FF] dark:bg-indigo-950/55 rounded-[20px] p-4 border border-black/5 dark:border-indigo-800/50 shadow-xs text-center">
               <strong className="block text-xl font-bold text-slate-800 dark:text-white font-mono">{calculatedPercent.toFixed(1)}%</strong>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Percentage</span>
             </div>

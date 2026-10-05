@@ -259,7 +259,7 @@ export const PrivacyPolicy: React.FC = () => {
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                 You maintain complete ownership of your personal information. You have the right to request access to the data we hold regarding your email address, request corrections, or request permanent deletion of all records associated with you.
               </p>
-              <div className="p-5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 space-y-3">
+              <div className="p-5 rounded-2xl bg-teal-100/80 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 space-y-3">
                 <div className="flex items-start gap-3">
                   <Trash2 className="w-5 h-5 text-teal-700 dark:text-teal-400 shrink-0 mt-0.5" />
                   <div>

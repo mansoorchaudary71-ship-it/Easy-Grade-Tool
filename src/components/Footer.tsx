@@ -751,7 +751,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <Link
                   to="/privacy"
                   onClick={scrollToTop}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 border border-emerald-200/70 dark:border-emerald-800/50 text-[11px] font-semibold text-emerald-800 dark:text-emerald-300 transition-colors cursor-pointer group active:scale-95"
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/50 border border-emerald-200/70 dark:border-emerald-800/50 text-[11px] font-semibold text-emerald-800 dark:text-emerald-300 transition-colors cursor-pointer group active:scale-95"
                   title="View 100% Client-Side Privacy Policy"
                 >
                   <Shield className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />

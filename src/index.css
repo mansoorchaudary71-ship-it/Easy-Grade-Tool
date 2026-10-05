@@ -47,7 +47,7 @@
   /* Default tool theme (unified academic teal) - optimized for WCAG AA/AAA */
   --tool-primary: 168 85% 23%;
   --tool-deep: 172 85% 18%;
-  --tool-soft: 168 50% 93%;
+  --tool-soft: 168 45% 88%;
   --tool-accent: 38 92% 50%;
   --tool-on-primary: 0 0% 100%;
 }
@@ -87,7 +87,7 @@
   /* Dark mode default tool tint */
   --tool-primary: 166 76% 44%;
   --tool-deep: 172 80% 36%;
-  --tool-soft: 168 35% 16%;
+  --tool-soft: 168 35% 22%;
   --tool-accent: 38 92% 54%;
   --tool-on-primary: 224 71% 4%;
 }
@@ -103,7 +103,7 @@
 .tool-theme-password {
   --tool-primary: 168 85% 23%;
   --tool-deep: 172 85% 18%;
-  --tool-soft: 168 50% 93%;
+  --tool-soft: 168 45% 88%;
   --tool-accent: 38 92% 50%;
   --tool-on-primary: 0 0% 100%;
 }
@@ -126,7 +126,7 @@
 .dark.tool-theme-password {
   --tool-primary: 166 76% 44%;
   --tool-deep: 172 80% 36%;
-  --tool-soft: 168 35% 16%;
+  --tool-soft: 168 35% 22%;
   --tool-accent: 38 92% 54%;
   --tool-on-primary: 224 71% 4%;
 }
@@ -734,7 +734,7 @@ h1 {
 }
 
 .metric-toggle-btn[data-active="true"] {
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   border-color: hsl(var(--tool-primary));
   color: hsl(var(--tool-primary));
   font-weight: 700;
@@ -819,7 +819,7 @@ h1 {
 
 /* Stepper Half-point button */
 .stepper-tap-half {
-  background: hsl(var(--tool-primary) / 0.08);
+  background: hsl(var(--tool-primary) / 0.14);
   color: hsl(var(--tool-primary));
   font-weight: 800;
   font-size: 11.5px;
@@ -1678,7 +1678,7 @@ input[type="number"]:focus {
 }
 
 .ez-table tr.ez-row-active {
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   font-weight: 700;
 }
 
@@ -1732,7 +1732,7 @@ input[type="number"]:focus {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   color: hsl(var(--tool-primary));
   display: grid;
   place-items: center;
@@ -2001,7 +2001,7 @@ input[type="number"]:focus {
 }
 
 .ez-row-current {
-  background: hsl(var(--tool-primary) / 0.12) !important;
+  background: hsl(var(--tool-primary) / 0.2) !important;
   font-weight: 700;
 }
 
@@ -2149,7 +2149,7 @@ input[type="number"]:focus {
 /* Add Item Button */
 .add-button {
   color: hsl(var(--tool-primary));
-  background: hsl(var(--tool-soft, var(--secondary)) / 0.5);
+  background: hsl(var(--tool-soft, var(--secondary)) / 0.8);
   border: 1px dashed hsl(var(--tool-primary) / 0.35);
   border-radius: 10px;
   display: inline-flex;
@@ -2997,7 +2997,7 @@ input[type="number"]:focus {
   font-weight: 600;
   font-family: var(--app-font-mono);
   color: hsl(var(--tool-primary));
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   padding: 3px 8px;
   border-radius: 6px;
   display: inline-flex;
@@ -3035,7 +3035,7 @@ input[type="number"]:focus {
   font-family: var(--app-font-mono);
   font-weight: 700;
   color: hsl(var(--tool-primary));
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   padding: 2px 7px;
   border-radius: 4px;
 }
@@ -3239,7 +3239,7 @@ input[type="number"]:focus {
 .projected-letter-tag {
   font: 700 13px var(--app-font-mono);
   color: hsl(var(--tool-primary));
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   padding: 2px 7px;
   border-radius: 4px;
 }
@@ -3405,7 +3405,7 @@ input[type="number"]:focus {
 }
 
 .what-if-badge {
-  background: hsl(var(--tool-primary) / 0.15);
+  background: hsl(var(--tool-primary) / 0.24);
   color: hsl(var(--tool-primary));
   font: 700 9.5px/1 var(--app-font-mono);
   text-transform: uppercase;
@@ -4442,7 +4442,7 @@ input[type="number"]:focus {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   color: hsl(var(--tool-primary));
   display: grid;
   place-items: center;
@@ -4658,7 +4658,7 @@ input[type="number"]:focus {
 }
 
 .history-card-badge:hover {
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   color: hsl(var(--tool-primary));
 }
 
@@ -4822,7 +4822,7 @@ input[type="number"]:focus {
   width: 24px;
   height: 24px;
   border-radius: 6px;
-  background: hsl(var(--tool-primary) / 0.12);
+  background: hsl(var(--tool-primary) / 0.2);
   color: hsl(var(--tool-primary));
   display: grid;
   place-items: center;
@@ -5061,7 +5061,7 @@ input[type="number"]:focus {
   text-transform: uppercase;
   padding: 2px 6px;
   border-radius: 4px;
-  background: hsl(var(--tool-primary) / 0.15);
+  background: hsl(var(--tool-primary) / 0.24);
   color: hsl(var(--tool-primary));
 }
 
@@ -5697,7 +5697,7 @@ input[type="number"]:focus {
 }
 
 .dark .command-palette-item.is-active {
-  background: hsl(var(--tool-soft) / 0.5);
+  background: hsl(var(--tool-soft) / 0.8);
 }
 
 .command-palette-item.is-selected.is-active {
