@@ -1,0 +1,63 @@
+<!-- QUICK GRADE TOOL — paste inside your quick-grade page, ABOVE the long SEO text.
+     Requires: quick-grade.css, print.css, quick-grade.js (included in this PR). -->
+<section id="qg" class="qg" aria-labelledby="qg-title">
+  <header class="qg-head">
+    <h1 id="qg-title">Quick grade calculator for teachers</h1>
+    <p class="qg-sub">Type the number of questions. Your grading chart appears instantly. Then print it.</p>
+  </header>
+
+  <div class="qg-controls">
+    <label class="qg-field" for="qg-total">
+      <span>Number of questions</span>
+      <input id="qg-total" type="number" inputmode="numeric" min="1" max="500" step="1" value="20">
+    </label>
+    <button id="qg-print" class="qg-print" type="button">Print chart</button>
+  </div>
+
+  <p id="qg-error" class="qg-error" role="alert" hidden></p>
+
+  <details class="qg-adv">
+    <summary>Advanced settings</summary>
+    <div class="qg-adv-grid">
+      <label class="qg-field"><span>Chart type</span>
+        <select id="qg-mode">
+          <option value="correct">Number correct</option>
+          <option value="missed">Number missed</option>
+        </select>
+      </label>
+      <label class="qg-field"><span>Points per question</span>
+        <input id="qg-points" type="number" min="0.25" max="100" step="0.25" value="1">
+      </label>
+      <label class="qg-field"><span>Decimal places</span>
+        <select id="qg-decimals"><option value="0">0</option><option value="1" selected>1</option><option value="2">2</option></select>
+      </label>
+      <label class="qg-field"><span>Rounding</span>
+        <select id="qg-round"><option value="nearest">Nearest</option><option value="up">Round up</option><option value="down">Round down</option></select>
+      </label>
+      <label class="qg-field"><span>Chart title (prints on top)</span>
+        <input id="qg-title-input" type="text" maxlength="80" placeholder="e.g. Unit 3 Quiz">
+      </label>
+      <fieldset class="qg-field qg-scale">
+        <legend>Letter grade cut-offs (%)</legend>
+        <div class="qg-scale-row">
+          <label>A <input data-grade="A" type="number" min="0" max="100" value="90"></label>
+          <label>B <input data-grade="B" type="number" min="0" max="100" value="80"></label>
+          <label>C <input data-grade="C" type="number" min="0" max="100" value="70"></label>
+          <label>D <input data-grade="D" type="number" min="0" max="100" value="60"></label>
+        </div>
+      </fieldset>
+      <label class="qg-check"><input id="qg-showletter" type="checkbox" checked> Show letter grade</label>
+      <button id="qg-reset" type="button" class="qg-link">Reset to defaults</button>
+    </div>
+  </details>
+
+  <h2 id="qg-print-title" class="qg-print-title"></h2>
+  <div class="qg-table-wrap" tabindex="0" role="region" aria-label="Grading chart">
+    <table id="qg-table" class="qg-table">
+      <caption id="qg-caption" class="qg-sr"></caption>
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="qg-foot">Works offline after your first visit. Nothing you type leaves your device.</p>
+</section>

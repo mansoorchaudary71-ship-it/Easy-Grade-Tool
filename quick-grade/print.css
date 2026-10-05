@@ -1,0 +1,16 @@
+/* Prints ONLY the grading chart (site header, nav, ads and SEO text are hidden). Load globally. */
+@media print{
+  @page{margin:12mm}
+  body *{visibility:hidden!important}
+  #qg,#qg *{visibility:visible!important}
+  #qg{position:absolute;left:0;top:0;width:100%;max-width:none;padding:0;color:#000;background:#fff}
+  #qg .qg-head,#qg .qg-controls,#qg .qg-adv,#qg .qg-foot,#qg .qg-error{display:none!important}
+  #qg .qg-print-title{display:block;font-size:16pt;margin:0 0 6pt;text-align:center}
+  #qg .qg-table-wrap{border:0;max-height:none;overflow:visible}
+  #qg .qg-table{font-size:10.5pt;color:#000}
+  #qg .qg-table th,#qg .qg-table td{padding:2.5pt 6pt;border:1px solid #000;color:#000!important;font-weight:400}
+  #qg .qg-table thead th{background:#eee!important;font-weight:700;position:static}
+  #qg .qg-table tbody tr{background:#fff!important;break-inside:avoid}
+  #qg .qg-table tbody tr:nth-child(even){background:#f2f2f2!important}
+  #qg .qg-table thead{display:table-header-group}
+}
