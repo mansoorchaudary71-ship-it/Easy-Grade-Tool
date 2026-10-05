@@ -634,6 +634,73 @@ export function runVerifyLaunch(): boolean {
     duplicateTargetErrors.slice(0, 3).join('; ')
   );
 
+
+  // =========================================================================
+  // CHECK 12: No foreign / competitor domain anywhere in the build or source
+  // =========================================================================
+  const BLOCKED_DOMAINS = [/easygradecalculator\.com/i];
+  const SCAN_EXT = new Set(['.html', '.xml', '.txt', '.json', '.js', '.css', '.svg', '.webmanifest', '.ts', '.tsx']);
+  const foreignHits: string[] = [];
+  const scanForForeign = (dir: string) => {
+    if (!fs.existsSync(dir)) return;
+    for (const name of fs.readdirSync(dir)) {
+      const full = path.join(dir, name);
+      const st = fs.statSync(full);
+      if (st.isDirectory()) {
+        if (name === 'node_modules' || name === '.git') continue;
+        scanForForeign(full);
+      } else if (SCAN_EXT.has(path.extname(name).toLowerCase())) {
+        // The guard's own blocklist legitimately names the blocked domain.
+        if (name === 'seoGuard.ts') continue;
+        const text = fs.readFileSync(full, 'utf-8');
+        if (BLOCKED_DOMAINS.some((re) => re.test(text))) {
+          foreignHits.push(path.relative(rootDir, full));
+        }
+      }
+    }
+  };
+  scanForForeign(distDir);
+  scanForForeign(srcDir);
+  scanForForeign(path.resolve(rootDir, 'public'));
+  const rootIndex = path.resolve(rootDir, 'index.html');
+  if (fs.existsSync(rootIndex) && BLOCKED_DOMAINS.some((re) => re.test(fs.readFileSync(rootIndex, 'utf-8')))) {
+    foreignHits.push('index.html');
+  }
+
+  recordCheck(
+    'CHK-12',
+    'Domain Hygiene',
+    'No competitor/foreign domain in dist/, src/, public/ or index.html',
+    foreignHits.length === 0,
+    foreignHits.slice(0, 3).join(', ')
+  );
+
+  // =========================================================================
+  // CHECK 13: Icon & manifest links are root-absolute and exist in dist/
+  // =========================================================================
+  const assetLinkErrors: string[] = [];
+  for (const file of htmlFiles) {
+    const html = fs.readFileSync(file, 'utf-8');
+    const rel = path.relative(distDir, file);
+    const linkRe = /<link\b[^>]*rel="(?:icon|apple-touch-icon|manifest)"[^>]*>/gi;
+    for (const tag of html.match(linkRe) || []) {
+      const href = /href="([^"]+)"/i.exec(tag)?.[1] || '';
+      if (/^https?:\/\//i.test(href)) continue;
+      if (!href.startsWith('/')) {
+        assetLinkErrors.push(`${rel}: relative href "${href}"`);
+      } else if (!fs.existsSync(path.join(distDir, href.split(/[?#]/)[0]))) {
+        assetLinkErrors.push(`${rel}: missing file "${href}"`);
+      }
+    }
+  }
+  recordCheck(
+    'CHK-13',
+    'Icon Links',
+    'Favicon/manifest links are root-absolute and resolve on every page',
+    assetLinkErrors.length === 0,
+    assetLinkErrors.slice(0, 2).join('; ')
+  );
+
   // =========================================================================
   // PRINT SUMMARY TABLE
   // =========================================================================
@@ -663,7 +730,7 @@ export function runVerifyLaunch(): boolean {
     return false;
   }
 
-  console.log('\n🎉 [verify-launch] All 11 pre-launch regression checks PASSED with 100% compliance!\n');
+  console.log(`\n🎉 [verify-launch] All ${results.length} pre-launch regression checks PASSED with 100% compliance!\n`);
   return true;
 }
 

@@ -120,8 +120,8 @@ const FinalExamTargetSolver: React.FC<{ setToast: (msg: string) => void }> = ({ 
       {/* Result Display Banner - Primary Highlight */}
       <div className={`p-5 rounded-[24px] border transition-all ${
         isImpossible
-          ? 'bg-[#FCEAEF] border-[#F7C6D5] text-rose-950'
-          : 'bg-[#E6F2EE] border-[#BDE0D5] shadow-sm'
+          ? 'bg-[#F9D6E1] border-[#EDA3BB] text-rose-950'
+          : 'bg-[#CFE9DF] border-[#96CDB8] shadow-sm'
       }`}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
@@ -358,7 +358,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
                   {st.step}
                 </h3>
                 {st.formula && (
-                  <div className="text-xs font-mono bg-teal-50 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300 px-3 py-1.5 rounded-lg border border-teal-100 dark:border-teal-900/50 inline-block">
+                  <div className="text-xs font-mono bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 px-3 py-1.5 rounded-lg border border-teal-100 dark:border-teal-900/50 inline-block">
                     Formula: {st.formula}
                   </div>
                 )}
@@ -377,7 +377,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
             {entry.workedExample.outcomes.map((out, oIdx) => (
               <div
                 key={oIdx}
-                className="p-4 rounded-2xl bg-teal-50/80 dark:bg-teal-950/30 border border-teal-200/80 dark:border-teal-900/60"
+                className="p-4 rounded-2xl bg-teal-50/80 dark:bg-teal-950/55 border border-teal-200/80 dark:border-teal-900/60"
               >
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400">
                   {out.label}

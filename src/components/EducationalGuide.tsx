@@ -363,7 +363,7 @@ export const EducationalGuide: React.FC<EducationalGuideProps> = ({ activeTool =
             Calculating points per question is a fundamental step in determining an accurate test score, especially for objective assessments. If a test has 100 points possible and 20 questions, each correct answer is worth 5 points. An easy grader can automate this calculation when you input the total number of questions and the number of questions answered correctly, helping students understand the value of each correct answer while checking their grade for this test. This granular detail aids in comprehending the impact of individual responses on the overall grade and percentage score, ensuring a precise calculation.
           </p>
 
-          <div className="my-8 p-5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 flex flex-col gap-4">
+          <div className="my-8 p-5 rounded-2xl bg-teal-100/80 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 flex flex-col gap-4">
             <div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 Explore Related Academic &amp; Grading Calculators

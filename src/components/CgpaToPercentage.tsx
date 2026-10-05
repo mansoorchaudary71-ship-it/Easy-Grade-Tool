@@ -989,7 +989,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             </div>
 
             {/* Primary Percentage Readout with Lightweight Inline SVG Donut Visual */}
-            <div className="p-5 rounded-[28px] bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 shadow-sm mb-5">
+            <div className="p-5 rounded-[28px] bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 shadow-sm mb-5">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-center sm:text-left">
                   <div className="font-mono text-4xl sm:text-5xl font-extrabold tracking-tight text-teal-950 dark:text-teal-100 tabular-nums">
@@ -1082,7 +1082,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="p-4 rounded-[20px] bg-[#FFF5E5] dark:bg-amber-950/30 border border-black/5 dark:border-amber-800/30 shadow-sm">
+                <div className="p-4 rounded-[20px] bg-[#FFE8C2] dark:bg-amber-950/55 border border-black/5 dark:border-amber-800/50 shadow-sm">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                     Class / Division
                   </div>
@@ -1090,7 +1090,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                     {isValidMainInput ? calculationResult.division.label : '—'}
                   </div>
                 </div>
-                <div className="p-4 rounded-[20px] bg-[#E8EEFF] dark:bg-indigo-950/30 border border-black/5 dark:border-indigo-800/30 shadow-sm">
+                <div className="p-4 rounded-[20px] bg-[#D6E1FF] dark:bg-indigo-950/55 border border-black/5 dark:border-indigo-800/50 shadow-sm">
                   <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                     Letter Equivalent
                   </div>
@@ -1271,7 +1271,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               </div>
             </div>
 
-            <div className="lg:col-span-5 p-5 rounded-[28px] bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 shadow-sm space-y-4">
+            <div className="lg:col-span-5 p-5 rounded-[28px] bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 shadow-sm space-y-4">
               <div className="text-xs font-semibold uppercase tracking-widest text-teal-800 dark:text-teal-300">
                 Cumulative Multi-Semester Result
               </div>
@@ -1339,7 +1339,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               </p>
             </div>
 
-            <div className="lg:col-span-6 p-5 rounded-[28px] bg-[#E8EEFF] dark:bg-indigo-950/40 border border-[#C6D4F9] dark:border-indigo-800/60 shadow-sm">
+            <div className="lg:col-span-6 p-5 rounded-[28px] bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#A5BCF0] dark:border-indigo-800/60 shadow-sm">
               <div className="text-xs font-semibold uppercase tracking-widest text-indigo-900 dark:text-indigo-300">
                 Required / Equivalent CGPA
               </div>

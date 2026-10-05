@@ -172,7 +172,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
           aria-live="polite"
         >
           <div>
-            <div className="bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
                 Each person pays
               </span>
@@ -182,11 +182,11 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-3.5 mt-8 pt-5 border-t border-slate-100/80 dark:border-slate-800">
-              <div className="bg-[#FFF5E5] dark:bg-amber-950/30 rounded-[24px] p-4 border border-black/5 dark:border-amber-800/30 shadow-xs">
+              <div className="bg-[#FFE8C2] dark:bg-amber-950/55 rounded-[24px] p-4 border border-black/5 dark:border-amber-800/50 shadow-xs">
                 <strong className="block text-xl font-bold text-slate-800 dark:text-white">{formatCurrency(tipAmount)}</strong>
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Tip amount</span>
               </div>
-              <div className="bg-[#E8EEFF] dark:bg-indigo-950/30 rounded-[24px] p-4 border border-black/5 dark:border-indigo-800/30 shadow-xs">
+              <div className="bg-[#D6E1FF] dark:bg-indigo-950/55 rounded-[24px] p-4 border border-black/5 dark:border-indigo-800/50 shadow-xs">
                 <strong className="block text-xl font-bold text-slate-800 dark:text-white">{formatCurrency(totalWithTip)}</strong>
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total with tip</span>
               </div>

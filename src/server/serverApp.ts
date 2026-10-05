@@ -27,6 +27,7 @@ import {
   generateRobotsTxt,
 } from '../data/seoConfig.ts';
 import { injectRouteSeoIntoHtml } from '../utils/seoHtmlInjector.ts';
+import { seoGuard } from './seoGuard.ts';
 import { PROGRAMMATIC_SEO_REGISTRY } from '../data/programmaticSeoData.ts';
 
 dotenv.config();
@@ -157,6 +158,9 @@ app.use((req, res, next) => {
 
   next();
 });
+
+// SEO guard: scrubs any foreign domain from outgoing HTML/XML/text and noindexes preview hosts
+app.use(seoGuard());
 
 // RFC 9116 security.txt endpoints
 app.get(['/.well-known/security.txt', '/security.txt'], (_req, res) => {

@@ -194,7 +194,7 @@ export const AboutMethodology: React.FC = () => {
               </table>
             </div>
 
-            <div className="p-4 rounded-2xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200/60 dark:border-teal-800/60">
+            <div className="p-4 rounded-2xl bg-teal-100/80 dark:bg-teal-950/60 border border-teal-200/60 dark:border-teal-800/60">
               <h3 className="text-xs sm:text-sm font-bold text-teal-900 dark:text-teal-200 m-0 mb-1 flex items-center gap-1.5">
                 <Calculator className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" aria-hidden="true" />
                 <span>The Cumulative GPA Formula</span>
@@ -309,7 +309,7 @@ export const AboutMethodology: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5">
+            <div className="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5">
               <HelpCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
               <span>
                 <strong>Important Note:</strong> Because university registrar rules and international transcript evaluations (such as WES) apply bespoke conversion policies, our tools are intended for academic planning and estimation. Always verify official policies directly with your university registrar.

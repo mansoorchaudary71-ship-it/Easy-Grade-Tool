@@ -377,7 +377,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
         <section aria-label="GPA Results Summary" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between" aria-live="polite">
           <div className="space-y-5">
             {/* Semester GPA - Master Output Container */}
-            <div className="bg-[#E6F2EE] dark:bg-teal-950/40 border border-[#BDE0D5] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
                 Semester GPA
               </span>
@@ -392,13 +392,13 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             </div>
 
             {/* Cumulative GPA - Master Output Container */}
-            <div className="bg-[#E8EEFF] dark:bg-indigo-950/40 border border-[#C6D4F9] dark:border-indigo-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#A5BCF0] dark:border-indigo-800/60 rounded-[28px] p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold tracking-widest text-indigo-900 dark:text-indigo-300 uppercase">
                   Cumulative GPA
                 </span>
                 {hasPriorHistory && (
-                  <span className="text-[11px] font-semibold text-indigo-900 dark:text-indigo-200 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-[#C6D4F9] dark:border-indigo-800/60 shadow-xs">
+                  <span className="text-[11px] font-semibold text-indigo-900 dark:text-indigo-200 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-[#A5BCF0] dark:border-indigo-800/60 shadow-xs">
                     Includes Prior History
                   </span>
                 )}
@@ -413,7 +413,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
 
             {/* Secondary Metric Tabs */}
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="bg-[#FFF5E5] dark:bg-amber-950/30 rounded-[24px] p-4 border border-black/5 dark:border-amber-800/30 shadow-xs">
+              <div className="bg-[#FFE8C2] dark:bg-amber-950/55 rounded-[24px] p-4 border border-black/5 dark:border-amber-800/50 shadow-xs">
                 <strong className="block text-xl font-bold text-slate-800 dark:text-white">{totalCumulativeCredits.toFixed(1)}</strong>
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total credits</span>
               </div>
@@ -630,7 +630,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             Honors designations and graduate programs set higher GPA benchmarks to recognize sustained academic excellence. Dean&apos;s List and Latin honors (Cum Laude, Magna Cum Laude, Summa Cum Laude) typically begin between 3.50 and 3.85 cumulative GPA. <strong className="font-semibold text-slate-900 dark:text-white">Graduate and professional schools generally look for an undergraduate GPA of 3.0 to 3.7+ alongside strong upper-division coursework.</strong>
           </p>
 
-          <div className="mt-8 p-5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="mt-8 p-5 rounded-2xl bg-teal-100/80 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-base font-bold text-slate-900 dark:text-white">
                 Need to Convert a 10.0, 5.0, or 4.0 CGPA to Percentage?
