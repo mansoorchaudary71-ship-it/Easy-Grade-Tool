@@ -428,6 +428,25 @@ h1 {
   display: none;
 }
 
+/* Subtle gradient fade-out on right edge for scrollable tool bar */
+.tool-nav-fade-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 48px;
+  pointer-events: none;
+  background: linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .tool-nav-fade-right {
+    width: 64px;
+  }
+}
+
 .tool-nav-item {
   color: #78716c;
   background: transparent;
