@@ -428,25 +428,6 @@ h1 {
   display: none;
 }
 
-/* Subtle gradient fade-out on right edge for scrollable tool bar */
-.tool-nav-fade-right {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 48px;
-  pointer-events: none;
-  background: linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background) / 0) 100%);
-  z-index: 10;
-  transition: opacity 0.3s ease;
-}
-
-@media (min-width: 640px) {
-  .tool-nav-fade-right {
-    width: 64px;
-  }
-}
-
 .tool-nav-item {
   color: #78716c;
   background: transparent;
@@ -6608,4 +6589,103 @@ input[type="number"]:focus {
   [data-print-area] th, [data-print-area] td { border-bottom: 1px solid #ccc; padding: 4px 6px; }
   [data-print-area] tr, [data-print-area] .letter-group-section, [data-print-area] .ez-score-item { break-inside: avoid; }
   .content-auto { content-visibility: visible; }
+}
+
+/* =====================================================================
+   GLOW / SPECULAR SHEEN
+   A soft radial highlight layered *behind* card content (z-index:-1 inside an
+   isolated stacking context), so text, layout and logic are untouched.
+   Pure CSS, no blur filters (cheap on mobile). Disabled for print, forced-colors
+   and increased-contrast users.
+   ===================================================================== */
+:root {
+  --glow-spec: 255 255 255;
+  --glow-spec-a: 0.55;
+  --glow-tint-a: 0.10;
+  --glow-edge-a: 0.55;
+  --glow-hover-boost: 1.35;
+}
+.dark {
+  --glow-spec-a: 0.07;
+  --glow-tint-a: 0.14;
+  --glow-edge-a: 0.10;
+}
+
+:where(
+  .tool-card, .tool-result-card, .result-panel, .summary-metric-card, .secondary-metric-card,
+  .prominent-scoring-card, .target-simulator-card, .simulation-results-box, .trend-chart-card,
+  .mini-summary, .history-card, .glow-surface
+):not(.absolute):not(.fixed):not(.sticky) {
+  position: relative;
+  isolation: isolate;
+}
+
+:where(
+  .tool-card, .tool-result-card, .result-panel, .summary-metric-card, .secondary-metric-card,
+  .prominent-scoring-card, .target-simulator-card, .simulation-results-box, .trend-chart-card,
+  .mini-summary, .history-card, .glow-surface
+)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 85% at 8% -10%, rgb(var(--glow-spec) / var(--glow-spec-a)) 0%, transparent 58%),
+    radial-gradient(90% 70% at 105% 110%, hsl(var(--tool-primary, 173 80% 25%) / var(--glow-tint-a)) 0%, transparent 62%);
+  box-shadow: inset 0 1px 0 rgb(var(--glow-spec) / var(--glow-edge-a));
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+/* Small, soft hover lift of the sheen on pointer devices only */
+@media (hover: hover) {
+  :where(.tool-card, .tool-result-card, .result-panel, .prominent-scoring-card, .target-simulator-card, .trend-chart-card, .glow-surface):hover::after {
+    opacity: var(--glow-hover-boost);
+  }
+}
+
+/* Active tabs / selected pills get a tighter highlight */
+.tool-nav-item[data-active="true"],
+.scale-tab[data-active="true"],
+.gpa-tab-btn[data-active="true"],
+.trend-pill-tabs [data-active="true"] {
+  position: relative;
+  isolation: isolate;
+}
+.tool-nav-item[data-active="true"]::after,
+.scale-tab[data-active="true"]::after,
+.gpa-tab-btn[data-active="true"]::after,
+.trend-pill-tabs [data-active="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(90% 120% at 20% -20%, rgb(var(--glow-spec) / calc(var(--glow-spec-a) * 0.9)) 0%, transparent 65%);
+  box-shadow: inset 0 1px 0 rgb(var(--glow-spec) / var(--glow-edge-a));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.tool-card, .tool-result-card, .result-panel, .glow-surface)::after { transition: none; }
+}
+@media (forced-colors: active), (prefers-contrast: more) {
+  :where(
+    .tool-card, .tool-result-card, .result-panel, .summary-metric-card, .secondary-metric-card,
+    .prominent-scoring-card, .target-simulator-card, .simulation-results-box, .trend-chart-card,
+    .mini-summary, .history-card, .glow-surface
+  )::after,
+  .tool-nav-item[data-active="true"]::after, .scale-tab[data-active="true"]::after,
+  .gpa-tab-btn[data-active="true"]::after, .trend-pill-tabs [data-active="true"]::after { display: none; }
+}
+@media print {
+  :where(
+    .tool-card, .tool-result-card, .result-panel, .summary-metric-card, .secondary-metric-card,
+    .prominent-scoring-card, .target-simulator-card, .simulation-results-box, .trend-chart-card,
+    .mini-summary, .history-card, .glow-surface
+  )::after,
+  .tool-nav-item[data-active="true"]::after, .scale-tab[data-active="true"]::after,
+  .gpa-tab-btn[data-active="true"]::after { display: none !important; }
 }

@@ -1,6 +1,6 @@
 /** Shared Tailwind class strings for the dedicated academic tools (matches the existing card/input look). */
 export const CARD =
-  'bg-white dark:bg-slate-900 rounded-[28px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none p-5 sm:p-8';
+  'glow-surface bg-white dark:bg-slate-900 rounded-[28px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none p-5 sm:p-8';
 export const LABEL =
   'text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase block mb-1.5';
 export const INPUT =
@@ -11,4 +11,4 @@ export const PILL_ON = 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full fo
 export const PILL_OFF =
   'bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold px-4 py-1.5 text-xs cursor-pointer transition-all';
 export const RESULT_BOX =
-  'bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm';
+  'glow-surface bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm';
