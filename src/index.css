@@ -6530,3 +6530,10 @@ input[type="number"]:focus {
 
 
 
+
+/* Skip rendering work for long below-the-fold sections (INP/LCP win on content-heavy pages) */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+.tool-nav-divider { white-space: nowrap; }

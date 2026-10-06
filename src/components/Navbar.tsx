@@ -1,7 +1,10 @@
 import React, { useMemo, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { Sun, Moon, Laptop, Search } from 'lucide-react';
-import { TOOLS_LIST } from '../data/constants';
+import { NAV_ITEMS } from '../data/navItems';
+import { isSamePath } from '../utils/paths';
+import { preloadForPath } from '../utils/lazyRoutes';
 import { ToolKey } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { PWAInstallButton } from './PWAInstallButton';
@@ -65,7 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     });
 
     return () => cancelAnimationFrame(rafId);
-  }, [activeTool]);
+  }, [activeTool, location.pathname]);
 
   const [mounted, setMounted] = React.useState(false);
   useEffect(() => {
@@ -158,32 +161,39 @@ export const Navbar: React.FC<NavbarProps> = ({
         aria-label="Calculator tools"
       >
         <div className="tool-nav-inner" ref={navInnerRef}>
-          {TOOLS_LIST.map((tool) => {
+          {NAV_ITEMS.map((tool, idx) => {
             const Icon = tool.icon;
-            const isActive = !isStaticPage && activeTool === tool.key;
+            const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
+            const startsUtility = tool.group === 'utility' && NAV_ITEMS[idx - 1]?.group === 'academic';
             return (
-              <Link
-                key={tool.key}
-                ref={isActive ? activeTabRef : undefined}
-                to={tool.path}
-                onClick={() => onSelectTool(tool.key)}
-                onMouseEnter={() => preloadTool(tool.key)}
-                onFocus={() => preloadTool(tool.key)}
-                onTouchStart={() => preloadTool(tool.key)}
-                onPointerDown={() => preloadTool(tool.key)}
-                className={`tool-nav-item inline-flex items-center no-underline cursor-pointer ${
-                  isActive
-                    ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-1.5'
-                    : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-1.5 transition-all'
-                }`}
-                data-tool={tool.key}
-                data-active={isActive}
-                aria-current={isActive ? 'page' : undefined}
-                title={`${tool.key === 'password' ? 'Password Generator' : tool.label + ' Calculator'}`}
-              >
-                <Icon aria-hidden="true" />
-                <span>{tool.label}</span>
-              </Link>
+              <React.Fragment key={tool.path}>
+                {startsUtility && (
+                  <span className="tool-nav-divider shrink-0 self-center mx-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-400" role="separator" aria-label="More tools">
+                    <span className="w-px h-5 bg-stone-300 dark:bg-slate-700" aria-hidden="true" />
+                    <span>More</span>
+                  </span>
+                )}
+                <Link
+                  ref={isActive ? activeTabRef : undefined}
+                  to={tool.path}
+                  onClick={() => onSelectTool(tool.toolKey)}
+                  onMouseEnter={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
+                  onFocus={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
+                  onTouchStart={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
+                  className={`tool-nav-item inline-flex items-center no-underline cursor-pointer ${
+                    isActive
+                      ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-1.5'
+                      : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-1.5 transition-all'
+                  }`}
+                  data-tool={tool.toolKey}
+                  data-active={isActive}
+                  aria-current={isActive ? 'page' : undefined}
+                  title={tool.title}
+                >
+                  <Icon aria-hidden="true" />
+                  <span>{tool.label}</span>
+                </Link>
+              </React.Fragment>
             );
           })}
         </div>

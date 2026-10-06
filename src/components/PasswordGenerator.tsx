@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { Copy, Check, RefreshCw, KeyRound } from 'lucide-react';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';

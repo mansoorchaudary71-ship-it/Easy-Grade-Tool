@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
 import { PaymentResultCard } from './LoanCalculator';

@@ -2,7 +2,7 @@
   "id": "/",
   "name": "Easy Grade Tool",
   "short_name": "Easy Grade Tool",
-  "description": "Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more.",
+  "description": "Free grade calculators for students and teachers: quick grade chart, weighted grades, final exam score, test grade, curve, letter grade, GPA and CGPA.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -18,9 +18,8 @@
   "dir": "ltr",
   "categories": [
     "education",
-    "utilities",
     "productivity",
-    "finance"
+    "utilities"
   ],
   "icons": [
     {
@@ -56,10 +55,34 @@
   ],
   "shortcuts": [
     {
-      "name": "Grade & Final Exam Calculator",
-      "short_name": "Grade Calc",
-      "description": "Calculate course grades, weighted averages, and final exam targets",
-      "url": "/grade-calculator",
+      "name": "Quick Grade Chart",
+      "short_name": "Quick Grade",
+      "description": "Print a score chart for any test length",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Weighted Grade Calculator",
+      "short_name": "Weighted",
+      "description": "Course grade from weighted categories",
+      "url": "/grade-calculator/",
+      "icons": [
+        {
+          "src": "/pwa-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Final Exam Calculator",
+      "short_name": "Final Exam",
+      "description": "Score needed on the final for your target grade",
+      "url": "/final-exam-grade-calculator/",
       "icons": [
         {
           "src": "/pwa-192x192.png",
@@ -69,45 +92,9 @@
     },
     {
       "name": "GPA Calculator",
-      "short_name": "GPA Calc",
-      "description": "Calculate semester, cumulative, and weighted 4.0 GPA",
-      "url": "/gpa-calculator",
-      "icons": [
-        {
-          "src": "/pwa-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "CGPA to Percentage Calculator",
-      "short_name": "CGPA to %",
-      "description": "Convert 10.0, 5.0, and 4.0 CGPA to percentage with university formulas",
-      "url": "/cgpa-to-percentage-calculator",
-      "icons": [
-        {
-          "src": "/pwa-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Percentage Calculator",
-      "short_name": "Percentages",
-      "description": "Calculate percentage differences, increase, decrease, and fractions",
-      "url": "/percentage-calculator",
-      "icons": [
-        {
-          "src": "/pwa-192x192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Loan & Mortgage Calculator",
-      "short_name": "Loans",
-      "description": "Calculate monthly loan payments, amortization, and mortgage schedules",
-      "url": "/loan-calculator",
+      "short_name": "GPA",
+      "description": "Semester and cumulative GPA",
+      "url": "/gpa-calculator/",
       "icons": [
         {
           "src": "/pwa-192x192.png",

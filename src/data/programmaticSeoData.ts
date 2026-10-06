@@ -49,7 +49,7 @@ export interface ProgrammaticSeoEntry {
 export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
   'final-exam-grade-calculator': {
     slug: 'final-exam-grade-calculator',
-    path: '/easy-grade-calculator/final-exam-grade-calculator',
+    path: '/final-exam-grade-calculator/',
     toolKey: 'quick',
     h1: 'Final Exam Grade Calculator',
     title: 'Final Exam Grade Calculator — Target Score Needed',
@@ -175,7 +175,7 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
 
   'ez-grader': {
     slug: 'ez-grader',
-    path: '/easy-grade-calculator/ez-grader',
+    path: '/ez-grader/',
     toolKey: 'quick',
     h1: 'EZ Grader Online & Classroom Test Scoring Chart',
     title: 'EZ Grader Online — Classroom Test Grading Chart',

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useId } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Link } from './SlashLink';
 import {
   Shield,
   Sparkles,
@@ -33,7 +34,9 @@ import {
   PlusCircle,
   Activity,
 } from 'lucide-react';
-import { TOOLS_LIST, getToolKeyFromPath, CONTACT_EMAIL } from '../data/constants';
+import { getToolKeyFromPath, CONTACT_EMAIL } from '../data/constants';
+import { NAV_ITEMS } from '../data/navItems';
+import { isSamePath } from '../utils/paths';
 import { ToolKey } from '../types';
 import { preloadTool } from '../utils/toolPreloader';
 import { SITE_URL } from '../data/seoConfig';
@@ -780,90 +783,45 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>Calculators</span>
                 <span className="text-[10px] font-medium text-slate-500">Tap to switch</span>
               </h2>
-              <ul className="space-y-1 text-xs">
-                {TOOLS_LIST.map((tool) => {
-                  const isStaticPage =
-                    location.pathname.startsWith('/about') ||
-                    location.pathname.startsWith('/privacy') ||
-                    location.pathname.startsWith('/methodology');
-                  const isActive = !isStaticPage && currentToolKey === tool.key && location.pathname !== '/grade-calculator';
-                  const Icon = toolIconMap[tool.key] || tool.icon;
-                  return (
-                    <li key={tool.key}>
-                      <Link
-                        to={tool.path}
-                        onClick={() => {
-                          scrollToTop();
-                          if (onSelectTool) {
-                            onSelectTool(tool.key);
-                          }
-                        }}
-                        className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
-                          isActive
-                            ? 'bg-stone-100 dark:bg-slate-800 text-stone-900 dark:text-white font-bold border border-stone-200/80 dark:border-slate-700/80 shadow-2xs'
-                            : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
-                        }`}
-                        aria-current={isActive ? 'page' : undefined}
-                        title={`Open ${tool.key === 'password' ? 'Password Generator' : tool.label + ' Calculator'}`}
-                      >
-                        <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} />
-                        <span className="truncate">{tool.label}</span>
-                        {isActive && (
-                          <span className="ml-auto w-2 h-2 rounded-full bg-teal-600 dark:bg-teal-400 shrink-0" aria-hidden="true" />
-                        )}
-                      </Link>
-                    </li>
-                  );
-                })}
-                <li>
-                  <Link
-                    to="/grade-calculator"
-                    onClick={scrollToTop}
-                    className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
-                      location.pathname === '/grade-calculator'
-                        ? 'bg-stone-100 dark:bg-slate-800 text-stone-900 dark:text-white font-bold border border-stone-200/80 dark:border-slate-700/80 shadow-2xs'
-                        : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
-                    }`}
-                    aria-current={location.pathname === '/grade-calculator' ? 'page' : undefined}
-                    title="Open Weighted Grade & Final Exam Calculator"
-                  >
-                    <Calculator className={`w-3.5 h-3.5 shrink-0 ${location.pathname === '/grade-calculator' ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} />
-                    <span className="truncate">Weighted Grade &amp; Final</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/easy-grade-calculator/final-exam-grade-calculator"
-                    onClick={scrollToTop}
-                    className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
-                      location.pathname === '/easy-grade-calculator/final-exam-grade-calculator'
-                        ? 'bg-stone-100 dark:bg-slate-800 text-stone-900 dark:text-white font-bold border border-stone-200/80 dark:border-slate-700/80 shadow-2xs'
-                        : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
-                    }`}
-                    aria-current={location.pathname === '/easy-grade-calculator/final-exam-grade-calculator' ? 'page' : undefined}
-                    title="Open Final Exam Grade Calculator — Target Score Needed"
-                  >
-                    <Target className={`w-3.5 h-3.5 shrink-0 ${location.pathname === '/easy-grade-calculator/final-exam-grade-calculator' ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} />
-                    <span className="truncate">Final Exam Grade Calculator</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/easy-grade-calculator/ez-grader"
-                    onClick={scrollToTop}
-                    className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
-                      location.pathname === '/easy-grade-calculator/ez-grader'
-                        ? 'bg-stone-100 dark:bg-slate-800 text-stone-900 dark:text-white font-bold border border-stone-200/80 dark:border-slate-700/80 shadow-2xs'
-                        : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
-                    }`}
-                    aria-current={location.pathname === '/easy-grade-calculator/ez-grader' ? 'page' : undefined}
-                    title="Open EZ Grader Online — Classroom Test Grading Chart"
-                  >
-                    <BookOpen className={`w-3.5 h-3.5 shrink-0 ${location.pathname === '/easy-grade-calculator/ez-grader' ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} />
-                    <span className="truncate">EZ Grader Online Chart</span>
-                  </Link>
-                </li>
-              </ul>
+              {(['academic', 'utility'] as const).map((group) => (
+                <React.Fragment key={group}>
+                  <h3 className="text-[10px] font-bold tracking-widest text-slate-500 uppercase mt-3 mb-1 m-0">
+                    {group === 'academic' ? 'Grade & GPA calculators' : 'More tools'}
+                  </h3>
+                  <ul className="space-y-1 text-xs list-none p-0 m-0">
+                    {NAV_ITEMS.filter((t) => t.group === group).map((tool) => {
+                      const isStaticPage =
+                        location.pathname.startsWith('/about') ||
+                        location.pathname.startsWith('/privacy') ||
+                        location.pathname.startsWith('/terms') ||
+                        location.pathname.startsWith('/methodology');
+                      const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
+                      const Icon = tool.icon;
+                      return (
+                        <li key={tool.path}>
+                          <Link
+                            to={tool.path}
+                            onClick={() => {
+                              scrollToTop();
+                              onSelectTool?.(tool.toolKey);
+                            }}
+                            className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
+                              isActive
+                                ? 'bg-stone-100 dark:bg-slate-800 text-stone-900 dark:text-white font-bold border border-stone-200/80 dark:border-slate-700/80 shadow-2xs'
+                                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
+                            }`}
+                            aria-current={isActive ? 'page' : undefined}
+                            title={tool.title}
+                          >
+                            <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} aria-hidden="true" />
+                            <span className="truncate">{tool.label}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </React.Fragment>
+              ))}
             </div>
 
             {/* Column 3: Working Feedback & Developer Support (Connected to Backend!) */}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { FileText, ShieldCheck, AlertCircle, Scale, CheckCircle2, Mail, ExternalLink, HardDrive } from 'lucide-react';
 import { SEO } from './SEO';
 import { ToolHeading } from './ToolHeading';

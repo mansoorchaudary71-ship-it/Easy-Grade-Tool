@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { Plus, X, RotateCcw, Target, ArrowLeft, Table2, Calculator, Download, Printer, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ToolHeading } from './ToolHeading';
@@ -769,7 +770,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
 
                 <div className="pt-2">
                   <Link
-                    to="/easy-grade-calculator/final-exam-grade-calculator"
+                    to="/final-exam-grade-calculator/"
                     className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 hover:underline transition-colors"
                   >
                     <span>Need detailed syllabus weighting? Open the Final Exam Grade Calculator simulator &rarr;</span>

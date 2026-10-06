@@ -3,6 +3,7 @@ export type { ToolKey };
 export { CONTACT_EMAIL, SITE_URL, BASE_CANONICAL_ORIGIN } from './constants.ts';
 import { SITE_URL, BASE_CANONICAL_ORIGIN } from './constants.ts';
 import { PROGRAMMATIC_SEO_REGISTRY } from './programmaticSeoData.ts';
+import { TOOL_PAGE_LIST } from './toolPages.ts';
 
 export interface RouteSeoConfig {
   title: string;
@@ -22,7 +23,7 @@ export interface RouteSeoConfig {
  * SITE_LAUNCH_DATE represents the initial platform publication date.
  * SITE_LAST_MODIFIED represents the date of the latest content, formula, and methodology review.
  */
-export const SITE_LAUNCH_DATE: string = '2024-01-15T00:00:00Z';
+export const SITE_LAUNCH_DATE: string = '2026-10-01T00:00:00Z';
 export const SITE_LAST_MODIFIED: string = '2026-10-04T00:00:00Z';
 
 /**
@@ -80,8 +81,8 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
     title: 'About & Grading Methodology — Easy Grade Tool',
     description:
       'Learn the mathematical formulas behind Easy Grade Tool: weighted course grades, 4.0 US GPA, CGPA to percentage ordinances, and global scales.',
-    canonicalPath: '/about',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/about`,
+    canonicalPath: '/about/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/about/`,
     ogImagePlaceholder: OG_IMAGES.default,
     ogType: 'website',
     keywords: [
@@ -105,8 +106,8 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
     title: 'Privacy Policy — Easy Grade Tool',
     description:
       'Easy Grade Tool privacy policy. Transparent client-side calculations, clear data retention policies for voluntary submissions, and user rights.',
-    canonicalPath: '/privacy',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/privacy`,
+    canonicalPath: '/privacy/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/privacy/`,
     ogImagePlaceholder: OG_IMAGES.default,
     ogType: 'website',
     keywords: [
@@ -128,8 +129,8 @@ export const SEO_STATIC_PAGES: Record<'about' | 'privacy' | 'terms', RouteSeoCon
     title: 'Terms of Service — Easy Grade Tool',
     description:
       'Read the terms of service, calculation disclaimers, educational license, and usage policies for Easy Grade Tool\'s suite of academic tools.',
-    canonicalPath: '/terms',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/terms`,
+    canonicalPath: '/terms/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/terms/`,
     ogImagePlaceholder: OG_IMAGES.default,
     ogType: 'website',
     keywords: [
@@ -153,8 +154,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'Grade Calculator — Weighted Average & Final Exam Score',
     description:
       'Calculate weighted course grades, assignment percentages, and the exact final exam score needed for your target letter grade. Free for students and teachers.',
-    canonicalPath: '/grade-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/grade-calculator`,
+    canonicalPath: '/grade-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/grade-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.quick,
     ogType: 'website',
     keywords: [
@@ -179,8 +180,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'GPA Calculator — College & High School 4.0 Scale GPA',
     description:
       'Calculate college and high school semester or cumulative GPA on a 4.0 scale with credit hours, plus/minus grades, and printable PDF transcript reports.',
-    canonicalPath: '/gpa-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/gpa-calculator`,
+    canonicalPath: '/gpa-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/gpa-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.gpa,
     ogType: 'website',
     keywords: [
@@ -205,8 +206,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'CGPA to Percentage Calculator — 10.0, 5.0 & 4.0 Scales',
     description:
       'Convert CGPA to percentage and SGPA to CGPA on 10.0, 5.0, and 4.0 scales using verified CBSE, UGC, VTU, Mumbai University, GTU, and SPPU formulas.',
-    canonicalPath: '/cgpa-to-percentage-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/cgpa-to-percentage-calculator`,
+    canonicalPath: '/cgpa-to-percentage-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/cgpa-to-percentage-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.cgpa,
     ogType: 'website',
     keywords: [
@@ -235,8 +236,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'Tip Calculator — Calculate Gratuity & Split the Bill',
     description:
       'Calculate restaurant tips and split bills evenly among any group in seconds. Choose quick tip percentage presets or custom gratuity with per-person totals.',
-    canonicalPath: '/tip-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/tip-calculator`,
+    canonicalPath: '/tip-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/tip-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.tip,
     ogType: 'website',
     keywords: [
@@ -260,8 +261,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'Percentage Calculator — % of a Number & Percent Change',
     description:
       'Calculate percentages instantly: find X% of Y, determine what percent one number is of another, and compute percentage increase or decrease online.',
-    canonicalPath: '/percentage-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/percentage-calculator`,
+    canonicalPath: '/percentage-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/percentage-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.percentage,
     ogType: 'website',
     keywords: [
@@ -284,8 +285,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'Loan Calculator — Monthly Payment & Amortization Table',
     description:
       'Estimate monthly loan payments, total interest costs, and year-by-year amortization schedules for personal, auto, and student loans in seconds.',
-    canonicalPath: '/loan-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/loan-calculator`,
+    canonicalPath: '/loan-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/loan-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.loan,
     ogType: 'website',
     keywords: [
@@ -308,8 +309,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'Mortgage Calculator — Monthly Home Loan & Interest Cost',
     description:
       'Calculate your monthly home mortgage payment, principal and interest split, and total loan cost over 15-year or 30-year fixed mortgage terms.',
-    canonicalPath: '/mortgage-calculator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/mortgage-calculator`,
+    canonicalPath: '/mortgage-calculator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/mortgage-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.mortgage,
     ogType: 'website',
     keywords: [
@@ -332,8 +333,8 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     title: 'Password Generator — Create Strong, Random Passwords',
     description:
       'Generate high-entropy, cryptographically secure random passwords locally in your browser with customizable length, numbers, and symbols.',
-    canonicalPath: '/password-generator',
-    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/password-generator`,
+    canonicalPath: '/password-generator/',
+    canonicalUrl: `${BASE_CANONICAL_ORIGIN}/password-generator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.password,
     ogType: 'website',
     keywords: [
@@ -369,67 +370,67 @@ export const SITEMAP_VARIATIONS: SitemapRouteEntry[] = [
     priority: 1.0,
   },
   {
-    path: '/grade-calculator',
+    path: '/grade-calculator/',
     name: SEO_ROUTES.quick.title,
     changefreq: 'daily',
     priority: 0.9,
   },
   {
-    path: '/gpa-calculator',
+    path: '/gpa-calculator/',
     name: SEO_ROUTES.gpa.title,
     changefreq: 'weekly',
     priority: 0.9,
   },
   {
-    path: '/cgpa-to-percentage-calculator',
+    path: '/cgpa-to-percentage-calculator/',
     name: SEO_ROUTES.cgpa.title,
     changefreq: 'weekly',
     priority: 0.9,
   },
   {
-    path: '/tip-calculator',
+    path: '/tip-calculator/',
     name: SEO_ROUTES.tip.title,
     changefreq: 'weekly',
     priority: 0.8,
   },
   {
-    path: '/percentage-calculator',
+    path: '/percentage-calculator/',
     name: SEO_ROUTES.percentage.title,
     changefreq: 'weekly',
     priority: 0.8,
   },
   {
-    path: '/loan-calculator',
+    path: '/loan-calculator/',
     name: SEO_ROUTES.loan.title,
     changefreq: 'weekly',
     priority: 0.8,
   },
   {
-    path: '/mortgage-calculator',
+    path: '/mortgage-calculator/',
     name: SEO_ROUTES.mortgage.title,
     changefreq: 'weekly',
     priority: 0.8,
   },
   {
-    path: '/password-generator',
+    path: '/password-generator/',
     name: SEO_ROUTES.password.title,
     changefreq: 'monthly',
     priority: 0.8,
   },
   {
-    path: '/about',
+    path: '/about/',
     name: SEO_STATIC_PAGES.about.title,
     changefreq: 'monthly',
     priority: 0.7,
   },
   {
-    path: '/privacy',
+    path: '/privacy/',
     name: SEO_STATIC_PAGES.privacy.title,
     changefreq: 'yearly',
     priority: 0.3,
   },
   {
-    path: '/terms',
+    path: '/terms/',
     name: SEO_STATIC_PAGES.terms.title,
     changefreq: 'yearly',
     priority: 0.3,
@@ -438,7 +439,13 @@ export const SITEMAP_VARIATIONS: SitemapRouteEntry[] = [
     path: entry.path,
     name: entry.title,
     changefreq: 'weekly' as const,
-    priority: 0.7,
+    priority: 0.8,
+  })),
+  ...TOOL_PAGE_LIST.map((entry) => ({
+    path: entry.path,
+    name: entry.title,
+    changefreq: 'weekly' as const,
+    priority: 0.8,
   })),
 ];
 

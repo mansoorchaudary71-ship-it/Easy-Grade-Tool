@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import {
   GraduationCap,
   BookOpen,
@@ -17,6 +17,7 @@ import { SEO } from './SEO';
 import { ToolHeading } from './ToolHeading';
 import { AmbientAura } from './AmbientAura';
 import { SEO_STATIC_PAGES, CONTACT_EMAIL } from '../data/seoConfig';
+import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON, CORRECTIONS_EMAIL } from '../data/siteIdentity';
 
 export const AboutMethodology: React.FC = () => {
   const seo = SEO_STATIC_PAGES.about;
@@ -56,6 +57,28 @@ export const AboutMethodology: React.FC = () => {
             </p>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
               We created <strong>Easy Grade Tool</strong> to provide students, parents, and educators with an immediate, mathematically rigorous, and tracker-free toolset—including our <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">4.0 GPA Calculator</Link>, and <Link to="/cgpa-to-percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>. Every formula on this site is documented below and covered by our <Link to="/privacy" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Client-Side Privacy Policy</Link>.
+            </p>
+          </section>
+
+          {/* Accountability: who runs the site, how accuracy is checked, how to report errors */}
+          <section aria-labelledby="accountability-title" className="bg-white/80 dark:bg-slate-900/80 rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-6 sm:p-8 space-y-4">
+            <h2 id="accountability-title" className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white m-0">
+              Who runs Easy Grade Tool, and how we keep it accurate
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 m-0">
+              Easy Grade Tool is built and maintained by the <strong>Easy Grade Tool team</strong>.
+              {ACADEMIC_REVIEWER ? ` Grading methodology is reviewed by ${ACADEMIC_REVIEWER.name}, ${ACADEMIC_REVIEWER.credential}.` : ''}{' '}
+              The site has no ads, no accounts and no tracking; calculations run in your browser.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300">
+              <li>Every formula is written as a plain function and checked by automated tests before each release, including the worked examples printed on the calculator pages.</li>
+              <li>Grading scales shown here are the most common ones, not official for every school. Your syllabus or registrar always wins.</li>
+              <li>Formulas and tables were last reviewed on {new Date(`${CONTENT_REVIEWED_ON}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}.</li>
+              <li>University-specific CGPA conversions follow each university’s published ordinance; if one changes, tell us and it will be corrected.</li>
+            </ul>
+            <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 m-0">
+              <strong>Corrections policy:</strong> found a wrong result or an outdated formula? Email{' '}
+              <a className="underline font-semibold" href={`mailto:${CORRECTIONS_EMAIL}`}>{CORRECTIONS_EMAIL}</a> with the calculator, the numbers you entered and the result you expected. Verified errors are fixed and the review date above is updated.
             </p>
           </section>
 

@@ -13,6 +13,7 @@ import { PrivacyPolicy } from './components/PrivacyPolicy';
 import { TermsOfService } from './components/TermsOfService';
 import { AboutMethodology } from './components/AboutMethodology';
 import { ProgrammaticCalculatorView } from './components/ProgrammaticCalculatorView';
+import { ToolPage } from './components/ToolPage';
 
 /**
  * Server-side / static site generation (SSG) render function.
@@ -36,6 +37,7 @@ export function render(url: string = '/'): string {
           TermsOfService,
           AboutMethodology,
           ProgrammaticCalculatorView,
+          ToolPage,
         }}
       />
     </React.StrictMode>

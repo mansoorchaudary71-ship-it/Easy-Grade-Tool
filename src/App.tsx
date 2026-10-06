@@ -15,22 +15,15 @@ import { ThemeProvider } from './context/ThemeContext';
 import { TOOLS_LIST, TOOL_PATHS, getToolKeyFromPath } from './data/constants';
 import { ToolKey } from './types';
 import { GradeCalculator } from './components/GradeCalculator';
-import { GpaCalculator } from './components/GpaCalculator';
-import { CgpaToPercentage } from './components/CgpaToPercentage';
-import { TipCalculator } from './components/TipCalculator';
-import { PercentageCalculator } from './components/PercentageCalculator';
-import { LoanCalculator } from './components/LoanCalculator';
-import { MortgageCalculator } from './components/MortgageCalculator';
-import { PasswordGenerator } from './components/PasswordGenerator';
-import { PrivacyPolicy } from './components/PrivacyPolicy';
-import { TermsOfService } from './components/TermsOfService';
-import { AboutMethodology } from './components/AboutMethodology';
-import { ProgrammaticCalculatorView } from './components/ProgrammaticCalculatorView';
-import { CommandPalette } from './components/CommandPalette';
 import { NotFound } from './components/NotFound';
+import { isSamePath } from './utils/paths';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
 import { preloadAllTools } from './utils/toolPreloader';
+import {
+  LazyGpa, LazyCgpa, LazyTip, LazyPercentage, LazyLoan, LazyMortgage, LazyPassword,
+  LazyPrivacy, LazyTerms, LazyAbout, LazyProgrammatic, LazyToolPage, LazyPalette,
+} from './utils/lazyRoutes';
 
 // Zero CLS loading placeholder for lazy routes
 const CalculatorSkeleton: React.FC = () => (
@@ -57,6 +50,19 @@ export interface AppSyncComponents {
   TermsOfService?: React.ComponentType<any>;
   AboutMethodology?: React.ComponentType<any>;
   ProgrammaticCalculatorView?: React.ComponentType<any>;
+  ToolPage?: React.ComponentType<any>;
+}
+
+/** Pages whose own component renders <SEO>, so the shared SEOHead must stay out of the way. */
+const SELF_MANAGED = [
+  '/final-exam-grade-calculator',
+  '/ez-grader',
+  '/test-grade-calculator',
+  '/grade-curve-calculator',
+  '/letter-grade-calculator',
+];
+function isSelfManagedSeoPath(pathname: string): boolean {
+  return SELF_MANAGED.some((r) => isSamePath(pathname, r));
 }
 
 function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
@@ -68,17 +74,18 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
 
   // Component resolution: prioritize sync components for SSR/prerender, with direct component fallbacks
   const CompGrade = syncComponents?.GradeCalculator || GradeCalculator;
-  const CompGpa = syncComponents?.GpaCalculator || GpaCalculator;
-  const CompCgpa = syncComponents?.CgpaToPercentage || CgpaToPercentage;
-  const CompTip = syncComponents?.TipCalculator || TipCalculator;
-  const CompPct = syncComponents?.PercentageCalculator || PercentageCalculator;
-  const CompLoan = syncComponents?.LoanCalculator || LoanCalculator;
-  const CompMortgage = syncComponents?.MortgageCalculator || MortgageCalculator;
-  const CompPassword = syncComponents?.PasswordGenerator || PasswordGenerator;
-  const CompPrivacy = syncComponents?.PrivacyPolicy || PrivacyPolicy;
-  const CompTerms = syncComponents?.TermsOfService || TermsOfService;
-  const CompAbout = syncComponents?.AboutMethodology || AboutMethodology;
-  const CompProgrammatic = syncComponents?.ProgrammaticCalculatorView || ProgrammaticCalculatorView;
+  const CompGpa = syncComponents?.GpaCalculator || LazyGpa;
+  const CompCgpa = syncComponents?.CgpaToPercentage || LazyCgpa;
+  const CompTip = syncComponents?.TipCalculator || LazyTip;
+  const CompPct = syncComponents?.PercentageCalculator || LazyPercentage;
+  const CompLoan = syncComponents?.LoanCalculator || LazyLoan;
+  const CompMortgage = syncComponents?.MortgageCalculator || LazyMortgage;
+  const CompPassword = syncComponents?.PasswordGenerator || LazyPassword;
+  const CompPrivacy = syncComponents?.PrivacyPolicy || LazyPrivacy;
+  const CompTerms = syncComponents?.TermsOfService || LazyTerms;
+  const CompAbout = syncComponents?.AboutMethodology || LazyAbout;
+  const CompToolPage = syncComponents?.ToolPage || LazyToolPage;
+  const CompProgrammatic = syncComponents?.ProgrammaticCalculatorView || LazyProgrammatic;
 
   // Derive active tool dynamically from URL pathname with immediate local state sync
   const pathTool = getToolKeyFromPath(location.pathname);
@@ -89,6 +96,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   }, [pathTool]);
 
   const isProgrammaticRoute =
+    isSelfManagedSeoPath(location.pathname) ||
     location.pathname.startsWith('/easy-grade-calculator/') ||
     location.pathname.startsWith('/calculator/') ||
     location.pathname.startsWith('/about') ||
@@ -226,26 +234,26 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               />
               <Route
                 path="/easy-grade-calculator/college-final-grade-calculator"
-                element={<Navigate to="/easy-grade-calculator/final-exam-grade-calculator" replace />}
+                element={<Navigate to="/final-exam-grade-calculator/" replace />}
               />
               <Route
                 path="/easy-grade-calculator/high-school-test-grader"
-                element={<Navigate to="/easy-grade-calculator/ez-grader" replace />}
+                element={<Navigate to="/ez-grader/" replace />}
               />
 
-              {/* Parameter-Driven Programmatic SEO Routes (Active: final-exam-grade-calculator & ez-grader) */}
-              <Route
-                path="/easy-grade-calculator/:slug"
-                element={<CompProgrammatic setToast={setToastMessage} />}
-              />
-              <Route
-                path="/easy-grade-calculator"
-                element={<Navigate to="/grade-calculator" replace />}
-              />
-              <Route
-                path="/calculator/:slug"
-                element={<CompProgrammatic setToast={setToastMessage} />}
-              />
+              {/* Flat, hub-and-spoke academic pages */}
+              <Route path="/final-exam-grade-calculator" element={<CompProgrammatic presetSlug="final-exam-grade-calculator" setToast={setToastMessage} />} />
+              <Route path="/ez-grader" element={<CompProgrammatic presetSlug="ez-grader" setToast={setToastMessage} />} />
+              <Route path="/test-grade-calculator" element={<CompToolPage slug="test-grade-calculator" />} />
+              <Route path="/grade-curve-calculator" element={<CompToolPage slug="grade-curve-calculator" />} />
+              <Route path="/letter-grade-calculator" element={<CompToolPage slug="letter-grade-calculator" />} />
+
+              {/* Legacy nested URLs (static redirect stubs are generated at build time for crawlers) */}
+              <Route path="/easy-grade-calculator/final-exam-grade-calculator" element={<Navigate to="/final-exam-grade-calculator/" replace />} />
+              <Route path="/easy-grade-calculator/ez-grader" element={<Navigate to="/ez-grader/" replace />} />
+              <Route path="/easy-grade-calculator" element={<Navigate to="/grade-calculator/" replace />} />
+              <Route path="/easy-grade-calculator/:slug" element={<Navigate to="/grade-calculator/" replace />} />
+              <Route path="/calculator/:slug" element={<Navigate to="/grade-calculator/" replace />} />
 
               {/* Backwards-compatibility redirects */}
               <Route path="/gpa" element={<Navigate to="/gpa-calculator" replace />} />
@@ -276,7 +284,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
 
       {isCommandPaletteOpen && (
         <Suspense fallback={null}>
-          <CommandPalette
+          <LazyPalette
             isOpen={isCommandPaletteOpen}
             onClose={() => setIsCommandPaletteOpen(false)}
             activeTool={activeTool}

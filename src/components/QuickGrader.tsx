@@ -1,5 +1,6 @@
 import React, { useState, useMemo, memo, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { Printer, Settings, Check, SlidersHorizontal, Hash, SearchX, RotateCcw, ChevronDown } from 'lucide-react';
 import { parseNumber } from '../utils/formatters';
 import { GRADING_SCALES } from '../data/constants';
@@ -62,7 +63,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
   const [isScaleModalOpen, setIsScaleModalOpen] = useState<boolean>(false);
   const [searchFilter, setSearchFilter] = useState<string>('');
   const { pathname } = useLocation();
-  const isEzGraderPage = pathname.replace(/\/+$/, '') === '/easy-grade-calculator/ez-grader';
+  const isEzGraderPage = pathname.replace(/\/+$/, '') === '/ez-grader';
 
   // Custom threshold overrides (defaults: A: 90, B: 80, C: 70, D: 60)
   const [thresholds, setThresholds] = useState<{ A: number; B: number; C: number; D: number }>({
@@ -330,7 +331,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           {!isEzGraderPage && (
           <div className="mt-2 pt-2 border-t border-slate-200/50 dark:border-slate-800/60">
             <Link
-              to="/easy-grade-calculator/ez-grader"
+              to="/ez-grader/"
               className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 hover:underline transition-colors"
             >
               <span>Grading classroom quizzes? View the complete EZ Grader Online Chart table &rarr;</span>
@@ -395,6 +396,32 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
             </div>
           </div>
 
+          {/* Primary action: teachers want the printable chart first */}
+          <button
+            type="button"
+            onClick={handlePrint}
+            onMouseEnter={preloadPdf}
+            onFocus={preloadPdf}
+            onTouchStart={preloadPdf}
+            className="w-full min-h-[48px] bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95"
+            aria-label="Print the grading chart"
+          >
+            <Printer className="w-4 h-4" aria-hidden="true" />
+            <span>Print Chart</span>
+          </button>
+
+          {/* Progressive disclosure: scale and precision are advanced options */}
+          <details className="group rounded-[24px] border border-stone-200/80 dark:border-slate-800 px-4 py-3">
+            <summary className="flex items-center justify-between cursor-pointer list-none text-sm font-semibold text-slate-700 dark:text-slate-200 select-none">
+              <span>
+                Advanced options
+                <span className="ml-2 text-[11px] font-mono font-medium text-slate-500 dark:text-slate-400">
+                  {scaleType === 'standard' ? 'Standard A–F' : 'Plus / minus'}
+                </span>
+              </span>
+              <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+            </summary>
+            <div className="mt-4 flex flex-col gap-5">
           {/* Grade Scale Selection & Modal Trigger */}
           <div className="bg-white dark:bg-slate-800/60 rounded-[24px] border border-stone-200/80 dark:border-slate-800 shadow-sm p-4 space-y-3">
             <div className="flex items-center justify-between">
@@ -471,6 +498,9 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               />
             </label>
           </div>
+
+            </div>
+          </details>
 
           {/* Quick Metrics / Scoring Summary */}
           <div className="grid grid-cols-2 gap-3 pt-1">

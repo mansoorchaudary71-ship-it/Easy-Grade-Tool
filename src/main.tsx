@@ -21,6 +21,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
 import './index.css';
+import { preloadForPath } from './utils/lazyRoutes';
 
 // Automatically register PWA Service Worker for offline caching
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
@@ -36,6 +37,14 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 }
 
 const container = document.getElementById('root')!;
+
+async function start() {
+  // Load the current route's chunk first so hydration finds it ready (no skeleton flash).
+  try {
+    await preloadForPath(window.location.pathname);
+  } catch {
+    /* fall through: Suspense fallback handles it */
+  }
 
 // Seamlessly hydrate pre-rendered HTML if present (from SSG / pre-render),
 // otherwise fall back gracefully to client createRoot
@@ -67,4 +76,6 @@ if (container.hasChildNodes()) {
     </StrictMode>
   );
 }
+}
 
+start();

@@ -86,13 +86,13 @@ export interface ToolDef {
 
 export const TOOL_PATHS: Record<ToolKey, string> = {
   quick: '/',
-  gpa: '/gpa-calculator',
-  cgpa: '/cgpa-to-percentage-calculator',
-  tip: '/tip-calculator',
-  percentage: '/percentage-calculator',
-  loan: '/loan-calculator',
-  mortgage: '/mortgage-calculator',
-  password: '/password-generator',
+  gpa: '/gpa-calculator/',
+  cgpa: '/cgpa-to-percentage-calculator/',
+  tip: '/tip-calculator/',
+  percentage: '/percentage-calculator/',
+  loan: '/loan-calculator/',
+  mortgage: '/mortgage-calculator/',
+  password: '/password-generator/',
 };
 
 export function getToolKeyFromPath(pathname: string): ToolKey {
@@ -109,13 +109,13 @@ export function getToolKeyFromPath(pathname: string): ToolKey {
 
 export const TOOLS_LIST: ToolDef[] = [
   { key: 'quick', label: 'Quick Grade', icon: GraduationCap, path: '/' },
-  { key: 'gpa', label: 'GPA', icon: GraduationCap, path: '/gpa-calculator' },
-  { key: 'cgpa', label: 'CGPA to %', icon: Calculator, path: '/cgpa-to-percentage-calculator' },
-  { key: 'tip', label: 'Tip', icon: Lightbulb, path: '/tip-calculator' },
-  { key: 'percentage', label: 'Percentage', icon: Percent, path: '/percentage-calculator' },
-  { key: 'loan', label: 'Loan', icon: Banknote, path: '/loan-calculator' },
-  { key: 'mortgage', label: 'Mortgage', icon: House, path: '/mortgage-calculator' },
-  { key: 'password', label: 'Password', icon: KeyRound, path: '/password-generator' },
+  { key: 'gpa', label: 'GPA', icon: GraduationCap, path: '/gpa-calculator/' },
+  { key: 'cgpa', label: 'CGPA to %', icon: Calculator, path: '/cgpa-to-percentage-calculator/' },
+  { key: 'tip', label: 'Tip', icon: Lightbulb, path: '/tip-calculator/' },
+  { key: 'percentage', label: 'Percentage', icon: Percent, path: '/percentage-calculator/' },
+  { key: 'loan', label: 'Loan', icon: Banknote, path: '/loan-calculator/' },
+  { key: 'mortgage', label: 'Mortgage', icon: House, path: '/mortgage-calculator/' },
+  { key: 'password', label: 'Password', icon: KeyRound, path: '/password-generator/' },
 ];
 
 export const FAQ_LIST: FaqItem[] = [

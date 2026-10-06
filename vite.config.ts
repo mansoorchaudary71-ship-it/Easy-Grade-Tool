@@ -124,7 +124,7 @@ export default defineConfig({
         id: base,
         name: 'Easy Grade Tool',
         short_name: 'Easy Grade Tool',
-        description: 'Calculate grades, weighted averages, GPA, needed final exam scores, tips, percentages, loans, and more.',
+        description: 'Free grade calculators for students and teachers: quick grade chart, weighted grades, final exam score, test grade, curve, letter grade, GPA and CGPA.',
         theme_color: '#097362',
         background_color: '#ffffff',
         display: 'standalone',
@@ -132,7 +132,7 @@ export default defineConfig({
         orientation: 'any',
         start_url: base,
         scope: base,
-        categories: ['education', 'utilities', 'productivity', 'finance'],
+        categories: ['education', 'productivity', 'utilities'],
         icons: [
           {
             src: '/pwa-192x192.png',
@@ -166,34 +166,10 @@ export default defineConfig({
           },
         ],
         shortcuts: [
-          {
-            name: 'Grade & Final Exam Calculator',
-            short_name: 'Grade Calc',
-            description: 'Calculate course grades, weighted averages, and final exam targets',
-            url: '/grade-calculator',
-            icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }],
-          },
-          {
-            name: 'GPA Calculator',
-            short_name: 'GPA Calc',
-            description: 'Calculate semester, cumulative, and weighted 4.0 GPA',
-            url: '/gpa-calculator',
-            icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }],
-          },
-          {
-            name: 'Percentage Calculator',
-            short_name: 'Percentages',
-            description: 'Calculate percentage differences, increase, decrease, and fractions',
-            url: '/percentage-calculator',
-            icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }],
-          },
-          {
-            name: 'Loan & Mortgage Calculator',
-            short_name: 'Loans',
-            description: 'Calculate monthly loan payments, amortization, and mortgage schedules',
-            url: '/loan-calculator',
-            icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }],
-          },
+          { name: 'Quick Grade Chart', short_name: 'Quick Grade', description: 'Print a score chart for any test length', url: '/', icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }] },
+          { name: 'Weighted Grade Calculator', short_name: 'Weighted', description: 'Course grade from weighted categories', url: '/grade-calculator/', icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }] },
+          { name: 'Final Exam Calculator', short_name: 'Final Exam', description: 'Score needed on the final for your target grade', url: '/final-exam-grade-calculator/', icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }] },
+          { name: 'GPA Calculator', short_name: 'GPA', description: 'Semester and cumulative GPA', url: '/gpa-calculator/', icons: [{ src: '/pwa-192x192.png', sizes: '192x192' }] },
         ],
       },
       workbox: {
@@ -201,8 +177,7 @@ export default defineConfig({
         navigateFallback: `${base}index.html`,
         navigateFallbackDenylist: [
           /^\/api/,
-          /^\/easy-grade-calculator\/(gpa|semester-gpa-calculator|weighted-grade-calculator|test-score|college-final-grade-calculator|high-school-test-grader)(\/|$)/i,
-          /^\/easy-grade-calculator\/?$/i,
+          /^\/easy-grade-calculator(\/|$)/i,
         ],
         cleanupOutdatedCaches: true,
         clientsClaim: true,

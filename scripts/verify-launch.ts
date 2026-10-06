@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { PROGRAMMATIC_SEO_REGISTRY } from '../src/data/programmaticSeoData';
+import { TOOL_PAGES } from '../src/data/toolPages';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +39,8 @@ function getAllHtmlFiles(dir: string, fileList: string[] = []): string[] {
     if (stat.isDirectory()) {
       getAllHtmlFiles(filePath, fileList);
     } else if (file.endsWith('.html')) {
+      // Static redirect stubs (legacy URLs) are verified separately in CHK-14
+      if (fs.readFileSync(filePath, 'utf-8').includes('data-redirect-stub')) continue;
       fileList.push(filePath);
     }
   }
@@ -334,7 +338,8 @@ export function runVerifyLaunch(): boolean {
   // CHECK 8: Uniqueness of Indexed Programmatic Pages
   // =========================================================================
   let uniquenessErrors: string[] = [];
-  const progDir = path.join(distDir, 'easy-grade-calculator');
+  const progDir = distDir;
+  const contentSlugs = new Set<string>([...Object.keys(PROGRAMMATIC_SEO_REGISTRY), ...Object.keys(TOOL_PAGES)]);
   const progPages: { file: string; rel: string; words: string[]; text: string; shingles: Set<string> }[] = [];
 
   function tokenizeWords(text: string): string[] {
@@ -360,7 +365,7 @@ export function runVerifyLaunch(): boolean {
   }
 
   if (fs.existsSync(progDir)) {
-    const entries = fs.readdirSync(progDir);
+    const entries = fs.readdirSync(progDir).filter((e) => contentSlugs.has(e));
     for (const entry of entries) {
       const pFile = path.join(progDir, entry, 'index.html');
       if (fs.existsSync(pFile)) {
@@ -381,7 +386,7 @@ export function runVerifyLaunch(): boolean {
         const words = tokenizeWords(cleanMain);
         progPages.push({
           file: pFile,
-          rel: `easy-grade-calculator/${entry}`,
+          rel: entry,
           words,
           text: cleanMain,
           shingles: get5WordShingles(words),
@@ -490,6 +495,9 @@ export function runVerifyLaunch(): boolean {
     'about-methodology',
     'gpa',
     'cgpa',
+    'easy-grade-calculator/final-exam-grade-calculator',
+    'easy-grade-calculator/ez-grader',
+    'easy-grade-calculator',
   ]);
 
   if (fs.existsSync(sitemapPath)) {
@@ -699,6 +707,85 @@ export function runVerifyLaunch(): boolean {
     'Favicon/manifest links are root-absolute and resolve on every page',
     assetLinkErrors.length === 0,
     assetLinkErrors.slice(0, 2).join('; ')
+  );
+
+  // =========================================================================
+  // CHECK 14: Trailing-slash consistency (GitHub Pages 301s /x -> /x/)
+  // =========================================================================
+  const slashErrors: string[] = [];
+  for (const hf of htmlFiles) {
+    const rel = path.relative(distDir, hf);
+    if (rel === '404.html' || rel === '500.html') continue;
+    const c = fs.readFileSync(hf, 'utf-8');
+    const m = c.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
+    if (m && !m[1].endsWith('/')) slashErrors.push(`${rel}: canonical lacks trailing slash (${m[1]})`);
+    const markup = c.replace(/<script[\s\S]*?<\/script>/gi, '');
+    for (const lm of markup.matchAll(/href="(\/[^"#?]*)"/g)) {
+      const h = lm[1];
+      const last = h.split('/').pop() || '';
+      if (h === '/' || h.endsWith('/') || last.includes('.')) continue;
+      slashErrors.push(`${rel}: internal link without trailing slash (${h})`);
+    }
+  }
+  if (fs.existsSync(sitemapPath)) {
+    const locs = [...fs.readFileSync(sitemapPath, 'utf-8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    for (const loc of locs) if (!loc.endsWith('/')) slashErrors.push(`sitemap loc lacks trailing slash: ${loc}`);
+  }
+  recordCheck(
+    'CHK-14',
+    'Trailing Slash',
+    'Canonicals, sitemap and internal links all use the served trailing-slash URL',
+    slashErrors.length === 0,
+    slashErrors.slice(0, 3).join('; ')
+  );
+
+  // =========================================================================
+  // CHECK 15: Legacy redirect stubs resolve to real, indexable, non-redirect pages
+  // =========================================================================
+  const stubErrors: string[] = [];
+  (function walk(dir: string) {
+    for (const f of fs.readdirSync(dir)) {
+      const full = path.join(dir, f);
+      if (fs.statSync(full).isDirectory()) walk(full);
+      else if (f.endsWith('.html')) {
+        const c = fs.readFileSync(full, 'utf-8');
+        if (!c.includes('data-redirect-stub')) continue;
+        const t = c.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
+        if (!t) { stubErrors.push(`${path.relative(distDir, full)}: stub has no canonical target`); continue; }
+        const tp = t.replace(prodHost, '').replace(/^\/+|\/+$/g, '');
+        const tf = tp === '' ? path.join(distDir, 'index.html') : path.join(distDir, tp, 'index.html');
+        if (!fs.existsSync(tf)) stubErrors.push(`${path.relative(distDir, full)}: target ${t} does not exist`);
+        else if (fs.readFileSync(tf, 'utf-8').includes('data-redirect-stub')) stubErrors.push(`${path.relative(distDir, full)}: redirect chain via ${t}`);
+      }
+    }
+  })(distDir);
+  recordCheck(
+    'CHK-15',
+    'Legacy Redirects',
+    'Every legacy URL stub points at an existing page (no chains, no dead ends)',
+    stubErrors.length === 0,
+    stubErrors.slice(0, 3).join('; ')
+  );
+
+  // =========================================================================
+  // CHECK 16: Crawl depth - every sitemap URL is linked from the homepage HTML
+  // =========================================================================
+  const depthErrors: string[] = [];
+  if (fs.existsSync(sitemapPath) && fs.existsSync(path.join(distDir, 'index.html'))) {
+    const home = fs.readFileSync(path.join(distDir, 'index.html'), 'utf-8');
+    const locs = [...fs.readFileSync(sitemapPath, 'utf-8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    for (const loc of locs) {
+      const p = loc.replace(prodHost, '') || '/';
+      if (p === '/') continue;
+      if (!home.includes(`href="${p}"`)) depthErrors.push(`Homepage HTML has no link to ${p}`);
+    }
+  }
+  recordCheck(
+    'CHK-16',
+    'Crawl Depth',
+    'Every sitemap URL is reachable in one click from the homepage',
+    depthErrors.length === 0,
+    depthErrors.slice(0, 3).join('; ')
   );
 
   // =========================================================================

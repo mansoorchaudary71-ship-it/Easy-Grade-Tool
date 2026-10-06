@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { ArrowDown, Calendar, Download, Printer } from 'lucide-react';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';

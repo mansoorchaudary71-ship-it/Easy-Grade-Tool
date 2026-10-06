@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Link } from './SlashLink';
 import {
   Sparkles,
   Calculator,
@@ -470,14 +471,14 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
             </Link>
             {entry.slug === 'final-exam-grade-calculator' ? (
               <Link
-                to="/easy-grade-calculator/ez-grader"
+                to="/ez-grader/"
                 className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
               >
                 EZ Grader Online Chart
               </Link>
             ) : (
               <Link
-                to="/easy-grade-calculator/final-exam-grade-calculator"
+                to="/final-exam-grade-calculator/"
                 className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
               >
                 Final Exam Target Solver

@@ -9,7 +9,10 @@ import {
   SITE_LAUNCH_DATE,
   SITE_LAST_MODIFIED,
 } from '../data/seoConfig.ts';
-import { resolveProgrammaticSeo } from '../data/programmaticSeoData.ts';
+import { resolveProgrammaticSeo, PROGRAMMATIC_SEO_REGISTRY } from '../data/programmaticSeoData.ts';
+import { SITE_OWNER } from '../data/siteIdentity.ts';
+import { HOME_FAQS } from '../data/homeContent.ts';
+import { getToolPageByPath } from '../data/toolPages.ts';
 import { getFaqSchema, TOOL_FAQS, WEIGHTED_COURSE_FAQS, FAQItem } from '../components/FAQ.tsx';
 import { getHowToSchema } from '../components/ManualGradeHowTo.tsx';
 import { getCgpaHowToSchema } from '../components/CgpaEducationalGuide.tsx';
@@ -40,7 +43,8 @@ export function resolveSeoForPath(rawPath: string): ResolvedRouteSeo {
       config: SEO_HOME,
       toolKey: 'quick',
       hasFaq: true,
-      hasGradeHowTo: true,
+      customFaqItems: HOME_FAQS,
+      hasGradeHowTo: false,
       hasCgpaHowTo: false,
       cleanPath,
     };
@@ -176,11 +180,36 @@ export function resolveSeoForPath(rawPath: string): ResolvedRouteSeo {
     };
   }
 
+  const toolPage = getToolPageByPath(cleanPath);
+  if (toolPage) {
+    return {
+      config: {
+        title: toolPage.title,
+        description: toolPage.metaDescription,
+        canonicalPath: toolPage.path,
+        canonicalUrl: `${BASE_CANONICAL_ORIGIN}${toolPage.path}`,
+        ogImagePlaceholder: SEO_ROUTES.quick.ogImagePlaceholder,
+        ogType: 'website',
+        keywords: toolPage.keywords,
+        schemaType: 'WebApplication',
+        applicationCategory: 'EducationalApplication',
+        featureList: toolPage.featureList,
+      },
+      toolKey: 'quick',
+      hasFaq: true,
+      customFaqItems: toolPage.faqs.map((f, i) => ({ id: `${toolPage.slug}-faq-${i}`, category: toolPage.slug, question: f.question, answer: f.answer })) as any,
+      hasGradeHowTo: false,
+      hasCgpaHowTo: false,
+      cleanPath: toolPage.path,
+    };
+  }
+
+  const progSlug = cleanPath.split('/').pop() || '';
   if (
-    cleanPath.startsWith('/easy-grade-calculator/') ||
-    cleanPath.startsWith('/calculator/')
+    PROGRAMMATIC_SEO_REGISTRY[progSlug] &&
+    (cleanPath === `/${progSlug}` || cleanPath.startsWith('/easy-grade-calculator/') || cleanPath.startsWith('/calculator/'))
   ) {
-    const slug = cleanPath.split('/').pop() || 'final-exam-grade-calculator';
+    const slug = progSlug;
     const entry = resolveProgrammaticSeo(slug);
     const canonicalPath = entry.path;
     const canonicalUrl = `${BASE_CANONICAL_ORIGIN}${entry.path}`;
@@ -311,8 +340,9 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     '@context': 'https://schema.org',
     '@type': config.schemaType || 'WebApplication',
     '@id': `${config.canonicalUrl}#webapp`,
-    name: config.title,
+    name: config.title.split(/\s[—|]\s/)[0].trim(),
     url: config.canonicalUrl,
+    isPartOf: { '@id': `${BASE_CANONICAL_ORIGIN}/#website` },
     applicationCategory: config.applicationCategory,
     operatingSystem: 'All',
     browserRequirements: 'Requires JavaScript. Requires HTML5.',
@@ -322,12 +352,14 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     description: config.description,
     datePublished: SITE_LAUNCH_DATE,
     dateModified: SITE_LAST_MODIFIED,
-    author: {
-      '@type': 'Organization',
-      name: 'Easy Grade Tool',
-      url: config.canonicalUrl,
-      email: CONTACT_EMAIL,
-    },
+    author: SITE_OWNER
+      ? {
+          '@type': 'Person',
+          name: SITE_OWNER.name,
+          jobTitle: SITE_OWNER.jobTitle,
+          ...(SITE_OWNER.sameAs.length ? { sameAs: SITE_OWNER.sameAs } : {}),
+        }
+      : { '@type': 'Organization', name: 'Easy Grade Tool', url: `${BASE_CANONICAL_ORIGIN}/` },
     publisher: {
       '@type': 'Organization',
       name: 'Easy Grade Tool',
@@ -351,6 +383,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     config.canonicalUrl === `${BASE_CANONICAL_ORIGIN}/` ||
     config.canonicalUrl === BASE_CANONICAL_ORIGIN;
 
+  const hubCrumb = !!getToolPageByPath(cleanPath) || cleanPath === '/final-exam-grade-calculator/' || cleanPath === '/ez-grader/';
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -371,9 +404,12 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
             name: 'Easy Grade Tool',
             item: `${BASE_CANONICAL_ORIGIN}/`,
           },
+          ...(hubCrumb
+            ? [{ '@type': 'ListItem', position: 2, name: 'Grade calculators', item: `${BASE_CANONICAL_ORIGIN}/grade-calculator/` }]
+            : []),
           {
             '@type': 'ListItem',
-            position: 2,
+            position: hubCrumb ? 3 : 2,
             name: config.title.split('—')[0].trim(),
             item: config.canonicalUrl,
           },
@@ -387,6 +423,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     name: 'Easy Grade Tool',
     url: `${BASE_CANONICAL_ORIGIN}/`,
     email: CONTACT_EMAIL,
+    ...(SITE_OWNER ? { founder: { '@type': 'Person', name: SITE_OWNER.name } } : {}),
     logo: {
       '@type': 'ImageObject',
       url: `${BASE_CANONICAL_ORIGIN}/icon.svg`,
@@ -412,7 +449,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     `<script id="schema-org-organization" type="application/ld+json">\n${JSON.stringify(organizationSchema, null, 2)}\n</script>`,
   ];
 
-  if (cleanPath === '/' || cleanPath === '') {
+  {
     scripts.push(
       `<script id="schema-org-website" type="application/ld+json">\n${JSON.stringify(websiteSchema, null, 2)}\n</script>`
     );

@@ -85,25 +85,21 @@ export function preloadPdf(): void {
 export function preloadAllTools(): void {
   if (typeof window === 'undefined') return;
 
-  const warmAll = () => {
+  // Respect Data Saver and slow connections: only warm on intent (hover/focus/touch) there.
+  const conn = (navigator as any).connection;
+  if (conn && (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || ''))) return;
+
+  const warm = () => {
+    // Most likely next stops for a grading visitor. Finance/utility tools load on intent only.
     preloadTool('gpa');
     preloadTool('cgpa');
-    preloadTool('tip');
     preloadTool('percentage');
-    preloadTool('loan');
-    preloadTool('mortgage');
-    preloadTool('password');
     preloadTool('command-palette');
-
-    // Pre-warm all HD educational guide images in browser memory cache
-    Object.keys(RAW_GUIDE_IMAGES).forEach((key) => {
-      preloadGuideImage(getGuideImageUrl(key));
-    });
   };
 
   if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(warmAll, { timeout: 1500 });
+    (window as any).requestIdleCallback(warm, { timeout: 4000 });
   } else {
-    setTimeout(warmAll, 200);
+    setTimeout(warm, 3000);
   }
 }

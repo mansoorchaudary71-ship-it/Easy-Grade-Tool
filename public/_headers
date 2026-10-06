@@ -1,0 +1,15 @@
+# Used by Cloudflare Pages / Netlify. GitHub Pages ignores this file.
+# If you put Cloudflare (free plan) in front of GitHub Pages, create the same rules under
+# Rules > Transform Rules > Modify Response Header. See docs/SEO-OPS.md.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=2592000

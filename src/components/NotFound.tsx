@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { Helmet } from '../utils/helmet';
 import { AlertCircle, ArrowLeft } from 'lucide-react';
 

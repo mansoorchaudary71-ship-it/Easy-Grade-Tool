@@ -5,6 +5,8 @@ import { render } from '../src/entry-server';
 import { ToolKey } from '../src/types';
 import { injectRouteSeoIntoHtml } from '../src/utils/seoHtmlInjector';
 import { PROGRAMMATIC_SEO_REGISTRY } from '../src/data/programmaticSeoData';
+import { TOOL_PAGE_LIST } from '../src/data/toolPages';
+import { LEGACY_REDIRECTS, renderRedirectStub } from './redirectStubs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,7 +21,7 @@ export interface PrerenderRouteDef {
   isSubDir: boolean;
 }
 
-// All 11 canonical routes (Homepage + 8 standalone tools + About + Privacy)
+// All canonical routes (Homepage + tools + dedicated academic pages + About/Privacy/Terms)
 export const PRERENDER_ROUTES: PrerenderRouteDef[] = [
   {
     route: '/',
@@ -97,7 +99,14 @@ export const PRERENDER_ROUTES: PrerenderRouteDef[] = [
   ...Object.values(PROGRAMMATIC_SEO_REGISTRY).map((entry) => ({
     route: entry.path,
     toolKey: entry.toolKey,
-    targetFile: path.resolve(distDir, 'easy-grade-calculator', entry.slug, 'index.html'),
+    targetFile: path.resolve(distDir, entry.slug, 'index.html'),
+    isSubDir: true,
+  })),
+  // Dedicated calculators (test grade, grade curve, letter grade)
+  ...TOOL_PAGE_LIST.map((entry) => ({
+    route: entry.path,
+    toolKey: 'quick' as ToolKey,
+    targetFile: path.resolve(distDir, entry.slug, 'index.html'),
     isSubDir: true,
   })),
 ];
@@ -185,18 +194,12 @@ export async function runPrerender(): Promise<void> {
     }
   }
 
-  // Remove obsolete/merged programmatic directories from dist/easy-grade-calculator
+  // Old nested directory (/easy-grade-calculator/...) is replaced entirely by redirect stubs below
   const egcDir = path.resolve(distDir, 'easy-grade-calculator');
   if (fs.existsSync(egcDir)) {
-    const activeSlugs = new Set(Object.keys(PROGRAMMATIC_SEO_REGISTRY));
-    const existingEntries = fs.readdirSync(egcDir);
-    for (const entry of existingEntries) {
-      if (!activeSlugs.has(entry)) {
-        try {
-          fs.rmSync(path.join(egcDir, entry), { recursive: true, force: true });
-        } catch (_) {}
-      }
-    }
+    try {
+      fs.rmSync(egcDir, { recursive: true, force: true });
+    } catch (_) {}
   }
 
   const dist404Path = path.resolve(distDir, '404.html');
@@ -283,6 +286,19 @@ export async function runPrerender(): Promise<void> {
       console.error(`❌ [SSG] Failed to pre-render route ${item.route}:`, err);
     }
   }
+
+  // Static redirect stubs for every legacy / alias URL. GitHub Pages cannot send real 301s,
+  // so each old URL gets a tiny page with meta-refresh + canonical pointing at the new URL.
+  let stubCount = 0;
+  for (const [from, to] of Object.entries(LEGACY_REDIRECTS)) {
+    const clean = from.replace(/^\/+|\/+$/g, '');
+    if (!clean) continue;
+    const target = path.resolve(distDir, clean, 'index.html');
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, renderRedirectStub(to), 'utf-8');
+    stubCount++;
+  }
+  console.log(`✅ [SSG] Wrote ${stubCount} legacy redirect stubs`);
 
   console.log(`🎉 SSG completed: ${successCount}/${PRERENDER_ROUTES.length} primary routes pre-rendered with zero duplicate content!`);
 }

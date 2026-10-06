@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from './SlashLink';
 import { Plus, X, Download, Printer } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ToolHeading } from './ToolHeading';

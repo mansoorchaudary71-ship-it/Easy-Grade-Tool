@@ -1,58 +1,70 @@
 {
   "/": {
-    "hash": "de419a8d620cf63f",
+    "hash": "c65172690cca371d",
     "lastmod": "2026-10-02"
   },
-  "/grade-calculator": {
-    "hash": "ec03e53dc055e0b1",
+  "/grade-calculator/": {
+    "hash": "85539a0246d67dfb",
     "lastmod": "2026-10-02"
   },
-  "/gpa-calculator": {
-    "hash": "1d765ddb64f9d9a3",
+  "/gpa-calculator/": {
+    "hash": "cdcf0fc2d9879161",
     "lastmod": "2026-10-02"
   },
-  "/cgpa-to-percentage-calculator": {
-    "hash": "833fb4f6d86b6a8d",
+  "/cgpa-to-percentage-calculator/": {
+    "hash": "cd529cc016dfc4b1",
     "lastmod": "2026-10-02"
   },
-  "/tip-calculator": {
-    "hash": "2be6e0373d2810d9",
+  "/tip-calculator/": {
+    "hash": "06021a4ee01fd0b7",
     "lastmod": "2026-10-02"
   },
-  "/percentage-calculator": {
-    "hash": "caa899d541756970",
+  "/percentage-calculator/": {
+    "hash": "3b611754e7f1e15d",
     "lastmod": "2026-10-02"
   },
-  "/loan-calculator": {
-    "hash": "2c394c11a1f97af2",
+  "/loan-calculator/": {
+    "hash": "f6fa60d85d657f0c",
     "lastmod": "2026-10-02"
   },
-  "/mortgage-calculator": {
-    "hash": "ec7e3c97e81c638d",
+  "/mortgage-calculator/": {
+    "hash": "bfd1c7157ada3282",
     "lastmod": "2026-10-02"
   },
-  "/password-generator": {
-    "hash": "bdce92fd4d215781",
+  "/password-generator/": {
+    "hash": "137690ee5964697c",
     "lastmod": "2026-10-02"
   },
-  "/about": {
-    "hash": "cc7f2c241d35c3a4",
+  "/about/": {
+    "hash": "8dfef98a19da7fb7",
     "lastmod": "2026-10-02"
   },
-  "/privacy": {
-    "hash": "3dc81f269d0752f8",
+  "/privacy/": {
+    "hash": "6300422d091099cc",
     "lastmod": "2026-10-02"
   },
-  "/terms": {
-    "hash": "f9fd9edcc968b6cb",
+  "/terms/": {
+    "hash": "10a8e3064424e09e",
     "lastmod": "2026-10-02"
   },
-  "/easy-grade-calculator/final-exam-grade-calculator": {
-    "hash": "1540146f92ee16ea",
+  "/final-exam-grade-calculator/": {
+    "hash": "7e6344584e17752e",
     "lastmod": "2026-10-02"
   },
-  "/easy-grade-calculator/ez-grader": {
-    "hash": "789c2965b9729ea5",
+  "/ez-grader/": {
+    "hash": "1aa3445673641c39",
+    "lastmod": "2026-10-02"
+  },
+  "/test-grade-calculator/": {
+    "hash": "97c1770732cdcdfc",
+    "lastmod": "2026-10-02"
+  },
+  "/grade-curve-calculator/": {
+    "hash": "f2601a7d7154fa6f",
+    "lastmod": "2026-10-02"
+  },
+  "/letter-grade-calculator/": {
+    "hash": "153dc16e990aa75e",
     "lastmod": "2026-10-02"
   }
 }

@@ -20,6 +20,8 @@ import { ToolKey } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { preloadTool } from '../utils/toolPreloader';
 import { Logo } from './Logo';
+import { useNavigate } from 'react-router-dom';
+import { NAV_ITEMS } from '../data/navItems';
 
 export interface CommandPaletteProps {
   isOpen: boolean;
@@ -48,7 +50,7 @@ interface PaletteActionItem {
   label: string;
   title: string;
   description: string;
-  category: 'Quick Actions';
+  category: 'Quick Actions' | 'Academic';
   icon: React.ComponentType<{ className?: string; 'aria-hidden'?: boolean | 'true' | 'false' }>;
   keywords: string[];
   action: () => void;
@@ -264,6 +266,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const { theme, resolvedTheme, setTheme } = useTheme();
+  const routerNavigate = useNavigate();
 
   // Detect Mac OS for modifier key symbol
   const isMac = useMemo(() => {
@@ -297,11 +300,32 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     ];
   }, [theme, resolvedTheme, setTheme, setToast]);
 
+  // Extra academic pages (not in the 8 legacy tool slots)
+  const pageItems: PaletteActionItem[] = useMemo(
+    () =>
+      NAV_ITEMS.filter((n) => ['Weighted Grade', 'Final Exam', 'Test Grade', 'Grade Curve', 'Letter Grade'].includes(n.label)).map((n) => ({
+        type: 'action' as const,
+        key: `page-${n.path}`,
+        label: n.title.charAt(0).toUpperCase() + n.title.slice(1),
+        title: n.title,
+        description: `Open the ${n.title}.`,
+        category: 'Academic' as const,
+        icon: n.icon,
+        keywords: [n.label.toLowerCase(), n.title.toLowerCase(), 'grade', 'academic'],
+        action: () => {
+          routerNavigate(n.path);
+          onClose();
+        },
+        badge: 'Page',
+      })),
+    [routerNavigate, onClose]
+  );
+
   // Combined filtered items
   const filteredItems: PaletteItem[] = useMemo(() => {
     const trimmed = query.trim().toLowerCase();
     if (!trimmed) {
-      return [...PALETTE_TOOLS, ...quickActions];
+      return [...PALETTE_TOOLS, ...pageItems, ...quickActions];
     }
 
     const matchesQuery = (item: PaletteItem) => {
@@ -315,10 +339,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
     };
 
     const toolsMatching = PALETTE_TOOLS.filter(matchesQuery);
-    const actionsMatching = quickActions.filter(matchesQuery);
+    const actionsMatching = [...pageItems, ...quickActions].filter(matchesQuery);
 
     return [...toolsMatching, ...actionsMatching];
-  }, [query, quickActions]);
+  }, [query, quickActions, pageItems]);
 
   // Keep selected index within bounds when results change
   useEffect(() => {
