@@ -533,6 +533,8 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between"
         aria-live="polite"
         id="ez-print-section"
+        data-print-area
+        data-print-title={`Quick Grade Chart — ${totalQuestions}-question test`}
       >
         <div>
           {/* Output Card Header - Master Highlight Container */}

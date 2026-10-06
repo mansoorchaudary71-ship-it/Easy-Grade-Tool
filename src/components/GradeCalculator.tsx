@@ -402,6 +402,8 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           role="tabpanel"
           aria-labelledby="tab-calculator"
           tabIndex={0}
+          data-print-area
+          data-print-title="Weighted Grade Report"
           className="relative tool-layout font-sans pt-1 focus:outline-none"
         >
           <AmbientAura />

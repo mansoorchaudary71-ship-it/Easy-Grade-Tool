@@ -6537,3 +6537,56 @@ input[type="number"]:focus {
   contain-intrinsic-size: auto 600px;
 }
 .tool-nav-divider { white-space: nowrap; }
+
+/* ===== Professional print output: only the result, never the whole website ===== */
+@page { margin: 14mm; }
+@media print {
+  [data-print-hidden] { display: none !important; }
+
+  /* Always remove site chrome, guides, FAQs and floating UI */
+  header, .topbar, .tool-nav, nav[aria-label="Calculator tools"], footer, .footer,
+  .seo-content, .seo-article, section[aria-label="Educational Guide"],
+  section[aria-label="Frequently Asked Questions"], section[aria-label="Related calculators"],
+  .toast, .command-palette-backdrop, button, [role="tablist"], .print\:hidden {
+    display: none !important;
+  }
+
+  [data-print-area] {
+    display: block !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  [data-print-area], [data-print-area] * {
+    color: #111 !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+  [data-print-area]::before {
+    content: attr(data-print-title);
+    display: block;
+    font: 700 20px/1.3 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    margin: 0 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #111;
+  }
+  [data-print-area]::after {
+    content: "Calculated with Easy Grade Tool · www.easygradetool.com";
+    display: block;
+    margin-top: 16px;
+    padding-top: 8px;
+    border-top: 1px solid #bbb;
+    font: 12px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: #555 !important;
+  }
+  [data-print-area] table { width: 100%; border-collapse: collapse; }
+  [data-print-area] th, [data-print-area] td { border-bottom: 1px solid #ccc; padding: 4px 6px; }
+  [data-print-area] tr, [data-print-area] .letter-group-section, [data-print-area] .ez-score-item { break-inside: avoid; }
+  .content-auto { content-visibility: visible; }
+}

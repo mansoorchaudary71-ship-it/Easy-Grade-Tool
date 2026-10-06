@@ -22,6 +22,9 @@ import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
 import './index.css';
 import { preloadForPath } from './utils/lazyRoutes';
+import { installPrintFocus } from './utils/printFocus';
+
+installPrintFocus();
 
 // Automatically register PWA Service Worker for offline caching
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {

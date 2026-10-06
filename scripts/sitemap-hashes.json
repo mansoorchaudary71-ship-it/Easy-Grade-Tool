@@ -1,10 +1,10 @@
 {
   "/": {
-    "hash": "c65172690cca371d",
+    "hash": "1e127000fa5803e8",
     "lastmod": "2026-10-02"
   },
   "/grade-calculator/": {
-    "hash": "85539a0246d67dfb",
+    "hash": "415fb379e86b05d2",
     "lastmod": "2026-10-02"
   },
   "/gpa-calculator/": {
@@ -32,7 +32,7 @@
     "lastmod": "2026-10-02"
   },
   "/password-generator/": {
-    "hash": "137690ee5964697c",
+    "hash": "31d3a749f193b141",
     "lastmod": "2026-10-02"
   },
   "/about/": {
@@ -48,23 +48,23 @@
     "lastmod": "2026-10-02"
   },
   "/final-exam-grade-calculator/": {
-    "hash": "7e6344584e17752e",
+    "hash": "f177d925f93a85fe",
     "lastmod": "2026-10-02"
   },
   "/ez-grader/": {
-    "hash": "1aa3445673641c39",
+    "hash": "ead7b782596154f2",
     "lastmod": "2026-10-02"
   },
   "/test-grade-calculator/": {
-    "hash": "97c1770732cdcdfc",
+    "hash": "81758922f411d6b1",
     "lastmod": "2026-10-02"
   },
   "/grade-curve-calculator/": {
-    "hash": "f2601a7d7154fa6f",
+    "hash": "647c2a5990cc2090",
     "lastmod": "2026-10-02"
   },
   "/letter-grade-calculator/": {
-    "hash": "153dc16e990aa75e",
+    "hash": "0e9892c466119112",
     "lastmod": "2026-10-02"
   }
 }

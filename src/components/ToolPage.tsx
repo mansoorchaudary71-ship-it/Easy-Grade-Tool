@@ -53,7 +53,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         <p className="text-base text-slate-600 dark:text-slate-300 max-w-3xl m-0">{entry.intro}</p>
       </header>
 
-      <section aria-label={`${entry.h1} tool`}>
+      <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
         <Tool />
       </section>
 
