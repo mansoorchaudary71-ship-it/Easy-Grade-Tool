@@ -1,7 +1,7 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
-import { Plus, X, RotateCcw, Target, ArrowLeft, Download, Printer } from 'lucide-react';
+import { Plus, X, RotateCcw, Target, ArrowLeft, Table2, Calculator, Download, Printer, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
@@ -38,10 +38,79 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
   const isWeightedRoute = location.pathname.replace(/\/+$/, '') === '/grade-calculator';
   const activeSeo = isWeightedRoute ? SEO_ROUTES.quick : SEO_HOME;
 
-  // The view is decided by the URL, not by an in-page switch:
-  // "/" is the Quick Grade chart; "/grade-calculator/" and the final-exam page are the weighted calculator.
-  const calcTab: 'quick-chart' | 'calculator' =
-    initialMode === 'points' || initialMode === 'weighted' || isWeightedRoute ? 'calculator' : 'quick-chart';
+  // Primary default tool is Quick Grade on / and Weighted Grade on /grade-calculator
+  const [calcTab, setCalcTab] = useState<'quick-chart' | 'calculator'>(() => {
+    if (initialMode === 'points' || initialMode === 'weighted') return 'calculator';
+    if (isWeightedRoute) return 'calculator';
+    return 'quick-chart';
+  });
+
+  useEffect(() => {
+    if (initialMode === 'points' || initialMode === 'weighted') return;
+    setCalcTab(isWeightedRoute ? 'calculator' : 'quick-chart');
+  }, [isWeightedRoute, initialMode]);
+
+  const tabListRef = useRef<HTMLDivElement>(null);
+  const quickTabRef = useRef<HTMLButtonElement>(null);
+  const weightedTabRef = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+
+  // Close mobile dropdown menu when clicking outside or pressing Escape
+  useEffect(() => {
+    if (!isDropdownOpen) return;
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isDropdownOpen]);
+
+  const switchTab = (tab: 'quick-chart' | 'calculator') => {
+    if (tab === calcTab) return;
+    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
+    setCalcTab(tab);
+  };
+
+  const handleSelectFromDropdown = (tab: 'quick-chart' | 'calculator') => {
+    switchTab(tab);
+    setIsDropdownOpen(false);
+  };
+
+  // Keyboard navigation for ARIA tablist (ArrowLeft, ArrowRight, Home, End)
+  const handleTabKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, current: 'quick-chart' | 'calculator') => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const nextTab = current === 'quick-chart' ? 'calculator' : 'quick-chart';
+      switchTab(nextTab);
+      if (nextTab === 'quick-chart') {
+        quickTabRef.current?.focus();
+      } else {
+        weightedTabRef.current?.focus();
+      }
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      switchTab('quick-chart');
+      quickTabRef.current?.focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      switchTab('calculator');
+      weightedTabRef.current?.focus();
+    }
+  };
 
   const [mode, setMode] = useState<'weighted' | 'points'>(() => {
     if (initialMode === 'points') return 'points';
@@ -143,9 +212,171 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
         />
       )}
 
+      {/* Primary Mode Switcher: Mobile Dropdown Menu (<sm) & Clear Segmented Tabs (>=sm) */}
+      <div className="w-full flex justify-center mb-6 pt-1 print:hidden">
+        {/* Mobile Dropdown Menu (Pill-shaped button with theme colors) */}
+        <div ref={dropdownRef} className="relative sm:hidden inline-block text-center">
+          <button
+            type="button"
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+            aria-expanded={isDropdownOpen}
+            aria-haspopup="menu"
+            aria-label="Toggle calculator view"
+            className="inline-flex items-center justify-between gap-2.5 px-5 py-2.5 rounded-full bg-white dark:bg-slate-900 text-stone-900 dark:text-white border border-stone-200/90 dark:border-slate-700 shadow-xs hover:border-stone-300 dark:hover:border-slate-600 font-bold text-xs sm:text-sm cursor-pointer select-none active:scale-[0.98] transition-all"
+          >
+            {calcTab === 'quick-chart' ? (
+              <span className="inline-flex items-center gap-2">
+                <Table2 className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" aria-hidden="true" />
+                <span>Quick Grade Chart</span>
+                <span className="text-[11px] font-medium text-stone-500 dark:text-stone-400">(EZ Grader)</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-2">
+                <Calculator className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" aria-hidden="true" />
+                <span>Weighted &amp; Final Exam</span>
+                <span className="text-[11px] font-medium text-stone-500 dark:text-stone-400">(Semester)</span>
+              </span>
+            )}
+            <ChevronDown
+              className={`w-4 h-4 text-stone-500 dark:text-stone-400 ml-1 transition-transform duration-200 ${
+                isDropdownOpen ? 'rotate-180' : ''
+              }`}
+              aria-hidden="true"
+            />
+          </button>
+
+          {isDropdownOpen && (
+            <div
+              role="menu"
+              aria-orientation="vertical"
+              className="absolute left-1/2 -translate-x-1/2 mt-2 w-72 max-w-[calc(100vw-2rem)] bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-stone-200 dark:border-slate-700 p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150"
+            >
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => handleSelectFromDropdown('quick-chart')}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer ${
+                  calcTab === 'quick-chart'
+                    ? 'bg-[#191C1E] text-white dark:bg-slate-800 shadow-xs'
+                    : 'text-stone-700 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-slate-800/70'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Table2
+                    className={`w-4 h-4 shrink-0 ${
+                      calcTab === 'quick-chart' ? 'text-teal-400' : 'text-stone-500 dark:text-stone-400'
+                    }`}
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <div className="leading-tight">Quick Grade Chart</div>
+                    <div
+                      className={`text-[11px] font-normal ${
+                        calcTab === 'quick-chart' ? 'text-stone-300' : 'text-stone-500 dark:text-stone-400'
+                      }`}
+                    >
+                      EZ Grader &bull; Instant Chart
+                    </div>
+                  </div>
+                </div>
+                {calcTab === 'quick-chart' && (
+                  <Check className="w-4 h-4 text-teal-400 shrink-0 ml-2" aria-hidden="true" />
+                )}
+              </button>
+
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => handleSelectFromDropdown('calculator')}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors text-left cursor-pointer mt-1 ${
+                  calcTab === 'calculator'
+                    ? 'bg-[#191C1E] text-white dark:bg-slate-800 shadow-xs'
+                    : 'text-stone-700 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-slate-800/70'
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Calculator
+                    className={`w-4 h-4 shrink-0 ${
+                      calcTab === 'calculator' ? 'text-teal-400' : 'text-stone-500 dark:text-stone-400'
+                    }`}
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <div className="leading-tight">Weighted &amp; Final Exam</div>
+                    <div
+                      className={`text-[11px] font-normal ${
+                        calcTab === 'calculator' ? 'text-stone-300' : 'text-stone-500 dark:text-stone-400'
+                      }`}
+                    >
+                      Semester &bull; Target Final Score
+                    </div>
+                  </div>
+                </div>
+                {calcTab === 'calculator' && (
+                  <Check className="w-4 h-4 text-teal-400 shrink-0 ml-2" aria-hidden="true" />
+                )}
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Desktop / Tablet Segmented Tabs */}
+        <div
+          ref={tabListRef}
+          role="tablist"
+          aria-label="Grade calculator modes"
+          className="hidden sm:inline-flex p-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-700/90 shadow-xs max-w-full overflow-x-auto gap-1"
+        >
+          <button
+            ref={quickTabRef}
+            id="tab-quick-chart"
+            role="tab"
+            type="button"
+            aria-selected={calcTab === 'quick-chart'}
+            aria-controls="panel-quick-chart"
+            tabIndex={calcTab === 'quick-chart' ? 0 : -1}
+            onClick={() => switchTab('quick-chart')}
+            onKeyDown={(e) => handleTabKeyDown(e, 'quick-chart')}
+            className={`flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer select-none whitespace-nowrap ${
+              calcTab === 'quick-chart'
+                ? 'bg-[#191C1E] text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
+                : 'bg-stone-100 text-stone-600 rounded-full font-medium hover:bg-white hover:shadow-sm border border-transparent transition-all px-4 py-1.5'
+            }`}
+          >
+            <Table2 className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span>Quick Grade Chart</span>
+            <span className="text-[11px] font-medium opacity-80">(EZ Grader)</span>
+          </button>
+
+          <button
+            ref={weightedTabRef}
+            id="tab-calculator"
+            role="tab"
+            type="button"
+            aria-selected={calcTab === 'calculator'}
+            aria-controls="panel-calculator"
+            tabIndex={calcTab === 'calculator' ? 0 : -1}
+            onClick={() => switchTab('calculator')}
+            onKeyDown={(e) => handleTabKeyDown(e, 'calculator')}
+            className={`flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer select-none whitespace-nowrap ${
+              calcTab === 'calculator'
+                ? 'bg-[#191C1E] text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
+                : 'bg-stone-100 text-stone-600 rounded-full font-medium hover:bg-white hover:shadow-sm border border-transparent transition-all px-4 py-1.5'
+            }`}
+          >
+            <Calculator className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span>Weighted &amp; Final Exam</span>
+            <span className="text-[11px] font-medium opacity-80">(Semester)</span>
+          </button>
+        </div>
+      </div>
+
       {calcTab === 'quick-chart' ? (
         <div
           id="panel-quick-chart"
+          role="tabpanel"
+          aria-labelledby="tab-quick-chart"
+          tabIndex={0}
           className="w-full max-w-full overflow-x-hidden pt-1 focus:outline-none"
         >
           {/* Quick Grade and Test Scoring Chart */}
@@ -153,20 +384,24 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
 
           {/* Secondary Switch to Weighted / Target Calculator */}
           <div className="mt-8 mb-6 text-center print:hidden">
-            <Link
-              to="/grade-calculator/"
-              className="no-underline inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors cursor-pointer bg-white/90 dark:bg-slate-800/90 px-4 py-2 rounded-full border border-stone-200 dark:border-slate-700 shadow-2xs hover:shadow-xs"
+            <button
+              type="button"
+              onClick={() => switchTab('calculator')}
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors cursor-pointer bg-white/90 dark:bg-slate-800/90 px-4 py-2 rounded-full border border-stone-200 dark:border-slate-700 shadow-2xs hover:shadow-xs"
             >
               <span>Need to calculate semester weighted assignments or final exam goals?</span>
               <span className="text-emerald-700 dark:text-emerald-400 font-bold underline">
                 Weighted Calculator →
               </span>
-            </Link>
+            </button>
           </div>
         </div>
       ) : (
         <div
           id="panel-calculator"
+          role="tabpanel"
+          aria-labelledby="tab-calculator"
+          tabIndex={0}
           data-print-area
           data-print-title="Weighted Grade Report"
           className="relative tool-layout font-sans pt-1 focus:outline-none"
@@ -175,13 +410,14 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
 
           {/* Return to Quick Grade Header */}
           <div className="col-span-full mb-3 flex items-center justify-between">
-            <Link
-              to="/"
-              className="no-underline inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-800 dark:text-emerald-400 hover:underline cursor-pointer bg-white/80 dark:bg-slate-800/80 px-3.5 py-1.5 rounded-full border border-stone-200 dark:border-slate-700"
+            <button
+              type="button"
+              onClick={() => switchTab('quick-chart')}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-emerald-800 dark:text-emerald-400 hover:underline cursor-pointer bg-white/80 dark:bg-slate-800/80 px-3.5 py-1.5 rounded-full border border-stone-200 dark:border-slate-700"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>← Back to Quick Grade Chart</span>
-            </Link>
+            </button>
           </div>
 
           {/* Left: Assessment Grade Rows Card */}

@@ -42,7 +42,7 @@ export const QuickGradeGuide: React.FC = () => (
       <ul className="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
         {MORE.map((m) => (
           <li key={m.to}>
-            <Link to={m.to} className="block h-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 hover:border-teal-600 transition-colors no-underline">
+            <Link to={m.to} className="glow-surface block h-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 hover:border-teal-600 transition-colors no-underline">
               <span className="block font-bold text-slate-900 dark:text-white">{m.title}</span>
               <span className="block text-sm text-slate-600 dark:text-slate-400">{m.text}</span>
             </Link>
