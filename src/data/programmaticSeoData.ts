@@ -168,6 +168,27 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
         answer:
           'Yes. Set your target grade to your institution’s minimum passing mark (typically 70.0% for a C or 60.0% for a D-). The solver will tell you the exact threshold needed to avoid failing the course.',
       },
+      {
+        id: 'faq-final-find-weight',
+        category: 'final-exam',
+        question: 'How do I find how much my final exam is worth?',
+        answer:
+          'Look at the grading breakdown in your syllabus. If it lists percentages, use the number next to the final exam. If your class adds up raw points, divide the final exam’s points by the total points in the course: a 200-point final in a 1,000-point course is worth 20%.',
+      },
+      {
+        id: 'faq-final-keep-b',
+        category: 'final-exam',
+        question: 'What do I need on the final to keep a B if I have an 82% and the final is worth 25%?',
+        answer:
+          'Your coursework banks 82 × 0.75 = 61.5 points. To finish with 80% you need (80 − 61.5) ÷ 0.25 = 74% on the final exam. Every point above 74% puts your course grade over the 80% line.',
+      },
+      {
+        id: 'faq-final-heavier-weight',
+        category: 'final-exam',
+        question: 'How does a heavier final exam weight change the score I need?',
+        answer:
+          'A heavier final means less is banked, so the exam matters more. With a 78% average on the 60% of the course already graded, a 40% final and an 80% target, you bank 46.8 points and need (80 − 46.8) ÷ 0.40 = 83% on the final.',
+      },
     ],
     searchVolumeTier: 'high',
     relatedSlugs: [],

@@ -8,8 +8,6 @@ import {
   CheckCircle2,
   ChevronRight,
   BookOpen,
-  HelpCircle,
-  ChevronDown,
   ArrowRight,
   Target,
   GraduationCap,
@@ -21,6 +19,8 @@ import {
 import { SEO } from './SEO';
 import { GradeCalculator } from './GradeCalculator';
 import { BASE_CANONICAL_ORIGIN } from '../data/constants';
+import { GuideArticle, GUIDE_ARTICLES } from './GuideArticle';
+import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 
 export interface ProgrammaticCalculatorViewProps {
   setToast: (msg: string) => void;
@@ -158,12 +158,6 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
   const entry: ProgrammaticSeoEntry = resolveProgrammaticSeo(rawSlug);
 
   const canonicalUrl = `${BASE_CANONICAL_ORIGIN}${entry.path}`;
-  const [openFaqId, setOpenFaqId] = useState<string | null>(entry.customFaqs[0]?.id || null);
-
-  const toggleFaq = (id: string) => {
-    setOpenFaqId((prev) => (prev === id ? null : id));
-  };
-
   return (
     <>
       <SEO
@@ -389,48 +383,11 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
           </div>
         </section>
 
-        {/* Unique Bespoke FAQ Section */}
-        <section
-          aria-labelledby="faq-heading"
-          className="p-6 sm:p-8 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-xs"
-        >
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 font-mono mb-2">
-            <HelpCircle className="w-4 h-4 text-teal-600" />
-            <span>Questions &amp; Guidance</span>
-          </div>
-          <h2
-            id="faq-heading"
-            className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-4"
-          >
-            Final Exam Grade Simulator Frequently Asked Questions
-          </h2>
+        {/* Educational guide with image below the heading */}
+        <GuideArticle article={GUIDE_ARTICLES['final-exam-grade-calculator']} />
 
-          <div className="divide-y divide-slate-200 dark:divide-slate-800">
-            {entry.customFaqs.map((faq) => {
-              const isOpen = openFaqId === faq.id;
-              return (
-                <div key={faq.id} className="py-4">
-                  <button
-                    type="button"
-                    onClick={() => toggleFaq(faq.id)}
-                    className="w-full flex items-center justify-between gap-4 text-left font-bold text-sm sm:text-base text-slate-800 dark:text-slate-200 hover:text-teal-700 dark:hover:text-teal-400 transition-colors"
-                    aria-expanded={isOpen}
-                  >
-                    <span>{faq.question}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 shrink-0 text-slate-400 transition-transform duration-200 ${
-                        isOpen ? 'rotate-180 text-teal-600' : ''
-                      }`}
-                    />
-                  </button>
-                  <div className={`mt-3 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pr-6 ${isOpen ? 'block' : 'hidden'}`}>
-                    {faq.answer}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+        {/* FAQ: same component and UI as every other tool; schema comes from the same entry.customFaqs */}
+        <FAQ tool="quick" items={entry.customFaqs} heading={PAGE_FAQ_HEADINGS['final-exam-grade-calculator']} />
 
         {/* Streamlined Internal Linking Cluster */}
         <nav

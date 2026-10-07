@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
-import { FAQ, WEIGHTED_COURSE_FAQS } from './FAQ';
+import { FAQ, WEIGHTED_COURSE_FAQS, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ManualGradeHowTo } from './ManualGradeHowTo';
 import { QuickGradeGuide } from './QuickGradeGuide';
 import { ToolKey } from '../types';
 import { BASE_CANONICAL_ORIGIN, SITE_LAUNCH_DATE, SITE_LAST_MODIFIED, CONTACT_EMAIL } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
+import { GuideArticle, GUIDE_ARTICLES } from './GuideArticle';
 
 export interface EducationalGuideProps {
   activeTool?: ToolKey;
@@ -162,8 +163,10 @@ export const EducationalGuide: React.FC<EducationalGuideProps> = ({ activeTool =
           </article>
         </section>
 
+        <GuideArticle article={GUIDE_ARTICLES['weighted-grade-calculator']} className="max-w-4xl mx-auto mb-16 px-4" />
+
         <div className="w-full max-w-4xl mx-auto px-4 mb-16">
-          <FAQ tool="quick" items={WEIGHTED_COURSE_FAQS} />
+          <FAQ tool="quick" items={WEIGHTED_COURSE_FAQS} heading={PAGE_FAQ_HEADINGS['weighted-grade-calculator']} />
         </div>
       </>
     );

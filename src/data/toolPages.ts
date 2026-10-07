@@ -150,6 +150,21 @@ export const TOOL_PAGES: Record<ToolPageSlug, ToolPageEntry> = {
         answer:
           'The Quick Grade chart lists the score for every possible number of wrong answers so a teacher can grade a whole stack from one printed sheet. This calculator grades one result at a time and handles bonus points and penalties.',
       },
+      {
+        question: 'What is a passing grade on a test?',
+        answer:
+          'On the common 10-point scale 60% is the lowest passing mark (a D) and anything under 60% is an F. Some schools and programs set the pass mark at 70%, and some instructors set their own cutoff for a single test, so the syllabus decides.',
+      },
+      {
+        question: 'How do I apply a late penalty to a test score?',
+        answer:
+          'If the penalty is in points, subtract it from the points earned before dividing: 42 earned minus a 5-point penalty is 37 out of 50, or 74%. If the penalty is a percentage, calculate the score first and then take that many percentage points off the result.',
+      },
+      {
+        question: 'How do I turn a score out of 20, 25 or 30 into a percentage?',
+        answer:
+          'Divide the points you earned by the points possible and multiply by 100. A 17 out of 20 is 85%, a 22 out of 25 is 88%, and a 26 out of 30 is 86.7%. The calculator does this for any test size and shows the letter grade next to it.',
+      },
     ],
     related: [
       { path: '/', label: 'Quick Grade chart', blurb: 'Printable score for every number of wrong answers.' },
@@ -249,6 +264,21 @@ export const TOOL_PAGES: Record<ToolPageSlug, ToolPageEntry> = {
         answer:
           'Only the instructor decides whether and how a curve is applied. Students can paste the class scores they know about to estimate the effect, but the official grade is the instructor’s.',
       },
+      {
+        question: 'What is the difference between these curves and a bell curve?',
+        answer:
+          'The four methods here move every score by one fixed rule, so the order of students and the gaps between them stay recognisable. A bell-curve policy assigns letters by rank or by distance from the class mean, which can leave some students lower than their raw score suggests. Ask your instructor which policy applies.',
+      },
+      {
+        question: 'How do I find the class mean and median before curving?',
+        answer:
+          'The mean is the sum of all scores divided by the number of scores, and the median is the middle score once they are sorted. For 55, 62, 70, 78 and 85 the sum is 350, so the mean is 70 and the median is 70. The calculator shows both before and after the curve.',
+      },
+      {
+        question: 'How many points should I add to curve a test?',
+        answer:
+          'There is no single right number, because it depends on your goal. To bring the class average from 70 up to 78 you add 8 points, and to make an 85 the top score of 100 you add 15. Try each method on your own scores and compare the results before deciding.',
+      },
     ],
     related: [
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Percentage and letter for one test, with bonus points.' },
@@ -341,6 +371,21 @@ export const TOOL_PAGES: Record<ToolPageSlug, ToolPageEntry> = {
         question: 'Does 89.5% round up to an A?',
         answer:
           'Only if your instructor rounds before assigning the letter. This calculator does not round for you: it uses the exact value you type, so you can see which side of the cutoff you are on.',
+      },
+      {
+        question: 'What is the lowest passing letter grade?',
+        answer:
+          'On most scales a D (60%) is the lowest passing grade, and a D- on the plus/minus scale. Many colleges require a C or better for major courses and prerequisites, so a D may pass the course without counting toward your program.',
+      },
+      {
+        question: 'What percentage is a B+?',
+        answer:
+          'On the common plus/minus scale a B+ covers 87% to 89.99%, a B covers 83% to 86.99% and a B- covers 80% to 82.99%. On the standard A–F scale there is no B+, so the same 88% is simply a B.',
+      },
+      {
+        question: 'How many GPA points does each letter grade earn?',
+        answer:
+          'On the common 4.0 scale an A is 4.0, A- 3.7, B+ 3.3, B 3.0, B- 2.7, C+ 2.3, C 2.0, C- 1.7, D+ 1.3, D 1.0, D- 0.7 and F 0.0. Your registrar may use a different table, so check the official scale.',
       },
     ],
     related: [

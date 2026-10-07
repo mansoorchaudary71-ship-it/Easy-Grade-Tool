@@ -55,7 +55,72 @@ export const WEIGHTED_COURSE_FAQS: FAQItem[] = [
     answer:
       'In a weighted syllabus, extra credit points added to a low-weight category (such as 10% Homework) only boost that specific category, whereas extra credit applied to a high-weight exam category (such as 40% Midterms) produces four times the increase in your overall course percentage.',
   },
+  {
+    id: 'weighted-points-or-percent-mode',
+    category: 'weighted',
+    question: 'Should I use Weighted (%) mode or Points mode for my class?',
+    answer:
+      'Check the grading section of your syllabus. If it lists category percentages such as Homework 20% and Exams 50%, use Weighted (%) mode. If your instructor adds up raw points and divides by the total possible, use Points mode. When a syllabus mixes both, turn each category’s points into a percentage first, then enter those percentages with their weights.',
+  },
+  {
+    id: 'weighted-average-to-letter',
+    category: 'general',
+    question: 'What letter grade does a weighted average of 88.4% earn?',
+    answer:
+      'On the common 10-point scale an 88.4% is a B, because the B range runs from 80% to 89.99%. On the plus/minus scale it is a B+, which starts at 87%. The calculator shows the letter for whichever scale you select, and your syllabus decides which scale your school applies.',
+  },
+  {
+    id: 'weighted-calculation-in-browser',
+    category: 'general',
+    question: 'Do I need an account to use the weighted grade calculator?',
+    answer:
+      'No. You can enter your assessments and weights and see your results straight away without signing up. The arithmetic runs in your browser, so you can try as many what-if scores as you like.',
+  },
 ];
+
+/**
+ * Per-page FAQ headings so each academic calculator gets its own eyebrow, title, intro and call to action
+ * while sharing the exact same FAQ UI as every other tool. Keys match the page slugs.
+ */
+export type FaqHeading = Partial<Omit<ToolFaqConfig, 'items'>>;
+
+export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
+  'weighted-grade-calculator': {
+    eyebrow: 'Weighted Grade FAQs',
+    title: 'Weighted Grade Calculator FAQs',
+    description:
+      'Straight answers on syllabus weights, weighted averages, partial-semester standings and how extra credit changes a weighted course grade.',
+    ctaText: 'Enter your categories, scores and weights above to see your weighted course grade update instantly.',
+  },
+  'final-exam-grade-calculator': {
+    eyebrow: 'Final Exam Target FAQs',
+    title: 'Final Exam Grade Calculator FAQs',
+    description:
+      'Clear answers about the score you need on a final exam, how exam weight works, and what to do when your target grade is out of reach.',
+    ctaText: 'Enter your current grade, target grade and final exam weight above to see the exact score you need.',
+  },
+  'test-grade-calculator': {
+    eyebrow: 'Test & Quiz Scoring FAQs',
+    title: 'Test Grade Calculator FAQs',
+    description:
+      'Quick answers on turning points into a percentage, adding extra credit, applying late penalties and finding the letter grade for a single test.',
+    ctaText: 'Enter your points earned and points possible above to get your test percentage and letter grade.',
+  },
+  'grade-curve-calculator': {
+    eyebrow: 'Curving & Class Stats FAQs',
+    title: 'Grade Curve Calculator FAQs',
+    description:
+      'Answers on the four curving methods, class mean and median, capping at 100 and how a curve changes each student’s letter grade.',
+    ctaText: 'Paste your class scores above and compare all four curving methods side by side.',
+  },
+  'letter-grade-calculator': {
+    eyebrow: 'Grade Scale FAQs',
+    title: 'Letter Grade Calculator FAQs',
+    description:
+      'Answers on percentage cutoffs, plus/minus scales, GPA points per letter and why your school’s scale may differ from the common one.',
+    ctaText: 'Enter a percentage or pick a letter above to see its range, GPA points and full scale table.',
+  },
+};
 
 export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
   quick: {
@@ -458,10 +523,13 @@ interface FAQProps {
   tool?: ToolKey;
   items?: FAQItem[];
   className?: string;
+  /** Optional per-page heading (eyebrow, title, description, CTA) layered over the tool's default. */
+  heading?: FaqHeading;
 }
 
-export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '' }) => {
-  const config = TOOL_FAQS[tool] || TOOL_FAQS.quick;
+export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '', heading }) => {
+  const baseConfig = TOOL_FAQS[tool] || TOOL_FAQS.quick;
+  const config: ToolFaqConfig = heading ? { ...baseConfig, ...heading } : baseConfig;
   const activeItems = items || config.items;
 
   // Open first two items by default

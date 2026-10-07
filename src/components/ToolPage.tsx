@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronDown, ShieldCheck } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 import { Link } from './SlashLink';
 import { SEO } from './SEO';
 import { TOOL_PAGES, ToolPageSlug, toolPageCanonical } from '../data/toolPages';
@@ -8,6 +8,8 @@ import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
+import { GuideArticle, GUIDE_ARTICLES } from './GuideArticle';
+import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 
 const TOOLS: Record<ToolPageSlug, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
@@ -25,6 +27,8 @@ const formatDate = (iso: string) =>
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
   const Tool = TOOLS[slug];
+  // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
+  const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));
 
   return (
     <article className="w-full max-w-5xl mx-auto py-4 sm:py-8 font-sans space-y-10 sm:space-y-14">
@@ -87,20 +91,11 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         </section>
       </div>
 
-      <section aria-label="Frequently asked questions" className="max-w-3xl space-y-3 content-auto">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Frequently asked questions</h2>
-        <div className="divide-y divide-slate-200 dark:divide-slate-800 rounded-[24px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-          {entry.faqs.map((f) => (
-            <details key={f.question} className="group px-5 py-4">
-              <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-semibold text-slate-900 dark:text-white">
-                <span>{f.question}</span>
-                <ChevronDown className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
-              </summary>
-              <p className="mt-2 mb-0 text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">{f.answer}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+      <GuideArticle article={GUIDE_ARTICLES[slug]} className="max-w-4xl content-auto" />
+
+      <div className="max-w-4xl content-auto">
+        <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />
+      </div>
 
       <section aria-label="Related calculators" className="space-y-3 print:hidden content-auto">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Related grade calculators</h2>
