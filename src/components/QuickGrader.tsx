@@ -1,6 +1,4 @@
 import React, { useState, useMemo, memo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Link } from './SlashLink';
 import { Printer, Settings, Check, SlidersHorizontal, Hash, SearchX, RotateCcw, ChevronDown } from 'lucide-react';
 import { parseNumber } from '../utils/formatters';
 import { GRADING_SCALES } from '../data/constants';
@@ -62,8 +60,6 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
   const [scaleType, setScaleType] = useState<GradingScaleType>('standard');
   const [isScaleModalOpen, setIsScaleModalOpen] = useState<boolean>(false);
   const [searchFilter, setSearchFilter] = useState<string>('');
-  const { pathname } = useLocation();
-  const isEzGraderPage = pathname.replace(/\/+$/, '') === '/ez-grader';
 
   // Custom threshold overrides (defaults: A: 90, B: 80, C: 70, D: 60)
   const [thresholds, setThresholds] = useState<{ A: number; B: number; C: number; D: number }>({
@@ -328,16 +324,6 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           <p className="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base mt-1 m-0">
             Set total questions and customize grading scale cutoffs.
           </p>
-          {!isEzGraderPage && (
-          <div className="mt-2 pt-2 border-t border-slate-200/50 dark:border-slate-800/60">
-            <Link
-              to="/ez-grader/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 hover:underline transition-colors"
-            >
-              <span>Grading classroom quizzes? View the complete EZ Grader Online Chart table &rarr;</span>
-            </Link>
-          </div>
-          )}
         </div>
 
         <div className="flex flex-col gap-5">

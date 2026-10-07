@@ -1,14 +1,14 @@
 {
   "/": {
-    "hash": "e6c66dfe1b275c19",
+    "hash": "18823230c4eff054",
     "lastmod": "2026-10-02"
   },
   "/grade-calculator/": {
-    "hash": "415fb379e86b05d2",
+    "hash": "0646a5caffe9fe95",
     "lastmod": "2026-10-02"
   },
   "/gpa-calculator/": {
-    "hash": "cdcf0fc2d9879161",
+    "hash": "5d642f0478cf5e17",
     "lastmod": "2026-10-02"
   },
   "/cgpa-to-percentage-calculator/": {
@@ -32,7 +32,7 @@
     "lastmod": "2026-10-02"
   },
   "/password-generator/": {
-    "hash": "eb36b8a1754dc9b7",
+    "hash": "f419bb1a974d724c",
     "lastmod": "2026-10-02"
   },
   "/about/": {
@@ -48,11 +48,7 @@
     "lastmod": "2026-10-02"
   },
   "/final-exam-grade-calculator/": {
-    "hash": "f177d925f93a85fe",
-    "lastmod": "2026-10-02"
-  },
-  "/ez-grader/": {
-    "hash": "ead7b782596154f2",
+    "hash": "321d1bdd76ad741c",
     "lastmod": "2026-10-02"
   },
   "/test-grade-calculator/": {

@@ -54,7 +54,6 @@ export function verifyAllNumbers(): boolean {
 
   // 2. EZ GRADER ONLINE MATH VERIFICATION
   console.log('\n--- 2. EZ Grader Online Math Verification ---');
-  const ezGrader = PROGRAMMATIC_SEO_REGISTRY['ez-grader'];
   const totalQuestions = 35;
   const wrongAnswers = 4;
   const correctAnswers = totalQuestions - wrongAnswers;

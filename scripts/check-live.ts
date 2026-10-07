@@ -28,7 +28,6 @@ const PAGES = [
   '/gpa-calculator',
   '/grade-calculator',
   '/cgpa-to-percentage-calculator',
-  '/easy-grade-calculator/ez-grader',
   '/easy-grade-calculator/final-exam-grade-calculator',
 ];
 

@@ -53,7 +53,7 @@ export function preloadForPath(pathname: string): Promise<unknown> {
   if (p === '/privacy') return loaders.privacy();
   if (p === '/terms') return loaders.terms();
   if (p === '/about') return loaders.about();
-  if (p === '/final-exam-grade-calculator' || p === '/ez-grader') return loaders.programmatic();
+  if (p === '/final-exam-grade-calculator') return loaders.programmatic();
   if (['/test-grade-calculator', '/grade-curve-calculator', '/letter-grade-calculator'].includes(p)) return loaders.toolPage();
   return Promise.resolve();
 }

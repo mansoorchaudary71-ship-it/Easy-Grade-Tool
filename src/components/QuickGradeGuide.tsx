@@ -11,7 +11,6 @@ const MORE = [
   { to: '/letter-grade-calculator/', title: 'Letter grade calculator', text: 'Percent to letter and GPA points on common scales.' },
   { to: '/gpa-calculator/', title: 'GPA calculator', text: 'Semester and cumulative GPA with credit hours.' },
   { to: '/cgpa-to-percentage-calculator/', title: 'CGPA to percentage', text: '10, 5 and 4-point conversions by university.' },
-  { to: '/ez-grader/', title: 'EZ Grader chart', text: 'The full printable EZ grader table for classroom tests.' },
 ];
 
 /** Lean homepage guide: one intent (grade a test fast), a worked example, FAQ, and links to every academic tool. */

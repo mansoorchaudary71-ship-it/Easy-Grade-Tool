@@ -20,7 +20,6 @@ import {
 } from '../data/programmaticSeoData';
 import { SEO } from './SEO';
 import { GradeCalculator } from './GradeCalculator';
-import { QuickGrader } from './QuickGrader';
 import { BASE_CANONICAL_ORIGIN } from '../data/constants';
 
 export interface ProgrammaticCalculatorViewProps {
@@ -237,10 +236,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
 
         {/* Interactive Workspace */}
         <section aria-label="Interactive Workspace" className="w-full">
-          {entry.slug === 'ez-grader' ? (
-            <QuickGrader setToast={setToast} />
-          ) : (
-            <>
+          <>
               {/* Dedicated Required-Final-Score Solver (Top Screen Match) */}
               <FinalExamTargetSolver setToast={setToast} />
 
@@ -258,8 +254,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
                 hideHeading={true}
                 hideSeo={true}
               />
-            </>
-          )}
+          </>
         </section>
 
         {/* Who This Is For vs General Calculator */}
@@ -407,9 +402,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
             id="faq-heading"
             className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-4"
           >
-            {entry.slug === 'final-exam-grade-calculator'
-              ? 'Final Exam Grade Simulator Frequently Asked Questions'
-              : 'EZ Grader Classroom Tool Frequently Asked Questions'}
+            Final Exam Grade Simulator Frequently Asked Questions
           </h2>
 
           <div className="divide-y divide-slate-200 dark:divide-slate-800">
@@ -469,21 +462,12 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
             >
               CGPA to Percentage
             </Link>
-            {entry.slug === 'final-exam-grade-calculator' ? (
-              <Link
-                to="/ez-grader/"
-                className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
-              >
-                EZ Grader Online Chart
-              </Link>
-            ) : (
-              <Link
-                to="/final-exam-grade-calculator/"
-                className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
-              >
-                Final Exam Target Solver
-              </Link>
-            )}
+            <Link
+              to="/"
+              className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
+            >
+              Quick Grade Chart
+            </Link>
           </div>
         </nav>
       </div>

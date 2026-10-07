@@ -9,9 +9,10 @@ import { SITE_URL } from '../src/data/constants';
 export const LEGACY_REDIRECTS: Record<string, string> = {
   // Old nested URLs (before flattening to hub-and-spoke)
   '/easy-grade-calculator/final-exam-grade-calculator': '/final-exam-grade-calculator/',
-  '/easy-grade-calculator/ez-grader': '/ez-grader/',
+  '/easy-grade-calculator/ez-grader': '/',
+  '/ez-grader': '/',
   '/easy-grade-calculator/college-final-grade-calculator': '/final-exam-grade-calculator/',
-  '/easy-grade-calculator/high-school-test-grader': '/ez-grader/',
+  '/easy-grade-calculator/high-school-test-grader': '/',
   '/easy-grade-calculator/weighted-grade-calculator': '/grade-calculator/',
   '/easy-grade-calculator/test-score': '/test-grade-calculator/',
   '/easy-grade-calculator/gpa': '/gpa-calculator/',
@@ -34,7 +35,7 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/curve-calculator': '/grade-curve-calculator/',
   '/test-score-calculator': '/test-grade-calculator/',
   '/quiz-grade-calculator': '/test-grade-calculator/',
-  '/easy-grader': '/ez-grader/',
+  '/easy-grader': '/',
   // Policy / methodology aliases
   '/privacy-policy': '/privacy/',
   '/terms-of-service': '/terms/',

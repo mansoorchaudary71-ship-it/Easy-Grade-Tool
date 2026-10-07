@@ -28,7 +28,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   if (
     cleanPath.startsWith('/easy-grade-calculator/') ||
     cleanPath.startsWith('/calculator/') ||
-    ['/final-exam-grade-calculator', '/ez-grader', '/test-grade-calculator', '/grade-curve-calculator', '/letter-grade-calculator'].includes(cleanPath)
+    ['/final-exam-grade-calculator', '/test-grade-calculator', '/grade-curve-calculator', '/letter-grade-calculator'].includes(cleanPath)
   ) {
     return null;
   }

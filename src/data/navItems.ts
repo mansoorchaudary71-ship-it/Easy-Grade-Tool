@@ -16,7 +16,6 @@ export interface NavItem {
 /** Academic tools come first and are visually separated from general utilities (topical-authority fix). */
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Quick Grade', title: 'Quick Grade chart (EZ Grader)', path: '/', group: 'academic', toolKey: 'quick', icon: GraduationCap },
-  { label: 'EZ Grader', title: 'EZ Grader online test grading chart', path: '/ez-grader/', group: 'academic', toolKey: 'quick', icon: ClipboardCheck },
   { label: 'Weighted Grade', title: 'Weighted grade calculator', path: '/grade-calculator/', group: 'academic', toolKey: 'quick', icon: Calculator },
   { label: 'Final Exam', title: 'Final exam grade calculator', path: '/final-exam-grade-calculator/', group: 'academic', toolKey: 'quick', icon: Target },
   { label: 'Test Grade', title: 'Test grade calculator', path: '/test-grade-calculator/', group: 'academic', toolKey: 'quick', icon: ClipboardCheck },

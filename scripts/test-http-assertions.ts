@@ -17,7 +17,7 @@ const REDIRECT_CHECKS: UrlCheck[] = [
   { url: '/easy-grade-calculator/weighted-grade-calculator', expectedStatus: 301, expectedLocation: '/grade-calculator' },
   { url: '/easy-grade-calculator/test-score', expectedStatus: 301, expectedLocation: '/grade-calculator' },
   { url: '/easy-grade-calculator/college-final-grade-calculator', expectedStatus: 301, expectedLocation: '/easy-grade-calculator/final-exam-grade-calculator' },
-  { url: '/easy-grade-calculator/high-school-test-grader', expectedStatus: 301, expectedLocation: '/easy-grade-calculator/ez-grader' },
+  { url: '/easy-grade-calculator/high-school-test-grader', expectedStatus: 301, expectedLocation: '/' },
   { url: '/easy-grade-calculator', expectedStatus: 301, expectedLocation: '/grade-calculator' },
 
   // Trailing-slash variants
@@ -26,7 +26,7 @@ const REDIRECT_CHECKS: UrlCheck[] = [
   { url: '/easy-grade-calculator/weighted-grade-calculator/', expectedStatus: 301, expectedLocation: '/grade-calculator' },
   { url: '/easy-grade-calculator/test-score/', expectedStatus: 301, expectedLocation: '/grade-calculator' },
   { url: '/easy-grade-calculator/college-final-grade-calculator/', expectedStatus: 301, expectedLocation: '/easy-grade-calculator/final-exam-grade-calculator' },
-  { url: '/easy-grade-calculator/high-school-test-grader/', expectedStatus: 301, expectedLocation: '/easy-grade-calculator/ez-grader' },
+  { url: '/easy-grade-calculator/high-school-test-grader/', expectedStatus: 301, expectedLocation: '/' },
   { url: '/easy-grade-calculator/', expectedStatus: 301, expectedLocation: '/grade-calculator' },
 ];
 
@@ -59,12 +59,6 @@ const SURVIVING_CHECKS: UrlCheck[] = [
     url: '/easy-grade-calculator/final-exam-grade-calculator',
     expectedStatus: 200,
     expectedCanonical: 'https://www.easygradetool.com/easy-grade-calculator/final-exam-grade-calculator',
-    expectNoIndex: false,
-  },
-  {
-    url: '/easy-grade-calculator/ez-grader',
-    expectedStatus: 200,
-    expectedCanonical: 'https://www.easygradetool.com/easy-grade-calculator/ez-grader',
     expectNoIndex: false,
   },
   {

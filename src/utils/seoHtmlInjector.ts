@@ -383,7 +383,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     config.canonicalUrl === `${BASE_CANONICAL_ORIGIN}/` ||
     config.canonicalUrl === BASE_CANONICAL_ORIGIN;
 
-  const hubCrumb = !!getToolPageByPath(cleanPath) || cleanPath === '/final-exam-grade-calculator/' || cleanPath === '/ez-grader/';
+  const hubCrumb = !!getToolPageByPath(cleanPath) || cleanPath === '/final-exam-grade-calculator/';
   const breadcrumbSchema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',

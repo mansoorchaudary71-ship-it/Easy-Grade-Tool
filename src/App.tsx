@@ -56,7 +56,6 @@ export interface AppSyncComponents {
 /** Pages whose own component renders <SEO>, so the shared SEOHead must stay out of the way. */
 const SELF_MANAGED = [
   '/final-exam-grade-calculator',
-  '/ez-grader',
   '/test-grade-calculator',
   '/grade-curve-calculator',
   '/letter-grade-calculator',
@@ -238,19 +237,19 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               />
               <Route
                 path="/easy-grade-calculator/high-school-test-grader"
-                element={<Navigate to="/ez-grader/" replace />}
+                element={<Navigate to="/" replace />}
               />
 
               {/* Flat, hub-and-spoke academic pages */}
               <Route path="/final-exam-grade-calculator" element={<CompProgrammatic presetSlug="final-exam-grade-calculator" setToast={setToastMessage} />} />
-              <Route path="/ez-grader" element={<CompProgrammatic presetSlug="ez-grader" setToast={setToastMessage} />} />
+              <Route path="/ez-grader" element={<Navigate to="/" replace />} />
               <Route path="/test-grade-calculator" element={<CompToolPage slug="test-grade-calculator" />} />
               <Route path="/grade-curve-calculator" element={<CompToolPage slug="grade-curve-calculator" />} />
               <Route path="/letter-grade-calculator" element={<CompToolPage slug="letter-grade-calculator" />} />
 
               {/* Legacy nested URLs (static redirect stubs are generated at build time for crawlers) */}
               <Route path="/easy-grade-calculator/final-exam-grade-calculator" element={<Navigate to="/final-exam-grade-calculator/" replace />} />
-              <Route path="/easy-grade-calculator/ez-grader" element={<Navigate to="/ez-grader/" replace />} />
+              <Route path="/easy-grade-calculator/ez-grader" element={<Navigate to="/" replace />} />
               <Route path="/easy-grade-calculator" element={<Navigate to="/grade-calculator/" replace />} />
               <Route path="/easy-grade-calculator/:slug" element={<Navigate to="/grade-calculator/" replace />} />
               <Route path="/calculator/:slug" element={<Navigate to="/grade-calculator/" replace />} />
