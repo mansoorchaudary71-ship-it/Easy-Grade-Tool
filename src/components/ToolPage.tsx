@@ -8,7 +8,6 @@ import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
-import { GuideArticle, GUIDE_ARTICLES } from './GuideArticle';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 
 const TOOLS: Record<ToolPageSlug, React.ComponentType> = {
@@ -43,16 +42,6 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       />
 
       <header className="space-y-3">
-        <nav aria-label="Breadcrumb" className="text-xs text-slate-500 dark:text-slate-400 print:hidden">
-          <ol className="flex flex-wrap items-center gap-1.5 list-none p-0 m-0">
-            <li><Link to="/" className="hover:underline">Easy Grade Tool</Link></li>
-            <li aria-hidden="true">›</li>
-            <li><Link to="/grade-calculator/" className="hover:underline">Grade calculators</Link></li>
-            <li aria-hidden="true">›</li>
-            <li aria-current="page" className="font-semibold text-slate-700 dark:text-slate-200">{entry.navLabel}</li>
-          </ol>
-        </nav>
-        <span className="inline-block text-[11px] font-mono font-bold tracking-widest uppercase text-teal-700 dark:text-teal-400">{entry.badge}</span>
         <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white [text-wrap:balance] m-0">{entry.h1}</h1>
         <p className="text-base text-slate-600 dark:text-slate-300 max-w-3xl m-0">{entry.intro}</p>
       </header>
@@ -90,8 +79,6 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
           <p className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300 m-0">{entry.example.takeaway}</p>
         </section>
       </div>
-
-      <GuideArticle article={GUIDE_ARTICLES[slug]} className="max-w-4xl content-auto" />
 
       <div className="max-w-4xl content-auto">
         <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />

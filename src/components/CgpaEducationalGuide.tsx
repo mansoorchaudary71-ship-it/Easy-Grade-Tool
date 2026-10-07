@@ -9,7 +9,6 @@ import {
   Calculator,
   Percent,
   ArrowRight,
-  BookOpen,
 } from 'lucide-react';
 import {
   CGPA_UNIVERSITIES,
@@ -230,11 +229,6 @@ export const CgpaEducationalGuide: React.FC = () => {
         aria-labelledby="cgpa-guide-heading"
       >
         <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100/80 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300 text-xs font-semibold uppercase tracking-wider mb-3">
-            <BookOpen className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Complete Academic Reference Guide</span>
-          </div>
-
           <h2
             id="cgpa-guide-heading"
             className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight mb-4"

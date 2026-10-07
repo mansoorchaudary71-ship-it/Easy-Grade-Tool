@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from './SlashLink';
 import {
-  Sparkles,
   Calculator,
-  Compass,
   CheckCircle2,
-  ChevronRight,
   BookOpen,
   ArrowRight,
   Target,
@@ -19,7 +16,6 @@ import {
 import { SEO } from './SEO';
 import { GradeCalculator } from './GradeCalculator';
 import { BASE_CANONICAL_ORIGIN } from '../data/constants';
-import { GuideArticle, GUIDE_ARTICLES } from './GuideArticle';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 
 export interface ProgrammaticCalculatorViewProps {
@@ -182,43 +178,8 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
       />
 
       <div className="programmatic-calc-wrapper w-full max-w-5xl mx-auto space-y-8">
-        {/* Breadcrumb Navigation */}
-        <nav
-          className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium overflow-x-auto py-1"
-          aria-label="Breadcrumb"
-        >
-          <Link
-            to="/"
-            className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors shrink-0"
-          >
-            Home
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5 shrink-0 text-slate-400" />
-          <Link
-            to={entry.audienceComparison.parentLinkPath}
-            className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors shrink-0"
-          >
-            {entry.audienceComparison.parentLinkText}
-          </Link>
-          <ChevronRight className="w-3.5 h-3.5 shrink-0 text-slate-400" />
-          <span className="text-slate-800 dark:text-slate-200 font-semibold truncate shrink-0">
-            {entry.h1}
-          </span>
-        </nav>
-
         {/* Hero Header */}
         <header className="p-6 sm:p-8 bg-gradient-to-r from-slate-50/95 to-teal-50/80 dark:from-slate-900/95 dark:to-slate-800/90 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-xs">
-          <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-teal-700 text-white shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{entry.badge}</span>
-            </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-slate-200/80 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-              <Compass className="w-3 h-3 text-teal-600" />
-              <span>Instant Calculation</span>
-            </span>
-          </div>
-
           <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
             {entry.h1}
           </h1>
@@ -382,9 +343,6 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
             ))}
           </div>
         </section>
-
-        {/* Educational guide with image below the heading */}
-        <GuideArticle article={GUIDE_ARTICLES['final-exam-grade-calculator']} />
 
         {/* FAQ: same component and UI as every other tool; schema comes from the same entry.customFaqs */}
         <FAQ tool="quick" items={entry.customFaqs} heading={PAGE_FAQ_HEADINGS['final-exam-grade-calculator']} />
