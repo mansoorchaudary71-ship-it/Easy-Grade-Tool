@@ -6689,3 +6689,37 @@ input[type="number"]:focus {
   .tool-nav-item[data-active="true"]::after, .scale-tab[data-active="true"]::after,
   .gpa-tab-btn[data-active="true"]::after { display: none !important; }
 }
+
+
+/* ==========================================================================
+   MOBILE ONLY (<= 640px): tool navigation wraps into rows instead of a
+   horizontally scrolling strip. Desktop/tablet behavior is unchanged.
+   ========================================================================== */
+@media (max-width: 640px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .tool-nav-inner {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px 4px;
+    padding: 12px 14px;
+    overflow-x: visible;
+    overflow-y: visible;
+  }
+
+  .tool-nav-item {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    font-size: 14px;
+    min-height: 44px;
+  }
+
+  /* The "More" separator only makes sense in a single scrolling row */
+  .tool-nav-divider {
+    display: none !important;
+  }
+}

@@ -37,6 +37,9 @@ export const Navbar: React.FC<NavbarProps> = ({
     const navInner = navInnerRef.current;
     if (!activeTab || !navInner) return;
 
+    // On mobile the tool list wraps into rows (no horizontal scroll), so there is nothing to center.
+    if (typeof window !== 'undefined' && window.matchMedia?.('(max-width: 640px)')?.matches) return;
+
     // Check prefers-reduced-motion
     const prefersReducedMotion =
       typeof window !== 'undefined' &&
