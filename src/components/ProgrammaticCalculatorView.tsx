@@ -11,128 +11,153 @@ import { GradeCalculator } from './GradeCalculator';
 import { BASE_CANONICAL_ORIGIN } from '../data/constants';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
+import { solveFinalExam } from '../utils/finalExam';
 
 export interface ProgrammaticCalculatorViewProps {
   setToast: (msg: string) => void;
   presetSlug?: string;
 }
 
-const FinalExamTargetSolver: React.FC<{ setToast: (msg: string) => void }> = ({ setToast }) => {
+const SOLVER_INPUT =
+  'w-full min-h-[48px] bg-[#F4F6F9] dark:bg-slate-800 border border-stone-200/80 dark:border-slate-700 text-stone-900 dark:text-white rounded-[20px] px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-stone-900 dark:focus:ring-teal-400 focus:border-stone-900 dark:focus:border-teal-400 transition-all font-bold text-lg font-mono text-center shadow-inner placeholder:text-slate-500 dark:placeholder:text-slate-400';
+const SOLVER_LABEL =
+  'text-xs font-semibold text-slate-800 dark:text-slate-200 uppercase tracking-wider block';
+
+const FinalExamTargetSolver: React.FC<{ setToast: (msg: string) => void }> = ({ setToast: _setToast }) => {
   const [currentGrade, setCurrentGrade] = useState<string>('84');
   const [targetGrade, setTargetGrade] = useState<string>('90');
   const [finalWeight, setFinalWeight] = useState<string>('25');
+  const [extraCredit, setExtraCredit] = useState<boolean>(false);
 
-  const curr = parseFloat(currentGrade) || 0;
-  const target = parseFloat(targetGrade) || 0;
-  const weight = parseFloat(finalWeight) || 25;
+  // Real validation: a blank or zero field never turns into a hidden default.
+  const result = solveFinalExam({
+    current: currentGrade,
+    target: targetGrade,
+    weight: finalWeight,
+    maxFinal: extraCredit ? 120 : 100,
+  });
 
-  const fWeightRatio = Math.max(0.01, Math.min(0.99, weight / 100));
-  const banked = curr * (1 - fWeightRatio);
-  const needed = (target - banked) / fWeightRatio;
-  const maxPossible = banked + 100 * fWeightRatio;
+  const valid = result.status !== 'invalid';
+  const tone =
+    result.status === 'unreachable'
+      ? 'bg-[#F9D6E1] dark:bg-rose-950/60 border-[#EDA3BB] dark:border-rose-800/60'
+      : 'bg-[#CFE9DF] dark:bg-teal-950/60 border-[#96CDB8] dark:border-teal-800/60 shadow-sm';
 
-  const isImpossible = needed > 100;
-  const isLocked = needed <= 0;
+  let headline = '—';
+  let message = 'Fill in all three boxes to see the score you need.';
+  if (result.status === 'ok') {
+    headline = `${result.required.toFixed(1)}%`;
+    message = `Score at least ${result.required.toFixed(1)}% on the final exam to reach ${parseFloat(targetGrade)}%.`;
+  } else if (result.status === 'secured') {
+    headline = '0%';
+    message = `Already secured: your ${result.banked.toFixed(1)} banked points reach the target even with 0% on the final.`;
+  } else if (result.status === 'unreachable') {
+    headline = `${result.required.toFixed(1)}%`;
+    message = `That is above the ${extraCredit ? '120' : '100'}% the final can earn. The highest course grade you can reach is ${result.maxPossible.toFixed(1)}%.`;
+  }
 
   return (
     <section
       aria-label="Target Final Exam Solver"
-      className="bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8 mb-8 space-y-6"
+      className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 mb-8 space-y-6"
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-teal-200/60 dark:border-teal-800/60">
         <div>
           <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-teal-800 dark:text-teal-400 mb-1">
-            <Target className="w-4 h-4" />
+            <Target className="w-4 h-4" aria-hidden="true" />
             <span>Target Final Exam Solver</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">
             Calculate Needed Final Exam Score
           </h2>
         </div>
-        <div className="text-xs font-mono px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-700 text-teal-800 dark:text-teal-300 font-semibold shadow-2xs">
+        <div className="text-xs font-mono px-3 py-2 rounded-full bg-white dark:bg-slate-900 border border-teal-200 dark:border-teal-700 text-teal-900 dark:text-teal-300 font-semibold">
           Formula: (Target − Banked) ÷ Final Weight
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="space-y-1.5">
-          <label htmlFor="target-solver-current" className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
-            Current Course Grade (%)
-          </label>
+          <label htmlFor="target-solver-current" className={SOLVER_LABEL}>Current Course Grade (%)</label>
           <input
             id="target-solver-current"
-            type="number"
-            min="0"
-            max="120"
-            step="0.1"
+            type="text"
+            inputMode="decimal"
+            enterKeyHint="next"
             value={currentGrade}
             onChange={(e) => setCurrentGrade(e.target.value)}
-            className="w-full bg-[#F4F6F9] border border-stone-200/80 text-stone-900 rounded-[20px] px-4 py-3.5 focus:bg-white focus:ring-2 focus:ring-stone-900 focus:border-stone-900 transition-all font-bold text-lg font-mono text-center shadow-inner"
+            className={SOLVER_INPUT}
             placeholder="84"
           />
         </div>
-
         <div className="space-y-1.5">
-          <label htmlFor="target-solver-target" className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
-            Desired Final Grade (%)
-          </label>
+          <label htmlFor="target-solver-target" className={SOLVER_LABEL}>Desired Final Grade (%)</label>
           <input
             id="target-solver-target"
-            type="number"
-            min="0"
-            max="120"
-            step="0.1"
+            type="text"
+            inputMode="decimal"
+            enterKeyHint="next"
             value={targetGrade}
             onChange={(e) => setTargetGrade(e.target.value)}
-            className="w-full bg-[#F4F6F9] border border-stone-200/80 text-stone-900 rounded-[20px] px-4 py-3.5 focus:bg-white focus:ring-2 focus:ring-stone-900 focus:border-stone-900 transition-all font-bold text-lg font-mono text-center shadow-inner"
+            className={SOLVER_INPUT}
             placeholder="90"
           />
         </div>
-
         <div className="space-y-1.5">
-          <label htmlFor="target-solver-weight" className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider block">
-            Final Exam Weight (%)
-          </label>
+          <label htmlFor="target-solver-weight" className={SOLVER_LABEL}>Final Exam Weight (%)</label>
           <input
             id="target-solver-weight"
-            type="number"
-            min="1"
-            max="99"
-            step="1"
+            type="text"
+            inputMode="decimal"
+            enterKeyHint="done"
             value={finalWeight}
             onChange={(e) => setFinalWeight(e.target.value)}
-            className="w-full bg-[#F4F6F9] border border-stone-200/80 text-stone-900 rounded-[20px] px-4 py-3.5 focus:bg-white focus:ring-2 focus:ring-stone-900 focus:border-stone-900 transition-all font-bold text-lg font-mono text-center shadow-inner"
+            className={SOLVER_INPUT}
             placeholder="25"
           />
+          <p className="text-xs text-slate-600 dark:text-slate-400 m-0">From 1 to 100. Use 100 if the final is the whole grade.</p>
         </div>
       </div>
 
-      {/* Result Display Banner - Primary Highlight */}
-      <div className={`p-5 rounded-[24px] border transition-all ${
-        isImpossible
-          ? 'bg-[#F9D6E1] border-[#EDA3BB] text-rose-950'
-          : 'bg-[#CFE9DF] border-[#96CDB8] shadow-sm'
-      }`}>
+      <label className="inline-flex items-center gap-3 min-h-[48px] text-sm font-medium text-slate-800 dark:text-slate-200 cursor-pointer select-none">
+        <input
+          type="checkbox"
+          checked={extraCredit}
+          onChange={(e) => setExtraCredit(e.target.checked)}
+          className="w-6 h-6 accent-teal-600"
+        />
+        <span>The final has extra credit (allow up to 120%)</span>
+      </label>
+
+      {result.status === 'invalid' && (
+        <ul className="m-0 pl-5 list-disc text-sm text-rose-700 dark:text-rose-400" role="alert">
+          {result.errors.map((e) => (
+            <li key={e}>{e}</li>
+          ))}
+        </ul>
+      )}
+
+      <div className={`p-5 rounded-[24px] border transition-all ${tone}`}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <div className="text-xs font-mono uppercase tracking-wider text-teal-800">
+          <div role="status" aria-live="polite" aria-atomic="true">
+            <div className="text-xs font-mono uppercase tracking-wider text-teal-900 dark:text-teal-300">
               Required Score on Final Exam
             </div>
-            <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 font-mono mt-1">
-              {needed.toFixed(1)}%
+            <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono mt-1">
+              {headline}
             </div>
-            <p className="text-xs sm:text-sm text-teal-900/80 mt-1 font-medium">
-              {isImpossible
-                ? `You would need ${needed.toFixed(1)}%, which is impossible without extra credit; the highest grade you can reach is ${maxPossible.toFixed(1)}%.`
-                : isLocked
-                ? `You already have ${banked.toFixed(1)} points banked! Your target of ${target.toFixed(1)}% is mathematically locked in even with a 0% on the final.`
-                : `Score at least ${needed.toFixed(1)}% on the final exam to secure your target grade of ${target.toFixed(1)}%.`}
-            </p>
+            <p className="text-sm text-teal-950/90 dark:text-teal-100/90 mt-1 font-medium">{message}</p>
           </div>
-          <div className="shrink-0 p-4 rounded-xl bg-white shadow-sm border border-stone-100 text-xs font-mono space-y-1">
-            <div className="text-slate-700">Banked: <strong className="text-slate-900">{banked.toFixed(1)} pts</strong></div>
-            <div className="text-slate-700">Max Possible: <strong className="text-slate-900">{maxPossible.toFixed(1)}%</strong></div>
-          </div>
+          {valid && (
+            <div className="shrink-0 p-4 rounded-xl bg-white dark:bg-slate-800 shadow-sm border border-stone-100 dark:border-slate-700 text-xs font-mono space-y-1">
+              <div className="text-slate-700 dark:text-slate-300">
+                Banked: <strong className="text-slate-900 dark:text-white">{result.banked.toFixed(1)} pts</strong>
+              </div>
+              <div className="text-slate-700 dark:text-slate-300">
+                Max Possible: <strong className="text-slate-900 dark:text-white">{result.maxPossible.toFixed(1)}%</strong>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
@@ -225,25 +250,25 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
           <div className="flex flex-wrap items-center gap-3 text-xs font-semibold">
             <Link
               to="/grade-calculator"
-              className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
+              className="inline-flex items-center min-h-[48px] px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
             >
               Weighted Grade Calculator
             </Link>
             <Link
               to="/gpa-calculator"
-              className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
+              className="inline-flex items-center min-h-[48px] px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
             >
               4.0 GPA Calculator
             </Link>
             <Link
               to="/cgpa-to-percentage-calculator"
-              className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
+              className="inline-flex items-center min-h-[48px] px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
             >
               CGPA to Percentage
             </Link>
             <Link
               to="/"
-              className="px-3.5 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
+              className="inline-flex items-center min-h-[48px] px-4 py-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
             >
               Quick Grade Chart
             </Link>

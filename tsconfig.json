@@ -23,5 +23,7 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "include": ["src", "scripts", "vite.config.ts"],
+  "exclude": ["node_modules", "dist", "quick-grade-updated-files", "fixed-2-files-v2", "quick-grade", "nav", "seo", "offline"]
 }

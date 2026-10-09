@@ -1,362 +1,243 @@
 /**
- * Grade Calculation Algorithms & Validation Engine
- * 
- * Supports:
- * - Half-Point (0.5) partial credit on questions and assessments
- * - Dynamic decimal precision (0, 1, or 2 decimal places)
- * - Safe edge-case clamping (negative inputs, over-boundary answers, division by zero)
- * - Clear, polite error messages and safe fallbacks
- * - Zero-latency synchronous evaluation
+ * Grade calculation helpers for the Quick Grade chart and the Weighted Grade calculator.
+ *
+ * Rules every function here follows:
+ *  - The letter grade is chosen from the SAME rounded percentage that is displayed.
+ *  - Scales come from academicMath (one source of truth).
+ *  - Invalid input produces an error message, never a silent substitute value.
  */
+import {
+  LetterBand,
+  SCALE_PLUS_MINUS,
+  SCALE_STANDARD,
+  letterForDisplayed,
+  parseStrictNumber,
+  roundTo,
+} from './academicMath';
 
 export type GradingScale = 'standard' | 'plus-minus';
 export type DecimalPrecision = 0 | 1 | 2;
 
-export interface QuickGraderInput {
-  totalQuestions: number | string;
-  wrongAnswers: number | string;
+export const MAX_QUESTIONS = 1000;
+
+export function scaleBands(scale: GradingScale): LetterBand[] {
+  return scale === 'plus-minus' ? SCALE_PLUS_MINUS : SCALE_STANDARD;
 }
 
-export interface QuickGraderValidationResult {
-  isValid: boolean;
-  totalError: string | null;
-  wrongError: string | null;
-  politeNotice: string | null;
-  safeTotal: number;
-  safeWrong: number;
-  safeCorrect: number;
+/** Safely parse any input value to a number. Unlike Number(), "", "0x1F" and "1e2" never sneak through. */
+export function safeParseFloat(val: unknown, fallback = 0): number {
+  const n = parseStrictNumber(val as string | number | null | undefined);
+  return n === null ? fallback : n;
 }
 
-export interface QuickGraderResult {
-  totalQuestions: number;
-  wrongAnswers: number;
-  correctAnswers: number;
-  rawPercentage: number;
-  formattedPercentage: string;
-  percentageNumber: number;
-  letterGrade: string;
-  validation: QuickGraderValidationResult;
+/** Letter for a percentage, chosen from the rounded value that is shown on screen. */
+export function calculateLetterFromPercentage(
+  percent: number,
+  scale: GradingScale = 'standard',
+  decimals: DecimalPrecision = 1
+): string {
+  const safe = Math.max(0, Math.min(150, Number.isFinite(percent) ? percent : 0));
+  return letterForDisplayed(safe, scaleBands(scale), decimals).letter;
 }
 
-export interface EzGraderRow {
+/* ------------------------------------------------------------------ */
+/* Quick Grade chart                                                   */
+/* ------------------------------------------------------------------ */
+
+export interface QuestionCountCheck {
+  value: number | null;
+  error: string | null;
+}
+
+/** Validates the "number of questions" field. No coercion: bad input returns an error and no value. */
+export function validateQuestionCount(raw: string): QuestionCountCheck {
+  const text = (raw ?? '').trim();
+  if (text === '') return { value: null, error: `Enter how many questions the test has (1 to ${MAX_QUESTIONS}).` };
+  const n = parseStrictNumber(text);
+  if (n === null) return { value: null, error: 'Use digits only, for example 25.' };
+  if (!Number.isInteger(n)) return { value: null, error: 'Questions must be a whole number. Use partial credit for halves.' };
+  if (n < 1) return { value: null, error: 'A test needs at least 1 question.' };
+  if (n > MAX_QUESTIONS) return { value: null, error: `The most this chart can show is ${MAX_QUESTIONS} questions.` };
+  return { value: n, error: null };
+}
+
+export interface WrongCountCheck {
+  value: number | null;
+  error: string | null;
+}
+
+/** Validates a wrong-answer count for a test of `total` questions. Halves are allowed when `half` is true. */
+export function validateWrongCount(raw: string, total: number, half: boolean): WrongCountCheck {
+  const text = (raw ?? '').trim();
+  if (text === '') return { value: null, error: null };
+  const n = parseStrictNumber(text);
+  if (n === null) return { value: null, error: 'Use digits only, for example 3.' };
+  if (!half && !Number.isInteger(n)) return { value: null, error: 'Whole numbers only. Turn on half points for partial credit.' };
+  if (half && Math.round(n * 2) !== n * 2) return { value: null, error: 'Half points go in steps of 0.5.' };
+  if (n > total) return { value: null, error: `Wrong answers cannot be more than ${total}.` };
+  return { value: n, error: null };
+}
+
+export interface QuickChartRow {
   wrong: number;
   correct: number;
+  /** Unrounded percentage. */
   rawPercentage: number;
-  formattedPercentage: string;
+  /** Percentage rounded to the displayed precision. */
   percentage: number;
+  formattedPercentage: string;
   letter: string;
-  isCurrent?: boolean;
 }
 
+export interface QuickChartOptions {
+  total: number;
+  decimals: DecimalPrecision;
+  /** Half-point steps (0.5 wrong) for partial credit. Capped at 200 questions to keep the table small. */
+  halfPoints?: boolean;
+  bands: LetterBand[];
+}
+
+/** Every row of the quick chart, from 0 wrong to all wrong. */
+export function buildQuickChart(opts: QuickChartOptions): QuickChartRow[] {
+  const total = Math.max(1, Math.min(MAX_QUESTIONS, Math.floor(opts.total)));
+  const step = opts.halfPoints && total <= 200 ? 0.5 : 1;
+  const rows: QuickChartRow[] = [];
+  const count = Math.round(total / step);
+  for (let i = 0; i <= count; i++) {
+    const wrong = i * step;
+    const correct = total - wrong;
+    const raw = Math.max(0, Math.min(100, (correct / total) * 100));
+    const percentage = roundTo(raw, opts.decimals);
+    rows.push({
+      wrong,
+      correct,
+      rawPercentage: raw,
+      percentage,
+      formattedPercentage: percentage.toFixed(opts.decimals),
+      letter: letterForDisplayed(raw, opts.bands, opts.decimals).letter,
+    });
+  }
+  return rows;
+}
+
+/** One student: percent and letter for a wrong-answer count. */
+export function gradeOneStudent(total: number, wrong: number, decimals: DecimalPrecision, bands: LetterBand[]) {
+  const raw = Math.max(0, Math.min(100, ((total - wrong) / total) * 100));
+  const percentage = roundTo(raw, decimals);
+  return {
+    correct: total - wrong,
+    percentage,
+    formattedPercentage: percentage.toFixed(decimals),
+    letter: letterForDisplayed(raw, bands, decimals).letter,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* Weighted / points calculator                                        */
+/* ------------------------------------------------------------------ */
+
 export interface MultiAssessmentItem {
-  id: number;
+  id: number | string;
   name: string;
   score: string | number;
   max: string | number;
   weight?: string | number;
 }
 
-export interface ValidatedMultiAssessment {
-  id: number;
-  name: string;
-  score: string;
-  max: string;
-  weight: string;
-  scoreNum: number;
-  maxNum: number;
-  weightNum: number;
-  isInvalid: boolean;
-  errorMessage: string | null;
+export interface RowIssue {
+  id: number | string;
+  message: string;
+}
+
+export interface MultiAssessmentResult {
+  /** Percentage rounded to the displayed precision. */
+  percentage: number;
+  /** Exact percentage. Use this, never `percentage`, when feeding the value into another formula. */
+  rawPercentage: number;
+  formattedPercentage: string;
+  letterGrade: string;
+  validItemCount: number;
+  /** Rows that were left out of the result, with the reason. Blank rows are not reported. */
+  issues: RowIssue[];
+  /** Sum of the weights of the rows that were counted (weighted mode). */
+  totalWeight: number;
+  /** Rows that are completely blank and ignored. */
+  blankRowCount: number;
+}
+
+function isBlankRow(item: MultiAssessmentItem): boolean {
+  return String(item.score ?? '').trim() === '';
 }
 
 /**
- * Safely parse any input value to a number.
- */
-export function safeParseFloat(val: unknown, fallback = 0): number {
-  if (typeof val === 'number') {
-    return isNaN(val) || !isFinite(val) ? fallback : val;
-  }
-  if (typeof val === 'string') {
-    const cleaned = val.trim();
-    if (cleaned === '') return fallback;
-    const parsed = Number(cleaned);
-    return isNaN(parsed) || !isFinite(parsed) ? fallback : parsed;
-  }
-  return fallback;
-}
-
-/**
- * Letter grade calculation mapping.
- */
-export function calculateLetterFromPercentage(
-  percent: number,
-  scale: GradingScale = 'standard'
-): string {
-  const safePercent = Math.max(0, Math.min(150, safeParseFloat(percent)));
-
-  if (scale === 'standard') {
-    if (safePercent >= 90) return 'A';
-    if (safePercent >= 80) return 'B';
-    if (safePercent >= 70) return 'C';
-    if (safePercent >= 60) return 'D';
-    return 'F';
-  }
-
-  // Plus/Minus grading scale
-  if (safePercent >= 97) return 'A+';
-  if (safePercent >= 93) return 'A';
-  if (safePercent >= 90) return 'A-';
-  if (safePercent >= 87) return 'B+';
-  if (safePercent >= 83) return 'B';
-  if (safePercent >= 80) return 'B-';
-  if (safePercent >= 77) return 'C+';
-  if (safePercent >= 73) return 'C';
-  if (safePercent >= 70) return 'C-';
-  if (safePercent >= 67) return 'D+';
-  if (safePercent >= 63) return 'D';
-  if (safePercent >= 60) return 'D-';
-  return 'F';
-}
-
-/**
- * Safely validates and sanitizes Quick Grader inputs with polite error notices.
- */
-export function validateQuickGraderInput(
-  rawTotalInput: number | string,
-  rawWrongInput: number | string
-): QuickGraderValidationResult {
-  const totalStr = String(rawTotalInput ?? '').trim();
-  const wrongStr = String(rawWrongInput ?? '').trim();
-
-  let totalError: string | null = null;
-  let wrongError: string | null = null;
-  let politeNotice: string | null = null;
-
-  // Validate Total Questions
-  let parsedTotal = safeParseFloat(totalStr, NaN);
-  if (totalStr === '') {
-    totalError = 'Please enter the total number of questions on the test.';
-    parsedTotal = 50; // Fallback default
-  } else if (isNaN(parsedTotal)) {
-    totalError = 'Total questions must be a valid number.';
-    parsedTotal = 50;
-  } else if (parsedTotal <= 0) {
-    totalError = 'Total questions must be at least 1.';
-    politeNotice = `Total questions must be greater than zero (received ${parsedTotal}). We evaluated this using 1 question so calculations remain safe.`;
-    parsedTotal = 1;
-  } else if (parsedTotal > 1000) {
-    totalError = 'Total questions is capped at 1,000.';
-    politeNotice = `You entered ${parsedTotal} questions. We safely capped this at 1,000 to keep calculations ultra-fast.`;
-    parsedTotal = 1000;
-  }
-
-  const safeTotal = Math.max(1, Math.min(1000, parsedTotal));
-
-  // Validate Wrong Answers
-  let parsedWrong = safeParseFloat(wrongStr, 0);
-  if (wrongStr === '') {
-    parsedWrong = 0;
-  } else if (isNaN(parsedWrong)) {
-    wrongError = 'Wrong answers must be a valid number.';
-    parsedWrong = 0;
-  } else if (parsedWrong < 0) {
-    wrongError = 'Number of wrong answers cannot be negative.';
-    politeNotice = `Negative answers (${parsedWrong}) are not possible. We safely adjusted this to 0 wrong (100% score) so your grades remain accurate.`;
-    parsedWrong = 0;
-  } else if (parsedWrong > safeTotal) {
-    wrongError = `Number of wrong answers (${parsedWrong}) cannot exceed total questions (${safeTotal}).`;
-    politeNotice = `You entered ${parsedWrong} wrong answers out of ${safeTotal} total questions. We calculated this using ${safeTotal} wrong (0.0%) to prevent impossible negative scores.`;
-    parsedWrong = safeTotal;
-  }
-
-  const safeWrong = Math.max(0, Math.min(safeTotal, Math.round(parsedWrong * 10) / 10));
-  const safeCorrect = Math.max(0, Math.round((safeTotal - safeWrong) * 10) / 10);
-
-  return {
-    isValid: !totalError && !wrongError,
-    totalError,
-    wrongError,
-    politeNotice,
-    safeTotal,
-    safeWrong,
-    safeCorrect,
-  };
-}
-
-/**
- * Calculates a single test grade with Half-Point (0.5) support and customizable decimal precision.
- */
-export function calculateQuickGrade(
-  totalQuestions: number | string,
-  wrongAnswers: number | string,
-  options: {
-    halfPointSupport?: boolean;
-    decimalPrecision?: DecimalPrecision;
-    scale?: GradingScale;
-  } = {}
-): QuickGraderResult {
-  const { decimalPrecision = 1, scale = 'standard' } = options;
-
-  const validation = validateQuickGraderInput(totalQuestions, wrongAnswers);
-  const { safeTotal, safeWrong, safeCorrect } = validation;
-
-  const rawPercentage = safeTotal > 0 ? (safeCorrect / safeTotal) * 100 : 0;
-  const clampedPercentage = Math.max(0, Math.min(100, rawPercentage));
-  const formattedPercentage = clampedPercentage.toFixed(decimalPrecision);
-  const percentageNumber = Number(formattedPercentage);
-  const letterGrade = calculateLetterFromPercentage(clampedPercentage, scale);
-
-  return {
-    totalQuestions: safeTotal,
-    wrongAnswers: safeWrong,
-    correctAnswers: safeCorrect,
-    rawPercentage: clampedPercentage,
-    formattedPercentage,
-    percentageNumber,
-    letterGrade,
-    validation,
-  };
-}
-
-/**
- * Generates every possible grade row for the EZ Grader Quick Table via a clean JavaScript loop.
- * Supports Half-Point (0.5) step increments for partial credit.
- */
-export function generateEzGraderTable(
-  totalQuestions: number | string,
-  options: {
-    halfPointSupport?: boolean;
-    decimalPrecision?: DecimalPrecision;
-    scale?: GradingScale;
-    sortAsc?: boolean;
-    currentWrong?: number;
-  } = {}
-): EzGraderRow[] {
-  const {
-    halfPointSupport = false,
-    decimalPrecision = 1,
-    scale = 'standard',
-    sortAsc = true,
-    currentWrong = -1,
-  } = options;
-
-  const rawTotal = safeParseFloat(totalQuestions, 50);
-  const total = Math.max(1, Math.min(500, rawTotal));
-
-  // Determine step size: 0.5 for partial credit (for up to 150 questions), otherwise 1
-  const step = halfPointSupport && total <= 150 ? 0.5 : 1;
-  const rows: EzGraderRow[] = [];
-
-  // Pure JavaScript loop iterating through all possible wrong answers
-  for (let wrong = 0; wrong <= total + 0.0001; wrong = Math.round((wrong + step) * 10) / 10) {
-    const correct = Math.max(0, Math.round((total - wrong) * 10) / 10);
-    const rawPct = total > 0 ? (correct / total) * 100 : 0;
-    const clampedPct = Math.max(0, Math.min(100, rawPct));
-    const formattedPercentage = clampedPct.toFixed(decimalPrecision);
-    const percentage = Number(formattedPercentage);
-    const letter = calculateLetterFromPercentage(clampedPct, scale);
-    const isCurrent = Math.abs(wrong - currentWrong) < 0.001;
-
-    rows.push({
-      wrong,
-      correct,
-      rawPercentage: clampedPct,
-      formattedPercentage,
-      percentage,
-      letter,
-      isCurrent,
-    });
-  }
-
-  if (!sortAsc) {
-    rows.reverse();
-  }
-
-  return rows;
-}
-
-/**
- * Calculates a multi-assessment weighted or points-based course grade.
- * Gracefully ignores invalid rows and guards against division by zero.
+ * Calculates a weighted or points-based course grade.
+ * Rows without a score are treated as "not graded yet" and ignored. Rows with a bad value are
+ * ignored AND reported in `issues` so the UI can say why.
  */
 export function calculateMultiAssessmentGrade(
   items: MultiAssessmentItem[],
   mode: 'points' | 'weighted',
-  options: {
-    decimalPrecision?: DecimalPrecision;
-    scale?: GradingScale;
-  } = {}
-): {
-  percentage: number;
-  formattedPercentage: string;
-  letterGrade: string;
-  validItemCount: number;
-} {
+  options: { decimalPrecision?: DecimalPrecision; scale?: GradingScale } = {}
+): MultiAssessmentResult {
   const { decimalPrecision = 1, scale = 'standard' } = options;
+  const bands = scaleBands(scale);
+  const issues: RowIssue[] = [];
+  let blankRowCount = 0;
 
-  const validItems = items
-    .map((item) => {
-      const scoreNum = safeParseFloat(item.score, NaN);
-      const maxNum = safeParseFloat(item.max, NaN);
-      const weightNum = safeParseFloat(item.weight, NaN);
-      const isValid =
-        !isNaN(scoreNum) &&
-        !isNaN(maxNum) &&
-        maxNum > 0 &&
-        scoreNum >= 0 &&
-        (mode !== 'weighted' || (!isNaN(weightNum) && weightNum > 0));
-
-      return {
-        scoreNum,
-        maxNum,
-        weightNum: isNaN(weightNum) ? 1 : weightNum,
-        isValid,
-      };
-    })
-    .filter((item) => item.isValid);
-
-  if (!validItems.length) {
-    return {
-      percentage: 0,
-      formattedPercentage: (0).toFixed(decimalPrecision),
-      letterGrade: calculateLetterFromPercentage(0, scale),
-      validItemCount: 0,
-    };
+  const valid: { score: number; max: number; weight: number }[] = [];
+  for (const item of items) {
+    if (isBlankRow(item)) {
+      blankRowCount++;
+      continue;
+    }
+    const score = parseStrictNumber(item.score);
+    const max = parseStrictNumber(item.max);
+    const weight = mode === 'weighted' ? parseStrictNumber(item.weight ?? '') : 1;
+    const label = item.name?.trim() || 'A row';
+    if (score === null) {
+      issues.push({ id: item.id, message: `${label}: the score is not a number.` });
+    } else if (max === null || max <= 0) {
+      issues.push({ id: item.id, message: `${label}: "Out of" must be a number above 0.` });
+    } else if (mode === 'weighted' && (weight === null || weight <= 0)) {
+      issues.push({ id: item.id, message: `${label}: the weight must be a number above 0.` });
+    } else {
+      valid.push({ score, max, weight: weight ?? 1 });
+    }
   }
 
-  let finalRawPercent = 0;
+  const empty = (): MultiAssessmentResult => ({
+    percentage: 0,
+    rawPercentage: 0,
+    formattedPercentage: (0).toFixed(decimalPrecision),
+    letterGrade: '',
+    validItemCount: 0,
+    issues,
+    totalWeight: 0,
+    blankRowCount,
+  });
+  if (!valid.length) return empty();
 
+  let raw: number;
+  let totalWeight = 0;
   if (mode === 'weighted') {
-    const totalWeight = validItems.reduce((acc, curr) => acc + curr.weightNum, 0);
-    if (totalWeight <= 0) {
-      finalRawPercent = 0;
-    } else {
-      const weightedSum = validItems.reduce(
-        (acc, curr) => acc + (curr.scoreNum / curr.maxNum) * curr.weightNum,
-        0
-      );
-      finalRawPercent = (weightedSum / totalWeight) * 100;
-    }
+    totalWeight = valid.reduce((a, r) => a + r.weight, 0);
+    const weightedSum = valid.reduce((a, r) => a + (r.score / r.max) * r.weight, 0);
+    raw = (weightedSum / totalWeight) * 100;
   } else {
-    // Points mode
-    const totalPossible = validItems.reduce((acc, curr) => acc + curr.maxNum, 0);
-    if (totalPossible <= 0) {
-      finalRawPercent = 0;
-    } else {
-      const totalEarned = validItems.reduce((acc, curr) => acc + curr.scoreNum, 0);
-      finalRawPercent = (totalEarned / totalPossible) * 100;
-    }
+    const possible = valid.reduce((a, r) => a + r.max, 0);
+    raw = (valid.reduce((a, r) => a + r.score, 0) / possible) * 100;
   }
-
-  const clampedPercent = Math.max(0, Math.min(100, finalRawPercent));
-  const formattedPercentage = clampedPercent.toFixed(decimalPrecision);
-  const percentage = Number(formattedPercentage);
-  const letterGrade = calculateLetterFromPercentage(clampedPercent, scale);
-
+  // Extra credit may legitimately push a course above 100%, so only a floor is applied.
+  raw = Math.max(0, raw);
+  const percentage = roundTo(raw, decimalPrecision);
   return {
     percentage,
-    formattedPercentage,
-    letterGrade,
-    validItemCount: validItems.length,
+    rawPercentage: raw,
+    formattedPercentage: percentage.toFixed(decimalPrecision),
+    letterGrade: letterForDisplayed(raw, bands, decimalPrecision).letter,
+    validItemCount: valid.length,
+    issues,
+    totalWeight,
+    blankRowCount,
   };
 }
