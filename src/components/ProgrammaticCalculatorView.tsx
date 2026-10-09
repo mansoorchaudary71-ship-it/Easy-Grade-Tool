@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from './SlashLink';
-import {
-  Calculator,
-  CheckCircle2,
-  BookOpen,
-  ArrowRight,
-  Target,
-  GraduationCap,
-} from 'lucide-react';
+import { Target, GraduationCap } from 'lucide-react';
 import {
   resolveProgrammaticSeo,
   ProgrammaticSeoEntry,
@@ -17,6 +10,7 @@ import { SEO } from './SEO';
 import { GradeCalculator } from './GradeCalculator';
 import { BASE_CANONICAL_ORIGIN } from '../data/constants';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
+import { ToolContentGuide } from './ToolContentGuide';
 
 export interface ProgrammaticCalculatorViewProps {
   setToast: (msg: string) => void;
@@ -212,137 +206,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
           </>
         </section>
 
-        {/* Who This Is For vs General Calculator */}
-        <section
-          aria-labelledby="comparison-heading"
-          className="p-6 sm:p-8 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-xs"
-        >
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 font-mono mb-2">
-            <Target className="w-4 h-4 text-teal-600" />
-            <span>Audience &amp; Tool Purpose</span>
-          </div>
-          <h2
-            id="comparison-heading"
-            className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight mb-4"
-          >
-            {entry.audienceComparison.heading}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
-                Target Audience &amp; Use Case
-              </h3>
-              <p>{entry.audienceComparison.whoItIsFor}</p>
-            </div>
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
-              <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2 flex items-center gap-2">
-                <Calculator className="w-4 h-4 text-teal-600 shrink-0" />
-                Mathematical Difference
-              </h3>
-              <p>{entry.audienceComparison.howItDiffers}</p>
-            </div>
-          </div>
-          <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between flex-wrap gap-3">
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              Need standard weighted grading or point tracking instead?
-            </span>
-            <Link
-              to={entry.audienceComparison.parentLinkPath}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 hover:underline transition-colors"
-            >
-              <span>Switch to {entry.audienceComparison.parentLinkText}</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </section>
-
-        {/* Step-by-Step Worked Calculation Example */}
-        <section
-          aria-labelledby="worked-example-heading"
-          className="p-6 sm:p-8 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-xs space-y-6"
-        >
-          <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 font-mono mb-2">
-              <BookOpen className="w-4 h-4 text-teal-600" />
-              <span>Pedagogical Math Guide</span>
-            </div>
-            <h2
-              id="worked-example-heading"
-              className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight"
-            >
-              {entry.workedExample.title}
-            </h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-3xl">
-              {entry.workedExample.scenario}
-            </p>
-          </div>
-
-          {/* Given Inputs Table */}
-          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-slate-50 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
-                <tr>
-                  <th scope="col" className="px-4 py-3">Parameter</th>
-                  <th scope="col" className="px-4 py-3">Example Value</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
-                {entry.workedExample.inputs.map((inp, idx) => (
-                  <tr key={idx} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30">
-                    <td className="px-4 py-2.5 text-slate-700 dark:text-slate-300 font-medium">{inp.label}</td>
-                    <td className="px-4 py-2.5 text-teal-700 dark:text-teal-400 font-semibold font-mono">{inp.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Steps */}
-          <div className="space-y-4">
-            {entry.workedExample.steps.map((st, sIdx) => (
-              <div
-                key={sIdx}
-                className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-700/60 space-y-2"
-              >
-                <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100">
-                  {st.step}
-                </h3>
-                {st.formula && (
-                  <div className="text-xs font-mono bg-teal-50 dark:bg-teal-950/60 text-teal-800 dark:text-teal-300 px-3 py-1.5 rounded-lg border border-teal-100 dark:border-teal-900/50 inline-block">
-                    Formula: {st.formula}
-                  </div>
-                )}
-                <p className="text-xs sm:text-sm font-mono font-semibold text-slate-800 dark:text-slate-200">
-                  {st.math}
-                </p>
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {st.explanation}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Outcomes */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-            {entry.workedExample.outcomes.map((out, oIdx) => (
-              <div
-                key={oIdx}
-                className="p-4 rounded-2xl bg-teal-50/80 dark:bg-teal-950/55 border border-teal-200/80 dark:border-teal-900/60"
-              >
-                <span className="text-xs font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400">
-                  {out.label}
-                </span>
-                <div className="text-lg font-extrabold text-teal-900 dark:text-teal-200 font-mono mt-0.5 mb-1.5">
-                  {out.result}
-                </div>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                  {out.commentary}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        <ToolContentGuide guide="final-exam" />
 
         {/* FAQ: same component and UI as every other tool; schema comes from the same entry.customFaqs */}
         <FAQ tool="quick" items={entry.customFaqs} heading={PAGE_FAQ_HEADINGS['final-exam-grade-calculator']} />

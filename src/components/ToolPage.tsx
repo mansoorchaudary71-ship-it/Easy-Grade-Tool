@@ -9,11 +9,19 @@ import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
+import { ToolContentGuide } from './ToolContentGuide';
+import { ToolGuideKey } from '../data/toolGuideContent';
 
 const TOOLS: Record<ToolPageSlug, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
   'grade-curve-calculator': GradeCurveTool,
   'letter-grade-calculator': LetterGradeTool,
+};
+
+const GUIDES: Record<ToolPageSlug, ToolGuideKey> = {
+  'test-grade-calculator': 'test-grade',
+  'grade-curve-calculator': 'grade-curve',
+  'letter-grade-calculator': 'letter-grade',
 };
 
 export interface ToolPageProps {
@@ -50,35 +58,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         <Tool />
       </section>
 
-      <div className="grid gap-10 content-auto">
-        {entry.sections.map((s) => (
-          <section key={s.heading} className="space-y-3 max-w-3xl">
-            <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{s.heading}</h2>
-            {s.paragraphs.map((p, i) => (
-              <p key={i} className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300 m-0">{p}</p>
-            ))}
-            {s.bullets && (
-              <ul className="list-disc pl-5 space-y-1.5 text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
-                {s.bullets.map((b) => (<li key={b}>{b}</li>))}
-              </ul>
-            )}
-          </section>
-        ))}
-
-        <section className={`glow-surface ${'max-w-3xl'} rounded-[24px] border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/70 p-5 sm:p-7 space-y-3`}>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{entry.example.heading}</h2>
-          <p className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300 m-0">{entry.example.scenario}</p>
-          <dl className="grid gap-2 m-0">
-            {entry.example.rows.map((r) => (
-              <div key={r.label} className="flex flex-wrap justify-between gap-x-4 border-t border-slate-200/70 dark:border-slate-800 pt-2">
-                <dt className="text-sm text-slate-600 dark:text-slate-400">{r.label}</dt>
-                <dd className="text-sm font-bold font-mono text-slate-900 dark:text-white m-0">{r.value}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300 m-0">{entry.example.takeaway}</p>
-        </section>
-      </div>
+      <ToolContentGuide guide={GUIDES[slug]} />
 
       <div className="max-w-4xl content-auto">
         <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />
