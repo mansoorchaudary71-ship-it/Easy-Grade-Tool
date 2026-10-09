@@ -45,6 +45,13 @@ export const RAW_GUIDE_IMAGES: Record<string, string> = {
   loan: 'images/loan-calculator-guide.webp',
   mortgage: 'images/mortgage-calculator-guide.webp',
   password: 'images/password-generator-guide.webp',
+  // Grade-tool guides (components/ToolContentGuide.tsx). They reuse the existing photos for now;
+  // to give a tool its own photo, drop a 1200x800 .webp in public/images and change that one line.
+  weighted: 'images/easy-grade-calculator-guide.webp',
+  'final-exam': 'images/easy-grade-calculator-guide.webp',
+  'test-grade': 'images/percentage-calculator-guide.webp',
+  'grade-curve': 'images/percentage-calculator-guide.webp',
+  'letter-grade': 'images/gpa-calculator-guide.webp',
 };
 
 export function getGuideImageUrl(toolKey: string): string {
@@ -78,3 +85,10 @@ export const GUIDE_PLACEHOLDERS: Record<string, string> = {
   password:
     'data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAADwAwCdASoYABAAPzmGuVQvKSWjMAgB4CcJQBOgBFkV5Z2vfYFWO6QAAP7L4iMvNXlBgxuKdvNCGZ5jLCcvk1t9pyg6mBoQ/YmTWv0PThEp7FsMfjhvtHqGirh7wxjBC0+dOvwJwmIq2vgLEUxrxtiROTBniwDwgGZllg+y4AA=',
 };
+
+// Blur placeholders for the grade-tool guide images follow the photo each one currently uses.
+GUIDE_PLACEHOLDERS.weighted = GUIDE_PLACEHOLDERS.quick;
+GUIDE_PLACEHOLDERS['final-exam'] = GUIDE_PLACEHOLDERS.quick;
+GUIDE_PLACEHOLDERS['test-grade'] = GUIDE_PLACEHOLDERS.percentage;
+GUIDE_PLACEHOLDERS['grade-curve'] = GUIDE_PLACEHOLDERS.percentage;
+GUIDE_PLACEHOLDERS['letter-grade'] = GUIDE_PLACEHOLDERS.gpa;
