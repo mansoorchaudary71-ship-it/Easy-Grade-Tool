@@ -14,7 +14,6 @@ import { AmbientAura } from './AmbientAura';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
 import { SEO_HOME, SEO_ROUTES } from '../data/seoConfig';
 import { EducationalGuide } from './EducationalGuide';
-import { SemanticGuideImage } from './SemanticGuideImage';
 
 export interface GradeCalculatorProps {
   setToast: (msg: string) => void;
@@ -142,15 +141,6 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               ? 'Calculate instant test percentage scores, letter grades, and printable quick charts for any test length.'
               : 'Add your assessments, calculate weighted averages, and simulate the exact score needed on your final exam.'
           }
-        />
-      )}
-
-      {calcTab === 'quick-chart' && !hideHeading && (
-        <SemanticGuideImage
-          toolKey="quick"
-          alt="Study desk with a notebook of course grades, a scientific calculator and a laptop for calculating test scores"
-          className="mb-6 max-h-56 sm:max-h-72"
-          priority
         />
       )}
 

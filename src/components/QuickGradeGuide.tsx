@@ -2,6 +2,7 @@ import React from 'react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from './SlashLink';
 import { HOME_FAQS } from '../data/homeContent';
+import { SemanticGuideImage } from './SemanticGuideImage';
 
 const MORE = [
   { to: '/grade-calculator/', title: 'Weighted grade calculator', text: 'Combine homework, quizzes and exams into a course grade.' },
@@ -13,19 +14,28 @@ const MORE = [
   { to: '/cgpa-to-percentage-calculator/', title: 'CGPA to percentage', text: '10, 5 and 4-point conversions by university.' },
 ];
 
-const H2 = 'text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0';
-const H3 = 'text-lg font-bold tracking-tight text-slate-900 dark:text-white m-0 pt-2';
-const P = 'text-[15px] leading-relaxed text-slate-700 dark:text-slate-300 m-0';
-const UL = 'list-disc pl-5 space-y-1.5 text-[15px] leading-relaxed text-slate-700 dark:text-slate-300 m-0';
+const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight';
+const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight';
+const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100';
+const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
 
 /** Homepage guide: tool content, links to every academic tool, and the FAQ. */
 export const QuickGradeGuide: React.FC = () => (
   <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4 space-y-10 content-auto print:hidden" aria-labelledby="home-guide-title">
-    <article className="space-y-10 max-w-3xl">
-      <div className="space-y-3">
-        <h2 id="home-guide-title" className={H2}>
+    <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <div>
+        <h2 id="home-guide-title" className={H2_MAIN}>
           Free Grade Calculator &amp; Quick Chart for Teachers and Students
         </h2>
+
+        <div className="my-6">
+          <SemanticGuideImage
+            toolKey="quick"
+            alt="Study desk with a notebook of course grades, a scientific calculator and a laptop for calculating test scores"
+          />
+        </div>
+
         <p className={P}>
           Welcome to our comprehensive resource designed to help educators and learners effortlessly determine academic
           standing and achieve the minimum grade required for their goals, including understanding what a passing grade
@@ -34,7 +44,7 @@ export const QuickGradeGuide: React.FC = () => (
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div>
         <h2 className={H2}>Understanding Grading Systems</h2>
         <p className={P}>
           Establishing a reliable grading scale is essential for evaluating academic performance accurately across diverse
@@ -73,7 +83,7 @@ export const QuickGradeGuide: React.FC = () => (
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div>
         <h2 className={H2}>Calculating GPA</h2>
 
         <h3 className={H3}>What is GPA and Why is it Important?</h3>
@@ -102,7 +112,7 @@ export const QuickGradeGuide: React.FC = () => (
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div>
         <h2 className={H2}>Grade Calculation Techniques</h2>
 
         <h3 className={H3}>Calculating a Weighted Average</h3>
@@ -142,7 +152,7 @@ export const QuickGradeGuide: React.FC = () => (
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div>
         <h2 className={H2}>How to Interpret Your Calculated Grades</h2>
         <p className={P}>
           Interpreting your calculated grades involves reviewing your overall grade and GPA metrics to identify strengths
@@ -152,7 +162,7 @@ export const QuickGradeGuide: React.FC = () => (
         </p>
       </div>
 
-      <div className="space-y-4">
+      <div>
         <h2 className={H2}>Resources for Further Assistance</h2>
         <p className={P}>
           For students and educators seeking additional support, utilizing comprehensive calculators for students and
