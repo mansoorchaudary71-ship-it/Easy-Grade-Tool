@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
 import { Sun, Moon, Laptop, Search } from 'lucide-react';
 import { NAV_ITEMS } from '../data/navItems';
+import { TOOL_PATHS } from '../data/constants';
 import { isSamePath } from '../utils/paths';
 import { preloadForPath } from '../utils/lazyRoutes';
 import { ToolKey } from '../types';
@@ -179,7 +180,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Link
                   ref={isActive ? activeTabRef : undefined}
                   to={tool.path}
-                  onClick={() => onSelectTool(tool.toolKey)}
+                  onClick={() => {
+                    // Only the 8 legacy tools map 1:1 to a ToolKey. Pages like Weighted/Final Exam/Test Grade/
+                    // Grade Curve/Letter Grade share the 'quick' key, so selecting them via onSelectTool would
+                    // navigate back to Home. The <Link> already navigates to the right page.
+                    if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool(tool.toolKey);
+                  }}
                   onMouseEnter={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
                   onFocus={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
                   onTouchStart={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}

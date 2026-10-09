@@ -34,7 +34,7 @@ import {
   PlusCircle,
   Activity,
 } from 'lucide-react';
-import { getToolKeyFromPath, CONTACT_EMAIL } from '../data/constants';
+import { getToolKeyFromPath, CONTACT_EMAIL, TOOL_PATHS } from '../data/constants';
 import { NAV_ITEMS } from '../data/navItems';
 import { isSamePath } from '../utils/paths';
 import { ToolKey } from '../types';
@@ -803,7 +803,8 @@ export const Footer: React.FC<FooterProps> = ({
                             to={tool.path}
                             onClick={() => {
                               scrollToTop();
-                              onSelectTool?.(tool.toolKey);
+                              // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
+                              if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
                             }}
                             className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
                               isActive

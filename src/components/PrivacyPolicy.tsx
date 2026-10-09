@@ -39,7 +39,7 @@ export const PrivacyPolicy: React.FC = () => {
       <div className="relative tool-layout font-sans">
         <AmbientAura />
 
-        <div className="w-full max-w-4xl mx-auto space-y-8">
+        <div className="w-full max-w-4xl mx-auto space-y-8 min-w-0 [overflow-wrap:anywhere]">
           {/* Key Privacy Highlights Card */}
           <div className="bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 rounded-3xl border border-white/60 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 w-full">
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-4 flex items-center gap-2.5">
@@ -210,9 +210,9 @@ export const PrivacyPolicy: React.FC = () => {
                 <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">4</span>
                 <span>Data Retention Policy</span>
               </h2>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs sm:text-sm border-collapse">
-                  <thead>
+              <div className="w-full">
+                <table className="block sm:table w-full text-left text-xs sm:text-sm border-collapse">
+                  <thead className="hidden sm:table-header-group">
                     <tr className="border-b border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white font-bold">
                       <th className="py-2.5 pr-4">Data Type</th>
                       <th className="py-2.5 px-4">Storage File</th>
@@ -220,30 +220,30 @@ export const PrivacyPolicy: React.FC = () => {
                       <th className="py-2.5 pl-4">Trigger for Deletion</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800/60 text-slate-600 dark:text-slate-300">
-                    <tr>
-                      <td className="py-2.5 pr-4 font-semibold text-slate-800 dark:text-slate-200">Newsletter Email</td>
-                      <td className="py-2.5 px-4 font-mono text-xs">subscribers.json</td>
-                      <td className="py-2.5 px-4">Until unsubscribed</td>
-                      <td className="py-2.5 pl-4">Unsubscribe request or deletion inquiry</td>
+                  <tbody className="block sm:table-row-group sm:divide-y divide-slate-200/60 dark:divide-slate-800/60 text-slate-600 dark:text-slate-300">
+                    <tr className="block sm:table-row rounded-xl sm:rounded-none border border-slate-200 dark:border-slate-700 sm:border-0 p-3 sm:p-0 mb-3 sm:mb-0">
+                      <td data-label="Data Type" className="block sm:table-cell py-1 sm:py-2.5 sm:pr-4 font-semibold text-slate-800 dark:text-slate-200 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Newsletter Email</td>
+                      <td data-label="Storage File" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 font-mono text-xs before:content-[attr(data-label)] before:mr-2 before:font-sans before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">subscribers.json</td>
+                      <td data-label="Retention Period" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Until unsubscribed</td>
+                      <td data-label="Trigger for Deletion" className="block sm:table-cell py-1 sm:py-2.5 sm:pl-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Unsubscribe request or deletion inquiry</td>
                     </tr>
-                    <tr>
-                      <td className="py-2.5 pr-4 font-semibold text-slate-800 dark:text-slate-200">Contact / Feedback</td>
-                      <td className="py-2.5 px-4 font-mono text-xs">contacts.json</td>
-                      <td className="py-2.5 px-4">Up to 12 months</td>
-                      <td className="py-2.5 pl-4">Support inquiry resolution or user request</td>
+                    <tr className="block sm:table-row rounded-xl sm:rounded-none border border-slate-200 dark:border-slate-700 sm:border-0 p-3 sm:p-0 mb-3 sm:mb-0">
+                      <td data-label="Data Type" className="block sm:table-cell py-1 sm:py-2.5 sm:pr-4 font-semibold text-slate-800 dark:text-slate-200 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Contact / Feedback</td>
+                      <td data-label="Storage File" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 font-mono text-xs before:content-[attr(data-label)] before:mr-2 before:font-sans before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">contacts.json</td>
+                      <td data-label="Retention Period" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Up to 12 months</td>
+                      <td data-label="Trigger for Deletion" className="block sm:table-cell py-1 sm:py-2.5 sm:pl-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Support inquiry resolution or user request</td>
                     </tr>
-                    <tr>
-                      <td className="py-2.5 pr-4 font-semibold text-slate-800 dark:text-slate-200">Issue Reports</td>
-                      <td className="py-2.5 px-4 font-mono text-xs">issues.json</td>
-                      <td className="py-2.5 px-4">Until formula is fixed</td>
-                      <td className="py-2.5 pl-4">Bug resolution or verification</td>
+                    <tr className="block sm:table-row rounded-xl sm:rounded-none border border-slate-200 dark:border-slate-700 sm:border-0 p-3 sm:p-0 mb-3 sm:mb-0">
+                      <td data-label="Data Type" className="block sm:table-cell py-1 sm:py-2.5 sm:pr-4 font-semibold text-slate-800 dark:text-slate-200 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Issue Reports</td>
+                      <td data-label="Storage File" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 font-mono text-xs before:content-[attr(data-label)] before:mr-2 before:font-sans before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">issues.json</td>
+                      <td data-label="Retention Period" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Until formula is fixed</td>
+                      <td data-label="Trigger for Deletion" className="block sm:table-cell py-1 sm:py-2.5 sm:pl-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Bug resolution or verification</td>
                     </tr>
-                    <tr>
-                      <td className="py-2.5 pr-4 font-semibold text-slate-800 dark:text-slate-200">Feature Suggestions</td>
-                      <td className="py-2.5 px-4 font-mono text-xs">suggestions.json</td>
-                      <td className="py-2.5 px-4">Roadmap lifecycle</td>
-                      <td className="py-2.5 pl-4">Feature launch or user request</td>
+                    <tr className="block sm:table-row rounded-xl sm:rounded-none border border-slate-200 dark:border-slate-700 sm:border-0 p-3 sm:p-0 mb-3 sm:mb-0">
+                      <td data-label="Data Type" className="block sm:table-cell py-1 sm:py-2.5 sm:pr-4 font-semibold text-slate-800 dark:text-slate-200 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Feature Suggestions</td>
+                      <td data-label="Storage File" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 font-mono text-xs before:content-[attr(data-label)] before:mr-2 before:font-sans before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">suggestions.json</td>
+                      <td data-label="Retention Period" className="block sm:table-cell py-1 sm:py-2.5 sm:px-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Roadmap lifecycle</td>
+                      <td data-label="Trigger for Deletion" className="block sm:table-cell py-1 sm:py-2.5 sm:pl-4 before:content-[attr(data-label)] before:mr-2 before:font-bold before:text-slate-900 dark:before:text-white sm:before:content-none">Feature launch or user request</td>
                     </tr>
                   </tbody>
                 </table>
