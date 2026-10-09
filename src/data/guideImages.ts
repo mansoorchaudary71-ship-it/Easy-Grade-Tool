@@ -45,13 +45,12 @@ export const RAW_GUIDE_IMAGES: Record<string, string> = {
   loan: 'images/loan-calculator-guide.webp',
   mortgage: 'images/mortgage-calculator-guide.webp',
   password: 'images/password-generator-guide.webp',
-  // Grade-tool guides (components/ToolContentGuide.tsx). They reuse the existing photos for now;
-  // to give a tool its own photo, drop a 1200x800 .webp in public/images and change that one line.
-  weighted: 'images/easy-grade-calculator-guide.webp',
-  'final-exam': 'images/easy-grade-calculator-guide.webp',
-  'test-grade': 'images/percentage-calculator-guide.webp',
-  'grade-curve': 'images/percentage-calculator-guide.webp',
-  'letter-grade': 'images/gpa-calculator-guide.webp',
+  // Grade-tool guides (components/ToolContentGuide.tsx). Each tool has its own dedicated photo.
+  weighted: 'images/weighted-grade-calculator-guide.webp',
+  'final-exam': 'images/final-exam-grade-calculator-guide.webp',
+  'test-grade': 'images/test-grade-calculator-guide.webp',
+  'grade-curve': 'images/grade-curve-calculator-guide.webp',
+  'letter-grade': 'images/letter-grade-calculator-guide.webp',
 };
 
 export function getGuideImageUrl(toolKey: string): string {
@@ -86,9 +85,14 @@ export const GUIDE_PLACEHOLDERS: Record<string, string> = {
     'data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAADwAwCdASoYABAAPzmGuVQvKSWjMAgB4CcJQBOgBFkV5Z2vfYFWO6QAAP7L4iMvNXlBgxuKdvNCGZ5jLCcvk1t9pyg6mBoQ/YmTWv0PThEp7FsMfjhvtHqGirh7wxjBC0+dOvwJwmIq2vgLEUxrxtiROTBniwDwgGZllg+y4AA=',
 };
 
-// Blur placeholders for the grade-tool guide images follow the photo each one currently uses.
-GUIDE_PLACEHOLDERS.weighted = GUIDE_PLACEHOLDERS.quick;
-GUIDE_PLACEHOLDERS['final-exam'] = GUIDE_PLACEHOLDERS.quick;
-GUIDE_PLACEHOLDERS['test-grade'] = GUIDE_PLACEHOLDERS.percentage;
-GUIDE_PLACEHOLDERS['grade-curve'] = GUIDE_PLACEHOLDERS.percentage;
-GUIDE_PLACEHOLDERS['letter-grade'] = GUIDE_PLACEHOLDERS.gpa;
+// Blur placeholders for the grade-tool guide images (one per dedicated photo).
+GUIDE_PLACEHOLDERS.weighted =
+  'data:image/webp;base64,UklGRo4AAABXRUJQVlA4IIIAAABQBACdASoYABAAPxF4tFGsJyUisAgBgCIJaAC1CIjJTfRW9KEFLPQFnThgAP76yHupYEpHjc9v/Ol9Q23DCJATSTtGVpGnUo+1tUc//gvOGmv0u2s8YpYxxH/bZVGKeZrB6a3hIuTZpPszb1/6auOR95sHF1fdB/FHXBJqagCMCAAA';
+GUIDE_PLACEHOLDERS['final-exam'] =
+  'data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQAwCdASoYABAAPxFwsFAsJiSisAgBgCIJY2VuU0AU/2RZwAD+72k7nHPfHyENFumne7ykRZC8XTiv218yOz1V3Y43exZwroMpqwnXJU2NdQW26qF06dDEIZjgAA==';
+GUIDE_PLACEHOLDERS['test-grade'] =
+  'data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAABwAwCdASoYABAAPxFysFAsJqSisAgBgCIJYwC/ODBhk3Yi4gAA/u8g/bgWJShpqLRHWrfukufyatKgSlVQtnKwYyu+AEv95SM0gwmTw3c88+doj6U8cAAA';
+GUIDE_PLACEHOLDERS['grade-curve'] =
+  'data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoYABAAPxF2sVCsJySisAgBgCIJQBZwBDv+4sv6/sLw2X6AAP7qfCMAZDQs7nAqp7Eyj5B3TuyOBJrAA0ZsAyouLLecxPRGdpogVV+zlfHR71IAAAA=';
+GUIDE_PLACEHOLDERS['letter-grade'] =
+  'data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAACQAwCdASoYABAAPxFysFAsJqSisAgBgCIJagAAW9FL1EQM5RiAAP7qfArG+KydoH/jkIKx6JMI7QuHbY8wmb5RYv/36YzYEjvs/c8q3gKLCLoUEJ4a5mnMY3w9dpIOkR42kIEYAuvdcxiocyv8SR4nRBdQAA==';

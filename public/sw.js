@@ -32,6 +32,11 @@ const PRECACHE_ASSETS = [
   '/images/loan-calculator-guide.webp',
   '/images/mortgage-calculator-guide.webp',
   '/images/password-generator-guide.webp',
+  '/images/weighted-grade-calculator-guide.webp',
+  '/images/final-exam-grade-calculator-guide.webp',
+  '/images/test-grade-calculator-guide.webp',
+  '/images/grade-curve-calculator-guide.webp',
+  '/images/letter-grade-calculator-guide.webp',
 ];
 
 // 1. Install Event: Cache offline shell and skip waiting immediately
