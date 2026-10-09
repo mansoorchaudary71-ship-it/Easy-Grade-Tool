@@ -1,0 +1,97 @@
+/*
+ * Touch-target, contrast and skip-link rules.
+ * Loaded AFTER index.css (see main.tsx) so these small, targeted rules win without rewriting the
+ * 6,700-line stylesheet. Remove selectors here once the matching rules in index.css are cleaned up.
+ */
+
+/* Skip link: first Tab stop, visible on focus */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -64px;
+  z-index: 10000;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  border-radius: 9999px;
+  background: #134e48;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  transition: top 0.15s ease-out;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: calc(env(safe-area-inset-top, 0px) + 12px);
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* Touch devices: every control is at least 48x48 CSS px */
+@media (pointer: coarse) {
+  button,
+  [role='button'],
+  summary,
+  select,
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  .topbar a,
+  .tool-nav a,
+  .tool-nav button,
+  nav a,
+  nav button,
+  footer a {
+    min-height: 48px !important;
+  }
+  .topbar a,
+  .tool-nav a,
+  nav a,
+  footer a {
+    display: inline-flex;
+    align-items: center;
+  }
+  input[type='checkbox'],
+  input[type='radio'] {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Keep 10-11px utility labels readable */
+.text-\[10px\],
+.text-\[11px\] {
+  font-size: 12px !important;
+  line-height: 1.35;
+}
+
+/* Contrast: slate-400 / stone-400 text on light backgrounds is about 2.5:1, below the 4.5:1 minimum */
+html:not(.dark) .text-slate-400,
+html:not(.dark) .text-stone-400,
+html:not(.dark) .text-gray-400 {
+  color: #475569;
+}
+html:not(.dark) .text-stone-500 {
+  color: #57534e;
+}
+html:not(.dark) .placeholder\:text-slate-400::placeholder,
+html:not(.dark) .placeholder\:text-stone-400::placeholder {
+  color: #64748b;
+}
+
+/* Sticky headers keep clear of the notch when installed as a PWA */
+html {
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 72px);
+}
+
+/* Do not let motion run for people who ask for less of it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

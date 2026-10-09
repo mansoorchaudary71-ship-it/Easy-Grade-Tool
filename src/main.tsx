@@ -21,6 +21,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
 import './index.css';
+import './styles/a11y-touch.css';
 import { preloadForPath } from './utils/lazyRoutes';
 import { installPrintFocus } from './utils/printFocus';
 

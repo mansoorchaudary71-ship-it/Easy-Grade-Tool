@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Suspense, lazy, useTransition } from 'react';
+import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
 import {
   Routes,
   Route,
@@ -16,7 +16,8 @@ import { TOOLS_LIST, TOOL_PATHS, getToolKeyFromPath } from './data/constants';
 import { ToolKey } from './types';
 import { GradeCalculator } from './components/GradeCalculator';
 import { NotFound } from './components/NotFound';
-import { isSamePath } from './utils/paths';
+import { isSelfManagedSeoPath } from './data/selfManagedSeo';
+import { LEGACY_REDIRECTS } from './data/legacyRedirects';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
 import { preloadAllTools } from './utils/toolPreloader';
@@ -31,8 +32,8 @@ const CalculatorSkeleton: React.FC = () => (
     <div className="h-8 w-60 bg-slate-200 dark:bg-slate-800 rounded-2xl mb-3" />
     <div className="h-4 w-96 max-w-full bg-slate-200/70 dark:bg-slate-800/70 rounded-lg mb-8" />
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-      <div className="md:col-span-7 h-96 bg-slate-200/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-800/80" />
-      <div className="md:col-span-5 h-96 bg-slate-200/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-800/80" />
+      <div className="md:col-span-7 min-h-[32rem] bg-slate-200/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-800/80" />
+      <div className="md:col-span-5 min-h-[32rem] bg-slate-200/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-800/80" />
     </div>
   </div>
 );
@@ -53,21 +54,9 @@ export interface AppSyncComponents {
   ToolPage?: React.ComponentType<any>;
 }
 
-/** Pages whose own component renders <SEO>, so the shared SEOHead must stay out of the way. */
-const SELF_MANAGED = [
-  '/final-exam-grade-calculator',
-  '/test-grade-calculator',
-  '/grade-curve-calculator',
-  '/letter-grade-calculator',
-];
-function isSelfManagedSeoPath(pathname: string): boolean {
-  return SELF_MANAGED.some((r) => isSamePath(pathname, r));
-}
-
 function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const [, startTransition] = useTransition();
   const [toastMessage, setToastMessage] = useState<string>('');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState<boolean>(false);
 
@@ -125,9 +114,23 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
     } catch (_) {}
   }, [navigate, location.pathname]);
 
-  // Automatically scroll to top whenever route changes so footer and nav clicks immediately show the target view
+  // On every client-side route change: scroll to top, move focus to <main> and announce the new page
+  // to screen readers. The first render is skipped so a fresh page load does not steal focus.
+  const mainRef = useRef<HTMLElement | null>(null);
+  const firstRoute = useRef(true);
+  const [routeAnnouncement, setRouteAnnouncement] = useState<string>('');
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    if (firstRoute.current) {
+      firstRoute.current = false;
+      return;
+    }
+    const frame = window.requestAnimationFrame(() => {
+      mainRef.current?.focus({ preventScroll: true });
+      const heading = document.querySelector('main h1');
+      setRouteAnnouncement(`${(heading?.textContent || document.title || 'Page').trim()} page loaded`);
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, [location.pathname]);
 
   // Warm up all calculator tool chunks during idle time for 0ms instantaneous switching
@@ -186,13 +189,15 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   return (
     <div className={`app-shell tool-theme-${activeTool} w-full max-w-full overflow-x-clip`}>
       {!isProgrammaticRoute && <SEOHead tool={activeTool} />}
+      <a href="#main-content" className="skip-link">Skip to main content</a>
+      <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{routeAnnouncement}</div>
       <Navbar
         activeTool={activeTool}
         onSelectTool={handleSelectTool}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
 
-      <main className={`main-wrap tool-theme-${activeTool} w-full max-w-full overflow-hidden px-4 sm:px-6`}>
+      <main id="main-content" ref={mainRef} tabIndex={-1} className={`main-wrap tool-theme-${activeTool} w-full max-w-full overflow-x-clip px-4 sm:px-6 focus:outline-none`}>
         <div className="tool-transition-container w-full max-w-full">
           <Suspense fallback={<CalculatorSkeleton />}>
             <Routes>
@@ -206,66 +211,21 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/mortgage-calculator" element={<CompMortgage setToast={setToastMessage} />} />
               <Route path="/password-generator" element={<CompPassword setToast={setToastMessage} />} />
               <Route path="/privacy" element={<CompPrivacy />} />
-              <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
               <Route path="/terms" element={<CompTerms />} />
-              <Route path="/terms-of-service" element={<Navigate to="/terms" replace />} />
-              <Route path="/terms-and-conditions" element={<Navigate to="/terms" replace />} />
               <Route path="/about" element={<CompAbout />} />
-              <Route path="/methodology" element={<Navigate to="/about" replace />} />
-              <Route path="/about-methodology" element={<Navigate to="/about" replace />} />
-
-              {/* Programmatic Route Merges & 301 Redirects */}
-              <Route
-                path="/easy-grade-calculator/gpa"
-                element={<Navigate to="/gpa-calculator" replace />}
-              />
-              <Route
-                path="/easy-grade-calculator/semester-gpa-calculator"
-                element={<Navigate to="/gpa-calculator" replace />}
-              />
-              <Route
-                path="/easy-grade-calculator/weighted-grade-calculator"
-                element={<Navigate to="/grade-calculator" replace />}
-              />
-              <Route
-                path="/easy-grade-calculator/test-score"
-                element={<Navigate to="/grade-calculator" replace />}
-              />
-              <Route
-                path="/easy-grade-calculator/college-final-grade-calculator"
-                element={<Navigate to="/final-exam-grade-calculator/" replace />}
-              />
-              <Route
-                path="/easy-grade-calculator/high-school-test-grader"
-                element={<Navigate to="/" replace />}
-              />
 
               {/* Flat, hub-and-spoke academic pages */}
               <Route path="/final-exam-grade-calculator" element={<CompProgrammatic presetSlug="final-exam-grade-calculator" setToast={setToastMessage} />} />
-              <Route path="/ez-grader" element={<Navigate to="/" replace />} />
               <Route path="/test-grade-calculator" element={<CompToolPage slug="test-grade-calculator" />} />
               <Route path="/grade-curve-calculator" element={<CompToolPage slug="grade-curve-calculator" />} />
               <Route path="/letter-grade-calculator" element={<CompToolPage slug="letter-grade-calculator" />} />
 
-              {/* Legacy nested URLs (static redirect stubs are generated at build time for crawlers) */}
-              <Route path="/easy-grade-calculator/final-exam-grade-calculator" element={<Navigate to="/final-exam-grade-calculator/" replace />} />
-              <Route path="/easy-grade-calculator/ez-grader" element={<Navigate to="/" replace />} />
-              <Route path="/easy-grade-calculator" element={<Navigate to="/grade-calculator/" replace />} />
+              {/* Legacy and alias URLs. Generated from the SAME table as the build-time redirect stubs. */}
+              {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
+                <Route key={from} path={from} element={<Navigate to={to} replace />} />
+              ))}
               <Route path="/easy-grade-calculator/:slug" element={<Navigate to="/grade-calculator/" replace />} />
               <Route path="/calculator/:slug" element={<Navigate to="/grade-calculator/" replace />} />
-
-              {/* Backwards-compatibility redirects */}
-              <Route path="/gpa" element={<Navigate to="/gpa-calculator" replace />} />
-              <Route path="/cgpa" element={<Navigate to="/cgpa-to-percentage-calculator" replace />} />
-              <Route path="/cgpa-to-percentage" element={<Navigate to="/cgpa-to-percentage-calculator" replace />} />
-              <Route path="/cgpa-calculator" element={<Navigate to="/cgpa-to-percentage-calculator" replace />} />
-              <Route path="/tip" element={<Navigate to="/tip-calculator" replace />} />
-              <Route path="/percentage" element={<Navigate to="/percentage-calculator" replace />} />
-              <Route path="/loan" element={<Navigate to="/loan-calculator" replace />} />
-              <Route path="/mortgage" element={<Navigate to="/mortgage-calculator" replace />} />
-              <Route path="/password" element={<Navigate to="/password-generator" replace />} />
-              <Route path="/final-grade" element={<Navigate to="/grade-calculator" replace />} />
-              <Route path="/weighted-grade" element={<Navigate to="/grade-calculator" replace />} />
 
               {/* Fallback for unknown routes: render true 404 page, never home shell */}
               <Route path="*" element={<NotFound />} />

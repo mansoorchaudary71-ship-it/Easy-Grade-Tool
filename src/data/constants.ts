@@ -8,6 +8,7 @@ import {
   KeyRound,
 } from 'lucide-react';
 import { AssessmentItem, CourseItem, FaqItem, ScaleGrade, ToolKey } from '../types';
+import { SCALE_PLUS_MINUS, SCALE_STANDARD, LetterBand } from '../utils/academicMath';
 
 /**
  * Single source of truth for the official application contact and support email.
@@ -35,46 +36,37 @@ export const INITIAL_COURSES: CourseItem[] = [
   { id: 3, name: 'History', credits: '3', grade: 'A-' },
 ];
 
-export const GRADE_POINT_MAP: Record<string, number> = {
-  'A+': 4.0,
-  A: 4.0,
-  'A-': 3.7,
-  'A−': 3.7,
-  'B+': 3.3,
-  B: 3.0,
-  'B-': 2.7,
-  'B−': 2.7,
-  'C+': 2.3,
-  C: 2.0,
-  'C-': 1.7,
-  'C−': 1.7,
-  'D+': 1.3,
-  D: 1.0,
-  'D-': 0.7,
-  'D−': 0.7,
-  F: 0.0,
+/** Colours per letter family. Scales below are derived from academicMath so every tool agrees. */
+const LETTER_COLORS: Record<string, string[]> = {
+  A: ['hsl(157 45% 48%)', 'hsl(157 45% 52%)', 'hsl(157 45% 58%)'],
+  B: ['hsl(186 48% 42%)', 'hsl(186 48% 51%)', 'hsl(186 38% 62%)'],
+  C: ['hsl(35 88% 58%)', 'hsl(35 76% 63%)', 'hsl(35 66% 68%)'],
+  D: ['hsl(25 72% 57%)', 'hsl(25 72% 62%)', 'hsl(25 62% 66%)'],
+  F: ['hsl(2 61% 54%)'],
 };
 
+function withColors(bands: LetterBand[]): ScaleGrade[] {
+  return bands.map((b) => {
+    const family = b.letter.charAt(0);
+    const shades = LETTER_COLORS[family] || LETTER_COLORS.F;
+    const idx = b.letter.endsWith('+') ? 0 : b.letter.endsWith('-') ? 2 : 1;
+    return { letter: b.letter, min: b.min, color: shades[Math.min(idx, shades.length - 1)] };
+  });
+}
+
+/** Letter -> 4.0-scale points. Accepts both the ASCII "-" and the Unicode minus "\u2212" spellings. */
+export const GRADE_POINT_MAP: Record<string, number> = (() => {
+  const map: Record<string, number> = {};
+  for (const band of [...SCALE_PLUS_MINUS, ...SCALE_STANDARD]) {
+    map[band.letter] = band.gpa;
+    if (band.letter.includes('-')) map[band.letter.replace('-', '\u2212')] = band.gpa;
+  }
+  return map;
+})();
+
 export const GRADING_SCALES: Record<'standard' | 'plus', ScaleGrade[]> = {
-  standard: [
-    { letter: 'A', min: 90, color: 'hsl(157 45% 48%)' },
-    { letter: 'B', min: 80, color: 'hsl(186 48% 42%)' },
-    { letter: 'C', min: 70, color: 'hsl(35 88% 58%)' },
-    { letter: 'D', min: 60, color: 'hsl(25 72% 57%)' },
-    { letter: 'F', min: 0, color: 'hsl(2 61% 54%)' },
-  ],
-  plus: [
-    { letter: 'A', min: 93, color: 'hsl(157 45% 48%)' },
-    { letter: 'A−', min: 90, color: 'hsl(157 45% 58%)' },
-    { letter: 'B+', min: 87, color: 'hsl(186 48% 42%)' },
-    { letter: 'B', min: 83, color: 'hsl(186 48% 51%)' },
-    { letter: 'B−', min: 80, color: 'hsl(186 38% 62%)' },
-    { letter: 'C+', min: 77, color: 'hsl(35 88% 58%)' },
-    { letter: 'C', min: 73, color: 'hsl(35 76% 63%)' },
-    { letter: 'C−', min: 70, color: 'hsl(35 66% 68%)' },
-    { letter: 'D', min: 60, color: 'hsl(25 72% 57%)' },
-    { letter: 'F', min: 0, color: 'hsl(2 61% 54%)' },
-  ],
+  standard: withColors(SCALE_STANDARD),
+  plus: withColors(SCALE_PLUS_MINUS),
 };
 
 export interface ToolDef {
@@ -95,16 +87,30 @@ export const TOOL_PATHS: Record<ToolKey, string> = {
   password: '/password-generator/',
 };
 
+const SEGMENT_TO_TOOL: Record<string, ToolKey> = {
+  'gpa-calculator': 'gpa',
+  gpa: 'gpa',
+  'cgpa-to-percentage-calculator': 'cgpa',
+  'cgpa-to-percentage': 'cgpa',
+  'cgpa-calculator': 'cgpa',
+  cgpa: 'cgpa',
+  'tip-calculator': 'tip',
+  tip: 'tip',
+  'percentage-calculator': 'percentage',
+  percentage: 'percentage',
+  'loan-calculator': 'loan',
+  loan: 'loan',
+  'mortgage-calculator': 'mortgage',
+  mortgage: 'mortgage',
+  'password-generator': 'password',
+  password: 'password',
+};
+
+/** Matches the first path segment exactly, so a future slug such as /multiple-choice-grader/ cannot be mis-themed. */
 export function getToolKeyFromPath(pathname: string): ToolKey {
-  const clean = (pathname || '/').toLowerCase();
-  if (clean.includes('cgpa')) return 'cgpa';
-  if (clean.includes('gpa')) return 'gpa';
-  if (clean.includes('tip')) return 'tip';
-  if (clean.includes('percentage')) return 'percentage';
-  if (clean.includes('loan')) return 'loan';
-  if (clean.includes('mortgage')) return 'mortgage';
-  if (clean.includes('password')) return 'password';
-  return 'quick';
+  const clean = (pathname || '/').toLowerCase().split(/[?#]/)[0];
+  const first = clean.split('/').filter(Boolean)[0] || '';
+  return SEGMENT_TO_TOOL[first] || 'quick';
 }
 
 export const TOOLS_LIST: ToolDef[] = [
@@ -157,7 +163,7 @@ export const FAQ_LIST: FaqItem[] = [
   {
     question: 'Does this grade calculator round the final percentage?',
     answer:
-      'The displayed percentage is rounded to one decimal place for readability. Letter classification uses the unrounded calculated percentage, so a value displayed as 89.5% is not automatically treated as 90%.',
+      'The displayed percentage is rounded to one decimal place for readability. The letter grade is chosen from the same rounded value that is displayed, so the percentage and the letter always agree.',
   },
   {
     question: 'How many points do I need to pass my class?',

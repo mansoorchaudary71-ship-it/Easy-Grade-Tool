@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { ToolKey } from '../types';
 import { SEO_HOME, SEO_ROUTES, SEO_STATIC_PAGES, RouteSeoConfig } from '../data/seoConfig';
 import { SEO } from './SEO';
+import { isSelfManagedSeoPath } from '../data/selfManagedSeo';
 
 export interface SEOHeadProps {
   tool: ToolKey;
@@ -25,11 +26,8 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   const location = useLocation();
   const cleanPath = location.pathname.replace(/\/+$/, '') || '/';
 
-  if (
-    cleanPath.startsWith('/easy-grade-calculator/') ||
-    cleanPath.startsWith('/calculator/') ||
-    ['/final-exam-grade-calculator', '/test-grade-calculator', '/grade-curve-calculator', '/letter-grade-calculator'].includes(cleanPath)
-  ) {
+  // Pages whose own component renders <SEO> (home and weighted grade included) must not get a second one.
+  if (isSelfManagedSeoPath(cleanPath)) {
     return null;
   }
 

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
 import { Plus, X, RotateCcw, Target, Download, Printer } from 'lucide-react';
@@ -9,6 +9,8 @@ import { AssessmentItem, CalculationMode, GradingScaleType } from '../types';
 import { INITIAL_ASSESSMENTS } from '../data/constants';
 import { QuickGrader } from './QuickGrader';
 import { calculateMultiAssessmentGrade } from '../utils/gradeCalculations';
+import { solveFinalExam } from '../utils/finalExam';
+import { parseStrictNumber } from '../utils/academicMath';
 import { GradeVisualProgressBar } from './GradeVisualProgressBar';
 import { AmbientAura } from './AmbientAura';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
@@ -22,8 +24,43 @@ export interface GradeCalculatorProps {
   initialScale?: GradingScaleType;
   initialCourseName?: string;
   hideHeading?: boolean;
+  /**
+   * Set when a parent already renders <SEO> for this page. On / and /grade-calculator this component
+   * is the single SEO owner (SEOHead skips those routes), so it stays false there.
+   */
   hideSeo?: boolean;
 }
+
+const SEG_WRAP =
+  'flex items-center gap-1 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700';
+const SEG_ON = 'cursor-pointer min-h-[48px] text-sm bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-5 py-2 shadow-sm';
+const SEG_OFF =
+  'cursor-pointer min-h-[48px] text-sm bg-transparent text-stone-700 dark:text-stone-200 rounded-full font-medium hover:bg-white dark:hover:bg-slate-700/60 hover:shadow-sm border border-transparent transition-all px-5 py-2';
+const ROW_INPUT =
+  'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
+const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1 text-center';
+const BTN_SOLID =
+  'bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
+const BTN_SOFT =
+  'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-sm inline-flex items-center justify-center gap-2 cursor-pointer transition-colors py-3 px-5 min-h-[48px] active:scale-95';
+const REMOVE_BTN =
+  'w-12 h-12 min-w-[48px] min-h-[48px] rounded-2xl text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 bg-slate-100/90 hover:bg-rose-50 dark:bg-slate-800/90 dark:hover:bg-rose-950/40 border border-slate-200/70 dark:border-slate-700/70 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
+
+const letterTone = (letter: string) => {
+  if (letter.startsWith('A')) return 'bg-[#D2E8E4] dark:bg-teal-950/60 border border-emerald-200/60 dark:border-teal-800/60';
+  if (letter.startsWith('B')) return 'bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#9FB3EE]/50 dark:border-indigo-800/60';
+  if (letter.startsWith('C')) return 'bg-[#FFE8C2] dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60';
+  if (letter.startsWith('D')) return 'bg-stone-100 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60';
+  return 'bg-[#F9D6E1] dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-800/60';
+};
+
+const letterBadge = (letter: string) => {
+  if (letter.startsWith('A')) return 'bg-emerald-100 text-emerald-900 border border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-700';
+  if (letter.startsWith('B')) return 'bg-indigo-100 text-indigo-900 border border-indigo-300 dark:bg-indigo-950/80 dark:text-indigo-300 dark:border-indigo-700';
+  if (letter.startsWith('C')) return 'bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-700';
+  if (letter.startsWith('D')) return 'bg-orange-100 text-orange-900 border border-orange-300 dark:bg-orange-950/80 dark:text-orange-300 dark:border-orange-700';
+  return 'bg-rose-100 text-rose-900 border border-rose-300 dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-700';
+};
 
 export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
   setToast,
@@ -40,15 +77,9 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
 
   // Quick Grade (/) and Weighted Grade (/grade-calculator) are separate tools; the view is derived from the route.
   const calcTab: 'quick-chart' | 'calculator' =
-    initialMode === 'points' || initialMode === 'weighted' || isWeightedRoute
-      ? 'calculator'
-      : 'quick-chart';
+    initialMode === 'points' || initialMode === 'weighted' || isWeightedRoute ? 'calculator' : 'quick-chart';
 
-  const [mode, setMode] = useState<'weighted' | 'points'>(() => {
-    if (initialMode === 'points') return 'points';
-    return 'weighted';
-  });
-
+  const [mode, setMode] = useState<'weighted' | 'points'>(() => (initialMode === 'points' ? 'points' : 'weighted'));
   const [scaleType, setScaleType] = useState<GradingScaleType>(initialScale);
   const [courseName] = useState<string>(initialCourseName || '');
   const [targetGrade, setTargetGrade] = useState<string>('90');
@@ -59,17 +90,19 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
     return INITIAL_ASSESSMENTS;
   });
 
-  // Handle assessment mutations for weighted mode
+  // Unique, monotonic row ids. Date.now() could repeat when two taps land in the same millisecond.
+  const nextId = useRef<number>(
+    Math.max(0, ...(initialItems && initialItems.length > 0 ? initialItems : INITIAL_ASSESSMENTS).map((i) => i.id)) + 1
+  );
+
   const handleUpdateItem = (id: number, field: keyof AssessmentItem, val: string) => {
-    setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, [field]: val } : item))
-    );
+    setItems((prev) => prev.map((item) => (item.id === id ? { ...item, [field]: val } : item)));
   };
 
   const handleAddItem = () => {
     triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
     const newItem: AssessmentItem = {
-      id: Date.now(),
+      id: nextId.current++,
       name: '',
       score: '',
       max: '100',
@@ -87,32 +120,41 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
   const handleReset = () => {
     triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
     setItems(INITIAL_ASSESSMENTS);
+    nextId.current = Math.max(nextId.current, Math.max(0, ...INITIAL_ASSESSMENTS.map((i) => i.id)) + 1);
     setToast?.('Reset to sample assessments');
   };
 
-  // Grade Calculation
-  const gradeResult = useMemo(() => {
-    return calculateMultiAssessmentGrade(items, mode, {
-      scale: scaleType === 'plus' ? 'plus-minus' : 'standard',
-      decimalPrecision: 1,
-    });
-  }, [items, mode, scaleType]);
+  const gradeResult = useMemo(
+    () =>
+      calculateMultiAssessmentGrade(items, mode, {
+        scale: scaleType === 'plus' ? 'plus-minus' : 'standard',
+        decimalPrecision: 1,
+      }),
+    [items, mode, scaleType]
+  );
 
-  // Target Final Exam Simulator
+  const hasResult = gradeResult.validItemCount > 0;
+  const issueById = useMemo(() => {
+    const map = new Map<number | string, string>();
+    gradeResult.issues.forEach((i) => map.set(i.id, i.message));
+    return map;
+  }, [gradeResult.issues]);
+  const countedIds = useMemo(() => {
+    const ids = new Set<number>();
+    items.forEach((it) => {
+      if (it.score.trim() !== '' && !issueById.has(it.id)) ids.add(it.id);
+    });
+    return ids;
+  }, [items, issueById]);
+
+  // Target final exam simulator: always the EXACT current grade, never the rounded display value.
   const targetSimulation = useMemo(() => {
-    const target = parseFloat(targetGrade);
-    const fWeight = parseFloat(finalWeight) / 100;
-    if (isNaN(target) || isNaN(fWeight) || fWeight <= 0 || fWeight >= 1) {
-      return null;
-    }
-    const currentGrade = gradeResult.percentage;
-    const required = (target - currentGrade * (1 - fWeight)) / fWeight;
-    return {
-      required: Math.round(required * 10) / 10,
-      achievable: required <= 100 && required >= 0,
-      extraCreditNeeded: required > 100,
-    };
-  }, [targetGrade, finalWeight, gradeResult.percentage]);
+    if (!hasResult) return null;
+    return solveFinalExam({ current: gradeResult.rawPercentage, target: targetGrade, weight: finalWeight });
+  }, [hasResult, gradeResult.rawPercentage, targetGrade, finalWeight]);
+
+  const weightsTotal = Math.round(gradeResult.totalWeight * 100) / 100;
+  const ignoredCount = gradeResult.issues.length + gradeResult.blankRowCount;
 
   return (
     <>
@@ -122,20 +164,17 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           description={activeSeo.description}
           canonicalUrl={activeSeo.canonicalUrl}
           ogImage={activeSeo.ogImagePlaceholder}
-          keywords={activeSeo.keywords}
           applicationCategory={activeSeo.applicationCategory}
           featureList={activeSeo.featureList}
+          name={isWeightedRoute ? 'Weighted Grade Calculator' : 'Easy Grade Calculator & Quick Grade Chart'}
+          breadcrumbLabel={isWeightedRoute ? 'Weighted Grade Calculator' : 'Quick Grade Calculator'}
         />
       )}
 
       {!hideHeading && (
         <ToolHeading
           badge={calcTab === 'quick-chart' ? 'Quick Grade' : 'Weighted Grade'}
-          title={
-            calcTab === 'quick-chart'
-              ? 'Easy Grade Calculator & Quick Chart'
-              : 'Weighted Grade & Final Exam Calculator'
-          }
+          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator & Quick Chart' : 'Weighted Grade & Final Exam Calculator'}
           description={
             calcTab === 'quick-chart'
               ? 'Calculate instant test percentage scores, letter grades, and printable quick charts for any test length.'
@@ -145,11 +184,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       )}
 
       {calcTab === 'quick-chart' ? (
-        <div
-          id="panel-quick-chart"
-          className="w-full max-w-full overflow-x-hidden pt-1"
-        >
-          {/* Quick Grade and Test Scoring Chart */}
+        <div id="panel-quick-chart" className="w-full max-w-full pt-1">
           <QuickGrader setToast={setToast} />
         </div>
       ) : (
@@ -161,33 +196,25 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
         >
           <AmbientAura />
 
-          {/* Left: Assessment Grade Rows Card */}
-          <section aria-label="Assessments Table" className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 space-y-5 sm:space-y-6">
-            {/* Header with Mode Toggle & Scale Settings */}
+          {/* Left: assessments */}
+          <section aria-label="Assessments Table" className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative p-6 sm:p-8 space-y-5 sm:space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/60 dark:border-slate-800">
               <div>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block mb-1">
-                  Assessments
-                </span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">Assessments</span>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">
                   {courseName ? courseName : 'Weighted & Points Calculator'}
                 </h2>
-                <p className="text-slate-600 dark:text-slate-300 font-medium text-sm mt-1 m-0">
-                  Add assignments, quizzes, and exams to calculate your current standing.
+                <p className="text-slate-700 dark:text-slate-300 font-medium text-sm mt-1 m-0">
+                  Add assignments, quizzes, and exams to calculate your current standing. Leave the score empty for work that is not graded yet.
                 </p>
               </div>
 
-              {/* Mode & Scale Toggles */}
               <div className="flex flex-wrap items-center gap-2">
-                {/* Scale Toggle (Standard vs Plus/Minus) */}
-                <div className="flex items-center gap-1 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700">
+                <div className={SEG_WRAP} role="group" aria-label="Grading scale">
                   <button
                     type="button"
-                    className={`cursor-pointer text-xs ${
-                      scaleType === 'standard'
-                        ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                        : 'bg-transparent text-stone-600 dark:text-stone-300 rounded-full font-medium hover:bg-white dark:hover:bg-slate-700/60 hover:shadow-sm border border-transparent transition-all px-4 py-1.5'
-                    }`}
+                    aria-pressed={scaleType === 'standard'}
+                    className={scaleType === 'standard' ? SEG_ON : SEG_OFF}
                     onClick={() => {
                       triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                       setScaleType('standard');
@@ -198,11 +225,8 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                   </button>
                   <button
                     type="button"
-                    className={`cursor-pointer text-xs ${
-                      scaleType === 'plus'
-                        ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                        : 'bg-transparent text-stone-600 dark:text-stone-300 rounded-full font-medium hover:bg-white dark:hover:bg-slate-700/60 hover:shadow-sm border border-transparent transition-all px-4 py-1.5'
-                    }`}
+                    aria-pressed={scaleType === 'plus'}
+                    className={scaleType === 'plus' ? SEG_ON : SEG_OFF}
                     onClick={() => {
                       triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                       setScaleType('plus');
@@ -213,15 +237,11 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                   </button>
                 </div>
 
-                {/* Mode Toggle (Weighted vs Points) */}
-                <div className="flex items-center gap-1 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700">
+                <div className={SEG_WRAP} role="group" aria-label="Calculation mode">
                   <button
                     type="button"
-                    className={`cursor-pointer text-xs ${
-                      mode === 'weighted'
-                        ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                        : 'bg-transparent text-stone-600 dark:text-stone-300 rounded-full font-medium hover:bg-white dark:hover:bg-slate-700/60 hover:shadow-sm border border-transparent transition-all px-4 py-1.5'
-                    }`}
+                    aria-pressed={mode === 'weighted'}
+                    className={mode === 'weighted' ? SEG_ON : SEG_OFF}
                     onClick={() => {
                       triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                       setMode('weighted');
@@ -232,11 +252,8 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                   </button>
                   <button
                     type="button"
-                    className={`cursor-pointer text-xs ${
-                      mode === 'points'
-                        ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                        : 'bg-transparent text-stone-600 dark:text-stone-300 rounded-full font-medium hover:bg-white dark:hover:bg-slate-700/60 hover:shadow-sm border border-transparent transition-all px-4 py-1.5'
-                    }`}
+                    aria-pressed={mode === 'points'}
+                    className={mode === 'points' ? SEG_ON : SEG_OFF}
                     onClick={() => {
                       triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                       setMode('points');
@@ -249,278 +266,272 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               </div>
             </div>
 
-            {/* Assessment Table Header (Desktop Only) */}
-            <div className="hidden sm:grid grid-cols-12 gap-2 text-[11px] font-semibold tracking-wider text-slate-400 uppercase px-1">
-              <span className={mode === 'weighted' ? 'col-span-5' : 'col-span-6'}>
-                Assignment
-              </span>
+            {/* Desktop column headers */}
+            <div className="hidden sm:grid grid-cols-12 gap-2 text-xs font-semibold tracking-wider text-slate-700 dark:text-slate-300 uppercase px-1">
+              <span className={mode === 'weighted' ? 'col-span-5' : 'col-span-6'}>Assignment</span>
               <span className="col-span-2 text-center">Score</span>
               <span className="col-span-2 text-center">Out Of</span>
-              {mode === 'weighted' && (
-                <span className="col-span-2 text-center">Weight %</span>
-              )}
+              {mode === 'weighted' && <span className="col-span-2 text-center">Weight %</span>}
               <span className="col-span-1" />
             </div>
 
-            {/* Assessment Rows with Subtle Slide-in Animation via Framer Motion */}
-            <div className="space-y-3 sm:space-y-2.5 overflow-x-auto">
+            {/* Rows. Padding keeps the focus ring visible inside the clipping box. */}
+            <div className="space-y-3 sm:space-y-2.5 overflow-x-auto p-1 -m-1">
               <AnimatePresence initial={false}>
-                {items.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    layout="position"
-                    initial={{ opacity: 0, x: -18, y: -4 }}
-                    animate={{ opacity: 1, x: 0, y: 0 }}
-                    exit={{
-                      opacity: 0,
-                      x: 18,
-                      height: 0,
-                      overflow: 'hidden',
-                      transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] },
-                    }}
-                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-white/80 dark:bg-slate-900/80 sm:bg-transparent sm:dark:bg-transparent border border-slate-200/90 dark:border-slate-800/90 sm:border-0 rounded-2xl sm:rounded-none p-3.5 sm:p-0 shadow-xs sm:shadow-none sm:grid sm:grid-cols-12 sm:gap-2 sm:items-center sm:py-1 space-y-2.5 sm:space-y-0"
-                  >
-                    {/* Assignment Name (and Mobile Remove Button) */}
-                    <div className={mode === 'weighted' ? 'sm:col-span-5' : 'sm:col-span-6'}>
-                      <div className="flex items-end gap-2">
-                        <div className="flex-1 min-w-0">
-                          <label htmlFor={`assess-name-${item.id}`} className="block sm:hidden text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1">
-                            Assignment
-                          </label>
-                          <input aria-label="Assignment name" placeholder="e.g. Midterm Exam"
-                            id={`assess-name-${item.id}`}
-                            type="text"
-                            className="w-full min-h-[44px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm placeholder:text-slate-400"
-                            value={item.name}
-                            onChange={(e) => handleUpdateItem(item.id, 'name', e.target.value)}
-                          />
+                {items.map((item, index) => {
+                  const rowName = item.name.trim() || `Row ${index + 1}`;
+                  const issue = issueById.get(item.id);
+                  const ignored = item.score.trim() === '';
+                  return (
+                    <motion.div
+                      key={item.id}
+                      layout="position"
+                      initial={{ opacity: 0, x: -18, y: -4 }}
+                      animate={{ opacity: 1, x: 0, y: 0 }}
+                      exit={{ opacity: 0, x: 18, height: 0, overflow: 'hidden', transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] } }}
+                      transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                      className="bg-white/80 dark:bg-slate-900/80 sm:bg-transparent sm:dark:bg-transparent border border-slate-200/90 dark:border-slate-800/90 sm:border-0 rounded-2xl sm:rounded-none p-3.5 sm:p-0 shadow-xs sm:shadow-none sm:grid sm:grid-cols-12 sm:gap-2 sm:items-center sm:py-1 space-y-2.5 sm:space-y-0"
+                    >
+                      <div className={mode === 'weighted' ? 'sm:col-span-5' : 'sm:col-span-6'}>
+                        <div className="flex items-end gap-2">
+                          <div className="flex-1 min-w-0">
+                            <label htmlFor={`assess-name-${item.id}`} className="block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
+                              Assignment
+                            </label>
+                            <input
+                              aria-label={`Assignment name, row ${index + 1}`}
+                              placeholder="e.g. Midterm Exam"
+                              id={`assess-name-${item.id}`}
+                              type="text"
+                              enterKeyHint="next"
+                              className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                              value={item.name}
+                              onChange={(e) => handleUpdateItem(item.id, 'name', e.target.value)}
+                            />
+                          </div>
+                          <div className="sm:hidden flex-shrink-0">
+                            <button
+                              type="button"
+                              className={REMOVE_BTN}
+                              aria-label={`Remove ${rowName}`}
+                              disabled={items.length <= 1}
+                              onClick={() => handleRemoveItem(item.id)}
+                            >
+                              <X className="w-5 h-5" aria-hidden="true" />
+                            </button>
+                          </div>
                         </div>
-                        {/* Mobile Remove Button (44x44px touch target) */}
-                        <div className="sm:hidden flex-shrink-0">
-                          <button
-                            type="button"
-                            className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-2xl text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 bg-slate-100/90 hover:bg-rose-50 dark:bg-slate-800/90 dark:hover:bg-rose-950/40 border border-slate-200/70 dark:border-slate-700/70 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                            aria-label={`Remove ${item.name || 'assignment'}`}
-                            disabled={items.length <= 1}
-                            onClick={() => handleRemoveItem(item.id)}
-                          >
-                            <X className="w-4 h-4" aria-hidden="true" />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Mobile: 2 or 3 Column Row for Score / Out Of / Weight % (Desktop: sm:contents) */}
-                    <div className={`grid ${mode === 'weighted' ? 'grid-cols-3' : 'grid-cols-2'} gap-2 sm:contents`}>
-                      {/* Earned Score */}
-                      <div className="sm:col-span-2">
-                        <label htmlFor={`assess-score-${item.id}`} className="block sm:hidden text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1 text-center">
-                          Score
-                        </label>
-                        <input aria-label="Score earned" placeholder="85"
-                          id={`assess-score-${item.id}`}
-                          type="number"
-                          inputMode="decimal"
-                          className="w-full min-h-[44px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-400"
-                          value={item.score}
-                          onChange={(e) => handleUpdateItem(item.id, 'score', e.target.value)}
-                        />
                       </div>
 
-                      {/* Maximum Possible Points */}
-                      <div className="sm:col-span-2">
-                        <label htmlFor={`assess-max-${item.id}`} className="block sm:hidden text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1 text-center">
-                          Out Of
-                        </label>
-                        <input aria-label="Total possible points" placeholder="100"
-                          id={`assess-max-${item.id}`}
-                          type="number"
-                          inputMode="decimal"
-                          className="w-full min-h-[44px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-400"
-                          value={item.max}
-                          onChange={(e) => handleUpdateItem(item.id, 'max', e.target.value)}
-                        />
-                      </div>
-
-                      {/* Category Weight % */}
-                      {mode === 'weighted' && (
+                      <div className={`grid ${mode === 'weighted' ? 'grid-cols-3' : 'grid-cols-2'} gap-2 sm:contents`}>
                         <div className="sm:col-span-2">
-                          <label htmlFor={`assess-weight-${item.id}`} className="block sm:hidden text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-1 text-center">
-                            Weight %
-                          </label>
-                          <input aria-label="Category weight percentage" placeholder="20"
-                            id={`assess-weight-${item.id}`}
-                            type="number"
+                          <label htmlFor={`assess-score-${item.id}`} className={ROW_LABEL}>Score</label>
+                          <input
+                            aria-label={`Score earned, ${rowName}`}
+                            placeholder="85"
+                            id={`assess-score-${item.id}`}
+                            type="text"
                             inputMode="decimal"
-                            className="w-full min-h-[44px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-400"
-                            value={item.weight}
-                            onChange={(e) => handleUpdateItem(item.id, 'weight', e.target.value)}
+                            enterKeyHint="next"
+                            aria-invalid={issue ? true : undefined}
+                            className={ROW_INPUT}
+                            value={item.score}
+                            onChange={(e) => handleUpdateItem(item.id, 'score', e.target.value)}
                           />
                         </div>
-                      )}
-                    </div>
+                        <div className="sm:col-span-2">
+                          <label htmlFor={`assess-max-${item.id}`} className={ROW_LABEL}>Out Of</label>
+                          <input
+                            aria-label={`Total possible points, ${rowName}`}
+                            placeholder="100"
+                            id={`assess-max-${item.id}`}
+                            type="text"
+                            inputMode="decimal"
+                            enterKeyHint="next"
+                            aria-invalid={issue ? true : undefined}
+                            className={ROW_INPUT}
+                            value={item.max}
+                            onChange={(e) => handleUpdateItem(item.id, 'max', e.target.value)}
+                          />
+                        </div>
+                        {mode === 'weighted' && (
+                          <div className="sm:col-span-2">
+                            <label htmlFor={`assess-weight-${item.id}`} className={ROW_LABEL}>Weight %</label>
+                            <input
+                              aria-label={`Category weight percentage, ${rowName}`}
+                              placeholder="20"
+                              id={`assess-weight-${item.id}`}
+                              type="text"
+                              inputMode="decimal"
+                              enterKeyHint="done"
+                              aria-invalid={issue ? true : undefined}
+                              className={ROW_INPUT}
+                              value={item.weight}
+                              onChange={(e) => handleUpdateItem(item.id, 'weight', e.target.value)}
+                            />
+                          </div>
+                        )}
+                      </div>
 
-                    {/* Desktop Remove Button */}
-                    <div className="hidden sm:flex sm:col-span-1 justify-center">
-                      <button
-                        type="button"
-                        className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
-                        aria-label="Remove assessment row"
-                        disabled={items.length <= 1}
-                        onClick={() => handleRemoveItem(item.id)}
-                      >
-                        <X className="w-4 h-4" aria-hidden="true" />
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
+                      <div className="hidden sm:flex sm:col-span-1 justify-center">
+                        <button
+                          type="button"
+                          className={REMOVE_BTN}
+                          aria-label={`Remove ${rowName}`}
+                          disabled={items.length <= 1}
+                          onClick={() => handleRemoveItem(item.id)}
+                        >
+                          <X className="w-5 h-5" aria-hidden="true" />
+                        </button>
+                      </div>
+
+                      {(issue || ignored) && (
+                        <p className={`sm:col-span-12 text-sm m-0 ${issue ? 'text-rose-700 dark:text-rose-400 font-semibold' : 'text-slate-600 dark:text-slate-400'}`} role={issue ? 'alert' : undefined}>
+                          {issue || `${rowName} is not counted yet because the score is empty.`}
+                        </p>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </AnimatePresence>
             </div>
 
-            {/* Controls: Add Grade Row & Reset */}
-            <div className="flex items-center justify-between pt-2">
-              <button
-                type="button"
-                className="bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-2.5 min-h-[44px] transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
-                onClick={handleAddItem}
-              >
+            {mode === 'weighted' && hasResult && (
+              <p className={`text-sm m-0 font-medium ${weightsTotal === 100 ? 'text-emerald-800 dark:text-emerald-300' : 'text-amber-800 dark:text-amber-300'}`}>
+                Weights total {weightsTotal}%.{' '}
+                {weightsTotal === 100
+                  ? 'Your weights add up to 100%.'
+                  : 'They do not add up to 100%, so the result is scaled to the weights you entered.'}
+              </p>
+            )}
+
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <button type="button" className={BTN_SOLID} onClick={handleAddItem}>
                 <Plus className="w-4 h-4" aria-hidden="true" />
                 <span>Add grade row</span>
               </button>
-
-              <button
-                type="button"
-                className="bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-xs inline-flex items-center gap-1.5 cursor-pointer transition-colors py-2.5 px-5 min-h-[44px]"
-                onClick={handleReset}
-              >
-                <RotateCcw className="w-3 h-3" />
+              <button type="button" className={BTN_SOFT} onClick={handleReset}>
+                <RotateCcw className="w-4 h-4" aria-hidden="true" />
                 <span>Reset rows</span>
               </button>
             </div>
           </section>
 
-          {/* Right: Results & Target Grade Simulator */}
-          <section aria-label="Grade Results and Target Calculator" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between" aria-live="polite">
+          {/* Right: results and target simulator */}
+          <section aria-label="Grade Results and Target Calculator" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative p-6 sm:p-8 flex flex-col justify-between">
             <div className="space-y-6">
-              {/* Current Grade Outcome - Outer Pastel Wrapper */}
-              <div className={`${
-                gradeResult.letterGrade.startsWith('A')
-                  ? 'bg-[#D2E8E4] dark:bg-teal-950/60 border border-emerald-200/60 dark:border-teal-800/60'
-                  : gradeResult.letterGrade.startsWith('B')
-                  ? 'bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#9FB3EE]/50 dark:border-indigo-800/60'
-                  : gradeResult.letterGrade.startsWith('C')
-                  ? 'bg-[#FFE8C2] dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60'
-                  : gradeResult.letterGrade.startsWith('D')
-                  ? 'bg-stone-100 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60'
-                  : 'bg-[#F9D6E1] dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-800/60'
-              } rounded-[24px] p-4.5 space-y-3`}>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block">
-                  Current Grade
-                </span>
+              <div className={`${hasResult ? letterTone(gradeResult.letterGrade) : 'bg-stone-100 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60'} rounded-[24px] p-4 space-y-3`}>
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">Current Grade</span>
 
-                {/* Inner Nested White Card for Depth */}
-                <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between">
-                  <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight">
-                    {gradeResult.formattedPercentage}%
+                {/* The only live region in the results: one short line. */}
+                <div
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                  className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3"
+                >
+                  {hasResult ? (
+                    <>
+                      <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight">
+                        {gradeResult.formattedPercentage}%
+                      </div>
+                      <span className={`text-sm sm:text-base font-bold font-mono px-3 py-1.5 rounded-full ${letterBadge(gradeResult.letterGrade)}`}>
+                        Grade {gradeResult.letterGrade}
+                      </span>
+                    </>
+                  ) : (
+                    <p className="m-0 text-sm font-semibold text-slate-700 dark:text-slate-200">Enter at least one score to see your grade.</p>
+                  )}
+                </div>
+
+                {hasResult && (
+                  <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl p-3 shadow-sm">
+                    <GradeVisualProgressBar percent={Math.min(100, gradeResult.percentage)} letter={gradeResult.letterGrade} />
+                    <p className="text-sm text-slate-700 dark:text-slate-300 font-medium mt-2 m-0 text-center sm:text-left">
+                      Based on {gradeResult.validItemCount} counted row{gradeResult.validItemCount === 1 ? '' : 's'} ({mode === 'weighted' ? 'weighted' : 'points-based'}).
+                      {ignoredCount > 0 ? ` ${ignoredCount} row${ignoredCount === 1 ? ' is' : 's are'} not counted.` : ''}
+                    </p>
                   </div>
-                  <span
-                    className={`text-sm sm:text-base font-bold font-mono px-3 py-1 rounded-full ${
-                      gradeResult.letterGrade.startsWith('A')
-                        ? 'bg-emerald-100 text-emerald-900 border border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-700'
-                        : gradeResult.letterGrade.startsWith('B')
-                        ? 'bg-indigo-100 text-indigo-900 border border-indigo-300 dark:bg-indigo-950/80 dark:text-indigo-300 dark:border-indigo-700'
-                        : gradeResult.letterGrade.startsWith('C')
-                        ? 'bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-700'
-                        : gradeResult.letterGrade.startsWith('D')
-                        ? 'bg-orange-100 text-orange-900 border border-orange-300 dark:bg-orange-950/80 dark:text-orange-300 dark:border-orange-700'
-                        : 'bg-rose-100 text-rose-900 border border-rose-300 dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-700'
-                    }`}
-                  >
-                    Grade {gradeResult.letterGrade}
-                  </span>
-                </div>
-
-                <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl p-3 shadow-sm">
-                  <GradeVisualProgressBar
-                    percent={gradeResult.percentage}
-                    letter={gradeResult.letterGrade}
-                  />
-                  <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-2 m-0 text-center sm:text-left">
-                    Based on {gradeResult.validItemCount} active assessment rows ({mode === 'weighted' ? 'weighted' : 'points-based'}).
-                  </p>
-                </div>
+                )}
               </div>
 
-              {/* Target Final Exam Simulator - Secondary Metric Block */}
+              {/* Target Final Exam Simulator */}
               <div className="bg-white dark:bg-slate-800/60 rounded-[24px] border border-stone-200/80 dark:border-slate-700 shadow-sm p-5 space-y-4">
                 <div className="flex items-center gap-2">
-                  <Target className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
-                    Target Final Exam Simulator
-                  </span>
+                  <Target className="w-4 h-4 text-purple-700 dark:text-purple-300" aria-hidden="true" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">Target Final Exam Simulator</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="target-grade-input" className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block mb-1">
+                    <label htmlFor="target-grade-input" className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
                       Desired Grade (%)
                     </label>
                     <input
                       id="target-grade-input"
-                      type="number"
-                      aria-label="Desired course grade percentage"
+                      type="text"
+                      inputMode="decimal"
+                      enterKeyHint="next"
                       placeholder="90"
-                      className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-400"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={targetGrade}
                       onChange={(e) => setTargetGrade(e.target.value)}
                     />
                   </div>
-
                   <div>
-                    <label htmlFor="final-weight-input" className="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block mb-1">
+                    <label htmlFor="final-weight-input" className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
                       Final Exam Weight (%)
                     </label>
                     <input
                       id="final-weight-input"
-                      type="number"
-                      aria-label="Final exam weight percentage"
+                      type="text"
+                      inputMode="decimal"
+                      enterKeyHint="done"
                       placeholder="20"
-                      className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-400"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={finalWeight}
                       onChange={(e) => setFinalWeight(e.target.value)}
                     />
                   </div>
                 </div>
 
-                {targetSimulation && (
-                  <div className="bg-[#D2E8E4] dark:bg-teal-950/60 border border-emerald-200/60 dark:border-teal-800/60 rounded-[24px] p-4.5 space-y-2">
-                    <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between">
-                      <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">Required on Final:</span>
-                      <strong className="text-2xl font-extrabold text-teal-950 dark:text-teal-100 font-mono">
-                        {targetSimulation.required}%
-                      </strong>
+                <div role="status" aria-live="polite" aria-atomic="true">
+                  {!hasResult ? (
+                    <p className="m-0 text-sm text-slate-700 dark:text-slate-300">Add at least one scored row first, then the simulator can work out what you need.</p>
+                  ) : targetSimulation && targetSimulation.status === 'invalid' ? (
+                    <ul className="m-0 pl-5 list-disc text-sm text-rose-700 dark:text-rose-400">
+                      {targetSimulation.errors.map((e) => (
+                        <li key={e}>{e}</li>
+                      ))}
+                    </ul>
+                  ) : targetSimulation ? (
+                    <div className="bg-[#D2E8E4] dark:bg-teal-950/60 border border-emerald-200/60 dark:border-teal-800/60 rounded-[24px] p-4 space-y-2">
+                      <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3">
+                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">Required on Final:</span>
+                        <strong className="text-2xl font-extrabold text-teal-950 dark:text-teal-100 font-mono">
+                          {targetSimulation.status === 'secured' ? '0%' : `${(Math.round(targetSimulation.required * 10) / 10).toFixed(1)}%`}
+                        </strong>
+                      </div>
+                      <p className="text-sm text-slate-800 dark:text-slate-200 m-0 px-1">
+                        {targetSimulation.status === 'secured'
+                          ? 'Already secured: you reach this target even with 0% on the final.'
+                          : targetSimulation.status === 'unreachable'
+                          ? `Out of reach without extra credit: the most you can reach is ${targetSimulation.maxPossible.toFixed(1)}%.`
+                          : 'Achievable on the final exam.'}
+                      </p>
                     </div>
-                    <span className="text-[11px] text-slate-600 dark:text-slate-300 block px-1">
-                      {targetSimulation.extraCreditNeeded
-                        ? 'Extra credit required to hit this target.'
-                        : targetSimulation.required <= 0
-                        ? 'You have already secured this target grade!'
-                        : 'Achievable on the final exam.'}
-                    </span>
-                  </div>
-                )}
+                  ) : null}
+                </div>
 
-                <div className="pt-2">
+                <div className="pt-1">
                   <Link
                     to="/final-exam-grade-calculator/"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 hover:underline transition-colors"
+                    className="inline-flex items-center min-h-[48px] gap-1.5 text-sm font-bold text-teal-800 dark:text-teal-300 hover:text-teal-900 dark:hover:text-teal-200 hover:underline transition-colors"
                   >
-                    <span>Need detailed syllabus weighting? Open the Final Exam Grade Calculator simulator &rarr;</span>
+                    <span>Need more detail? Open the Final Exam Grade Calculator &rarr;</span>
                   </Link>
                 </div>
 
-                {/* Export PDF & Print Actions */}
                 <div className="pt-4 border-t border-slate-200/60 dark:border-slate-800 flex flex-wrap items-center gap-2 print:hidden">
                   <button
                     type="button"
@@ -533,7 +544,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                         setToast?.('Use Export PDF to save a printable report.');
                       }
                     }}
-                    className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
+                    className={`flex-1 ${BTN_SOLID}`}
                   >
                     <Printer className="w-4 h-4" aria-hidden="true" />
                     <span>Print Result</span>
@@ -541,11 +552,13 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                   <button
                     type="button"
                     aria-label="Export grade report as PDF"
+                    disabled={!hasResult}
                     onClick={async () => {
                       triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                       try {
                         setToast?.('Generating PDF grade report...');
                         const { exportGradeReportPdf } = await import('../utils/pdfExport');
+                        // Export exactly the rows the screen counted, so the PDF matches the on-screen result.
                         await exportGradeReportPdf({
                           courseName: courseName || 'Course Grade Report',
                           mode,
@@ -553,22 +566,24 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                           percent: gradeResult.percentage,
                           letter: gradeResult.letterGrade,
                           targetGrade,
-                          assessments: items.map((it) => ({
-                            ...it,
-                            scoreNum: parseFloat(it.score) || 0,
-                            maxNum: parseFloat(it.max) || 100,
-                            weightNum: parseFloat(it.weight) || 0,
-                            invalid: isNaN(parseFloat(it.score)) || isNaN(parseFloat(it.max)) || (parseFloat(it.max) || 0) <= 0,
-                          })),
+                          assessments: items
+                            .filter((it) => countedIds.has(it.id))
+                            .map((it) => ({
+                              ...it,
+                              scoreNum: parseStrictNumber(it.score) ?? 0,
+                              maxNum: parseStrictNumber(it.max) ?? 1,
+                              weightNum: parseStrictNumber(it.weight) ?? 0,
+                              invalid: false,
+                            })),
                         });
                         setToast?.('Grade report PDF downloaded!');
                       } catch {
                         setToast?.('Could not generate PDF report.');
                       }
                     }}
-                    className="min-h-[46px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 font-semibold shadow-xs text-xs transition-all cursor-pointer active:scale-95"
+                    className={`${BTN_SOFT} disabled:opacity-50 disabled:cursor-not-allowed`}
                   >
-                    <Download className="w-3.5 h-3.5" aria-hidden="true" />
+                    <Download className="w-4 h-4" aria-hidden="true" />
                     <span>Export PDF</span>
                   </button>
                 </div>
