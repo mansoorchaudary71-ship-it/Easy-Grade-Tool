@@ -15,6 +15,7 @@ import {
   computeCgpaToPercentage,
 } from '../data/cgpaUniversities';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 import {
   BASE_CANONICAL_ORIGIN,
   SITE_LAUNCH_DATE,
@@ -224,11 +225,7 @@ export const CgpaEducationalGuide: React.FC = () => {
       </section>
 
       {/* Main Educational & Reference Article */}
-      <section
-        className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4"
-        aria-labelledby="cgpa-guide-heading"
-      >
-        <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="cgpa-guide-heading">
           <h2
             id="cgpa-guide-heading"
             className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight mb-4"
@@ -433,11 +430,10 @@ export const CgpaEducationalGuide: React.FC = () => {
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             For example, if you earned an SGPA of <strong>8.10</strong> in Semester 1 (22 credits) and <strong>8.50</strong> in Semester 2 (24 credits), your cumulative GPA is <code>[(8.10 × 22) + (8.50 × 24)] ÷ (22 + 24) = (178.2 + 204.0) ÷ 46 = 8.31 CGPA</code>. You can use the built-in <strong>SGPA to CGPA &amp; Percentage Calculator</strong> panel above to compute this automatically across up to 12 semesters. Need to compute US 4.0 letter-grade GPA from course credits, calculate weighted syllabus grades, or check raw percentage differences? Explore our <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">4.0 GPA Calculator</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, and <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link>.
           </p>
+        </ContentSection>
 
-          {/* FAQ Section */}
-          <FAQ tool="cgpa" />
-        </article>
-      </section>
+      {/* FAQ Section: its own card, identical to every other tool */}
+      <FAQ tool="cgpa" />
     </>
   );
 };

@@ -1,8 +1,9 @@
 import React from 'react';
-import { ChevronDown } from 'lucide-react';
 import { Link } from './SlashLink';
 import { HOME_FAQS } from '../data/homeContent';
 import { SemanticGuideImage } from './SemanticGuideImage';
+import { ContentSection } from './GuideShell';
+import { FAQ, FaqHeading } from './FAQ';
 
 const MORE = [
   { to: '/grade-calculator/', title: 'Weighted grade calculator', text: 'Combine homework, quizzes and exams into a course grade.' },
@@ -20,10 +21,17 @@ const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100';
 const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
 const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
 
+const HOME_FAQ_HEADING: FaqHeading = {
+  eyebrow: 'Quick Grade FAQs',
+  title: 'Quick Grade FAQ',
+  description: 'Short answers on the Quick Grade (EZ Grader) chart, the percentage formula, grading scales and printing.',
+  ctaText: 'Enter your number of questions above to see the full percentage and letter grade chart.',
+};
+
 /** Homepage guide: tool content, links to every academic tool, and the FAQ. */
 export const QuickGradeGuide: React.FC = () => (
-  <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4 space-y-10 content-auto print:hidden" aria-labelledby="home-guide-title">
-    <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+  <>
+    <ContentSection labelledBy="home-guide-title">
       <div>
         <h2 id="home-guide-title" className={H2_MAIN}>
           Free Grade Calculator &amp; Quick Chart for Teachers and Students
@@ -171,9 +179,9 @@ export const QuickGradeGuide: React.FC = () => (
           averages, using a free grade calculator to calculate your results and understand what you need on your final.
         </p>
       </div>
-    </article>
+    </ContentSection>
 
-    <div className="space-y-3">
+    <div className="guide-shell print:hidden space-y-3" style={{ marginTop: '3rem' }}>
       <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">More grade calculators</h2>
       <ul className="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
         {MORE.map((m) => (
@@ -187,21 +195,8 @@ export const QuickGradeGuide: React.FC = () => (
       </ul>
     </div>
 
-    <div className="space-y-3 max-w-3xl" aria-label="Frequently asked questions">
-      <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Quick Grade FAQ</h2>
-      <div className="divide-y divide-slate-200 dark:divide-slate-800 rounded-[24px] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-        {HOME_FAQS.map((f) => (
-          <details key={f.id} className="group px-5 py-4">
-            <summary className="flex items-center justify-between gap-4 cursor-pointer list-none font-semibold text-slate-900 dark:text-white">
-              <span>{f.question}</span>
-              <ChevronDown className="w-4 h-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
-            </summary>
-            <p className="mt-2 mb-0 text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">{f.answer}</p>
-          </details>
-        ))}
-      </div>
-    </div>
-  </section>
+    <FAQ tool="quick" items={HOME_FAQS} heading={HOME_FAQ_HEADING} />
+  </>
 );
 
 export default QuickGradeGuide;

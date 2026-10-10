@@ -9,6 +9,7 @@ import { SEO_ROUTES } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 
 interface PaymentResultCardProps {
@@ -449,8 +450,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
       />
 
       {/* Optimized Educational & SEO Content for Loan Calculator */}
-      <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4" aria-labelledby="loan-guide-title">
-        <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="loan-guide-title">
           <h2
             id="loan-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
@@ -608,12 +608,9 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Strategic loan management—such as making extra principal payments, avoiding prepayment penalties, and refinancing when interest rates drop—can shorten your payoff timeline significantly. <strong className="font-semibold text-slate-900 dark:text-white">Use the amortization schedule above to track how quickly your principal balance decreases each year and plan ahead with confidence.</strong>
           </p>
-        </article>
-      </section>
+        </ContentSection>
 
-      <section aria-label="Loan Frequently Asked Questions" className="w-full max-w-4xl mx-auto my-12 px-4">
-        <FAQ tool="loan" />
-      </section>
+      <FAQ tool="loan" />
     </>
   );
 };

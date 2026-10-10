@@ -91,13 +91,8 @@ export const EducationalGuide: React.FC<EducationalGuideProps> = ({ activeTool =
   if (activeTool === 'quick' && isWeightedRoute) {
     return (
       <>
-        <div className="w-full max-w-4xl mx-auto mt-12 mb-16 px-4">
-          <ToolContentGuide guide="weighted" />
-        </div>
-
-        <div className="w-full max-w-4xl mx-auto px-4 mb-16">
-          <FAQ tool="quick" items={WEIGHTED_COURSE_FAQS} heading={PAGE_FAQ_HEADINGS['weighted-grade-calculator']} />
-        </div>
+        <ToolContentGuide guide="weighted" />
+        <FAQ tool="quick" items={WEIGHTED_COURSE_FAQS} heading={PAGE_FAQ_HEADINGS['weighted-grade-calculator']} />
       </>
     );
   }
@@ -109,10 +104,6 @@ export const EducationalGuide: React.FC<EducationalGuideProps> = ({ activeTool =
 
   // For other tool pages, render the tool-specific FAQ accordion in an accessible SEO container
   return (
-    <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4">
-      <article className="seo-article bg-gradient-to-br from-white/90 to-slate-50/85 dark:from-slate-900/90 dark:to-slate-950/85 backdrop-blur-xl border border-white/80 dark:border-slate-800/80 shadow-[0_15px_50px_rgba(0,0,0,0.06)] rounded-3xl p-6 sm:p-10 font-sans">
-        <FAQ tool={activeTool} />
-      </article>
-    </section>
+    <FAQ tool={activeTool} />
   );
 };

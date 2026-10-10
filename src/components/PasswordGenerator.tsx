@@ -9,6 +9,7 @@ import { SEO_ROUTES } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 
 interface PasswordGeneratorProps {
   setToast: (msg: string) => void;
@@ -283,8 +284,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
       </div>
 
       {/* Optimized Educational & SEO Content for Password Generator */}
-      <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16" aria-labelledby="password-guide-title">
-        <article className="seo-article bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 border border-white/80 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="password-guide-title">
           <h2
             id="password-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
@@ -446,12 +446,9 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Understanding how randomly generated passwords from a password generator use cryptographic methods is key to appreciating their strength and their ability to create a unique password for each account, which is vital when you need a strong password. When a random password generator creates a new password, it typically generates a sequence of characters that lacks any discernible patterns or personal information, which is crucial for creating a unique password. This makes the complex passwords incredibly resistant to brute-force and dictionary attacks. The generated strong password should be a random mix of uppercase letters, lowercase letters, numbers, and special characters, with a sufficient password length of at least 16 characters long to enhance security. This ensures that each unique password for every online account provides maximum protection against hackers.
           </p>
-        </article>
-      </section>
+        </ContentSection>
 
-      <section aria-label="Password Frequently Asked Questions" className="w-full max-w-4xl mx-auto my-12 px-4">
-        <FAQ tool="password" />
-      </section>
+      <FAQ tool="password" />
     </>
   );
 };

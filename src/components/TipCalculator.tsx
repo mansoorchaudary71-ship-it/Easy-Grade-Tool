@@ -9,6 +9,7 @@ import { SEO_ROUTES } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 
 interface TipCalculatorProps {
@@ -196,8 +197,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
       </div>
 
       {/* Optimized Educational & SEO Content for Tip Calculator */}
-      <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4" aria-labelledby="tip-guide-title">
-        <article className="seo-article bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 border border-white/80 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="tip-guide-title">
           <h2
             id="tip-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
@@ -404,12 +404,9 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             In cases where mandatory gratuity is added directly to your check, it covers the service fee on the bill. Your total bill will simply be the bill amount, with no extra tip expected from the customer, unless you choose to leave a bigger tip. For general percentage ratios, discounts, or monthly financing estimates, explore our <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link>, <Link to="/loan-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Loan Calculator</Link>, and <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>.
           </p>
-        </article>
-      </section>
+        </ContentSection>
 
-      <section aria-label="Tip Frequently Asked Questions" className="w-full max-w-4xl mx-auto my-12 px-4">
-        <FAQ tool="tip" />
-      </section>
+      <FAQ tool="tip" />
     </>
   );
 };
