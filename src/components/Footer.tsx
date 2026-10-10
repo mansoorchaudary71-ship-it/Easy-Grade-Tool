@@ -33,6 +33,8 @@ import {
   Bug,
   PlusCircle,
   Activity,
+  ArrowRight,
+  ChevronDown,
 } from 'lucide-react';
 import { getToolKeyFromPath, CONTACT_EMAIL, TOOL_PATHS } from '../data/constants';
 import { NAV_ITEMS } from '../data/navItems';
@@ -60,13 +62,107 @@ interface ServerHealthData {
   latencyMs?: number;
 }
 
+
+const FOOTER_PREMIUM_CSS = `
+.ft-news{position:relative;isolation:isolate;overflow:hidden;color:#fff;
+  background:linear-gradient(120deg,#16206b 0%,#2f4bb8 40%,#5b3fc4 75%,#2f4bb8 100%);background-size:220% 220%;
+  animation:ft-grad 16s ease-in-out infinite,ft-rise .7s cubic-bezier(.2,.8,.2,1) both;
+  box-shadow:0 30px 70px -24px rgba(40,60,170,.7),inset 0 0 0 1px rgba(255,255,255,.16)}
+.ft-news::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+  background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%)}
+.ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
+.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(99,179,255,.45);animation:ft-drift 11s ease-in-out infinite}
+.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(236,110,190,.38);animation:ft-drift 14s ease-in-out infinite reverse}
+.ft-title-accent{background:linear-gradient(90deg,#fde68a,#fdba74 45%,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ft-float{animation:ft-float 6s ease-in-out infinite}
+.ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
+.ft-spark:nth-of-type(2){animation-delay:.9s}.ft-spark:nth-of-type(3){animation-delay:1.7s}
+.ft-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:9999px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .25s,background .25s,border-color .25s}
+.ft-form:focus-within{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.75);box-shadow:0 0 0 4px rgba(255,255,255,.18),0 10px 30px -10px rgba(253,230,138,.55)}
+.ft-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
+  font-weight:800;font-size:.85rem;color:#18205c;background:linear-gradient(135deg,#fde68a 0%,#fdba74 55%,#f9a8d4 100%);
+  box-shadow:0 10px 24px -8px rgba(253,186,116,.8);transition:transform .2s,box-shadow .2s,filter .2s}
+.ft-btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:ft-shine 5s ease-in-out infinite}
+.ft-btn:hover:not(:disabled){transform:translateY(-1px) scale(1.03);box-shadow:0 14px 30px -8px rgba(253,186,116,.95);filter:saturate(1.1)}
+.ft-btn:active:not(:disabled){transform:scale(.96)}
+.ft-btn:disabled{opacity:.75;cursor:wait}
+.ft-btn:focus-visible,.ft-acc-sum:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
+.ft-msg{animation:ft-pop .35s cubic-bezier(.2,1.2,.3,1) both}
+.ft-acc{border-radius:16px;border:1px solid rgb(226 232 240);background:linear-gradient(180deg,#fff,#f8faff);transition:border-color .2s,box-shadow .2s}
+.dark .ft-acc{border-color:rgb(51 65 85);background:linear-gradient(180deg,rgb(15 23 42),rgb(30 41 59 / .6))}
+.ft-acc:hover,.ft-acc[open]{border-color:#9db2f2;box-shadow:0 12px 28px -18px rgba(68,104,216,.55)}
+.ft-acc-sum{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.5rem;min-height:48px;padding:.6rem .85rem;cursor:pointer;border-radius:16px;user-select:none}
+.ft-acc-sum::-webkit-details-marker{display:none}
+.ft-acc-count{font-size:.68rem;font-weight:700;padding:.1rem .45rem;border-radius:9999px;color:#3454be;background:#e8eeff}
+.dark .ft-acc-count{color:#bfd0ff;background:rgb(51 65 85)}
+.ft-acc-chev{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.ft-acc[open] .ft-acc-chev{transform:rotate(180deg)}
+.ft-acc[open] .ft-acc-panel{animation:ft-reveal .32s cubic-bezier(.2,.8,.2,1) both}
+.ft-acc-panel{padding:.25rem .5rem .6rem}
+.ft-link{display:flex;align-items:center;gap:.6rem;min-height:44px;padding:.35rem .5rem;border-radius:12px;text-decoration:none;
+  font-size:13px;font-weight:600;color:rgb(71 85 105);transition:background .2s,color .2s,transform .2s;cursor:pointer;background:transparent;border:0;width:100%;text-align:left}
+.dark .ft-link{color:rgb(203 213 225)}
+.ft-link:hover{background:#eef2ff;color:#3454be;transform:translateX(3px)}
+.dark .ft-link:hover{background:rgb(51 65 85 / .7);color:#bfd0ff}
+.ft-link[aria-current="page"]{background:#e8eeff;color:#3454be;font-weight:800}
+.dark .ft-link[aria-current="page"]{background:rgb(51 65 85);color:#bfd0ff}
+.ft-ico{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9px;flex-shrink:0;color:#4468d8;background:#e8eeff;transition:background .2s,color .2s,transform .2s}
+.dark .ft-ico{color:#bfd0ff;background:rgb(51 65 85)}
+.ft-link:hover .ft-ico{background:#4468d8;color:#fff;transform:rotate(-6deg) scale(1.08)}
+@keyframes ft-grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes ft-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes ft-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(28px,18px) scale(1.12)}}
+@keyframes ft-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
+@keyframes ft-twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes ft-shine{0%,60%{left:-70%}100%{left:130%}}
+@keyframes ft-pop{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes ft-reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .ft-news,.ft-orb,.ft-float,.ft-spark,.ft-btn::after,.ft-msg,.ft-acc[open] .ft-acc-panel{animation:none!important}
+  .ft-acc-chev,.ft-link,.ft-ico,.ft-btn,.ft-btn .ft-arrow{transition:none!important}
+}
+`;
+
+/** Native <details> accordion: closed by default, fully keyboard accessible, and every link stays in the prerendered HTML for crawlers. */
+const FooterAccordion: React.FC<{
+  title: string;
+  count?: number;
+  open: boolean;
+  onToggle: (open: boolean) => void;
+  children: React.ReactNode;
+}> = ({ title, count, open, onToggle, children }) => (
+  <details
+    className="ft-acc"
+    open={open}
+    onToggle={(e) => {
+      const next = (e.currentTarget as HTMLDetailsElement).open;
+      if (next !== open) onToggle(next);
+    }}
+  >
+    <summary className="ft-acc-sum">
+      <h2 className="text-[15px] font-bold text-slate-900 dark:text-white m-0">{title}</h2>
+      <span className="inline-flex items-center gap-2">
+        {typeof count === 'number' && <span className="ft-acc-count">{count}</span>}
+        <ChevronDown className="ft-acc-chev w-4 h-4 text-slate-500 dark:text-slate-300" aria-hidden="true" />
+      </span>
+    </summary>
+    <div className="ft-acc-panel">{children}</div>
+  </details>
+);
+
 /**
  * Pages that are not in the top navigation but must stay one click from every page (and from the homepage),
  * which the launch audit (CHK-16) enforces for every sitemap URL.
  */
-const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string }[] = [
-  { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/' },
-  { label: 'Grading Scales', title: 'Grading scale charts by number of questions', path: '/grading-scale/' },
+const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string; icon: React.ComponentType<{ className?: string }> }[] = [
+  { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/', icon: Activity },
+  { label: 'Grading Scales', title: 'Grading scale charts by number of questions', path: '/grading-scale/', icon: FileText },
 ];
 
 export const Footer: React.FC<FooterProps> = ({
@@ -94,6 +190,9 @@ export const Footer: React.FC<FooterProps> = ({
   const [subscribeEmail, setSubscribeEmail] = useState<string>('');
   const [subscribeLoading, setSubscribeLoading] = useState<boolean>(false);
   const [subscribeMessage, setSubscribeMessage] = useState<{ text: string; isError?: boolean } | null>(null);
+  // Footer link groups are collapsed by default and expand on tap/click
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({ academic: false, utility: false, support: false });
+  const setGroupOpen = (key: string) => (open: boolean) => setOpenGroups((g) => (g[key] === open ? g : { ...g, [key]: open }));
 
   // Contact form state
   const [contactName, setContactName] = useState<string>('');
@@ -606,16 +705,23 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <>
       <footer className="site-footer relative w-full mt-24 font-sans" aria-label="Site footer">
+        <style dangerouslySetInnerHTML={{ __html: FOOTER_PREMIUM_CSS }} />
         {/* Newsletter banner: overlaps the top edge of the white footer panel (Backed by POST /api/subscribe) */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
           <section
             aria-label="Newsletter"
-            className="grid md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 px-6 py-8 sm:px-10 rounded-[20px] bg-gradient-to-br from-[#5A7DE6] to-[#4468D8] dark:from-[#3F5FC9] dark:to-[#3350B4] shadow-[0_28px_60px_-22px_rgba(52,84,190,0.65)] text-white"
+            className="ft-news grid md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 px-6 py-9 sm:px-10 rounded-[24px]"
           >
+            <span className="ft-orb ft-orb-a" aria-hidden="true" />
+            <span className="ft-orb ft-orb-b" aria-hidden="true" />
             {/* Illustration (decorative) */}
-            <div className="hidden md:flex justify-center" aria-hidden="true">
+            <div className="hidden md:flex justify-center ft-float" aria-hidden="true">
               <svg viewBox="0 0 240 230" className="w-56 h-auto -mt-16 drop-shadow-[0_18px_24px_rgba(20,35,100,0.35)]" fill="none">
                 <defs>
+                  <linearGradient id="fnScreen" x1="72" y1="70" x2="164" y2="106" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#4468D8" />
+                    <stop offset="1" stopColor="#7C5CE0" />
+                  </linearGradient>
                   <linearGradient id="fnBody" x1="60" y1="50" x2="180" y2="200" gradientUnits="userSpaceOnUse">
                     <stop stopColor="#E3EDFF" />
                     <stop offset="1" stopColor="#9DBBF6" />
@@ -648,26 +754,30 @@ export const Footer: React.FC<FooterProps> = ({
                 <path d="M82 49 V68 C82 76 154 76 154 68 V49 L118 62 Z" fill="#2B3B80" />
                 <path d="M174 40 V62" stroke="#E8795A" strokeWidth="3" strokeLinecap="round" />
                 <circle cx="174" cy="66" r="4.5" fill="#E8795A" />
-                <path d="M205 78 q0 12 12 12 q-12 0 -12 12 q0 -12 -12 -12 q12 0 12 -12 Z" fill="#fff" />
-                <path d="M34 58 q0 9 9 9 q-9 0 -9 9 q0 -9 -9 -9 q9 0 9 -9 Z" fill="#fff" />
-                <path d="M44 128 q0 7 7 7 q-7 0 -7 7 q0 -7 -7 -7 q7 0 7 -7 Z" fill="#fff" opacity="0.9" />
+                <path className="ft-spark" d="M205 78 q0 12 12 12 q-12 0 -12 12 q0 -12 -12 -12 q12 0 12 -12 Z" fill="#fff" />
+                <path className="ft-spark" d="M34 58 q0 9 9 9 q-9 0 -9 9 q0 -9 -9 -9 q9 0 9 -9 Z" fill="#fff" />
+                <path className="ft-spark" d="M44 128 q0 7 7 7 q-7 0 -7 7 q0 -7 -7 -7 q7 0 7 -7 Z" fill="#fff" opacity="0.9" />
               </svg>
             </div>
 
             <div className="min-w-0">
-              <h2 className="text-xl sm:text-2xl font-bold leading-snug tracking-tight text-white m-0 max-w-lg">
-                Subscribe to get updates on new grade formulas &amp; academic tools
+              <p className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-200 m-0 mb-3">
+                <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+                Free study updates
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight text-white m-0 max-w-lg [text-wrap:balance]">
+                Subscribe to get updates on new <span className="ft-title-accent">grade formulas &amp; academic tools</span>
               </h2>
               <p className="mt-3 text-[13px] sm:text-sm font-medium text-white/85 m-0 max-w-lg">
                 Get notified when new grading scales, curve calculators, and semester planning tools are added.
               </p>
 
-              <form onSubmit={handleSubscribe} noValidate className="mt-5 max-w-md">
+              <form onSubmit={handleSubscribe} noValidate className="mt-5 max-w-lg">
                 <label htmlFor={subscribeEmailId} className="sr-only">
                   Email address for updates
                 </label>
-                <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-white/20 border border-white/25 focus-within:bg-white/25 focus-within:border-white/60 transition-colors">
-                  <Mail className="w-4 h-4 ml-3 text-white/80 shrink-0" aria-hidden="true" />
+                <div className="ft-form">
+                  <Mail className="w-4 h-4 ml-3 text-white/85 shrink-0" aria-hidden="true" />
                   <input
                     id={subscribeEmailId}
                     type="email"
@@ -677,31 +787,37 @@ export const Footer: React.FC<FooterProps> = ({
                       if (subscribeMessage) setSubscribeMessage(null);
                     }}
                     placeholder="Enter your email"
-                    className="flex-1 min-w-0 min-h-[40px] bg-transparent border-0 text-white placeholder:text-white/70 px-1 py-2 text-base sm:text-[13px] font-medium focus:outline-none focus:ring-0"
+                    autoComplete="email"
+                    className="flex-1 min-w-0 min-h-[44px] bg-transparent border-0 text-white placeholder:text-white/70 px-1 py-2 text-base sm:text-sm font-medium focus:outline-none focus:ring-0"
                   />
-                  <button
-                    type="submit"
-                    disabled={subscribeLoading}
-                    className="inline-flex items-center justify-center gap-2 min-h-[40px] px-5 text-[13px] font-bold text-[#3454BE] bg-white hover:bg-blue-50 rounded-full transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-70 shrink-0"
-                  >
+                  <button type="submit" disabled={subscribeLoading} className="ft-btn">
                     {subscribeLoading ? (
                       <>
-                        <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
+                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
                         <span>Subscribing...</span>
                       </>
                     ) : (
-                      <span>Subscribe</span>
+                      <>
+                        <span>Subscribe</span>
+                        <ArrowRight className="ft-arrow w-4 h-4" aria-hidden="true" />
+                      </>
                     )}
                   </button>
                 </div>
               </form>
 
+              <ul className="mt-4 p-0 m-0 list-none flex flex-wrap gap-2">
+                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />No spam</li>
+                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />Free forever</li>
+                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />Unsubscribe anytime</li>
+              </ul>
+
               <p className="mt-3 text-[11px] leading-relaxed text-white/80 m-0 max-w-md">
-                You will be able to unsubscribe at any time. By subscribing, you agree to our{' '}
+                By subscribing, you agree to our{' '}
                 <Link
                   to="/privacy"
                   onClick={scrollToTop}
-                  className="text-white font-semibold underline underline-offset-2 hover:text-white/90"
+                  className="text-white font-semibold underline underline-offset-2 hover:text-amber-200 transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -711,8 +827,8 @@ export const Footer: React.FC<FooterProps> = ({
               {subscribeMessage && (
                 <div
                   role="status"
-                  className={`mt-3 max-w-md text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-1.5 ${
-                    subscribeMessage.isError ? 'bg-rose-50 text-rose-700' : 'bg-white text-emerald-700'
+                  className={`ft-msg mt-3 max-w-md text-xs font-semibold px-4 py-2.5 rounded-full flex items-center gap-1.5 shadow-lg ${
+                    subscribeMessage.isError ? 'bg-rose-50 text-rose-800' : 'bg-white text-emerald-800'
                   }`}
                 >
                   {subscribeMessage.isError ? (
@@ -790,61 +906,64 @@ export const Footer: React.FC<FooterProps> = ({
                 </div>
               </div>
 
-              {/* Calculators + More tools (same nav data as before) */}
-              {(['academic', 'utility'] as const).map((group) => (
-                <div key={group} className="md:col-span-2">
-                  <h2 className={colHeadCls}>{group === 'academic' ? 'Grade Calculators' : 'More Tools'}</h2>
-                  <ul className="space-y-3 list-none p-0 m-0">
-                    {NAV_ITEMS.filter((t) => t.group === group).map((tool) => {
-                      const isStaticPage =
-                        location.pathname.startsWith('/about') ||
-                        location.pathname.startsWith('/privacy') ||
-                        location.pathname.startsWith('/terms') ||
-                        location.pathname.startsWith('/methodology');
-                      const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
-                      return (
-                        <li key={tool.path}>
-                          <Link
-                            to={tool.path}
-                            onClick={() => {
-                              scrollToTop();
-                              // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
-                              if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
-                            }}
-                            className={`${linkCls} no-underline ${isActive ? '!text-[#4468D8] dark:!text-blue-300 font-bold' : ''}`}
-                            aria-current={isActive ? 'page' : undefined}
-                            title={tool.title}
-                          >
-                            {tool.label}
-                          </Link>
-                        </li>
-                      );
-                    })}
-                    {group === 'academic' &&
-                      FOOTER_EXTRA_ACADEMIC_LINKS.map((tool) => {
-                        const isActive = location.pathname.startsWith(tool.path.replace(/\/+$/, ''));
-                        return (
-                          <li key={tool.path}>
-                            <Link
-                              to={tool.path}
-                              onClick={scrollToTop}
-                              className={`${linkCls} no-underline ${isActive ? '!text-[#4468D8] dark:!text-blue-300 font-bold' : ''}`}
-                              aria-current={isActive && isSamePath(location.pathname, tool.path) ? 'page' : undefined}
-                              title={tool.title}
-                            >
-                              {tool.label}
-                            </Link>
-                          </li>
-                        );
-                      })}
-                  </ul>
-                </div>
-              ))}
+              {/* Calculators + More tools: expandable groups (same nav data as before) */}
+              {(['academic', 'utility'] as const).map((group) => {
+                const isStaticPage =
+                  location.pathname.startsWith('/about') ||
+                  location.pathname.startsWith('/privacy') ||
+                  location.pathname.startsWith('/terms') ||
+                  location.pathname.startsWith('/methodology');
+                const items = [
+                  ...NAV_ITEMS.filter((t) => t.group === group).map((t) => ({
+                    label: t.label,
+                    title: t.title,
+                    path: t.path,
+                    icon: t.icon as React.ComponentType<{ className?: string }>,
+                    toolKey: t.toolKey as ToolKey | null,
+                  })),
+                  ...(group === 'academic' ? FOOTER_EXTRA_ACADEMIC_LINKS.map((t) => ({ ...t, toolKey: null as ToolKey | null })) : []),
+                ];
+                return (
+                  <div key={group} className="col-span-2 md:col-span-2">
+                    <FooterAccordion
+                      title={group === 'academic' ? 'Grade Calculators' : 'More Tools'}
+                      count={items.length}
+                      open={!!openGroups[group]}
+                      onToggle={setGroupOpen(group)}
+                    >
+                      <ul className="list-none p-0 m-0 space-y-0.5">
+                        {items.map((tool) => {
+                          const Icon = tool.icon;
+                          const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
+                          return (
+                            <li key={tool.path}>
+                              <Link
+                                to={tool.path}
+                                onClick={() => {
+                                  scrollToTop();
+                                  // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
+                                  if (tool.toolKey && isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
+                                }}
+                                className="ft-link"
+                                aria-current={isActive ? 'page' : undefined}
+                                title={tool.title}
+                              >
+                                <span className="ft-ico"><Icon className="w-4 h-4" aria-hidden="true" /></span>
+                                <span>{tool.label}</span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </FooterAccordion>
+                  </div>
+                );
+              })}
 
               {/* Support */}
-              <div className="md:col-span-2">
-                <h2 className={colHeadCls}>Support</h2>
-                <ul className="space-y-3 list-none p-0 m-0">
+              <div className="col-span-2 md:col-span-2">
+                <FooterAccordion title="Support" open={!!openGroups.support} onToggle={setGroupOpen('support')}>
+                <ul className="list-none p-0 m-0 space-y-1 px-1.5">
                   <li>
                     <button
                       type="button"
@@ -853,7 +972,7 @@ export const Footer: React.FC<FooterProps> = ({
                         setIssueError(null);
                         setActiveModal('reportIssue');
                       }}
-                      className={linkCls}
+                      className="ft-link"
                       title="Report a calculation error or UI bug directly to backend ticket system"
                     >
                       Report an Issue
@@ -867,7 +986,7 @@ export const Footer: React.FC<FooterProps> = ({
                         setFeatureError(null);
                         setActiveModal('suggestFeature');
                       }}
-                      className={linkCls}
+                      className="ft-link"
                       title="Suggest a new grading scale, formula or calculator to the roadmap"
                     >
                       Request a Feature
@@ -880,7 +999,7 @@ export const Footer: React.FC<FooterProps> = ({
                         checkServerHealth();
                         setActiveModal('status');
                       }}
-                      className={linkCls}
+                      className="ft-link"
                       title="Inspect backend latency, operational status and uptime"
                     >
                       System Status
@@ -890,13 +1009,14 @@ export const Footer: React.FC<FooterProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveModal('resetConfirm')}
-                      className={`${linkCls} !text-rose-600/90 dark:!text-rose-400/90 hover:!text-rose-700 dark:hover:!text-rose-300`}
+                      className={`ft-link !text-rose-600/90 dark:!text-rose-400/90 hover:!text-rose-700 dark:hover:!text-rose-300`}
                       title="Reset all saved course grades, GPA rows, and calculator history"
                     >
                       Reset Local Data
                     </button>
                   </li>
                 </ul>
+                </FooterAccordion>
               </div>
 
               {/* Contact Us */}
