@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>Easy Grade Calculator &amp; EZ Grader Chart | Easy Grade Tool</title>
+    <meta name="description" content="Free easy grade calculator and EZ grader chart. Enter the number of questions to see percentage scores, letter grades and a printable chart for any test." />
+    <meta name="theme-color" content="#F3F4F6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Easy Grade Tool" />
+    <!-- Apply the saved/system theme BEFORE first paint so dark-mode visitors never see a white flash. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('easy_grade_theme_preference');
+          var dark = t === 'dark' || ((t !== 'light') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          if (dark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://www.easygradetool.com/" />
+    
+    <!-- Self-Hosted Critical Fonts Preload -->
+    <link rel="preload" href="/fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:title" content="Easy Grade Calculator &amp; EZ Grader Chart | Easy Grade Tool" />
+    <meta property="og:description" content="Free easy grade calculator and EZ grader chart. Enter the number of questions to see percentage scores, letter grades and a printable chart for any test." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.easygradetool.com/" />
+    <meta property="og:site_name" content="Easy Grade Tool" />
+    <meta property="og:image" content="https://www.easygradetool.com/og-cards/grade-calculator-1200x630.png" />
+    <meta property="og:image:secure_url" content="https://www.easygradetool.com/og-cards/grade-calculator-1200x630.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Easy Grade Tool — free easy grade calculator and EZ grader chart" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Easy Grade Calculator &amp; EZ Grader Chart | Easy Grade Tool" />
+    <meta name="twitter:description" content="Free easy grade calculator and EZ grader chart. Enter the number of questions to see percentage scores, letter grades and a printable chart for any test." />
+    <meta name="twitter:image" content="https://www.easygradetool.com/og-cards/grade-calculator-1200x630.png" />
+    <meta name="twitter:image:alt" content="Easy Grade Tool — free easy grade calculator and EZ grader chart" />
+    <script id="schema-org-webapp" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://www.easygradetool.com/#webapp",
+      "name": "Easy Grade Tool",
+      "alternateName": "Easy Grade Calculator",
+      "url": "https://www.easygradetool.com/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0.0",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "description": "Free easy grade calculator and EZ grader chart.",
+      "datePublished": "2026-10-01T00:00:00Z",
+      "dateModified": "2026-10-06T00:00:00Z",
+      "author": {
+        "@type": "Organization",
+        "name": "Easy Grade Tool",
+        "url": "https://www.easygradetool.com/",
+        "email": "support@easygradetool.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Easy Grade Tool",
+        "url": "https://www.easygradetool.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.easygradetool.com/icon.svg"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Weighted & Points-based Grade Calculation",
+        "Target Final Exam Score Simulator",
+        "Customizable Standard and Plus/Minus Grading Scales",
+        "Semester & Cumulative 4.0 GPA Calculation",
+        "Offline PWA Utility Support"
+      ]
+    }
+    </script>
+    <script id="schema-org-breadcrumb" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://www.easygradetool.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Easy Grade Tool",
+          "item": "https://www.easygradetool.com/"
+        }
+      ]
+    }
+    </script>
+    <script id="schema-org-organization" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.easygradetool.com/#organization",
+      "name": "Easy Grade Tool",
+      "url": "https://www.easygradetool.com/",
+      "email": "support@easygradetool.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.easygradetool.com/icon.svg",
+        "width": 512,
+        "height": 512
+      }
+    }
+    </script>
+    <script id="schema-org-faq" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the Easy Grade Calculator (Quick Grade) work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply enter the total number of questions on your test or quiz and the number of wrong answers. The calculator immediately computes your percentage score and letter grade using the formula: Percentage = ((Total Questions − Wrong Answers) ÷ Total Questions) × 100."
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-[#F3F4F6] text-stone-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
