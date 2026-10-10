@@ -8,23 +8,17 @@ import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
-import { AverageGradeTool } from './tools/AverageGradeTool';
-import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
-import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
 import { ToolGuideKey } from '../data/toolGuideContent';
 
-const TOOLS: Record<string, React.ComponentType> = {
+const TOOLS: Record<ToolPageSlug, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
   'grade-curve-calculator': GradeCurveTool,
   'letter-grade-calculator': LetterGradeTool,
-  'average-grade-calculator': AverageGradeTool,
-  'grading-scale': GradingScaleIndexTool,
 };
 
-/** Pages that have a long-form guide. Generated pages carry their own sections instead. */
-const GUIDES: Record<string, ToolGuideKey> = {
+const GUIDES: Record<ToolPageSlug, ToolGuideKey> = {
   'test-grade-calculator': 'test-grade',
   'grade-curve-calculator': 'grade-curve',
   'letter-grade-calculator': 'letter-grade',
@@ -39,8 +33,7 @@ const formatDate = (iso: string) =>
 
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
-  const Tool: React.ComponentType | undefined = TOOLS[slug];
-  const guideKey = GUIDES[slug];
+  const Tool = TOOLS[slug];
   // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
   const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));
 
@@ -50,12 +43,10 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         title={entry.title}
         description={entry.metaDescription}
         canonicalUrl={toolPageCanonical(entry)}
-        ogImage={entry.ogImage ?? OG_IMAGES.quick}
+        ogImage={OG_IMAGES.quick}
         keywords={entry.keywords}
         featureList={entry.featureList}
         applicationCategory="EducationalApplication"
-        name={entry.h1}
-        breadcrumbLabel={entry.navLabel}
       />
 
       <header className="space-y-3">
@@ -64,47 +55,12 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       </header>
 
       <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
-        {entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : Tool ? <Tool /> : null}
+        <Tool />
       </section>
 
-      {guideKey ? (
-        <ToolContentGuide guide={guideKey} />
-      ) : (
-        <div className="max-w-4xl space-y-8">
-          {entry.sections.map((section) => (
-            <section key={section.heading} className="space-y-3">
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{section.heading}</h2>
-              {section.paragraphs.map((para) => (
-                <p key={para} className="text-base text-slate-700 dark:text-slate-300 leading-relaxed m-0">{para}</p>
-              ))}
-              {section.bullets && (
-                <ul className="m-0 pl-5 list-disc text-base text-slate-700 dark:text-slate-300 space-y-1">
-                  {section.bullets.map((b) => (
-                    <li key={b}>{b}</li>
-                  ))}
-                </ul>
-              )}
-            </section>
-          ))}
-          <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{entry.example.heading}</h2>
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">{entry.example.scenario}</p>
-            <dl className="m-0 grid sm:grid-cols-2 gap-x-6 gap-y-2">
-              {entry.example.rows.map((row) => (
-                <div key={row.label} className="flex items-baseline justify-between gap-3 border-b border-slate-200/70 dark:border-slate-800 py-1.5">
-                  <dt className="text-sm text-slate-700 dark:text-slate-300">{row.label}</dt>
-                  <dd className="m-0 font-bold font-mono text-slate-900 dark:text-white">{row.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">{entry.example.takeaway}</p>
-          </section>
-        </div>
-      )}
+      <ToolContentGuide guide={GUIDES[slug]} />
 
-      <div className="max-w-4xl content-auto">
-        <FAQ tool="quick" items={faqItems} heading={entry.faqHeading ?? PAGE_FAQ_HEADINGS[slug]} />
-      </div>
+      <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />
 
       <section aria-label="Related calculators" className="space-y-3 print:hidden content-auto">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Related grade calculators</h2>

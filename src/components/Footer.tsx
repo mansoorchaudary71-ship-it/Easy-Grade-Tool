@@ -587,208 +587,205 @@ export const Footer: React.FC<FooterProps> = ({
     password: KeyRound,
   };
 
+  // Shared footer styles (single place to tweak the look)
+  const colHeadCls = 'text-[15px] font-bold text-slate-900 dark:text-white m-0 mb-5';
+  const linkCls =
+    'inline-flex items-center text-left text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
+  const iconBtnCls =
+    'w-9 h-9 inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#4F73DF] hover:text-white dark:hover:bg-[#4F73DF] transition-colors cursor-pointer active:scale-95';
+
   return (
     <>
-      <footer className="w-full mt-20 pt-14 pb-12 font-sans border-t border-stone-200/80 dark:border-slate-800 bg-white/40 dark:bg-slate-950/60 backdrop-blur-xs transition-colors">
-        <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          {/* Top Quick Actions Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-8 mb-10 border-b border-stone-200/70 dark:border-slate-800/70">
-            {/* Suite Info Pill */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800 text-xs font-semibold text-stone-700 dark:text-stone-300 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" aria-hidden="true" />
-              <span>Calculators &amp; Grading Tools</span>
-            </div>
-
-            {/* Quick Actions Buttons */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              {/* Search Tools (⌘K) */}
-              <button
-                type="button"
-                onClick={handleOpenSearch}
-                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-stone-700 dark:text-stone-300 bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-full hover:border-stone-300 dark:hover:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-800/80 transition-all cursor-pointer shadow-xs active:scale-95"
-                title="Search calculators (Ctrl+K or ⌘K)"
-                aria-label="Open search command palette"
-              >
-                <Search className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
-                <span>Search Tools</span>
-                <kbd className="px-1.5 py-0.5 text-[10px] font-mono bg-stone-100 dark:bg-slate-800 text-slate-500 rounded-full border border-stone-200 dark:border-slate-700 ml-0.5">
-                  ⌘K
-                </kbd>
-              </button>
-
-              {/* Share / Copy Link */}
-              <button
-                type="button"
-                onClick={handleShareLink}
-                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-stone-700 dark:text-stone-300 bg-white dark:bg-slate-900 border border-stone-200 dark:border-slate-800 rounded-full hover:border-stone-300 dark:hover:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-800/80 transition-all cursor-pointer shadow-xs active:scale-95"
-                title="Share current calculator or copy link"
-                aria-label="Share current calculator"
-              >
-                {copiedLink ? (
-                  <>
-                    <Check className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" aria-hidden="true" />
-                    <span className="text-teal-700 dark:text-teal-400 font-semibold">Link Copied!</span>
-                  </>
-                ) : (
-                  <>
-                    <Share2 className="w-3.5 h-3.5 text-slate-500" aria-hidden="true" />
-                    <span>Share App</span>
-                  </>
+      <footer className="site-footer relative w-full mt-24 font-sans" aria-label="Site footer">
+        {/* Newsletter banner: overlaps the top edge of the white footer panel (Backed by POST /api/subscribe) */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+          <section
+            aria-label="Newsletter"
+            className="grid md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 px-6 py-8 sm:px-10 rounded-[20px] bg-gradient-to-br from-[#5A7DE6] to-[#4468D8] dark:from-[#3F5FC9] dark:to-[#3350B4] shadow-[0_28px_60px_-22px_rgba(52,84,190,0.65)] text-white"
+          >
+            {/* Illustration (decorative) */}
+            <div className="hidden md:flex justify-center" aria-hidden="true">
+              <svg viewBox="0 0 240 230" className="w-56 h-auto -mt-16 drop-shadow-[0_18px_24px_rgba(20,35,100,0.35)]" fill="none">
+                <defs>
+                  <linearGradient id="fnBody" x1="60" y1="50" x2="180" y2="200" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#E3EDFF" />
+                    <stop offset="1" stopColor="#9DBBF6" />
+                  </linearGradient>
+                  <linearGradient id="fnScreen" x1="76" y1="68" x2="164" y2="102" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#2E4AAE" />
+                    <stop offset="1" stopColor="#3E5FCC" />
+                  </linearGradient>
+                </defs>
+                <ellipse cx="120" cy="214" rx="78" ry="9" fill="#1B2D78" opacity="0.28" />
+                <rect x="66" y="62" width="120" height="146" rx="20" fill="#7FA0EC" />
+                <rect x="58" y="54" width="120" height="146" rx="20" fill="url(#fnBody)" />
+                <rect x="72" y="70" width="92" height="36" rx="10" fill="url(#fnScreen)" />
+                <text x="118" y="95" textAnchor="middle" fontSize="22" fontWeight="800" fill="#fff" fontFamily="Inter, sans-serif">A+</text>
+                {[0, 1, 2].map((r) =>
+                  [0, 1, 2].map((c) => (
+                    <rect
+                      key={`${r}-${c}`}
+                      x={74 + c * 31}
+                      y={120 + r * 25}
+                      width="24"
+                      height="18"
+                      rx="6"
+                      fill={r === 2 && c === 2 ? '#E8795A' : '#FFFFFF'}
+                      opacity={r === 2 && c === 2 ? 1 : 0.92}
+                    />
+                  ))
                 )}
-              </button>
-
-              {/* Back to Top */}
-              <button
-                type="button"
-                onClick={scrollToTop}
-                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-stone-800 dark:text-stone-200 bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 border border-stone-200 dark:border-slate-700 rounded-full transition-all cursor-pointer shadow-xs active:scale-95"
-                title="Scroll back to top"
-                aria-label="Scroll back to top"
-              >
-                <ArrowUp className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" aria-hidden="true" />
-                <span>Back to Top ↑</span>
-              </button>
+                <path d="M118 12 L184 36 L118 60 L52 36 Z" fill="#1E2B63" />
+                <path d="M82 49 V68 C82 76 154 76 154 68 V49 L118 62 Z" fill="#2B3B80" />
+                <path d="M174 40 V62" stroke="#E8795A" strokeWidth="3" strokeLinecap="round" />
+                <circle cx="174" cy="66" r="4.5" fill="#E8795A" />
+                <path d="M205 78 q0 12 12 12 q-12 0 -12 12 q0 -12 -12 -12 q12 0 12 -12 Z" fill="#fff" />
+                <path d="M34 58 q0 9 9 9 q-9 0 -9 9 q0 -9 -9 -9 q9 0 9 -9 Z" fill="#fff" />
+                <path d="M44 128 q0 7 7 7 q-7 0 -7 7 q0 -7 -7 -7 q7 0 7 -7 Z" fill="#fff" opacity="0.9" />
+              </svg>
             </div>
-          </div>
 
-          {/* Interactive Newsletter / Updates Box (Backed by POST /api/subscribe) */}
-          <div className="mb-12 p-6 sm:p-8 rounded-[32px] bg-white dark:bg-slate-900 border border-stone-200/90 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-1.5 text-center md:text-left">
-              <div className="flex items-center justify-center md:justify-start gap-2">
-                <Sparkles className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <h2 className="text-sm sm:text-base font-bold text-slate-800 dark:text-white m-0">
-                  Stay Updated on Grade Formulas &amp; Academic Tools
-                </h2>
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 font-medium m-0">
+            <div className="min-w-0">
+              <h2 className="text-xl sm:text-2xl font-bold leading-snug tracking-tight text-white m-0 max-w-lg">
+                Subscribe to get updates on new grade formulas &amp; academic tools
+              </h2>
+              <p className="mt-3 text-[13px] sm:text-sm font-medium text-white/85 m-0 max-w-lg">
                 Get notified when new grading scales, curve calculators, and semester planning tools are added.
               </p>
-            </div>
 
-            <div className="w-full md:w-auto flex flex-col gap-2 shrink-0">
-              <form onSubmit={handleSubscribe} noValidate className="w-full md:w-auto flex flex-col sm:flex-row gap-2.5 shrink-0">
+              <form onSubmit={handleSubscribe} noValidate className="mt-5 max-w-md">
                 <label htmlFor={subscribeEmailId} className="sr-only">
                   Email address for updates
                 </label>
-                <input
-                  id={subscribeEmailId}
-                  type="email"
-                  value={subscribeEmail}
-                  onChange={(e) => {
-                    setSubscribeEmail(e.target.value);
-                    if (subscribeMessage) setSubscribeMessage(null);
-                  }}
-                  placeholder="Enter your student or edu email..."
-                  className="w-full sm:w-72 min-h-[46px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all text-xs font-medium placeholder:text-stone-400"
-                />
-                <button
-                  type="submit"
-                  disabled={subscribeLoading}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 text-xs font-bold text-white bg-[#191C1E] hover:bg-black dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-60 shrink-0"
-                >
-                  {subscribeLoading ? (
-                    <>
-                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                      <span>Subscribing...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-1.5 p-1.5 rounded-full bg-white/20 border border-white/25 focus-within:bg-white/25 focus-within:border-white/60 transition-colors">
+                  <Mail className="w-4 h-4 ml-3 text-white/80 shrink-0" aria-hidden="true" />
+                  <input
+                    id={subscribeEmailId}
+                    type="email"
+                    value={subscribeEmail}
+                    onChange={(e) => {
+                      setSubscribeEmail(e.target.value);
+                      if (subscribeMessage) setSubscribeMessage(null);
+                    }}
+                    placeholder="Enter your email"
+                    className="flex-1 min-w-0 min-h-[40px] bg-transparent border-0 text-white placeholder:text-white/70 px-1 py-2 text-base sm:text-[13px] font-medium focus:outline-none focus:ring-0"
+                  />
+                  <button
+                    type="submit"
+                    disabled={subscribeLoading}
+                    className="inline-flex items-center justify-center gap-2 min-h-[40px] px-5 text-[13px] font-bold text-[#3454BE] bg-white hover:bg-blue-50 rounded-full transition-all cursor-pointer shadow-sm active:scale-95 disabled:opacity-70 shrink-0"
+                  >
+                    {subscribeLoading ? (
+                      <>
+                        <Loader2 className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
+                        <span>Subscribing...</span>
+                      </>
+                    ) : (
                       <span>Subscribe</span>
-                    </>
-                  )}
-                </button>
+                    )}
+                  </button>
+                </div>
               </form>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 m-0 px-2 text-center sm:text-left">
-                By subscribing, you agree to our{' '}
+
+              <p className="mt-3 text-[11px] leading-relaxed text-white/80 m-0 max-w-md">
+                You will be able to unsubscribe at any time. By subscribing, you agree to our{' '}
                 <Link
                   to="/privacy"
                   onClick={scrollToTop}
-                  className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600 transition-colors"
+                  className="text-white font-semibold underline underline-offset-2 hover:text-white/90"
                 >
                   Privacy Policy
-                </Link>{' '}
-                and consent to receive email updates. Unsubscribe anytime.
+                </Link>
+                .
               </p>
+
               {subscribeMessage && (
                 <div
-                  className={`text-xs font-medium px-4 py-2 rounded-full text-center sm:text-left transition-all flex items-center gap-1.5 ${
-                    subscribeMessage.isError
-                      ? 'bg-rose-50 text-rose-700 dark:bg-rose-950/50 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
-                      : 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                  role="status"
+                  className={`mt-3 max-w-md text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-1.5 ${
+                    subscribeMessage.isError ? 'bg-rose-50 text-rose-700' : 'bg-white text-emerald-700'
                   }`}
                 >
                   {subscribeMessage.isError ? (
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                   ) : (
-                    <Check className="w-3.5 h-3.5 shrink-0" />
+                    <Check className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                   )}
                   <span>{subscribeMessage.text}</span>
                 </div>
               )}
             </div>
-          </div>
+          </section>
+        </div>
 
-          {/* 4 Main Footer Columns */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12">
-            {/* Column 1: Brand & Data Management */}
-            <div className="md:col-span-4 space-y-4">
-              <Link
-                to="/"
-                onClick={() => {
-                  scrollToTop();
-                  if (onSelectTool) onSelectTool('quick');
-                }}
-                className="group flex items-center gap-3 text-left cursor-pointer transition-transform active:scale-95 focus:outline-none"
-                title="Go to Easy Grade Tool Home"
-              >
-                <Logo size="md" />
-              </Link>
-
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
-                An offline-first, private-by-design calculation suite built for students, educators, and everyday planning. Fast, accurate, and completely tracker-free.
-              </p>
-
-              {/* Working Client-Side Privacy Badge */}
-              <div className="flex flex-wrap items-center gap-2 pt-1">
+        {/* White footer panel */}
+        <div className="relative -mt-16 pt-28 md:pt-24 bg-white dark:bg-slate-900 border-t border-slate-200/70 dark:border-slate-800 shadow-[0_-12px_50px_-20px_rgba(70,100,210,0.25)] dark:shadow-none transition-colors">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 pb-12">
+              {/* Brand */}
+              <div className="col-span-2 md:col-span-4 space-y-5">
                 <Link
-                  to="/privacy"
-                  onClick={scrollToTop}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/50 border border-emerald-200/70 dark:border-emerald-800/50 text-[11px] font-semibold text-emerald-800 dark:text-emerald-300 transition-colors cursor-pointer group active:scale-95"
-                  title="View 100% Client-Side Privacy Policy"
+                  to="/"
+                  onClick={() => {
+                    scrollToTop();
+                    if (onSelectTool) onSelectTool('quick');
+                  }}
+                  className="group inline-flex items-center text-left cursor-pointer transition-transform active:scale-95 focus:outline-none"
+                  title="Go to Easy Grade Tool Home"
                 >
-                  <Shield className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
-                  <span>100% Client Privacy</span>
-                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 opacity-60 group-hover:opacity-100 transition-opacity">
-                    • Policy →
-                  </span>
+                  <Logo size="md" />
                 </Link>
 
-                {/* Working Export / Backup Data Button */}
-                <button
-                  type="button"
-                  onClick={handleBackupData}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-stone-100 hover:bg-stone-200 dark:bg-slate-800 dark:hover:bg-slate-700 border border-stone-200 dark:border-slate-700 text-[11px] font-semibold text-stone-700 dark:text-stone-300 transition-colors cursor-pointer active:scale-95"
-                  title="Download a verified JSON backup of all your saved course grades and calculations"
-                >
-                  <Download className="w-3 h-3 text-slate-500" />
-                  <span>Export Data</span>
-                </button>
-              </div>
-            </div>
+                <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs m-0">
+                  An offline-first, private-by-design calculation suite built for students, educators, and everyday planning. Fast, accurate, and completely tracker-free.
+                </p>
 
-            {/* Column 2: Calculators */}
-            <div className="md:col-span-3 space-y-3">
-              <h2 className="text-xs font-bold tracking-widest text-slate-400 dark:text-slate-400 uppercase flex items-center justify-between m-0">
-                <span>Calculators</span>
-                <span className="text-[10px] font-medium text-slate-500">Tap to switch</span>
-              </h2>
+                {/* Quick action icons */}
+                <div className="flex items-center gap-2.5">
+                  <button
+                    type="button"
+                    onClick={handleOpenSearch}
+                    className={iconBtnCls}
+                    title="Search calculators (Ctrl+K or ⌘K)"
+                    aria-label="Open search command palette"
+                  >
+                    <Search className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleShareLink}
+                    className={iconBtnCls}
+                    title="Share current calculator or copy link"
+                    aria-label="Share current calculator"
+                  >
+                    {copiedLink ? <Check className="w-4 h-4 text-emerald-600" aria-hidden="true" /> : <Share2 className="w-4 h-4" aria-hidden="true" />}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleBackupData}
+                    className={iconBtnCls}
+                    title="Download a verified JSON backup of all your saved course grades and calculations"
+                    aria-label="Export my data"
+                  >
+                    <Download className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={scrollToTop}
+                    className={iconBtnCls}
+                    title="Scroll back to top"
+                    aria-label="Scroll back to top"
+                  >
+                    <ArrowUp className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Calculators + More tools (same nav data as before) */}
               {(['academic', 'utility'] as const).map((group) => (
-                <React.Fragment key={group}>
-                  <h3 className="text-[10px] font-bold tracking-widest text-slate-500 uppercase mt-3 mb-1 m-0">
-                    {group === 'academic' ? 'Grade & GPA calculators' : 'More tools'}
-                  </h3>
-                  <ul className="space-y-1 text-xs list-none p-0 m-0">
+                <div key={group} className="md:col-span-2">
+                  <h2 className={colHeadCls}>{group === 'academic' ? 'Grade Calculators' : 'More Tools'}</h2>
+                  <ul className="space-y-3 list-none p-0 m-0">
                     {NAV_ITEMS.filter((t) => t.group === group).map((tool) => {
                       const isStaticPage =
                         location.pathname.startsWith('/about') ||
@@ -796,7 +793,6 @@ export const Footer: React.FC<FooterProps> = ({
                         location.pathname.startsWith('/terms') ||
                         location.pathname.startsWith('/methodology');
                       const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
-                      const Icon = tool.icon;
                       return (
                         <li key={tool.path}>
                           <Link
@@ -806,212 +802,142 @@ export const Footer: React.FC<FooterProps> = ({
                               // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
                               if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
                             }}
-                            className={`w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl transition-all cursor-pointer active:scale-95 no-underline ${
-                              isActive
-                                ? 'bg-stone-100 dark:bg-slate-800 text-stone-900 dark:text-white font-bold border border-stone-200/80 dark:border-slate-700/80 shadow-2xs'
-                                : 'text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium'
-                            }`}
+                            className={`${linkCls} no-underline ${isActive ? '!text-[#4468D8] dark:!text-blue-300 font-bold' : ''}`}
                             aria-current={isActive ? 'page' : undefined}
                             title={tool.title}
                           >
-                            <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? 'text-teal-700 dark:text-teal-400' : 'text-slate-400'}`} aria-hidden="true" />
-                            <span className="truncate">{tool.label}</span>
+                            {tool.label}
                           </Link>
                         </li>
                       );
                     })}
                   </ul>
-                </React.Fragment>
+                </div>
               ))}
-            </div>
 
-            {/* Column 3: Working Feedback & Developer Support (Connected to Backend!) */}
-            <div className="md:col-span-3 space-y-3">
-              <h2 className="text-xs font-bold tracking-widest text-slate-400 dark:text-slate-400 uppercase m-0">
-                Support &amp; Feedback
-              </h2>
-              <ul className="space-y-1 text-xs">
-                {/* Working Contact Developer Button */}
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setContactSuccess(null);
-                      setContactError(null);
-                      setActiveModal('contact');
-                    }}
-                    className="w-full text-left flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95 group"
-                    title="Send a message or feedback directly to the engineering team via backend"
-                  >
-                    <div className="flex items-center gap-2 truncate">
-                      <MessageSquare className="w-3.5 h-3.5 text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors shrink-0" />
-                      <span className="text-stone-700 dark:text-slate-300">Contact &amp; Feedback</span>
-                    </div>
-                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-stone-100 dark:bg-slate-800 text-stone-600 dark:text-slate-300 border border-stone-200/80 dark:border-slate-700/80 shrink-0">
-                      Form
-                    </span>
-                  </button>
-                </li>
+              {/* Support */}
+              <div className="md:col-span-2">
+                <h2 className={colHeadCls}>Support</h2>
+                <ul className="space-y-3 list-none p-0 m-0">
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIssueSuccess(null);
+                        setIssueError(null);
+                        setActiveModal('reportIssue');
+                      }}
+                      className={linkCls}
+                      title="Report a calculation error or UI bug directly to backend ticket system"
+                    >
+                      Report an Issue
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFeatureSuccess(null);
+                        setFeatureError(null);
+                        setActiveModal('suggestFeature');
+                      }}
+                      className={linkCls}
+                      title="Suggest a new grading scale, formula or calculator to the roadmap"
+                    >
+                      Request a Feature
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        checkServerHealth();
+                        setActiveModal('status');
+                      }}
+                      className={linkCls}
+                      title="Inspect backend latency, operational status and uptime"
+                    >
+                      System Status
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => setActiveModal('resetConfirm')}
+                      className={`${linkCls} !text-rose-600/90 dark:!text-rose-400/90 hover:!text-rose-700 dark:hover:!text-rose-300`}
+                      title="Reset all saved course grades, GPA rows, and calculator history"
+                    >
+                      Reset Local Data
+                    </button>
+                  </li>
+                </ul>
+              </div>
 
-                {/* Working Report an Issue Button */}
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIssueSuccess(null);
-                      setIssueError(null);
-                      setActiveModal('reportIssue');
-                    }}
-                    className="w-full text-left flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95 group"
-                    title="Report a calculation error or UI bug directly to backend ticket system"
-                  >
-                    <div className="flex items-center gap-2 truncate">
-                      <Bug className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors shrink-0" />
-                      <span>Report an Issue</span>
-                    </div>
-                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-500 shrink-0">
-                      Bug
-                    </span>
-                  </button>
-                </li>
-
-                {/* Working Suggest a Calculator / Feature Button */}
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFeatureSuccess(null);
-                      setFeatureError(null);
-                      setActiveModal('suggestFeature');
-                    }}
-                    className="w-full text-left flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95 group"
-                    title="Suggest a new grading scale, formula or calculator to the roadmap"
-                  >
-                    <div className="flex items-center gap-2 truncate">
-                      <PlusCircle className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors shrink-0" />
-                      <span>Request a Feature</span>
-                    </div>
-                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-500 shrink-0">
-                      Idea
-                    </span>
-                  </button>
-                </li>
-
-                {/* Working Quick Copy Email Button */}
-                <li>
-                  <button
-                    type="button"
-                    onClick={handleCopyEmail}
-                    className="w-full text-left flex items-center justify-between gap-1.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95 group"
-                    title={`Copy direct email address: ${CONTACT_EMAIL}`}
-                  >
-                    <div className="flex items-center gap-2 truncate">
-                      {copiedEmail ? (
-                        <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                      ) : (
-                        <Mail className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200 shrink-0" />
-                      )}
-                      <span className={copiedEmail ? 'text-teal-700 dark:text-teal-400 font-semibold truncate' : 'truncate'}>
-                        {copiedEmail ? 'Copied Email!' : 'Copy Direct Email'}
+              {/* Contact Us */}
+              <div className="md:col-span-2">
+                <h2 className={colHeadCls}>Contact Us</h2>
+                <ul className="space-y-3.5 list-none p-0 m-0">
+                  <li>
+                    <button
+                      type="button"
+                      onClick={handleCopyEmail}
+                      className={`${linkCls} gap-2.5`}
+                      title={`Copy direct email address: ${CONTACT_EMAIL}`}
+                    >
+                      <span className="w-6 h-6 rounded-md bg-[#4F73DF] text-white flex items-center justify-center shrink-0">
+                        {copiedEmail ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Mail className="w-3.5 h-3.5" aria-hidden="true" />}
                       </span>
-                    </div>
-                    <span className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-stone-100 dark:bg-slate-800 text-slate-500 shrink-0">
-                      {copiedEmail ? 'Ready' : 'Copy'}
-                    </span>
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4: Trust, Legal & System Health */}
-            <div className="md:col-span-2 space-y-3">
-              <h2 className="text-xs font-bold tracking-widest text-slate-400 dark:text-slate-400 uppercase m-0">
-                Trust &amp; Legal
-              </h2>
-              <ul className="space-y-1 text-xs">
-                {/* Working About & Methodology link */}
-                <li>
-                  <Link
-                    to="/about"
-                    onClick={scrollToTop}
-                    onMouseEnter={() => preloadTool('about')}
-                    onFocus={() => preloadTool('about')}
-                    onTouchStart={() => preloadTool('about')}
-                    className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95"
-                    title="Learn about our grading methodology, GPA formulas, and project mission"
-                  >
-                    <BookOpen className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>About &amp; Methodology</span>
-                  </Link>
-                </li>
-
-                {/* Working Privacy Policy link */}
-                <li>
-                  <Link
-                    to="/privacy"
-                    onClick={scrollToTop}
-                    className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95"
-                    title="Read our Privacy Policy"
-                  >
-                    <Shield className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>Privacy Policy</span>
-                  </Link>
-                </li>
-
-                {/* Working Terms of Service link */}
-                <li>
-                  <Link
-                    to="/terms"
-                    onClick={scrollToTop}
-                    className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95"
-                    title="View Terms of Service & Educational Disclaimer"
-                  >
-                    <FileText className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>Terms of Service</span>
-                  </Link>
-                </li>
-
-                {/* Working Clear Data / Reset Button */}
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => setActiveModal('resetConfirm')}
-                    className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl text-rose-600/90 dark:text-rose-400/90 hover:text-rose-700 dark:hover:text-rose-300 hover:bg-rose-50/70 dark:hover:bg-rose-950/40 font-medium transition-all cursor-pointer active:scale-95"
-                    title="Reset all saved course grades, GPA rows, and calculator history"
-                  >
-                    <Trash2 className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                    <span>Reset Local Data</span>
-                  </button>
-                </li>
-
-                {/* Working Server Status Button */}
-                <li>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      checkServerHealth();
-                      setActiveModal('status');
-                    }}
-                    className="w-full text-left flex items-center gap-2.5 px-3 py-2 rounded-xl text-stone-600 dark:text-slate-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-100/60 dark:hover:bg-slate-800/60 font-medium transition-all cursor-pointer active:scale-95"
-                    title="Inspect backend latency, operational status and uptime"
-                  >
-                    <Activity className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span>System Status</span>
-                  </button>
-                </li>
-              </ul>
+                      <span className="break-all">{copiedEmail ? 'Copied!' : CONTACT_EMAIL}</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setContactSuccess(null);
+                        setContactError(null);
+                        setActiveModal('contact');
+                      }}
+                      className={`${linkCls} gap-2.5`}
+                      title="Send a message or feedback directly to the engineering team via backend"
+                    >
+                      <span className="w-6 h-6 rounded-md bg-[#4F73DF] text-white flex items-center justify-center shrink-0">
+                        <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
+                      </span>
+                      <span>Contact &amp; Feedback</span>
+                    </button>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
-          {/* Minimal Bottom Bar */}
-          <div className="pt-6 border-t border-stone-200/60 dark:border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-500 dark:text-slate-400 font-sans">
-            <p className="m-0 text-center sm:text-left">
-              &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite.
-            </p>
-            <div className="flex items-center gap-1.5 text-xs">
-              <span>Engineered with</span>
-              <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" aria-hidden="true" />
-              <span>for students and educators</span>
+          {/* Bottom bar */}
+          <div className="border-t border-slate-200/80 dark:border-slate-800">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+              <p className="m-0 text-center md:text-left">
+                &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite. Engineered with{' '}
+                <Heart className="w-3 h-3 text-rose-500 fill-rose-500 inline -mt-0.5" aria-hidden="true" /> for students and educators.
+              </p>
+              <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium text-slate-600 dark:text-slate-300">
+                <Link
+                  to="/about"
+                  onClick={scrollToTop}
+                  onMouseEnter={() => preloadTool('about')}
+                  onFocus={() => preloadTool('about')}
+                  onTouchStart={() => preloadTool('about')}
+                  className="no-underline hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors"
+                  title="Learn about our grading methodology, GPA formulas, and project mission"
+                >
+                  About &amp; Methodology
+                </Link>
+                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors" title="Read our Privacy Policy">
+                  Privacy Policy
+                </Link>
+                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors" title="View Terms of Service & Educational Disclaimer">
+                  Terms of Service
+                </Link>
+              </nav>
             </div>
           </div>
         </div>
