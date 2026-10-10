@@ -188,7 +188,7 @@ export function resolveSeoForPath(rawPath: string): ResolvedRouteSeo {
         description: toolPage.metaDescription,
         canonicalPath: toolPage.path,
         canonicalUrl: `${BASE_CANONICAL_ORIGIN}${toolPage.path}`,
-        ogImagePlaceholder: SEO_ROUTES.quick.ogImagePlaceholder,
+        ogImagePlaceholder: toolPage.ogImage ?? SEO_ROUTES.quick.ogImagePlaceholder,
         ogType: 'website',
         keywords: toolPage.keywords,
         schemaType: 'WebApplication',

@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
-import { Sun, Moon, Laptop, Search } from 'lucide-react';
+import { Sun, Moon, Laptop, Search, Ellipsis } from 'lucide-react';
 import { NAV_ITEMS } from '../data/navItems';
 import { TOOL_PATHS } from '../data/constants';
 import { isSamePath } from '../utils/paths';
@@ -11,6 +11,7 @@ import { useTheme } from '../context/ThemeContext';
 import { PWAInstallButton } from './PWAInstallButton';
 import { preloadTool } from '../utils/toolPreloader';
 import { Logo } from './Logo';
+import { MoreToolsSheet } from './MoreToolsSheet';
 
 interface NavbarProps {
   activeTool: ToolKey;
@@ -37,9 +38,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     const activeTab = activeTabRef.current;
     const navInner = navInnerRef.current;
     if (!activeTab || !navInner) return;
-
-    // On mobile the tool list wraps into rows (no horizontal scroll), so there is nothing to center.
-    if (typeof window !== 'undefined' && window.matchMedia?.('(max-width: 640px)')?.matches) return;
 
     // Check prefers-reduced-motion
     const prefersReducedMotion =
@@ -74,6 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     return () => cancelAnimationFrame(rafId);
   }, [activeTool, location.pathname]);
 
+  const [moreOpen, setMoreOpen] = React.useState(false);
   const [mounted, setMounted] = React.useState(false);
   useEffect(() => {
     setMounted(true);
@@ -86,6 +85,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       /Mac|iPod|iPhone|iPad/i.test(navigator.userAgent || '')
     );
   }, [mounted]);
+
+  // Academic tools are the primary row; general-purpose utilities live behind "More tools".
+  const primaryItems = useMemo(() => NAV_ITEMS.filter((t) => t.group === 'academic'), []);
+  const moreItems = useMemo(() => NAV_ITEMS.filter((t) => t.group === 'utility'), []);
+  const activeMore = !isStaticPage ? moreItems.find((t) => isSamePath(location.pathname, t.path)) : undefined;
+  const moreIsActive = !!activeMore;
 
   const cycleTheme = () => {
     if (theme === 'system') {
@@ -165,48 +170,69 @@ export const Navbar: React.FC<NavbarProps> = ({
         aria-label="Calculator tools"
       >
         <div className="tool-nav-inner" ref={navInnerRef}>
-          {NAV_ITEMS.map((tool, idx) => {
+          {primaryItems.map((tool) => {
             const Icon = tool.icon;
             const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
-            const startsUtility = tool.group === 'utility' && NAV_ITEMS[idx - 1]?.group === 'academic';
             return (
-              <React.Fragment key={tool.path}>
-                {startsUtility && (
-                  <span className="tool-nav-divider shrink-0 self-center mx-1 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-stone-400" role="separator" aria-label="More tools">
-                    <span className="w-px h-5 bg-stone-300 dark:bg-slate-700" aria-hidden="true" />
-                    <span>More</span>
-                  </span>
-                )}
-                <Link
-                  ref={isActive ? activeTabRef : undefined}
-                  to={tool.path}
-                  onClick={() => {
-                    // Only the 8 legacy tools map 1:1 to a ToolKey. Pages like Weighted/Final Exam/Test Grade/
-                    // Grade Curve/Letter Grade share the 'quick' key, so selecting them via onSelectTool would
-                    // navigate back to Home. The <Link> already navigates to the right page.
-                    if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool(tool.toolKey);
-                  }}
-                  onMouseEnter={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
-                  onFocus={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
-                  onTouchStart={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
-                  className={`tool-nav-item inline-flex items-center no-underline cursor-pointer ${
-                    isActive
-                      ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-1.5'
-                      : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-1.5 transition-all'
-                  }`}
-                  data-tool={tool.toolKey}
-                  data-active={isActive}
-                  aria-current={isActive ? 'page' : undefined}
-                  title={tool.title}
-                >
-                  <Icon aria-hidden="true" />
-                  <span>{tool.label}</span>
-                </Link>
-              </React.Fragment>
+              <Link
+                key={tool.path}
+                ref={isActive ? activeTabRef : undefined}
+                to={tool.path}
+                onClick={() => {
+                  // Only the legacy tools map 1:1 to a ToolKey. Pages like Weighted/Final Exam/Test Grade/
+                  // Grade Curve/Letter Grade share the 'quick' key, so selecting them via onSelectTool would
+                  // navigate back to Home. The <Link> already navigates to the right page.
+                  if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool(tool.toolKey);
+                }}
+                onMouseEnter={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
+                onFocus={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
+                onTouchStart={() => { preloadTool(tool.toolKey); void preloadForPath(tool.path); }}
+                className={`tool-nav-item inline-flex items-center no-underline cursor-pointer min-h-[48px] ${
+                  isActive
+                    ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-2'
+                    : 'text-stone-700 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-2 transition-all'
+                }`}
+                data-tool={tool.toolKey}
+                data-active={isActive}
+                aria-current={isActive ? 'page' : undefined}
+                title={tool.title}
+              >
+                <Icon aria-hidden="true" />
+                <span>{tool.label}</span>
+              </Link>
             );
           })}
+
+          {moreItems.length > 0 && (
+            <button
+              type="button"
+              className={`tool-nav-item inline-flex items-center cursor-pointer min-h-[48px] rounded-full px-4 py-2 font-semibold transition-all ${
+                moreIsActive
+                  ? 'bg-white text-stone-900 font-bold shadow-sm border border-stone-200'
+                  : 'text-stone-700 hover:text-stone-900 hover:bg-stone-100/50 border border-transparent'
+              }`}
+              aria-haspopup="dialog"
+              aria-expanded={moreOpen}
+              data-active={moreIsActive}
+              onClick={() => setMoreOpen(true)}
+              onMouseEnter={() => moreItems.forEach((t) => void preloadForPath(t.path))}
+            >
+              <Ellipsis aria-hidden="true" />
+              <span>{moreIsActive ? activeMore?.label : 'More tools'}</span>
+            </button>
+          )}
         </div>
       </nav>
+      {moreOpen && (
+        <MoreToolsSheet
+          items={moreItems}
+          currentPath={location.pathname}
+          onClose={() => setMoreOpen(false)}
+          onNavigate={(item) => {
+            if (isSamePath(TOOL_PATHS[item.toolKey], item.path)) onSelectTool(item.toolKey);
+          }}
+        />
+      )}
     </header>
   );
 };

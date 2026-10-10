@@ -17,7 +17,20 @@ CARDS = {
     "og-cards/mortgage-calculator-1200x630.png": ("Mortgage Calculator", "Monthly home loan payment and interest cost"),
     "og-cards/password-generator-1200x630.png": ("Password Generator", "Strong random passwords made in your browser"),
     "og-image.png": ("Easy Grade Tool", "Free grade, GPA and everyday calculators"),
+    "og-cards/test-grade-calculator-1200x630.png": ("Test Grade\nCalculator", "Percent and letter from points earned"),
+    "og-cards/grade-curve-calculator-1200x630.png": ("Grade Curve\nCalculator", "Four curving methods, class mean and median"),
+    "og-cards/letter-grade-calculator-1200x630.png": ("Letter Grade\nCalculator", "Percent to letter and GPA points"),
+    "og-cards/average-grade-calculator-1200x630.png": ("Average Grade\nCalculator", "Mean, median and letter for any list of scores"),
+    "og-cards/grading-scale-1200x630.png": ("Grading Scale Charts", "Score charts for tests of 5 to 100 questions"),
 }
+
+# One card per /grading-scale/N-questions/ page. Keep this list in sync with src/data/gradingScaleSizes.ts.
+GRADING_SCALE_SIZES = [5, 10, 12, 15, 16, 18, 20, 25, 30, 35, 40, 45, 50, 60, 75, 80, 100]
+for _n in GRADING_SCALE_SIZES:
+    CARDS[f"og-cards/grading-scale-{_n}-questions-1200x630.png"] = (
+        f"{_n}-Question\nGrading Scale",
+        f"Each answer is {round(100 / _n, 2):g}%. Percent and letter for every score",
+    )
 
 def gradient(w, h, c1, c2):
     img = Image.new("RGB", (w, h), c1)

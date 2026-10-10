@@ -4,6 +4,7 @@ export { CONTACT_EMAIL, SITE_URL, BASE_CANONICAL_ORIGIN } from './constants.ts';
 import { SITE_URL, BASE_CANONICAL_ORIGIN } from './constants.ts';
 import { PROGRAMMATIC_SEO_REGISTRY } from './programmaticSeoData.ts';
 import { TOOL_PAGE_LIST } from './toolPages.ts';
+import { CONTENT_REVIEWED_ON } from './siteIdentity.ts';
 
 export interface RouteSeoConfig {
   title: string;
@@ -21,10 +22,11 @@ export interface RouteSeoConfig {
 /**
  * Single source of truth for platform launch and structured data timestamps (ISO 8601).
  * SITE_LAUNCH_DATE represents the initial platform publication date.
- * SITE_LAST_MODIFIED represents the date of the latest content, formula, and methodology review.
+ * SITE_LAST_MODIFIED represents the date of the latest content, formula, and methodology review. It is derived
+ * from CONTENT_REVIEWED_ON (siteIdentity.ts), so schema dateModified, the page byline and the sitemap fallback agree.
  */
 export const SITE_LAUNCH_DATE: string = '2026-10-01T00:00:00Z';
-export const SITE_LAST_MODIFIED: string = '2026-10-04T00:00:00Z';
+export const SITE_LAST_MODIFIED: string = `${CONTENT_REVIEWED_ON}T00:00:00Z`;
 
 /**
  * Returns the resolved canonical origin.

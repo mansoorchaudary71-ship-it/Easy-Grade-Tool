@@ -5,11 +5,13 @@ import {
   useNavigate,
   useLocation,
   Navigate,
+  useParams,
   BrowserRouter,
   MemoryRouter,
 } from 'react-router-dom';
 import { HelmetProvider } from './utils/helmet';
 import { Navbar } from './components/Navbar';
+import { UpdatePrompt } from './components/UpdatePrompt';
 import { Toast } from './components/Toast';
 import { ThemeProvider } from './context/ThemeContext';
 import { TOOLS_LIST, TOOL_PATHS, getToolKeyFromPath } from './data/constants';
@@ -17,6 +19,7 @@ import { ToolKey } from './types';
 import { GradeCalculator } from './components/GradeCalculator';
 import { NotFound } from './components/NotFound';
 import { isSelfManagedSeoPath } from './data/selfManagedSeo';
+import { isGradingScaleParam } from './data/gradingScaleSizes';
 import { LEGACY_REDIRECTS } from './data/legacyRedirects';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
@@ -53,6 +56,13 @@ export interface AppSyncComponents {
   ProgrammaticCalculatorView?: React.ComponentType<any>;
   ToolPage?: React.ComponentType<any>;
 }
+
+/** /grading-scale/25-questions/ -> the page for that test size; unknown sizes go to the index. */
+const GradingScaleRoute: React.FC<{ ToolPage: React.ComponentType<{ slug: string }> }> = ({ ToolPage }) => {
+  const { size } = useParams();
+  if (!isGradingScaleParam(size)) return <Navigate to="/grading-scale/" replace />;
+  return <ToolPage slug={`grading-scale/${size}`} />;
+};
 
 function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   const location = useLocation();
@@ -219,6 +229,9 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/test-grade-calculator" element={<CompToolPage slug="test-grade-calculator" />} />
               <Route path="/grade-curve-calculator" element={<CompToolPage slug="grade-curve-calculator" />} />
               <Route path="/letter-grade-calculator" element={<CompToolPage slug="letter-grade-calculator" />} />
+              <Route path="/average-grade-calculator" element={<CompToolPage slug="average-grade-calculator" />} />
+              <Route path="/grading-scale" element={<CompToolPage slug="grading-scale" />} />
+              <Route path="/grading-scale/:size" element={<GradingScaleRoute ToolPage={CompToolPage} />} />
 
               {/* Legacy and alias URLs. Generated from the SAME table as the build-time redirect stubs. */}
               {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
@@ -233,6 +246,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
           </Suspense>
         </div>
       </main>
+      <UpdatePrompt />
 
       <Footer
         activeTool={activeTool}
