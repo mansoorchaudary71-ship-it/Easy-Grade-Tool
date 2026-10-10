@@ -2,38 +2,101 @@ import React from 'react';
 import { ShieldCheck } from 'lucide-react';
 import { Link } from './SlashLink';
 import { SEO } from './SEO';
-import { TOOL_PAGES, ToolPageSlug, toolPageCanonical } from '../data/toolPages';
+import { TOOL_PAGES, toolPageCanonical } from '../data/toolPages';
+import type { ToolPageEntry } from '../data/toolPages';
 import { OG_IMAGES } from '../data/seoConfig';
 import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
+import { AverageGradeTool } from './tools/AverageGradeTool';
+import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
+import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
+import { ContentSection } from './GuideShell';
 import { ToolGuideKey } from '../data/toolGuideContent';
 
-const TOOLS: Record<ToolPageSlug, React.ComponentType> = {
+/**
+ * One template for every dedicated academic page:
+ *  - core pages (test grade, grade curve, letter grade) show the supplied Word-document guide,
+ *  - generated pages (average grade, grading-scale index, /grading-scale/N-questions/) show the
+ *    sections + worked example from data/gradingScalePages.ts,
+ * and every page ends with the shared FAQ and related-links blocks.
+ */
+
+const SIMPLE_TOOLS: Record<string, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
   'grade-curve-calculator': GradeCurveTool,
   'letter-grade-calculator': LetterGradeTool,
+  'average-grade-calculator': AverageGradeTool,
+  'grading-scale': GradingScaleIndexTool,
 };
 
-const GUIDES: Record<ToolPageSlug, ToolGuideKey> = {
+/** Pages whose long-form copy comes from the Word documents (data/toolGuideContent.ts). */
+const GUIDES: Record<string, ToolGuideKey> = {
   'test-grade-calculator': 'test-grade',
   'grade-curve-calculator': 'grade-curve',
   'letter-grade-calculator': 'letter-grade',
 };
 
 export interface ToolPageProps {
-  slug: ToolPageSlug;
+  /** e.g. 'test-grade-calculator', 'average-grade-calculator', 'grading-scale', 'grading-scale/25-questions' */
+  slug: string;
 }
 
 const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
+const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight first:mt-0';
+const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+
+const renderTool = (slug: string, entry: ToolPageEntry): React.ReactNode => {
+  if (typeof entry.questions === 'number') return <QuestionCountChartTool questions={entry.questions} />;
+  const Tool = SIMPLE_TOOLS[slug];
+  return Tool ? <Tool /> : null;
+};
+
+/** Sections + worked example for the generated pages. */
+const GeneratedContent: React.FC<{ entry: ToolPageEntry }> = ({ entry }) => (
+  <ContentSection guide={entry.slug}>
+    {entry.sections.map((s) => (
+      <React.Fragment key={s.heading}>
+        <h2 className={H2}>{s.heading}</h2>
+        {s.paragraphs.map((p, i) => (
+          <p key={i} className={P}>{p}</p>
+        ))}
+        {s.bullets && s.bullets.length > 0 && (
+          <ul className={UL}>
+            {s.bullets.map((b, i) => (
+              <li key={i}>{b}</li>
+            ))}
+          </ul>
+        )}
+      </React.Fragment>
+    ))}
+
+    <h2 className={H2}>{entry.example.heading}</h2>
+    <p className={P}>{entry.example.scenario}</p>
+    <dl className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 p-4 mb-4 m-0">
+      {entry.example.rows.map((r) => (
+        <React.Fragment key={r.label}>
+          <dt className="text-sm text-slate-600 dark:text-slate-300">{r.label}</dt>
+          <dd className="text-sm font-bold text-slate-900 dark:text-white m-0 text-right">{r.value}</dd>
+        </React.Fragment>
+      ))}
+    </dl>
+    <p className={P}>{entry.example.takeaway}</p>
+  </ContentSection>
+);
+
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
-  const Tool = TOOLS[slug];
+  // Unknown slug: render nothing instead of crashing the whole route.
+  if (!entry) return null;
+
+  const guide = GUIDES[slug];
   // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
   const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));
 
@@ -55,12 +118,12 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       </header>
 
       <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
-        <Tool />
+        {renderTool(slug, entry)}
       </section>
 
-      <ToolContentGuide guide={GUIDES[slug]} />
+      {guide ? <ToolContentGuide guide={guide} /> : <GeneratedContent entry={entry} />}
 
-      <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />
+      <FAQ tool="quick" items={faqItems} heading={entry.faqHeading ?? PAGE_FAQ_HEADINGS[slug] ?? (slug.startsWith('grading-scale/') ? PAGE_FAQ_HEADINGS['grading-scale'] : undefined)} />
 
       <section aria-label="Related calculators" className="space-y-3 print:hidden content-auto">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Related grade calculators</h2>

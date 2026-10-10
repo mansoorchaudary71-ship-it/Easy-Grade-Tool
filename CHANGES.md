@@ -1,15 +1,13 @@
-# Content purge patch
+# FAQ + footer patch (fixed)
 
-Unzip over the repo root, then delete the removed files:
+Unzip over the repo root, then `npm run build`.
 
-    git rm -r --ignore-unmatch src/components/GuideArticle.tsx src/components/QuickGradeCalculator.tsx src/components/GpaToPercentage.tsx quick-grade nav seo offline docs/INTEGRATION.md
-
-Then `npm install && npm run build` (runs the 16-check launch audit) and push.
-
-## What changed
-- GuideArticle.tsx deleted: keyword-spun copy (5 articles) that repeated what toolPages.ts / programmaticSeoData.ts already say properly. Removed from the final-exam, test-grade, grade-curve, letter-grade and weighted pages.
-- ToolHeading.tsx: the badge/eyebrow line above every H1 is gone.
-- ToolPage.tsx: breadcrumb + badge above the H1 removed (BreadcrumbList JSON-LD in SEO.tsx is untouched).
-- ProgrammaticCalculatorView.tsx: breadcrumb + badge chips above the H1 removed.
-- CgpaEducationalGuide.tsx: "Complete Academic Reference Guide" kicker above the guide heading removed.
-- Dead, unimported files deleted: QuickGradeCalculator.tsx, GpaToPercentage.tsx, quick-grade/, nav/, seo/, offline/, docs/INTEGRATION.md.
+Fixes the 4 failing launch checks (CHK-03, CHK-08, CHK-10, CHK-16):
+- ToolPage.tsx: the previous version only knew test-grade, grade-curve and letter-grade, so
+  /average-grade-calculator/, /grading-scale/ and all /grading-scale/N-questions/ pages rendered an
+  undefined tool ("type is invalid") with no H1, FAQs or content. It now renders the right tool for every
+  slug plus each page's sections, worked example, FAQ and related links.
+- Footer.tsx: adds crawlable "Average Grade" and "Grading Scales" links to the Grade Calculators column
+  so the homepage links to every sitemap URL (CHK-16).
+- FAQ.tsx: adds FAQ headings for the average-grade and grading-scale pages (same UI as the other tools).
+- All other files are unchanged from the earlier patch.

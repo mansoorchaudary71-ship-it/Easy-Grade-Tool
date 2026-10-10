@@ -60,6 +60,15 @@ interface ServerHealthData {
   latencyMs?: number;
 }
 
+/**
+ * Pages that are not in the top navigation but must stay one click from every page (and from the homepage),
+ * which the launch audit (CHK-16) enforces for every sitemap URL.
+ */
+const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string }[] = [
+  { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/' },
+  { label: 'Grading Scales', title: 'Grading scale charts by number of questions', path: '/grading-scale/' },
+];
+
 export const Footer: React.FC<FooterProps> = ({
   activeTool: propActiveTool,
   onSelectTool,
@@ -811,6 +820,23 @@ export const Footer: React.FC<FooterProps> = ({
                         </li>
                       );
                     })}
+                    {group === 'academic' &&
+                      FOOTER_EXTRA_ACADEMIC_LINKS.map((tool) => {
+                        const isActive = location.pathname.startsWith(tool.path.replace(/\/+$/, ''));
+                        return (
+                          <li key={tool.path}>
+                            <Link
+                              to={tool.path}
+                              onClick={scrollToTop}
+                              className={`${linkCls} no-underline ${isActive ? '!text-[#4468D8] dark:!text-blue-300 font-bold' : ''}`}
+                              aria-current={isActive && isSamePath(location.pathname, tool.path) ? 'page' : undefined}
+                              title={tool.title}
+                            >
+                              {tool.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </div>
               ))}
