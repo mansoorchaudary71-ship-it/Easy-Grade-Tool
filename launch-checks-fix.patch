@@ -1,0 +1,214 @@
+diff -ru orig/Easy-Grade-Tool-main/src/components/FAQ.tsx Easy-Grade-Tool-main/src/components/FAQ.tsx
+--- orig/Easy-Grade-Tool-main/src/components/FAQ.tsx	2026-10-10 05:14:01.000000000 +0000
++++ Easy-Grade-Tool-main/src/components/FAQ.tsx	2026-10-10 05:23:41.190687509 +0000
+@@ -120,6 +120,20 @@
+       'Answers on percentage cutoffs, plus/minus scales, GPA points per letter and why your school’s scale may differ from the common one.',
+     ctaText: 'Enter a percentage or pick a letter above to see its range, GPA points and full scale table.',
+   },
++  'average-grade-calculator': {
++    eyebrow: 'Average Grade FAQs',
++    title: 'Average Grade Calculator FAQs',
++    description:
++      'Answers on finding the mean and median of your scores, mixing tests with different totals and knowing when a plain average is not your course grade.',
++    ctaText: 'Paste your scores above to see the mean, median, range and letter grade.',
++  },
++  'grading-scale': {
++    eyebrow: 'Grading Scale FAQs',
++    title: 'Grading Scale Chart FAQs',
++    description:
++      'Answers on the cutoffs these charts use, how to handle a test size that is not listed and why one wrong answer costs different amounts on different tests.',
++    ctaText: 'Choose a test size above to open its score chart.',
++  },
+ };
+ 
+ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
+diff -ru orig/Easy-Grade-Tool-main/src/components/QuickGradeGuide.tsx Easy-Grade-Tool-main/src/components/QuickGradeGuide.tsx
+--- orig/Easy-Grade-Tool-main/src/components/QuickGradeGuide.tsx	2026-10-10 05:14:01.000000000 +0000
++++ Easy-Grade-Tool-main/src/components/QuickGradeGuide.tsx	2026-10-10 05:23:41.191412699 +0000
+@@ -11,6 +11,8 @@
+   { to: '/test-grade-calculator/', title: 'Test grade calculator', text: 'Percentage and letter for one test, with bonus points.' },
+   { to: '/grade-curve-calculator/', title: 'Grade curve calculator', text: 'Four curving methods with before and after scores.' },
+   { to: '/letter-grade-calculator/', title: 'Letter grade calculator', text: 'Percent to letter and GPA points on common scales.' },
++  { to: '/average-grade-calculator/', title: 'Average grade calculator', text: 'Mean, median and letter grade for a list of scores.' },
++  { to: '/grading-scale/', title: 'Grading scale charts', text: 'Score charts for tests of 5 to 100 questions.' },
+   { to: '/gpa-calculator/', title: 'GPA calculator', text: 'Semester and cumulative GPA with credit hours.' },
+   { to: '/cgpa-to-percentage-calculator/', title: 'CGPA to percentage', text: '10, 5 and 4-point conversions by university.' },
+ ];
+diff -ru orig/Easy-Grade-Tool-main/src/components/ToolPage.tsx Easy-Grade-Tool-main/src/components/ToolPage.tsx
+--- orig/Easy-Grade-Tool-main/src/components/ToolPage.tsx	2026-10-10 05:14:01.000000000 +0000
++++ Easy-Grade-Tool-main/src/components/ToolPage.tsx	2026-10-10 05:23:17.371038098 +0000
+@@ -8,6 +8,9 @@
+ import { TestGradeTool } from './tools/TestGradeTool';
+ import { GradeCurveTool } from './tools/GradeCurveTool';
+ import { LetterGradeTool } from './tools/LetterGradeTool';
++import { AverageGradeTool } from './tools/AverageGradeTool';
++import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
++import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
+ import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
+ import { ToolContentGuide } from './ToolContentGuide';
+ import { ToolGuideKey } from '../data/toolGuideContent';
+@@ -16,6 +19,8 @@
+   'test-grade-calculator': TestGradeTool,
+   'grade-curve-calculator': GradeCurveTool,
+   'letter-grade-calculator': LetterGradeTool,
++  'average-grade-calculator': AverageGradeTool,
++  'grading-scale': GradingScaleIndexTool,
+ };
+ 
+ const GUIDES: Record<ToolPageSlug, ToolGuideKey> = {
+@@ -28,12 +33,73 @@
+   slug: ToolPageSlug;
+ }
+ 
++const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight';
++const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight';
++const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
++const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
++
++/**
++ * Written content for pages that are generated from data (average grade, grading-scale hub and the
++ * per-size charts). Renders the page's own sections and its worked example as real, crawlable HTML
++ * inside the main content area, so the page is never just a form.
++ */
++const EntryContent: React.FC<{ entry: (typeof TOOL_PAGES)[string] }> = ({ entry }) => {
++  const titleId = `${entry.slug.replace(/\//g, '-')}-content-title`;
++  const exampleId = `${entry.slug.replace(/\//g, '-')}-example-title`;
++  return (
++    <>
++      <section className="seo-content guide-shell" aria-labelledby={titleId} data-tool-guide={entry.slug}>
++        <article className="seo-article guide-card font-sans">
++          <h2 id={titleId} className={H2_MAIN}>{entry.h1}: how it works</h2>
++          {entry.sections.map((section) => (
++            <React.Fragment key={section.heading}>
++              <h3 className={H2}>{section.heading}</h3>
++              {section.paragraphs.map((para, i) => (
++                <p key={i} className={P}>{para}</p>
++              ))}
++              {section.bullets && section.bullets.length > 0 && (
++                <ul className={UL}>
++                  {section.bullets.map((b, i) => (
++                    <li key={i}>{b}</li>
++                  ))}
++                </ul>
++              )}
++            </React.Fragment>
++          ))}
++        </article>
++      </section>
++
++      <section className="seo-content guide-shell" aria-labelledby={exampleId}>
++        <article className="seo-article guide-card font-sans">
++          <h2 id={exampleId} className={H2_MAIN}>{entry.example.heading}</h2>
++          <p className={P}>{entry.example.scenario}</p>
++          <div className="overflow-x-auto">
++            <table className="w-full text-sm text-left">
++              <tbody>
++                {entry.example.rows.map((row) => (
++                  <tr key={row.label} className="border-b border-slate-200 dark:border-slate-800">
++                    <th scope="row" className="py-2 pr-4 font-semibold text-slate-800 dark:text-slate-100">{row.label}</th>
++                    <td className="py-2 text-slate-600 dark:text-slate-300">{row.value}</td>
++                  </tr>
++                ))}
++              </tbody>
++            </table>
++          </div>
++          <p className={`${P} mt-4`}>{entry.example.takeaway}</p>
++        </article>
++      </section>
++    </>
++  );
++};
++
+ const formatDate = (iso: string) =>
+   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+ 
+ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
+   const entry = TOOL_PAGES[slug];
+-  const Tool = TOOLS[slug];
++  const ToolComponent = TOOLS[slug];
++  // /grading-scale/N-questions/ pages share one chart component, driven by the entry's question count.
++  const guideKey = GUIDES[slug];
+   // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
+   const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));
+ 
+@@ -55,10 +121,10 @@
+       </header>
+ 
+       <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
+-        <Tool />
++        {ToolComponent ? <ToolComponent /> : entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : null}
+       </section>
+ 
+-      <ToolContentGuide guide={GUIDES[slug]} />
++      {guideKey ? <ToolContentGuide guide={guideKey} /> : <EntryContent entry={entry} />}
+ 
+       <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />
+ 
+diff -ru orig/Easy-Grade-Tool-main/src/data/gradingScalePages.ts Easy-Grade-Tool-main/src/data/gradingScalePages.ts
+--- orig/Easy-Grade-Tool-main/src/data/gradingScalePages.ts	2026-10-10 05:14:01.000000000 +0000
++++ Easy-Grade-Tool-main/src/data/gradingScalePages.ts	2026-10-10 05:23:34.168541041 +0000
+@@ -275,6 +275,50 @@
+           'Scores out of different totals should be converted to percentages first. A 9 out of 10 and a 45 out of 50 are both 90%, but averaging 9 and 45 gives a meaningless 27.',
+         ],
+       },
++      {
++        heading: 'Step by step: from a list of scores to a letter grade',
++        paragraphs: [
++          'The calculator follows the same short routine you would use on paper, so you can check any result by hand.',
++        ],
++        bullets: [
++          'List every score you want included, one per test, quiz or assignment, using the same maximum for all of them.',
++          'Add the scores together to get the sum, then divide the sum by how many scores you entered. The result is the mean.',
++          'Sort the scores from lowest to highest and pick the middle one. With an even number of scores, take the midpoint of the two middle values. That is the median.',
++          'Divide the mean by the maximum score and multiply by 100 to get a percentage, then read the letter from your grading scale.',
++        ],
++      },
++      {
++        heading: 'What each result on the calculator tells you',
++        paragraphs: [
++          'The mean is your overall level across all the work entered. The median shows what a typical score looks like once extremes are set aside. The highest and lowest scores show your range, which tells you how consistent you have been.',
++          'A narrow range, such as 84 to 95, means the average describes your performance well. A wide range, such as 40 to 100, means the average hides a lot of variation, and it is worth asking which assignments dragged the score down and whether they can be repeated or made up.',
++        ],
++      },
++      {
++        heading: 'When a plain average can mislead you',
++        paragraphs: [
++          'A single zero for a missed assignment can pull a mean down by many points, while the median stays almost unchanged. If your teacher drops the lowest score, remove it from the list before you calculate, otherwise the result will be lower than your real standing.',
++          'Averages also hide trends. Scores of 70, 80, 90 and 100 average to 85, exactly the same as 100, 90, 80 and 70, even though the first student is improving and the second is slipping. Looking at the order of your scores is as useful as the number itself.',
++          'Finally, remember rounding. An average of 89.6 is a B on the standard scale even though it rounds to 90 when written as a whole number. Always use the exact value your school uses for its cutoffs.',
++        ],
++      },
++      {
++        heading: 'Average grade, weighted grade and GPA are different measures',
++        paragraphs: [
++          'An average grade treats every score as equal, so it fits a set of tests of the same size. A weighted grade gives each category its own share of the course, for example homework 20% and exams 50%, and needs the weighted grade calculator. A GPA does not average percentages at all: it converts each course to grade points and combines them by credit hours.',
++          'Use the average grade calculator for questions such as how you are doing across five quizzes or what the class mean was on a unit test. Use the other tools when your syllabus assigns weights or when you need a semester GPA.',
++        ],
++      },
++      {
++        heading: 'Tips for entering your scores',
++        paragraphs: ['A few habits keep the result accurate:'],
++        bullets: [
++          'Convert every score to the same scale first. If one quiz was out of 20 and another out of 50, enter percentages instead of raw points.',
++          'Use commas, spaces or line breaks between values. Do not type a percent sign or letters next to the numbers.',
++          'Keep extra credit as part of the score if your teacher counts it, and change the out-of value if scores can go above 100.',
++          'Check the warnings under the box. Any value the calculator could not read is listed there with the reason, so nothing is silently skipped.',
++        ],
++      },
+     ],
+     example: {
+       heading: 'Worked example: five test scores',
+diff -ru orig/Easy-Grade-Tool-main/src/utils/seoHtmlInjector.ts Easy-Grade-Tool-main/src/utils/seoHtmlInjector.ts
+--- orig/Easy-Grade-Tool-main/src/utils/seoHtmlInjector.ts	2026-10-10 05:14:01.000000000 +0000
++++ Easy-Grade-Tool-main/src/utils/seoHtmlInjector.ts	2026-10-10 05:23:41.191919825 +0000
+@@ -281,6 +281,10 @@
+ 
+   // 1. <title>
+   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${safeTitle}</title>`);
++  // Safety net: if the template had no <title> to replace, insert one so no page ships without it.
++  if (!/<title>[^<]+<\/title>/i.test(html)) {
++    html = html.replace('</head>', `    <title>${safeTitle}</title>\n  </head>`);
++  }
+ 
+   // 2. <meta name="description">
+   html = html.replace(
