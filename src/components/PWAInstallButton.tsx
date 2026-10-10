@@ -39,8 +39,8 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
 
   if (installSuccess) {
     return (
-      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-600/90 text-white text-xs font-medium shadow-sm ${className}`}>
-        <Check className="w-3.5 h-3.5" aria-hidden="true" />
+      <div className={`inline-flex min-h-11 items-center gap-2 px-4 py-2 rounded-full bg-emerald-600/90 text-white text-xs font-semibold shadow-md shadow-emerald-600/20 ${className}`}>
+        <Check className="w-3.5 h-3.5" strokeWidth={2} aria-hidden="true" />
         <span>Installed!</span>
       </div>
     );
@@ -51,15 +51,15 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
       <button
         type="button"
         onClick={handleInstallClick}
-        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-tight transition-all duration-200 cursor-pointer shadow-sm ${
+        className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-tight cursor-pointer text-white shadow-md shadow-emerald-600/20 transition-all duration-200 hover:brightness-110 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
           variant === 'banner'
-            ? 'bg-emerald-600 text-white hover:bg-emerald-700 active:scale-95'
-            : 'bg-emerald-700 hover:bg-emerald-800 text-white border border-emerald-600/60 hover:border-emerald-500 active:scale-95'
+            ? 'bg-emerald-600'
+            : 'bg-emerald-700 border border-emerald-600/60'
         } ${className}`}
         aria-label={isIOS ? 'Install Easy Grade Tool on iOS' : 'Install Easy Grade App for offline use'}
         title="Install app to your home screen for full offline access"
       >
-        <Download className="w-3.5 h-3.5" aria-hidden="true" />
+        <Download className="w-3.5 h-3.5" strokeWidth={2} aria-hidden="true" />
         <span className="hidden sm:inline">Install App</span>
         <span className="sm:hidden">Install</span>
       </button>

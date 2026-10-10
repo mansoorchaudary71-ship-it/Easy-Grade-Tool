@@ -1,6 +1,9 @@
 @import "./fonts.css";
 @import "tailwindcss";
 
+/* Tailwind dark: variants follow the app's .dark class on <html> (set by ThemeContext), not just the OS setting */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   /* 60% Dominant Neutral Canvas */
   --background: 220 14% 96%;
