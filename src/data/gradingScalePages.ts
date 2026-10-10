@@ -97,7 +97,7 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     },
     {
       question: `How many questions can I get wrong on a ${n}-question test and still get an A?`,
-      answer: `On the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
+      answer: `On a ${n}-question test graded on the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
     },
     {
       question: `What grade is ${faqWrong} wrong out of ${n}?`,
