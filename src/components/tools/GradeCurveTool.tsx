@@ -160,7 +160,7 @@ export const GradeCurveTool: React.FC = () => {
                 ['Median before', before.median],
                 ['Median after', after.median],
               ].map(([label, val]) => (
-                <div key={label as string} className="glow-surface rounded-2xl bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 p-3">
+                <div key={label as string} className="glow-surface rounded-2xl bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 p-3">
                   <span className="text-xs font-semibold uppercase tracking-wider text-teal-900 dark:text-teal-300 block">{label as string}</span>
                   <strong className="text-xl font-extrabold font-mono text-teal-950 dark:text-teal-100">{roundTo(val as number, 1)}</strong>
                 </div>

@@ -134,7 +134,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
   const getTierRowBg = (letter: string) => {
     if (letter.startsWith('A')) {
-      return 'bg-[#CFE9DF] hover:bg-[#C0E0D3] border border-[#96CDB8]/50';
+      return 'bg-[#DCE1EF] hover:bg-[#CDD4E8] border border-[#B0BAD9]/50';
     }
     if (letter.startsWith('B')) {
       return 'bg-[#D6E1FF] hover:bg-[#C8D6FF] border border-[#A5BCF0]/50';
@@ -152,7 +152,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
     <div className="w-full max-w-5xl mx-auto space-y-8 font-sans">
       {/* 1. Header & Title */}
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 text-xs font-semibold uppercase tracking-wider">
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs font-semibold uppercase tracking-wider">
           <span>Quick Grade Chart</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -238,7 +238,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
           {/* Quick Metrics & Actions */}
           <div className="flex flex-col justify-between space-y-4">
-            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
+            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
               <span className="text-[11px] font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
                 Points Per Question
               </span>
@@ -260,7 +260,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               <button
                 type="button"
                 onClick={handlePrint}
-                className="inline-flex items-center justify-center gap-1.5 py-2.5 px-6 bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
+                className="inline-flex items-center justify-center gap-1.5 py-2.5 px-6 bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>Print Chart</span>
@@ -385,7 +385,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
       {/* 4. Educational Guide & Calculation Methodology Text */}
       <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 dark:from-slate-900 dark:to-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-4">
-        <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-400 text-sm font-bold">
+        <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 text-sm font-bold">
           <BookOpen className="w-4 h-4" />
           <span>How Easy Grade Calculator Works</span>
         </div>
@@ -400,7 +400,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
               Percentage Formula
             </span>
-            <code className="text-sm font-mono font-bold text-emerald-600 dark:text-emerald-400 block">
+            <code className="text-sm font-mono font-bold text-teal-600 dark:text-teal-400 block">
               Grade (%) = ((Total - Wrong) / Total) × 100
             </code>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
@@ -411,7 +411,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
               Points Per Item
             </span>
-            <code className="text-sm font-mono font-bold text-emerald-600 dark:text-emerald-400 block">
+            <code className="text-sm font-mono font-bold text-teal-600 dark:text-teal-400 block">
               Weight = 100 / Total Questions
             </code>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">

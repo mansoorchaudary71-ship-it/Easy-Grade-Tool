@@ -39,7 +39,7 @@ export const TermsOfService: React.FC = () => {
           {/* Summary Card */}
           <div className="bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 rounded-3xl border border-white/60 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 w-full">
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-4 flex items-center gap-2.5">
-              <Scale className="w-6 h-6 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+              <Scale className="w-6 h-6 text-teal-600 dark:text-teal-400" aria-hidden="true" />
               <span>Terms of Service Overview</span>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
@@ -51,7 +51,7 @@ export const TermsOfService: React.FC = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
               <div className="p-4 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 shadow-xs">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 mb-2" aria-hidden="true" />
+                <CheckCircle2 className="w-5 h-5 text-teal-600 dark:text-teal-400 mb-2" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-slate-800 dark:text-white">Free Educational Use</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 font-medium mt-1">
                   100% free access for students, teachers, parents, and lifelong learners.

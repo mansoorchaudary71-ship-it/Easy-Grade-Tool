@@ -34,17 +34,17 @@ export interface GradeCalculatorProps {
 }
 
 const ROW_INPUT =
-  'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
+  'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
 const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1 text-center';
 const BTN_SOLID =
-  'bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
+  'bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
 const BTN_SOFT =
   'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-sm inline-flex items-center justify-center gap-2 cursor-pointer transition-colors py-3 px-5 min-h-[48px] active:scale-95';
 const REMOVE_BTN =
   'w-12 h-12 min-w-[48px] min-h-[48px] rounded-2xl text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 bg-slate-100/90 hover:bg-rose-50 dark:bg-slate-800/90 dark:hover:bg-rose-950/40 border border-slate-200/70 dark:border-slate-700/70 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
 
 const letterTone = (letter: string) => {
-  if (letter.startsWith('A')) return 'bg-[#D2E8E4] dark:bg-teal-950/60 border border-emerald-200/60 dark:border-teal-800/60';
+  if (letter.startsWith('A')) return 'bg-[#D2E8E4] dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60';
   if (letter.startsWith('B')) return 'bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#9FB3EE]/50 dark:border-indigo-800/60';
   if (letter.startsWith('C')) return 'bg-[#FFE8C2] dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60';
   if (letter.startsWith('D')) return 'bg-stone-100 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60';
@@ -289,7 +289,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                               id={`assess-name-${item.id}`}
                               type="text"
                               enterKeyHint="next"
-                              className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                              className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 dark:placeholder:text-slate-400"
                               value={item.name}
                               onChange={(e) => handleUpdateItem(item.id, 'name', e.target.value)}
                             />
@@ -458,7 +458,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       inputMode="decimal"
                       enterKeyHint="next"
                       placeholder="90"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={targetGrade}
                       onChange={(e) => setTargetGrade(e.target.value)}
                     />
@@ -473,7 +473,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       inputMode="decimal"
                       enterKeyHint="done"
                       placeholder="20"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={finalWeight}
                       onChange={(e) => setFinalWeight(e.target.value)}
                     />
@@ -490,7 +490,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       ))}
                     </ul>
                   ) : targetSimulation ? (
-                    <div className="bg-[#D2E8E4] dark:bg-teal-950/60 border border-emerald-200/60 dark:border-teal-800/60 rounded-[24px] p-4 space-y-2">
+                    <div className="bg-[#E0E4F0] dark:bg-teal-950/60 border border-teal-200/60 dark:border-teal-800/60 rounded-[24px] p-4 space-y-2">
                       <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3">
                         <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">Required on Final:</span>
                         <strong className="text-2xl font-extrabold text-teal-950 dark:text-teal-100 font-mono">

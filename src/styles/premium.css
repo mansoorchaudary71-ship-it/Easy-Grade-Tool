@@ -5,35 +5,35 @@
    so every rule only touches shadows, focus rings, transitions and motion (never layout).
    ========================================================================== */
 
-/* 1. Inputs: soft emerald focus ring instead of the old hard blue border */
+/* 1. Inputs: soft brand focus ring instead of the old hard blue border */
 .premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select):focus {
   outline: none;
   border-color: transparent;
-  box-shadow: 0 0 0 2px rgb(16 185 129 / 0.4);
+  box-shadow: 0 0 0 2px rgb(76 89 133 / 0.4);
 }
 .premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea, select) {
   transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
-/* 2. Primary green buttons: colored drop shadow, slight brightness lift on hover */
-.premium-surface :is(button, a)[class*="bg-[#134E48]"]:not([aria-pressed]) {
-  box-shadow: 0 6px 16px -4px rgb(5 150 105 / 0.35);
+/* 2. Primary brand buttons: colored drop shadow, slight brightness lift on hover */
+.premium-surface :is(button, a)[class*="bg-[#4C5985]"]:not([aria-pressed]) {
+  box-shadow: 0 6px 16px -4px rgb(76 89 133 / 0.35);
   transition: filter 0.25s ease, translate 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class*="bg-[#134E48]"]:not([aria-pressed]):hover {
+  .premium-surface :is(button, a)[class*="bg-[#4C5985]"]:not([aria-pressed]):hover {
     filter: brightness(1.1);
     translate: 0 -1px;
-    box-shadow: 0 10px 22px -6px rgb(5 150 105 / 0.45);
+    box-shadow: 0 10px 22px -6px rgb(76 89 133 / 0.45);
   }
 }
 
 /* 3. Result panels: diffused glow, inner highlight, gentle rise-in when they appear */
-.premium-surface [class*="bg-[#CFE9DF]"] {
-  box-shadow: 0 12px 32px -14px rgb(16 185 129 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.6);
+.premium-surface [class*="bg-[#DCE1EF]"] {
+  box-shadow: 0 12px 32px -14px rgb(76 89 133 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.6);
   animation: premium-rise 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-.dark .premium-surface [class*="bg-[#CFE9DF]"] {
+.dark .premium-surface [class*="bg-[#DCE1EF]"] {
   box-shadow: 0 12px 32px -14px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.06);
 }
 
@@ -46,14 +46,14 @@
   box-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 14px 40px -18px rgb(0 0 0 / 0.6);
 }
 
-/* 5. Secondary / chip buttons: lift and turn brand green on hover */
+/* 5. Secondary / chip buttons: lift and turn brand colour on hover */
 @media (hover: hover) {
   .premium-surface .preset-btn:not([aria-pressed="true"]):hover {
     translate: 0 -2px;
-    color: rgb(4 120 87);
+    color: rgb(61 71 107);
   }
   .dark .premium-surface .preset-btn:not([aria-pressed="true"]):hover {
-    color: rgb(52 211 153);
+    color: rgb(138 152 196);
   }
 }
 .premium-surface .preset-btn {
@@ -66,9 +66,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .premium-surface [class*="bg-[#CFE9DF]"] { animation: none; }
+  .premium-surface [class*="bg-[#DCE1EF]"] { animation: none; }
   .premium-surface .preset-btn:hover,
-  .premium-surface :is(button, a)[class*="bg-[#134E48]"]:hover { translate: none; }
+  .premium-surface :is(button, a)[class*="bg-[#4C5985]"]:hover { translate: none; }
 }
 @media print {
   .premium-surface * { box-shadow: none !important; animation: none !important; }

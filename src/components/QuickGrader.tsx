@@ -58,13 +58,13 @@ const STORAGE_KEY = 'egt:quick-grader:v1';
 const COMMON_QUESTION_PRESETS = [10, 20, 25, 50, 100];
 
 const BTN_SOLID =
-  'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 text-sm transition-all cursor-pointer active:scale-95';
+  'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 text-sm transition-all cursor-pointer active:scale-95';
 const BTN_SOFT =
   'inline-flex items-center justify-center gap-2 min-h-[48px] bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-5 py-3 text-sm transition-all cursor-pointer active:scale-[0.98]';
 const STEP_BTN =
   'w-12 h-12 min-w-[48px] shrink-0 inline-flex items-center justify-center rounded-full bg-white dark:bg-slate-800 text-stone-800 dark:text-slate-100 border border-stone-300 dark:border-slate-600 hover:bg-stone-50 dark:hover:bg-slate-700 shadow-sm cursor-pointer transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed';
 const FIELD =
-  'w-full h-12 min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-lg text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
+  'w-full h-12 min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-lg text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
 const CARD_SHELL =
   'bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative p-5 sm:p-8';
 
@@ -88,7 +88,7 @@ const getBadgeClasses = (letter: string) => {
 const getTierWrapperClass = (letter: string) => {
   switch (familyOf(letter)) {
     case 'A':
-      return 'bg-[#CFE9DF] dark:bg-teal-950/55 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-4';
+      return 'bg-[#DCE1EF] dark:bg-teal-950/55 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-4';
     case 'B':
       return 'bg-[#D6E1FF] dark:bg-indigo-950/55 border border-[#A5BCF0] dark:border-indigo-800/60 rounded-[24px] p-4';
     case 'C':
@@ -650,7 +650,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           </details>
 
           <div className="grid grid-cols-2 gap-3 pt-1">
-            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 rounded-[20px] p-4 border border-[#96CDB8] dark:border-teal-800/50 shadow-sm">
+            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 rounded-[20px] p-4 border border-[#B0BAD9] dark:border-teal-800/50 shadow-sm">
               <span className="text-xs font-semibold text-slate-700 dark:text-teal-300 uppercase tracking-wider block">Each worth</span>
               <strong className="text-base font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">
                 {pointsPerQuestion.toFixed(pointsPerQuestion % 1 === 0 ? 0 : 2)}%
@@ -714,7 +714,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           role="status"
           aria-live="polite"
           aria-atomic="true"
-          className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm"
+          className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm"
         >
           {student ? (
             <div className="flex flex-wrap items-end justify-between gap-3">
@@ -810,7 +810,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         data-print-title={`Quick Grade Chart — ${total}-question test`}
       >
         <div>
-          <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block mb-1">Scoring Output</span>
               <h2 className="text-xl sm:text-2xl font-bold text-teal-950 dark:text-teal-100 tracking-tight m-0">
@@ -858,7 +858,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 onChange={(e) => setFilterInput(e.target.value)}
                 aria-invalid={filterCheck.error ? true : undefined}
                 aria-describedby={filterCheck.error ? 'filter-error' : undefined}
-                className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full py-3 pl-11 pr-24 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-base placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full py-3 pl-11 pr-24 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base placeholder:text-slate-500 dark:placeholder:text-slate-400"
               />
               {filterInput && (
                 <button

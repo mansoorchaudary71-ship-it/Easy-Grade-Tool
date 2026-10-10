@@ -43,14 +43,14 @@ def gradient(w, h, c1, c2):
 
 def make(path, title, sub):
     W, H = 1200, 630
-    img = gradient(W, H, (10, 29, 26), (6, 21, 19))
+    img = gradient(W, H, (17, 21, 38), (10, 13, 24))
     d = ImageDraw.Draw(img, "RGBA")
-    d.ellipse((760, -220, 1380, 400), fill=(16, 185, 129, 40))
-    d.ellipse((-200, 380, 360, 940), fill=(16, 185, 129, 28))
+    d.ellipse((760, -220, 1380, 400), fill=(102, 118, 168, 40))
+    d.ellipse((-200, 380, 360, 940), fill=(102, 118, 168, 28))
     # brand pill
     pill_font = ImageFont.truetype(BOLD, 26)
-    d.rounded_rectangle((90, 90, 420, 142), radius=26, fill=(16, 185, 129, 40), outline=(16, 185, 129, 160), width=2)
-    d.text((118, 102), "EASY GRADE TOOL", font=pill_font, fill=(52, 211, 153))
+    d.rounded_rectangle((90, 90, 420, 142), radius=26, fill=(102, 118, 168, 40), outline=(102, 118, 168, 160), width=2)
+    d.text((118, 102), "EASY GRADE TOOL", font=pill_font, fill=(160, 172, 214))
     # title
     size = 84 if "\n" not in title and len(title) < 22 else 72
     tf = ImageFont.truetype(BOLD, size)
@@ -60,7 +60,7 @@ def make(path, title, sub):
         y += int(size * 1.2)
     d.text((90, y + 14), sub, font=ImageFont.truetype(REG, 34), fill=(148, 163, 184))
     # domain
-    d.rectangle((90, 520, 150, 524), fill=(16, 185, 129))
+    d.rectangle((90, 520, 150, 524), fill=(102, 118, 168))
     d.text((90, 540), "www.easygradetool.com", font=ImageFont.truetype(BOLD, 30), fill=(203, 213, 225))
     full = os.path.join(OUT, path)
     img.save(full, optimize=True)

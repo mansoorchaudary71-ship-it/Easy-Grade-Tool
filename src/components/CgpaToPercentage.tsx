@@ -593,8 +593,8 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                       onKeyDown={(e) => handleScaleTabKeyDown(e, idx)}
                       className={`relative isolate min-h-[44px] px-4 py-1.5 text-center flex flex-col items-center justify-center cursor-pointer rounded-full ${
                         isSelected
-                          ? 'font-bold text-emerald-900 dark:text-white'
-                          : 'font-semibold text-slate-600 dark:text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700 dark:hover:text-emerald-400'
+                          ? 'font-bold text-teal-900 dark:text-white'
+                          : 'font-semibold text-slate-600 dark:text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 dark:hover:text-teal-400'
                       }`}
                     >
                       {isSelected && (
@@ -939,7 +939,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                       }}
                       className={`preset-btn text-xs py-1.5 px-4 font-mono transition-all cursor-pointer ${
                         isCurrent
-                          ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold shadow-sm'
+                          ? 'bg-[#4C5985] dark:bg-teal-600 text-white rounded-full font-bold shadow-sm'
                           : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm'
                       }`}
                     >
@@ -954,7 +954,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             <div className="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-200/60 dark:border-slate-800">
               <button
                 type="submit"
-                className="flex-1 min-h-[48px] px-6 py-2.5 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                className="flex-1 min-h-[48px] px-6 py-2.5 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm sm:text-base transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
                 <span>Calculate Percentage</span>
@@ -1001,7 +1001,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             </div>
 
             {/* Primary Percentage Readout with Lightweight Inline SVG Donut Visual */}
-            <div className="p-5 rounded-[28px] bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 shadow-sm mb-5">
+            <div className="p-5 rounded-[28px] bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 shadow-sm mb-5">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-center sm:text-left">
                   <div className="font-mono text-4xl sm:text-5xl font-extrabold tracking-tight text-teal-950 dark:text-teal-100 tabular-nums">
@@ -1067,7 +1067,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               {/* Visual Progress Bar */}
               <div className="mt-4 w-full h-2 rounded-full bg-slate-200/80 dark:bg-slate-800 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-teal-500 to-emerald-500 transition-all duration-300"
+                  className="h-full rounded-full bg-gradient-to-r from-teal-500 to-teal-500 transition-all duration-300"
                   style={{
                     width: `${isValidMainInput ? Math.min(100, Math.max(0, calculationResult.percentage)) : 0}%`,
                   }}
@@ -1141,7 +1141,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             <button
               type="button"
               onClick={handleExportPdf}
-              className="min-h-[44px] px-6 py-2.5 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
+              className="min-h-[44px] px-6 py-2.5 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
             >
               <FileDown className="w-3.5 h-3.5" aria-hidden="true" />
               <span>PDF</span>
@@ -1149,7 +1149,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             <button
               type="button"
               onClick={handlePrint}
-              className="min-h-[44px] px-6 py-2.5 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
+              className="min-h-[44px] px-6 py-2.5 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95"
             >
               <Printer className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Print</span>
@@ -1276,14 +1276,14 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                     setCgpaError('');
                     setToast(`Loaded ${sgpaSummary.calculatedCgpa.toFixed(2)} CGPA into main converter!`);
                   }}
-                  className="min-h-[44px] px-6 py-2.5 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
+                  className="min-h-[44px] px-6 py-2.5 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
                 >
                   Use {sgpaSummary.calculatedCgpa.toFixed(2)} CGPA in Main Converter &uarr;
                 </button>
               </div>
             </div>
 
-            <div className="lg:col-span-5 p-5 rounded-[28px] bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 shadow-sm space-y-4">
+            <div className="lg:col-span-5 p-5 rounded-[28px] bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 shadow-sm space-y-4">
               <div className="text-xs font-semibold uppercase tracking-widest text-teal-800 dark:text-teal-300">
                 Cumulative Multi-Semester Result
               </div>

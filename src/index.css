@@ -1,6 +1,21 @@
 @import "./fonts.css";
 @import "tailwindcss";
 
+/* Brand palette: the former teal scale is re-mapped to the #4c5985 family (600 = #4c5985). */
+@theme {
+  --color-teal-50: #f3f5fa;
+  --color-teal-100: #e4e8f3;
+  --color-teal-200: #ccd3e8;
+  --color-teal-300: #aab5d6;
+  --color-teal-400: #8a98c4;
+  --color-teal-500: #6676a8;
+  --color-teal-600: #4c5985;
+  --color-teal-700: #3d476b;
+  --color-teal-800: #323a57;
+  --color-teal-900: #272d44;
+  --color-teal-950: #181c2c;
+}
+
 /* Tailwind dark: variants follow the app's .dark class on <html> (set by ThemeContext), not just the OS setting */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -24,7 +39,7 @@
   --popover-border: 220 14% 91%;
 
   /* 10% High-Contrast Brand Accent */
-  --primary: 168 85% 23%;
+  --primary: 226 27% 41%;
   --primary-foreground: 0 0% 100%;
   --accent: 38 92% 50%;
   --accent-foreground: 0 0% 100%;
@@ -48,9 +63,9 @@
   --duration-normal: 220ms;
 
   /* Default tool theme (unified academic teal) - optimized for WCAG AA/AAA */
-  --tool-primary: 168 85% 23%;
-  --tool-deep: 172 85% 18%;
-  --tool-soft: 168 45% 88%;
+  --tool-primary: 226 27% 41%;
+  --tool-deep: 226 27% 31%;
+  --tool-soft: 226 30% 91%;
   --tool-accent: 38 92% 50%;
   --tool-on-primary: 0 0% 100%;
 }
@@ -75,7 +90,7 @@
   --popover-border: 224 25% 16%;
 
   /* 10% High-Contrast Brand Accent */
-  --primary: 166 76% 44%;
+  --primary: 226 48% 72%;
   --primary-foreground: 224 71% 4%;
   --accent: 38 92% 54%;
   --accent-foreground: 224 71% 4%;
@@ -88,9 +103,9 @@
   --shadow-drawer: -12px 0 45px -4px rgba(0, 0, 0, 0.7);
 
   /* Dark mode default tool tint */
-  --tool-primary: 166 76% 44%;
-  --tool-deep: 172 80% 36%;
-  --tool-soft: 168 35% 22%;
+  --tool-primary: 226 48% 72%;
+  --tool-deep: 226 32% 56%;
+  --tool-soft: 226 25% 23%;
   --tool-accent: 38 92% 54%;
   --tool-on-primary: 224 71% 4%;
 }
@@ -104,9 +119,9 @@
 .tool-theme-loan,
 .tool-theme-mortgage,
 .tool-theme-password {
-  --tool-primary: 168 85% 23%;
-  --tool-deep: 172 85% 18%;
-  --tool-soft: 168 45% 88%;
+  --tool-primary: 226 27% 41%;
+  --tool-deep: 226 27% 31%;
+  --tool-soft: 226 30% 91%;
   --tool-accent: 38 92% 50%;
   --tool-on-primary: 0 0% 100%;
 }
@@ -127,9 +142,9 @@
 .dark.tool-theme-mortgage,
 .dark .tool-theme-password,
 .dark.tool-theme-password {
-  --tool-primary: 166 76% 44%;
-  --tool-deep: 172 80% 36%;
-  --tool-soft: 168 35% 22%;
+  --tool-primary: 226 48% 72%;
+  --tool-deep: 226 32% 56%;
+  --tool-soft: 226 25% 23%;
   --tool-accent: 38 92% 54%;
   --tool-on-primary: 224 71% 4%;
 }
@@ -1038,8 +1053,8 @@ h1 {
 /* Primary Result Displays & Master Outputs */
 .primary-result-card,
 .master-output-card {
-  background-color: rgba(236, 253, 245, 0.5) !important; /* bg-emerald-50/50 */
-  border: 1px solid #d1fae5 !important; /* border-emerald-100 */
+  background-color: rgba(225, 229, 241, 0.55) !important; /* brand tint */
+  border: 1px solid #cdd4e8 !important; /* brand tint border */
   border-radius: 24px !important; /* rounded-[24px] */
   padding: 1.25rem !important; /* p-5 */
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important; /* shadow-sm */
@@ -4625,7 +4640,7 @@ input[type="number"]:focus {
   border-radius: 0 4px 4px 0;
 }
 
-.history-card[data-tool="quick"]::before { background: #10b981; }
+.history-card[data-tool="quick"]::before { background: #4c5985; }
 .history-card[data-tool="gpa"]::before { background: #6366f1; }
 .history-card[data-tool="tip"]::before { background: #f97316; }
 .history-card[data-tool="percentage"]::before { background: #f43f5e; }
@@ -5733,12 +5748,12 @@ input[type="number"]:focus {
 
 /* Distinct Tool Icon Accents */
 .command-palette-item-icon.tool-icon-quick {
-  background: hsl(168 55% 92%);
-  color: hsl(168 85% 24%);
+  background: hsl(226 30% 92%);
+  color: hsl(226 27% 38%);
 }
 .dark .command-palette-item-icon.tool-icon-quick {
-  background: hsl(168 35% 18%);
-  color: hsl(166 76% 54%);
+  background: hsl(226 25% 20%);
+  color: hsl(226 48% 74%);
 }
 
 .command-palette-item-icon.tool-icon-gpa {
@@ -6174,11 +6189,11 @@ input[type="number"]:focus {
     text-shadow: none !important;
   }
 
-  .result-panel .bg-\[\#E6F2EE\],
+  .result-panel .bg-\[\#E6E9F3\],
   .result-panel .bg-\[\#E8EEFF\],
   .result-panel .bg-\[\#FFF5E5\],
   .result-panel .bg-\[\#F8F9FA\],
-  .result-panel .bg-\[\#E8F3F1\] {
+  .result-panel .bg-\[\#E9ECF4\] {
     background: #f8fafc !important;
     border: 1px solid #cbd5e1 !important;
     box-shadow: none !important;
@@ -6636,7 +6651,7 @@ input[type="number"]:focus {
   pointer-events: none;
   background:
     radial-gradient(120% 85% at 8% -10%, rgb(var(--glow-spec) / var(--glow-spec-a)) 0%, transparent 58%),
-    radial-gradient(90% 70% at 105% 110%, hsl(var(--tool-primary, 173 80% 25%) / var(--glow-tint-a)) 0%, transparent 62%);
+    radial-gradient(90% 70% at 105% 110%, hsl(var(--tool-primary, 226 27% 41%) / var(--glow-tint-a)) 0%, transparent 62%);
   box-shadow: inset 0 1px 0 rgb(var(--glow-spec) / var(--glow-edge-a));
   opacity: 1;
   transition: opacity 0.35s ease;

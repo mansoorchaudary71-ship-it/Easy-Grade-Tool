@@ -54,7 +54,7 @@ const MarkArtwork: React.FC<{ uid: string; variant: MarkVariant }> = ({ uid, var
           <stop offset="1" stopColor={BRAND.goldTo} />
         </linearGradient>
         <filter id={`${uid}-drop`} x="-20%" y="-20%" width="140%" height="150%">
-          <feDropShadow dx="0" dy="10" stdDeviation="9" floodColor="#021F1A" floodOpacity="0.38" />
+          <feDropShadow dx="0" dy="10" stdDeviation="9" floodColor="#0B0E1C" floodOpacity="0.38" />
         </filter>
       </defs>
 
@@ -181,7 +181,7 @@ export const LogoLockup: React.FC<LogoLockupProps> = ({
         <path
           d={WORDMARK.tool.d}
           fill={accentFill}
-          className={accentFill ? undefined : 'fill-[#0B8A72] dark:fill-emerald-400'}
+          className={accentFill ? undefined : 'fill-[#4C5985] dark:fill-teal-400'}
         />
       </g>
     </svg>
@@ -210,7 +210,7 @@ const ICON_SIZE = {
 export const Logo: React.FC<LogoProps> = ({ className = '', iconOnly = false, size = 'md' }) => {
   return (
     <div
-      className={`inline-flex items-center select-none text-[#052E28] dark:text-white ${className}`}
+      className={`inline-flex items-center select-none text-[#1B2038] dark:text-white ${className}`}
     >
       {iconOnly ? (
         <BrandMark

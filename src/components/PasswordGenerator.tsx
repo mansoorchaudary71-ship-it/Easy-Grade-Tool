@@ -144,14 +144,14 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 space-y-6"
         >
           {/* Password Display - Primary Master Output */}
-          <div className="relative p-5 rounded-[28px] bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 shadow-sm flex items-center justify-center" aria-live="polite">
+          <div className="relative p-5 rounded-[28px] bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 shadow-sm flex items-center justify-center" aria-live="polite">
             <span className="font-mono text-base sm:text-xl font-extrabold tracking-wider text-teal-950 dark:text-teal-100 break-all select-all block text-center px-8">
               {password}
             </span>
             <button
               type="button"
               onClick={handleCopy}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-2 rounded-full text-teal-700 dark:text-teal-400 hover:text-teal-900 hover:bg-emerald-100/50 dark:hover:bg-teal-900/50 transition-all cursor-pointer"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 p-2 rounded-full text-teal-700 dark:text-teal-400 hover:text-teal-900 hover:bg-teal-100/50 dark:hover:bg-teal-900/50 transition-all cursor-pointer"
               title="Copy password to clipboard"
               aria-label="Copy password to clipboard"
             >
@@ -167,7 +167,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               type="button"
-              className="bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
+              className="bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
               onClick={handleGenerate}
             >
               <RefreshCw className="w-4 h-4" aria-hidden="true" />

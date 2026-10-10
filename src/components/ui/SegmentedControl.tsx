@@ -35,7 +35,7 @@ interface SegmentedControlProps<T extends string | number> {
 }
 
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
 
 /**
  * Accessible segmented control with a fluid, sliding background (Framer Motion layout animation).
@@ -66,7 +66,7 @@ export function SegmentedControl<T extends string | number>({
 
   const pillClass = isTrack
     ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20 dark:border-white/10 dark:bg-teal-600 dark:shadow-black/30'
-    : 'absolute inset-0 -z-10 rounded-full bg-emerald-700 shadow-md shadow-emerald-600/25 dark:bg-teal-600';
+    : 'absolute inset-0 -z-10 rounded-full bg-teal-700 shadow-md shadow-teal-600/25 dark:bg-teal-600';
 
   return (
     <LayoutGroup id={groupId}>
@@ -82,11 +82,11 @@ export function SegmentedControl<T extends string | number>({
         {options.map((opt) => {
           const active = value === opt.value && !opt.disabledSelection;
           const activeText = isTrack
-            ? 'font-bold text-emerald-900 dark:text-white'
+            ? 'font-bold text-teal-900 dark:text-white'
             : 'font-bold text-white';
           const inactiveText = isTrack
-            ? 'font-semibold text-slate-600 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-400'
-            : 'font-semibold text-slate-700 hover:text-emerald-700 dark:text-slate-200 dark:hover:text-emerald-400 border border-gray-200 bg-white dark:border-slate-700 dark:bg-slate-800';
+            ? 'font-semibold text-slate-600 hover:text-teal-700 dark:text-slate-300 dark:hover:text-teal-400'
+            : 'font-semibold text-slate-700 hover:text-teal-700 dark:text-slate-200 dark:hover:text-teal-400 border border-gray-200 bg-white dark:border-slate-700 dark:bg-slate-800';
           return (
             <button
               key={String(opt.value)}

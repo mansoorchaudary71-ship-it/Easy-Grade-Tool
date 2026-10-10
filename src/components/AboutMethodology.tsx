@@ -45,8 +45,8 @@ export const AboutMethodology: React.FC = () => {
         <div className="w-full max-w-4xl mx-auto space-y-10">
           {/* Mission & Purpose Card */}
           <section className="bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 rounded-3xl border border-white/80 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 w-full space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 text-xs font-semibold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300 text-xs font-semibold uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" aria-hidden="true" />
               <span>Mission &amp; Transparency</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 dark:text-white tracking-tight m-0">
@@ -234,7 +234,7 @@ export const AboutMethodology: React.FC = () => {
           {/* 2. The Weighted Grade Formula */}
           <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-700 dark:text-emerald-300 shrink-0">
+              <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950/60 flex items-center justify-center text-teal-700 dark:text-teal-300 shrink-0">
                 <Layers className="w-5 h-5" aria-hidden="true" />
               </div>
               <div>
@@ -252,7 +252,7 @@ export const AboutMethodology: React.FC = () => {
             </p>
 
             <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-slate-100 dark:bg-slate-950 border border-slate-800 font-mono text-xs sm:text-sm space-y-3">
-              <div className="text-emerald-400 font-semibold">Normalized Weighted Percentage</div>
+              <div className="text-teal-400 font-semibold">Normalized Weighted Percentage</div>
               <div className="p-3 bg-slate-800/80 rounded-xl text-center font-bold text-white text-sm sm:text-base">
                 Final Grade (%) = &Sigma; [ (Earned / Max) &times; Weight ] / &Sigma; [ Total Weight ]
               </div>
@@ -320,7 +320,7 @@ export const AboutMethodology: React.FC = () => {
               </div>
 
               <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60 space-y-2">
-                <div className="text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider font-mono">
+                <div className="text-xs font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider font-mono">
                   Canada &amp; Others
                 </div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white m-0">
@@ -343,7 +343,7 @@ export const AboutMethodology: React.FC = () => {
           {/* 4. Authorship, Maintenance & Contact */}
           <section className="bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 rounded-3xl border border-white/80 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-700 dark:text-emerald-300 shrink-0">
+              <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950/60 flex items-center justify-center text-teal-700 dark:text-teal-300 shrink-0">
                 <ShieldCheck className="w-5 h-5" aria-hidden="true" />
               </div>
               <div>
@@ -365,7 +365,7 @@ export const AboutMethodology: React.FC = () => {
                 <div className="text-xs font-mono text-slate-500 uppercase tracking-wider">Maintainer &amp; Support</div>
                 <div className="font-bold text-sm text-slate-900 dark:text-white">Engineering &amp; Editorial Team</div>
                 <div className="text-xs text-slate-600 dark:text-slate-300 font-medium">
-                  Direct communication: <a href={`mailto:${CONTACT_EMAIL}`} className="text-emerald-600 dark:text-emerald-400 hover:underline font-semibold">{CONTACT_EMAIL}</a>
+                  Direct communication: <a href={`mailto:${CONTACT_EMAIL}`} className="text-teal-600 dark:text-teal-400 hover:underline font-semibold">{CONTACT_EMAIL}</a>
                 </div>
               </div>
 

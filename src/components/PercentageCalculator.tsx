@@ -119,7 +119,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
               />
               <span>?</span>
             </div>
-            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[20px] p-4 shadow-sm mt-5 flex items-center justify-between">
+            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[20px] p-4 shadow-sm mt-5 flex items-center justify-between">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase">Result</span>
               <strong className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight">{result1Formatted}</strong>
             </div>
@@ -152,7 +152,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
               />
               <span>?</span>
             </div>
-            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[20px] p-4 shadow-sm mt-5 flex items-center justify-between">
+            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[20px] p-4 shadow-sm mt-5 flex items-center justify-between">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase">Result</span>
               <strong className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight">{result2Formatted}</strong>
             </div>
@@ -186,7 +186,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
               />
               <span>?</span>
             </div>
-            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[20px] p-4 shadow-sm mt-5 flex items-center justify-between">
+            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[20px] p-4 shadow-sm mt-5 flex items-center justify-between">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase">Result</span>
               <strong
                 className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight"

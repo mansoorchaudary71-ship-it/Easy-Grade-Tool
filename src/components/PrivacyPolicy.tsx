@@ -43,7 +43,7 @@ export const PrivacyPolicy: React.FC = () => {
           {/* Key Privacy Highlights Card */}
           <div className="bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 rounded-3xl border border-white/60 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 w-full">
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 dark:text-white tracking-tight mb-4 flex items-center gap-2.5">
-              <ShieldCheck className="w-6 h-6 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+              <ShieldCheck className="w-6 h-6 text-teal-600 dark:text-teal-400" aria-hidden="true" />
               <span>Core Privacy Architecture</span>
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 font-medium">
@@ -161,7 +161,7 @@ export const PrivacyPolicy: React.FC = () => {
                 {/* 2.4 Feature Suggestion */}
                 <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
                   <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
-                    <Laptop className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    <Laptop className="w-4 h-4 text-teal-600 dark:text-teal-400" />
                     <span>D. Feature Suggestions (<code className="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">POST /api/suggest-feature</code>)</span>
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">

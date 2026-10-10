@@ -159,7 +159,7 @@ const GradeScaleModalDialog: React.FC<{
               type="button"
               className={`rounded-full text-xs cursor-pointer ${
                 draftScaleType === 'standard'
-                  ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-2 shadow-sm'
+                  ? 'bg-[#4C5985] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-2 shadow-sm'
                   : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-4 py-2 transition-all'
               }`}
               onClick={() => setDraftScaleType('standard')}
@@ -170,7 +170,7 @@ const GradeScaleModalDialog: React.FC<{
               type="button"
               className={`rounded-full text-xs cursor-pointer ${
                 draftScaleType === 'plus'
-                  ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-2 shadow-sm'
+                  ? 'bg-[#4C5985] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-2 shadow-sm'
                   : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-4 py-2 transition-all'
               }`}
               onClick={() => setDraftScaleType('plus')}
@@ -247,7 +247,7 @@ const GradeScaleModalDialog: React.FC<{
             className={`text-xs font-bold py-2.5 px-6 rounded-full shadow-md transition-all ${
               thresholdValidationError
                 ? 'bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed opacity-60'
-                : 'bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white cursor-pointer active:scale-95'
+                : 'bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white cursor-pointer active:scale-95'
             }`}
             onClick={handleSave}
           >

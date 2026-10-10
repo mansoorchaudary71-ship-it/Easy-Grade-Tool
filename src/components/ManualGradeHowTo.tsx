@@ -267,7 +267,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
             className={`relative isolate flex min-h-[44px] items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm cursor-pointer ${
               activeTab === 'weighted'
                 ? 'font-bold text-stone-900'
-                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700'
+                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700'
             }`}
           >
             {activeTab === 'weighted' && (
@@ -289,7 +289,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
             className={`relative isolate flex min-h-[44px] items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm cursor-pointer ${
               activeTab === 'points'
                 ? 'font-bold text-stone-900'
-                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700'
+                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700'
             }`}
           >
             {activeTab === 'points' && (
@@ -311,7 +311,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
             className={`relative isolate flex min-h-[44px] items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm cursor-pointer ${
               activeTab === 'final-exam'
                 ? 'font-bold text-stone-900'
-                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700'
+                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700'
             }`}
           >
             {activeTab === 'final-exam' && (

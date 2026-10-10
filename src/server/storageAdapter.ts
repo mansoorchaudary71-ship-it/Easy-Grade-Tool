@@ -311,7 +311,7 @@ export class StorageAdapter {
 
       const htmlBody = `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px;">
-          <h2 style="color: #097362; margin-top: 0;">Easy Grade Tool — New ${submission.type.toUpperCase()}</h2>
+          <h2 style="color: #4C5985; margin-top: 0;">Easy Grade Tool — New ${submission.type.toUpperCase()}</h2>
           <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
             <tr><td style="padding: 8px 0; color: #64748b;"><strong>Submission ID:</strong></td><td>${submission.id}</td></tr>
             <tr><td style="padding: 8px 0; color: #64748b;"><strong>Type:</strong></td><td>${submission.type}</td></tr>

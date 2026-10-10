@@ -344,7 +344,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
 
           <button
             type="button"
-            className="mt-6 bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
+            className="mt-6 bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
             onClick={handleAddCourse}
           >
             <Plus className="w-4 h-4" aria-hidden="true" /> Add course
@@ -355,7 +355,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
         <section aria-label="GPA Results Summary" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between" aria-live="polite">
           <div className="space-y-5">
             {/* Semester GPA - Master Output Container */}
-            <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
                 Semester GPA
               </span>
@@ -414,7 +414,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                     setToast?.('Use Export GPA PDF to save a printable transcript.');
                   }
                 }}
-                className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
+                className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
               >
                 <Printer className="w-4 h-4" aria-hidden="true" />
                 <span>Print Result</span>

@@ -11,20 +11,20 @@
 
 export const BRAND = {
   /** Squircle background gradient (top-left -> bottom-right). */
-  bgFrom: '#14A38B',
-  bgMid: '#0A6B5C',
-  bgTo: '#053B33',
+  bgFrom: '#6577AB',
+  bgMid: '#4C5985',
+  bgTo: '#2B3354',
   /** Letter "A" ink gradient (top -> bottom). */
   inkFrom: '#FFFFFF',
-  inkTo: '#D5F5EA',
+  inkTo: '#DDE2F1',
   /** Gold accent used for the crossbar and the "+". */
   goldFrom: '#FFE9A3',
   goldTo: '#F5A524',
   /** Wordmark colours. */
-  textLight: '#052E28',
+  textLight: '#1B2038',
   textDark: '#FFFFFF',
-  accentLight: '#0B8A72',
-  accentDark: '#34D399',
+  accentLight: '#4C5985',
+  accentDark: '#9AA8D4',
 } as const;
 
 /**

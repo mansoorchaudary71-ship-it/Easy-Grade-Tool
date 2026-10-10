@@ -75,13 +75,13 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 /* -------------------------------------------------------------------------- */
 
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
 
 const tabBase =
   'relative isolate inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 min-h-11 text-[13px] no-underline cursor-pointer select-none touch-manipulation [-webkit-tap-highlight-color:transparent]';
 
 const tabInactive =
-  'font-semibold text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700 dark:text-slate-300 dark:hover:text-emerald-400';
+  'font-semibold text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 dark:text-slate-300 dark:hover:text-teal-400';
 
 const tabActive = 'font-bold text-slate-900 dark:text-white';
 
@@ -206,14 +206,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onOpenCommandPalette}
               onTouchStart={() => preloadTool('command-palette')}
               aria-label={`Open calculator search (${shortcutLabel})`}
-              className={`inline-flex size-11 items-center justify-center rounded-full border border-gray-200 bg-white/80 text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700 md:hidden dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:text-emerald-400 ${focusRing}`}
+              className={`inline-flex size-11 items-center justify-center rounded-full border border-gray-200 bg-white/80 text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 md:hidden dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:text-teal-400 ${focusRing}`}
             >
               <Search className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
 
             <div className="group relative hidden w-52 transition-[width] duration-300 ease-out md:block lg:w-64 md:focus-within:w-64 lg:focus-within:w-80">
               <Search
-                className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors duration-300 group-focus-within:text-emerald-600"
+                className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors duration-300 group-focus-within:text-teal-600"
                 strokeWidth={ICON_STROKE}
                 aria-hidden="true"
               />
@@ -241,7 +241,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="h-11 w-full cursor-pointer rounded-full border border-gray-200 bg-white/80 py-2 pl-10 pr-16 text-[13px] font-medium text-slate-800 shadow-sm outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-gray-300 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-100 dark:placeholder:text-slate-400"
+                className="h-11 w-full cursor-pointer rounded-full border border-gray-200 bg-white/80 py-2 pl-10 pr-16 text-[13px] font-medium text-slate-800 shadow-sm outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-gray-300 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-100 dark:placeholder:text-slate-400"
               />
               <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-gray-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 lg:inline-flex dark:border-white/10 dark:bg-slate-900 dark:text-slate-400">
                 {shortcutLabel}
@@ -249,7 +249,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* 100% Private badge */}
-            <div className="hidden items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700 lg:inline-flex dark:bg-emerald-500/10 dark:text-emerald-300">
+            <div className="hidden items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1.5 text-xs font-semibold text-teal-700 lg:inline-flex dark:bg-teal-500/10 dark:text-teal-300">
               <PrivacyShieldIcon className="size-3.5 shrink-0" />
               <span>100% Private</span>
             </div>
@@ -263,7 +263,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={cycleTheme}
               aria-label={`Current theme: ${theme}. Click to switch theme.`}
               title={`Theme: ${themeLabel} (Click to cycle)`}
-              className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white/80 px-3 text-xs font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700 active:scale-95 dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:text-emerald-400 ${focusRing}`}
+              className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white/80 px-3 text-xs font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 active:scale-95 dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:text-teal-400 ${focusRing}`}
             >
               <span className="relative inline-flex size-4 items-center justify-center">
                 <AnimatePresence mode="wait" initial={false}>

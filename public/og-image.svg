@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0a1d1a" />
-      <stop offset="50%" stop-color="#0f2b26" />
-      <stop offset="100%" stop-color="#061513" />
+      <stop offset="0%" stop-color="#0f1118" />
+      <stop offset="50%" stop-color="#161924" />
+      <stop offset="100%" stop-color="#0a0c11" />
     </linearGradient>
     <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#143c35" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="#0d2823" stop-opacity="0.8" />
+      <stop offset="0%" stop-color="#1e2332" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#141721" stop-opacity="0.8" />
     </linearGradient>
     <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#10b981" />
-      <stop offset="100%" stop-color="#34d399" />
+      <stop offset="0%" stop-color="#3a4e8f" />
+      <stop offset="100%" stop-color="#5c6eab" />
     </linearGradient>
     <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#f59e0b" />
@@ -27,8 +27,8 @@
   <rect width="1200" height="630" fill="url(#bgGrad)" />
 
   <!-- Ambient Glow Circles -->
-  <circle cx="1050" cy="120" r="280" fill="#10b981" opacity="0.12" filter="url(#glow)" />
-  <circle cx="150" cy="520" r="240" fill="#059669" opacity="0.10" filter="url(#glow)" />
+  <circle cx="1050" cy="120" r="280" fill="#3a4e8f" opacity="0.12" filter="url(#glow)" />
+  <circle cx="150" cy="520" r="240" fill="#2b3b70" opacity="0.10" filter="url(#glow)" />
   <circle cx="900" cy="500" r="200" fill="#f59e0b" opacity="0.08" filter="url(#glow)" />
 
   <!-- Grid Accents -->
@@ -48,8 +48,8 @@
   <!-- Left Content Column -->
   <g transform="translate(100, 110)">
     <!-- Pill Badge -->
-    <rect width="210" height="36" rx="18" fill="#10b981" fill-opacity="0.18" stroke="#10b981" stroke-opacity="0.4" stroke-width="1" />
-    <text x="24" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#34d399" letter-spacing="1.5">ACADEMIC TOOLKIT</text>
+    <rect width="210" height="36" rx="18" fill="#3a4e8f" fill-opacity="0.18" stroke="#3a4e8f" stroke-opacity="0.4" stroke-width="1" />
+    <text x="24" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#5c6eab" letter-spacing="1.5">ACADEMIC TOOLKIT</text>
 
     <!-- Main Title -->
     <text x="0" y="95" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="800" fill="#ffffff" letter-spacing="-1.5">
@@ -87,21 +87,21 @@
   <!-- Right Visual Card: Interactive Grade Dashboard Preview -->
   <g transform="translate(730, 95)">
     <!-- Main Card Shadow & Border -->
-    <rect width="370" height="440" rx="20" fill="url(#cardGrad)" stroke="#10b981" stroke-opacity="0.3" stroke-width="1.5" />
+    <rect width="370" height="440" rx="20" fill="url(#cardGrad)" stroke="#3a4e8f" stroke-opacity="0.3" stroke-width="1.5" />
 
     <!-- Card Header -->
-    <text x="28" y="44" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#10b981" letter-spacing="1">CURRENT SEMESTER</text>
+    <text x="28" y="44" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="700" fill="#3a4e8f" letter-spacing="1">CURRENT SEMESTER</text>
     <text x="28" y="70" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="700" fill="#ffffff">Biology 101 Honors</text>
 
     <!-- Score Big Display -->
     <g transform="translate(28, 95)">
-      <rect width="314" height="110" rx="14" fill="#091b17" stroke="#10b981" stroke-opacity="0.2" stroke-width="1" />
+      <rect width="314" height="110" rx="14" fill="#0e1016" stroke="#3a4e8f" stroke-opacity="0.2" stroke-width="1" />
       <text x="22" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="44" font-weight="800" fill="url(#accentGrad)">94.2%</text>
-      <text x="22" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#6ee7b7">Letter Grade: A (Excellent)</text>
+      <text x="22" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#8c9ac9">Letter Grade: A (Excellent)</text>
 
       <!-- Mini Badge -->
-      <rect x="235" y="24" width="56" height="56" rx="12" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-opacity="0.5" stroke-width="1" />
-      <text x="251" y="62" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="800" fill="#34d399">A</text>
+      <rect x="235" y="24" width="56" height="56" rx="12" fill="#3a4e8f" fill-opacity="0.2" stroke="#3a4e8f" stroke-opacity="0.5" stroke-width="1" />
+      <text x="251" y="62" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="800" fill="#5c6eab">A</text>
     </g>
 
     <!-- Simulated Chart Slope (Recharts visual representation) -->
@@ -109,14 +109,14 @@
       <text x="0" y="16" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#94a3b8" letter-spacing="0.5">PERFORMANCE TRAJECTORY</text>
       
       <!-- Trend Area -->
-      <path d="M 0 110 Q 50 95, 100 70 T 200 50 T 314 20 L 314 130 L 0 130 Z" fill="#10b981" fill-opacity="0.12" />
-      <path d="M 0 110 Q 50 95, 100 70 T 200 50 T 314 20" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+      <path d="M 0 110 Q 50 95, 100 70 T 200 50 T 314 20 L 314 130 L 0 130 Z" fill="#3a4e8f" fill-opacity="0.12" />
+      <path d="M 0 110 Q 50 95, 100 70 T 200 50 T 314 20" fill="none" stroke="#3a4e8f" stroke-width="3" stroke-linecap="round" />
       
       <!-- Dots -->
-      <circle cx="0" cy="110" r="4" fill="#10b981" stroke="#ffffff" stroke-width="1.5" />
-      <circle cx="100" cy="70" r="4" fill="#10b981" stroke="#ffffff" stroke-width="1.5" />
-      <circle cx="200" cy="50" r="4" fill="#10b981" stroke="#ffffff" stroke-width="1.5" />
-      <circle cx="314" cy="20" r="6" fill="#34d399" stroke="#ffffff" stroke-width="2" />
+      <circle cx="0" cy="110" r="4" fill="#3a4e8f" stroke="#ffffff" stroke-width="1.5" />
+      <circle cx="100" cy="70" r="4" fill="#3a4e8f" stroke="#ffffff" stroke-width="1.5" />
+      <circle cx="200" cy="50" r="4" fill="#3a4e8f" stroke="#ffffff" stroke-width="1.5" />
+      <circle cx="314" cy="20" r="6" fill="#5c6eab" stroke="#ffffff" stroke-width="2" />
       
       <!-- Benchmark Line -->
       <line x1="0" y1="35" x2="314" y2="35" stroke="#ffffff" stroke-opacity="0.2" stroke-dasharray="3 3" stroke-width="1" />
@@ -127,12 +127,12 @@
       <text x="0" y="146" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#64748b">Exam 1</text>
       <text x="90" y="146" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#64748b">Midterm</text>
       <text x="190" y="146" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#64748b">Project</text>
-      <text x="280" y="146" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" fill="#34d399">Current</text>
+      <text x="280" y="146" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700" fill="#5c6eab">Current</text>
     </g>
 
     <!-- Footer Stats Row inside Card -->
     <g transform="translate(28, 395)">
-      <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">GPA Impact: <tspan fill="#34d399" font-weight="700">+0.28 pts</tspan></text>
+      <text x="0" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">GPA Impact: <tspan fill="#5c6eab" font-weight="700">+0.28 pts</tspan></text>
       <text x="210" y="18" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Status: <tspan fill="#fbbf24" font-weight="700">Dean's List</tspan></text>
     </g>
   </g>

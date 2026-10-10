@@ -397,7 +397,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
           </div>
 
           {/* Animated Circular Progress Gauge - Master Output */}
-          <div className="bg-[#CFE9DF] dark:bg-teal-950/60 border border-[#96CDB8] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
+          <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
             <div className="gpa-gauge-container">
               <svg
                 className="gpa-gauge-svg"
@@ -494,7 +494,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
         <div className="mt-6 flex flex-col gap-2.5">
           <button
             type="button"
-            className="w-full min-h-[48px] py-3 px-6 rounded-full bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
+            className="w-full min-h-[48px] py-3 px-6 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
             onClick={handleCopy}
             title="Copy percentage and GPA conversion result"
             aria-label="Copy percentage conversion result"

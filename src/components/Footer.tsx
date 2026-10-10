@@ -918,7 +918,7 @@ export const Footer: React.FC<FooterProps> = ({
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/70 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
                 <MessageSquare className="w-5 h-5" />
               </div>
               <div>
@@ -927,7 +927,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Send questions, formula inquiries, or feedback directly to our team at{' '}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="font-medium text-emerald-600 dark:text-emerald-400 underline underline-offset-2 hover:text-emerald-700 dark:hover:text-emerald-300"
+                    className="font-medium text-teal-600 dark:text-teal-400 underline underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
                   >
                     {CONTACT_EMAIL}
                   </a>.
@@ -967,7 +967,7 @@ export const Footer: React.FC<FooterProps> = ({
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="e.g. Alex Chen"
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
                     />
                   </div>
 
@@ -984,7 +984,7 @@ export const Footer: React.FC<FooterProps> = ({
                       required
                       aria-required="true"
                       aria-describedby={contactError ? contactErrorId : undefined}
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
                     />
                   </div>
                 </div>
@@ -997,7 +997,7 @@ export const Footer: React.FC<FooterProps> = ({
                     id={contactSubjectId}
                     value={contactSubject}
                     onChange={(e) => setContactSubject(e.target.value)}
-                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
                   >
                     <option value="General Feedback">General Feedback</option>
                     <option value="Grading Formula Question">Grading Formula Question</option>
@@ -1020,7 +1020,7 @@ export const Footer: React.FC<FooterProps> = ({
                     required
                     aria-required="true"
                     aria-describedby={contactError ? contactErrorId : undefined}
-                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-emerald-500 dark:focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all resize-none"
+                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all resize-none"
                   />
                 </div>
 

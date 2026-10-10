@@ -37,7 +37,7 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
   let y = margin;
 
   // Header Banner Background
-  doc.setFillColor(31, 89, 80); // #1f5950 deep teal
+  doc.setFillColor(76, 89, 133); // #4C5985 brand
   doc.roundedRect(margin, y, contentWidth, 24, 3, 3, 'F');
 
   // App Brand & Title
@@ -48,7 +48,7 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
-  doc.setTextColor(220, 240, 235);
+  doc.setTextColor(225, 229, 241);
   const now = new Date();
   const dateStr = new Intl.DateTimeFormat('en-US', {
     month: 'long',
@@ -101,14 +101,14 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
   y += 24;
 
   // Main Grade Result Card
-  doc.setFillColor(240, 253, 250); // soft teal tint
-  doc.setDrawColor(45, 140, 126);
+  doc.setFillColor(240, 243, 250); // soft brand tint
+  doc.setDrawColor(102, 118, 168);
   doc.setLineWidth(0.7);
   doc.roundedRect(margin, y, contentWidth, 26, 3, 3, 'FD');
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(8.5);
-  doc.setTextColor(31, 89, 80);
+  doc.setTextColor(76, 89, 133);
   doc.text('CURRENT GRADE SUMMARY', margin + 8, y + 7);
 
   // Large percent and letter
@@ -120,7 +120,7 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
 
   // Letter Grade badge
   const letterBoxX = margin + 8 + doc.getTextWidth(percentStr) + 6;
-  doc.setFillColor(31, 89, 80);
+  doc.setFillColor(76, 89, 133);
   doc.roundedRect(letterBoxX, y + 10, 16, 12, 2, 2, 'F');
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(14);
@@ -241,14 +241,14 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
   // What-If & Target Grade Simulation (if tested)
   if (data.whatIf) {
     const boxHeight = data.whatIf.targetGrade || data.whatIf.neededScore ? 19 : 14;
-    doc.setFillColor(240, 253, 250); // soft teal/neutral
-    doc.setDrawColor(45, 140, 126);
+    doc.setFillColor(240, 243, 250); // soft brand/neutral
+    doc.setDrawColor(102, 118, 168);
     doc.setLineWidth(0.4);
     doc.roundedRect(margin, y, contentWidth, boxHeight, 2, 2, 'FD');
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(8.5);
-    doc.setTextColor(31, 89, 80);
+    doc.setTextColor(76, 89, 133);
     const targetTag = data.whatIf.targetGrade ? ` (Target Goal: ${data.whatIf.targetGrade}%)` : '';
     doc.text(`UPCOMING ASSIGNMENT & TARGET GRADE SIMULATION${targetTag}:`, margin + 6, y + 5.5);
 
@@ -269,7 +269,7 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
     if (data.whatIf.neededScore) {
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(8);
-      doc.setTextColor(31, 89, 80);
+      doc.setTextColor(76, 89, 133);
       doc.text(`Required to achieve target: ${data.whatIf.neededScore}`, margin + 6, y + 15.5);
     }
 
@@ -616,7 +616,7 @@ export async function exportQuickGradePdf(options: QuickGradePdfOptions): Promis
   let y = margin;
 
   // Header Banner Background
-  doc.setFillColor(31, 89, 80); // #1f5950 deep teal
+  doc.setFillColor(76, 89, 133); // #4C5985 brand
   doc.roundedRect(margin, y, contentWidth, 20, 2, 2, 'F');
 
   // Title
@@ -627,7 +627,7 @@ export async function exportQuickGradePdf(options: QuickGradePdfOptions): Promis
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
-  doc.setTextColor(220, 240, 235);
+  doc.setTextColor(225, 229, 241);
   const scaleDesc =
     options.scaleType === 'plus'
       ? 'Scale: Plus / Minus (A, A-, B+...)'
@@ -664,7 +664,7 @@ export async function exportQuickGradePdf(options: QuickGradePdfOptions): Promis
       y = margin;
 
       // Small secondary header for continuation pages
-      doc.setFillColor(31, 89, 80);
+      doc.setFillColor(76, 89, 133);
       doc.roundedRect(margin, y, contentWidth, 10, 1.5, 1.5, 'F');
       doc.setTextColor(255, 255, 255);
       doc.setFont('helvetica', 'bold');
@@ -787,7 +787,7 @@ export async function exportToPdf(options: GenericPdfExportOptions): Promise<voi
   let y = margin;
 
   // Header Banner
-  doc.setFillColor(15, 118, 110); // #0f766e teal-700
+  doc.setFillColor(61, 71, 107); // #3d476b brand-700
   doc.roundedRect(margin, y, contentWidth, 24, 3, 3, 'F');
 
   doc.setTextColor(255, 255, 255);

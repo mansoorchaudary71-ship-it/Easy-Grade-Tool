@@ -51,10 +51,10 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
       <button
         type="button"
         onClick={handleInstallClick}
-        className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-tight cursor-pointer text-white shadow-md shadow-emerald-600/20 transition-all duration-200 hover:brightness-110 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
+        className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-tight cursor-pointer text-white shadow-md shadow-teal-600/20 transition-all duration-200 hover:brightness-110 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
           variant === 'banner'
-            ? 'bg-emerald-600'
-            : 'bg-emerald-700 border border-emerald-600/60'
+            ? 'bg-teal-600'
+            : 'bg-teal-700 border border-teal-600/60'
         } ${className}`}
         aria-label={isIOS ? 'Install Easy Grade Tool on iOS' : 'Install Easy Grade App for offline use'}
         title="Install app to your home screen for full offline access"
@@ -79,7 +79,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
           >
             <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
               <div className="flex items-center gap-2.5">
-                <div className="h-9 w-9 rounded-xl bg-emerald-600/15 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
+                <div className="h-9 w-9 rounded-xl bg-teal-600/15 flex items-center justify-center text-teal-700 dark:text-teal-400">
                   <Download className="w-5 h-5" />
                 </div>
                 <div>
@@ -101,7 +101,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
 
             <div className="mt-4 space-y-3.5 text-sm">
               <div className="flex items-start gap-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 p-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-bold text-xs">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal-600 text-white font-bold text-xs">
                   1
                 </div>
                 <div>
@@ -113,7 +113,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
               </div>
 
               <div className="flex items-start gap-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 p-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-bold text-xs">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal-600 text-white font-bold text-xs">
                   2
                 </div>
                 <div>
@@ -125,7 +125,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
               </div>
 
               <div className="flex items-start gap-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 p-3">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-600 text-white font-bold text-xs">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-teal-600 text-white font-bold text-xs">
                   3
                 </div>
                 <div>
