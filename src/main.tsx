@@ -27,13 +27,16 @@ import { installPrintFocus } from './utils/printFocus';
 
 installPrintFocus();
 
-// Automatically register PWA Service Worker for offline caching
+// Register the PWA service worker. A new version waits until the person accepts it: <UpdatePrompt /> listens
+// for this event and offers a "Reload" button, so code is never swapped mid-session.
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   try {
-    registerSW({
+    const updateSW = registerSW({
       immediate: true,
       onOfflineReady() {},
-      onNeedRefresh() {},
+      onNeedRefresh() {
+        window.dispatchEvent(new CustomEvent('egt:sw-update', { detail: { apply: () => updateSW(true) } }));
+      },
     });
   } catch (err) {
     console.warn('PWA service worker registration skipped in current environment:', err);

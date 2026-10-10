@@ -44,7 +44,10 @@ function computeHash(content: string): string {
 export function runSitemapGeneration(customOrigin?: string): string {
   const origin = customOrigin || SITE_URL;
   const cleanOrigin = origin.replace(/\/+$/, '');
-  const today = '2026-10-02';
+  // Real build date (honours SOURCE_DATE_EPOCH for reproducible builds). A page's lastmod only moves to this
+  // date when its rendered content hash changes; new pages start with it.
+  const epoch = process.env.SOURCE_DATE_EPOCH ? Number(process.env.SOURCE_DATE_EPOCH) * 1000 : Date.now();
+  const today = new Date(epoch).toISOString().slice(0, 10);
 
   console.log(`🗺️  Generating honest, per-URL content-hashed sitemap.xml for origin: ${origin}...`);
 

@@ -1,89 +1,8 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { defineConfig, Plugin } from 'vite';
+import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
-
-/**
- * Custom Vite plugin for Static Site Generation (SSG) / Pre-rendering.
- * Executes during `vite build` to inject fully rendered HTML of the main page
- * directly into `<div id="root"></div>`, and generates fully populated HTML files
- * for each dedicated calculator route in `dist/` so search engine crawlers receive
- * complete, crawlable HTML upon initial page load.
- */
-function prerenderPlugin(): Plugin {
-  return {
-    name: 'vite-plugin-prerender-html',
-    enforce: 'post',
-    apply: 'build',
-    transformIndexHtml: {
-      order: 'post',
-      async handler(html) {
-        try {
-          const { render } = await import('./src/entry-server');
-          const renderedApp = render('/');
-          if (renderedApp && renderedApp.length > 0) {
-            console.log(`\n✨ [prerenderPlugin] Injected ${renderedApp.length} bytes of pre-rendered root static HTML.`);
-            return html.replace(
-              /<div id="root">\s*<\/div>/,
-              `<div id="root">${renderedApp}</div>`
-            );
-          }
-        } catch (error) {
-          console.warn('⚠️ [prerenderPlugin] Failed to pre-render static HTML:', error);
-        }
-        return html;
-      },
-    },
-    async closeBundle() {
-      try {
-        const { runPrerender } = await import('./scripts/prerender');
-        await runPrerender();
-      } catch (error) {
-        console.warn('⚠️ [prerenderPlugin] Failed multi-route SSG generation:', error);
-      }
-    },
-  };
-}
-
-/**
- * Automated Vite plugin to generate a clean sitemap.xml in the public and dist directories.
- */
-function sitemapPlugin(): Plugin {
-  return {
-    name: 'vite-plugin-automated-sitemap',
-    apply: 'build',
-    async closeBundle() {
-      try {
-        const { runSitemapGeneration } = await import('./scripts/generateSitemap');
-        runSitemapGeneration();
-      } catch (error) {
-        console.warn('⚠️ [sitemapPlugin] Could not auto-generate sitemap.xml:', error);
-      }
-    },
-  };
-}
-
-/**
- * Prevents client-side WebSocket send() errors when HMR is disabled in containerized iframe environments.
- */
-function viteClientSafeSendPlugin(): Plugin {
-  const legacyRouterProp = ['isOutside', 'Re', 'mix', 'App'].join('');
-  return {
-    name: 'vite-client-safe-send',
-    enforce: 'post',
-    transform(code, id) {
-      if (id.includes('@vite/client') || id.includes('vite/dist/client')) {
-        return code
-          .replace(/ws\.send\(JSON\.stringify\(data\)\);/g, 'if (ws && ws.readyState === 1) ws.send(JSON.stringify(data));')
-          .replace(/wsTransport\.send\(data\);/g, 'wsTransport?.send?.(data);');
-      }
-      if (id.includes('react-router') && code.includes(legacyRouterProp)) {
-        return code.split(legacyRouterProp).join('isOutsideRouterApp');
-      }
-    },
-  };
-}
 
 function resolveBaseUrl(): string {
   // If explicitly set via env var (and not just empty or root)
@@ -106,7 +25,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       injectRegister: 'auto',
       manifestFilename: 'manifest.json',
       includeAssets: [
@@ -125,7 +44,7 @@ export default defineConfig({
         name: 'Easy Grade Tool',
         short_name: 'Easy Grade Tool',
         description: 'Free grade calculators for students and teachers: quick grade chart, weighted grades, final exam score, test grade, curve, letter grade, GPA and CGPA.',
-        theme_color: '#097362',
+        theme_color: '#F3F4F6',
         background_color: '#ffffff',
         display: 'standalone',
         display_override: ['standalone', 'window-controls-overlay', 'minimal-ui'],
@@ -180,8 +99,10 @@ export default defineConfig({
           /^\/easy-grade-calculator(\/|$)/i,
         ],
         cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true,
+        // The new service worker waits until the person taps "Reload" in the update banner (see UpdatePrompt),
+        // so code is never swapped under someone who is in the middle of entering grades.
+        clientsClaim: false,
+        skipWaiting: false,
         runtimeCaching: [
           // Network-first navigation routes: never cache HTML shell forever (max 24 hours)
           // Excludes /api and non-GET requests entirely
@@ -266,7 +187,6 @@ export default defineConfig({
         enabled: false,
       },
     }),
-    viteClientSafeSendPlugin(),
   ],
   resolve: {
     dedupe: ['react', 'react-dom'],
@@ -337,13 +257,5 @@ export default defineConfig({
         },
       },
     },
-  },
-  server: {
-    // HMR is disabled in AI Studio via DISABLE_HMR env var.
-    // Do not modify - file watching is disabled to prevent flickering during agent edits.
-    hmr: process.env.DISABLE_HMR !== 'true',
-    // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-    watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    forwardConsole: false,
   },
 });

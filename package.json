@@ -10,7 +10,7 @@
     "start": "node server.ts",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --dotfiles",
-    "build": "tsx scripts/verify-academic-math.ts && vite build && tsx scripts/prerender.ts && tsx scripts/generateSitemap.ts && tsx scripts/write-build-info.ts",
+    "build": "tsx scripts/verify-academic-math.ts && tsx scripts/verify-scale-pages.ts && vite build && tsx scripts/prerender.ts && tsx scripts/generateSitemap.ts && tsx scripts/write-build-info.ts",
     "postbuild": "tsx scripts/verify-launch.ts",
     "verify": "tsx scripts/verify-launch.ts",
     "check:live": "tsx scripts/check-live.ts",
@@ -20,7 +20,7 @@
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "verify:math": "tsx scripts/verify-academic-math.ts"
+    "verify:math": "tsx scripts/verify-academic-math.ts && tsx scripts/verify-scale-pages.ts"
   },
   "dependencies": {
     "@google/genai": "2.4.0",
