@@ -281,10 +281,6 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
 
   // 1. <title>
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${safeTitle}</title>`);
-  // Safety net: if the template had no <title> to replace, insert one so no page ships without it.
-  if (!/<title>[^<]+<\/title>/i.test(html)) {
-    html = html.replace('</head>', `    <title>${safeTitle}</title>\n  </head>`);
-  }
 
   // 2. <meta name="description">
   html = html.replace(

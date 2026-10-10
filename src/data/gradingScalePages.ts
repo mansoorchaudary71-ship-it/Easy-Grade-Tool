@@ -97,7 +97,7 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     },
     {
       question: `How many questions can I get wrong on a ${n}-question test and still get an A?`,
-      answer: `On a ${n}-question test graded on the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
+      answer: `On the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
     },
     {
       question: `What grade is ${faqWrong} wrong out of ${n}?`,
@@ -273,50 +273,6 @@ export function buildAverageGradePage(): ToolPageEntry {
         paragraphs: [
           'The median is the middle score when the list is sorted. One very low or very high score pulls the mean but barely moves the median, so comparing them shows whether a single outlier is driving your average.',
           'Scores out of different totals should be converted to percentages first. A 9 out of 10 and a 45 out of 50 are both 90%, but averaging 9 and 45 gives a meaningless 27.',
-        ],
-      },
-      {
-        heading: 'Step by step: from a list of scores to a letter grade',
-        paragraphs: [
-          'The calculator follows the same short routine you would use on paper, so you can check any result by hand.',
-        ],
-        bullets: [
-          'List every score you want included, one per test, quiz or assignment, using the same maximum for all of them.',
-          'Add the scores together to get the sum, then divide the sum by how many scores you entered. The result is the mean.',
-          'Sort the scores from lowest to highest and pick the middle one. With an even number of scores, take the midpoint of the two middle values. That is the median.',
-          'Divide the mean by the maximum score and multiply by 100 to get a percentage, then read the letter from your grading scale.',
-        ],
-      },
-      {
-        heading: 'What each result on the calculator tells you',
-        paragraphs: [
-          'The mean is your overall level across all the work entered. The median shows what a typical score looks like once extremes are set aside. The highest and lowest scores show your range, which tells you how consistent you have been.',
-          'A narrow range, such as 84 to 95, means the average describes your performance well. A wide range, such as 40 to 100, means the average hides a lot of variation, and it is worth asking which assignments dragged the score down and whether they can be repeated or made up.',
-        ],
-      },
-      {
-        heading: 'When a plain average can mislead you',
-        paragraphs: [
-          'A single zero for a missed assignment can pull a mean down by many points, while the median stays almost unchanged. If your teacher drops the lowest score, remove it from the list before you calculate, otherwise the result will be lower than your real standing.',
-          'Averages also hide trends. Scores of 70, 80, 90 and 100 average to 85, exactly the same as 100, 90, 80 and 70, even though the first student is improving and the second is slipping. Looking at the order of your scores is as useful as the number itself.',
-          'Finally, remember rounding. An average of 89.6 is a B on the standard scale even though it rounds to 90 when written as a whole number. Always use the exact value your school uses for its cutoffs.',
-        ],
-      },
-      {
-        heading: 'Average grade, weighted grade and GPA are different measures',
-        paragraphs: [
-          'An average grade treats every score as equal, so it fits a set of tests of the same size. A weighted grade gives each category its own share of the course, for example homework 20% and exams 50%, and needs the weighted grade calculator. A GPA does not average percentages at all: it converts each course to grade points and combines them by credit hours.',
-          'Use the average grade calculator for questions such as how you are doing across five quizzes or what the class mean was on a unit test. Use the other tools when your syllabus assigns weights or when you need a semester GPA.',
-        ],
-      },
-      {
-        heading: 'Tips for entering your scores',
-        paragraphs: ['A few habits keep the result accurate:'],
-        bullets: [
-          'Convert every score to the same scale first. If one quiz was out of 20 and another out of 50, enter percentages instead of raw points.',
-          'Use commas, spaces or line breaks between values. Do not type a percent sign or letters next to the numbers.',
-          'Keep extra credit as part of the score if your teacher counts it, and change the out-of value if scores can go above 100.',
-          'Check the warnings under the box. Any value the calculator could not read is listed there with the reason, so nothing is silently skipped.',
         ],
       },
     ],

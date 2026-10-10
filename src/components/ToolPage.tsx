@@ -2,8 +2,7 @@ import React from 'react';
 import { ShieldCheck } from 'lucide-react';
 import { Link } from './SlashLink';
 import { SEO } from './SEO';
-import { TOOL_PAGES, toolPageCanonical } from '../data/toolPages';
-import type { ToolPageEntry } from '../data/toolPages';
+import { TOOL_PAGES, ToolPageSlug, toolPageCanonical } from '../data/toolPages';
 import { OG_IMAGES } from '../data/seoConfig';
 import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
@@ -14,18 +13,9 @@ import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
 import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
-import { ContentSection } from './GuideShell';
 import { ToolGuideKey } from '../data/toolGuideContent';
 
-/**
- * One template for every dedicated academic page:
- *  - core pages (test grade, grade curve, letter grade) show the supplied Word-document guide,
- *  - generated pages (average grade, grading-scale index, /grading-scale/N-questions/) show the
- *    sections + worked example from data/gradingScalePages.ts,
- * and every page ends with the shared FAQ and related-links blocks.
- */
-
-const SIMPLE_TOOLS: Record<string, React.ComponentType> = {
+const TOOLS: Record<string, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
   'grade-curve-calculator': GradeCurveTool,
   'letter-grade-calculator': LetterGradeTool,
@@ -33,7 +23,7 @@ const SIMPLE_TOOLS: Record<string, React.ComponentType> = {
   'grading-scale': GradingScaleIndexTool,
 };
 
-/** Pages whose long-form copy comes from the Word documents (data/toolGuideContent.ts). */
+/** Pages that have a long-form guide. Generated pages carry their own sections instead. */
 const GUIDES: Record<string, ToolGuideKey> = {
   'test-grade-calculator': 'test-grade',
   'grade-curve-calculator': 'grade-curve',
@@ -41,62 +31,16 @@ const GUIDES: Record<string, ToolGuideKey> = {
 };
 
 export interface ToolPageProps {
-  /** e.g. 'test-grade-calculator', 'average-grade-calculator', 'grading-scale', 'grading-scale/25-questions' */
-  slug: string;
+  slug: ToolPageSlug;
 }
 
 const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
-const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight first:mt-0';
-const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-
-const renderTool = (slug: string, entry: ToolPageEntry): React.ReactNode => {
-  if (typeof entry.questions === 'number') return <QuestionCountChartTool questions={entry.questions} />;
-  const Tool = SIMPLE_TOOLS[slug];
-  return Tool ? <Tool /> : null;
-};
-
-/** Sections + worked example for the generated pages. */
-const GeneratedContent: React.FC<{ entry: ToolPageEntry }> = ({ entry }) => (
-  <ContentSection guide={entry.slug}>
-    {entry.sections.map((s) => (
-      <React.Fragment key={s.heading}>
-        <h2 className={H2}>{s.heading}</h2>
-        {s.paragraphs.map((p, i) => (
-          <p key={i} className={P}>{p}</p>
-        ))}
-        {s.bullets && s.bullets.length > 0 && (
-          <ul className={UL}>
-            {s.bullets.map((b, i) => (
-              <li key={i}>{b}</li>
-            ))}
-          </ul>
-        )}
-      </React.Fragment>
-    ))}
-
-    <h2 className={H2}>{entry.example.heading}</h2>
-    <p className={P}>{entry.example.scenario}</p>
-    <dl className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 p-4 mb-4 m-0">
-      {entry.example.rows.map((r) => (
-        <React.Fragment key={r.label}>
-          <dt className="text-sm text-slate-600 dark:text-slate-300">{r.label}</dt>
-          <dd className="text-sm font-bold text-slate-900 dark:text-white m-0 text-right">{r.value}</dd>
-        </React.Fragment>
-      ))}
-    </dl>
-    <p className={P}>{entry.example.takeaway}</p>
-  </ContentSection>
-);
-
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
-  // Unknown slug: render nothing instead of crashing the whole route.
-  if (!entry) return null;
-
-  const guide = GUIDES[slug];
+  const Tool: React.ComponentType | undefined = TOOLS[slug];
+  const guideKey = GUIDES[slug];
   // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
   const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));
 
@@ -106,10 +50,12 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         title={entry.title}
         description={entry.metaDescription}
         canonicalUrl={toolPageCanonical(entry)}
-        ogImage={OG_IMAGES.quick}
+        ogImage={entry.ogImage ?? OG_IMAGES.quick}
         keywords={entry.keywords}
         featureList={entry.featureList}
         applicationCategory="EducationalApplication"
+        name={entry.h1}
+        breadcrumbLabel={entry.navLabel}
       />
 
       <header className="space-y-3">
@@ -118,12 +64,47 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       </header>
 
       <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
-        {renderTool(slug, entry)}
+        {entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : Tool ? <Tool /> : null}
       </section>
 
-      {guide ? <ToolContentGuide guide={guide} /> : <GeneratedContent entry={entry} />}
+      {guideKey ? (
+        <ToolContentGuide guide={guideKey} />
+      ) : (
+        <div className="max-w-4xl space-y-8">
+          {entry.sections.map((section) => (
+            <section key={section.heading} className="space-y-3">
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{section.heading}</h2>
+              {section.paragraphs.map((para) => (
+                <p key={para} className="text-base text-slate-700 dark:text-slate-300 leading-relaxed m-0">{para}</p>
+              ))}
+              {section.bullets && (
+                <ul className="m-0 pl-5 list-disc text-base text-slate-700 dark:text-slate-300 space-y-1">
+                  {section.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+          <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{entry.example.heading}</h2>
+            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">{entry.example.scenario}</p>
+            <dl className="m-0 grid sm:grid-cols-2 gap-x-6 gap-y-2">
+              {entry.example.rows.map((row) => (
+                <div key={row.label} className="flex items-baseline justify-between gap-3 border-b border-slate-200/70 dark:border-slate-800 py-1.5">
+                  <dt className="text-sm text-slate-700 dark:text-slate-300">{row.label}</dt>
+                  <dd className="m-0 font-bold font-mono text-slate-900 dark:text-white">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">{entry.example.takeaway}</p>
+          </section>
+        </div>
+      )}
 
-      <FAQ tool="quick" items={faqItems} heading={entry.faqHeading ?? PAGE_FAQ_HEADINGS[slug] ?? (slug.startsWith('grading-scale/') ? PAGE_FAQ_HEADINGS['grading-scale'] : undefined)} />
+      <div className="max-w-4xl content-auto">
+        <FAQ tool="quick" items={faqItems} heading={entry.faqHeading ?? PAGE_FAQ_HEADINGS[slug]} />
+      </div>
 
       <section aria-label="Related calculators" className="space-y-3 print:hidden content-auto">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Related grade calculators</h2>
