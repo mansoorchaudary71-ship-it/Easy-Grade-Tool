@@ -95,3 +95,20 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
+/* Tool navigation: one scrollable row on phones instead of 13 items wrapping into rows */
+@media (max-width: 640px) {
+  .tool-nav .tool-nav-inner {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .tool-nav .tool-nav-item {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    scroll-snap-align: center;
+  }
+}

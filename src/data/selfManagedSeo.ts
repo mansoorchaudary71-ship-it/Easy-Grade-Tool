@@ -14,10 +14,12 @@ export const SELF_MANAGED_SEO_PATHS: string[] = [
   '/test-grade-calculator',
   '/grade-curve-calculator',
   '/letter-grade-calculator',
+  '/average-grade-calculator',
+  '/grading-scale',
 ];
 
 /** Route prefixes whose pages render their own <SEO>. */
-export const SELF_MANAGED_SEO_PREFIXES: string[] = ['/easy-grade-calculator/', '/calculator/'];
+export const SELF_MANAGED_SEO_PREFIXES: string[] = ['/easy-grade-calculator/', '/calculator/', '/grading-scale/'];
 
 export function isSelfManagedSeoPath(pathname: string): boolean {
   const clean = normalizePath(pathname);

@@ -16,6 +16,7 @@ import { AmbientAura } from './AmbientAura';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
 import { SEO_HOME, SEO_ROUTES } from '../data/seoConfig';
 import { EducationalGuide } from './EducationalGuide';
+import { GRADING_SCALE_SIZES, gradingScalePath } from '../data/gradingScaleSizes';
 
 export interface GradeCalculatorProps {
   setToast: (msg: string) => void;
@@ -186,6 +187,28 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       {calcTab === 'quick-chart' ? (
         <div id="panel-quick-chart" className="w-full max-w-full pt-1">
           <QuickGrader setToast={setToast} />
+          <nav aria-label="Grading scale charts by test size" className="mt-8 rounded-[28px] bg-white dark:bg-slate-900 border border-white/80 dark:border-slate-800 p-5 sm:p-6 print:hidden">
+            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 m-0">Ready-made grading scale charts</h2>
+            <p className="text-sm text-slate-700 dark:text-slate-300 mt-1 mb-4">Pick your test size for the percentage and letter grade of every score.</p>
+            <ul className="m-0 p-0 list-none flex flex-wrap gap-2">
+              {GRADING_SCALE_SIZES.map((n) => (
+                <li key={n}>
+                  <Link
+                    to={gradingScalePath(n)}
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] px-4 rounded-full border border-stone-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold text-stone-800 dark:text-slate-100 hover:border-teal-600 no-underline"
+                    aria-label={`${n}-question grading scale`}
+                  >
+                    {n}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link to="/grading-scale/" className="inline-flex items-center min-h-[48px] px-4 rounded-full text-sm font-bold text-teal-800 dark:text-teal-300 hover:underline no-underline">
+                  All charts &rarr;
+                </Link>
+              </li>
+            </ul>
+          </nav>
         </div>
       ) : (
         <div
