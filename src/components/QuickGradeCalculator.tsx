@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Printer, Settings, Check, Search, RotateCcw, SlidersHorizontal, BookOpen } from 'lucide-react';
+import { SegmentedControl } from './ui/SegmentedControl';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 
@@ -186,23 +187,19 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             {/* Quick Presets */}
             <div className="flex items-center gap-1.5 pt-1 flex-wrap">
               <span className="text-[11px] font-semibold text-slate-400">Presets:</span>
-              {PRESET_QUESTIONS.map((n) => (
-                <button
-                  key={n}
-                  type="button"
-                  onClick={() => {
-                    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                    setTotalQuestionsInput(String(n));
-                  }}
-                  className={`preset-btn px-4 py-1.5 text-xs transition-all cursor-pointer ${
-                    totalQuestions === n
-                      ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                      : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                  }`}
-                >
-                  {n}
-                </button>
-              ))}
+              <SegmentedControl
+                ariaLabel="Question count presets"
+                variant="chips"
+                size="sm"
+                optionClassName="preset-btn"
+                value={totalQuestions}
+                onChange={(n) => setTotalQuestionsInput(String(n))}
+                options={PRESET_QUESTIONS.map((n) => ({
+                  value: n,
+                  label: n,
+                  onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION),
+                }))}
+              />
             </div>
           </div>
 
@@ -212,36 +209,17 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
                 Grading Scale
               </span>
-              <div className="grid grid-cols-2 gap-2 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700">
-                <button
-                  type="button"
-                  onClick={() => {
-                    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                    setScaleType('standard');
-                  }}
-                  className={`text-xs cursor-pointer text-center ${
-                    scaleType === 'standard'
-                      ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                      : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                  }`}
-                >
-                  Standard (A–F)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                    setScaleType('plus');
-                  }}
-                  className={`text-xs cursor-pointer text-center ${
-                    scaleType === 'plus'
-                      ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                      : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                  }`}
-                >
-                  Plus / Minus (A+–F)
-                </button>
-              </div>
+              <SegmentedControl
+                ariaLabel="Grading scale"
+                fill
+                size="sm"
+                value={scaleType}
+                onChange={(v) => setScaleType(v)}
+                options={[
+                  { value: 'standard', label: 'Standard (A–F)', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
+                  { value: 'plus', label: 'Plus / Minus (A+–F)', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
+                ]}
+              />
             </div>
 
             {/* Decimal Toggle */}

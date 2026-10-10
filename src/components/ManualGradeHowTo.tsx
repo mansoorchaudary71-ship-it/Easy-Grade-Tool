@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useId } from 'react';
+import { LayoutGroup, motion } from 'motion/react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from '../utils/helmet';
 import {
@@ -257,18 +258,26 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
         </div>
 
         {/* Method Selector Tabs */}
-        <div className="mt-6 flex flex-wrap gap-2 p-1.5 bg-stone-100/80 border border-stone-200 rounded-full" role="tablist">
+        <LayoutGroup id="howto-tabs"><div className="mt-6 flex flex-wrap gap-2 p-1.5 bg-slate-100/80 border border-gray-200/70 rounded-full" role="tablist">
           <button
             type="button"
             role="tab"
             aria-selected={activeTab === 'weighted'}
             onClick={() => setActiveTab('weighted')}
-            className={`flex items-center gap-2 text-xs sm:text-sm cursor-pointer ${
+            className={`relative isolate flex min-h-[44px] items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm cursor-pointer ${
               activeTab === 'weighted'
-                ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-1.5'
-                : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-1.5 transition-all'
+                ? 'font-bold text-stone-900'
+                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700'
             }`}
           >
+            {activeTab === 'weighted' && (
+              <motion.span
+                layoutId="howto-active-pill"
+                className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20"
+                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                aria-hidden="true"
+              />
+            )}
             <Layers className="w-4 h-4" aria-hidden="true" />
             <span>Weighted Grading (Syllabus Categories)</span>
           </button>
@@ -277,12 +286,20 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
             role="tab"
             aria-selected={activeTab === 'points'}
             onClick={() => setActiveTab('points')}
-            className={`flex items-center gap-2 text-xs sm:text-sm cursor-pointer ${
+            className={`relative isolate flex min-h-[44px] items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm cursor-pointer ${
               activeTab === 'points'
-                ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-1.5'
-                : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-1.5 transition-all'
+                ? 'font-bold text-stone-900'
+                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700'
             }`}
           >
+            {activeTab === 'points' && (
+              <motion.span
+                layoutId="howto-active-pill"
+                className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20"
+                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                aria-hidden="true"
+              />
+            )}
             <Percent className="w-4 h-4" aria-hidden="true" />
             <span>Points-Based Grading</span>
           </button>
@@ -291,16 +308,24 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
             role="tab"
             aria-selected={activeTab === 'final-exam'}
             onClick={() => setActiveTab('final-exam')}
-            className={`flex items-center gap-2 text-xs sm:text-sm cursor-pointer ${
+            className={`relative isolate flex min-h-[44px] items-center gap-2 rounded-full px-4 py-1.5 text-xs sm:text-sm cursor-pointer ${
               activeTab === 'final-exam'
-                ? 'bg-white text-stone-900 font-bold rounded-full shadow-sm border border-stone-200 px-4 py-1.5'
-                : 'text-stone-500 hover:text-stone-900 hover:bg-stone-100/50 rounded-full font-semibold px-4 py-1.5 transition-all'
+                ? 'font-bold text-stone-900'
+                : 'font-semibold text-stone-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700'
             }`}
           >
+            {activeTab === 'final-exam' && (
+              <motion.span
+                layoutId="howto-active-pill"
+                className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20"
+                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                aria-hidden="true"
+              />
+            )}
             <Calculator className="w-4 h-4" aria-hidden="true" />
             <span>Needed Final Exam Target Score</span>
           </button>
-        </div>
+        </div></LayoutGroup>
 
         {/* Tab 1: Weighted Grading Steps */}
         {activeTab === 'weighted' && (

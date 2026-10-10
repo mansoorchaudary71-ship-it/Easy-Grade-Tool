@@ -207,7 +207,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
 
-      <main id="main-content" ref={mainRef} tabIndex={-1} className={`main-wrap tool-theme-${activeTool} w-full max-w-full overflow-x-clip px-4 sm:px-6 focus:outline-none`}>
+      <main id="main-content" ref={mainRef} tabIndex={-1} className={`main-wrap premium-surface tool-theme-${activeTool} w-full max-w-full overflow-x-clip px-4 sm:px-6 focus:outline-none`}>
         <div className="tool-transition-container w-full max-w-full">
           <Suspense fallback={<CalculatorSkeleton />}>
             <Routes>

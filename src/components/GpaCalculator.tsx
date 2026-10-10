@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Link } from './SlashLink';
 import { Plus, X, Download, Printer } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SegmentedControl } from './ui/SegmentedControl';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
 import { INITIAL_COURSES } from '../data/constants';
@@ -195,41 +196,17 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             </div>
 
             {/* A+ grade value toggle (4.0 or 4.33) */}
-            <div className="flex items-center gap-1.5 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800/80 border border-stone-200 dark:border-slate-700">
-              <span className="text-xs font-semibold text-stone-600 dark:text-stone-300 pl-2">
-                A+ grade value:
-              </span>
-              <button
-                type="button"
-                className={`text-xs cursor-pointer ${
-                  aPlusValue === 4.0
-                    ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                    : 'bg-white dark:bg-slate-900 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-800 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                }`}
-                onClick={() => {
-                  triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                  setAPlusValue(4.0);
-                  setToast?.('A+ grade value set to 4.0');
-                }}
-              >
-                4.0
-              </button>
-              <button
-                type="button"
-                className={`text-xs cursor-pointer ${
-                  aPlusValue === 4.33
-                    ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                    : 'bg-white dark:bg-slate-900 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-800 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                }`}
-                onClick={() => {
-                  triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                  setAPlusValue(4.33);
-                  setToast?.('A+ grade value set to 4.33');
-                }}
-              >
-                4.33
-              </button>
-            </div>
+            <SegmentedControl
+              ariaLabel="A+ grade value"
+              prefix="A+ grade value:"
+              size="sm"
+              value={aPlusValue}
+              onChange={(v) => setAPlusValue(v)}
+              options={[
+                { value: 4.0, label: '4.0', onSelect: () => { triggerHapticFeedback(DEFAULT_HAPTIC_DURATION); setToast?.('A+ grade value set to 4.0'); } },
+                { value: 4.33, label: '4.33', onSelect: () => { triggerHapticFeedback(DEFAULT_HAPTIC_DURATION); setToast?.('A+ grade value set to 4.33'); } },
+              ]}
+            />
           </div>
 
           {/* Optional Prior Cumulative Inputs with Generous 8px-Grid Spacing */}

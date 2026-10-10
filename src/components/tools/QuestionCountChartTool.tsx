@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from 'react';
+import { SegmentedControl } from '../ui/SegmentedControl';
 import { Printer } from 'lucide-react';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD } from '../../utils/academicMath';
 import { buildQuickChart } from '../../utils/gradeCalculations';
 import { Link } from '../SlashLink';
-import { BTN_PRIMARY, CARD, PILL_OFF, PILL_ON } from './ui';
+import { BTN_PRIMARY, CARD, PILL_OFF } from './ui';
 
 /** Fixed-size score chart for /grading-scale/N-questions/ pages. */
 export const QuestionCountChartTool: React.FC<{ questions: number }> = ({ questions }) => {
@@ -16,9 +17,13 @@ export const QuestionCountChartTool: React.FC<{ questions: number }> = ({ questi
   return (
     <div className="space-y-6">
       <section aria-label="Scale choice" className={`${CARD} print:hidden`}>
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Grading scale">
-          <button type="button" aria-pressed={!plus} className={!plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(false)}>A–F</button>
-          <button type="button" aria-pressed={plus} className={plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(true)}>Plus / minus</button>
+        <div className="flex flex-wrap items-center gap-3">
+          <SegmentedControl
+            ariaLabel="Grading scale"
+            value={plus ? 'plus' : 'standard'}
+            onChange={(v) => setPlus(v === 'plus')}
+            options={[{ value: 'standard', label: 'A–F' }, { value: 'plus', label: 'Plus / minus' }]}
+          />
           <Link to="/" className={`${PILL_OFF} no-underline`}>Custom cutoffs or another test size</Link>
         </div>
       </section>

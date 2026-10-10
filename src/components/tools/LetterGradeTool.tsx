@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SegmentedControl } from '../ui/SegmentedControl';
 import { Printer } from 'lucide-react';
 import {
   SCALE_PLUS_MINUS,
@@ -9,7 +10,7 @@ import {
   parseStrictNumber,
   percentToLetter,
 } from '../../utils/academicMath';
-import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, PILL_OFF, PILL_ON, RESULT_BOX } from './ui';
+import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, RESULT_BOX } from './ui';
 
 type Mode = 'percent' | 'letter';
 
@@ -54,14 +55,18 @@ export const LetterGradeTool: React.FC = () => {
   return (
     <div className="space-y-6">
       <section aria-label="Letter grade inputs" className={`${CARD} space-y-5 print:hidden`}>
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Conversion direction">
-          <button type="button" aria-pressed={mode === 'percent'} className={mode === 'percent' ? PILL_ON : PILL_OFF} onClick={() => setMode('percent')}>Percent → letter</button>
-          <button type="button" aria-pressed={mode === 'letter'} className={mode === 'letter' ? PILL_ON : PILL_OFF} onClick={() => setMode('letter')}>Letter → percent</button>
-        </div>
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Grading scale">
-          <button type="button" aria-pressed={!plus} className={!plus ? PILL_ON : PILL_OFF} onClick={() => changeScale(false)}>A–F</button>
-          <button type="button" aria-pressed={plus} className={plus ? PILL_ON : PILL_OFF} onClick={() => changeScale(true)}>Plus / minus</button>
-        </div>
+        <SegmentedControl
+          ariaLabel="Conversion direction"
+          value={mode}
+          onChange={(v) => setMode(v)}
+          options={[{ value: 'percent', label: 'Percent → letter' }, { value: 'letter', label: 'Letter → percent' }]}
+        />
+        <SegmentedControl
+          ariaLabel="Grading scale"
+          value={plus ? 'plus' : 'standard'}
+          onChange={(v) => changeScale(v === 'plus')}
+          options={[{ value: 'standard', label: 'A–F' }, { value: 'plus', label: 'Plus / minus' }]}
+        />
 
         {mode === 'percent' ? (
           <div>

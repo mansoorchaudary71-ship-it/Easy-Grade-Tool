@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SegmentedControl } from '../ui/SegmentedControl';
 import { Printer } from 'lucide-react';
 import {
   CurveMethod,
@@ -12,7 +13,7 @@ import {
   roundTo,
   validateCurveParams,
 } from '../../utils/academicMath';
-import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, PILL_OFF, PILL_ON, SWITCH_ROW, WARN_TEXT } from './ui';
+import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, SWITCH_ROW, WARN_TEXT } from './ui';
 
 const METHODS: { key: CurveMethod; label: string }[] = [
   { key: 'flat', label: 'Add flat points' },
@@ -112,13 +113,13 @@ export const GradeCurveTool: React.FC = () => {
           {maxError && <p id="gc-max-err" className={`${ERROR_TEXT} mt-1.5`} role="alert">{maxError}</p>}
         </div>
 
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Curve method">
-          {METHODS.map((m) => (
-            <button key={m.key} type="button" aria-pressed={method === m.key} className={method === m.key ? PILL_ON : PILL_OFF} onClick={() => setMethod(m.key)}>
-              {m.label}
-            </button>
-          ))}
-        </div>
+        <SegmentedControl
+          ariaLabel="Curve method"
+          variant="chips"
+          value={method}
+          onChange={(v) => setMethod(v)}
+          options={METHODS.map((m) => ({ value: m.key, label: m.label }))}
+        />
 
         {method === 'flat' && (
           <div className="max-w-[12rem]">
@@ -138,10 +139,12 @@ export const GradeCurveTool: React.FC = () => {
             <input type="checkbox" checked={cap} onChange={(e) => setCap(e.target.checked)} className="w-6 h-6 accent-teal-600" />
             <span>Cap curved scores at {limit}</span>
           </label>
-          <div className="flex items-center gap-2" role="group" aria-label="Grading scale">
-            <button type="button" aria-pressed={!plus} className={!plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(false)}>A–F</button>
-            <button type="button" aria-pressed={plus} className={plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(true)}>Plus / minus</button>
-          </div>
+          <SegmentedControl
+          ariaLabel="Grading scale"
+          value={plus ? 'plus' : 'standard'}
+          onChange={(v) => setPlus(v === 'plus')}
+          options={[{ value: 'standard', label: 'A–F' }, { value: 'plus', label: 'Plus / minus' }]}
+        />
         </div>
       </section>
 

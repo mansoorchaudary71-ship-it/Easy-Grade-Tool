@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
 import { Plus, X, RotateCcw, Target, Download, Printer } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SegmentedControl } from './ui/SegmentedControl';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
 import { AssessmentItem, CalculationMode, GradingScaleType } from '../types';
@@ -32,13 +33,8 @@ export interface GradeCalculatorProps {
   hideSeo?: boolean;
 }
 
-const SEG_WRAP =
-  'flex items-center gap-1 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700';
-const SEG_ON = 'cursor-pointer min-h-[48px] text-sm bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-5 py-2 shadow-sm';
-const SEG_OFF =
-  'cursor-pointer min-h-[48px] text-sm bg-transparent text-stone-700 dark:text-stone-200 rounded-full font-medium hover:bg-white dark:hover:bg-slate-700/60 hover:shadow-sm border border-transparent transition-all px-5 py-2';
 const ROW_INPUT =
-  'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
+  'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
 const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1 text-center';
 const BTN_SOLID =
   'bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
@@ -233,59 +229,25 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                <div className={SEG_WRAP} role="group" aria-label="Grading scale">
-                  <button
-                    type="button"
-                    aria-pressed={scaleType === 'standard'}
-                    className={scaleType === 'standard' ? SEG_ON : SEG_OFF}
-                    onClick={() => {
-                      triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                      setScaleType('standard');
-                      setToast?.('Grading scale: Standard (A–F)');
-                    }}
-                  >
-                    A–F
-                  </button>
-                  <button
-                    type="button"
-                    aria-pressed={scaleType === 'plus'}
-                    className={scaleType === 'plus' ? SEG_ON : SEG_OFF}
-                    onClick={() => {
-                      triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                      setScaleType('plus');
-                      setToast?.('Grading scale: Plus/Minus');
-                    }}
-                  >
-                    +/−
-                  </button>
-                </div>
+                <SegmentedControl
+                  ariaLabel="Grading scale"
+                  value={scaleType}
+                  onChange={(v) => setScaleType(v)}
+                  options={[
+                    { value: 'standard', label: 'A–F', onSelect: () => { triggerHapticFeedback(DEFAULT_HAPTIC_DURATION); setToast?.('Grading scale: Standard (A–F)'); } },
+                    { value: 'plus', label: '+/−', ariaLabel: 'Plus and minus grading', onSelect: () => { triggerHapticFeedback(DEFAULT_HAPTIC_DURATION); setToast?.('Grading scale: Plus/Minus'); } },
+                  ]}
+                />
 
-                <div className={SEG_WRAP} role="group" aria-label="Calculation mode">
-                  <button
-                    type="button"
-                    aria-pressed={mode === 'weighted'}
-                    className={mode === 'weighted' ? SEG_ON : SEG_OFF}
-                    onClick={() => {
-                      triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                      setMode('weighted');
-                      setToast?.('Switched to Weighted grading');
-                    }}
-                  >
-                    Weighted (%)
-                  </button>
-                  <button
-                    type="button"
-                    aria-pressed={mode === 'points'}
-                    className={mode === 'points' ? SEG_ON : SEG_OFF}
-                    onClick={() => {
-                      triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                      setMode('points');
-                      setToast?.('Switched to Points-based grading');
-                    }}
-                  >
-                    Points
-                  </button>
-                </div>
+                <SegmentedControl
+                  ariaLabel="Calculation mode"
+                  value={mode}
+                  onChange={(v) => setMode(v)}
+                  options={[
+                    { value: 'weighted', label: 'Weighted (%)', onSelect: () => { triggerHapticFeedback(DEFAULT_HAPTIC_DURATION); setToast?.('Switched to Weighted grading'); } },
+                    { value: 'points', label: 'Points', onSelect: () => { triggerHapticFeedback(DEFAULT_HAPTIC_DURATION); setToast?.('Switched to Points-based grading'); } },
+                  ]}
+                />
               </div>
             </div>
 
@@ -327,7 +289,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                               id={`assess-name-${item.id}`}
                               type="text"
                               enterKeyHint="next"
-                              className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                              className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 dark:placeholder:text-slate-400"
                               value={item.name}
                               onChange={(e) => handleUpdateItem(item.id, 'name', e.target.value)}
                             />
@@ -496,7 +458,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       inputMode="decimal"
                       enterKeyHint="next"
                       placeholder="90"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={targetGrade}
                       onChange={(e) => setTargetGrade(e.target.value)}
                     />
@@ -511,7 +473,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       inputMode="decimal"
                       enterKeyHint="done"
                       placeholder="20"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={finalWeight}
                       onChange={(e) => setFinalWeight(e.target.value)}
                     />

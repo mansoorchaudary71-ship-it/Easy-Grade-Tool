@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { SegmentedControl } from './ui/SegmentedControl';
 import {
   Copy,
   Check,
@@ -323,36 +324,21 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
             <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase">
               Quick Scale Presets:
             </span>
-            <div className="flex flex-wrap gap-2">
-              {['4.0', '4.3', '5.0', '10.0'].map((val) => (
-                <button
-                  key={val}
-                  type="button"
-                  className={`preset-btn text-xs cursor-pointer ${
-                    selectedScalePreset === val
-                      ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                      : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                  }`}
-                  onClick={() => {
-                    setSelectedScalePreset(val);
-                    setCustomScaleInput(val);
-                  }}
-                >
-                  {val} Scale
-                </button>
-              ))}
-              <button
-                type="button"
-                className={`preset-btn text-xs cursor-pointer ${
-                  selectedScalePreset === 'custom'
-                    ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                    : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
-                }`}
-                onClick={() => setSelectedScalePreset('custom')}
-              >
-                Custom
-              </button>
-            </div>
+            <SegmentedControl
+              ariaLabel="Quick scale presets"
+              variant="chips"
+              size="sm"
+              optionClassName="preset-btn"
+              value={selectedScalePreset}
+              onChange={(val) => {
+                setSelectedScalePreset(val);
+                if (val !== 'custom') setCustomScaleInput(val);
+              }}
+              options={[
+                ...['4.0', '4.3', '5.0', '10.0'].map((val) => ({ value: val, label: `${val} Scale` })),
+                { value: 'custom', label: 'Custom' },
+              ]}
+            />
           </div>
         </div>
 

@@ -29,6 +29,7 @@ import {
   validateWrongCount,
 } from '../utils/gradeCalculations';
 import { AmbientAura } from './AmbientAura';
+import { SegmentedControl } from './ui/SegmentedControl';
 import { CutoffFields, CutoffDrafts, cutoffsToDrafts, parseCutoffDrafts } from './CutoffFields';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
 import { preloadPdf } from '../utils/toolPreloader';
@@ -60,13 +61,10 @@ const BTN_SOLID =
   'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#134E48] hover:bg-[#0D3834] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 text-sm transition-all cursor-pointer active:scale-95';
 const BTN_SOFT =
   'inline-flex items-center justify-center gap-2 min-h-[48px] bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-5 py-3 text-sm transition-all cursor-pointer active:scale-[0.98]';
-const PILL_ON = 'min-h-[48px] bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-5 py-3 text-sm shadow-sm cursor-pointer';
-const PILL_OFF =
-  'min-h-[48px] bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold px-5 py-3 text-sm cursor-pointer transition-all';
 const STEP_BTN =
   'w-12 h-12 min-w-[48px] shrink-0 inline-flex items-center justify-center rounded-full bg-white dark:bg-slate-800 text-stone-800 dark:text-slate-100 border border-stone-300 dark:border-slate-600 hover:bg-stone-50 dark:hover:bg-slate-700 shadow-sm cursor-pointer transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed';
 const FIELD =
-  'w-full h-12 min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
+  'w-full h-12 min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-lg text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
 const CARD_SHELL =
   'bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative p-5 sm:p-8';
 
@@ -538,22 +536,20 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               </p>
             )}
 
-            <div className="flex items-center gap-2 pt-1 flex-wrap" role="group" aria-label="Common test sizes">
+            <div className="flex items-center gap-2 pt-1 flex-wrap">
               <span className="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mr-1">Presets:</span>
-              {COMMON_QUESTION_PRESETS.map((q) => (
-                <button
-                  key={q}
-                  type="button"
-                  aria-pressed={total === q && !totalCheck.error}
-                  onClick={() => {
-                    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                    setTotalInput(String(q));
-                  }}
-                  className={`preset-btn transition-all ${total === q && !totalCheck.error ? PILL_ON : PILL_OFF}`}
-                >
-                  {q}
-                </button>
-              ))}
+              <SegmentedControl
+                ariaLabel="Common test sizes"
+                variant="chips"
+                optionClassName="preset-btn"
+                value={totalCheck.error ? null : total}
+                onChange={(v) => setTotalInput(String(v))}
+                options={COMMON_QUESTION_PRESETS.map((q) => ({
+                  value: q,
+                  label: q,
+                  onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION),
+                }))}
+              />
             </div>
           </div>
 
@@ -583,30 +579,16 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               <ChevronDown className="w-4 h-4 transition-transform group-open:rotate-180" aria-hidden="true" />
             </summary>
             <div className="pb-4 pt-2 flex flex-col gap-5">
-              <div className="grid grid-cols-2 gap-2" role="group" aria-label="Grading scale">
-                <button
-                  type="button"
-                  aria-pressed={scaleType === 'standard'}
-                  className={scaleType === 'standard' ? PILL_ON : PILL_OFF}
-                  onClick={() => {
-                    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                    setScaleType('standard');
-                  }}
-                >
-                  A, B, C, D, F
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={scaleType === 'plus'}
-                  className={scaleType === 'plus' ? PILL_ON : PILL_OFF}
-                  onClick={() => {
-                    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
-                    setScaleType('plus');
-                  }}
-                >
-                  Plus / minus
-                </button>
-              </div>
+              <SegmentedControl
+                ariaLabel="Grading scale"
+                fill
+                value={scaleType}
+                onChange={(v) => setScaleType(v)}
+                options={[
+                  { value: 'standard', label: 'A, B, C, D, F', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
+                  { value: 'plus', label: 'Plus / minus', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
+                ]}
+              />
 
               {scaleType === 'standard' ? (
                 <div className="space-y-3">
@@ -876,7 +858,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 onChange={(e) => setFilterInput(e.target.value)}
                 aria-invalid={filterCheck.error ? true : undefined}
                 aria-describedby={filterCheck.error ? 'filter-error' : undefined}
-                className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full py-3 pl-11 pr-24 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] dark:focus:border-blue-500 focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-full py-3 pl-11 pr-24 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-emerald-500/40 transition-all font-bold text-base placeholder:text-slate-500 dark:placeholder:text-slate-400"
               />
               {filterInput && (
                 <button

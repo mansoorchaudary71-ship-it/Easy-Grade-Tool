@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { LayoutGroup, motion } from 'motion/react';
 import { useSearchParams } from 'react-router-dom';
 import { Link } from './SlashLink';
 import {
@@ -567,10 +568,11 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                 </span>
               </div>
 
+              <LayoutGroup id="cgpa-scale-tabs">
               <div
                 role="tablist"
                 aria-labelledby="cgpa-scale-tablist-label"
-                className="grid grid-cols-3 gap-2 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700"
+                className="grid grid-cols-3 gap-1 p-1 rounded-full bg-slate-100/80 dark:bg-slate-800 border border-gray-200/70 dark:border-white/10"
               >
                 {SCALES.map((s, idx) => {
                   const isSelected = scale === s.value;
@@ -589,12 +591,20 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                       tabIndex={isSelected ? 0 : -1}
                       onClick={() => handleScaleChange(s.value)}
                       onKeyDown={(e) => handleScaleTabKeyDown(e, idx)}
-                      className={`min-h-[44px] px-3 py-1.5 text-center transition-all flex flex-col items-center justify-center cursor-pointer ${
+                      className={`relative isolate min-h-[44px] px-4 py-1.5 text-center flex flex-col items-center justify-center cursor-pointer rounded-full ${
                         isSelected
-                          ? 'bg-[#134E48] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-1.5 shadow-sm'
-                          : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all'
+                          ? 'font-bold text-emerald-900 dark:text-white'
+                          : 'font-semibold text-slate-600 dark:text-slate-300 transition-all duration-300 hover:-translate-y-0.5 hover:text-emerald-700 dark:hover:text-emerald-400'
                       }`}
                     >
+                      {isSelected && (
+                        <motion.span
+                          layoutId="cgpa-active-pill"
+                          className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20 dark:border-white/10 dark:bg-teal-600"
+                          transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                          aria-hidden="true"
+                        />
+                      )}
                       <span className="text-xs sm:text-sm font-mono font-bold">{s.label}</span>
                       <span className="text-[10px] opacity-80 leading-tight hidden sm:inline">
                         {s.badge}
@@ -603,6 +613,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                   );
                 })}
               </div>
+              </LayoutGroup>
               <p className="text-xs text-slate-500 dark:text-slate-400 m-0">
                 {SCALES.find((s) => s.value === scale)?.multiplierNote}
               </p>

@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Premium surface layer (glass / One UI inspired)
+   Scoped to <main class="premium-surface"> so it only touches the calculators.
+   This file is imported AFTER index.css; unlayered rules here win over Tailwind utilities,
+   so every rule only touches shadows, focus rings, transitions and motion (never layout).
+   ========================================================================== */
+
+/* 1. Inputs: soft emerald focus ring instead of the old hard blue border */
+.premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select):focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px rgb(16 185 129 / 0.4);
+}
+.premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), textarea, select) {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* 2. Primary green buttons: colored drop shadow, slight brightness lift on hover */
+.premium-surface :is(button, a)[class*="bg-[#134E48]"]:not([aria-pressed]) {
+  box-shadow: 0 6px 16px -4px rgb(5 150 105 / 0.35);
+  transition: filter 0.25s ease, translate 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+@media (hover: hover) {
+  .premium-surface :is(button, a)[class*="bg-[#134E48]"]:not([aria-pressed]):hover {
+    filter: brightness(1.1);
+    translate: 0 -1px;
+    box-shadow: 0 10px 22px -6px rgb(5 150 105 / 0.45);
+  }
+}
+
+/* 3. Result panels: diffused glow, inner highlight, gentle rise-in when they appear */
+.premium-surface [class*="bg-[#CFE9DF]"] {
+  box-shadow: 0 12px 32px -14px rgb(16 185 129 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.6);
+  animation: premium-rise 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.dark .premium-surface [class*="bg-[#CFE9DF]"] {
+  box-shadow: 0 12px 32px -14px rgb(0 0 0 / 0.55), inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+/* 4. Cards: soft floating shadow, brightens a touch under the pointer */
+.premium-surface .glow-surface {
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.9) inset, 0 14px 40px -18px rgb(15 23 42 / 0.2);
+  transition: box-shadow 0.3s ease;
+}
+.dark .premium-surface .glow-surface {
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 14px 40px -18px rgb(0 0 0 / 0.6);
+}
+
+/* 5. Secondary / chip buttons: lift and turn brand green on hover */
+@media (hover: hover) {
+  .premium-surface .preset-btn:not([aria-pressed="true"]):hover {
+    translate: 0 -2px;
+    color: rgb(4 120 87);
+  }
+  .dark .premium-surface .preset-btn:not([aria-pressed="true"]):hover {
+    color: rgb(52 211 153);
+  }
+}
+.premium-surface .preset-btn {
+  transition: translate 0.3s ease, color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@keyframes premium-rise {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-surface [class*="bg-[#CFE9DF]"] { animation: none; }
+  .premium-surface .preset-btn:hover,
+  .premium-surface :is(button, a)[class*="bg-[#134E48]"]:hover { translate: none; }
+}
+@media print {
+  .premium-surface * { box-shadow: none !important; animation: none !important; }
+}

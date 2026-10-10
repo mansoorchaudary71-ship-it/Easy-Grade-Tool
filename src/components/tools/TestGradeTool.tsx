@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SegmentedControl } from '../ui/SegmentedControl';
 import { Printer } from 'lucide-react';
 import {
   SCALE_PLUS_MINUS,
@@ -8,7 +9,7 @@ import {
   percentToLetter,
   roundTo,
 } from '../../utils/academicMath';
-import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, PILL_OFF, PILL_ON, RESULT_BOX, WARN_TEXT } from './ui';
+import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, RESULT_BOX, WARN_TEXT } from './ui';
 
 /** Blank -> NaN (invalid), never 0. Decimal commas are accepted. */
 const toNum = (v: string): number => {
@@ -85,11 +86,13 @@ export const TestGradeTool: React.FC = () => {
           </div>
         </details>
 
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Grading scale">
-          <span className="text-xs font-semibold uppercase tracking-widest text-slate-700 dark:text-slate-300 mr-1">Scale</span>
-          <button type="button" aria-pressed={!plus} className={!plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(false)}>A–F</button>
-          <button type="button" aria-pressed={plus} className={plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(true)}>Plus / minus</button>
-        </div>
+        <SegmentedControl
+          ariaLabel="Grading scale"
+          prefix="Scale"
+          value={plus ? 'plus' : 'standard'}
+          onChange={(v) => setPlus(v === 'plus')}
+          options={[{ value: 'standard', label: 'A–F' }, { value: 'plus', label: 'Plus / minus' }]}
+        />
       </section>
 
       <section aria-label="Test grade result" className={`${CARD} space-y-5`}>

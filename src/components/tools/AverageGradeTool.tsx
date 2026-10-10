@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { SegmentedControl } from '../ui/SegmentedControl';
 import { Printer } from 'lucide-react';
 import {
   SCALE_PLUS_MINUS,
@@ -9,7 +10,7 @@ import {
   percentToLetter,
   roundTo,
 } from '../../utils/academicMath';
-import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, PILL_OFF, PILL_ON, RESULT_BOX, WARN_TEXT } from './ui';
+import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, RESULT_BOX, WARN_TEXT } from './ui';
 
 export const AverageGradeTool: React.FC = () => {
   const [raw, setRaw] = useState('88, 92, 79, 95, 84');
@@ -60,10 +61,12 @@ export const AverageGradeTool: React.FC = () => {
           <input id="ag-max" className={INPUT} type="text" inputMode="decimal" enterKeyHint="done" value={maxInput} onChange={(e) => setMaxInput(e.target.value)} aria-invalid={maxError ? true : undefined} />
           {maxError && <p className={`${ERROR_TEXT} mt-1.5`} role="alert">{maxError}</p>}
         </div>
-        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Grading scale">
-          <button type="button" aria-pressed={!plus} className={!plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(false)}>A–F</button>
-          <button type="button" aria-pressed={plus} className={plus ? PILL_ON : PILL_OFF} onClick={() => setPlus(true)}>Plus / minus</button>
-        </div>
+        <SegmentedControl
+          ariaLabel="Grading scale"
+          value={plus ? 'plus' : 'standard'}
+          onChange={(v) => setPlus(v === 'plus')}
+          options={[{ value: 'standard', label: 'A–F' }, { value: 'plus', label: 'Plus / minus' }]}
+        />
       </section>
 
       <section aria-label="Average grade result" className={`${CARD} space-y-4`}>
