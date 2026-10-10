@@ -11,6 +11,8 @@ const MORE = [
   { to: '/test-grade-calculator/', title: 'Test grade calculator', text: 'Percentage and letter for one test, with bonus points.' },
   { to: '/grade-curve-calculator/', title: 'Grade curve calculator', text: 'Four curving methods with before and after scores.' },
   { to: '/letter-grade-calculator/', title: 'Letter grade calculator', text: 'Percent to letter and GPA points on common scales.' },
+  { to: '/average-grade-calculator/', title: 'Average grade calculator', text: 'Mean, median and letter grade for a list of scores.' },
+  { to: '/grading-scale/', title: 'Grading scale charts', text: 'Score charts for tests of 5 to 100 questions.' },
   { to: '/gpa-calculator/', title: 'GPA calculator', text: 'Semester and cumulative GPA with credit hours.' },
   { to: '/cgpa-to-percentage-calculator/', title: 'CGPA to percentage', text: '10, 5 and 4-point conversions by university.' },
 ];

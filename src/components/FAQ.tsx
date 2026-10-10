@@ -120,6 +120,20 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
       'Answers on percentage cutoffs, plus/minus scales, GPA points per letter and why your school’s scale may differ from the common one.',
     ctaText: 'Enter a percentage or pick a letter above to see its range, GPA points and full scale table.',
   },
+  'average-grade-calculator': {
+    eyebrow: 'Average Grade FAQs',
+    title: 'Average Grade Calculator FAQs',
+    description:
+      'Answers on finding the mean and median of your scores, mixing tests with different totals and knowing when a plain average is not your course grade.',
+    ctaText: 'Paste your scores above to see the mean, median, range and letter grade.',
+  },
+  'grading-scale': {
+    eyebrow: 'Grading Scale FAQs',
+    title: 'Grading Scale Chart FAQs',
+    description:
+      'Answers on the cutoffs these charts use, how to handle a test size that is not listed and why one wrong answer costs different amounts on different tests.',
+    ctaText: 'Choose a test size above to open its score chart.',
+  },
 };
 
 export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
