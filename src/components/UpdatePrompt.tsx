@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 /**
  * Offers a "Reload" button when a new version of the site has been downloaded in the background.
- * Mounted once in App. Renders nothing until main.tsx's service-worker callback fires "egt:sw-update".
+ * Mounted once in App. Renders nothing until main.tsx reports a waiting update (via window.__egtSwApply or the "egt:sw-update" event).
  */
 export const UpdatePrompt: React.FC = () => {
   const [apply, setApply] = useState<null | (() => void)>(null);
 
   useEffect(() => {
+    // An update may have been detected before this component mounted (the event is fire-and-forget).
+    if (typeof window.__egtSwApply === 'function') {
+      const pending = window.__egtSwApply;
+      setApply(() => pending);
+    }
     const onUpdate = (e: Event) => {
       const detail = (e as CustomEvent<{ apply: () => void }>).detail;
       if (detail && typeof detail.apply === 'function') setApply(() => detail.apply);
