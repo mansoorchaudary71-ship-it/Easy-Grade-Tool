@@ -91,30 +91,16 @@ const FOOTER_PREMIUM_CSS = `
 .ft-btn:hover:not(:disabled){transform:translateY(-1px) scale(1.03);box-shadow:0 14px 30px -8px rgba(253,186,116,.95);filter:saturate(1.1)}
 .ft-btn:active:not(:disabled){transform:scale(.96)}
 .ft-btn:disabled{opacity:.75;cursor:wait}
-.ft-btn:focus-visible,.ft-acc-sum:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ft-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
 .ft-msg{animation:ft-pop .35s cubic-bezier(.2,1.2,.3,1) both}
-.ft-acc{border-radius:16px;border:1px solid rgb(226 232 240);background:linear-gradient(180deg,#fff,#f8faff);transition:border-color .2s,box-shadow .2s}
-.dark .ft-acc{border-color:rgb(51 65 85);background:linear-gradient(180deg,rgb(15 23 42),rgb(30 41 59 / .6))}
-.ft-acc:hover,.ft-acc[open]{border-color:#9db2f2;box-shadow:0 12px 28px -18px rgba(68,104,216,.55)}
-.ft-acc-sum{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.5rem;min-height:48px;padding:.6rem .85rem;cursor:pointer;border-radius:16px;user-select:none}
-.ft-acc-sum::-webkit-details-marker{display:none}
-.ft-acc-count{font-size:.68rem;font-weight:700;padding:.1rem .45rem;border-radius:9999px;color:#3454be;background:#e8eeff}
-.dark .ft-acc-count{color:#bfd0ff;background:rgb(51 65 85)}
-.ft-acc-chev{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
-.ft-acc[open] .ft-acc-chev{transform:rotate(180deg)}
-.ft-acc[open] .ft-acc-panel{animation:ft-reveal .32s cubic-bezier(.2,.8,.2,1) both}
-.ft-acc-panel{padding:.25rem .5rem .6rem}
-.ft-link{display:flex;align-items:center;gap:.6rem;min-height:44px;padding:.35rem .5rem;border-radius:12px;text-decoration:none;
-  font-size:13px;font-weight:600;color:rgb(71 85 105);transition:background .2s,color .2s,transform .2s;cursor:pointer;background:transparent;border:0;width:100%;text-align:left}
-.dark .ft-link{color:rgb(203 213 225)}
-.ft-link:hover{background:#eef2ff;color:#3454be;transform:translateX(3px)}
-.dark .ft-link:hover{background:rgb(51 65 85 / .7);color:#bfd0ff}
-.ft-link[aria-current="page"]{background:#e8eeff;color:#3454be;font-weight:800}
-.dark .ft-link[aria-current="page"]{background:rgb(51 65 85);color:#bfd0ff}
-.ft-ico{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9px;flex-shrink:0;color:#4468d8;background:#e8eeff;transition:background .2s,color .2s,transform .2s}
-.dark .ft-ico{color:#bfd0ff;background:rgb(51 65 85)}
-.ft-link:hover .ft-ico{background:#4468d8;color:#fff;transform:rotate(-6deg) scale(1.08)}
+.ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .85rem;border-radius:9999px;cursor:pointer;
+  font-size:12px;font-weight:700;color:#3454be;background:#eef2ff;border:1px solid #c7d4fb;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.dark .ft-more-btn{color:#bfd0ff;background:rgb(30 41 59);border-color:rgb(71 85 105)}
+.ft-more-btn:hover{background:#4468d8;color:#fff;border-color:#4468d8;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(68,104,216,.9)}
+.ft-more-btn:focus-visible{outline:3px solid #4468d8;outline-offset:2px}
+.ft-more-chev{transition:transform .25s}
+.ft-more-in{animation:ft-reveal .28s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ft-grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes ft-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes ft-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(28px,18px) scale(1.12)}}
@@ -124,45 +110,21 @@ const FOOTER_PREMIUM_CSS = `
 @keyframes ft-pop{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes ft-reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){
-  .ft-news,.ft-orb,.ft-float,.ft-spark,.ft-btn::after,.ft-msg,.ft-acc[open] .ft-acc-panel{animation:none!important}
-  .ft-acc-chev,.ft-link,.ft-ico,.ft-btn,.ft-btn .ft-arrow{transition:none!important}
+  .ft-news,.ft-orb,.ft-float,.ft-spark,.ft-btn::after,.ft-msg,.ft-more-in{animation:none!important}
+  .ft-more-btn,.ft-more-chev,.ft-btn,.ft-btn .ft-arrow{transition:none!important}
 }
 `;
-
-/** Native <details> accordion: closed by default, fully keyboard accessible, and every link stays in the prerendered HTML for crawlers. */
-const FooterAccordion: React.FC<{
-  title: string;
-  count?: number;
-  open: boolean;
-  onToggle: (open: boolean) => void;
-  children: React.ReactNode;
-}> = ({ title, count, open, onToggle, children }) => (
-  <details
-    className="ft-acc"
-    open={open}
-    onToggle={(e) => {
-      const next = (e.currentTarget as HTMLDetailsElement).open;
-      if (next !== open) onToggle(next);
-    }}
-  >
-    <summary className="ft-acc-sum">
-      <h2 className="text-[15px] font-bold text-slate-900 dark:text-white m-0">{title}</h2>
-      <span className="inline-flex items-center gap-2">
-        {typeof count === 'number' && <span className="ft-acc-count">{count}</span>}
-        <ChevronDown className="ft-acc-chev w-4 h-4 text-slate-500 dark:text-slate-300" aria-hidden="true" />
-      </span>
-    </summary>
-    <div className="ft-acc-panel">{children}</div>
-  </details>
-);
 
 /**
  * Pages that are not in the top navigation but must stay one click from every page (and from the homepage),
  * which the launch audit (CHK-16) enforces for every sitemap URL.
  */
-const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string; icon: React.ComponentType<{ className?: string }> }[] = [
-  { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/', icon: Activity },
-  { label: 'Grading Scales', title: 'Grading scale charts by number of questions', path: '/grading-scale/', icon: FileText },
+/** Links shown before the "More" button in each footer column (all columns line up at this height). */
+const FOOTER_VISIBLE_LINKS = 4;
+
+const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string }[] = [
+  { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/' },
+  { label: 'Grading Scales', title: 'Grading scale charts by number of questions', path: '/grading-scale/' },
 ];
 
 export const Footer: React.FC<FooterProps> = ({
@@ -190,8 +152,8 @@ export const Footer: React.FC<FooterProps> = ({
   const [subscribeEmail, setSubscribeEmail] = useState<string>('');
   const [subscribeLoading, setSubscribeLoading] = useState<boolean>(false);
   const [subscribeMessage, setSubscribeMessage] = useState<{ text: string; isError?: boolean } | null>(null);
-  // Footer link groups are collapsed by default and expand on tap/click
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({ academic: false, utility: false, support: false });
+  // Long footer link columns show a few links first and expand with the "More" button
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({ academic: false, utility: false });
   const setGroupOpen = (key: string) => (open: boolean) => setOpenGroups((g) => (g[key] === open ? g : { ...g, [key]: open }));
 
   // Contact form state
@@ -906,7 +868,7 @@ export const Footer: React.FC<FooterProps> = ({
                 </div>
               </div>
 
-              {/* Calculators + More tools: expandable groups (same nav data as before) */}
+              {/* Calculators + More tools: original vertical lists, capped with a "More" button so every column is the same height */}
               {(['academic', 'utility'] as const).map((group) => {
                 const isStaticPage =
                   location.pathname.startsWith('/about') ||
@@ -918,52 +880,63 @@ export const Footer: React.FC<FooterProps> = ({
                     label: t.label,
                     title: t.title,
                     path: t.path,
-                    icon: t.icon as React.ComponentType<{ className?: string }>,
                     toolKey: t.toolKey as ToolKey | null,
                   })),
                   ...(group === 'academic' ? FOOTER_EXTRA_ACADEMIC_LINKS.map((t) => ({ ...t, toolKey: null as ToolKey | null })) : []),
                 ];
+                const expanded = !!openGroups[group];
+                const hasMore = items.length > FOOTER_VISIBLE_LINKS;
+                // Keep the expanded group open when the visitor is on one of its hidden pages.
+                const hiddenActive = items.slice(FOOTER_VISIBLE_LINKS).some((t) => !isStaticPage && isSamePath(location.pathname, t.path));
+                const showAll = expanded || hiddenActive;
                 return (
-                  <div key={group} className="col-span-2 md:col-span-2">
-                    <FooterAccordion
-                      title={group === 'academic' ? 'Grade Calculators' : 'More Tools'}
-                      count={items.length}
-                      open={!!openGroups[group]}
-                      onToggle={setGroupOpen(group)}
-                    >
-                      <ul className="list-none p-0 m-0 space-y-0.5">
-                        {items.map((tool) => {
-                          const Icon = tool.icon;
-                          const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
-                          return (
-                            <li key={tool.path}>
-                              <Link
-                                to={tool.path}
-                                onClick={() => {
-                                  scrollToTop();
-                                  // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
-                                  if (tool.toolKey && isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
-                                }}
-                                className="ft-link"
-                                aria-current={isActive ? 'page' : undefined}
-                                title={tool.title}
-                              >
-                                <span className="ft-ico"><Icon className="w-4 h-4" aria-hidden="true" /></span>
-                                <span>{tool.label}</span>
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </FooterAccordion>
+                  <div key={group} className="md:col-span-2">
+                    <h2 className={colHeadCls}>{group === 'academic' ? 'Grade Calculators' : 'More Tools'}</h2>
+                    <ul className="space-y-3 list-none p-0 m-0">
+                      {items.map((tool, idx) => {
+                        const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
+                        // Hidden items stay in the HTML (crawlable) but are not displayed until "More" is pressed.
+                        const isHidden = idx >= FOOTER_VISIBLE_LINKS && !showAll;
+                        return (
+                          <li key={tool.path} className={isHidden ? 'hidden' : idx >= FOOTER_VISIBLE_LINKS ? 'ft-more-in' : undefined}>
+                            <Link
+                              to={tool.path}
+                              onClick={() => {
+                                scrollToTop();
+                                // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
+                                if (tool.toolKey && isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
+                              }}
+                              className={`${linkCls} no-underline ${isActive ? '!text-[#4468D8] dark:!text-blue-300 font-bold' : ''}`}
+                              aria-current={isActive ? 'page' : undefined}
+                              title={tool.title}
+                            >
+                              {tool.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                      {hasMore && (
+                        <li>
+                          <button
+                            type="button"
+                            onClick={() => setGroupOpen(group)(!showAll)}
+                            aria-expanded={showAll}
+                            className="ft-more-btn"
+                          >
+                            <span>{showAll ? 'Show less' : `More (${items.length - FOOTER_VISIBLE_LINKS})`}</span>
+                            <ChevronDown className={`ft-more-chev w-3.5 h-3.5 ${showAll ? 'rotate-180' : ''}`} aria-hidden="true" />
+                          </button>
+                        </li>
+                      )}
+                    </ul>
                   </div>
                 );
               })}
 
               {/* Support */}
-              <div className="col-span-2 md:col-span-2">
-                <FooterAccordion title="Support" open={!!openGroups.support} onToggle={setGroupOpen('support')}>
-                <ul className="list-none p-0 m-0 space-y-1 px-1.5">
+              <div className="md:col-span-2">
+                <h2 className={colHeadCls}>Support</h2>
+                <ul className="space-y-3 list-none p-0 m-0">
                   <li>
                     <button
                       type="button"
@@ -972,7 +945,7 @@ export const Footer: React.FC<FooterProps> = ({
                         setIssueError(null);
                         setActiveModal('reportIssue');
                       }}
-                      className="ft-link"
+                      className={linkCls}
                       title="Report a calculation error or UI bug directly to backend ticket system"
                     >
                       Report an Issue
@@ -986,7 +959,7 @@ export const Footer: React.FC<FooterProps> = ({
                         setFeatureError(null);
                         setActiveModal('suggestFeature');
                       }}
-                      className="ft-link"
+                      className={linkCls}
                       title="Suggest a new grading scale, formula or calculator to the roadmap"
                     >
                       Request a Feature
@@ -999,7 +972,7 @@ export const Footer: React.FC<FooterProps> = ({
                         checkServerHealth();
                         setActiveModal('status');
                       }}
-                      className="ft-link"
+                      className={linkCls}
                       title="Inspect backend latency, operational status and uptime"
                     >
                       System Status
@@ -1009,14 +982,13 @@ export const Footer: React.FC<FooterProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveModal('resetConfirm')}
-                      className={`ft-link !text-rose-600/90 dark:!text-rose-400/90 hover:!text-rose-700 dark:hover:!text-rose-300`}
+                      className={`${linkCls} !text-rose-600/90 dark:!text-rose-400/90 hover:!text-rose-700 dark:hover:!text-rose-300`}
                       title="Reset all saved course grades, GPA rows, and calculator history"
                     >
                       Reset Local Data
                     </button>
                   </li>
                 </ul>
-                </FooterAccordion>
               </div>
 
               {/* Contact Us */}
