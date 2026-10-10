@@ -21,18 +21,13 @@ import {
   KeyRound,
   X,
   AlertTriangle,
-  Download,
-  RefreshCw,
   Send,
   CheckCircle2,
-  Server,
   FileText,
-  Trash2,
   Loader2,
   MessageSquare,
   Bug,
   PlusCircle,
-  Activity,
   ArrowRight,
   ChevronDown,
 } from 'lucide-react';
@@ -50,16 +45,6 @@ export interface FooterProps {
   onSelectTool?: (tool: ToolKey) => void;
   onOpenCommandPalette?: () => void;
   setToast?: (msg: string) => void;
-}
-
-interface ServerHealthData {
-  status: string;
-  uptimeHuman: string;
-  version: string;
-  timestamp: string;
-  calculatorsOnline: number;
-  environment: string;
-  latencyMs?: number;
 }
 
 
@@ -141,7 +126,7 @@ export const Footer: React.FC<FooterProps> = ({
 
   // States for interactive modals
   const [activeModal, setActiveModal] = useState<
-    'contact' | 'reportIssue' | 'suggestFeature' | 'status' | 'resetConfirm' | null
+    'contact' | 'reportIssue' | 'suggestFeature' | null
   >(null);
 
   // Share & copy states
@@ -153,8 +138,13 @@ export const Footer: React.FC<FooterProps> = ({
   const [subscribeLoading, setSubscribeLoading] = useState<boolean>(false);
   const [subscribeMessage, setSubscribeMessage] = useState<{ text: string; isError?: boolean } | null>(null);
   // Long footer link columns show a few links first and expand with the "More" button
-  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({ academic: false, utility: false });
+  // undefined = automatic (collapsed, or open when the visitor is on a hidden link); true/false = the visitor's own choice
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean | undefined>>({});
   const setGroupOpen = (key: string) => (open: boolean) => setOpenGroups((g) => (g[key] === open ? g : { ...g, [key]: open }));
+  // A new page starts from the automatic state again, so the active link is never left hidden.
+  useEffect(() => {
+    setOpenGroups({});
+  }, [location.pathname]);
 
   // Contact form state
   const [contactName, setContactName] = useState<string>('');
@@ -183,9 +173,6 @@ export const Footer: React.FC<FooterProps> = ({
   const [featureSuccess, setFeatureSuccess] = useState<string | null>(null);
   const [featureError, setFeatureError] = useState<string | null>(null);
 
-  // Server health state
-  const [serverHealth, setServerHealth] = useState<ServerHealthData | null>(null);
-  const [healthLoading, setHealthLoading] = useState<boolean>(false);
 
   // WCAG 2.1 AA Compliant Unique IDs generated via React useId()
   const contactTitleId = useId();
@@ -209,8 +196,6 @@ export const Footer: React.FC<FooterProps> = ({
   const featureDescriptionId = useId();
   const featureEmailId = useId();
 
-  const statusTitleId = useId();
-  const resetTitleId = useId();
   const subscribeEmailId = useId();
 
   // Accessible focus trap, Escape key handling, and focus restoration for modal dialogs
@@ -301,56 +286,6 @@ export const Footer: React.FC<FooterProps> = ({
       localStorage.setItem(key, JSON.stringify(existing));
     } catch (_) {}
   };
-
-  // Fetch health check on mount
-  const checkServerHealth = async () => {
-    setHealthLoading(true);
-    const start = performance.now();
-    try {
-      const res = await fetch(`${API_BASE}/api/health`);
-      const elapsed = Math.round(performance.now() - start);
-      const isJson = res.headers.get('content-type')?.includes('application/json');
-      if (res.ok && isJson) {
-        const data = await res.json();
-        setServerHealth({ ...data, latencyMs: elapsed });
-      } else {
-        setServerHealth({
-          status: 'client-active',
-          uptimeHuman: 'Instant Offline Engine',
-          version: '1.2.0',
-          timestamp: new Date().toISOString(),
-          calculatorsOnline: 8,
-          environment: 'Static / PWA Ready',
-          latencyMs: elapsed,
-        });
-      }
-    } catch {
-      setServerHealth({
-        status: 'standalone-browser',
-        uptimeHuman: 'Client-side active',
-        version: '1.2.0',
-        timestamp: new Date().toISOString(),
-        calculatorsOnline: 8,
-        environment: 'browser-cached',
-        latencyMs: 1,
-      });
-    } finally {
-      setHealthLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    // Defer health check to idle time so initial paint and hydration are instant
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        const id = (window as any).requestIdleCallback(() => checkServerHealth(), { timeout: 3000 });
-        return () => (window as any).cancelIdleCallback?.(id);
-      } else {
-        const timer = setTimeout(() => checkServerHealth(), 2000);
-        return () => clearTimeout(timer);
-      }
-    }
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -511,81 +446,6 @@ export const Footer: React.FC<FooterProps> = ({
       }
     } finally {
       setFeatureLoading(false);
-    }
-  };
-
-  // 5. Working Backup & Export Data button (connected to backend POST /api/backup-data)
-  const handleBackupData = () => {
-    try {
-      const dump: Record<string, any> = {};
-      if (typeof window !== 'undefined' && window.localStorage) {
-        for (let i = 0; i < window.localStorage.length; i++) {
-          const key = window.localStorage.key(i);
-          if (key) {
-            try {
-              dump[key] = JSON.parse(window.localStorage.getItem(key) || '""');
-            } catch {
-              dump[key] = window.localStorage.getItem(key);
-            }
-          }
-        }
-      }
-
-      // Generate and trigger download synchronously so browser user gesture is preserved on 1st click
-      const backupBlob = new Blob(
-        [
-          JSON.stringify(
-            {
-              app: 'Easy Grade Tool',
-              exportDate: new Date().toISOString(),
-              version: '1.2.0',
-              data: dump,
-            },
-            null,
-            2
-          ),
-        ],
-        { type: 'application/json' }
-      );
-
-      const url = URL.createObjectURL(backupBlob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `easy-grade-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      if (setToast) setToast('Backup downloaded successfully (.json)!');
-
-      // Verify and record with backend asynchronously in background
-      fetch(`${API_BASE}/api/backup-data`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientData: dump }),
-      }).catch(() => {});
-    } catch (err) {
-      console.error('Backup error:', err);
-      if (setToast) setToast('Failed to generate data backup.');
-    }
-  };
-
-  // 6. Working Reset / Clear Local Data button
-  const handleResetData = () => {
-    try {
-      if (typeof window !== 'undefined') {
-        window.localStorage.clear();
-        window.sessionStorage.clear();
-      }
-      setActiveModal(null);
-      if (setToast) setToast('All stored calculation data cleared successfully!');
-      setTimeout(() => {
-        window.location.reload();
-      }, 700);
-    } catch {
-      setActiveModal(null);
-      if (setToast) setToast('Storage cleared.');
     }
   };
 
@@ -849,15 +709,6 @@ export const Footer: React.FC<FooterProps> = ({
                   </button>
                   <button
                     type="button"
-                    onClick={handleBackupData}
-                    className={iconBtnCls}
-                    title="Download a verified JSON backup of all your saved course grades and calculations"
-                    aria-label="Export my data"
-                  >
-                    <Download className="w-4 h-4" aria-hidden="true" />
-                  </button>
-                  <button
-                    type="button"
                     onClick={scrollToTop}
                     className={iconBtnCls}
                     title="Scroll back to top"
@@ -884,11 +735,12 @@ export const Footer: React.FC<FooterProps> = ({
                   })),
                   ...(group === 'academic' ? FOOTER_EXTRA_ACADEMIC_LINKS.map((t) => ({ ...t, toolKey: null as ToolKey | null })) : []),
                 ];
-                const expanded = !!openGroups[group];
+                const userChoice = openGroups[group];
                 const hasMore = items.length > FOOTER_VISIBLE_LINKS;
                 // Keep the expanded group open when the visitor is on one of its hidden pages.
                 const hiddenActive = items.slice(FOOTER_VISIBLE_LINKS).some((t) => !isStaticPage && isSamePath(location.pathname, t.path));
-                const showAll = expanded || hiddenActive;
+                // An explicit click always wins; otherwise stay open only while the active page is a hidden link.
+                const showAll = userChoice ?? hiddenActive;
                 return (
                   <div key={group} className="md:col-span-2">
                     <h2 className={colHeadCls}>{group === 'academic' ? 'Grade Calculators' : 'More Tools'}</h2>
@@ -963,29 +815,6 @@ export const Footer: React.FC<FooterProps> = ({
                       title="Suggest a new grading scale, formula or calculator to the roadmap"
                     >
                       Request a Feature
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        checkServerHealth();
-                        setActiveModal('status');
-                      }}
-                      className={linkCls}
-                      title="Inspect backend latency, operational status and uptime"
-                    >
-                      System Status
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      type="button"
-                      onClick={() => setActiveModal('resetConfirm')}
-                      className={`${linkCls} !text-rose-600/90 dark:!text-rose-400/90 hover:!text-rose-700 dark:hover:!text-rose-300`}
-                      title="Reset all saved course grades, GPA rows, and calculator history"
-                    >
-                      Reset Local Data
                     </button>
                   </li>
                 </ul>
@@ -1558,158 +1387,6 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
       )}
 
-      {/* ========================================================================= */}
-      {/* MODAL 4: SYSTEM & BACKEND STATUS (Pings GET /api/health)                  */}
-      {/* ========================================================================= */}
-      {activeModal === 'status' && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setActiveModal(null);
-          }}
-        >
-          <div
-            ref={modalRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={statusTitleId}
-            tabIndex={-1}
-            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
-          >
-            <button
-              type="button"
-              onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              aria-label="Close modal"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                <Server className="w-5 h-5" />
-              </div>
-              <div>
-                <h3 id={statusTitleId} className="text-base font-bold text-slate-900 dark:text-white">System &amp; Backend Status</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Real-time health check of Easy Grade services.
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-3 mb-6">
-              <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80">
-                <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">API Health Status</span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  {serverHealth?.status === 'operational' ? 'Operational' : 'Active'}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80">
-                  <div className="text-slate-500 dark:text-slate-400 mb-0.5">Roundtrip Latency</div>
-                  <div className="text-sm font-bold font-mono text-emerald-600 dark:text-emerald-400">
-                    {serverHealth?.latencyMs ? `${serverHealth.latencyMs} ms` : '< 5 ms'}
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80">
-                  <div className="text-slate-500 dark:text-slate-400 mb-0.5">Server Uptime</div>
-                  <div className="text-sm font-bold font-mono text-slate-800 dark:text-slate-200">
-                    {serverHealth?.uptimeHuman || 'Online'}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 text-xs space-y-1">
-                <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
-                  <span>Active Suite Calculators</span>
-                  <span className="font-semibold text-slate-900 dark:text-white">{serverHealth?.calculatorsOnline || 8} of 8 Ready</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
-                  <span>Client-Side PWA Engine</span>
-                  <span className="font-semibold text-emerald-600 dark:text-emerald-400">Enabled (Offline Ready)</span>
-                </div>
-                <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
-                  <span>Version</span>
-                  <span className="font-mono text-slate-700 dark:text-slate-300">v{serverHealth?.version || '1.2.0'}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <button
-                type="button"
-                onClick={checkServerHealth}
-                disabled={healthLoading}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-              >
-                <RefreshCw className={`w-3.5 h-3.5 ${healthLoading ? 'animate-spin' : ''}`} />
-                <span>Refresh Ping</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveModal(null)}
-                className="px-4 py-1.5 text-xs font-bold text-white bg-teal-700 dark:bg-teal-600 hover:bg-teal-800 dark:hover:bg-teal-700 rounded-xl transition-all cursor-pointer shadow-xs"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ========================================================================= */}
-      {/* MODAL 6: RESET DATA CONFIRMATION                                          */}
-      {/* ========================================================================= */}
-      {activeModal === 'resetConfirm' && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) setActiveModal(null);
-          }}
-        >
-          <div
-            ref={modalRef}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={resetTitleId}
-            tabIndex={-1}
-            className="relative w-full max-w-sm bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-6 text-center space-y-4 outline-none"
-          >
-            <div className="w-12 h-12 mx-auto rounded-full bg-rose-100 dark:bg-rose-950 text-rose-600 flex items-center justify-center">
-              <AlertTriangle className="w-6 h-6" />
-            </div>
-
-            <div>
-              <h3 id={resetTitleId} className="text-base font-bold text-slate-900 dark:text-white">Reset All Calculator Data?</h3>
-              <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                This will erase all locally stored course rows, GPA terms, custom scales, and loan inputs. This action cannot be undone.
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveModal(null)}
-                className="px-4 py-2 text-xs font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl cursor-pointer"
-              >
-                Cancel
-              </button>
-
-              <button
-                type="button"
-                onClick={handleResetData}
-                className="px-4 py-2 text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 rounded-xl transition-all cursor-pointer shadow-xs active:scale-95"
-              >
-                Yes, Reset All
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
