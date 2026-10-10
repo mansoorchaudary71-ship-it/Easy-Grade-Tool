@@ -4,6 +4,18 @@ import { ToolKey } from '../types';
 import { SEO_HOME, SEO_ROUTES, SEO_STATIC_PAGES, RouteSeoConfig } from '../data/seoConfig';
 import { SEO } from './SEO';
 import { isSelfManagedSeoPath } from '../data/selfManagedSeo';
+import { TOOL_PATHS } from '../data/constants';
+import { normalizePath } from '../utils/paths';
+
+/** Paths this component supplies head tags for. Anything else (404s, redirect sources) gets none, so NotFound owns its own head. */
+const KNOWN_PATHS = new Set<string>([
+  ...Object.values(TOOL_PATHS).map(normalizePath),
+  '/about',
+  '/methodology',
+  '/about-methodology',
+  '/privacy',
+  '/privacy-policy',
+]);
 
 export interface SEOHeadProps {
   tool: ToolKey;
@@ -28,6 +40,10 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
 
   // Pages whose own component renders <SEO> (home and weighted grade included) must not get a second one.
   if (isSelfManagedSeoPath(cleanPath)) {
+    return null;
+  }
+
+  if (!KNOWN_PATHS.has(normalizePath(cleanPath))) {
     return null;
   }
 

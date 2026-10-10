@@ -1,21 +1,3 @@
-// Ensure window.fetch has both getter and setter to prevent TypeError in sandboxed/iframe environments
-if (typeof window !== 'undefined') {
-  try {
-    const _origFetch = window.fetch ? window.fetch.bind(window) : undefined;
-    let _assignedFetch: any = null;
-    Object.defineProperty(window, 'fetch', {
-      get() {
-        return _assignedFetch || _origFetch;
-      },
-      set(fn) {
-        _assignedFetch = typeof fn === 'function' ? fn.bind(window) : fn;
-      },
-      configurable: true,
-      enumerable: true,
-    });
-  } catch (_) {}
-}
-
 import { StrictMode } from 'react';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
@@ -30,60 +12,50 @@ installPrintFocus();
 
 // Register the PWA service worker. A new version waits until the person accepts it: <UpdatePrompt /> listens
 // for this event and offers a "Reload" button, so code is never swapped mid-session.
-if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-  try {
-    const updateSW = registerSW({
-      immediate: true,
-      onOfflineReady() {},
-      onNeedRefresh() {
-        window.dispatchEvent(new CustomEvent('egt:sw-update', { detail: { apply: () => updateSW(true) } }));
-      },
-    });
-  } catch (err) {
-    console.warn('PWA service worker registration skipped in current environment:', err);
-  }
+if ('serviceWorker' in navigator) {
+  const updateSW = registerSW({
+    immediate: true,
+    onNeedRefresh() {
+      window.dispatchEvent(new CustomEvent('egt:sw-update', { detail: { apply: () => updateSW(true) } }));
+    },
+  });
 }
 
-const container = document.getElementById('root')!;
+/** Longest we wait for the current route's chunk before hydrating anyway. */
+const PRELOAD_TIMEOUT_MS = 1500;
+
+function preloadWithTimeout(pathname: string): Promise<void> {
+  const timeout = new Promise<void>((resolve) => window.setTimeout(resolve, PRELOAD_TIMEOUT_MS));
+  const preload = preloadForPath(pathname).then(
+    () => undefined,
+    () => undefined, // the Suspense fallback covers a failed or slow chunk
+  );
+  return Promise.race([preload, timeout]);
+}
 
 async function start() {
-  // Load the current route's chunk first so hydration finds it ready (no skeleton flash).
-  try {
-    await preloadForPath(window.location.pathname);
-  } catch {
-    /* fall through: Suspense fallback handles it */
-  }
+  const container = document.getElementById('root');
+  if (!container) return;
 
-// Seamlessly hydrate pre-rendered HTML if present (from SSG / pre-render),
-// otherwise fall back gracefully to client createRoot
-if (container.hasChildNodes()) {
-  try {
-    hydrateRoot(
-      container,
-      <StrictMode>
-        <App />
-      </StrictMode>,
-      {
-        onRecoverableError(error) {
-          // Suppress uncaught hydration mismatch error from breaking the page
-          console.warn('Hydration discrepancy handled gracefully:', error);
-        },
-      }
-    );
-  } catch {
-    createRoot(container).render(
-      <StrictMode>
-        <App />
-      </StrictMode>
-    );
-  }
-} else {
-  createRoot(container).render(
+  // Give the route chunk a short head start so hydration finds it ready, but never block on it.
+  await preloadWithTimeout(window.location.pathname);
+
+  const app = (
     <StrictMode>
       <App />
     </StrictMode>
   );
-}
+
+  if (container.hasChildNodes()) {
+    // Pre-rendered HTML is present: hydrate it. Mismatches are reported through onRecoverableError, not try/catch.
+    hydrateRoot(container, app, {
+      onRecoverableError(error) {
+        if (import.meta.env.DEV) console.warn('Hydration mismatch recovered:', error);
+      },
+    });
+  } else {
+    createRoot(container).render(app);
+  }
 }
 
-start();
+void start();

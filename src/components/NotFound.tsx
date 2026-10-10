@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from './SlashLink';
 import { Helmet } from '../utils/helmet';
 import { AlertCircle, ArrowLeft } from 'lucide-react';
 
 export const NotFound: React.FC = () => {
+  // A 404 has no canonical URL. Remove any canonical / og:url left in <head> by the page the visitor came from.
+  useEffect(() => {
+    document.head.querySelectorAll('link[rel="canonical"], meta[property="og:url"]').forEach((el) => el.remove());
+  }, []);
+
   return (
     <div className="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans">
       <Helmet>

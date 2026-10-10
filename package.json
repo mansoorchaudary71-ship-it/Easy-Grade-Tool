@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "start": "node server.ts",
+    "start": "tsx server.ts",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist --dotfiles",
     "build": "tsx scripts/verify-academic-math.ts && tsx scripts/verify-scale-pages.ts && vite build && tsx scripts/prerender.ts && tsx scripts/generateSitemap.ts && tsx scripts/write-build-info.ts",
@@ -18,7 +18,7 @@
     "prerender": "tsx scripts/prerender.ts",
     "sitemap": "tsx scripts/generateSitemap.ts",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "clean": "node -e \"for (const f of ['dist','server.js']) require('fs').rmSync(f,{recursive:true,force:true})\"",
     "lint": "tsc --noEmit",
     "verify:math": "tsx scripts/verify-academic-math.ts && tsx scripts/verify-scale-pages.ts"
   },
@@ -56,5 +56,8 @@
     "tailwindcss": "4.3.3",
     "typescript": "7.0.2",
     "vite-plugin-pwa": "1.3.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }

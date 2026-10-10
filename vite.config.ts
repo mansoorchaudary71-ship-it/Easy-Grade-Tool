@@ -46,6 +46,8 @@ export default defineConfig({
         description: 'Free grade calculators for students and teachers: quick grade chart, weighted grades, final exam score, test grade, curve, letter grade, GPA and CGPA.',
         theme_color: '#F3F4F6',
         background_color: '#ffffff',
+        lang: 'en-US',
+        dir: 'ltr',
         display: 'standalone',
         display_override: ['standalone', 'window-controls-overlay', 'minimal-ui'],
         orientation: 'any',
@@ -93,6 +95,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2,json}'],
+        // Crawler/social assets and the many prerendered scale pages are not needed for the offline app shell.
+        globIgnores: ['og-cards/**', 'images/**', 'grading-scale/**', '404.html', '500.html'],
         navigateFallback: `${base}index.html`,
         navigateFallbackDenylist: [
           /^\/api/,
@@ -136,24 +140,9 @@ export default defineConfig({
               },
             },
           },
-          // Static JS & CSS bundles: Stale-While-Revalidate
-          {
-            urlPattern: /\.(?:js|css)$/i,
-            handler: 'StaleWhileRevalidate',
-            options: {
-              cacheName: 'v2-easygradetool-static-bundles',
-              expiration: {
-                maxEntries: 60,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
           // Local Self-Hosted Fonts: CacheFirst for optimal performance
           {
-            urlPattern: /\/fonts\/.*\.(?:woff|woff2|ttf|eot)$/i,
+            urlPattern: ({ url, sameOrigin }) => sameOrigin && /\/fonts\/.*\.(?:woff|woff2|ttf|eot)$/i.test(url.pathname),
             handler: 'CacheFirst',
             options: {
               cacheName: 'v2-easygradetool-fonts',
@@ -168,7 +157,7 @@ export default defineConfig({
           },
           // Images and icons cache (Stale-While-Revalidate)
           {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
+            urlPattern: ({ url, sameOrigin }) => sameOrigin && /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i.test(url.pathname),
             handler: 'StaleWhileRevalidate',
             options: {
               cacheName: 'v2-easygradetool-images',

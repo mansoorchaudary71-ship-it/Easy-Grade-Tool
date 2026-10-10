@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef, Suspense } from 'react';
 import {
   Routes,
   Route,
@@ -24,6 +24,7 @@ import { LEGACY_REDIRECTS } from './data/legacyRedirects';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
 import { preloadAllTools } from './utils/toolPreloader';
+import { normalizePath } from './utils/paths';
 import {
   LazyGpa, LazyCgpa, LazyTip, LazyPercentage, LazyLoan, LazyMortgage, LazyPassword,
   LazyPrivacy, LazyTerms, LazyAbout, LazyProgrammatic, LazyToolPage, LazyPalette,
@@ -86,21 +87,17 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   const CompProgrammatic = syncComponents?.ProgrammaticCalculatorView || LazyProgrammatic;
 
   // Derive active tool dynamically from URL pathname with immediate local state sync
-  const pathTool = getToolKeyFromPath(location.pathname);
-  const [activeTool, setActiveTool] = useState<ToolKey>(pathTool);
+  const activeTool: ToolKey = useMemo(() => getToolKeyFromPath(location.pathname), [location.pathname]);
 
-  useEffect(() => {
-    setActiveTool(pathTool);
-  }, [pathTool]);
-
-  const isProgrammaticRoute =
-    isSelfManagedSeoPath(location.pathname) ||
-    location.pathname.startsWith('/easy-grade-calculator/') ||
-    location.pathname.startsWith('/calculator/') ||
-    location.pathname.startsWith('/about') ||
-    location.pathname.startsWith('/privacy') ||
-    location.pathname.startsWith('/terms') ||
-    location.pathname.startsWith('/methodology');
+  // Segment-boundary match: '/about' and '/about/x' qualify, '/about-us-fake' does not.
+  const isProgrammaticRoute = useMemo(() => {
+    const path = normalizePath(location.pathname);
+    const underPrefix = (prefix: string) => path === prefix || path.startsWith(`${prefix}/`);
+    return (
+      isSelfManagedSeoPath(location.pathname) ||
+      ['/easy-grade-calculator', '/calculator', '/about', '/privacy', '/terms', '/methodology'].some(underPrefix)
+    );
+  }, [location.pathname]);
 
   // Restore deep link route from GitHub Pages SPA 404 redirect if present
   useEffect(() => {
@@ -188,7 +185,6 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
 
   const handleSelectTool = useCallback(
     (tool: ToolKey) => {
-      setActiveTool(tool);
       const targetPath = TOOL_PATHS[tool] || '/grade-calculator';
       navigate(targetPath);
       window.scrollTo({ top: 0, behavior: 'instant' });

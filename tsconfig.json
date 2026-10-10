@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "experimentalDecorators": true,
-    "useDefineForClassFields": false,
     "module": "ESNext",
-    "types": ["vite/client", "vite-plugin-pwa/client"],
+    "types": [
+      "vite/client",
+      "vite-plugin-pwa/client"
+    ],
     "lib": [
       "ES2022",
       "DOM",
@@ -14,7 +15,6 @@
     "moduleResolution": "bundler",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "allowJs": true,
     "jsx": "react-jsx",
     "paths": {
       "@/*": [
@@ -24,6 +24,13 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "include": ["src", "scripts", "vite.config.ts"],
-  "exclude": ["node_modules", "dist", "quick-grade-updated-files", "fixed-2-files-v2", "quick-grade", "nav", "seo", "offline"]
+  "include": [
+    "src",
+    "scripts",
+    "vite.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

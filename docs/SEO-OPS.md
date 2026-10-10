@@ -30,3 +30,12 @@ Footer contact/subscribe forms need a relay on static hosting. Create a Formspre
 ## 5. Not built on purpose
 - AP / AP World / AP Stats calculators: they need official, yearly-changing score-conversion tables. Add only with a sourced table and a verification date.
 - Fake ratings/reviews schema, and FAQ/HowTo "rich result" tricks: Google stopped showing HowTo rich results in 2023 and limits FAQ rich results to a few site types. FAQPage markup is kept (valid, harmless, helps other engines) but do not expect SERP decoration from it.
+
+## Security headers on GitHub Pages (C6)
+
+GitHub Pages does not read `public/_headers`, so the live site sends no Content-Security-Policy, X-Frame-Options or Permissions-Policy header. Two options:
+
+1. Put Cloudflare (or another CDN) in front of the domain and mirror `public/_headers` as response header rules.
+2. Add a `<meta http-equiv="Content-Security-Policy">` tag. This covers script, style and connect sources but not `frame-ancestors`, which browsers ignore in meta tags.
+
+The inline `<style>` block in `Footer.tsx` would need `'unsafe-inline'` under a strict policy. Moving it to a stylesheet (finding B13) removes that need.

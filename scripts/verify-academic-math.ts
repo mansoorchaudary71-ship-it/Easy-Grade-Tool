@@ -24,6 +24,7 @@ import { solveFinalExam } from '../src/utils/finalExam';
 import {
   buildQuickChart,
   calculateMultiAssessmentGrade,
+  gradeOneStudent,
   validateQuestionCount,
   validateWrongCount,
 } from '../src/utils/gradeCalculations';
@@ -174,6 +175,24 @@ eq('cgpa path', getToolKeyFromPath('/cgpa-to-percentage-calculator/'), 'cgpa');
 eq('weighted path stays quick', getToolKeyFromPath('/grade-calculator/'), 'quick');
 eq('future slug not mis-themed', getToolKeyFromPath('/multiple-choice-grader/'), 'quick');
 eq('tip path', getToolKeyFromPath('/tip-calculator'), 'tip');
+
+// B14: edge cases that must never produce NaN or nonsense
+const g0 = gradeOneStudent(0, 0, 1, SCALE_STANDARD);
+eq('gradeOneStudent: total 0 is not NaN', [g0.percentage, g0.formattedPercentage, g0.correct], [0, '0.0', 0]);
+eq('gradeOneStudent: wrong above total clamps', gradeOneStudent(25, 30, 1, SCALE_STANDARD).correct, 0);
+eq('gradeOneStudent: negative wrong clamps', gradeOneStudent(25, -3, 1, SCALE_STANDARD).percentage, 100);
+eq('gradeOneStudent: 3 of 25 wrong = 88.0', gradeOneStudent(25, 3, 1, SCALE_STANDARD).formattedPercentage, '88.0');
+eq('parseStrictNumber rejects negatives', parseStrictNumber('-5'), null);
+eq('parseStrictNumber rejects thousands separators', parseStrictNumber('1,234.5'), null);
+eq('parseStrictNumber rejects exponent form', parseStrictNumber('1e3'), null);
+eq('parseStrictNumber trims spaces', parseStrictNumber(' 12 '), 12);
+eq('final exam: weight 0 is invalid', solveFinalExam({ current: 90, target: 80, weight: 0 }).status, 'invalid');
+eq('final exam: weight above 100 is invalid', solveFinalExam({ current: 90, target: 80, weight: 101 }).status, 'invalid');
+eq('final exam: weight 100 uses the exam alone', solveFinalExam({ current: 90, target: 80, weight: 100 }).status, 'ok');
+eq('final exam: target above reach is unreachable', solveFinalExam({ current: 90, target: 120, weight: 20 }).status, 'unreachable');
+eq('final exam: already secured', solveFinalExam({ current: 100, target: 80, weight: 20 }).status, 'secured');
+eq('final exam: 100 current, 90 target, 20% weight needs a 50', solveFinalExam({ current: 100, target: 90, weight: 20 }).status, 'ok');
+eq('final exam: blank current is invalid', solveFinalExam({ current: '', target: 90, weight: 20 }).status, 'invalid');
 
 if (failed) {
   console.error(`\n${failed} check(s) failed`);

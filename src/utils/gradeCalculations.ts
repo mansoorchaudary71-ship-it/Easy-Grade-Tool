@@ -122,10 +122,21 @@ export function buildQuickChart(opts: QuickChartOptions): QuickChartRow[] {
 
 /** One student: percent and letter for a wrong-answer count. */
 export function gradeOneStudent(total: number, wrong: number, decimals: DecimalPrecision, bands: LetterBand[]) {
-  const raw = Math.max(0, Math.min(100, ((total - wrong) / total) * 100));
+  // Callers validate input first (validateQuestionCount / validateWrongCount). This guard keeps the function
+  // total-safe on its own: a zero or invalid total can never produce NaN, and "correct" is never negative.
+  if (!Number.isFinite(total) || total <= 0) {
+    return {
+      correct: 0,
+      percentage: 0,
+      formattedPercentage: (0).toFixed(decimals),
+      letter: letterForDisplayed(0, bands, decimals).letter,
+    };
+  }
+  const wrongClamped = Number.isFinite(wrong) ? Math.max(0, Math.min(total, wrong)) : 0;
+  const raw = Math.max(0, Math.min(100, ((total - wrongClamped) / total) * 100));
   const percentage = roundTo(raw, decimals);
   return {
-    correct: total - wrong,
+    correct: total - wrongClamped,
     percentage,
     formattedPercentage: percentage.toFixed(decimals),
     letter: letterForDisplayed(raw, bands, decimals).letter,
