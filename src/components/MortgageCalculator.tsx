@@ -9,6 +9,7 @@ import { SEO_ROUTES } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 
 interface MortgageCalculatorProps {
@@ -140,8 +141,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
       </div>
 
       {/* Optimized Educational & SEO Content for Mortgage Calculator */}
-      <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4" aria-labelledby="mortgage-guide-title">
-        <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="mortgage-guide-title">
           <h2
             id="mortgage-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
@@ -350,12 +350,9 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
             Once you have received multiple loan offers, it&apos;s critical to meticulously compare them to identify the most advantageous mortgage. Focus on the <strong className="font-semibold text-gray-900 dark:text-gray-100">interest rate, the total loan amount, and the overall monthly payment, using a mortgage calculator to determine the long-term cost of each option</strong>, including how much interest you will pay over the life of the loan. This comprehensive comparison will empower you to make an informed investment decision for your home.
           </p>
-        </article>
-      </section>
+        </ContentSection>
 
-      <section aria-label="Mortgage Frequently Asked Questions" className="w-full max-w-4xl mx-auto my-12 px-4">
-        <FAQ tool="mortgage" />
-      </section>
+      <FAQ tool="mortgage" />
     </>
   );
 };

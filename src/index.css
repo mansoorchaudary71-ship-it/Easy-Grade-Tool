@@ -6723,3 +6723,124 @@ input[type="number"]:focus {
     display: none !important;
   }
 }
+
+
+/* =====================================================================
+   UNIFORM CONTENT + FAQ SECTIONS (all tools)
+   One frame (.guide-shell > .guide-card) and one type scale shared by the
+   Content section (ContentSection) and the FAQ section (FAQ.tsx).
+   Defined last and with higher specificity than the legacy .seo-content /
+   .seo-article rules (which Terms / Privacy still use) so it always wins.
+   ===================================================================== */
+.guide-shell,
+.seo-content.guide-shell {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 56rem;            /* 896px, centred on every screen size */
+  margin: 5rem auto 0;
+  padding: 0;
+  border-top: 0;
+}
+
+/* FAQ follows the Content card, so it sits a little closer and owns the page-bottom gap */
+.faq-section.guide-shell {
+  margin: 3rem auto 3rem;
+}
+
+.guide-card,
+.guide-card.seo-article {
+  --g-title: clamp(1.625rem, 1.35rem + 0.9vw, 1.875rem);
+  --g-h2: 1.5rem;
+  --g-h3: 1.0625rem;
+  --g-body: 0.9375rem;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 1.25rem 1rem;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--card-border) / 0.85);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+  font-family: inherit;
+}
+
+@media (min-width: 640px) {
+  .guide-card,
+  .guide-card.seo-article {
+    padding: 2.25rem 2.5rem;
+  }
+}
+
+/* ---- Titles (Content title + FAQ title are identical) ---- */
+.guide-card.seo-article h2[id$="-title"],
+.guide-card.seo-article h2[id$="-heading"],
+.guide-card .faq-title {
+  margin: 0 0 1.25rem;
+  font-size: var(--g-title);
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: hsl(var(--foreground));
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---- Content typography ---- */
+.guide-card.seo-article h2 {
+  margin: 2rem 0 0.75rem;
+  font-size: var(--g-h2);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: hsl(var(--foreground));
+}
+
+.guide-card.seo-article h3 {
+  margin: 1.5rem 0 0.5rem;
+  font-size: var(--g-h3);
+  line-height: 1.35;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+.guide-card.seo-article p,
+.guide-card.seo-article ol,
+.guide-card.seo-article ul {
+  font-size: var(--g-body);
+  line-height: 1.75;
+  color: hsl(var(--muted-foreground));
+}
+
+.guide-card.seo-article ul,
+.guide-card.seo-article ol {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0 0 1.125rem;
+  padding-left: 1.375rem;
+}
+
+.guide-card.seo-article ul { list-style: disc outside; }
+.guide-card.seo-article ol { list-style: decimal outside; }
+.guide-card.seo-article ul li::marker { color: hsl(var(--tool-primary)); }
+
+/* ---- FAQ typography (same scale as the content above) ---- */
+.guide-card .faq-desc {
+  margin: 0.5rem 0 0;
+  max-width: 42rem;
+  font-size: var(--g-body);
+  line-height: 1.6;
+  color: hsl(var(--muted-foreground));
+}
+
+.guide-card .faq-q {
+  font-size: var(--g-h3);
+  line-height: 1.35;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+}
+
+.guide-card .faq-a {
+  font-size: var(--g-body);
+  line-height: 1.75;
+  color: hsl(var(--muted-foreground));
+}

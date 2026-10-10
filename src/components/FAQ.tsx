@@ -618,13 +618,14 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
       )}
 
       <section
-        className={`faq-section mt-10 pt-8 border-t border-slate-200 dark:border-slate-800 ${className}`}
+        className={`faq-section guide-shell ${className}`.trim()}
         aria-labelledby={`${baseId}-faq-title`}
         itemScope
         itemType="https://schema.org/FAQPage"
       >
+        <div className="guide-card font-sans">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-5">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono mb-1">
               <HelpCircle className="w-4 h-4" aria-hidden="true" />
@@ -632,11 +633,11 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
             </div>
             <h2
               id={`${baseId}-faq-title`}
-              className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight"
+              className="faq-title"
             >
               {config.title}
             </h2>
-            <p className="text-sm font-medium text-slate-600 dark:text-slate-300 mt-1 max-w-xl">
+            <p className="faq-desc">
               {config.description}
             </p>
           </div>
@@ -703,7 +704,7 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
                   itemScope
                   itemProp="mainEntity"
                   itemType="https://schema.org/Question"
-                  className={`overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-white/60 dark:border-slate-800/60 shadow-sm rounded-2xl mb-3 transition-all hover:shadow-md ${
+                  className={`overflow-hidden bg-slate-50/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 shadow-xs rounded-2xl mb-3 transition-all hover:shadow-md ${
                     isOpen
                       ? 'ring-2 ring-teal-500/20 dark:ring-teal-500/20 border-teal-500/30 dark:border-teal-500/30'
                       : ''
@@ -719,7 +720,7 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
                   >
                     <span
                       itemProp="name"
-                      className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight"
+                      className="faq-q tracking-tight"
                     >
                       {item.question}
                     </span>
@@ -745,7 +746,7 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
                   >
                     <div
                       itemProp="text"
-                      className="px-5 pb-5 pt-1 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/80"
+                      className="faq-a px-5 pb-5 pt-3 border-t border-slate-100 dark:border-slate-800/80"
                     >
                       {item.answer}
                     </div>
@@ -757,7 +758,7 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
         </div>
 
         {/* Helpful User Support Footer Card */}
-        <div className="mt-8 p-5 sm:p-6 bg-gradient-to-r from-white/90 to-slate-50/85 dark:from-slate-900/90 dark:to-slate-950/85 backdrop-blur-xl border border-white/80 dark:border-slate-800/80 rounded-3xl shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="mt-8 p-5 sm:p-6 bg-slate-50/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-slate-900 text-white dark:bg-white dark:text-slate-900 flex items-center justify-center shrink-0 shadow-md shadow-slate-900/20">
               <Sparkles className="w-5 h-5" aria-hidden="true" />
@@ -779,6 +780,7 @@ export const FAQ: React.FC<FAQProps> = ({ tool = 'quick', items, className = '',
           >
             Back to Top Calculator ↑
           </button>
+        </div>
         </div>
       </section>
     </>

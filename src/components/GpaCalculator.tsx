@@ -13,6 +13,7 @@ import { SEO_ROUTES } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 
 interface GpaCalculatorProps {
   setToast?: (msg: string) => void;
@@ -470,8 +471,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
       </div>
 
       {/* Optimized Educational & SEO Content for GPA Calculator */}
-      <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16" aria-labelledby="gpa-guide-title">
-        <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="gpa-guide-title">
           <h2
             id="gpa-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
@@ -646,13 +646,10 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
               Open CGPA to % Calculator &rarr;
             </Link>
           </div>
-        </article>
-      </section>
+        </ContentSection>
 
       {!hideSeo && (
-        <section aria-label="GPA Frequently Asked Questions" className="w-full max-w-4xl mx-auto my-12 px-4">
-          <FAQ tool="gpa" />
-        </section>
+        <FAQ tool="gpa" />
       )}
     </>
   );

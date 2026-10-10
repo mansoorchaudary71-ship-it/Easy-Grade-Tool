@@ -1,6 +1,7 @@
 import React from 'react';
 import { TOOL_GUIDE_CONTENT, ToolGuideKey, GuideRun, GuideBlock } from '../data/toolGuideContent';
 import { SemanticGuideImage } from './SemanticGuideImage';
+import { ContentSection } from './GuideShell';
 
 /** Same type scale as the homepage / weighted guide (QuickGradeGuide.tsx, EducationalGuide.tsx). */
 const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight';
@@ -62,12 +63,7 @@ export const ToolContentGuide: React.FC<ToolContentGuideProps> = ({ guide }) => 
   };
 
   return (
-    <section
-      className="seo-content w-full max-w-4xl mx-auto content-auto print:hidden"
-      aria-labelledby={titleId}
-      data-tool-guide={guide}
-    >
-      <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+    <ContentSection labelledBy={titleId} guide={guide}>
         <div>
           <h2 id={titleId} className={H2_MAIN}>{title}</h2>
           <div className="my-6">
@@ -76,8 +72,7 @@ export const ToolContentGuide: React.FC<ToolContentGuideProps> = ({ guide }) => 
           {lead && lead.t === 'p' && <p className={P}><Runs runs={lead.runs} /></p>}
         </div>
         {remaining.map(renderBlock)}
-      </article>
-    </section>
+    </ContentSection>
   );
 };
 

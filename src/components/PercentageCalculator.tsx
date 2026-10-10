@@ -8,6 +8,7 @@ import { SEO_ROUTES } from '../data/seoConfig';
 import { GUIDE_IMAGES } from '../data/guideImages';
 import { SemanticGuideImage } from './SemanticGuideImage';
 import { FAQ } from './FAQ';
+import { ContentSection } from './GuideShell';
 
 interface PercentageCalculatorProps {
   setToast?: (msg: string) => void;
@@ -198,8 +199,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
       </div>
 
       {/* Optimized Educational & SEO Content for Percentage Calculator */}
-      <section className="seo-content w-full max-w-4xl mx-auto mt-12 mb-16 px-4" aria-labelledby="percentage-guide-title">
-        <article className="seo-article bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 border border-white/80 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+      <ContentSection labelledBy="percentage-guide-title">
           <h2
             id="percentage-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
@@ -359,12 +359,9 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Beyond basic percentage calculations, understanding how to convert values into decimal form can enhance your analytical skills and help you express a number in different formats, including fractions and percentages. <strong className="font-semibold text-slate-900 dark:text-white">Various specialized percentage calculators exist to address academic, dining, and financial needs.</strong> For academic scoring, explore our <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Easy Grade Chart</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, and <Link to="/cgpa-to-percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>; or use our <Link to="/tip-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Tip Calculator</Link> for restaurant gratuity percentages.
           </p>
-        </article>
-      </section>
+        </ContentSection>
 
-      <section aria-label="Percentage Frequently Asked Questions" className="w-full max-w-4xl mx-auto my-12 px-4">
-        <FAQ tool="percentage" />
-      </section>
+      <FAQ tool="percentage" />
     </>
   );
 };
