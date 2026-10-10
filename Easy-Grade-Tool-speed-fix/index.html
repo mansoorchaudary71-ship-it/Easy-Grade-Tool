@@ -13,6 +13,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Easy Grade Tool" />
+    <!-- Reload always starts from the home page (Quick Grade). Runs before anything renders, so there is no flash of another page. -->
+    <script>
+      (function () {
+        try {
+          var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+          var isReload = nav ? nav.type === 'reload' : (performance.navigation && performance.navigation.type === 1);
+          if (isReload && location.pathname !== '/') location.replace('/');
+        } catch (e) {}
+      })();
+    </script>
     <!-- Apply the saved/system theme BEFORE first paint so dark-mode visitors never see a white flash. -->
     <script>
       (function () {

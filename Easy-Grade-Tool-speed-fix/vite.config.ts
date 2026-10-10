@@ -104,6 +104,10 @@ export default defineConfig({
         ],
         globIgnores: ['og-cards/**', 'images/**', '**/node_modules/**'],
         navigateFallback: `${base}index.html`,
+        // Only the home page may fall back to the cached shell. Without this, the service worker answered EVERY
+        // page request (e.g. /gpa-calculator/) with the pre-rendered HOME page first, which then switched to the
+        // real page once the JavaScript loaded. That was the "home flashes first" bug.
+        navigateFallbackAllowlist: [/^\/$/],
         navigateFallbackDenylist: [
           /^\/api/,
           /^\/easy-grade-calculator(\/|$)/i,
