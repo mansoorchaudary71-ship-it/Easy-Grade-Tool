@@ -37,6 +37,18 @@ check('every page has at least 3 FAQs and 2 sections', TOOL_PAGE_LIST.every((e) 
 check('every size has a page', GRADING_SCALE_SIZES.every((n) => !!TOOL_PAGES[`grading-scale/${n}-questions`]));
 check('page paths match slugs', TOOL_PAGE_LIST.every((e) => e.path === `/${e.slug}/`));
 
+// The launch audit (CHK-10) rejects identical FAQ answers on different pages, so catch that here first.
+const faqAnswers = new Map<string, string>();
+const dupFaqs: string[] = [];
+for (const e of TOOL_PAGE_LIST) {
+  for (const f of e.faqs) {
+    const a = f.answer.replace(/\s+/g, ' ').trim();
+    if (faqAnswers.has(a)) dupFaqs.push(`${e.slug} = ${faqAnswers.get(a)} ("${a.slice(0, 40)}...")`);
+    else faqAnswers.set(a, e.slug);
+  }
+}
+check('no FAQ answer is repeated on another page', dupFaqs.length === 0, dupFaqs.slice(0, 3).join('; '));
+
 const sitemapPaths = new Set(SITEMAP_VARIATIONS.map((s) => s.path));
 check('every generated page is in the sitemap list', TOOL_PAGE_LIST.every((e) => sitemapPaths.has(e.path)), TOOL_PAGE_LIST.filter((e) => !sitemapPaths.has(e.path)).map((e) => e.path).join(', '));
 check('sitemap has no redirect sources', Object.keys(LEGACY_REDIRECTS).every((from) => !sitemapPaths.has(from.endsWith('/') ? from : `${from}/`)));

@@ -6171,11 +6171,11 @@ input[type="number"]:focus {
     text-shadow: none !important;
   }
 
-  .result-panel .bg-[#E6F2EE],
-  .result-panel .bg-[#E8EEFF],
-  .result-panel .bg-[#FFF5E5],
-  .result-panel .bg-[#F8F9FA],
-  .result-panel .bg-[#E8F3F1] {
+  .result-panel .bg-\[\#E6F2EE\],
+  .result-panel .bg-\[\#E8EEFF\],
+  .result-panel .bg-\[\#FFF5E5\],
+  .result-panel .bg-\[\#F8F9FA\],
+  .result-panel .bg-\[\#E8F3F1\] {
     background: #f8fafc !important;
     border: 1px solid #cbd5e1 !important;
     box-shadow: none !important;

@@ -97,7 +97,7 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     },
     {
       question: `How many questions can I get wrong on a ${n}-question test and still get an A?`,
-      answer: `On the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
+      answer: `On a ${n}-question test with the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
     },
     {
       question: `What grade is ${faqWrong} wrong out of ${n}?`,
@@ -106,8 +106,8 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     {
       question: `Can I give partial credit on a ${n}-question test?`,
       answer: half
-        ? `Yes. Turn on half points in the Quick Grade calculator and a half-credit answer counts as ${fmt(p / 2, 3)}% instead of ${fmt(p, 3)}%. The chart on this page uses whole questions only.`
-        : 'Use a points-based calculation for partial credit: add the points earned on every question, divide by the points possible and multiply by 100.',
+        ? `Yes. On a ${n}-question test, turn on half points in the Quick Grade calculator and a half-credit answer counts as ${fmt(p / 2, 3)}% instead of ${fmt(p, 3)}%. The chart on this page uses whole questions only.`
+        : `For partial credit on a ${n}-question test, use a points-based calculation: add the points earned on every question, divide by the points possible and multiply by 100.`,
     },
   ];
 
