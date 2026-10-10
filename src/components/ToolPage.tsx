@@ -8,9 +8,6 @@ import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
-import { AverageGradeTool } from './tools/AverageGradeTool';
-import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
-import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
 import { ToolGuideKey } from '../data/toolGuideContent';
@@ -19,8 +16,6 @@ const TOOLS: Record<ToolPageSlug, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
   'grade-curve-calculator': GradeCurveTool,
   'letter-grade-calculator': LetterGradeTool,
-  'average-grade-calculator': AverageGradeTool,
-  'grading-scale': GradingScaleIndexTool,
 };
 
 const GUIDES: Record<ToolPageSlug, ToolGuideKey> = {
@@ -33,73 +28,12 @@ export interface ToolPageProps {
   slug: ToolPageSlug;
 }
 
-const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight';
-const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight';
-const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-
-/**
- * Written content for pages that are generated from data (average grade, grading-scale hub and the
- * per-size charts). Renders the page's own sections and its worked example as real, crawlable HTML
- * inside the main content area, so the page is never just a form.
- */
-const EntryContent: React.FC<{ entry: (typeof TOOL_PAGES)[string] }> = ({ entry }) => {
-  const titleId = `${entry.slug.replace(/\//g, '-')}-content-title`;
-  const exampleId = `${entry.slug.replace(/\//g, '-')}-example-title`;
-  return (
-    <>
-      <section className="seo-content guide-shell" aria-labelledby={titleId} data-tool-guide={entry.slug}>
-        <article className="seo-article guide-card font-sans">
-          <h2 id={titleId} className={H2_MAIN}>{entry.h1}: how it works</h2>
-          {entry.sections.map((section) => (
-            <React.Fragment key={section.heading}>
-              <h3 className={H2}>{section.heading}</h3>
-              {section.paragraphs.map((para, i) => (
-                <p key={i} className={P}>{para}</p>
-              ))}
-              {section.bullets && section.bullets.length > 0 && (
-                <ul className={UL}>
-                  {section.bullets.map((b, i) => (
-                    <li key={i}>{b}</li>
-                  ))}
-                </ul>
-              )}
-            </React.Fragment>
-          ))}
-        </article>
-      </section>
-
-      <section className="seo-content guide-shell" aria-labelledby={exampleId}>
-        <article className="seo-article guide-card font-sans">
-          <h2 id={exampleId} className={H2_MAIN}>{entry.example.heading}</h2>
-          <p className={P}>{entry.example.scenario}</p>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left">
-              <tbody>
-                {entry.example.rows.map((row) => (
-                  <tr key={row.label} className="border-b border-slate-200 dark:border-slate-800">
-                    <th scope="row" className="py-2 pr-4 font-semibold text-slate-800 dark:text-slate-100">{row.label}</th>
-                    <td className="py-2 text-slate-600 dark:text-slate-300">{row.value}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className={`${P} mt-4`}>{entry.example.takeaway}</p>
-        </article>
-      </section>
-    </>
-  );
-};
-
 const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
-  const ToolComponent = TOOLS[slug];
-  // /grading-scale/N-questions/ pages share one chart component, driven by the entry's question count.
-  const guideKey = GUIDES[slug];
+  const Tool = TOOLS[slug];
   // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
   const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));
 
@@ -121,10 +55,10 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       </header>
 
       <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
-        {ToolComponent ? <ToolComponent /> : entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : null}
+        <Tool />
       </section>
 
-      {guideKey ? <ToolContentGuide guide={guideKey} /> : <EntryContent entry={entry} />}
+      <ToolContentGuide guide={GUIDES[slug]} />
 
       <FAQ tool="quick" items={faqItems} heading={PAGE_FAQ_HEADINGS[slug]} />
 
