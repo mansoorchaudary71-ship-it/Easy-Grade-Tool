@@ -48,11 +48,11 @@
 
 /* 5. Secondary / chip buttons: lift and turn brand colour on hover */
 @media (hover: hover) {
-  .premium-surface .preset-btn:not([aria-pressed="true"]):hover {
+  .premium-surface .preset-btn:not([aria-pressed="true"]):not(.text-white):hover {
     translate: 0 -2px;
     color: rgb(61 71 107);
   }
-  .dark .premium-surface .preset-btn:not([aria-pressed="true"]):hover {
+  .dark .premium-surface .preset-btn:not([aria-pressed="true"]):not(.text-white):hover {
     color: rgb(138 152 196);
   }
 }

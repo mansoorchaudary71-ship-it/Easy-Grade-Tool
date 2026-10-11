@@ -1005,21 +1005,25 @@ h1 {
   border-radius: 9999px !important;
 }
 
-.preset-btn:not(.active):not([data-active="true"]) {
+.preset-btn:not(.active):not([data-active="true"]):not(.text-white) {
   background-color: var(--color-stone-100, #f5f5f4);
   color: var(--color-stone-600, #57534e);
   border: 1px solid var(--color-stone-200, #e7e5e4);
   border-radius: 9999px !important;
 }
 
-.preset-btn:not(.active):not([data-active="true"]):hover {
+.preset-btn:not(.active):not([data-active="true"]):not(.text-white):hover {
   background-color: var(--color-stone-200, #e7e5e4);
 }
 
-/* Selected preset chip (10 / 20 / 25 / 50 / 100): white text on the brand pill */
-.preset-btn[aria-pressed="true"]:not(.active):not([data-active="true"]),
-.preset-btn[aria-pressed="true"]:not(.active):not([data-active="true"]):hover {
-  color: #ffffff;
+/* Selected preset chips (Quick Grade 10/20/25/50/100, CGPA, GPA to %, Tip %): white text.
+   Selected chips are marked by aria-pressed or already carry text-white, so the grey
+   "unselected" rules above skip them and the white text shows. */
+.preset-btn[aria-pressed="true"],
+.preset-btn[aria-pressed="true"]:hover,
+.preset-btn.text-white,
+.preset-btn.text-white:hover {
+  color: #ffffff !important;
 }
 
 /* Action Buttons (Uniform Pill Styling) */
