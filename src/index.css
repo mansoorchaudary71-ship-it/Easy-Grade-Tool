@@ -1016,6 +1016,12 @@ h1 {
   background-color: var(--color-stone-200, #e7e5e4);
 }
 
+/* Selected preset chip (10 / 20 / 25 / 50 / 100): white text on the brand pill */
+.preset-btn[aria-pressed="true"]:not(.active):not([data-active="true"]),
+.preset-btn[aria-pressed="true"]:not(.active):not([data-active="true"]):hover {
+  color: #ffffff;
+}
+
 /* Action Buttons (Uniform Pill Styling) */
 .primary-action-btn,
 .btn-primary-pill {
