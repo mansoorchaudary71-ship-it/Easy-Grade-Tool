@@ -348,7 +348,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
         description="Use our free Loan Calculator to compute monthly payments, total loan cost, and principal vs. interest amortization across personal, auto, and student loan terms."
       />
 
-      <div className="relative tool-layout font-sans">
+      <div className="relative tool-layout font-sans" data-print-area data-print-title="Loan Payment Summary">
         <AmbientAura />
 
         {/* Exactly three inputs */}

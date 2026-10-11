@@ -6868,3 +6868,183 @@ input[type="number"]:focus {
   line-height: 1.75;
   color: hsl(var(--muted-foreground));
 }
+
+
+/* ==========================================================================
+   PROFESSIONAL PRINT LAYOUT (all print buttons / Ctrl+P)
+   Prints ONLY the marked tool area (data-print-area) as a clean A4 report:
+   title + date header, the inputs and results as plain black-on-white text,
+   no website chrome, no buttons, no decorative effects, no clipped scroll boxes.
+   Loaded last so it wins over the earlier print rules. Screen styles are untouched.
+   ========================================================================== */
+@page {
+  size: A4;
+  margin: 16mm 14mm 18mm;
+}
+
+@media print {
+  html, body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    font-size: 11pt;
+    line-height: 1.45;
+  }
+
+  /* 1. Header (title) and footer (site + print date). Only the outermost area gets them. */
+  [data-print-area]::before {
+    content: attr(data-print-title);
+    display: block;
+    font: 700 20pt/1.25 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #1b2038 !important;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2.5px solid #4c5985;
+    letter-spacing: -0.01em;
+  }
+  [data-print-area]::after {
+    content: "Easy Grade Tool \00B7  www.easygradetool.com  \00B7  Printed " attr(data-print-date);
+    display: block;
+    margin-top: 18px;
+    padding-top: 8px;
+    border-top: 1px solid #c7ccd9;
+    font: 9pt/1.4 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #5b6275 !important;
+    text-align: center;
+  }
+  [data-print-area] [data-print-area]::before,
+  [data-print-area] [data-print-area]::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* 2. Never clip: scroll boxes and fixed heights must expand so every row reaches the paper */
+  [data-print-area],
+  [data-print-area] * {
+    max-height: none !important;
+    overflow: visible !important;
+    transform: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* 3. Remove decorative layers and every control that makes no sense on paper */
+  [data-print-area] .contain-strict[aria-hidden="true"],
+  [data-print-area] .sr-only,
+  [data-print-area] [role="tablist"],
+  [data-print-area] [role="status"]:empty,
+  [data-print-area] .toast,
+  [data-print-area] .print\:hidden,
+  [data-print-area] [data-print-skip],
+  [data-print-area] input[type="range"] {
+    display: none !important;
+  }
+
+  /* 4. Buttons are hidden, EXCEPT the ones that are really content (score chips in the quick chart) */
+  [data-print-area] button.ez-score-item {
+    display: flex !important;
+    cursor: default;
+  }
+
+  /* 5. One clean column: inputs first, then results, instead of the 2-column screen layout */
+  [data-print-area].tool-layout,
+  [data-print-area] .tool-layout,
+  [data-print-area] .calculator-grid {
+    display: block !important;
+  }
+  [data-print-area].tool-layout > *,
+  [data-print-area] .tool-layout > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 14px !important;
+  }
+
+  /* 6. Cards: thin neutral outline, never split across pages when small */
+  [data-print-area] .tool-card,
+  [data-print-area] .result-panel,
+  [data-print-area] section[aria-label]:not([data-print-area]) {
+    border: 1px solid #d3d7e3 !important;
+    border-radius: 8px !important;
+    padding: 12px 14px !important;
+    break-inside: auto;
+  }
+  [data-print-area] .result-panel,
+  [data-print-area] .ez-score-item,
+  [data-print-area] .letter-group-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  [data-print-area] .ez-score-item {
+    border: 1px solid #d3d7e3 !important;
+    border-radius: 6px !important;
+    min-height: 0 !important;
+    padding: 5px 10px !important;
+    background: #fff !important;
+  }
+
+  /* 7. Form fields print as plain underlined values, not as web inputs */
+  [data-print-area] input:not([type="checkbox"]):not([type="radio"]),
+  [data-print-area] select,
+  [data-print-area] textarea {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    border: 0 !important;
+    border-bottom: 1px solid #c7ccd9 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 2px 4px !important;
+    font: inherit !important;
+    color: #111 !important;
+    text-align: left;
+  }
+  [data-print-area] select + svg,
+  [data-print-area] .lucide-chevron-down { display: none !important; }
+  [data-print-area] ::placeholder { color: transparent !important; }
+
+  /* 8. Tables: repeat header on every page, keep rows whole, light zebra */
+  [data-print-area] table { width: 100% !important; border-collapse: collapse; font-size: 10.5pt; }
+  [data-print-area] thead { display: table-header-group; }
+  [data-print-area] tfoot { display: table-footer-group; }
+  [data-print-area] tr { break-inside: avoid; page-break-inside: avoid; }
+  [data-print-area] th {
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 1.5px solid #4c5985 !important;
+    padding: 5px 8px;
+  }
+  [data-print-area] td { border-bottom: 1px solid #dfe2ec !important; padding: 4px 8px; }
+  [data-print-area] tbody tr:nth-child(even) td,
+  [data-print-area] tbody tr:nth-child(even) th { background-color: #f5f6fa !important; }
+
+  /* Quick chart: an unpaired last grade group (usually F, the longest) spans the full width,
+     lays its rows out in 4 columns and may flow onto the next page instead of leaving a gap */
+  #ez-print-section .space-y-6 > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+  #ez-print-section .space-y-6 > :last-child:nth-child(odd) .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  /* 9. Typography: strong hierarchy, readable on paper */
+  [data-print-area] h1, [data-print-area] h2, [data-print-area] h3 {
+    color: #1b2038 !important;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  [data-print-area] h2 { font-size: 14pt; margin: 0 0 6px; }
+  [data-print-area] h3 { font-size: 12pt; margin: 0 0 4px; }
+  [data-print-area] p { orphans: 3; widows: 3; }
+  [data-print-area] a { text-decoration: none; color: inherit !important; }
+  [data-print-area] svg { max-height: 1.1em; }
+  [data-print-area] .text-rose-600,
+  [data-print-area] .text-rose-700 { color: #b42318 !important; }
+}

@@ -532,7 +532,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
       )}
 
       {/* PART 1: MAIN CGPA TO PERCENTAGE CALCULATOR (Uniformed UI/UX Container) */}
-      <div className="relative tool-layout font-sans">
+      <div className="relative tool-layout font-sans" data-print-area data-print-title="CGPA to Percentage Conversion">
         <AmbientAura />
 
         {/* Left Column: Uniformed Inputs & Configuration Container */}

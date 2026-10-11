@@ -180,7 +180,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
         />
       )}
 
-      <div className="relative tool-layout font-sans">
+      <div className="relative tool-layout font-sans" data-print-area data-print-title="GPA Calculation Report">
         <AmbientAura />
 
         {/* Course Rows & Global Settings */}

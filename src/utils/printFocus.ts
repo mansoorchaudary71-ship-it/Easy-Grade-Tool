@@ -10,12 +10,19 @@ export function installPrintFocus(): void {
   if (typeof window === 'undefined') return;
   let hidden: HTMLElement[] = [];
   let active = false;
+  let printed: HTMLElement | null = null;
 
   const before = () => {
     if (active) return;
     active = true;
     const target = document.querySelector<HTMLElement>('[data-print-area]');
     if (!target) return;
+    // Printed date for the report footer (CSS reads it with attr(data-print-date)).
+    printed = target;
+    target.setAttribute(
+      'data-print-date',
+      new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' }),
+    );
     let node: HTMLElement | null = target;
     while (node && node !== document.body && node.parentElement) {
       for (const sib of Array.from(node.parentElement.children)) {
@@ -31,6 +38,8 @@ export function installPrintFocus(): void {
   const after = () => {
     hidden.forEach((el) => el.removeAttribute('data-print-hidden'));
     hidden = [];
+    printed?.removeAttribute('data-print-date');
+    printed = null;
     active = false;
   };
 

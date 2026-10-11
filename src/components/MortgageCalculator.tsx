@@ -43,7 +43,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
         description="Use our free Mortgage Calculator to estimate your monthly home loan payment, principal and interest split, and total interest paid over a 15-year or 30-year mortgage term."
       />
 
-      <div className="relative tool-layout font-sans">
+      <div className="relative tool-layout font-sans" data-print-area data-print-title="Mortgage Payment Summary">
         <AmbientAura />
 
         {/* Exactly three inputs */}
