@@ -173,7 +173,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
           aria-live="polite"
         >
           <div>
-            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
                 Each person pays
               </span>

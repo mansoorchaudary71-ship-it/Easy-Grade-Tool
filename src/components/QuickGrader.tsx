@@ -58,7 +58,7 @@ const STORAGE_KEY = 'egt:quick-grader:v1';
 const COMMON_QUESTION_PRESETS = [10, 20, 25, 50, 100];
 
 const BTN_SOLID =
-  'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 text-sm transition-all cursor-pointer active:scale-95';
+  'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 text-sm transition-all cursor-pointer active:scale-95';
 const BTN_SOFT =
   'inline-flex items-center justify-center gap-2 min-h-[48px] bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-5 py-3 text-sm transition-all cursor-pointer active:scale-[0.98]';
 const STEP_BTN =
@@ -88,7 +88,7 @@ const getBadgeClasses = (letter: string) => {
 const getTierWrapperClass = (letter: string) => {
   switch (familyOf(letter)) {
     case 'A':
-      return 'bg-[#DCE1EF] dark:bg-teal-950/55 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-4';
+      return 'bg-[#DBEAFE] dark:bg-teal-950/55 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[24px] p-4';
     case 'B':
       return 'bg-[#D6E1FF] dark:bg-indigo-950/55 border border-[#A5BCF0] dark:border-indigo-800/60 rounded-[24px] p-4';
     case 'C':
@@ -650,7 +650,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           </details>
 
           <div className="grid grid-cols-2 gap-3 pt-1">
-            <div className="bg-[#DCE1EF] dark:bg-teal-950/60 rounded-[20px] p-4 border border-[#B0BAD9] dark:border-teal-800/50 shadow-sm">
+            <div className="bg-[#DBEAFE] dark:bg-teal-950/60 rounded-[20px] p-4 border border-[#BFDBFE] dark:border-teal-800/50 shadow-sm">
               <span className="text-xs font-semibold text-slate-700 dark:text-teal-300 uppercase tracking-wider block">Each worth</span>
               <strong className="text-base font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">
                 {pointsPerQuestion.toFixed(pointsPerQuestion % 1 === 0 ? 0 : 2)}%
@@ -714,7 +714,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           role="status"
           aria-live="polite"
           aria-atomic="true"
-          className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm"
+          className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm"
         >
           {student ? (
             <div className="flex flex-wrap items-end justify-between gap-3">
@@ -810,7 +810,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         data-print-title={`Quick Grade Chart — ${total}-question test`}
       >
         <div>
-          <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[24px] p-5 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block mb-1">Scoring Output</span>
               <h2 className="text-xl sm:text-2xl font-bold text-teal-950 dark:text-teal-100 tracking-tight m-0">

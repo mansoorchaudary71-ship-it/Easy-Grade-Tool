@@ -50,16 +50,16 @@ export interface FooterProps {
 
 const FOOTER_PREMIUM_CSS = `
 .ft-news{position:relative;isolation:isolate;overflow:hidden;color:#fff;
-  background:linear-gradient(120deg,#16206b 0%,#2f4bb8 40%,#5b3fc4 75%,#2f4bb8 100%);background-size:220% 220%;
+  background:linear-gradient(120deg,#1E293B 0%,#1E293B 45%,#1e3a8a 100%);background-size:220% 220%;
   animation:ft-grad 16s ease-in-out infinite,ft-rise .7s cubic-bezier(.2,.8,.2,1) both;
-  box-shadow:0 30px 70px -24px rgba(40,60,170,.7),inset 0 0 0 1px rgba(255,255,255,.16)}
+  box-shadow:0 30px 70px -24px rgba(15,23,42,.75),inset 0 0 0 1px rgba(255,255,255,.1)}
 .ft-news::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
   background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
   background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%)}
 .ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
-.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(99,179,255,.45);animation:ft-drift 11s ease-in-out infinite}
-.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(236,110,190,.38);animation:ft-drift 14s ease-in-out infinite reverse}
-.ft-title-accent{background:linear-gradient(90deg,#fde68a,#fdba74 45%,#f9a8d4);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(37,99,235,.5);animation:ft-drift 11s ease-in-out infinite}
+.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(96,165,250,.28);animation:ft-drift 14s ease-in-out infinite reverse}
+.ft-title-accent{background:linear-gradient(90deg,#93c5fd,#bfdbfe 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .ft-float{animation:ft-float 6s ease-in-out infinite}
 .ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
 .ft-spark:nth-of-type(2){animation-delay:.9s}.ft-spark:nth-of-type(3){animation-delay:1.7s}
@@ -67,14 +67,14 @@ const FOOTER_PREMIUM_CSS = `
   background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .25s,background .25s,border-color .25s}
-.ft-form:focus-within{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.75);box-shadow:0 0 0 4px rgba(255,255,255,.18),0 10px 30px -10px rgba(253,230,138,.55)}
+.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(96,165,250,.9);box-shadow:0 0 0 4px rgba(37,99,235,.35),0 10px 30px -10px rgba(37,99,235,.6)}
 .ft-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
-  font-weight:800;font-size:.85rem;color:#18205c;background:linear-gradient(135deg,#fde68a 0%,#fdba74 55%,#f9a8d4 100%);
-  box-shadow:0 10px 24px -8px rgba(253,186,116,.8);transition:transform .2s,box-shadow .2s,filter .2s}
+  font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#3b82f6 0%,#2563eb 55%,#1d4ed8 100%);background-size:160% 160%;background-position:0% 50%;
+  box-shadow:0 10px 24px -8px rgba(37,99,235,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
 .ft-btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;transform:skewX(-20deg);
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:ft-shine 5s ease-in-out infinite}
-.ft-btn:hover:not(:disabled){transform:translateY(-1px) scale(1.03);box-shadow:0 14px 30px -8px rgba(253,186,116,.95);filter:saturate(1.1)}
-.ft-btn:active:not(:disabled){transform:scale(.96)}
+.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(37,99,235,.9),0 0 0 4px rgba(37,99,235,.22),inset 0 1px 0 rgba(255,255,255,.28)}
+.ft-btn:active:not(:disabled){scale:.96;translate:0 0;transition-duration:.1s,.1s,.2s,.5s}
 .ft-btn:disabled{opacity:.75;cursor:wait}
 .ft-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
@@ -95,6 +95,7 @@ const FOOTER_PREMIUM_CSS = `
 @keyframes ft-pop{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes ft-reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){
+  .ft-btn:hover:not(:disabled){translate:none}
   .ft-news,.ft-orb,.ft-float,.ft-spark,.ft-btn::after,.ft-msg,.ft-more-in{animation:none!important}
   .ft-more-btn,.ft-more-chev,.ft-btn,.ft-btn .ft-arrow{transition:none!important}
 }
@@ -522,7 +523,7 @@ export const Footer: React.FC<FooterProps> = ({
   const linkCls =
     'inline-flex items-center text-left text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'w-9 h-9 inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#4F73DF] hover:text-white dark:hover:bg-[#4F73DF] transition-colors cursor-pointer active:scale-95';
+    'w-9 h-9 inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
@@ -536,6 +537,23 @@ export const Footer: React.FC<FooterProps> = ({
           >
             <span className="ft-orb ft-orb-a" aria-hidden="true" />
             <span className="ft-orb ft-orb-b" aria-hidden="true" />
+            {/* Decorative arcs + wave: no fill, non-interactive, clipped by the banner's overflow-hidden */}
+            <svg
+              className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
+              viewBox="0 0 800 300"
+              preserveAspectRatio="xMidYMid slice"
+              fill="none"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <g stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5">
+                <circle cx="720" cy="270" r="80" />
+                <circle cx="720" cy="270" r="145" />
+                <circle cx="720" cy="270" r="215" />
+                <circle cx="720" cy="270" r="290" />
+                <path d="M-20 70 C 140 20, 280 130, 450 76 S 700 10, 830 60" />
+              </g>
+            </svg>
             {/* Illustration (decorative) */}
             <div className="hidden md:flex justify-center ft-float" aria-hidden="true">
               <svg viewBox="0 0 240 230" className="w-56 h-auto -mt-16 drop-shadow-[0_18px_24px_rgba(20,35,100,0.35)]" fill="none">
@@ -831,7 +849,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title={`Copy direct email address: ${CONTACT_EMAIL}`}
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#4F73DF] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0">
                         {copiedEmail ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Mail className="w-3.5 h-3.5" aria-hidden="true" />}
                       </span>
                       <span className="break-all">{copiedEmail ? 'Copied!' : CONTACT_EMAIL}</span>
@@ -848,7 +866,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title="Send a message or feedback directly to the engineering team via backend"
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#4F73DF] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0">
                         <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                       </span>
                       <span>Contact &amp; Feedback</span>

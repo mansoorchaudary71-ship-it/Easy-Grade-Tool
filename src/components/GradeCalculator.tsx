@@ -37,7 +37,7 @@ const ROW_INPUT =
   'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
 const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1 text-center';
 const BTN_SOLID =
-  'bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
+  'bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
 const BTN_SOFT =
   'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-sm inline-flex items-center justify-center gap-2 cursor-pointer transition-colors py-3 px-5 min-h-[48px] active:scale-95';
 const REMOVE_BTN =

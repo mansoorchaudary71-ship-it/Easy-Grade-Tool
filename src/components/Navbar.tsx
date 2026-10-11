@@ -74,19 +74,21 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 /* Shared class strings                                                        */
 /* -------------------------------------------------------------------------- */
 
+/** The header is always the deep slate surface (#1E293B), so the focus ring offset matches it in both themes. */
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1E293B]';
 
 const tabBase =
   'relative isolate inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 min-h-11 text-[13px] no-underline cursor-pointer select-none touch-manipulation [-webkit-tap-highlight-color:transparent]';
 
 const tabInactive =
-  'font-semibold text-slate-600 transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 dark:text-slate-300 dark:hover:text-teal-400';
+  'font-semibold text-slate-300 hover:bg-white/[0.06] hover:text-white';
 
-const tabActive = 'font-bold text-slate-900 dark:text-white';
+const tabActive = 'font-bold text-white';
 
+/** The sliding active pill: vibrant blue with a soft glow and a crisp 1px inner edge. */
 const pillClass =
-  'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20 dark:border-white/10 dark:bg-slate-700/80 dark:shadow-black/30';
+  'absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-[#3B82F6] to-[#2563EB] shadow-[0_8px_20px_-6px_rgba(37,99,235,0.75),inset_0_1px_0_rgba(255,255,255,0.22)] ring-1 ring-inset ring-white/15';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -178,11 +180,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   // The shared sliding pill spring (instant when the user prefers reduced motion)
   const pillTransition = prefersReducedMotion
     ? { duration: 0 }
-    : { type: 'spring' as const, stiffness: 420, damping: 34, mass: 0.9 };
+    : { duration: 0.45, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] };
 
   return (
     <MotionConfig reducedMotion="user">
-      <header className="sticky top-0 z-50 border-b border-gray-200/50 bg-white/70 backdrop-blur-md print:hidden dark:border-white/10 dark:bg-slate-950/70">
+      <header className="header-slate sticky top-0 z-50 border-b border-white/10 bg-[#1E293B]/95 shadow-[0_12px_32px_-16px_rgba(15,23,42,0.7)] backdrop-blur-xl print:hidden">
+        {/* Decorative overlay: faint concentric arcs + a wave. Non-interactive, clipped by its own overflow-hidden parent. */}
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+          <svg
+            className="absolute inset-0 h-full w-full"
+            viewBox="0 0 1440 120"
+            preserveAspectRatio="xMidYMid slice"
+            fill="none"
+            focusable="false"
+          >
+            <g stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.25">
+              <circle cx="1290" cy="-12" r="64" />
+              <circle cx="1290" cy="-12" r="118" />
+              <circle cx="1290" cy="-12" r="176" />
+              <circle cx="1290" cy="-12" r="238" />
+              <path d="M-40 92 C 180 40, 360 142, 600 84 S 980 18, 1180 74 S 1400 96, 1500 52" />
+              <path d="M-40 112 C 200 66, 380 160, 620 106 S 1000 44, 1200 98 S 1420 118, 1500 78" />
+            </g>
+          </svg>
+          <div className="absolute -right-24 -top-28 h-64 w-96 rounded-full bg-[#2563EB]/25 blur-3xl" />
+        </div>
         {/* ------------------------------ Top bar ------------------------------ */}
         <div className="mx-auto flex h-14 max-w-[1240px] items-center justify-between px-3.5 sm:h-16 sm:px-6">
           <Link
@@ -196,7 +218,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onTouchStart={() => preloadTool('quick')}
             aria-label="Easy Grade Tool Home"
           >
-            <Logo />
+            <Logo onDark />
           </Link>
 
           <div className="flex items-center gap-4 sm:gap-5">
@@ -206,14 +228,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={onOpenCommandPalette}
               onTouchStart={() => preloadTool('command-palette')}
               aria-label={`Open calculator search (${shortcutLabel})`}
-              className={`inline-flex size-11 items-center justify-center rounded-full border border-gray-200 bg-white/80 text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 md:hidden dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-300 dark:hover:text-teal-400 ${focusRing}`}
+              className={`inline-flex size-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-slate-200 shadow-sm hover:bg-white/10 hover:text-white md:hidden ${focusRing}`}
             >
               <Search className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
 
             <div className="group relative hidden w-52 transition-[width] duration-300 ease-out md:block lg:w-64 md:focus-within:w-64 lg:focus-within:w-80">
               <Search
-                className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors duration-300 group-focus-within:text-teal-600"
+                className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-[#94A3B8] transition-colors duration-300 group-focus-within:text-blue-300"
                 strokeWidth={ICON_STROKE}
                 aria-hidden="true"
               />
@@ -241,15 +263,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="h-11 w-full cursor-pointer rounded-full border border-gray-200 bg-white/80 py-2 pl-10 pr-16 text-[13px] font-medium text-slate-800 shadow-sm outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-gray-300 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-100 dark:placeholder:text-slate-400"
+                className="h-11 w-full cursor-pointer rounded-full border border-white/10 bg-white/[0.06] py-2 pl-10 pr-16 text-[13px] font-medium text-slate-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] outline-none transition-all duration-300 placeholder:text-[#94A3B8] hover:border-white/20 hover:bg-white/10 focus:border-transparent focus:bg-white/10 focus:ring-2 focus:ring-blue-400/60"
               />
-              <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-gray-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 lg:inline-flex dark:border-white/10 dark:bg-slate-900 dark:text-slate-400">
+              <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-[#94A3B8] lg:inline-flex">
                 {shortcutLabel}
               </kbd>
             </div>
 
             {/* 100% Private badge */}
-            <div className="hidden items-center gap-1.5 rounded-full bg-teal-50 px-3 py-1.5 text-xs font-semibold text-teal-700 lg:inline-flex dark:bg-teal-500/10 dark:text-teal-300">
+            <div className="hidden items-center gap-1.5 rounded-full border border-white/10 bg-[#2563EB]/20 px-3 py-1.5 text-xs font-semibold text-blue-200 lg:inline-flex">
               <PrivacyShieldIcon className="size-3.5 shrink-0" />
               <span>100% Private</span>
             </div>
@@ -263,7 +285,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={cycleTheme}
               aria-label={`Current theme: ${theme}. Click to switch theme.`}
               title={`Theme: ${themeLabel} (Click to cycle)`}
-              className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-gray-200 bg-white/80 px-3 text-xs font-semibold text-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:text-teal-700 active:scale-95 dark:border-white/10 dark:bg-slate-800/70 dark:text-slate-200 dark:hover:text-teal-400 ${focusRing}`}
+              className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-3 text-xs font-semibold text-slate-100 shadow-sm hover:bg-white/10 hover:text-white ${focusRing}`}
             >
               <span className="relative inline-flex size-4 items-center justify-center">
                 <AnimatePresence mode="wait" initial={false}>
@@ -292,7 +314,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* --------------------------- Secondary toolbar ------------------------ */}
         <nav
-          className="border-t border-gray-200/60 bg-slate-50 dark:border-white/10 dark:bg-slate-900"
+          className="border-t border-white/10 bg-black/20"
           aria-label="Calculator tools"
         >
           <LayoutGroup id="tool-nav-pill">

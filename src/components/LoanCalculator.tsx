@@ -176,7 +176,7 @@ export const PaymentResultCard: React.FC<PaymentResultCardProps> = ({
       aria-live="polite"
     >
       <div>
-        <div className="bg-[#DCE1EF] dark:bg-teal-950/60 border border-[#B0BAD9] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+        <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
           <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
             Monthly Payment
           </span>
@@ -290,7 +290,7 @@ export const PaymentResultCard: React.FC<PaymentResultCardProps> = ({
                   setToast?.(`Could not generate ${title} PDF.`);
                 }
               }}
-              className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-full bg-[#4C5985] hover:bg-[#3D476B] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
+              className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-full bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
             >
               <Download className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Export PDF</span>

@@ -274,7 +274,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
               <motion.span
                 layoutId="howto-active-pill"
                 className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20"
-                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
                 aria-hidden="true"
               />
             )}
@@ -296,7 +296,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
               <motion.span
                 layoutId="howto-active-pill"
                 className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20"
-                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
                 aria-hidden="true"
               />
             )}
@@ -318,7 +318,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
               <motion.span
                 layoutId="howto-active-pill"
                 className="absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20"
-                transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                transition={{ duration: 0.45, ease: [0.32, 0.72, 0, 1] }}
                 aria-hidden="true"
               />
             )}

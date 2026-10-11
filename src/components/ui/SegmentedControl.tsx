@@ -57,7 +57,7 @@ export function SegmentedControl<T extends string | number>({
   const reduced = useReducedMotion();
   const transition = reduced
     ? { duration: 0 }
-    : { type: 'spring' as const, stiffness: 420, damping: 34, mass: 0.9 };
+    : { duration: 0.45, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] };
 
   const isTrack = variant === 'track';
   const wrapClass = isTrack
@@ -65,8 +65,8 @@ export function SegmentedControl<T extends string | number>({
     : `flex flex-wrap items-center gap-2 ${className}`;
 
   const pillClass = isTrack
-    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-sm shadow-gray-400/20 dark:border-white/10 dark:bg-teal-600 dark:shadow-black/30'
-    : 'absolute inset-0 -z-10 rounded-full bg-teal-700 shadow-md shadow-teal-600/25 dark:bg-teal-600';
+    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-teal-600 dark:shadow-[0_8px_18px_-6px_rgba(37,99,235,0.6)]'
+    : 'absolute inset-0 -z-10 rounded-full bg-teal-600 shadow-[0_8px_18px_-6px_rgba(37,99,235,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
 
   return (
     <LayoutGroup id={groupId}>

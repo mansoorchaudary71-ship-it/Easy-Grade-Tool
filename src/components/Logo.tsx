@@ -181,7 +181,7 @@ export const LogoLockup: React.FC<LogoLockupProps> = ({
         <path
           d={WORDMARK.tool.d}
           fill={accentFill}
-          className={accentFill ? undefined : 'fill-[#4C5985] dark:fill-teal-400'}
+          className={accentFill ? undefined : 'fill-[#2563EB] dark:fill-teal-400'}
         />
       </g>
     </svg>
@@ -192,6 +192,8 @@ interface LogoProps {
   className?: string;
   iconOnly?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  /** Use on the dark slate header: white wordmark + light-blue "Tool". */
+  onDark?: boolean;
 }
 
 const LOCKUP_HEIGHT = {
@@ -207,17 +209,20 @@ const ICON_SIZE = {
 } as const;
 
 /** Official Easy Grade Tool logo (same props as before, so existing usages keep working). */
-export const Logo: React.FC<LogoProps> = ({ className = '', iconOnly = false, size = 'md' }) => {
+export const Logo: React.FC<LogoProps> = ({ className = '', iconOnly = false, size = 'md', onDark = false }) => {
   return (
     <div
-      className={`inline-flex items-center select-none text-[#1B2038] dark:text-white ${className}`}
+      className={`inline-flex items-center select-none ${onDark ? 'text-white' : 'text-[#1B2038] dark:text-white'} ${className}`}
     >
       {iconOnly ? (
         <BrandMark
           className={`${ICON_SIZE[size]} shrink-0 transition-transform duration-200 ease-out group-hover:scale-105 [.brand:hover_&]:scale-105 motion-reduce:transition-none`}
         />
       ) : (
-        <LogoLockup className={`${LOCKUP_HEIGHT[size]} w-auto shrink-0`} />
+        <LogoLockup
+          className={`${LOCKUP_HEIGHT[size]} w-auto shrink-0`}
+          accentFill={onDark ? '#60A5FA' : undefined}
+        />
       )}
     </div>
   );
