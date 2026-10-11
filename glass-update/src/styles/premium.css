@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Slate + blue design system (Samsung One UI inspired: spatial, glassy, tactile)
+
+   Palette
+     --ds-slate  #1E293B  Deep Royal Slate: header, page banners, newsletter banner, dark-mode surfaces
+     --ds-blue   #2563EB  Vibrant Slate-Blue: every primary CTA, active pill and key highlight
+   Imported AFTER index.css and a11y-touch.css (see main.tsx). Unlayered rules here win over Tailwind
+   utilities, so this file only touches colour, shadow, border, transition and motion (never layout).
+   ========================================================================== */
+
+:root {
+  --ds-slate: #1E293B;
+  --ds-slate-deep: #0F172A;
+  --ds-blue: #2563EB;
+  --ds-blue-hover: #1D4ED8;
+  --ds-edge: rgba(255, 255, 255, 0.1);
+
+  /* Glide curve for sliding pills / hover lifts, springy overshoot for tap release */
+  --ds-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --ds-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Soft ambient elevation */
+  --ds-shadow-card: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 2px 4px rgba(15, 23, 42, 0.04), 0 18px 44px -20px rgba(15, 23, 42, 0.28);
+  --ds-shadow-cta: 0 8px 20px -6px rgba(37, 99, 235, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  --ds-shadow-cta-hover: 0 16px 32px -8px rgba(37, 99, 235, 0.7), 0 0 0 4px rgba(37, 99, 235, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  /* The former indigo/teal scale is now the blue scale (600 = #2563EB) */
+  --color-teal-50: #eff6ff;
+  --color-teal-100: #dbeafe;
+  --color-teal-200: #bfdbfe;
+  --color-teal-300: #93c5fd;
+  --color-teal-400: #60a5fa;
+  --color-teal-500: #3b82f6;
+  --color-teal-600: #2563eb;
+  --color-teal-700: #1d4ed8;
+  --color-teal-800: #1e40af;
+  --color-teal-900: #1e3a8a;
+  --color-teal-950: #172554;
+
+  --primary: 221 83% 53%;
+  --accent: 221 83% 53%;
+}
+
+/* Tool themes set their own copies of these on .app-shell / <main>, so match those elements */
+html [class*="tool-theme-"] {
+  --tool-primary: 221 83% 53%;
+  --tool-deep: 224 76% 48%;
+  --tool-soft: 214 95% 93%;
+  --tool-on-primary: 0 0% 100%;
+}
+
+/* Light canvas: a cooler grey so the slate chrome sits naturally on it */
+html:not(.dark) body {
+  background-color: #EEF2F7;
+}
+
+/* --------------------------------------------------------------------------
+   Dark mode: canvas #0F172A, every surface #1E293B.
+   The Tailwind slate 800/900/950 steps are shifted one notch up in dark mode only, so every existing
+   dark:bg-slate-900 card becomes exactly #1E293B, inputs sit one step lighter, and borders stay subtle.
+   -------------------------------------------------------------------------- */
+html.dark {
+  --color-slate-800: #2A374D;
+  --color-slate-900: #1E293B;
+  --color-slate-950: #0F172A;
+
+  --background: 222 47% 11%;
+  --card: 215 33% 17%;
+  --card-border: 215 25% 27%;
+  --border: 215 25% 24%;
+  --input: 215 25% 24%;
+  --popover: 215 33% 17%;
+  --primary: 213 94% 68%;
+  --primary-foreground: 222 47% 11%;
+  --accent: 213 94% 68%;
+}
+html.dark [class*="tool-theme-"] {
+  --tool-primary: 213 94% 68%;
+  --tool-deep: 217 91% 60%;
+  --tool-soft: 222 40% 22%;
+  --tool-on-primary: 222 47% 11%;
+}
+html.dark body {
+  background-color: #0F172A;
+}
+
+/* ==========================================================================
+   1. Tactile tap scale + springy release (all buttons, pills, tabs, clickable cards)
+   `scale` / `translate` are the individual transform properties, so they compose with each other
+   and with Tailwind's translate/scale utilities instead of fighting over `transform`.
+   ========================================================================== */
+html :is(button, [role="button"], [role="tab"], summary, .preset-btn, a[class*="rounded"], [class*="cursor-pointer"]):where(:not(:disabled, [aria-disabled="true"], .fixed, [class*="inset-0"], .skip-link, input, select, textarea)) {
+  transition-property: scale, translate, transform, box-shadow, background-color, background-position, border-color, color, fill, stroke, filter, opacity, width, height, padding;
+  transition-duration: 0.38s, 0.3s, 0.3s, 0.3s, 0.25s, 0.5s, 0.25s, 0.25s, 0.25s, 0.25s, 0.2s, 0.3s, 0.3s, 0.3s;
+  transition-timing-function: var(--ds-spring), var(--ds-ease), var(--ds-ease), ease, ease, var(--ds-ease), ease, ease, ease, ease, ease, var(--ds-ease), var(--ds-ease), var(--ds-ease);
+  -webkit-tap-highlight-color: transparent;
+}
+html :is(button, [role="button"], [role="tab"], summary, .preset-btn, a[class*="rounded"], [class*="cursor-pointer"]):where(:not(:disabled, [aria-disabled="true"], .fixed, [class*="inset-0"], .skip-link, input, select, textarea)):active {
+  scale: 0.96;
+  transition-duration: 0.1s;
+}
+
+/* ==========================================================================
+   2. Primary CTA (#2563EB): gradient, glow, hover lift
+   ========================================================================== */
+.premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled) {
+  background-image: linear-gradient(135deg, #3B82F6 0%, #2563EB 52%, #1D4ED8 100%);
+  background-size: 170% 170%;
+  background-position: 0% 50%;
+  box-shadow: var(--ds-shadow-cta);
+}
+@media (hover: hover) {
+  .premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled):hover {
+    translate: 0 -1.5px;
+    background-position: 100% 50%;
+    box-shadow: var(--ds-shadow-cta-hover);
+  }
+}
+.premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled):active {
+  translate: 0 0;
+  box-shadow: 0 4px 10px -4px rgba(37, 99, 235, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+/* Secondary / chip buttons: lift and turn blue on hover */
+@media (hover: hover) {
+  .premium-surface .preset-btn:not([aria-pressed="true"]):not(.text-white):hover {
+    translate: 0 -2px;
+    color: #1D4ED8;
+  }
+  .dark .premium-surface .preset-btn:not([aria-pressed="true"]):not(.text-white):hover {
+    color: #93C5FD;
+  }
+}
+
+/* Unselected preset chips: index.css paints them warm stone in both themes; use slate instead */
+html:not(.dark) .preset-btn:not(.active):not([data-active="true"]):not(.text-white) {
+  background-color: #F1F5F9;
+  color: #475569;
+  border-color: #E2E8F0;
+}
+html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white) {
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #CBD5E1;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Selected preset chip keeps its small gold marker */
+.premium-surface .preset-btn[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #f5a524;
+  box-shadow: 0 0 6px 1px rgb(245 165 36 / 0.55);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   3. Inputs: blue focus ring
+   ========================================================================== */
+.premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select) {
+  transition: box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+.premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select):focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.32);
+}
+
+/* ==========================================================================
+   4. Cards and result panels: ambient shadow + crisp 1px edge
+   Light cards get a hairline slate edge + white top highlight (a white-on-white edge would be invisible);
+   dark cards get the requested rgba(255,255,255,0.1) edge.
+   ========================================================================== */
+.premium-surface .glow-surface {
+  border-color: rgba(148, 163, 184, 0.28);
+  box-shadow: var(--ds-shadow-card);
+}
+.dark .premium-surface .glow-surface {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 20px 44px -20px rgba(0, 0, 0, 0.65);
+}
+
+/* Result panels rise in softly and carry a blue glow */
+.premium-surface [class*="bg-[#DBEAFE]"] {
+  border-color: #BFDBFE;
+  box-shadow: 0 14px 34px -16px rgba(37, 99, 235, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  animation: premium-rise 0.38s var(--ds-ease) both;
+}
+.dark .premium-surface [class*="bg-[#DBEAFE]"] {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* Header + banners: crisp inner edge on the slate surfaces */
+.header-slate {
+  /* Inset highlight only: the drop shadow lives on the tool bar (the lowest glass layer) so it never muddies the glass above it */
+  box-shadow: inset 0 1px 0 var(--ds-edge);
+}
+
+/* --------------------------------------------------------------------------
+   Glassmorphism: main header + secondary tool navigation bar
+   Each bar owns its own frosted layer (translucent slate + blur + 1px hairline).
+   Only the background is translucent; text, icons and buttons inside stay 100% opaque.
+   -------------------------------------------------------------------------- */
+.glass-bar {
+  background-color: rgba(30, 41, 59, 0.75); /* slate-800 @ 75% (== bg-slate-900/75 family) */
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* == border-b border-white/10: defines the glass edge */
+}
+.glass-bar--tools {
+  box-shadow: 0 12px 32px -16px rgba(15, 23, 42, 0.7);
+}
+/* No backdrop-filter support, or the user asked for less transparency: fall back to a near-solid slate so contrast is preserved */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-bar { background-color: rgba(30, 41, 59, 0.97); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass-bar {
+    background-color: #1E293B;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+.banner-slate {
+  box-shadow: inset 0 0 0 1px var(--ds-edge), 0 24px 48px -24px rgba(15, 23, 42, 0.6);
+}
+/* index.css sets h1-h6 colours un-layered, which beats Tailwind's layered text-white; restate it here */
+.banner-slate :is(h1, h2, h3),
+.ft-news :is(h1, h2, h3) {
+  color: #fff;
+}
+
+@keyframes premium-rise {
+  from { opacity: 0; transform: translateY(8px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ==========================================================================
+   5. Motion preferences + print
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .premium-surface [class*="bg-[#DBEAFE]"] { animation: none; }
+  .premium-surface .preset-btn:hover,
+  .premium-surface :is(button, a)[class~="bg-[#2563EB]"]:hover { translate: none; }
+}
+@media print {
+  .premium-surface * { box-shadow: none !important; animation: none !important; }
+}
