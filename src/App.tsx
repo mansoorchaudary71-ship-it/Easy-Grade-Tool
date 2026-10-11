@@ -10,7 +10,7 @@ import {
   MemoryRouter,
 } from 'react-router-dom';
 import { HelmetProvider } from './utils/helmet';
-import { Navbar } from './components/Navbar';
+import { SiteHeader } from './components/SiteHeader';
 import { UpdatePrompt } from './components/UpdatePrompt';
 import { Toast } from './components/Toast';
 import { ThemeProvider } from './context/ThemeContext';
@@ -197,7 +197,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
       {!isProgrammaticRoute && <SEOHead tool={activeTool} />}
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{routeAnnouncement}</div>
-      <Navbar
+      <SiteHeader
         activeTool={activeTool}
         onSelectTool={handleSelectTool}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}

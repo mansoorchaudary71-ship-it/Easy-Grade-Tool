@@ -1,27 +1,19 @@
-import React, { useMemo, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React from 'react';
 import { Link } from './SlashLink';
-import { Sun, Moon, Search, Ellipsis } from 'lucide-react';
-import { AnimatePresence, LayoutGroup, MotionConfig, motion, useReducedMotion } from 'motion/react';
-import { NAV_ITEMS } from '../data/navItems';
-import { TOOL_PATHS } from '../data/constants';
-import { isSamePath } from '../utils/paths';
-import { preloadForPath } from '../utils/lazyRoutes';
+import { Sun, Moon, Search } from 'lucide-react';
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/react';
 import { ToolKey } from '../types';
 import { useTheme } from '../context/ThemeContext';
 import { PWAInstallButton } from './PWAInstallButton';
 import { preloadTool } from '../utils/toolPreloader';
 import { Logo } from './Logo';
-import { MoreToolsSheet } from './MoreToolsSheet';
+import { ICON_STROKE, headerFocusRing as focusRing } from './ToolNavBar';
 
 interface NavbarProps {
   activeTool: ToolKey;
   onSelectTool: (tool: ToolKey) => void;
   onOpenCommandPalette: () => void;
 }
-
-/** One consistent stroke width for every toolbar / header icon. */
-const ICON_STROKE = 2;
 
 /* -------------------------------------------------------------------------- */
 /* Icons                                                                       */
@@ -71,26 +63,6 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 );
 
 /* -------------------------------------------------------------------------- */
-/* Shared class strings                                                        */
-/* -------------------------------------------------------------------------- */
-
-/** The header is always the deep slate surface (#1E293B), so the focus ring offset matches it in both themes. */
-const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1E293B]';
-
-const tabBase =
-  'relative isolate inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 min-h-11 text-[13px] no-underline cursor-pointer select-none touch-manipulation [-webkit-tap-highlight-color:transparent]';
-
-const tabInactive =
-  'font-semibold text-slate-300 hover:bg-white/[0.06] hover:text-white';
-
-const tabActive = 'font-bold text-white';
-
-/** The sliding active pill: vibrant blue with a soft glow and a crisp 1px inner edge. */
-const pillClass =
-  'absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-[#3B82F6] to-[#2563EB] shadow-[0_8px_20px_-6px_rgba(37,99,235,0.75),inset_0_1px_0_rgba(255,255,255,0.22)] ring-1 ring-inset ring-white/15';
-
-/* -------------------------------------------------------------------------- */
 /* Component                                                                   */
 /* -------------------------------------------------------------------------- */
 
@@ -100,69 +72,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenCommandPalette,
 }) => {
   const { theme, resolvedTheme, setTheme } = useTheme();
-  const location = useLocation();
   const prefersReducedMotion = useReducedMotion();
-  const isStaticPage =
-    location.pathname.startsWith('/about') ||
-    location.pathname.startsWith('/privacy') ||
-    location.pathname.startsWith('/methodology');
-  const navInnerRef = useRef<HTMLDivElement>(null);
-  const activeTabRef = useRef<HTMLAnchorElement>(null);
-
-  // Center the active tool tab in the horizontally scrolling container on load and route/tool change
-  useEffect(() => {
-    const activeTab = activeTabRef.current;
-    const navInner = navInnerRef.current;
-    if (!activeTab || !navInner) return;
-
-    const scrollBehavior = prefersReducedMotion ? 'instant' : 'smooth';
-
-    // requestAnimationFrame ensures layout and DOM widths are stable across viewports
-    const rafId = requestAnimationFrame(() => {
-      // block: 'nearest' makes sure the whole page is NOT scrolled vertically
-      try {
-        activeTab.scrollIntoView({
-          inline: 'center',
-          block: 'nearest',
-          behavior: scrollBehavior as ScrollBehavior,
-        });
-      } catch {
-        // Fallback for older browsers: scroll only the nav container
-        const tabLeft = activeTab.offsetLeft;
-        const tabWidth = activeTab.offsetWidth;
-        const containerWidth = navInner.clientWidth;
-        const targetScrollLeft = tabLeft - containerWidth / 2 + tabWidth / 2;
-        navInner.scrollTo({
-          left: Math.max(0, targetScrollLeft),
-          behavior: scrollBehavior as ScrollBehavior,
-        });
-      }
-    });
-
-    return () => cancelAnimationFrame(rafId);
-  }, [activeTool, location.pathname, prefersReducedMotion]);
-
-  const [moreOpen, setMoreOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 
-  const isMac = useMemo(() => {
+  const isMac = React.useMemo(() => {
     return (
       mounted &&
       typeof navigator !== 'undefined' &&
       /Mac|iPod|iPhone|iPad/i.test(navigator.userAgent || '')
     );
   }, [mounted]);
-
-  // Academic tools are the primary row; general-purpose utilities live behind "More tools".
-  const primaryItems = useMemo(() => NAV_ITEMS.filter((t) => t.group === 'academic'), []);
-  const moreItems = useMemo(() => NAV_ITEMS.filter((t) => t.group === 'utility'), []);
-  const activeMore = !isStaticPage
-    ? moreItems.find((t) => isSamePath(location.pathname, t.path))
-    : undefined;
-  const moreIsActive = !!activeMore;
 
   const cycleTheme = () => {
     if (theme === 'system') {
@@ -177,14 +99,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   const shortcutLabel = isMac ? '⌘K' : 'Ctrl+K';
   const themeLabel = theme.charAt(0).toUpperCase() + theme.slice(1);
 
-  // The shared sliding pill spring (instant when the user prefers reduced motion)
-  const pillTransition = prefersReducedMotion
-    ? { duration: 0 }
-    : { duration: 0.45, ease: [0.32, 0.72, 0, 1] as [number, number, number, number] };
-
   return (
     <MotionConfig reducedMotion="user">
-      <header className="header-slate sticky top-0 z-50 border-b border-white/10 bg-[#1E293B]/95 shadow-[0_12px_32px_-16px_rgba(15,23,42,0.7)] backdrop-blur-xl print:hidden">
+      <header className="header-slate glass-bar glass-bar--header sticky top-0 z-50 print:hidden">
         {/* Decorative overlay: faint concentric arcs + a wave. Non-interactive, clipped by its own overflow-hidden parent. */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
           <svg
@@ -311,99 +228,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
         </div>
-
-        {/* --------------------------- Secondary toolbar ------------------------ */}
-        <nav
-          className="border-t border-white/10 bg-black/20"
-          aria-label="Calculator tools"
-        >
-          <LayoutGroup id="tool-nav-pill">
-            <div
-              ref={navInnerRef}
-              className="mx-auto flex max-w-[1240px] items-center gap-1.5 overflow-x-auto overflow-y-hidden px-3.5 py-2 [scrollbar-width:none] sm:px-6 [&::-webkit-scrollbar]:hidden"
-            >
-              {primaryItems.map((tool) => {
-                const Icon = tool.icon;
-                const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
-                return (
-                  <Link
-                    key={tool.path}
-                    ref={isActive ? activeTabRef : undefined}
-                    to={tool.path}
-                    onClick={() => {
-                      // Only the legacy tools map 1:1 to a ToolKey. Pages like Weighted/Final Exam/Test Grade/
-                      // Grade Curve/Letter Grade share the 'quick' key, so selecting them via onSelectTool would
-                      // navigate back to Home. The <Link> already navigates to the right page.
-                      if (isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool(tool.toolKey);
-                    }}
-                    onMouseEnter={() => {
-                      preloadTool(tool.toolKey);
-                      void preloadForPath(tool.path);
-                    }}
-                    onFocus={() => {
-                      preloadTool(tool.toolKey);
-                      void preloadForPath(tool.path);
-                    }}
-                    onTouchStart={() => {
-                      preloadTool(tool.toolKey);
-                      void preloadForPath(tool.path);
-                    }}
-                    className={`${tabBase} ${focusRing} ${isActive ? tabActive : tabInactive}`}
-                    data-tool={tool.toolKey}
-                    data-active={isActive}
-                    aria-current={isActive ? 'page' : undefined}
-                    title={tool.title}
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="toolbar-active-pill"
-                        className={pillClass}
-                        transition={pillTransition}
-                        aria-hidden="true"
-                      />
-                    )}
-                    <Icon className="size-4 shrink-0" strokeWidth={ICON_STROKE} aria-hidden="true" />
-                    <span>{tool.label}</span>
-                  </Link>
-                );
-              })}
-
-              {moreItems.length > 0 && (
-                <button
-                  type="button"
-                  className={`${tabBase} ${focusRing} ${moreIsActive ? tabActive : tabInactive}`}
-                  aria-haspopup="dialog"
-                  aria-expanded={moreOpen}
-                  data-active={moreIsActive}
-                  onClick={() => setMoreOpen(true)}
-                  onMouseEnter={() => moreItems.forEach((t) => void preloadForPath(t.path))}
-                >
-                  {moreIsActive && (
-                    <motion.span
-                      layoutId="toolbar-active-pill"
-                      className={pillClass}
-                      transition={pillTransition}
-                      aria-hidden="true"
-                    />
-                  )}
-                  <Ellipsis className="size-4 shrink-0" strokeWidth={ICON_STROKE} aria-hidden="true" />
-                  <span>{moreIsActive ? activeMore?.label : 'More tools'}</span>
-                </button>
-              )}
-            </div>
-          </LayoutGroup>
-        </nav>
-
-        {moreOpen && (
-          <MoreToolsSheet
-            items={moreItems}
-            currentPath={location.pathname}
-            onClose={() => setMoreOpen(false)}
-            onNavigate={(item) => {
-              if (isSamePath(TOOL_PATHS[item.toolKey], item.path)) onSelectTool(item.toolKey);
-            }}
-          />
-        )}
       </header>
     </MotionConfig>
   );

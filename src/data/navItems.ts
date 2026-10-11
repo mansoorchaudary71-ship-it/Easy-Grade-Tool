@@ -1,6 +1,6 @@
 import {
   GraduationCap, Calculator, Target, ClipboardCheck, TrendingUp, Type, Percent,
-  Lightbulb, Banknote, House, KeyRound, BookOpen,
+  Lightbulb, Banknote, House, KeyRound, BookOpen, Sigma,
 } from 'lucide-react';
 import { ToolKey } from '../types';
 
@@ -20,6 +20,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Final Exam', title: 'Final exam grade calculator', path: '/final-exam-grade-calculator/', group: 'academic', toolKey: 'quick', icon: Target },
   { label: 'Test Grade', title: 'Test grade calculator', path: '/test-grade-calculator/', group: 'academic', toolKey: 'quick', icon: ClipboardCheck },
   { label: 'Grade Curve', title: 'Grade curve calculator', path: '/grade-curve-calculator/', group: 'academic', toolKey: 'quick', icon: TrendingUp },
+  { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/', group: 'academic', toolKey: 'quick', icon: Sigma },
   { label: 'Letter Grade', title: 'Letter grade calculator', path: '/letter-grade-calculator/', group: 'academic', toolKey: 'quick', icon: Type },
   { label: 'GPA', title: 'GPA calculator', path: '/gpa-calculator/', group: 'academic', toolKey: 'gpa', icon: BookOpen },
   { label: 'CGPA to %', title: 'CGPA to percentage calculator', path: '/cgpa-to-percentage-calculator/', group: 'academic', toolKey: 'cgpa', icon: Calculator },
