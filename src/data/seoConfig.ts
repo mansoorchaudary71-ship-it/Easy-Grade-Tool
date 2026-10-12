@@ -179,9 +179,9 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
     ],
   },
   gpa: {
-    title: 'GPA Calculator — College & High School 4.0 Scale GPA',
+    title: 'GPA Calculator — Projected GPA, 4.0 Scale & Quality Points',
     description:
-      'Calculate college and high school semester or cumulative GPA on a 4.0 scale with credit hours, plus/minus grades, and printable PDF transcript reports.',
+      'Free GPA calculator: find your semester, cumulative or projected GPA on a 4.0 scale with credit hours, quality points and plus/minus grades.',
     canonicalPath: '/gpa-calculator/',
     canonicalUrl: `${BASE_CANONICAL_ORIGIN}/gpa-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.gpa,
@@ -191,6 +191,9 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
       'college gpa calculator',
       'cumulative gpa',
       'semester gpa',
+      'projected gpa calculator',
+      'what gpa is a 73',
+      'gpa quality points chart',
       '4.0 scale gpa',
       'credit hours quality points',
     ],

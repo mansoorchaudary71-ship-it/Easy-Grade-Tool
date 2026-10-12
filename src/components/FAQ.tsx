@@ -212,9 +212,30 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
       {
         id: 'gpa-calculation',
         category: 'gpa',
-        question: 'How is my GPA calculated?',
+        question: 'How do I calculate my GPA?',
         answer:
           'Your Grade Point Average (GPA) is calculated on a 4.0 scale by converting each course letter grade into numerical grade points (A = 4.0, A- = 3.7, B+ = 3.3, B = 3.0, B- = 2.7, C+ = 2.3, C = 2.0, D = 1.0, F = 0.0). You multiply each grade point value by the course credit hours to obtain "quality points", add all quality points together across all courses, and divide by the total number of credits attempted.',
+      },
+      {
+        id: 'projected-gpa',
+        category: 'gpa',
+        question: 'How do I calculate a projected GPA?',
+        answer:
+          'A projected GPA estimates where your GPA will land after the courses you are taking now. Enter your current cumulative GPA and credits earned, add this term\'s courses with the grades you expect, and divide total quality points by total credits. For example, 60 credits at a 3.2 GPA is 192 quality points; adding 15 credits at 3.6 gives 54 more, so (192 + 54) ÷ 75 = 3.28.',
+      },
+      {
+        id: 'gpa-for-73-percent',
+        category: 'gpa',
+        question: 'What GPA is a 73?',
+        answer:
+          'A 73% is a C on most grading scales, which is worth 2.0 on the 4.0 scale. On the plus/minus scale 73 is the lowest C (2.0): 70 to 72 is a C- (1.7) and 77 starts a C+ (2.3). Some schools set their own cutoffs, so check your syllabus.',
+      },
+      {
+        id: 'gpa-quality-points-chart',
+        category: 'gpa',
+        question: 'What is the quality points chart for a 3-credit course?',
+        answer:
+          'Quality points are grade points multiplied by credits. For a 3-credit course on the 4.0 scale: A (4.0) = 12, A- (3.7) = 11.1, B+ (3.3) = 9.9, B (3.0) = 9, B- (2.7) = 8.1, C+ (2.3) = 6.9, C (2.0) = 6, D (1.0) = 3 and F (0.0) = 0.',
       },
       {
         id: 'weighted-vs-unweighted-gpa',

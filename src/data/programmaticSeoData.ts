@@ -52,9 +52,9 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
     path: '/final-exam-grade-calculator/',
     toolKey: 'quick',
     h1: 'Final Exam Grade Calculator',
-    title: 'Final Exam Grade Calculator — Target Score Needed',
+    title: 'Final Grade Calculator — What Do You Need on the Final?',
     metaDescription:
-      'Calculate the exact score you need on your final exam to pass or earn an A, B, or C. Step-by-step syllabus weight formula and grade simulator.',
+      'Free final exam calculator: find the score you need on your final to pass or earn an A, B or C, and see your final grade. Step-by-step weight formula included.',
     targetAudience: 'college',
     badge: 'Final Exam Target Solver',
     summary:
@@ -133,6 +133,20 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
       parentLinkPath: '/grade-calculator',
     },
     customFaqs: [
+      {
+        id: 'faq-final-how-to-calculate',
+        category: 'final-exam',
+        question: 'How do I calculate my final grade?',
+        answer:
+          'Multiply your current grade by the share of the course already graded, multiply your final exam score by the final exam weight, and add the two: Final Grade = Current Grade × (1 − Final Weight) + Final Exam Score × Final Weight. With an 84% current grade, a 25% final and a 92% exam score, you get 84 × 0.75 + 92 × 0.25 = 63 + 23 = 86%.',
+      },
+      {
+        id: 'faq-final-exam-vs-final-grade',
+        category: 'final-exam',
+        question: 'Is this a final exam calculator or a final grade calculator?',
+        answer:
+          'Both. Enter your current grade, your target and the final exam weight to see the score you need on the exam, or try different exam scores to see the final course grade each one would give you. It uses the same formula either way, and it works for any test or exam that counts for a share of your grade.',
+      },
       {
         id: 'faq-final-over-100',
         category: 'final-exam',

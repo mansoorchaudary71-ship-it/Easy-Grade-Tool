@@ -309,7 +309,7 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     h1: 'Letter Grade Calculator',
     title: 'Letter Grade Calculator — Percent to Letter & GPA Points',
     metaDescription:
-      'Convert any percentage to a letter grade and 4.0 GPA points, or look up the percentage range for each letter on the standard A–F and plus/minus scales.',
+      'Convert any percentage to a letter grade and 4.0 GPA points. See what GPA a 73, 85 or 90 is, plus the cutoffs for each letter on A–F and plus/minus scales.',
     badge: 'Percent ↔ letter',
     intro:
       'Enter a percentage to see its letter grade and GPA points, or pick a letter to see the percentage range and midpoint. Switch between the standard A–F scale and the common plus/minus scale.',
@@ -342,6 +342,13 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         ],
       },
       {
+        heading: 'What GPA is a 73%? Common percentages in GPA points',
+        paragraphs: [
+          'A 73% is a C on both common scales, worth 2.0 on the 4.0 scale. On the plus/minus scale it is the lowest C: 70 to 72.99 is a C- (1.7) and 77 starts a C+ (2.3).',
+          'The same logic applies to other scores. A 90% is an A (4.0) on the standard scale or an A- (3.7) on the plus/minus scale, and an 85% is a B (3.0) on both. Use the calculator above for any other percentage.',
+        ],
+      },
+      {
         heading: 'From letter grade to GPA points',
         paragraphs: [
           'GPA points come from the letter, not the percentage: on the common 4.0 scale A is 4.0, A- is 3.7, B+ is 3.3 and so on down to F at 0.0. A course’s contribution to GPA is its points multiplied by its credit hours.',
@@ -361,6 +368,11 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         'The same 89.5% is a B (3.0) on the standard scale and a B+ (3.3) on the plus/minus scale, and half a point from the next letter on both. Whether it rounds up to 90 depends on your school’s rounding rule.',
     },
     faqs: [
+      {
+        question: 'What GPA is a 73%?',
+        answer:
+          'A 73% is a C, which is 2.0 GPA points on the 4.0 scale. On the plus/minus scale it is the lowest C (2.0), with 70 to 72.99 a C- (1.7). Your school’s scale decides, so check the syllabus.',
+      },
       {
         question: 'What percentage is an A, B, C, D and F?',
         answer:
