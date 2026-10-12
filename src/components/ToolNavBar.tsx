@@ -91,11 +91,11 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
 
   return (
     <>
-      <nav className="glass-bar glass-bar--tools relative z-40 md:sticky md:top-[65px] print:hidden" aria-label="Calculator tools">
+      <nav className="glass-bar glass-bar--tools relative isolate print:hidden" aria-label="Calculator tools">
         <LayoutGroup id="tool-nav-pill">
           <div
             ref={navInnerRef}
-            className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-center gap-1.5 px-3.5 py-2 md:flex-nowrap md:justify-start md:overflow-x-auto md:overflow-y-hidden md:[scrollbar-width:none] sm:px-6 md:[&::-webkit-scrollbar]:hidden"
+            className="mx-auto flex max-w-[1240px] items-center gap-1.5 overflow-x-auto overflow-y-hidden px-3.5 py-2 [scrollbar-width:none] sm:px-6 [&::-webkit-scrollbar]:hidden"
           >
             {primaryItems.map((tool) => {
               const Icon = tool.icon;

@@ -10,15 +10,16 @@ interface SiteHeaderProps {
 }
 
 /**
- * The single, global site chrome: main glass header + glass tool navigation bar.
+ * The single, global site chrome: glass main header + glass tool navigation bar.
  *
- * Mounted once in App.tsx above <Routes>, so the tool bar is guaranteed to appear directly
- * under the header on every page. The wrapper is `display: contents`: the header is sticky on
- * every screen size, the tool bar docks under it from `md` up (on phones it wraps into pill
- * rows and scrolls away so it never eats the screen). Each bar owns its own glass layer.
+ * Mounted once in App.tsx above <Routes>, so the one-row tool bar sits directly under the header on
+ * every page. This wrapper is the sticky element (both bars stay pinned together on every screen
+ * size); each bar owns its own backdrop-blur layer, so neither nests inside the other's blur.
+ * There must be exactly ONE tool bar: a second one would share the sliding pill's layoutId and the
+ * pill would jump between the two.
  */
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool, onOpenCommandPalette }) => (
-  <div className="site-chrome contents print:hidden" data-site-chrome>
+  <div className="site-chrome sticky top-0 z-50 print:hidden" data-site-chrome>
     <Navbar activeTool={activeTool} onSelectTool={onSelectTool} onOpenCommandPalette={onOpenCommandPalette} />
     <ToolNavBar onSelectTool={onSelectTool} />
   </div>

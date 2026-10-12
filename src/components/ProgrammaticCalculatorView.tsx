@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from './SlashLink';
+import { ToolHeading } from './ToolHeading';
 import { Target, GraduationCap } from 'lucide-react';
 import {
   resolveProgrammaticSeo,
@@ -197,16 +198,8 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
       />
 
       <div className="programmatic-calc-wrapper w-full max-w-5xl mx-auto space-y-8">
-        {/* Hero Header */}
-        <header className="p-6 sm:p-8 bg-gradient-to-r from-slate-50/95 to-teal-50/80 dark:from-slate-900/95 dark:to-slate-800/90 border border-slate-200/80 dark:border-slate-800 rounded-3xl shadow-xs">
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
-            {entry.h1}
-          </h1>
-
-          <p className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300 font-medium max-w-3xl leading-relaxed">
-            {entry.intentContext}
-          </p>
-        </header>
+        {/* Hero banner: same slate banner as every other tool page */}
+        <ToolHeading title={entry.h1} description={entry.intentContext} />
 
         {/* Interactive Workspace */}
         <section aria-label="Interactive Workspace" className="w-full">

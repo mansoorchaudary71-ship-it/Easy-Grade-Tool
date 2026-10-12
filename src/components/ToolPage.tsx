@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShieldCheck } from 'lucide-react';
 import { Link } from './SlashLink';
+import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
 import { TOOL_PAGES, ToolPageSlug, toolPageCanonical } from '../data/toolPages';
 import { OG_IMAGES } from '../data/seoConfig';
@@ -58,10 +59,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         breadcrumbLabel={entry.navLabel}
       />
 
-      <header className="space-y-3">
-        <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white [text-wrap:balance] m-0">{entry.h1}</h1>
-        <p className="text-base text-slate-600 dark:text-slate-300 max-w-3xl m-0">{entry.intro}</p>
-      </header>
+      <ToolHeading title={entry.h1} description={entry.intro} />
 
       <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
         {entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : Tool ? <Tool /> : null}
