@@ -111,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <MotionConfig reducedMotion="user">
-      <header className="glass-bar glass-bar--header relative isolate print:hidden">
+      <header className="slate-bar relative isolate print:hidden">
         {/* Decorative overlay: faint concentric arcs + a wave. Non-interactive, clipped by its own overflow-hidden parent. */}
         <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
           <svg

@@ -38,7 +38,7 @@ const pillClass =
  *
  * Rendered by <SiteHeader /> directly under the main header, so it appears on EVERY route
  * (calculators, hub pages, grading-scale pages, legal/about pages and the 404 page).
- * Glass surface: translucent slate + backdrop blur + 1px hairline (see `.glass-bar` in premium.css).
+ * Solid slate surface with a 1px hairline, same look as the banner (see `.slate-bar` in premium.css).
  * Everything inside it stays fully opaque.
  */
 export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
@@ -91,7 +91,17 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
 
   return (
     <>
-      <nav className="glass-bar glass-bar--tools relative isolate print:hidden" aria-label="Calculator tools">
+      <nav className="slate-bar slate-bar--tools relative isolate print:hidden" aria-label="Calculator tools">
+        {/* Same faint arc + wave overlay as the banner: no fill, non-interactive, clipped by its own overflow-hidden parent */}
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1440 64" preserveAspectRatio="xMidYMid slice" fill="none" focusable="false">
+            <g stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.25">
+              <circle cx="120" cy="70" r="60" />
+              <circle cx="120" cy="70" r="110" />
+              <path d="M-40 44 C 220 8, 420 80, 700 36 S 1120 4, 1500 40" />
+            </g>
+          </svg>
+        </div>
         <LayoutGroup id="tool-nav-pill">
           <div
             ref={navInnerRef}

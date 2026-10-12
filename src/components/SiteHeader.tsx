@@ -10,11 +10,11 @@ interface SiteHeaderProps {
 }
 
 /**
- * The single, global site chrome: glass main header + glass tool navigation bar.
+ * The single, global site chrome: solid slate main header + slate tool navigation bar.
  *
  * Mounted once in App.tsx above <Routes>, so the one-row tool bar sits directly under the header on
  * every page. This wrapper is the sticky element (both bars stay pinned together on every screen
- * size); each bar owns its own backdrop-blur layer, so neither nests inside the other's blur.
+ * size); the two bars share the slate banner look.
  * There must be exactly ONE tool bar: a second one would share the sliding pill's layoutId and the
  * pill would jump between the two.
  */
