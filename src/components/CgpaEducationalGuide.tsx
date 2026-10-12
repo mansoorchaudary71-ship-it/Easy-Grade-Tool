@@ -28,7 +28,7 @@ import { SemanticGuideImage } from './SemanticGuideImage';
 
 export function getCgpaHowToSchema(canonicalOrigin: string = BASE_CANONICAL_ORIGIN) {
   const cleanOrigin = canonicalOrigin.replace(/\/+$/, '');
-  const url = `${cleanOrigin}/cgpa-to-percentage-calculator`;
+  const url = `${cleanOrigin}/cgpa-to-percentage-calculator/`;
 
   return {
     '@context': 'https://schema.org',

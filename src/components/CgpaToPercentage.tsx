@@ -419,7 +419,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
       params.set('uni', selectedUniId);
     }
     setSearchParams(params, { replace: true });
-    const shareUrl = `${window.location.origin}/cgpa-to-percentage-calculator?${params.toString()}`;
+    const shareUrl = `${window.location.origin}/cgpa-to-percentage-calculator/?${params.toString()}`;
     try {
       await navigator.clipboard.writeText(shareUrl);
       triggerHaptic(10);
