@@ -186,7 +186,7 @@ export function buildGradingScaleIndexPage(): ToolPageEntry {
     navLabel: 'Grading Scales',
     h1: 'Grading Scale Charts by Number of Questions',
     title: 'Grading Scale Charts: 5 to 100 Questions | Easy Grade Tool',
-    metaDescription: `Pick your test size, from ${GRADING_SCALE_SIZES[0]} to ${GRADING_SCALE_SIZES[GRADING_SCALE_SIZES.length - 1]} questions, and get the percentage and letter grade for every possible score.`,
+    metaDescription: `Pick your test size, from ${GRADING_SCALE_SIZES[0]} to ${GRADING_SCALE_SIZES[GRADING_SCALE_SIZES.length - 1]} questions, and get the percentage and letter grade for every possible score. Free, printable charts, no sign-up.`,
     badge: 'Score charts',
     intro: 'Choose the number of questions on your test to open a ready-made score chart. Each chart lists the percentage and letter grade for every number of wrong answers, on the standard and plus/minus scales.',
     keywords: ['grading scale by number of questions', 'test score chart', 'quiz grading scale', 'grading scale chart'],
