@@ -23,19 +23,18 @@ export const headerFocusRing =
   'outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1E293B]';
 
 const tabBase =
-  'relative isolate inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 min-h-11 text-[14px] leading-none tracking-[-0.005em] no-underline cursor-pointer select-none touch-manipulation transition-[color,background-color,transform] duration-200 ease-out active:scale-[0.97] [-webkit-tap-highlight-color:transparent]';
+  'relative isolate inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 min-h-10 text-[13.5px] leading-none no-underline cursor-pointer select-none touch-manipulation transition-[color,background-color,transform] duration-200 ease-out [-webkit-tap-highlight-color:transparent]';
 
 /** Light, calm focus ring for the white bar (the shared `headerFocusRing` above is tuned for the dark header). */
 const tabFocusRing =
   'outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-indigo-400/80 dark:focus-visible:ring-offset-slate-900';
 
 const tabInactive =
-  'font-medium text-slate-500 hover:bg-slate-900/[0.045] hover:text-slate-800 dark:text-slate-400 dark:hover:bg-white/[0.07] dark:hover:text-slate-100';
+  'font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100';
 const tabActive = 'font-semibold text-indigo-600 dark:text-indigo-300';
 
-/** The sliding active pill: soft lavender fill, hairline indigo edge, a lifted glow and a crisp top highlight. */
-const pillClass =
-  'absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-indigo-50 to-[#E6E8FF] ring-1 ring-inset ring-indigo-200/70 shadow-[0_6px_16px_-8px_rgba(79,70,229,0.55),inset_0_1px_0_rgba(255,255,255,0.9)] dark:from-indigo-400/20 dark:to-indigo-500/15 dark:ring-indigo-300/25 dark:shadow-[0_8px_20px_-10px_rgba(99,102,241,0.7),inset_0_1px_0_rgba(255,255,255,0.12)]';
+/** The sliding active pill: flat, minimal lavender fill. */
+const pillClass = 'absolute inset-0 -z-10 rounded-full bg-indigo-50 dark:bg-indigo-400/15';
 
 /**
  * Secondary "tool name" bar (Quick Grade, Weighted Grade, Final Exam, ...).
@@ -96,13 +95,13 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
   return (
     <>
       <nav
-        className="relative isolate border-b border-slate-200/80 bg-white/90 shadow-[0_12px_28px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl print:hidden dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_14px_32px_-18px_rgba(0,0,0,0.7)]"
+        className="relative isolate border-b border-slate-200/70 bg-white print:hidden dark:border-white/10 dark:bg-slate-900"
         aria-label="Calculator tools"
       >
         <LayoutGroup id="tool-nav-pill">
           <div
             ref={navInnerRef}
-            className="mx-auto flex max-w-[1240px] items-center gap-1 overflow-x-auto overflow-y-hidden px-6 py-2.5 [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,#000_20px,#000_calc(100%-20px),transparent)] sm:px-8 [&::-webkit-scrollbar]:hidden [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto"
+            className="mx-auto flex max-w-[1240px] items-center gap-0.5 overflow-x-auto overflow-y-hidden px-6 py-1.5 [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,#000_20px,#000_calc(100%-20px),transparent)] sm:px-8 [&::-webkit-scrollbar]:hidden [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto"
           >
             {primaryItems.map((tool) => {
               const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
