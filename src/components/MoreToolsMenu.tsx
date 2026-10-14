@@ -19,7 +19,8 @@ const GAP = 10;
 const MARGIN = 12;
 
 /**
- * Anchored glass dropdown for the "More tools" tab (tablet + desktop; phones keep the bottom sheet).
+ * Anchored glass dropdown for the "More tools" button (tablet + desktop; phones keep the bottom sheet).
+ * Items use the same Primary / Secondary buttons as the menu bar: current page = solid indigo, others = outlined.
  *
  * Non-modal on purpose: the page stays scrollable and the header stays reachable, like a normal menu.
  *  - opens right under the tab, right-aligned to it and clamped inside the viewport
@@ -99,14 +100,14 @@ export const MoreToolsMenu: React.FC<MoreToolsMenuProps> = ({ items, currentPath
       role="group"
       aria-label="More tools"
       style={{ top: pos.top, left: pos.left, width: WIDTH }}
-      className={`fixed z-[9999] origin-top-right overflow-hidden rounded-2xl border border-slate-200/70 bg-white/85 p-1.5 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.45),0_2px_6px_rgba(15,23,42,0.05)] backdrop-blur-xl backdrop-saturate-150 transition duration-150 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-slate-900/85 dark:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.8)] ${
+      className={`fixed z-[9999] origin-top-right overflow-hidden rounded-2xl border border-slate-200/70 bg-white/90 p-2 shadow-[0_24px_60px_-24px_rgba(30,41,90,0.45),0_2px_6px_rgba(15,23,42,0.05)] backdrop-blur-xl backdrop-saturate-150 transition duration-150 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_24px_60px_-24px_rgba(0,0,0,0.8)] ${
         shown ? 'translate-y-0 scale-100 opacity-100' : '-translate-y-1 scale-[0.98] opacity-0'
       }`}
     >
-      <p className="m-0 px-2.5 pb-1 pt-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500 dark:text-slate-400">
+      <p className="m-0 px-1.5 pb-2 pt-1 text-xs font-semibold text-slate-500 dark:text-slate-400">
         General tools
       </p>
-      <ul className="m-0 list-none space-y-0.5 p-0">
+      <ul className="m-0 list-none space-y-1.5 p-0">
         {items.map((item) => {
           const Icon = item.icon;
           const active = isSamePath(currentPath, item.path);
@@ -119,28 +120,22 @@ export const MoreToolsMenu: React.FC<MoreToolsMenuProps> = ({ items, currentPath
                   onClose();
                 }}
                 aria-current={active ? 'page' : undefined}
-                className={`group flex min-h-10 items-center gap-3 rounded-xl px-2.5 text-[13.5px] font-medium no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-blue-500/70 dark:focus-visible:ring-blue-400/80 ${
+                className={`group relative flex min-h-11 items-center gap-3 rounded-xl border-[1.5px] px-2.5 text-[13.5px] font-semibold no-underline outline-none focus-visible:ring-2 focus-visible:ring-[#4D63DA]/60 focus-visible:ring-offset-1 dark:focus-visible:ring-[#8B9CFF]/80 dark:focus-visible:ring-offset-slate-900 ${
                   active
-                    ? 'bg-slate-900/[0.05] text-slate-950 dark:bg-white/10 dark:text-white'
-                    : 'text-slate-600 hover:bg-slate-900/[0.04] hover:text-slate-950 dark:text-slate-300 dark:hover:bg-white/[0.07] dark:hover:text-white'
+                    ? 'border-transparent bg-gradient-to-b from-[#5A6FE6] to-[#4157CC] text-white shadow-[0_10px_20px_-10px_rgba(65,87,204,0.75),inset_0_1px_0_rgba(255,255,255,0.28)] dark:from-[#6E82F5] dark:to-[#4A5FDB]'
+                    : 'border-[#4D63DA]/40 bg-white/90 text-[#4D63DA] hover:-translate-y-px hover:border-[#4D63DA] hover:bg-[#F3F5FF] hover:shadow-[0_6px_14px_-8px_rgba(77,99,218,0.45)] dark:border-[#8B9CFF]/30 dark:bg-white/[0.04] dark:text-[#B4C0FF] dark:hover:border-[#8B9CFF]/80 dark:hover:bg-white/[0.10] dark:hover:text-white'
                 }`}
               >
                 <span
-                  className={`inline-flex size-7 shrink-0 items-center justify-center rounded-lg transition-colors duration-150 ${
+                  className={`inline-flex size-7 shrink-0 items-center justify-center rounded-lg ${
                     active
-                      ? 'bg-blue-600/10 text-blue-600 dark:bg-blue-400/15 dark:text-blue-300'
-                      : 'bg-slate-900/[0.05] text-slate-500 group-hover:text-slate-800 dark:bg-white/[0.06] dark:text-slate-400 dark:group-hover:text-slate-100'
+                      ? 'bg-white/20 text-white'
+                      : 'bg-[#4D63DA]/10 text-[#4D63DA] dark:bg-white/[0.08] dark:text-[#B4C0FF] dark:group-hover:text-white'
                   }`}
                 >
                   <Icon className="size-4" strokeWidth={2} aria-hidden="true" />
                 </span>
                 <span className="flex-1">{item.label}</span>
-                {active && (
-                  <span
-                    className="size-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(37,99,235,0.7)] dark:bg-blue-400"
-                    aria-hidden="true"
-                  />
-                )}
               </Link>
             </li>
           );

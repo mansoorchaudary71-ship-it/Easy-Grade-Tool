@@ -13,7 +13,8 @@ interface MoreToolsSheetProps {
   onNavigate: (item: NavItem) => void;
 }
 
-/** Bottom sheet on phones, centered card on larger screens. Mount only while open. */
+/** Bottom sheet on phones, centered card on larger screens. Mount only while open.
+ *  Items use the same Primary / Secondary buttons as the menu bar. */
 export const MoreToolsSheet: React.FC<MoreToolsSheetProps> = ({ items, currentPath, onClose, onNavigate }) => {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -67,10 +68,10 @@ export const MoreToolsSheet: React.FC<MoreToolsSheetProps> = ({ items, currentPa
                     onClose();
                   }}
                   aria-current={active ? 'page' : undefined}
-                  className={`flex items-center gap-3 min-h-[48px] px-4 py-3 rounded-2xl no-underline text-base font-semibold border transition-colors ${
+                  className={`flex items-center gap-3 min-h-[52px] px-4 py-3 rounded-2xl border-[1.5px] no-underline text-base font-semibold outline-none focus-visible:ring-2 focus-visible:ring-[#4D63DA]/60 dark:focus-visible:ring-[#8B9CFF]/80 ${
                     active
-                      ? 'bg-teal-50 dark:bg-teal-950/50 border-teal-600 text-teal-900 dark:text-teal-200'
-                      : 'bg-white dark:bg-slate-800 border-stone-200 dark:border-slate-700 text-stone-800 dark:text-slate-100 hover:bg-stone-50 dark:hover:bg-slate-700'
+                      ? 'border-transparent bg-gradient-to-b from-[#5A6FE6] to-[#4157CC] text-white shadow-[0_12px_22px_-12px_rgba(65,87,204,0.8),inset_0_1px_0_rgba(255,255,255,0.28)] dark:from-[#6E82F5] dark:to-[#4A5FDB]'
+                      : 'border-[#4D63DA]/45 bg-white text-[#4D63DA] hover:border-[#4D63DA] hover:bg-[#F3F5FF] dark:border-[#8B9CFF]/35 dark:bg-white/[0.05] dark:text-[#B4C0FF] dark:hover:border-[#8B9CFF]/80 dark:hover:bg-white/[0.10] dark:hover:text-white'
                   }`}
                 >
                   <Icon className="w-5 h-5 shrink-0" aria-hidden="true" />
