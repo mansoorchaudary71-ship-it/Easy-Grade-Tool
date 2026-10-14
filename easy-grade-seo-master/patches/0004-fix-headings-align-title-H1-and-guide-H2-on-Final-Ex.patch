@@ -1,0 +1,54 @@
+From fb191d1644a476da48a8ffc3957b0f6cc8c1ceba Mon Sep 17 00:00:00 2001
+From: audit <a@a>
+Date: Wed, 14 Oct 2026 02:00:56 +0000
+Subject: [PATCH 5/8] fix(headings): align title, H1 and guide H2 on 'Final
+ Exam Grade Calculator' [H1]
+
+---
+ src/components/GuideArticle.tsx | 2 +-
+ src/data/programmaticSeoData.ts | 2 +-
+ src/data/toolGuideContent.ts    | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/components/GuideArticle.tsx b/src/components/GuideArticle.tsx
+index d1b98c5..cfe6732 100644
+--- a/src/components/GuideArticle.tsx
++++ b/src/components/GuideArticle.tsx
+@@ -40,7 +40,7 @@ export interface GuideArticleEntry {
+ export const GUIDE_ARTICLES: Record<GuideArticleSlug, GuideArticleEntry> = {
+   "final-exam-grade-calculator": {
+     id: "final-exam-guide",
+-    title: "College Final Grade Calculator – Free Final Grade Calculator & Grading",
++    title: "Final Exam Grade Calculator: Find the Score You Need",
+     imageKey: "quick",
+     imageAlt: "A study notebook listing course grades beside a scientific calculator on a desk, used to plan the score needed on a final exam.",
+     blocks: [
+diff --git a/src/data/programmaticSeoData.ts b/src/data/programmaticSeoData.ts
+index e8026ee..d8d37c0 100644
+--- a/src/data/programmaticSeoData.ts
++++ b/src/data/programmaticSeoData.ts
+@@ -52,7 +52,7 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
+     path: '/final-exam-grade-calculator/',
+     toolKey: 'quick',
+     h1: 'Final Exam Grade Calculator',
+-    title: 'Final Grade Calculator — What Do You Need on the Final?',
++    title: 'Final Exam Grade Calculator — What Score Do You Need?',
+     metaDescription:
+       'Free final exam calculator: find the score you need on your final to pass or earn an A, B or C, and see your final grade. Step-by-step weight formula included.',
+     targetAudience: 'college',
+diff --git a/src/data/toolGuideContent.ts b/src/data/toolGuideContent.ts
+index b2105ea..db3fbc4 100644
+--- a/src/data/toolGuideContent.ts
++++ b/src/data/toolGuideContent.ts
+@@ -76,7 +76,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
+     imageKey: "final-exam",
+     imageAlt: "Study desk with a notebook of course grades, a calculator and a pen, set up to work out the score needed on a final exam.",
+     blocks: [
+-      { t: "title", text: "College Final Grade Calculator – Free Final Grade Calculator & Grading" },
++      { t: "title", text: "Final Exam Grade Calculator: Find the Score You Need" },
+       { t: 'p', runs: [["Navigating academic success requires utilizing a reliable college final grade calculator to manage your expectations and reach your target grade, ensuring you know the needed final score. By understanding grading systems and how a grade calculator works, students can make informed decisions about their midterm and final exam strategies, focusing on equally weighted assignments and using tools like uloop. "], ["Accurately determine the exact score you need on your final exam to achieve your desired course grade as a percentage, considering how scores and weights are entered.", true], ["."]] },
+       { t: "h2", text: "Understanding Grading Systems" },
+       { t: 'p', runs: [["Comprehending how instructors determine final grades involves analyzing your current grade alongside the syllabus to understand what grade do I need on my final exam and how the calculator uses this information. Using advanced grade calculators ensures you always know your current course grade and what grade do I need to achieve my academic goals. "], ["Understanding the precise percentage required for academic excellence can motivate you to achieve the needed final score.", true], ["."]] },
+-- 
+2.43.0
+

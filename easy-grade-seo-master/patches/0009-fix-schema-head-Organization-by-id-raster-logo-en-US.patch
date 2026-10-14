@@ -1,0 +1,104 @@
+From 34ac335c14437c9ec5de9b5165a513f44171c35e Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 02:51:47 +0000
+Subject: [PATCH 04/11] fix(schema,head): Organization by @id, raster logo,
+ en-US everywhere, robots preview directives (T-08, T-10)
+
+---
+ src/components/SEO.tsx       | 16 +++-------------
+ src/utils/seoHtmlInjector.ts | 24 ++++++++++++------------
+ 2 files changed, 15 insertions(+), 25 deletions(-)
+
+diff --git a/src/components/SEO.tsx b/src/components/SEO.tsx
+index 07ec749..d196a41 100644
+--- a/src/components/SEO.tsx
++++ b/src/components/SEO.tsx
+@@ -154,18 +154,8 @@ export const SEO: React.FC<SEOProps> = ({
+         description,
+         datePublished: SITE_LAUNCH_DATE,
+         dateModified: SITE_LAST_MODIFIED,
+-        author: {
+-          '@type': 'Organization',
+-          name: 'Easy Grade Tool',
+-          url: `${BASE_CANONICAL_ORIGIN}/`,
+-          email: CONTACT_EMAIL,
+-        },
+-        publisher: {
+-          '@type': 'Organization',
+-          name: 'Easy Grade Tool',
+-          url: `${BASE_CANONICAL_ORIGIN}/`,
+-          logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/icon.svg` },
+-        },
++        author: { '@id': `${BASE_CANONICAL_ORIGIN}/#organization` },
++        publisher: { '@id': `${BASE_CANONICAL_ORIGIN}/#organization` },
+         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+         ...(featureList && featureList.length > 0 ? { featureList } : {}),
+       };
+@@ -192,7 +182,7 @@ export const SEO: React.FC<SEOProps> = ({
+       name: 'Easy Grade Tool',
+       url: `${BASE_CANONICAL_ORIGIN}/`,
+       email: CONTACT_EMAIL,
+-      logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/icon.svg`, width: 512, height: 512 },
++      logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png`, width: 512, height: 512 },
+     };
+ 
+     return {
+diff --git a/src/utils/seoHtmlInjector.ts b/src/utils/seoHtmlInjector.ts
+index 4e42684..e6c9c58 100644
+--- a/src/utils/seoHtmlInjector.ts
++++ b/src/utils/seoHtmlInjector.ts
+@@ -294,6 +294,14 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
+     `<link rel="canonical" href="${safeCanonical}" />`
+   );
+ 
++  // 3b. Robots preview directives (indexing stays the default; only allows full snippets and large previews)
++  if (!/<meta\s+name="robots"/i.test(html)) {
++    html = html.replace(
++      /(<link\s+rel="canonical"[^>]*>)/i,
++      '$1\n    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />'
++    );
++  }
++
+   // 4. OpenGraph & Twitter Card tags
+   html = html.replace(
+     /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i,
+@@ -359,16 +367,8 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
+           jobTitle: SITE_OWNER.jobTitle,
+           ...(SITE_OWNER.sameAs.length ? { sameAs: SITE_OWNER.sameAs } : {}),
+         }
+-      : { '@type': 'Organization', name: 'Easy Grade Tool', url: `${BASE_CANONICAL_ORIGIN}/` },
+-    publisher: {
+-      '@type': 'Organization',
+-      name: 'Easy Grade Tool',
+-      url: `${BASE_CANONICAL_ORIGIN}/`,
+-      logo: {
+-        '@type': 'ImageObject',
+-        url: `${BASE_CANONICAL_ORIGIN}/icon.svg`,
+-      },
+-    },
++      : { '@id': `${BASE_CANONICAL_ORIGIN}/#organization` },
++    publisher: { '@id': `${BASE_CANONICAL_ORIGIN}/#organization` },
+     offers: {
+       '@type': 'Offer',
+       price: '0',
+@@ -426,7 +426,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
+     ...(SITE_OWNER ? { founder: { '@type': 'Person', name: SITE_OWNER.name } } : {}),
+     logo: {
+       '@type': 'ImageObject',
+-      url: `${BASE_CANONICAL_ORIGIN}/icon.svg`,
++      url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png`,
+       width: 512,
+       height: 512,
+     },
+@@ -439,7 +439,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
+     name: 'Easy Grade Tool',
+     alternateName: ['Easy Grade Calculator', 'EasyGradeTool'],
+     url: `${BASE_CANONICAL_ORIGIN}/`,
+-    inLanguage: 'en',
++    inLanguage: 'en-US',
+     publisher: { '@id': `${BASE_CANONICAL_ORIGIN}/#organization` },
+   };
+ 
+-- 
+2.43.0
+

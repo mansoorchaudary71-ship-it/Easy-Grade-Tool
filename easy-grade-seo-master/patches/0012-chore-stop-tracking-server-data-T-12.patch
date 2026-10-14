@@ -1,0 +1,59 @@
+From b9720f5cd54ea263a9957e6bff41c70d76df9660 Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 03:09:12 +0000
+Subject: [PATCH 10/11] chore: stop tracking server-data/ (T-12)
+
+---
+ .gitignore                   | 3 +++
+ server-data/contacts.json    | 1 -
+ server-data/issues.json      | 1 -
+ server-data/subscribers.json | 1 -
+ server-data/suggestions.json | 1 -
+ 5 files changed, 3 insertions(+), 4 deletions(-)
+ delete mode 100644 server-data/contacts.json
+ delete mode 100644 server-data/issues.json
+ delete mode 100644 server-data/subscribers.json
+ delete mode 100644 server-data/suggestions.json
+
+diff --git a/.gitignore b/.gitignore
+index 5a86d2a..5370ba8 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -6,3 +6,6 @@ coverage/
+ *.log
+ .env*
+ !.env.example
++
++# Runtime data written by the Express dev server (never commit user data)
++server-data/
+diff --git a/server-data/contacts.json b/server-data/contacts.json
+deleted file mode 100644
+index fe51488..0000000
+--- a/server-data/contacts.json
++++ /dev/null
+@@ -1 +0,0 @@
+-[]
+diff --git a/server-data/issues.json b/server-data/issues.json
+deleted file mode 100644
+index fe51488..0000000
+--- a/server-data/issues.json
++++ /dev/null
+@@ -1 +0,0 @@
+-[]
+diff --git a/server-data/subscribers.json b/server-data/subscribers.json
+deleted file mode 100644
+index fe51488..0000000
+--- a/server-data/subscribers.json
++++ /dev/null
+@@ -1 +0,0 @@
+-[]
+diff --git a/server-data/suggestions.json b/server-data/suggestions.json
+deleted file mode 100644
+index fe51488..0000000
+--- a/server-data/suggestions.json
++++ /dev/null
+@@ -1 +0,0 @@
+-[]
+-- 
+2.43.0
+

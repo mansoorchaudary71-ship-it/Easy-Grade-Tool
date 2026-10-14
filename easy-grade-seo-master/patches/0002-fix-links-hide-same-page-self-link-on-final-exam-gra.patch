@@ -1,0 +1,33 @@
+From 98180b86d1d37424d1c8302647477e955861efcc Mon Sep 17 00:00:00 2001
+From: audit <a@a>
+Date: Tue, 13 Oct 2026 16:57:57 +0000
+Subject: [PATCH 2/8] fix(links): hide same-page self-link on
+ /final-exam-grade-calculator/ [M2]
+
+---
+ src/components/GradeCalculator.tsx | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/components/GradeCalculator.tsx b/src/components/GradeCalculator.tsx
+index fc76b9b..f1e514d 100644
+--- a/src/components/GradeCalculator.tsx
++++ b/src/components/GradeCalculator.tsx
+@@ -513,6 +513,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
+                   ) : null}
+                 </div>
+ 
++                {location.pathname.replace(/\/+$/, '') !== '/final-exam-grade-calculator' && (
+                 <div className="pt-1">
+                   <Link
+                     to="/final-exam-grade-calculator/"
+@@ -521,6 +522,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
+                     <span>Need more detail? Open the Final Exam Grade Calculator &rarr;</span>
+                   </Link>
+                 </div>
++                )}
+ 
+                 <div className="pt-4 border-t border-slate-200/60 dark:border-slate-800 flex flex-wrap items-center gap-2 print:hidden">
+                   <button
+-- 
+2.43.0
+

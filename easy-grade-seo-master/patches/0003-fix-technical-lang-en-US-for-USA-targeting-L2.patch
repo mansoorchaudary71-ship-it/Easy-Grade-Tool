@@ -1,0 +1,23 @@
+From 7d3b60db2fda8830bf3a343543f0d3c1a62a5302 Mon Sep 17 00:00:00 2001
+From: audit <a@a>
+Date: Wed, 14 Oct 2026 02:00:52 +0000
+Subject: [PATCH 4/8] fix(technical): lang=en-US for USA targeting [L2]
+
+---
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/index.html b/index.html
+index 7d6d295..bf19282 100644
+--- a/index.html
++++ b/index.html
+@@ -1,5 +1,5 @@
+ <!doctype html>
+-<html lang="en">
++<html lang="en-US">
+   <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+-- 
+2.43.0
+

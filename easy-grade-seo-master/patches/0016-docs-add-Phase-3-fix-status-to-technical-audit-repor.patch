@@ -1,0 +1,46 @@
+From cd7077730833ba3fa6065d6ebe1fd93c2393567d Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 02:52:02 +0000
+Subject: [PATCH 08/11] docs: add Phase 3 fix status to technical audit report
+
+---
+ SEO_TECHNICAL_AUDIT_REPORT.md | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/SEO_TECHNICAL_AUDIT_REPORT.md b/SEO_TECHNICAL_AUDIT_REPORT.md
+index 4c64c5c..f0ab5ce 100644
+--- a/SEO_TECHNICAL_AUDIT_REPORT.md
++++ b/SEO_TECHNICAL_AUDIT_REPORT.md
+@@ -124,3 +124,29 @@ Takeaway: on technical SEO you already match or beat the fetched competitors. Pa
+ 3. OK to delete or archive the leftover root files in T-07?
+ 4. How is Search Console verified (DNS or HTML tag)? (T-15)
+ 5. Share a PageSpeed Insights / Lighthouse result for 2-3 pages if you want performance fixes beyond T-06.
++
++---
++
++# Phase 3/4 — Fix status (Before / After)
++
++Verified on the built `dist/` after `npm run build` (17/17 verify-launch checks pass, `tsc --noEmit` clean).
++
++| ID | Status | Before | After |
++|----|--------|--------|-------|
++| T-03 | Fixed | 404 carried homepage canonical, OG tags, FAQ/WebApp JSON-LD; charset at byte 789 | 404 has no canonical, no OG, no JSON-LD, its own description, noindex; charset at byte 51 |
++| T-04 | Fixed | CI: Node 20, `npm install` | CI: Node 22, `npm ci` |
++| T-08 | Fixed | Organization repeated inline; logo SVG; WebSite `en` vs `en-US` | `author`/`publisher` reference `#organization`; logo `/pwa-512x512.png`; `en-US` everywhere |
++| T-09 | Fixed | "Average Grade" twice in footer | Once |
++| T-10 | Fixed | No robots meta on indexable pages | All 35 real pages: `index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1` |
++| T-11 | Fixed | `Policy: /privacy` | `Policy: /privacy/` |
++| T-05 | Not changed | — | `dateModified` is the editorial "content reviewed" date (`CONTENT_REVIEWED_ON`), not a build date. Tying it to build time would claim freshness that did not happen. Bump `CONTENT_REVIEWED_ON` when content changes. |
++| T-01, T-02 | Waiting on you | — | Needs Cloudflare (or another host) decision |
++| T-06 | Waiting on data | — | Needs PageSpeed/Lighthouse numbers before trimming CSS/JS |
++| T-07, T-12, T-13 | Waiting on you | — | Involve deleting/untracking files; not touched |
++| T-15 | Waiting on you | — | Search Console method unknown |
++| T-14, T-16, T-17 | No action | — | Informational / on-page scope |
++
++Estimated technical score after fixes: **76/100** (Delivery & hosting stays at 45 until T-01/T-02 are decided).
++
++## Not done
++- Phase 0 step 2 and the combined on-page + technical package: `seo-audit-fixes-patches.zip` and `SEO_AUDIT_REPORT.md` were never uploaded. The delivered patches are technical-only and apply on your original main.
+-- 
+2.43.0
+

@@ -1,0 +1,46 @@
+From e861e54cc4a779926d3d3d77440eee9a383f5403 Mon Sep 17 00:00:00 2001
+From: audit <a@a>
+Date: Wed, 14 Oct 2026 02:01:05 +0000
+Subject: [PATCH 6/8] docs: draft replacement guide copy for review (not
+ published) [C1/C2]
+
+---
+ docs/content-drafts/final-exam-guide-DRAFT.md | 26 +++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 docs/content-drafts/final-exam-guide-DRAFT.md
+
+diff --git a/docs/content-drafts/final-exam-guide-DRAFT.md b/docs/content-drafts/final-exam-guide-DRAFT.md
+new file mode 100644
+index 0000000..d78230e
+--- /dev/null
++++ b/docs/content-drafts/final-exam-guide-DRAFT.md
+@@ -0,0 +1,26 @@
++# DRAFT for review — final exam page guide copy (NOT published)
++Replaces the guide text in `src/components/GuideArticle.tsx` and `src/data/toolGuideContent.ts` (issues C1/C2).
++Removes: "uloop", "final grade calculator CSU", "cal poly", stray `**.` marks, repeated keyword phrasing.
++TODO: confirm every statement matches your calculator's behaviour; add a real "last updated" date and author/reviewer if you want one.
++
++## Final Exam Grade Calculator: Find the Score You Need
++Enter your current grade, the weight of your final exam, and the grade you want. The calculator tells you the minimum percentage you need on the final.
++
++## The formula
++Required score = (target grade − current grade × (1 − final weight)) ÷ final weight
++
++## Worked example
++Current grade 84%, final worth 25%, target 86%:
++84 × 0.75 = 63 points banked. (86 − 63) ÷ 0.25 = 92%. You need 92% on the final.
++For a 90% target the result is 108%, which is impossible without extra credit or a curve. The highest grade you can reach is 63 + 25 = 88%.
++
++## How to use it
++1. Enter your current course grade.
++2. Enter the final exam weight from your syllabus.
++3. Enter your target grade and read the required score.
++4. Try a lower target to find a safe minimum.
++
++## Tips
++- Use the weight stated in your syllabus, not an estimate.
++- Ask your instructor whether a curve or dropped grade applies; the calculator does not assume one.
++- Check your current grade matches your course portal before relying on the result.
+-- 
+2.43.0
+

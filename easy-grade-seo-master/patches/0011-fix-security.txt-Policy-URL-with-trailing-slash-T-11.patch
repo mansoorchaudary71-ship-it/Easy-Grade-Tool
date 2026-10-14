@@ -1,0 +1,34 @@
+From 1c79bb0ca651da563a9eaef5039fcd7e999039f9 Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 02:51:47 +0000
+Subject: [PATCH 06/11] fix(security.txt): Policy URL with trailing slash
+ (T-11)
+
+---
+ public/.well-known/security.txt | 2 +-
+ public/security.txt             | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/public/.well-known/security.txt b/public/.well-known/security.txt
+index 6a1878a..aac97eb 100644
+--- a/public/.well-known/security.txt
++++ b/public/.well-known/security.txt
+@@ -2,4 +2,4 @@ Contact: mailto:support@easygradetool.com
+ Expires: 2027-10-04T00:00:00.000Z
+ Preferred-Languages: en
+ Canonical: https://www.easygradetool.com/.well-known/security.txt
+-Policy: https://www.easygradetool.com/privacy
++Policy: https://www.easygradetool.com/privacy/
+diff --git a/public/security.txt b/public/security.txt
+index 6a1878a..aac97eb 100644
+--- a/public/security.txt
++++ b/public/security.txt
+@@ -2,4 +2,4 @@ Contact: mailto:support@easygradetool.com
+ Expires: 2027-10-04T00:00:00.000Z
+ Preferred-Languages: en
+ Canonical: https://www.easygradetool.com/.well-known/security.txt
+-Policy: https://www.easygradetool.com/privacy
++Policy: https://www.easygradetool.com/privacy/
+-- 
+2.43.0
+

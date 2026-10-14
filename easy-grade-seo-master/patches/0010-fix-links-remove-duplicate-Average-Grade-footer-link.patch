@@ -1,0 +1,28 @@
+From 3a2ef79c0fcbe9f1fe0b720e6cd5ba08a10f0229 Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 02:51:47 +0000
+Subject: [PATCH 05/11] fix(links): remove duplicate Average Grade footer link
+ (T-09)
+
+---
+ src/components/Footer.tsx | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/components/Footer.tsx b/src/components/Footer.tsx
+index 8fc0026..be585bf 100644
+--- a/src/components/Footer.tsx
++++ b/src/components/Footer.tsx
+@@ -751,7 +751,9 @@ export const Footer: React.FC<FooterProps> = ({
+                     path: t.path,
+                     toolKey: t.toolKey as ToolKey | null,
+                   })),
+-                  ...(group === 'academic' ? FOOTER_EXTRA_ACADEMIC_LINKS.map((t) => ({ ...t, toolKey: null as ToolKey | null })) : []),
++                  ...(group === 'academic'
++                    ? FOOTER_EXTRA_ACADEMIC_LINKS.filter((t) => !NAV_ITEMS.some((n) => n.path === t.path)).map((t) => ({ ...t, toolKey: null as ToolKey | null }))
++                    : []),
+                 ];
+                 const userChoice = openGroups[group];
+                 const hasMore = items.length > FOOTER_VISIBLE_LINKS;
+-- 
+2.43.0
+

@@ -1,0 +1,30 @@
+From c82a40abcc999a65cf4a06ede0a90662668761c8 Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 02:51:47 +0000
+Subject: [PATCH 03/11] ci: use Node 22 and npm ci to match engines and
+ lockfile (T-04)
+
+---
+ .github/workflows/deploy.yml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index 1d4ae2a..f35f9af 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -25,10 +25,10 @@ jobs:
+       - name: Set up Node
+         uses: actions/setup-node@v4
+         with:
+-          node-version: 20
++          node-version: 22
+           
+       - name: Install dependencies
+-        run: npm install
++        run: npm ci
+         
+       - name: Build project
+         run: npm run build
+-- 
+2.43.0
+

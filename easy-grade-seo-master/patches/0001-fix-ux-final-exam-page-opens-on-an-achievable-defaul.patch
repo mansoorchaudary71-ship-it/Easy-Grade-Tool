@@ -1,0 +1,61 @@
+From 1791488aaef8c2a507ce2d58acf8c2b6f946559e Mon Sep 17 00:00:00 2001
+From: audit <a@a>
+Date: Tue, 13 Oct 2026 16:57:57 +0000
+Subject: [PATCH 1/8] fix(ux): final-exam page opens on an achievable default
+ target (86% / 25% weight) instead of an impossible 108% result [H3]
+
+---
+ src/components/GradeCalculator.tsx            | 9 +++++++--
+ src/components/ProgrammaticCalculatorView.tsx | 2 ++
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/src/components/GradeCalculator.tsx b/src/components/GradeCalculator.tsx
+index 8134f1d..fc76b9b 100644
+--- a/src/components/GradeCalculator.tsx
++++ b/src/components/GradeCalculator.tsx
+@@ -31,6 +31,9 @@ export interface GradeCalculatorProps {
+    * is the single SEO owner (SEOHead skips those routes), so it stays false there.
+    */
+   hideSeo?: boolean;
++  /** Starting values for the target-final solver (percent strings). Defaults: 90 and 20. */
++  initialTargetGrade?: string;
++  initialFinalWeight?: string;
+ }
+ 
+ const ROW_INPUT =
+@@ -67,6 +70,8 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
+   initialCourseName,
+   hideHeading = false,
+   hideSeo = false,
++  initialTargetGrade,
++  initialFinalWeight,
+ }) => {
+   const location = useLocation();
+   const isWeightedRoute = location.pathname.replace(/\/+$/, '') === '/grade-calculator';
+@@ -79,8 +84,8 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
+   const [mode, setMode] = useState<'weighted' | 'points'>(() => (initialMode === 'points' ? 'points' : 'weighted'));
+   const [scaleType, setScaleType] = useState<GradingScaleType>(initialScale);
+   const [courseName] = useState<string>(initialCourseName || '');
+-  const [targetGrade, setTargetGrade] = useState<string>('90');
+-  const [finalWeight, setFinalWeight] = useState<string>('20');
++  const [targetGrade, setTargetGrade] = useState<string>(initialTargetGrade ?? '90');
++  const [finalWeight, setFinalWeight] = useState<string>(initialFinalWeight ?? '20');
+ 
+   const [items, setItems] = useState<AssessmentItem[]>(() => {
+     if (initialItems && initialItems.length > 0) return initialItems;
+diff --git a/src/components/ProgrammaticCalculatorView.tsx b/src/components/ProgrammaticCalculatorView.tsx
+index dabdb02..be55b34 100644
+--- a/src/components/ProgrammaticCalculatorView.tsx
++++ b/src/components/ProgrammaticCalculatorView.tsx
+@@ -220,6 +220,8 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
+                 initialCourseName={entry.courseName}
+                 hideHeading={true}
+                 hideSeo={true}
++                initialTargetGrade={entry.slug === 'final-exam-grade-calculator' ? '86' : undefined}
++                initialFinalWeight={entry.slug === 'final-exam-grade-calculator' ? '25' : undefined}
+               />
+           </>
+         </section>
+-- 
+2.43.0
+

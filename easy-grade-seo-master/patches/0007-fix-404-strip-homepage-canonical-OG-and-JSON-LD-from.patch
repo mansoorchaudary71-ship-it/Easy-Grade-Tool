@@ -1,0 +1,42 @@
+From fecc3be1d970b1decc68f3d6375dd3dfacdcc6c0 Mon Sep 17 00:00:00 2001
+From: SEO Audit <audit@example.com>
+Date: Wed, 14 Oct 2026 02:51:47 +0000
+Subject: [PATCH 02/11] fix(404): strip homepage canonical, OG and JSON-LD from
+ 404 page; charset first (T-03)
+
+---
+ scripts/prerender.ts | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/scripts/prerender.ts b/scripts/prerender.ts
+index a37e3a3..a15f52a 100644
+--- a/scripts/prerender.ts
++++ b/scripts/prerender.ts
+@@ -231,6 +231,24 @@ export async function runPrerender(): Promise<void> {
+     </script>`
+     );
+   }
++  // The 404 is built from the homepage template, so strip everything that describes the homepage:
++  // canonical, description, OG/Twitter tags and JSON-LD. An error page must not carry another page's signals.
++  notFoundHtml = notFoundHtml
++    .replace(/<link\s+rel="canonical"[^>]*>\s*/gi, '')
++    .replace(/<meta\s+(?:property="og:|name="twitter:)[^>]*>\s*/gi, '')
++    .replace(/<script[^>]*type="application\/ld\+json"[^>]*>[\s\S]*?<\/script>\s*/gi, '')
++    .replace(
++      /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
++      '<meta name="description" content="The page you requested could not be found. Return to Easy Grade Tool to use the free grade calculators." />'
++    );
++  // Keep <meta charset> as the very first thing in <head>: move the robots meta and redirect script after it.
++  {
++    const injected = notFoundHtml.match(/<head>\s*(<meta name="robots"[^>]*>\s*<script>[\s\S]*?<\/script>)/i);
++    const charset = notFoundHtml.match(/<meta\s+charset="[^"]*"\s*\/?>/i);
++    if (injected && charset) {
++      notFoundHtml = notFoundHtml.replace(injected[1], '').replace(charset[0], `${charset[0]}\n    ${injected[1]}`);
++    }
++  }
+   notFoundHtml = notFoundHtml.replace(
+     /<title>.*?<\/title>/i,
+     '<title>404 — Page Not Found | Easy Grade Tool</title>'
+-- 
+2.43.0
+
