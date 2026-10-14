@@ -188,6 +188,67 @@ export const LogoLockup: React.FC<LogoLockupProps> = ({
   );
 };
 
+/* -------------------------------------------------------------------------- */
+/* Thin wordmark (current brand look)                                          */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Modern, light "monoline" wordmark: EASY GRADE in hairline geometric capitals with wide tracking,
+ * a blue crossbar on each "A", and a small tracked "TOOL" + hairline rule underneath.
+ *
+ * Every letter is a stroked vector path (no font), so it renders identically everywhere with no
+ * font loading and no layout shift. Colours: letters use `currentColor` (set by <Logo />), the
+ * accent uses brand blue (lighter blue on dark surfaces).
+ */
+const ThinWordmark: React.FC<{ className?: string; onDark?: boolean }> = ({ className, onDark = false }) => {
+  const accent = onDark ? 'stroke-blue-400' : 'stroke-[#2563EB] dark:stroke-blue-400';
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="-6 -6 844 174"
+      fill="none"
+      role="img"
+      aria-label="Easy Grade Tool"
+      className={className}
+      strokeLinecap="butt"
+      strokeLinejoin="miter"
+      strokeMiterlimit={2.5}
+    >
+      {/* EASY GRADE */}
+      <g stroke="currentColor" strokeWidth={6.5}>
+        <path transform="translate(0 0)" d="M54 0H0V100H54M0 50H46" />
+        <path transform="translate(80 0)" d="M0 100L39 0L78 100" />
+        <path transform="translate(184 0)" d="M51 19C51 7 41 0 27 0C13 0 3 8 3 23C3 38 14 44 27 50C40 56 51 62 51 77C51 92 41 100 27 100C13 100 3 93 2 81" />
+        <path transform="translate(264 0)" d="M0 0L32 52L64 0M32 52V100" />
+        <path transform="translate(398 0)" d="M70 20C62 7 50 0 37 0C15 0 0 19 0 50C0 81 15 100 37 100C58 100 72 86 72 60V54H40" />
+        <path transform="translate(498 0)" d="M0 100V0H30C47 0 56 10 56 26C56 42 47 52 30 52H0M30 52L56 100" />
+        <path transform="translate(580 0)" d="M0 100L39 0L78 100" />
+        <path transform="translate(684 0)" d="M0 0H26C54 0 68 20 68 50C68 80 54 100 26 100H0Z" />
+        <path transform="translate(778 0)" d="M54 0H0V100H54M0 50H46" />
+      </g>
+      {/* Blue crossbars of the two A's */}
+      <g className={accent} strokeWidth={6.5}>
+        <path transform="translate(80 0)" d="M14 66H64" />
+        <path transform="translate(580 0)" d="M14 66H64" />
+      </g>
+      {/* TOOL */}
+      <g transform="translate(0 132)" className={accent} strokeWidth={13.3}>
+        <path transform="translate(0.0 0) scale(0.3)" d="M0 0H60M30 0V100" />
+        <path transform="translate(31.8 0) scale(0.3)" d="M42 0C65 0 84 20 84 50C84 80 65 100 42 100C19 100 0 80 0 50C0 20 19 0 42 0Z" />
+        <path transform="translate(70.8 0) scale(0.3)" d="M42 0C65 0 84 20 84 50C84 80 65 100 42 100C19 100 0 80 0 50C0 20 19 0 42 0Z" />
+        <path transform="translate(109.8 0) scale(0.3)" d="M0 0V100H48" />
+      </g>
+      {/* Hairline rule that runs out to the end of the wordmark */}
+      <path
+        d="M148.8 147H832"
+        className={accent}
+        strokeWidth={2.2}
+        strokeOpacity={0.45}
+      />
+    </svg>
+  );
+};
+
 interface LogoProps {
   className?: string;
   iconOnly?: boolean;
@@ -198,8 +259,8 @@ interface LogoProps {
 
 const LOCKUP_HEIGHT = {
   sm: 'h-7',
-  md: 'h-7 sm:h-9',
-  lg: 'h-12',
+  md: 'h-8 sm:h-10',
+  lg: 'h-14',
 } as const;
 
 const ICON_SIZE = {
@@ -208,21 +269,21 @@ const ICON_SIZE = {
   lg: 'size-12',
 } as const;
 
-/** Official Easy Grade Tool logo (same props as before, so existing usages keep working). */
+/**
+ * Official Easy Grade Tool logo (same props as before, so existing usages keep working).
+ * The full logo is the thin monoline wordmark; `iconOnly` still returns the square app-icon mark.
+ */
 export const Logo: React.FC<LogoProps> = ({ className = '', iconOnly = false, size = 'md', onDark = false }) => {
   return (
     <div
-      className={`inline-flex items-center select-none ${onDark ? 'text-white' : 'text-[#1B2038] dark:text-white'} ${className}`}
+      className={`inline-flex items-center select-none ${onDark ? 'text-white' : 'text-[#0F172A] dark:text-white'} ${className}`}
     >
       {iconOnly ? (
         <BrandMark
           className={`${ICON_SIZE[size]} shrink-0 transition-transform duration-200 ease-out group-hover:scale-105 [.brand:hover_&]:scale-105 motion-reduce:transition-none`}
         />
       ) : (
-        <LogoLockup
-          className={`${LOCKUP_HEIGHT[size]} w-auto shrink-0`}
-          accentFill={onDark ? '#60A5FA' : undefined}
-        />
+        <ThinWordmark className={`${LOCKUP_HEIGHT[size]} w-auto shrink-0`} onDark={onDark} />
       )}
     </div>
   );

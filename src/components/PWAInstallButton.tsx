@@ -51,10 +51,10 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
       <button
         type="button"
         onClick={handleInstallClick}
-        className={`inline-flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold tracking-tight cursor-pointer text-white shadow-md shadow-teal-600/20 transition-all duration-200 hover:brightness-110 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
+        className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2 text-xs font-semibold tracking-tight cursor-pointer transition-all duration-200 active:scale-95 outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-offset-slate-900 ${
           variant === 'banner'
-            ? 'bg-teal-600'
-            : 'bg-teal-700 border border-teal-600/60'
+            ? 'bg-teal-600 text-white shadow-md shadow-teal-600/20 hover:brightness-110'
+            : 'bg-[#111827] text-white shadow-[0_8px_20px_-8px_rgba(15,23,42,0.6)] hover:bg-[#1F2937] hover:shadow-[0_12px_24px_-8px_rgba(15,23,42,0.65)] dark:bg-white dark:text-slate-900 dark:shadow-[0_8px_20px_-8px_rgba(0,0,0,0.6)] dark:hover:bg-slate-100'
         } ${className}`}
         aria-label={isIOS ? 'Install Easy Grade Tool on iOS' : 'Install Easy Grade App for offline use'}
         title="Install app to your home screen for full offline access"

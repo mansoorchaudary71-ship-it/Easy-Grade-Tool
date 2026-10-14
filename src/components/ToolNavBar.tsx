@@ -18,31 +18,33 @@ export interface ToolNavBarProps {
 /** One consistent stroke width for every toolbar / header icon. */
 export const ICON_STROKE = 2;
 
-/** Focus ring shared by the header and the tool bar. The glass bars sit on the slate hue, so the offset matches it. */
+/** Focus ring shared by the header and the tool bar. Light grey-blue surface; deep slate in dark mode. */
 export const headerFocusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1E293B]';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-blue-400/80 dark:focus-visible:ring-offset-[#1B2038]';
 
 const tabBase =
-  'relative isolate inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 min-h-10 text-[13.5px] leading-none no-underline cursor-pointer select-none touch-manipulation transition-[color,background-color,transform] duration-200 ease-out [-webkit-tap-highlight-color:transparent]';
+  'relative isolate inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 min-h-10 text-[13.5px] leading-none no-underline cursor-pointer select-none touch-manipulation transition-[color,background-color,transform] duration-200 ease-out [-webkit-tap-highlight-color:transparent]';
 
-/** Light, calm focus ring for the white bar (the shared `headerFocusRing` above is tuned for the dark header). */
+/** Focus ring for tabs inside the frosted pill. */
 const tabFocusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-indigo-400/80 dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-blue-400/80 dark:focus-visible:ring-offset-slate-800';
 
 const tabInactive =
-  'font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-100';
-const tabActive = 'font-semibold text-indigo-600 dark:text-indigo-300';
+  'font-medium text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white';
+const tabActive = 'font-semibold text-slate-900 dark:text-white';
 
-/** The sliding active pill: flat, minimal lavender fill. */
-const pillClass = 'absolute inset-0 -z-10 rounded-full bg-indigo-50 dark:bg-indigo-400/15';
+/** The sliding active pill: a clean white chip that lifts off the frosted bar (translucent white in dark mode). */
+const pillClass =
+  'absolute inset-0 -z-10 rounded-full bg-white shadow-[0_1px_2px_rgba(15,23,42,0.08),0_4px_10px_-4px_rgba(15,23,42,0.18)] ring-1 ring-slate-900/[0.05] dark:bg-white/[0.14] dark:shadow-none dark:ring-white/10';
 
 /**
  * Secondary "tool name" bar (Quick Grade, Weighted Grade, Final Exam, ...).
  *
  * Rendered by <SiteHeader /> directly under the main header, so it appears on EVERY route
  * (calculators, hub pages, grading-scale pages, legal/about pages and the 404 page).
- * Light frosted bar with text-only pill tabs (soft lavender active pill that slides between tabs).
- * Dark mode gets a deep slate surface with an indigo-tinted pill. The main header above is not touched.
+ * A centered, frosted "floating pill" menu (see `.avura-pill` in styles/premium.css) on the shared gradient +
+ * contour-line canvas painted by <SiteHeader />. The bar itself is transparent. The active tab is a white chip
+ * that slides between tabs (translucent white in dark mode).
  */
 export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
   const location = useLocation();
@@ -95,14 +97,17 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
   return (
     <>
       <nav
-        className="relative isolate border-b border-slate-200/70 bg-white print:hidden dark:border-white/10 dark:bg-slate-900"
+        className="relative isolate px-3 pb-3 sm:px-6 sm:pb-3.5 print:hidden"
         aria-label="Calculator tools"
       >
         <LayoutGroup id="tool-nav-pill">
-          <div
-            ref={navInnerRef}
-            className="mx-auto flex max-w-[1240px] items-center gap-0.5 overflow-x-auto overflow-y-hidden px-6 py-1.5 [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,#000_20px,#000_calc(100%-20px),transparent)] sm:px-8 [&::-webkit-scrollbar]:hidden [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto"
-          >
+          <div className="mx-auto flex max-w-[1240px] justify-center">
+            {/* Outer = frosted pill (must not be masked); inner = horizontal scroller with soft edge fade. */}
+            <div className="avura-pill flex min-w-0 max-w-full rounded-full">
+              <div
+                ref={navInnerRef}
+                className="flex min-w-0 items-center gap-0.5 overflow-x-auto overflow-y-hidden rounded-full px-1.5 py-1 [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,#000_12px,#000_calc(100%-12px),transparent)] [&::-webkit-scrollbar]:hidden"
+              >
             {primaryItems.map((tool) => {
               const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
               const warm = () => {
@@ -162,6 +167,8 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
                 <ChevronDown className="size-3.5 shrink-0 opacity-70" strokeWidth={2.25} aria-hidden="true" />
               </button>
             )}
+              </div>
+            </div>
           </div>
         </LayoutGroup>
       </nav>
