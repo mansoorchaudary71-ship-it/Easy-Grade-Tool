@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Ellipsis } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { LayoutGroup, motion, useReducedMotion } from 'motion/react';
 import { Link } from './SlashLink';
 import { MoreToolsSheet } from './MoreToolsSheet';
@@ -23,23 +23,27 @@ export const headerFocusRing =
   'outline-none focus-visible:ring-2 focus-visible:ring-blue-400/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1E293B]';
 
 const tabBase =
-  'relative isolate inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 min-h-11 text-[13px] no-underline cursor-pointer select-none touch-manipulation [-webkit-tap-highlight-color:transparent]';
+  'relative isolate inline-flex shrink-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 min-h-11 text-[14px] leading-none tracking-[-0.005em] no-underline cursor-pointer select-none touch-manipulation transition-[color,background-color,transform] duration-200 ease-out active:scale-[0.97] [-webkit-tap-highlight-color:transparent]';
 
-// slate-100 (not 300): the bar is translucent, so inactive labels need extra contrast over light pages.
-const tabInactive = 'font-semibold text-slate-100 hover:bg-white/[0.1] hover:text-white';
-const tabActive = 'font-bold text-white';
+/** Light, calm focus ring for the white bar (the shared `headerFocusRing` above is tuned for the dark header). */
+const tabFocusRing =
+  'outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-indigo-400/80 dark:focus-visible:ring-offset-slate-900';
 
-/** The sliding active pill: vibrant blue with a soft glow and a crisp 1px inner edge. */
+const tabInactive =
+  'font-medium text-slate-500 hover:bg-slate-900/[0.045] hover:text-slate-800 dark:text-slate-400 dark:hover:bg-white/[0.07] dark:hover:text-slate-100';
+const tabActive = 'font-semibold text-indigo-600 dark:text-indigo-300';
+
+/** The sliding active pill: soft lavender fill, hairline indigo edge, a lifted glow and a crisp top highlight. */
 const pillClass =
-  'absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-[#3B82F6] to-[#2563EB] shadow-[0_8px_20px_-6px_rgba(37,99,235,0.75),inset_0_1px_0_rgba(255,255,255,0.22)] ring-1 ring-inset ring-white/15';
+  'absolute inset-0 -z-10 rounded-full bg-gradient-to-b from-indigo-50 to-[#E6E8FF] ring-1 ring-inset ring-indigo-200/70 shadow-[0_6px_16px_-8px_rgba(79,70,229,0.55),inset_0_1px_0_rgba(255,255,255,0.9)] dark:from-indigo-400/20 dark:to-indigo-500/15 dark:ring-indigo-300/25 dark:shadow-[0_8px_20px_-10px_rgba(99,102,241,0.7),inset_0_1px_0_rgba(255,255,255,0.12)]';
 
 /**
  * Secondary "tool name" bar (Quick Grade, Weighted Grade, Final Exam, ...).
  *
  * Rendered by <SiteHeader /> directly under the main header, so it appears on EVERY route
  * (calculators, hub pages, grading-scale pages, legal/about pages and the 404 page).
- * Solid slate surface with a 1px hairline, same look as the banner (see `.slate-bar` in premium.css).
- * Everything inside it stays fully opaque.
+ * Light frosted bar with text-only pill tabs (soft lavender active pill that slides between tabs).
+ * Dark mode gets a deep slate surface with an indigo-tinted pill. The main header above is not touched.
  */
 export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
   const location = useLocation();
@@ -91,24 +95,16 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
 
   return (
     <>
-      <nav className="slate-bar slate-bar--tools relative isolate print:hidden" aria-label="Calculator tools">
-        {/* Same faint arc + wave overlay as the banner: no fill, non-interactive, clipped by its own overflow-hidden parent */}
-        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 1440 64" preserveAspectRatio="xMidYMid slice" fill="none" focusable="false">
-            <g stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.25">
-              <circle cx="120" cy="70" r="60" />
-              <circle cx="120" cy="70" r="110" />
-              <path d="M-40 44 C 220 8, 420 80, 700 36 S 1120 4, 1500 40" />
-            </g>
-          </svg>
-        </div>
+      <nav
+        className="relative isolate border-b border-slate-200/80 bg-white/90 shadow-[0_12px_28px_-20px_rgba(15,23,42,0.35)] backdrop-blur-xl print:hidden dark:border-white/10 dark:bg-slate-900/90 dark:shadow-[0_14px_32px_-18px_rgba(0,0,0,0.7)]"
+        aria-label="Calculator tools"
+      >
         <LayoutGroup id="tool-nav-pill">
           <div
             ref={navInnerRef}
-            className="mx-auto flex max-w-[1240px] items-center gap-1.5 overflow-x-auto overflow-y-hidden px-3.5 py-2 [scrollbar-width:none] sm:px-6 [&::-webkit-scrollbar]:hidden"
+            className="mx-auto flex max-w-[1240px] items-center gap-1 overflow-x-auto overflow-y-hidden px-6 py-2.5 [scrollbar-width:none] [mask-image:linear-gradient(to_right,transparent,#000_20px,#000_calc(100%-20px),transparent)] sm:px-8 [&::-webkit-scrollbar]:hidden [&>*:first-child]:ml-auto [&>*:last-child]:mr-auto"
           >
             {primaryItems.map((tool) => {
-              const Icon = tool.icon;
               const isActive = !isStaticPage && isSamePath(location.pathname, tool.path);
               const warm = () => {
                 preloadTool(tool.toolKey);
@@ -126,7 +122,7 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
                   onMouseEnter={warm}
                   onFocus={warm}
                   onTouchStart={warm}
-                  className={`${tabBase} ${headerFocusRing} ${isActive ? tabActive : tabInactive}`}
+                  className={`${tabBase} ${tabFocusRing} ${isActive ? tabActive : tabInactive}`}
                   data-tool={tool.toolKey}
                   data-active={isActive}
                   aria-current={isActive ? 'page' : undefined}
@@ -140,7 +136,6 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
                       aria-hidden="true"
                     />
                   )}
-                  <Icon className="size-4 shrink-0" strokeWidth={ICON_STROKE} aria-hidden="true" />
                   <span>{tool.label}</span>
                 </Link>
               );
@@ -149,7 +144,7 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
             {moreItems.length > 0 && (
               <button
                 type="button"
-                className={`${tabBase} ${headerFocusRing} ${moreIsActive ? tabActive : tabInactive}`}
+                className={`${tabBase} ${tabFocusRing} ${moreIsActive ? tabActive : tabInactive}`}
                 aria-haspopup="dialog"
                 aria-expanded={moreOpen}
                 data-active={moreIsActive}
@@ -164,8 +159,8 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
                     aria-hidden="true"
                   />
                 )}
-                <Ellipsis className="size-4 shrink-0" strokeWidth={ICON_STROKE} aria-hidden="true" />
                 <span>{moreIsActive ? activeMore?.label : 'More tools'}</span>
+                <ChevronDown className="size-3.5 shrink-0 opacity-70" strokeWidth={2.25} aria-hidden="true" />
               </button>
             )}
           </div>
