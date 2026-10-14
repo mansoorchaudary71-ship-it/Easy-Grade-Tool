@@ -508,7 +508,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            Using a GPA Calculator
+            Semester GPA Calculator and Cumulative GPA Calculator
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
@@ -524,6 +524,99 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Weighted vs Unweighted GPA
+          </h2>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Weighted vs unweighted GPA is the most common point of confusion on a high school transcript. Both start from the same letter grades; they differ in whether course difficulty adds extra points.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Unweighted GPA Meaning
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            An unweighted GPA is the plain 4.0-scale average: an A is worth 4.0 in every course, whether it is a regular, honors or AP class. The unweighted GPA meaning is simple: it measures the grades you earned, not how hard the courses were. The calculator above produces an unweighted GPA (with an optional 4.33 value for A+).
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            What Is the Difference Between Weighted and Unweighted GPA?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            A weighted GPA adds bonus points for harder courses, commonly +0.5 for honors and +1.0 for AP or IB, so an A in an AP class can count as 5.0 and the scale tops out at 5.0 instead of 4.0. An unweighted GPA ignores difficulty. For example, a student with an A in AP Biology (5.0 weighted), a B in English (3.0) and an A in Algebra (4.0) has a weighted GPA of (5.0 + 3.0 + 4.0) ÷ 3 = 4.0, but an unweighted GPA of (4.0 + 3.0 + 4.0) ÷ 3 = 3.67.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Weighted GPA Calculator: How to Calculate a Weighted GPA
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            To calculate a weighted GPA, add your school&apos;s bonus to the grade points of each weighted course, multiply by the credits, and divide the total by the total credits as usual. This calculator works on the 4.0 scale, so for a weighted result add the bonus to the weighted courses by hand and average as described above. Use your school&apos;s own weighting table, because bonus values differ from district to district.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How Does Weighted GPA Affect College Admissions?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Colleges look at the number and the context around it. Many admissions offices recalculate GPA on their own scale, often unweighted, or focus on the grades you earned in the most demanding courses your school offered. A weighted GPA shows course rigor, but it is not directly comparable between schools because weighting systems differ. Strong grades in challenging classes help most, and the school profile your counselor sends explains how your school weights courses.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            High School GPA Calculator
+          </h2>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            A high school GPA calculator works like a college one, except that courses usually carry equal credit and many schools report both a weighted and an unweighted GPA. Enter each course with its letter grade and credit value above to see your semester GPA, then add your prior GPA and credits for the cumulative figure.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How Do I Calculate My High School GPA?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Convert each final course grade to grade points, multiply by the credit value (use 1 when every course is worth the same), add the results and divide by the total credits. If a school lists only whole-letter grades, A = 4.0, B = 3.0, C = 2.0, D = 1.0 and F = 0.0.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Calculate GPA: High School Step by Step
+          </h3>
+
+          <ol className="list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            <li>List every course for the term with its final letter grade.</li>
+            <li>Convert each letter to grade points on your school&apos;s scale.</li>
+            <li>Multiply the grade points by each course&apos;s credit value.</li>
+            <li>Add the quality points and divide by the total credits attempted.</li>
+            <li>Enter the same courses in the calculator above to check your result.</li>
+          </ol>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            GPA Scale 4.0 High School Chart
+          </h3>
+
+          <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            <li>A (90–100%): 4.0, with A- worth 3.7</li>
+            <li>B (80–89%): 3.0, with B+ worth 3.3 and B- worth 2.7</li>
+            <li>C (70–79%): 2.0, with C+ worth 2.3 and C- worth 1.7</li>
+            <li>D (60–69%): 1.0</li>
+            <li>F (below 60%): 0.0</li>
+          </ul>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            The percentage ranges follow the common 10-point scale. Your school may use different cutoffs, so check them with the 
+            <Link to="/letter-grade-calculator/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Letter Grade Calculator</Link>.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            What GPA Do I Need to Get Into College?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            There is no single number. Community colleges and other open-admission schools often have no GPA cutoff, many state universities report a middle range of roughly 3.0 to 3.8, and the most selective colleges typically admit students with GPAs close to 4.0 unweighted. Check each school&apos;s published admitted-student profile, because course rigor, test policy and intended major also matter.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
             GPA and Course Grades
           </h2>
 
@@ -536,7 +629,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            Quality Points Explained
+            Quality Points Calculator: How Quality Points Work
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">

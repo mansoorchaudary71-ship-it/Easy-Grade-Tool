@@ -76,6 +76,41 @@ export const WEIGHTED_COURSE_FAQS: FAQItem[] = [
     answer:
       'No. You can enter your assessments and weights and see your results straight away without signing up. The arithmetic runs in your browser, so you can try as many what-if scores as you like.',
   },
+  {
+    id: 'weighted-how-system-works',
+    category: 'weighted',
+    question: 'How does a weighted grading system work?',
+    answer:
+      'A weighted grading system splits a course into categories such as homework, quizzes, exams and a final, and gives each category a percentage of the course grade. You average the scores inside each category, multiply each average by its weight and add the results. A category with a higher weight moves your grade more than one with a lower weight, even if it contains fewer assignments.',
+  },
+  {
+    id: 'weighted-category-weight-grading',
+    category: 'weighted',
+    question: 'What is category weight grading?',
+    answer:
+      'Category weight grading groups assignments into categories and weights each category instead of each assignment. If homework is 20% of the course, all homework together counts for 20% whether there are five assignments or fifty. The calculator applies the weights you enter to each category’s percentage.',
+  },
+  {
+    id: 'weighted-calc-for-a-class',
+    category: 'weighted',
+    question: 'How do I calculate my weighted grade for a class?',
+    answer:
+      'Turn each category score into a percentage, multiply it by the category weight written as a decimal, then add the results. If some categories are not graded yet, divide by the total weight used so far. For example, 92% at 20%, 85% at 20%, 78% at 25% and 88% at 15% add up to 68.1 from 80% of the course, which is an 85.1% weighted grade.',
+  },
+  {
+    id: 'weighted-average-grade-meaning',
+    category: 'weighted',
+    question: 'What is a weighted average grade?',
+    answer:
+      'A weighted average grade is an average in which some scores count more than others. A 100% on a quiz worth 10% and a 70% on an exam worth 90% give a weighted average of 73%, compared with a simple average of 85%.',
+  },
+  {
+    id: 'weighted-how-to-calculate-by-hand',
+    category: 'weighted',
+    question: 'How to calculate weighted grades without a calculator?',
+    answer:
+      'Multiply each category percentage by its weight as a decimal, write down each product, and add the products. Then divide by the total of the weights you used. Keep one extra decimal place until the last step so rounding does not push you over a letter cutoff.',
+  },
 ];
 
 /**
@@ -272,6 +307,76 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         answer:
           'Most colleges require a 2.0 GPA for good academic standing. A GPA of 3.0 or above is generally competitive for graduate school programs, while a GPA of 3.5 or higher typically qualifies students for Dean\'s List recognition, honors societies, and academic distinction (cum laude).',
       },
+      {
+        id: 'gpa-weighted-vs-unweighted',
+        category: 'gpa',
+        question: 'What is the difference between weighted and unweighted GPA?',
+        answer:
+          'An unweighted GPA uses the plain 4.0 scale, so an A is 4.0 in every course. A weighted GPA adds bonus points for harder courses, commonly +0.5 for honors and +1.0 for AP or IB, so the scale can reach 5.0. Weighted vs unweighted GPA is mostly a high school distinction, and your transcript may list both.',
+      },
+      {
+        id: 'gpa-unweighted-meaning',
+        category: 'gpa',
+        question: 'What is the unweighted GPA meaning?',
+        answer:
+          'Unweighted GPA means a grade point average that ignores course difficulty. Every A counts 4.0, every B 3.0 and so on, whether the class is regular, honors or AP. The calculator above gives an unweighted GPA.',
+      },
+      {
+        id: 'gpa-weighted-calculator',
+        category: 'gpa',
+        question: 'Is there a weighted GPA calculator here?',
+        answer:
+          'This calculator works on the 4.0 scale (with an optional 4.33 for A+). To find a weighted GPA, add your school’s bonus, such as +0.5 for honors or +1.0 for AP, to the grade points of those courses, then multiply by credits and divide by total credits. Bonus values vary, so use your school’s weighting table.',
+      },
+      {
+        id: 'gpa-college-admissions',
+        category: 'gpa',
+        question: 'How does weighted GPA affect college admissions?',
+        answer:
+          'Many colleges recalculate GPA on their own scale, often unweighted, and look at the rigor of the courses you chose. A weighted GPA shows that you took harder classes, but it is not directly comparable between schools because weighting systems differ. Your school profile explains how your school weights courses.',
+      },
+      {
+        id: 'gpa-high-school-how',
+        category: 'gpa',
+        question: 'How do I calculate my high school GPA?',
+        answer:
+          'Convert each final course grade to grade points (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0), multiply by the credit value, add the results and divide by total credits. If every course has the same credit, divide by the number of courses. A student with 4.0, 3.0, 4.0 and 3.0 in four equal courses has a 3.5 GPA.',
+      },
+      {
+        id: 'gpa-high-school-calculator',
+        category: 'gpa',
+        question: 'Can I use this as a high school GPA calculator?',
+        answer:
+          'Yes. Enter each course with its letter grade and credit value (use 1.0 for equal credits) to get your semester GPA, then add your prior GPA and credits for a cumulative figure. It gives the unweighted GPA on a 4.0 scale.',
+      },
+      {
+        id: 'gpa-scale-4-high-school',
+        category: 'gpa',
+        question: 'What is the GPA scale 4.0 high school students use?',
+        answer:
+          'On the common 4.0 scale an A is 4.0, a B is 3.0, a C is 2.0, a D is 1.0 and an F is 0.0, with plus and minus grades such as A- at 3.7 and B+ at 3.3. Schools that weight courses add bonus points for honors, AP or IB classes on top of this.',
+      },
+      {
+        id: 'gpa-needed-for-college',
+        category: 'gpa',
+        question: 'What GPA do I need to get into college?',
+        answer:
+          'It depends on the college. Community colleges and open-admission schools often set no minimum, many state universities report a middle range of roughly 3.0 to 3.8, and the most selective colleges typically admit students close to 4.0 unweighted. Check each school’s admitted-student profile.',
+      },
+      {
+        id: 'gpa-semester-vs-cumulative',
+        category: 'gpa',
+        question: 'What is the difference between a semester GPA and a cumulative GPA?',
+        answer:
+          'A semester GPA covers the courses from one term only. A cumulative GPA combines every term by adding all quality points and dividing by all credits attempted. The calculator’s prior GPA and credits fields turn a semester result into a cumulative GPA.',
+      },
+      {
+        id: 'gpa-quality-points',
+        category: 'gpa',
+        question: 'How do I use a quality points calculator?',
+        answer:
+          'Quality points are grade points multiplied by credit hours. An A (4.0) in a 3-credit course is 12.0 quality points. Add the quality points for all courses and divide by the total credits to get your GPA. The calculator shows the quality points for each course.',
+      },
     ],
   },
   cgpa: {
@@ -374,6 +479,13 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         answer:
           'Tipping on takeout is optional. Leaving 10% or rounding up with change is considered courteous for packing and preparation, especially on large, complex, or customized food orders.',
       },
+      {
+        id: 'tip-split-bill-calculator',
+        category: 'tip',
+        question: 'How does the split bill calculator work?',
+        answer:
+          'Enter the bill, choose a tip percentage and set the number of people. The tip is added to the bill and the total is divided evenly, so you see the tip, the total and the amount each person pays. A $120 bill with an 18% tip split four ways is $35.40 per person.',
+      },
     ],
   },
   percentage: {
@@ -417,6 +529,13 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         question: 'What is the difference between a percentage and a percentile?',
         answer:
           'A percentage expresses a fraction or proportion out of 100 (e.g., scoring 85% on an exam means 85 out of 100 questions correct). A percentile describes relative rank compared to others (e.g., scoring in the 90th percentile means you scored higher than 90% of test takers).',
+      },
+      {
+        id: 'percentage-percent-change-calculator',
+        category: 'percentage',
+        question: 'How do I use the percent change calculator?',
+        answer:
+          'Enter the starting value and the new value. The percent change is (new − old) ÷ old × 100: going from 80 to 100 is a 25% increase, and going from 100 to 80 is a 20% decrease. A positive result means growth and a negative result means a drop.',
       },
     ],
   },

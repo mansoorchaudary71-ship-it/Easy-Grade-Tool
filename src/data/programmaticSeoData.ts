@@ -54,7 +54,7 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
     h1: 'Final Exam Grade Calculator',
     title: 'Final Grade Calculator — What Do You Need on the Final?',
     metaDescription:
-      'Free final exam calculator: find the score you need on your final to pass or earn an A, B or C, and see your final grade. Step-by-step weight formula included.',
+      'Final exam grade calculator: find the grade needed on the final to pass or earn an A, B or C. Enter your current grade, exam weight and target for the exact score.',
     targetAudience: 'college',
     badge: 'Final Exam Target Solver',
     summary:
@@ -174,6 +174,27 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
         question: 'How do dropped quiz or exam scores affect my final exam calculation?',
         answer:
           'Recalculate your current grade after removing the dropped score before entering your numbers here. Dropping a low grade raises your current percentage standing, which reduces the exam score you need on finals day.',
+      },
+      {
+        id: 'faq-final-what-score-to-pass',
+        category: 'final-exam',
+        question: 'What score do I need to pass my final exam?',
+        answer:
+          'Set your target to the lowest passing grade in your syllabus and read the result. With a 72% average and a final worth 30%, you need 32% on the exam to finish at 60% and 65.3% to finish at 70%. If the calculator shows a negative number, you have already passed.',
+      },
+      {
+        id: 'faq-final-grade-to-pass',
+        category: 'final-exam',
+        question: 'What grade do I need on my final exam to pass?',
+        answer:
+          'Use your course’s minimum passing grade as the target, enter your current grade and the final exam weight, and the calculator returns the exam percentage that keeps you at or above it. Passing marks differ: 60% is common, but many programs require a C (70%) for a course to count.',
+      },
+      {
+        id: 'faq-final-calc-what-i-need',
+        category: 'final-exam',
+        question: 'How do I calculate what I need on my final?',
+        answer:
+          'Use required score = (target − current grade × (1 − final weight)) ÷ final weight, with the weight as a decimal. With an 84% current grade, a 25% final and an 80% target, (80 − 63) ÷ 0.25 = 68%. The calculator does this for any numbers you enter.',
       },
       {
         id: 'faq-final-pass-fail',

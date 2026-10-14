@@ -20,6 +20,8 @@ const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white trac
 const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100';
 const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
 const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+const OL = 'list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+const A = 'text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600';
 
 const HOME_FAQ_HEADING: FaqHeading = {
   eyebrow: 'Quick Grade FAQs',
@@ -28,13 +30,13 @@ const HOME_FAQ_HEADING: FaqHeading = {
   ctaText: 'Enter your number of questions above to see the full percentage and letter grade chart.',
 };
 
-/** Homepage guide: tool content, links to every academic tool, and the FAQ. */
+/** Homepage guide: what an EZ grader chart is, easy grader vs manual grading, free tools for teachers, then the FAQ. */
 export const QuickGradeGuide: React.FC = () => (
   <>
     <ContentSection labelledBy="home-guide-title">
       <div>
         <h2 id="home-guide-title" className={H2_MAIN}>
-          Free Grade Calculator &amp; Quick Chart for Teachers and Students
+          Easy Grade Calculator: Free Easy Grader Tool and EZ Grader Chart for Teachers
         </h2>
 
         <div className="my-6">
@@ -45,138 +47,130 @@ export const QuickGradeGuide: React.FC = () => (
         </div>
 
         <p className={P}>
-          Welcome to our comprehensive resource designed to help educators and learners effortlessly determine academic
-          standing and achieve the minimum grade required for their goals, including understanding what a passing grade
-          entails. Whether you need to figure out a test score or assess your overall course grade, our tools simplify the
-          entire assessment process, making it ez to understand your performance.
+          This <strong>easy grade calculator</strong> is a free <strong>easy grader tool</strong> built for the
+          moment a stack of tests lands on your desk: an <strong>easy grader for teachers</strong> that turns the number
+          of questions into an EZ grader chart, with the percentage and letter grade for every possible number of wrong
+          answers, ready to look up or print. Students can use the same chart to check a score, and the tools below
+          cover weighted grades, final exams and GPA.
         </p>
       </div>
 
       <div>
-        <h2 className={H2}>Understanding Grading Systems</h2>
+        <h2 className={H2}>EZ Grader Chart Explained</h2>
+
+        <h3 className={H3}>What is an EZ grader chart?</h3>
         <p className={P}>
-          Establishing a reliable grading scale is essential for evaluating academic performance accurately across diverse
-          educational environments and institutions everywhere, particularly when considering category weights.
+          An EZ grader chart is a score table for one test size. Each row shows a number of wrong answers with the
+          matching percentage and letter grade, so nobody has to divide on every paper. The classic version is a
+          cardboard wheel; this one is a digital chart that adjusts to any number of questions and any grading scale.
         </p>
 
-        <h3 className={H3}>What is Grading?</h3>
+        <h3 className={H3}>How do teachers use an EZ grader?</h3>
+        <ol className={OL}>
+          <li>Count the questions on the test and enter that number above.</li>
+          <li>Pick the standard A–F scale or the plus/minus scale, or set your own cutoffs.</li>
+          <li>Count the wrong answers on each paper and find that row in the chart.</li>
+          <li>Write the percentage and letter grade on the paper, or print the chart and keep it beside you.</li>
+        </ol>
+
+        <h3 className={H3}>Printable grader chart</h3>
         <p className={P}>
-          Grading is the systematic process of converting earned points and assignment scores into a standardized letter
-          grade or percentage to measure student comprehension effectively, often using a teacher grader for accuracy.
+          Press Print Chart for a clean one-page <strong>printable grader chart</strong> without the site navigation. For
+          a ready-made chart at a fixed size, open the{' '}
+          <Link to="/grading-scale/" className={A}>grading scale charts by number of questions</Link>.
         </p>
 
-        <h3 className={H3}>Types of Grading Scales</h3>
+        <h3 className={H3}>From wrong answers to percentage</h3>
         <p className={P}>
-          To determine a student and course grade comprehensively, various grading systems utilize different methods, such
-          as standard grading practices and category weights.
+          The chart uses one formula: (questions − wrong answers) ÷ questions × 100. On a 20-question test, 2 wrong
+          answers gives 18 ÷ 20 × 100 = 90%. To grade a test where questions have different point values, use the{' '}
+          <Link to="/test-grade-calculator/" className={A}>test grade calculator</Link> instead.
+        </p>
+      </div>
+
+      <div>
+        <h2 className={H2}>Easy Grader vs. Manual Grading</h2>
+
+        <h3 className={H3}>Manual test grading</h3>
+        <p className={P}>
+          Manual test grading means working out each score by hand: subtract the wrong answers, divide by the number of
+          questions, multiply by 100, then look up the letter. It is simple for one paper and slow and error-prone for a
+          class of thirty, especially when the test size changes from quiz to quiz.
+        </p>
+
+        <h3 className={H3}>Printable grading chart vs grading by hand</h3>
+        <p className={P}>
+          A printable grading chart does the arithmetic once, in advance. You look up the number of wrong answers instead
+          of recalculating, so every student with the same score gets exactly the same percentage and letter. Grading
+          by hand still makes sense for essays and rubric work, where the score comes from your judgment rather than a
+          count.
+        </p>
+
+        <h3 className={H3}>Is an online grader faster than grading by hand?</h3>
+        <p className={P}>
+          For objective tests, yes. Looking up a row takes a few seconds, while repeating the division and the letter
+          conversion for every paper takes much longer and invites rounding slips. An online grader also keeps the
+          grading scale consistent across all your classes.
+        </p>
+
+        <h3 className={H3}>What is the easiest way for a teacher to grade tests?</h3>
+        <p className={P}>
+          The easiest way is to build the chart before you start: choose the test size and scale, print the chart, then
+          mark each paper by counting wrong answers and reading across. Use a calculator only for the cases a chart
+          cannot cover, such as bonus points, weighted categories or a late penalty.
+        </p>
+      </div>
+
+      <div>
+        <h2 className={H2}>Best Free Grading Tools for Teachers</h2>
+        <p className={P}>
+          The best free grading tools for teachers share a few traits: they need no account, they run in the browser,
+          they let you set your own grading scale, and they do not upload student scores anywhere. Easy Grade Tool works
+          that way: calculations stay on your device and nothing you enter is stored on a server.
+        </p>
+
+        <h3 className={H3}>What is the best free grading tool for teachers?</h3>
+        <p className={P}>
+          It depends on the job. For grading a stack of multiple-choice tests, a chart-based easy grader is the fastest.
+          For a semester grade, a weighted grade calculator is the right fit, and for curving a hard exam you want a
+          curve calculator. Here is how the free tools on this site match the common jobs:
         </p>
         <ul className={UL}>
-          <li>
-            Standard percentages are essential for calculating the quick grade you need in any grading system, especially
-            when using a standard 4.0 scale, as the calculator applies these percentages effectively.
-          </li>
-          <li>
-            Rubric evaluations are essential for teachers to provide clear feedback and maintain consistency in classroom
-            grading, contributing to a fair assessment of grades and credit hours.
-          </li>
-          <li>A traditional 4.0 scale</li>
+          <li>Grading one test at a time: the EZ grader chart above or the test grade calculator.</li>
+          <li>Course grades with categories: the weighted grade calculator.</li>
+          <li>Hard exam, low scores: the grade curve calculator.</li>
+          <li>Printing a reference sheet for the class: the grading scale charts.</li>
         </ul>
 
-        <h3 className={H3}>The Importance of Accurate Grading</h3>
+        <h3 className={H3}>Best grade calculator for teachers</h3>
         <p className={P}>
-          Precise calculation ensures that every test grade calculator metric reflects true mastery of the material assessed
-          through questions on a test, allowing you to calculate test outcomes effectively. This tool is essential, helping
-          instructors assign a fair final grade and monitor progress according to the grading rules, while also providing a
-          calculator to find the necessary scores.
+          A good grade calculator for teachers handles both single tests and whole courses, and shows its formula so you
+          can check the math. Use the weighted grade calculator for category weights, then the average grade calculator
+          when you need a class mean, median and letter grade for a set of scores.
+        </p>
+
+        <h3 className={H3}>Online grader for classroom tests</h3>
+        <p className={P}>
+          An online grader for classroom tests should work on any device, including the phone you carry between rooms.
+          This site installs as an app and keeps working offline once loaded, so you can grade in a room with no
+          Wi-Fi.
+        </p>
+
+        <h3 className={H3}>EZ grader vs online grade calculator</h3>
+        <p className={P}>
+          An EZ grader chart lists every possible score for one test size, so it is built for speed across many papers.
+          An online grade calculator takes any set of points and weights and computes one result at a time, so it is
+          built for flexibility. Teachers usually want both, which is why they live side by side here.
         </p>
       </div>
 
       <div>
-        <h2 className={H2}>Calculating GPA</h2>
-
-        <h3 className={H3}>What is GPA and Why is it Important?</h3>
+        <h2 className={H2}>How Grades Connect Across Tools</h2>
         <p className={P}>
-          To calculate GPA accurately, institutions rely on a standardized GPA scale that converts each letter grade into
-          grade points, ensuring a fair classroom grading process and that a gpa is required for graduation. Utilizing a
-          reliable GPA calculator allows students to monitor their academic standing and understand how every course grade
-          impacts their overall cumulative average on a traditional 4.0 scale, ensuring they meet the minimum grade
-          required for success.
-        </p>
-
-        <h3 className={H3}>How to Use a GPA Calculator Effectively</h3>
-        <p className={P}>
-          When you use our free grade calculator and specialized calculators for students and teachers, you can easily
-          input your assignment scores and credit hours to calculate test results efficiently. This seamless grade
-          calculation process ensures you always know your current grade and what you need to achieve your target grade,
-          including your final exam grade.
-        </p>
-
-        <h3 className={H3}>Understanding Weighted vs. Unweighted GPA</h3>
-        <p className={P}>
-          A weighted grade takes into account the difficulty of advanced classes by adding extra grade points to the
-          calculation, which is essential for understanding your overall class average. Understanding the difference between
-          weighted and unweighted grading systems is essential when you calculate your GPA for college admissions or
-          scholarship applications, especially when determining the final exam grade you need.
-        </p>
-      </div>
-
-      <div>
-        <h2 className={H2}>Grade Calculation Techniques</h2>
-
-        <h3 className={H3}>Calculating a Weighted Average</h3>
-        <p className={P}>
-          To find your weighted average, you can use a grade calculator using the standard 4.0 scale that incorporates every
-          grade—a method frequently used in a weighted grade calculator to determine your exact overall course grade based
-          on homework, quizzes, and the final exam, where your grade is calculated based on various components. You must
-          complete the following steps to enter the number of points earned and calculate your grade effectively, which
-          will help you see your current grade in relation to the final exam score and the possible score.
-        </p>
-        <ul className={UL}>
-          <li>
-            Multiply each category score by its specific weight to calculate your overall grade effectively, ensuring you
-            account for every grade and credit hours.
-          </li>
-          <li>
-            Sum the results to find the quick grade you need for your overall performance and assess whether you are on
-            track for a passing grade according to the grading scale used.
-          </li>
-        </ul>
-
-        <h3 className={H3}>Final Grade Calculation Methods</h3>
-        <p className={P}>
-          Determining your final grade requires a comprehensive final grade calculator that accounts for all points earned
-          versus total points possible throughout the semester, ensuring your grade is calculated accurately. By entering
-          your current grade and the weight of the upcoming final exam, you can easily calculate your grade and plan your
-          study strategy to achieve the score you need on the remaining assessments.
-        </p>
-
-        <h3 className={H3}>Using Test Score Calculators</h3>
-        <p className={P}>
-          A test grade calculator helps educators and learners quickly assess individual assessment outcomes, answering
-          questions on a test and making it easier to understand the impact on the overall class average, by analyzing the
-          number of questions, total questions, and wrong answers using math by hand. Whether you input the number wrong or
-          points earned, this free online tool allows you to instantly see your grade percentage based on the possible
-          score, as the calculator automatically processes your inputs.
-        </p>
-      </div>
-
-      <div>
-        <h2 className={H2}>How to Interpret Your Calculated Grades</h2>
-        <p className={P}>
-          Interpreting your calculated grades involves reviewing your overall grade and GPA metrics to identify strengths
-          and weaknesses in your coursework based on standard grading practices. An average grade calculator helps you see
-          your current grade, ensuring you stay on track to meet your educational goals before the term ends, especially
-          when you use grade data from all assessments to find the score needed.
-        </p>
-      </div>
-
-      <div>
-        <h2 className={H2}>Resources for Further Assistance</h2>
-        <p className={P}>
-          For students and educators seeking additional support, utilizing comprehensive calculators for students and
-          teachers ensures precise grade and GPA tracking, including tracking correct answers for assessments. Explore our
-          free online resources to master every calculation, from simple quiz percentages to complex cumulative grade point
-          averages, using a free grade calculator to calculate your results and understand what you need on your final.
+          A test percentage becomes one assessment in a weighted course grade, and the course letter feeds your GPA.
+          Start with the chart or test grade calculator, move to the weighted grade calculator for the course, use the
+          final exam calculator to plan the last assessment, and take the letters to the GPA calculator for a semester
+          or cumulative GPA.
         </p>
       </div>
     </ContentSection>

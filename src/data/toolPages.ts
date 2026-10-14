@@ -83,9 +83,9 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/test-grade-calculator/',
     navLabel: 'Test Grade',
     h1: 'Test Grade Calculator',
-    title: 'Test Grade Calculator — Score, Percent & Letter Grade',
+    title: 'Test Grade Calculator — Score Percentage & Letter Grade',
     metaDescription:
-      'Enter points earned and points possible to get your test percentage and letter grade. Add bonus points or penalties and see the score needed for a target grade.',
+      'Free test score percentage calculator: enter points earned and points possible to get your test percentage and letter grade, with bonus points and late penalties.',
     badge: 'Single test or quiz',
     intro:
       'Type the points you earned and the points the test was worth. You get the percentage, the letter grade on your chosen scale, and the points you would have needed for the next grade up.',
@@ -93,6 +93,10 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       'test grade calculator',
       'quiz grade calculator',
       'test score percentage calculator',
+      'how to calculate test percentage',
+      'how to calculate grade percentage',
+      'points possible to percentage',
+      'wrong answers to percentage',
       'points earned out of possible',
       'extra credit test grade',
     ],
@@ -173,6 +177,21 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         question: 'How do I apply a late penalty to a test score?',
         answer:
           'If the penalty is in points, subtract it from the points earned before dividing: 42 earned minus a 5-point penalty is 37 out of 50, or 74%. If the penalty is a percentage, calculate the score first and then take that many percentage points off the result.',
+      },
+      {
+        question: 'How do I calculate a test score percentage?',
+        answer:
+          'Divide the points you earned by the points possible and multiply by 100. For example, 42 out of 50 is 42 ÷ 50 × 100 = 84%. Add any bonus points to the points earned first, and subtract a points penalty before dividing.',
+      },
+      {
+        question: 'What percentage is X out of Y questions?',
+        answer:
+          'Divide X by Y and multiply by 100. 18 out of 24 questions is 75%, 33 out of 40 is 82.5% and 47 out of 60 is 78.3%. Enter your own numbers above to get any other result and its letter grade.',
+      },
+      {
+        question: 'How do I convert wrong answers to a percentage?',
+        answer:
+          'Subtract the wrong answers from the total, divide by the total and multiply by 100. Missing 4 questions on a 25-question test gives 21 ÷ 25 × 100 = 84%. Each question on that test is worth 4 percentage points.',
       },
       {
         question: 'How do I turn a score out of 20, 25 or 30 into a percentage?',
@@ -319,6 +338,8 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       'percentage to gpa',
       'grade scale chart',
       'a-f grading scale',
+      'letter grade percentage chart',
+      'what percentage is an a grade',
     ],
     featureList: [
       'Percent to letter grade and 4.0 GPA points',
@@ -402,6 +423,21 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         question: 'What is the lowest passing letter grade?',
         answer:
           'On most scales a D (60%) is the lowest passing grade, and a D- on the plus/minus scale. Many colleges require a C or better for major courses and prerequisites, so a D may pass the course without counting toward your program.',
+      },
+      {
+        question: 'What percentage do you need to get an A?',
+        answer:
+          'Most classes need 90% for an A, and some schools require 93%. On a plus/minus scale 93% is a plain A and 90% is an A-. Check your syllabus, because the cutoff and the rounding rule are set by your school or instructor.',
+      },
+      {
+        question: 'How does the A to F grading scale work?',
+        answer:
+          'The A to F grading scale groups percentages into letters: A is 90–100%, B is 80–89%, C is 70–79%, D is 60–69% and F is below 60%. Each letter maps to GPA points from 4.0 for an A down to 0.0 for an F.',
+      },
+      {
+        question: 'Is there a letter grade percentage chart I can print?',
+        answer:
+          'Yes. The standard and plus/minus cutoff tables on this page are a letter grade percentage chart you can print. For a chart that lists every possible score on a test of a given size, use the grading scale charts.',
       },
       {
         question: 'What percentage is a B+?',

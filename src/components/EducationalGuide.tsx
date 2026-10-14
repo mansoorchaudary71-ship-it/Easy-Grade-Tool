@@ -29,10 +29,10 @@ export function getEducationalGuideSchema(
     '@type': 'Article',
     '@id': `${url}#educational-guide`,
     headline: isWeighted
-      ? 'Final Grade Calculator – Weighted Grade & Final Grade Calculator'
+      ? 'Weighted Grade Calculator: How to Calculate Weighted Grades'
       : 'Easy Grade Calculator: Grading Percentage & Grade Calculator Guide',
     name: isWeighted
-      ? 'Final Grade Calculator – Weighted Grade & Final Grade Calculator'
+      ? 'Weighted Grade Calculator: How to Calculate Weighted Grades'
       : 'Easy Grade Calculator: Grading Percentage & Grade Calculator Guide',
     description: isWeighted
       ? 'Guide to weighted grade calculation, how final exam weight affects your course grade, and how to work out the score you need on the final exam.'

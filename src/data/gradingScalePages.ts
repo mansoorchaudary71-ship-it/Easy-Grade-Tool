@@ -186,10 +186,19 @@ export function buildGradingScaleIndexPage(): ToolPageEntry {
     navLabel: 'Grading Scales',
     h1: 'Grading Scale Charts by Number of Questions',
     title: 'Grading Scale Chart — Percent & Letter Grade by Test Size',
-    metaDescription: `Pick your test size, from ${GRADING_SCALE_SIZES[0]} to ${GRADING_SCALE_SIZES[GRADING_SCALE_SIZES.length - 1]} questions, and get the percentage and letter grade for every possible score. Free, printable charts, no sign-up.`,
+    metaDescription: `Printable grading chart for any test: pick your size, from ${GRADING_SCALE_SIZES[0]} to ${GRADING_SCALE_SIZES[GRADING_SCALE_SIZES.length - 1]} questions, and get the percent and letter grade for every score. Free, no sign-up.`,
     badge: 'Score charts',
     intro: 'Choose the number of questions on your test to open a ready-made score chart. Each chart lists the percentage and letter grade for every number of wrong answers, on the standard and plus/minus scales.',
-    keywords: ['grading scale by number of questions', 'test score chart', 'quiz grading scale', 'grading scale chart'],
+    keywords: [
+      'grading scale chart',
+      'grading scale by questions',
+      'printable grading chart',
+      'teacher grading chart printable',
+      'printable grade scale chart',
+      'printable grader chart',
+      'test score chart',
+      'quiz grading scale',
+    ],
     featureList: ['Charts for 17 common test sizes', 'Standard and plus/minus letter grades', 'Printable, free, no sign-up'],
     sections: [
       {
@@ -197,6 +206,36 @@ export function buildGradingScaleIndexPage(): ToolPageEntry {
         paragraphs: [
           'Every chart uses the same rule: percentage = correct answers ÷ total questions × 100, then the letter grade is read from the scale. The standard scale is A 90, B 80, C 70, D 60. The plus/minus scale splits each letter into thirds.',
           'Short quizzes swing the most: on a 10-question quiz one wrong answer is 10 points, while on a 100-question exam it is 1 point.',
+          'That is why the grading scale by questions is a separate chart for each test size: the same two misses mean something different on a 10-question quiz than on a 50-question test.',
+        ],
+      },
+      {
+        heading: 'Printable grading chart for any test',
+        paragraphs: [
+          'A printable grading chart saves you from dividing on every paper. Pick the number of questions on your test, open the chart and print it: you get a one-page printable grade scale chart that lists the percentage and letter grade for every number of wrong answers. Teachers who search for a teacher grading chart printable usually want exactly this, a sheet they can keep beside the stack of tests.',
+          `The same page works as a printable grader chart for quizzes, unit tests and finals. Charts are ready for ${GRADING_SCALE_SIZES.length} common test sizes, and the Quick Grade calculator on the home page builds one for any whole number of questions from 1 to 1000.`,
+        ],
+      },
+      {
+        heading: 'How do I print a grading chart for my class?',
+        paragraphs: ['Printing takes four steps:'],
+        bullets: [
+          'Open the chart for your test size from the list above.',
+          'Check that the scale matches your syllabus, or set your own cutoffs in the Quick Grade calculator first.',
+          'Use the print button. The printed page contains only the chart, without the site navigation.',
+          'Keep the sheet beside the tests, or save the printout as a PDF for your class folder.',
+        ],
+      },
+      {
+        heading: 'Printable grading chart vs grading by hand',
+        paragraphs: [
+          'Grading by hand means subtracting the wrong answers, dividing by the number of questions, multiplying by 100 and looking up the letter, again for every paper. A printable grading chart does that arithmetic once, so every student with the same score gets the same percentage and letter, and you only count wrong answers. Hand grading still fits essays and rubric work, where the score comes from your judgment rather than a count.',
+        ],
+      },
+      {
+        heading: 'What is the easiest printable grading tool for teachers?',
+        paragraphs: [
+          'The easiest printable grading tool is a chart built for your exact test size: no formulas, no account and a layout that fits one page. The charts here do that for common test sizes, and the Quick Grade calculator covers every other size with your own letter cutoffs.',
         ],
       },
       {
@@ -230,6 +269,22 @@ export function buildGradingScaleIndexPage(): ToolPageEntry {
       {
         question: 'Can I print a chart?',
         answer: 'Yes. Open a chart and use the print button, or open the Quick Grade calculator for a full printable chart with your own cutoffs.',
+      },
+      {
+        question: 'How do I print a grading chart for my class?',
+        answer: 'Open the chart for your test size, check that the scale matches your syllabus and use the print button. The printed page contains only the chart. If you need custom cutoffs, set them in the Quick Grade calculator first and print from there.',
+      },
+      {
+        question: 'What is the easiest printable grading tool for teachers?',
+        answer: 'A chart made for your test size is the easiest: you count the wrong answers on a paper and read the percentage and letter straight across. Start with the chart for your number of questions, or use the Quick Grade calculator for any other size.',
+      },
+      {
+        question: 'Is a printable grading chart faster than grading by hand?',
+        answer: 'For tests with right and wrong answers, yes. Looking up a row takes seconds, while repeating the division and the letter conversion on every paper takes longer and invites rounding errors. Grade essays and rubric-based work by hand.',
+      },
+      {
+        question: 'Is there a printable grade scale chart for every test size?',
+        answer: 'There are ready-made charts for the most common test sizes, and the Quick Grade calculator builds the same chart for any whole number of questions from 1 to 1000, so a printable grade scale chart is always available for your test.',
       },
     ],
     related: [

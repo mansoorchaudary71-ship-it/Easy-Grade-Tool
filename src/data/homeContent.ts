@@ -37,4 +37,53 @@ export const HOME_FAQS: FAQItem[] = [
     answer:
       'No. The calculation runs in your browser and nothing you type into the calculator is uploaded.',
   },
+  {
+    id: 'home-what-is-ez-grader-chart',
+    category: 'quick-grade',
+    question: 'What is an EZ grader chart and who uses it?',
+    answer:
+      'An EZ grader chart is a table that lists the percentage and letter grade for every possible number of wrong answers on a test of a given size. Teachers use it to grade a stack of objective tests quickly, and students use it to check a score.',
+  },
+  {
+    id: 'home-easy-grader-for-teachers',
+    category: 'teachers',
+    question: 'Is this an easy grader for teachers?',
+    answer:
+      'Yes. Enter the number of questions, pick your grading scale and read each paper’s grade straight from the chart. You can print the chart, set your own letter cutoffs, and use the other tools on this site for weighted course grades, curves and final exams.',
+  },
+  {
+    id: 'home-best-free-grading-tool',
+    category: 'teachers',
+    question: 'What is the best free grading tool for teachers?',
+    answer:
+      'The best free grading tool is the one that fits the job. A chart-based easy grader is fastest for objective tests, a weighted grade calculator suits whole courses, and a curve calculator helps after a hard exam. Look for tools that need no account, let you set your own scale and keep student scores on your device.',
+  },
+  {
+    id: 'home-ez-grader-vs-calculator',
+    category: 'teachers',
+    question: 'What is the difference between an EZ grader and an online grade calculator?',
+    answer:
+      'An EZ grader chart lists every score for one test size, so it is built for speed across many papers. An online grade calculator computes one result from any points and weights, so it is built for flexibility. This site has both.',
+  },
+  {
+    id: 'home-online-grader-faster',
+    category: 'teachers',
+    question: 'Is an online grader faster than grading by hand?',
+    answer:
+      'For tests with right and wrong answers, yes. Looking up a row in the chart takes seconds, while dividing and converting to a letter for every paper takes much longer and invites rounding mistakes. Grading by hand still fits essays and rubric-based work.',
+  },
+  {
+    id: 'home-easiest-way-to-grade',
+    category: 'teachers',
+    question: 'What is the easiest way for a teacher to grade tests?',
+    answer:
+      'Build the chart first: choose the test size and grading scale, print it, then mark each paper by counting wrong answers and reading across the row. Use a calculator only for bonus points, weighted categories or penalties.',
+  },
+  {
+    id: 'home-test-score-percent',
+    category: 'quick-grade',
+    question: 'How do I turn wrong answers into a percentage?',
+    answer:
+      'Subtract the wrong answers from the number of questions, divide by the number of questions and multiply by 100. Missing 3 questions on a 25-question test gives 22 ÷ 25 × 100 = 88%.',
+  },
 ];
