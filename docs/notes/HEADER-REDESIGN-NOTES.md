@@ -7,7 +7,8 @@ Reference: Dribbble "Real Estate Property Website Landing Page UI Design" header
 | --- | --- |
 | `src/components/SiteHeader.tsx` | Owns the shared gradient canvas + contour-line layer behind BOTH rows |
 | `src/components/Navbar.tsx` | Light header: brand logo left; search, 100% Private, Install, theme on the right |
-| `src/components/ToolNavBar.tsx` | Centered frosted pill menu, sliding white active chip |
+| `src/components/ToolNavBar.tsx` | Minimalist glass menu row: borderless tabs, sliding blue underline + glow (round 2) |
+| `src/components/MoreToolsMenu.tsx` | NEW (round 2). Anchored glass "More tools" dropdown for tablet/desktop |
 | `src/components/PWAInstallButton.tsx` | `nav` variant is now the dark pill CTA (white pill in dark mode) |
 | `src/styles/premium.css` | New `.avura-chrome`, `.avura-lines`, `.avura-pill` rules |
 | `src/assets/header-contours.svg` | NEW. Hairline topographic rings + wave lines (used as a CSS mask) |
@@ -18,7 +19,7 @@ and the sliding-pill animation behave exactly as before.
 ## Palette
 - Light: cool grey `#F4F5F8` -> `#EEF1F7` -> pale sky `#E4EDFC`, blue glow `rgba(147,197,253,.55)` top-right
 - Dark: `#0F172A` -> `#1B2638` -> `#1E2D52`, royal-blue glow `rgba(37,99,235,.38)`
-- Menu pill: translucent slate (`.avura-pill`), active chip white, active text `slate-900`
+- Menu row: transparent tabs on a soft glass strip (`.avura-menu`); active = `slate-950` text + blue underline (`#2563EB` -> `#38BDF8`)
 - CTA: `#111827` (dark mode: white). Accent: brand blue `#2563EB`
 
 ## Tweaking
@@ -42,3 +43,12 @@ referenced by the print stylesheet and scripts/test-site-qa.ts).
   and the command-palette icon still work. Favicons / PWA icons / public/logo.svg are NOT regenerated:
   they still show the old squircle "A+" until you run `npx tsx scripts/generateIcons.ts`
   (after updating it to use the new mark).
+
+## Menu bar, round 2 (premium / minimal)
+- No container box or heavy border. `.avura-menu` (premium.css) = soft backdrop-blur strip + a hairline that fades out at both edges.
+- Tabs: 36px tall (was 40px), same weight in every state (no layout shift), neutral slate that firms up on hover (200ms).
+- Active tab: crisp dark text + 2px gradient underline with soft glow that springs between tabs (`layoutId`). Reduced-motion users get an instant move.
+- "More tools": ordinary tab with a chevron that rotates. Tablet/desktop opens `MoreToolsMenu` (non-modal glass dropdown;
+  Esc / outside click / Tab close it, Up/Down arrows move between tools). Phones keep the existing bottom sheet.
+- Contrast: inactive tabs use `slate-600` on the light header (~7:1) and `slate-400` on dark (~6:1); focus rings are visible on every tab.
+- Tweak the glow in `renderIndicator()` in ToolNavBar.tsx; tab height via `min-h-9` in `tabBase`.
