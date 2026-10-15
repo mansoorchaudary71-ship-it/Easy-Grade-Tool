@@ -523,7 +523,7 @@ export const Footer: React.FC<FooterProps> = ({
   const linkCls =
     'inline-flex items-center text-left text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'w-9 h-9 inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
+    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
 
   return (
     <>

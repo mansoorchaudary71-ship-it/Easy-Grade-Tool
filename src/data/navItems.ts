@@ -30,3 +30,48 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Mortgage', title: 'Mortgage calculator', path: '/mortgage-calculator/', group: 'utility', toolKey: 'mortgage', icon: House },
   { label: 'Password', title: 'Password generator', path: '/password-generator/', group: 'utility', toolKey: 'password', icon: KeyRound },
 ];
+
+/* -------------------------------------------------------------------------- */
+/* Hick's Law: one primary link + one grouped "Tools" menu                      */
+/* -------------------------------------------------------------------------- */
+
+/** The one tool that stays visible in the header: it is the home page and the most-used calculator. */
+export const PRIMARY_NAV_ITEM: NavItem = NAV_ITEMS[0];
+
+export interface NavGroup {
+  id: string;
+  heading: string;
+  items: NavItem[];
+}
+
+const byPath = (paths: string[]): NavItem[] =>
+  paths.map((p) => NAV_ITEMS.find((n) => n.path === p)).filter((n): n is NavItem => !!n);
+
+/** Everything except the primary item, in three small groups (5-7 items each is easy to scan). */
+export const TOOL_GROUPS: NavGroup[] = [
+  {
+    id: 'grades',
+    heading: 'Grade tools',
+    items: byPath([
+      '/grade-calculator/',
+      '/final-exam-grade-calculator/',
+      '/test-grade-calculator/',
+      '/grade-curve-calculator/',
+      '/average-grade-calculator/',
+      '/letter-grade-calculator/',
+    ]),
+  },
+  {
+    id: 'gpa',
+    heading: 'GPA and percentages',
+    items: byPath(['/gpa-calculator/', '/cgpa-to-percentage-calculator/', '/percentage-calculator/']),
+  },
+  {
+    id: 'everyday',
+    heading: 'Everyday tools',
+    items: byPath(['/tip-calculator/', '/loan-calculator/', '/mortgage-calculator/', '/password-generator/']),
+  },
+];
+
+/** Flat list of every item inside the Tools menu. */
+export const TOOLS_MENU_ITEMS: NavItem[] = TOOL_GROUPS.flatMap((g) => g.items);

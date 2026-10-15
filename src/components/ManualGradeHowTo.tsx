@@ -405,7 +405,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
                           <button
                             type="button"
                             onClick={() => handleCopy(step.formula!, step.id)}
-                            className="text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 min-w-[40px] min-h-[40px] flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800"
+                            className="text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800"
                             title="Copy formula"
                             aria-label={`Copy formula for ${step.name}`}
                           >

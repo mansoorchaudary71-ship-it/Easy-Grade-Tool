@@ -1,12 +1,18 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { Link } from './SlashLink';
-import { Sun, Moon, Search } from 'lucide-react';
+import { Sun, Moon, Search, Menu } from 'lucide-react';
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/react';
 import { ToolKey } from '../types';
+import { useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { PWAInstallButton } from './PWAInstallButton';
 import { preloadTool } from '../utils/toolPreloader';
 import { Logo } from './Logo';
+import { ToolNavBar } from './ToolNavBar';
+import { MobileNavDrawer } from './MobileNavDrawer';
+import { PRIMARY_NAV_ITEM, TOOL_GROUPS } from '../data/navItems';
+import { TOOL_PATHS } from '../data/constants';
+import { isSamePath } from '../utils/paths';
 
 interface NavbarProps {
   activeTool: ToolKey;
@@ -70,11 +76,11 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 /** The header is a light grey-blue surface (deep slate in dark mode), so the focus ring offset follows the theme. */
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-500/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-100 dark:focus-visible:ring-blue-400/80 dark:focus-visible:ring-offset-[#1B2638]';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-slate-900';
 
 /** Shared look for the round glass controls (search icon on phones, theme switch). */
 const glassControl =
-  'border border-slate-300/60 bg-white/60 text-slate-700 shadow-sm backdrop-blur-md hover:bg-white hover:text-slate-900 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-100 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white';
+  'border border-slate-500 bg-white text-slate-800 shadow-sm hover:bg-slate-100 hover:text-slate-950 dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100 dark:shadow-none dark:hover:bg-slate-700 dark:hover:text-white';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -87,6 +93,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const prefersReducedMotion = useReducedMotion();
+  const location = useLocation();
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -115,10 +123,22 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <MotionConfig reducedMotion="user">
-      {/* Transparent: the gradient + contour artwork is painted once by <SiteHeader /> behind both rows. */}
+      {/* Transparent: the gradient + contour artwork is painted once by <SiteHeader /> behind the header row. */}
       <header className="relative print:hidden">
         {/* ------------------------------ Top bar ------------------------------ */}
         <div className="mx-auto flex h-14 max-w-[1240px] items-center justify-between px-3.5 sm:h-[68px] sm:px-6">
+          <div className="flex items-center gap-1 sm:gap-3">
+          {/* Hamburger: phones only. Opens the grouped tools drawer. */}
+          <button
+            type="button"
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Open menu"
+            aria-haspopup="dialog"
+            aria-expanded={drawerOpen}
+            className={`-ml-1 inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full ${glassControl} md:hidden ${focusRing}`}
+          >
+            <Menu className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
+          </button>
           <Link
             className={`brand rounded-xl ${focusRing}`}
             to="/"
@@ -132,8 +152,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Logo />
           </Link>
+          {/* Desktop: Quick Grade link + grouped Tools dropdown */}
+          <div className="ml-2 hidden md:block">
+            <ToolNavBar onSelectTool={onSelectTool} />
+          </div>
+          </div>
 
-          <div className="flex items-center gap-4 sm:gap-5">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Search: compact icon button on phones, expanding field from md up */}
             <button
               type="button"
@@ -145,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Search className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
 
-            <div className="group relative hidden w-52 transition-[width] duration-300 ease-out md:block lg:w-64 md:focus-within:w-64 lg:focus-within:w-80">
+            <div className="group relative hidden w-44 transition-[width] duration-300 ease-out md:block lg:w-64 xl:w-72 md:focus-within:w-56 lg:focus-within:w-80">
               <Search
                 className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-500 transition-colors duration-300 group-focus-within:text-blue-600 dark:text-[#94A3B8] dark:group-focus-within:text-blue-300"
                 strokeWidth={ICON_STROKE}
@@ -175,7 +200,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="h-11 w-full cursor-pointer rounded-full border border-slate-300/60 bg-white/60 py-2 pl-10 pr-16 text-[13px] font-medium text-slate-800 shadow-sm backdrop-blur-md outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-slate-400/60 hover:bg-white focus:border-transparent focus:bg-white focus:ring-2 focus:ring-blue-500/50 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] dark:placeholder:text-[#94A3B8] dark:hover:border-white/20 dark:hover:bg-white/10 dark:focus:bg-white/10 dark:focus:ring-blue-400/60"
+                className="h-11 w-full cursor-pointer rounded-full border border-slate-500 bg-white py-2 pl-10 pr-16 text-sm font-medium text-slate-800 shadow-sm backdrop-blur-md outline-none transition-all duration-300 placeholder:text-slate-600 hover:border-slate-700 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/40 dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] dark:placeholder:text-slate-300 dark:hover:border-slate-300 dark:focus:border-blue-400 dark:focus:ring-blue-400/50"
               />
               <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-slate-300/70 bg-white/70 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-[#94A3B8] lg:inline-flex">
                 {shortcutLabel}
@@ -224,6 +249,20 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
       </header>
+
+      {drawerOpen && (
+        <MobileNavDrawer
+          primary={PRIMARY_NAV_ITEM}
+          groups={TOOL_GROUPS}
+          currentPath={location.pathname}
+          shortcutLabel={shortcutLabel}
+          onClose={() => setDrawerOpen(false)}
+          onNavigate={(item) => {
+            if (isSamePath(TOOL_PATHS[item.toolKey], item.path)) onSelectTool(item.toolKey);
+          }}
+          onOpenSearch={() => window.setTimeout(onOpenCommandPalette, 0)}
+        />
+      )}
     </MotionConfig>
   );
 };

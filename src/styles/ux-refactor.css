@@ -1,0 +1,61 @@
+/* ==========================================================================
+   UX refactor layer. Imported LAST in main.tsx (after index.css, a11y-touch.css, premium.css).
+   Only small, targeted rules: the component work is done with Tailwind classes in the .tsx files.
+
+   Laws applied:  Hick (one header row, grouped Tools menu)   Miller (Advanced settings fold)
+                  Fitts (44px+ targets)   WCAG 2.1 AA (4.5:1 text, 3:1 UI, visible focus)
+                  60-30-10 (slate-50 / slate-900 canvas, white + slate cards, blue-600 accent)
+   ========================================================================== */
+
+/* 1. Canvas = the 60%. slate-50 in light mode, slate-900 (#0F172A) in dark mode. */
+html:not(.dark) body { background-color: #F8FAFC; color: #0F172A; }
+html.dark body { background-color: #0F172A; color: #F1F5F9; }
+
+/* 2. Header is now ONE row (the second tab row is gone), so anchors need less clearance. */
+html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 84px); }
+.site-chrome { border-bottom: 1px solid rgb(203 213 225 / 0.8); }
+html.dark .site-chrome { border-bottom-color: rgb(51 65 85 / 0.9); }
+
+/* 3. Primary CTA = flat blue-600 / blue-700.
+   premium.css painted `bg-[#2563EB]` buttons with a gradient that starts at #3B82F6, where white text is only 3.7:1.
+   A flat fill keeps every primary button at 5.2:1 (hover 6.7:1) in both themes. */
+.premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled) {
+  background-image: none;
+  background-color: #2563EB;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.18);
+}
+@media (hover: hover) {
+  .premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled):hover {
+    background-color: #1D4ED8;
+    translate: 0 0;
+    box-shadow: 0 2px 6px rgb(15 23 42 / 0.22);
+  }
+}
+
+/* 4. Fitts: every tappable control is at least 44x44 CSS px. Heights come from the components (min-h-11 / min-h-[48px])
+   and a11y-touch.css (48px on coarse pointers); this adds the missing WIDTH floor for chips and toggle buttons. */
+.preset-btn, button[aria-pressed], .ez-chart-pick { min-width: 44px; min-height: 44px; }
+
+/* 5. Keyboard focus: one consistent, high-contrast ring (3:1 against both canvases). */
+:focus-visible { outline: 2px solid #2563EB; outline-offset: 2px; }
+html.dark :focus-visible { outline-color: #60A5FA; }
+.ez-chart-pick:focus-visible { outline-offset: -2px; }
+
+/* 6. Quick Chart table: keep header cells opaque while sticky, and give sticky cells a stacking context. */
+.ez-chart-table thead th { background-clip: padding-box; }
+
+/* 7. Print: the chart is a plain table on paper (no sticky header, no scroll box, no shadows, no colour dependence). */
+@media print {
+  .ez-chart-table { width: 100% !important; min-width: 0 !important; border-collapse: collapse !important; font-size: 11pt; }
+  .ez-chart-table thead th { position: static !important; box-shadow: none !important; background: #f1f5f9 !important; color: #000 !important; border-bottom: 1px solid #94a3b8 !important; }
+  .ez-chart-table th, .ez-chart-table td { background: #fff !important; color: #000 !important; border-bottom: 1px solid #cbd5e1 !important; padding: 3px 6px !important; }
+  .ez-chart-table th[scope="colgroup"] { background: #e2e8f0 !important; border-top: 1px solid #94a3b8 !important; }
+  .ez-chart-table tr { break-inside: avoid; page-break-inside: avoid; }
+  .ez-chart-table tbody { break-inside: auto; }
+  .ez-chart-table span, .ez-chart-table strong { color: #000 !important; background: transparent !important; border-color: transparent !important; }
+  [data-print-area] button.ez-chart-pick {
+    display: inline-flex !important; min-height: 0 !important; width: auto !important; padding: 0 !important;
+    border: 0 !important; background: transparent !important; color: #000 !important;
+  }
+  [data-scroll-shadow] { display: none !important; }
+}

@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
 import { Plus, X, RotateCcw, Target, Download, Printer } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { gradeTone } from '../utils/gradeTone';
 import { SegmentedControl } from './ui/SegmentedControl';
 import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
@@ -37,27 +38,15 @@ const ROW_INPUT =
   'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
 const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1 text-center';
 const BTN_SOLID =
-  'bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
+  'bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-sm px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
 const BTN_SOFT =
   'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-sm inline-flex items-center justify-center gap-2 cursor-pointer transition-colors py-3 px-5 min-h-[48px] active:scale-95';
 const REMOVE_BTN =
   'w-12 h-12 min-w-[48px] min-h-[48px] rounded-2xl text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 bg-slate-100/90 hover:bg-rose-50 dark:bg-slate-800/90 dark:hover:bg-rose-950/40 border border-slate-200/70 dark:border-slate-700/70 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
 
-const letterTone = (letter: string) => {
-  if (letter.startsWith('A')) return 'bg-[#D2E8E4] dark:bg-emerald-950/60 border border-emerald-200/60 dark:border-emerald-800/60';
-  if (letter.startsWith('B')) return 'bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#9FB3EE]/50 dark:border-indigo-800/60';
-  if (letter.startsWith('C')) return 'bg-[#FFE8C2] dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60';
-  if (letter.startsWith('D')) return 'bg-stone-100 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60';
-  return 'bg-[#F9D6E1] dark:bg-rose-950/60 border border-rose-200/60 dark:border-rose-800/60';
-};
-
-const letterBadge = (letter: string) => {
-  if (letter.startsWith('A')) return 'bg-emerald-100 text-emerald-900 border border-emerald-300 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-700';
-  if (letter.startsWith('B')) return 'bg-indigo-100 text-indigo-900 border border-indigo-300 dark:bg-indigo-950/80 dark:text-indigo-300 dark:border-indigo-700';
-  if (letter.startsWith('C')) return 'bg-amber-100 text-amber-900 border border-amber-300 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-700';
-  if (letter.startsWith('D')) return 'bg-orange-100 text-orange-900 border border-orange-300 dark:bg-orange-950/80 dark:text-orange-300 dark:border-orange-700';
-  return 'bg-rose-100 text-rose-900 border border-rose-300 dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-700';
-};
+/** Semantic grade colours (A/B green, C amber, D/F rose). Shared with the Quick Chart; see utils/gradeTone.ts. */
+const letterTone = (letter: string) => `${gradeTone(letter).surface} border`;
+const letterBadge = (letter: string) => `${gradeTone(letter).badge} border`;
 
 export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
   setToast,
@@ -417,10 +406,10 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                 >
                   {hasResult ? (
                     <>
-                      <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight">
+                      <div className={`text-5xl sm:text-6xl font-extrabold leading-none font-mono tracking-tight tabular-nums ${gradeTone(gradeResult.letterGrade).text}`}>
                         {gradeResult.formattedPercentage}%
                       </div>
-                      <span className={`text-sm sm:text-base font-bold font-mono px-3 py-1.5 rounded-full ${letterBadge(gradeResult.letterGrade)}`}>
+                      <span className={`inline-flex items-center gap-1.5 text-base sm:text-lg font-bold font-mono px-4 py-2 rounded-full ${letterBadge(gradeResult.letterGrade)}`}>
                         Grade {gradeResult.letterGrade}
                       </span>
                     </>

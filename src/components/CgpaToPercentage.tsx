@@ -1230,7 +1230,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                       placeholder="8.50"
                       value={sem.sgpa}
                       onChange={(e) => handleUpdateSemester(sem.id, 'sgpa', e.target.value)}
-                      className="w-full min-h-[42px] px-4 py-2.5 rounded-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 font-mono text-base sm:text-sm font-bold text-center placeholder:text-slate-400"
+                      className="w-full min-h-[44px] px-4 py-2.5 rounded-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 font-mono text-base sm:text-sm font-bold text-center placeholder:text-slate-400"
                     />
                   </div>
                   <div className="col-span-3">
@@ -1241,7 +1241,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                       placeholder="22"
                       value={sem.credits}
                       onChange={(e) => handleUpdateSemester(sem.id, 'credits', e.target.value)}
-                      className="w-full min-h-[42px] px-4 py-2.5 rounded-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 font-mono text-base sm:text-sm font-bold text-center placeholder:text-slate-400"
+                      className="w-full min-h-[44px] px-4 py-2.5 rounded-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 font-mono text-base sm:text-sm font-bold text-center placeholder:text-slate-400"
                     />
                   </div>
                   <div className="col-span-1 flex justify-end">

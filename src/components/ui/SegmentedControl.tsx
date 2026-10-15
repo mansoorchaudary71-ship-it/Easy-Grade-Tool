@@ -35,7 +35,7 @@ interface SegmentedControlProps<T extends string | number> {
 }
 
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-teal-500/50 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
 
 /**
  * Accessible segmented control with a fluid, sliding background (Framer Motion layout animation).
@@ -65,8 +65,8 @@ export function SegmentedControl<T extends string | number>({
     : `flex flex-wrap items-center gap-2 ${className}`;
 
   const pillClass = isTrack
-    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-teal-600 dark:shadow-[0_8px_18px_-6px_rgba(37,99,235,0.6)]'
-    : 'absolute inset-0 -z-10 rounded-full bg-teal-600 shadow-[0_8px_18px_-6px_rgba(37,99,235,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
+    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-blue-600 dark:shadow-[0_8px_18px_-6px_rgba(37,99,235,0.6)]'
+    : 'absolute inset-0 -z-10 rounded-full bg-blue-600 shadow-[0_8px_18px_-6px_rgba(37,99,235,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
 
   return (
     <LayoutGroup id={groupId}>
@@ -82,11 +82,11 @@ export function SegmentedControl<T extends string | number>({
         {options.map((opt) => {
           const active = value === opt.value && !opt.disabledSelection;
           const activeText = isTrack
-            ? 'font-bold text-teal-900 dark:text-white'
+            ? 'font-bold text-blue-800 dark:text-white'
             : 'font-bold text-white';
           const inactiveText = isTrack
-            ? 'font-semibold text-slate-600 hover:text-teal-700 dark:text-slate-300 dark:hover:text-teal-400'
-            : 'font-semibold text-slate-700 hover:text-teal-700 dark:text-slate-200 dark:hover:text-teal-400 border border-gray-200 bg-white dark:border-slate-700 dark:bg-slate-800';
+            ? 'font-semibold text-slate-700 hover:text-blue-800 dark:text-slate-300 dark:hover:text-blue-400'
+            : 'font-semibold text-slate-700 hover:text-blue-700 dark:text-slate-200 dark:hover:text-blue-400 border border-slate-300 bg-white dark:border-slate-500 dark:bg-slate-800';
           return (
             <button
               key={String(opt.value)}
@@ -97,7 +97,7 @@ export function SegmentedControl<T extends string | number>({
                 opt.onSelect?.();
                 onChange(opt.value);
               }}
-              className={`relative isolate inline-flex cursor-pointer select-none touch-manipulation items-center justify-center whitespace-nowrap rounded-full px-4 text-sm [-webkit-tap-highlight-color:transparent] ${
+              className={`relative isolate inline-flex cursor-pointer select-none touch-manipulation items-center justify-center whitespace-nowrap rounded-full px-4 text-sm [-webkit-tap-highlight-color:transparent] min-w-[44px] ${
                 size === 'md' ? 'min-h-[48px] py-2' : 'min-h-[44px] py-1.5'
               } ${focusRing} ${active ? activeText : `${inactiveText} transition-all duration-300 hover:-translate-y-0.5`} ${optionClassName}`}
             >

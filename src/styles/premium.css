@@ -51,7 +51,7 @@ html [class*="tool-theme-"] {
 
 /* Light canvas: a cooler grey so the slate chrome sits naturally on it */
 html:not(.dark) body {
-  background-color: #EEF2F7;
+  background-color: #F8FAFC; /* slate-50: the 60% neutral */
 }
 
 /* --------------------------------------------------------------------------
