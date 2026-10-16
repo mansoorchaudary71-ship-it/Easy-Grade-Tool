@@ -39,6 +39,7 @@ import { preloadTool } from '../utils/toolPreloader';
 import { SITE_URL } from '../data/seoConfig';
 import { submitForm } from '../utils/formSubmit';
 import { Logo } from './Logo';
+import { ChromeAccents } from './ChromeAccents';
 
 export interface FooterProps {
   activeTool?: ToolKey;
@@ -49,54 +50,38 @@ export interface FooterProps {
 
 
 const FOOTER_PREMIUM_CSS = `
-.ft-news{position:relative;isolation:isolate;overflow:hidden;color:#fff;
-  background:linear-gradient(120deg,#1E293B 0%,#1E293B 45%,#1e3a8a 100%);background-size:220% 220%;
-  animation:ft-grad 16s ease-in-out infinite,ft-rise .7s cubic-bezier(.2,.8,.2,1) both;
-  box-shadow:0 30px 70px -24px rgba(15,23,42,.75),inset 0 0 0 1px rgba(255,255,255,.1)}
-.ft-news::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
-  background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
-  background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%)}
-.ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
-.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(37,99,235,.5);animation:ft-drift 11s ease-in-out infinite}
-.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(96,165,250,.28);animation:ft-drift 14s ease-in-out infinite reverse}
-.ft-title-accent{background:linear-gradient(90deg,#93c5fd,#bfdbfe 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.ft-float{animation:ft-float 6s ease-in-out infinite}
-.ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
-.ft-spark:nth-of-type(2){animation-delay:.9s}.ft-spark:nth-of-type(3){animation-delay:1.7s}
-.ft-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:9999px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.92);
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .25s,background .25s,border-color .25s}
-.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(96,165,250,.9);box-shadow:0 0 0 4px rgba(37,99,235,.35),0 10px 30px -10px rgba(37,99,235,.6)}
-.ft-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
-  font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#3b82f6 0%,#2563eb 55%,#1d4ed8 100%);background-size:160% 160%;background-position:0% 50%;
-  box-shadow:0 10px 24px -8px rgba(37,99,235,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
-.ft-btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;transform:skewX(-20deg);
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:ft-shine 5s ease-in-out infinite}
-.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(37,99,235,.9),0 0 0 4px rgba(37,99,235,.22),inset 0 1px 0 rgba(255,255,255,.28)}
-.ft-btn:active:not(:disabled){scale:.96;translate:0 0;transition-duration:.1s,.1s,.2s,.5s}
+.ft-news{position:relative;color:#0F172A}
+.ft-title-accent{color:inherit}
+.ft-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:500;color:#475569;
+  background:#fff;border:1px solid #e2e8f0}
+.dark .ft-chip{color:#cbd5e1;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
+.ft-form{display:flex;align-items:center;gap:.4rem;padding:.35rem;border-radius:9999px;background:#fff;border:1px solid #e2e8f0;
+  box-shadow:0 1px 2px rgba(15,23,42,.04);transition:box-shadow .2s,border-color .2s}
+.dark .ft-form{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);box-shadow:none}
+.ft-form:focus-within{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.15)}
+.dark .ft-form:focus-within{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.25)}
+.ft-form input{background:transparent!important;border:0!important;box-shadow:none!important;color:#0F172A}
+.dark .ft-form input{color:#f8fafc}
+.ft-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
+  font-weight:600;font-size:.875rem;color:#fff;background:#2563eb;transition:background-color .2s,scale .2s}
+.ft-btn:hover:not(:disabled){background:#1d4ed8}
+.ft-btn:active:not(:disabled){scale:.97}
 .ft-btn:disabled{opacity:.75;cursor:wait}
-.ft-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ft-btn:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+.dark .ft-btn:focus-visible{outline-color:#60a5fa}
 .ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
 .ft-msg{animation:ft-pop .35s cubic-bezier(.2,1.2,.3,1) both}
-.ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .85rem;border-radius:9999px;cursor:pointer;
-  font-size:12px;font-weight:700;color:#3454be;background:#eef2ff;border:1px solid #c7d4fb;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
-.dark .ft-more-btn{color:#bfd0ff;background:rgb(30 41 59);border-color:rgb(71 85 105)}
-.ft-more-btn:hover{background:#4468d8;color:#fff;border-color:#4468d8;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(68,104,216,.9)}
-.ft-more-btn:focus-visible{outline:3px solid #4468d8;outline-offset:2px}
+.ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .9rem;border-radius:9999px;cursor:pointer;
+  font-size:12px;font-weight:600;color:#334155;background:#fff;border:1px solid #e2e8f0;transition:background .2s,color .2s,border-color .2s}
+.dark .ft-more-btn{color:#e2e8f0;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
+.ft-more-btn:hover{background:#2563eb;color:#fff;border-color:#2563eb}
+.ft-more-btn:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
 .ft-more-chev{transition:transform .25s}
 .ft-more-in{animation:ft-reveal .28s cubic-bezier(.2,.8,.2,1) both}
-@keyframes ft-grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-@keyframes ft-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-@keyframes ft-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(28px,18px) scale(1.12)}}
-@keyframes ft-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
-@keyframes ft-twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
-@keyframes ft-shine{0%,60%{left:-70%}100%{left:130%}}
 @keyframes ft-pop{from{opacity:0;transform:translateY(6px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes ft-reveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){
-  .ft-btn:hover:not(:disabled){translate:none}
-  .ft-news,.ft-orb,.ft-float,.ft-spark,.ft-btn::after,.ft-msg,.ft-more-in{animation:none!important}
+  .ft-msg,.ft-more-in{animation:none!important}
   .ft-more-btn,.ft-more-chev,.ft-btn,.ft-btn .ft-arrow{transition:none!important}
 }
 `;
@@ -519,44 +504,26 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   // Shared footer styles (single place to tweak the look)
-  const colHeadCls = 'text-[15px] font-bold text-slate-900 dark:text-white m-0 mb-5';
+  const colHeadCls = 'text-sm font-semibold tracking-tight text-slate-900 dark:text-white m-0 mb-5';
   const linkCls =
     'inline-flex items-center text-left text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
+    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.04)] dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-none hover:border-[#2563EB] hover:bg-[#2563EB] hover:text-white dark:hover:border-[#2563EB] dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
-      <footer className="site-footer relative w-full mt-24 font-sans" aria-label="Site footer">
+      <footer className="site-footer relative isolate w-full mt-20 overflow-hidden border-t border-slate-200/80 bg-white font-sans dark:border-white/10 dark:bg-[#0B0F17]" aria-label="Site footer">
         <style dangerouslySetInnerHTML={{ __html: FOOTER_PREMIUM_CSS }} />
+        <ChromeAccents variant="footer" />
         {/* Newsletter banner: overlaps the top edge of the white footer panel (Backed by POST /api/subscribe) */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-14 sm:pt-16">
           <section
             aria-label="Newsletter"
-            className="ft-news grid md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 px-6 py-9 sm:px-10 rounded-[24px]"
+            className="ft-news grid md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 pb-12 border-b border-slate-200/80 dark:border-white/10"
           >
-            <span className="ft-orb ft-orb-a" aria-hidden="true" />
-            <span className="ft-orb ft-orb-b" aria-hidden="true" />
-            {/* Decorative arcs + wave: no fill, non-interactive, clipped by the banner's overflow-hidden */}
-            <svg
-              className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
-              viewBox="0 0 800 300"
-              preserveAspectRatio="xMidYMid slice"
-              fill="none"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <g stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5">
-                <circle cx="720" cy="270" r="80" />
-                <circle cx="720" cy="270" r="145" />
-                <circle cx="720" cy="270" r="215" />
-                <circle cx="720" cy="270" r="290" />
-                <path d="M-20 70 C 140 20, 280 130, 450 76 S 700 10, 830 60" />
-              </g>
-            </svg>
             {/* Illustration (decorative) */}
             <div className="hidden md:flex justify-center ft-float" aria-hidden="true">
-              <svg viewBox="0 0 240 230" className="w-56 h-auto -mt-16 drop-shadow-[0_18px_24px_rgba(20,35,100,0.35)]" fill="none">
+              <svg viewBox="0 0 240 230" className="w-40 h-auto" fill="none">
                 <defs>
                   <linearGradient id="fnScreen" x1="72" y1="70" x2="164" y2="106" gradientUnits="userSpaceOnUse">
                     <stop stopColor="#4468D8" />
@@ -601,14 +568,14 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <div className="min-w-0">
-              <p className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-200 m-0 mb-3">
-                <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+              <p className="inline-flex items-center gap-1.5 text-[13px] font-medium text-slate-500 dark:text-slate-400 m-0 mb-3">
+                <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" aria-hidden="true" />
                 Free study updates
               </p>
-              <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight text-white m-0 max-w-lg [text-wrap:balance]">
+              <h2 className="ft-news-title m-0 max-w-lg [text-wrap:balance]">
                 Subscribe to get updates on new <span className="ft-title-accent">grade formulas &amp; academic tools</span>
               </h2>
-              <p className="mt-3 text-[13px] sm:text-sm font-medium text-white/85 m-0 max-w-lg">
+              <p className="mt-3 text-[13.5px] sm:text-sm font-normal leading-relaxed text-slate-600 dark:text-slate-300 m-0 max-w-lg">
                 Get notified when new grading scales, curve calculators, and semester planning tools are added.
               </p>
 
@@ -617,7 +584,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Email address for updates
                 </label>
                 <div className="ft-form">
-                  <Mail className="w-4 h-4 ml-3 text-white/85 shrink-0" aria-hidden="true" />
+                  <Mail className="w-4 h-4 ml-3 text-slate-400 shrink-0" aria-hidden="true" />
                   <input
                     id={subscribeEmailId}
                     type="email"
@@ -628,7 +595,7 @@ export const Footer: React.FC<FooterProps> = ({
                     }}
                     placeholder="Enter your email"
                     autoComplete="email"
-                    className="flex-1 min-w-0 min-h-[44px] bg-transparent border-0 text-white placeholder:text-white/70 px-1 py-2 text-base sm:text-sm font-medium focus:outline-none focus:ring-0"
+                    className="flex-1 min-w-0 min-h-[44px] bg-transparent border-0 text-slate-900 dark:text-white placeholder:text-slate-500 px-1 py-2 text-base sm:text-sm font-medium focus:outline-none focus:ring-0"
                   />
                   <button type="submit" disabled={subscribeLoading} className="ft-btn">
                     {subscribeLoading ? (
@@ -647,17 +614,17 @@ export const Footer: React.FC<FooterProps> = ({
               </form>
 
               <ul className="mt-4 p-0 m-0 list-none flex flex-wrap gap-2">
-                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />No spam</li>
-                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />Free forever</li>
-                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />Unsubscribe anytime</li>
+                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />No spam</li>
+                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />Free forever</li>
+                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />Unsubscribe anytime</li>
               </ul>
 
-              <p className="mt-3 text-[11px] leading-relaxed text-white/80 m-0 max-w-md">
+              <p className="mt-3 text-[12px] leading-relaxed text-slate-500 dark:text-slate-400 m-0 max-w-md">
                 By subscribing, you agree to our{' '}
                 <Link
                   to="/privacy"
                   onClick={scrollToTop}
-                  className="text-white font-semibold underline underline-offset-2 hover:text-amber-200 transition-colors"
+                  className="text-slate-900 dark:text-white font-medium underline underline-offset-2 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
                 >
                   Privacy Policy
                 </Link>
@@ -667,8 +634,8 @@ export const Footer: React.FC<FooterProps> = ({
               {subscribeMessage && (
                 <div
                   role="status"
-                  className={`ft-msg mt-3 max-w-md text-xs font-semibold px-4 py-2.5 rounded-full flex items-center gap-1.5 shadow-lg ${
-                    subscribeMessage.isError ? 'bg-rose-50 text-rose-800' : 'bg-white text-emerald-800'
+                  className={`ft-msg mt-3 max-w-md text-xs font-semibold px-4 py-2.5 rounded-full flex items-center gap-1.5 ${
+                    subscribeMessage.isError ? 'border border-rose-200 bg-rose-50 text-rose-800' : 'border border-emerald-200 bg-emerald-50 text-emerald-800'
                   }`}
                 >
                   {subscribeMessage.isError ? (
@@ -683,8 +650,8 @@ export const Footer: React.FC<FooterProps> = ({
           </section>
         </div>
 
-        {/* White footer panel */}
-        <div className="relative -mt-16 pt-28 md:pt-24 bg-white dark:bg-slate-900 border-t border-slate-200/70 dark:border-slate-800 shadow-[0_-12px_50px_-20px_rgba(70,100,210,0.25)] dark:shadow-none transition-colors">
+        {/* Link columns (same stark surface as the header) */}
+        <div className="relative z-10 pt-12">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 pb-12">
               {/* Brand */}
@@ -849,7 +816,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title={`Copy direct email address: ${CONTACT_EMAIL}`}
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-full bg-[#2563EB] text-white flex items-center justify-center shrink-0">
                         {copiedEmail ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Mail className="w-3.5 h-3.5" aria-hidden="true" />}
                       </span>
                       <span className="break-all">{copiedEmail ? 'Copied!' : CONTACT_EMAIL}</span>
@@ -866,7 +833,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title="Send a message or feedback directly to the engineering team via backend"
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-full bg-[#2563EB] text-white flex items-center justify-center shrink-0">
                         <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                       </span>
                       <span>Contact &amp; Feedback</span>
@@ -878,7 +845,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Bottom bar */}
-          <div className="border-t border-slate-200/80 dark:border-slate-800">
+          <div className="relative z-10 border-t border-slate-200/80 dark:border-white/10">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
               <p className="m-0 text-center md:text-left">
                 &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite. Engineered with{' '}

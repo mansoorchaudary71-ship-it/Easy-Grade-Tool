@@ -5,7 +5,6 @@ import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/
 import { ToolKey } from '../types';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
-import { PWAInstallButton } from './PWAInstallButton';
 import { preloadTool } from '../utils/toolPreloader';
 import { Logo } from './Logo';
 import { ToolNavBar } from './ToolNavBar';
@@ -160,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* ------------------------------ Right: actions ------------------------------ */}
-          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5 md:justify-self-end">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3 md:justify-self-end">
             {/* Search: icon button on phones and tablets, pure-white pill field from xl up */}
             <button
               type="button"
@@ -204,21 +203,21 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="h-11 w-full cursor-pointer rounded-full border border-slate-200 bg-white py-2 pl-11 pr-20 text-[13px] font-medium tracking-tight text-slate-800 shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/25 dark:border-white/10 dark:bg-[#151B26] dark:text-slate-100 dark:shadow-none dark:placeholder:text-slate-400 dark:hover:border-white/20 dark:focus:border-blue-400 dark:focus:ring-blue-400/40"
+                className="h-11 w-full cursor-pointer rounded-full border border-slate-200 bg-white py-2 pl-11 pr-20 text-[13.5px] font-medium tracking-tight text-slate-800 shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/25 dark:border-white/10 dark:bg-[#151B26] dark:text-slate-100 dark:shadow-none dark:placeholder:text-slate-400 dark:hover:border-white/20 dark:focus:border-blue-400 dark:focus:ring-blue-400/40"
               />
               <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
                 {shortcutLabel}
               </kbd>
             </div>
 
-            {/* 100% Private: quiet shield chip from lg, with the words from 2xl */}
+            {/* 100% Private: white pill, shield only from lg, with the words from xl */}
             <div
-              className="hidden items-center gap-1.5 rounded-full border border-emerald-200/80 bg-emerald-50/70 px-2.5 py-1.5 text-xs font-semibold text-emerald-800 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-300 lg:inline-flex"
+              className="hidden h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3.5 text-[13px] font-medium tracking-tight text-emerald-800 shadow-[0_1px_2px_rgba(15,23,42,0.04)] dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300 dark:shadow-none lg:inline-flex"
               title="100% Private: everything runs in your browser"
             >
               <PrivacyShieldIcon className="size-4 shrink-0" />
-              <span className="hidden 2xl:inline">100% Private</span>
-              <span className="sr-only 2xl:hidden">100% Private</span>
+              <span className="hidden xl:inline">100% Private</span>
+              <span className="sr-only xl:hidden">100% Private</span>
             </div>
 
             {/* Theme switcher: System -> Light -> Dark (icon-only to keep the header clean) */}
@@ -250,9 +249,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </AnimatePresence>
               </span>
             </button>
-
-            {/* In-app PWA install trigger: dark pill */}
-            <PWAInstallButton />
           </div>
         </div>
       </header>

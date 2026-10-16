@@ -23,13 +23,16 @@ export const headerFocusRing =
 
 const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];
 
-/** 44px-tall text link: small tracked capitals; state is carried by colour AND a hairline underline so it never relies on colour alone. */
+/**
+ * 44px-tall text link in sentence case: 14px medium with slightly tightened tracking. State is carried by colour AND a short
+ * pill underline, so it never relies on colour alone.
+ */
 const linkBase =
-  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[12.5px] font-medium uppercase tracking-[0.12em] no-underline touch-manipulation transition-colors duration-150 lg:px-5 [-webkit-tap-highlight-color:transparent]';
+  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[14px] font-medium tracking-[-0.01em] no-underline touch-manipulation transition-colors duration-150 lg:px-6 [-webkit-tap-highlight-color:transparent]';
 const linkIdle =
-  'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white';
+  'text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white';
 const linkActive =
-  'text-slate-950 dark:text-white after:absolute after:inset-x-4 after:bottom-1.5 after:h-0.5 after:rounded-full after:bg-blue-600 dark:after:bg-blue-400 lg:after:inset-x-5';
+  'text-slate-950 dark:text-white after:absolute after:bottom-1.5 after:left-1/2 after:h-0.5 after:w-5 after:-translate-x-1/2 after:rounded-full after:bg-blue-600 dark:after:bg-blue-400';
 
 /**
  * Desktop primary navigation (md and up): ONE visible link (Quick Grade) plus ONE "Tools" dropdown that holds
@@ -52,7 +55,7 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
 
   return (
     <>
-      <nav className="hidden items-center gap-1 md:flex lg:gap-3" aria-label="Main">
+      <nav className="hidden items-center gap-1 md:flex lg:gap-4" aria-label="Main">
         <Link
           to={PRIMARY_NAV_ITEM.path}
           onClick={() => {

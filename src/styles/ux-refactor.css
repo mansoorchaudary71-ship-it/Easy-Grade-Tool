@@ -59,3 +59,17 @@ html.dark :focus-visible { outline-color: #60A5FA; }
   }
   [data-scroll-shadow] { display: none !important; }
 }
+
+/* 8. One UI layer: pure white fields in light mode (the canvas is slate-50, so a hairline keeps them legible).
+   Focus keeps the blue ring from index.css / :focus-visible above; dark mode keeps its own field colours. */
+html:not(.dark) :is(
+  input[type="number"], input[type="text"], input[type="email"], input[type="search"],
+  input[type="url"], input[type="tel"], input[type="password"],
+  textarea, select, .field-input, .tool-input
+) {
+  background-color: #FFFFFF;
+  border-color: rgb(226 232 240);
+}
+html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .tool-input):hover {
+  border-color: rgb(203 213 225);
+}
