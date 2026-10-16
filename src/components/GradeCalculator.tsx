@@ -160,11 +160,11 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       {!hideHeading && (
         <ToolHeading
           badge={calcTab === 'quick-chart' ? 'Quick Grade' : 'Weighted Grade'}
-          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator: Test Score to Percentage & Letter Grade' : 'Weighted Grade & Final Exam Calculator'}
+          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator: Test Score to Percentage & Letter Grade' : 'Weighted Grade Calculator: Course Grade & Final Exam Score'}
           description={
             calcTab === 'quick-chart'
               ? 'Free easy grade calculator for teachers and students. Enter the number of questions to get percentage scores, letter grades and a printable chart, with half points.'
-              : 'Add your assessments, calculate weighted averages, and simulate the exact score needed on your final exam.'
+              : 'Free weighted grade calculator for school and college. Add categories, scores and weights, or use total points, then see the score you need on the final exam.'
           }
         />
       )}

@@ -111,6 +111,83 @@ export const WEIGHTED_COURSE_FAQS: FAQItem[] = [
     answer:
       'Multiply each category percentage by its weight as a decimal, write down each product, and add the products. Then divide by the total of the weights you used. Keep one extra decimal place until the last step so rounding does not push you over a letter cutoff.',
   },
+  {
+    id: 'weighted-by-points',
+    category: 'weighted',
+    question: 'Can I use a weighted grade calculator with points instead of percentages?',
+    answer:
+      'Yes. In Points mode the calculator adds every point you earned and divides by every point possible, so no weights are needed. Scores of 45 out of 50, 88 out of 100 and 27 out of 30 give 160 of 180 points, or 88.9%. Use Weighted (%) mode when your syllabus gives each category its own percentage.',
+  },
+  {
+    id: 'weighted-80-20-60-40',
+    category: 'weighted',
+    question: 'How do I calculate a weighted grade with an 80/20 or 60/40 split?',
+    answer:
+      'Multiply each part by its weight and add. With 80% coursework and a 20% exam, an 88% coursework average and a 72% exam give 0.80 × 88 + 0.20 × 72 = 84.8%. With 60% exams and 40% homework, a 75% exam average and 95% homework give 83%. Type the weights as 80 and 20, or 60 and 40, to get the same result here.',
+  },
+  {
+    id: 'weighted-extra-credit-calculator',
+    category: 'weighted',
+    question: 'Does the weighted grade calculator allow extra credit?',
+    answer:
+      'Yes. Enter a score above the Out Of value, such as 105 out of 100, or add a bonus row. The result is not capped at 100%, so you can see the uncapped grade and then apply your instructor’s rule if extra credit is limited.',
+  },
+  {
+    id: 'weighted-vs-unweighted-difference',
+    category: 'general',
+    question: 'What is the difference between weighted and unweighted grades?',
+    answer:
+      'In an unweighted grade every point or assignment counts the same. In a weighted grade each category counts for a set share, so an exam worth 40% moves the course grade far more than homework worth 10%. A weighted GPA is a different idea: it adds bonus points for honors or AP classes, and the GPA calculator handles it.',
+  },
+  {
+    id: 'weighted-high-school-ap-honors',
+    category: 'general',
+    question: 'Can I use it for high school, AP and honors classes?',
+    answer:
+      'Yes for the class grade. Enter your teacher’s categories and weights to get the course percentage. AP and honors weighting usually changes the GPA scale rather than the class percentage, so take the resulting letter to the GPA calculator for the weighted GPA.',
+  },
+  {
+    id: 'weighted-college-university-credits',
+    category: 'general',
+    question: 'How do I calculate a weighted grade for college or university modules with credits?',
+    answer:
+      'Enter each module’s percentage and use its credit value as the weight, so a 40-credit module counts twice as much as a 20-credit module. The calculator divides by the weights you enter, so they do not need to add up to 100. Grading scales and degree classes differ by country, so check your institution’s table for the final label.',
+  },
+  {
+    id: 'weighted-needed-on-final',
+    category: 'exams',
+    question: 'What do I need on the final exam to keep my weighted grade?',
+    answer:
+      'Use needed score = (target − current grade × (1 − final weight)) ÷ final weight. With an 82% current grade, a 30% final and an 80% target, that is (80 − 82 × 0.70) ÷ 0.30 = 75.3%. The target grade simulator under your results does this for you.',
+  },
+  {
+    id: 'weighted-excel-google-sheets',
+    category: 'general',
+    question: 'How do I make a weighted grade calculator in Excel or Google Sheets?',
+    answer:
+      'List each category percentage in one column and its weight in the next, then use =SUMPRODUCT(B2:B6, C2:C6) / SUM(C2:C6). It works the same in Excel and Google Sheets. This page gives the same answer without building a sheet, and it adds a letter grade and a final exam target.',
+  },
+  {
+    id: 'weighted-canvas-powerschool-blackboard',
+    category: 'general',
+    question: 'Can I use it with Canvas, Blackboard or PowerSchool grades?',
+    answer:
+      'Yes, by typing the numbers in. Copy each category’s percentage or points from your school portal and add the weights from your syllabus. The calculator does not connect to school accounts or import anything, which also lets you test what-if scores before real ones are posted.',
+  },
+  {
+    id: 'weighted-semester-full-year',
+    category: 'general',
+    question: 'How do I calculate a full-year or semester weighted grade?',
+    answer:
+      'For one semester, enter your categories and weights. For a full year, enter each term’s grade as a row and give each term the weight your school uses, such as 50 and 50. A term that counts for less gets a smaller weight.',
+  },
+  {
+    id: 'weighted-free-app-teachers',
+    category: 'general',
+    question: 'Is there a free weighted grade calculator app, and can teachers use it?',
+    answer:
+      'It is free, needs no account and runs in your browser on a phone or computer. You can add it to your home screen from the browser menu, and it keeps working offline after the first visit. Teachers can use it to check one student’s weighted grade; the average grade calculator is the page for a class mean.',
+  },
 ];
 
 /**
@@ -124,7 +201,7 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
     eyebrow: 'Weighted Grade FAQs',
     title: 'Weighted Grade Calculator FAQs',
     description:
-      'Straight answers on syllabus weights, weighted averages, partial-semester standings and how extra credit changes a weighted course grade.',
+      'Straight answers on syllabus weights, points vs percentages, extra credit, college credits, the score needed on the final, and Excel or Google Sheets formulas.',
     ctaText: 'Enter your categories, scores and weights above to see your weighted course grade update instantly.',
   },
   'final-exam-grade-calculator': {

@@ -53,7 +53,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       p(
         'A ',
         ['weighted grade calculator', true],
-        ' turns your syllabus into one course percentage. Instead of adding every point together, it gives each category (homework, quizzes, projects, midterms and the final exam) its own share of the grade, so you can see where you stand today and what you still need to earn.',
+        ' turns your syllabus into one course percentage. Instead of adding every point together, it gives each category (homework, quizzes, projects, midterms and the final exam) its own share of the grade, so you can see where you stand today and what you still need to earn. This free online tool works for school, high school and college classes, with weights or with total points.',
       ),
 
       h2('How to Calculate Weighted Grades'),
@@ -88,6 +88,54 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       h3('When the weights do not add up to 100%'),
       p(
         'Mid-semester only some categories are graded. The calculator divides by the weights you have entered, so a partial-term result shows your current standing instead of a number dragged down by work that does not exist yet.',
+      ),
+
+      h2('Weighted Grade Calculator with Points or Percentages'),
+      h3('How does a weighted grade calculator work with total points?'),
+      p(
+        'Some courses skip category weights and simply add up points: every point counts the same, and the grade is points earned divided by points possible. Switch the calculator to Points mode for that. Scores of 45 out of 50, 88 out of 100 and 27 out of 30 give 160 of 180 points, or 88.9%. In Weighted (%) mode the same rows would each need a weight instead.',
+      ),
+      h3('Weighted grade calculator by percent: 80/20 and 60/40 splits'),
+      p(
+        'Two-part syllabi are the easiest to check by hand. With coursework worth 80% and an exam worth 20%, a coursework average of 88% and an exam score of 72% give 0.80 × 88 + 0.20 × 72 = 84.8%. With exams worth 60% and homework worth 40%, a 75% exam average and 95% homework give 0.60 × 75 + 0.40 × 95 = 83%. Enter the weights as 80 and 20, or 60 and 40, and the calculator returns the same totals.',
+      ),
+      h3('Weighted grade calculator with extra credit'),
+      p(
+        'To add extra credit, type a score that is higher than the Out Of value for that row, such as 105 out of 100, or add a separate bonus row. The calculator does not cap the result at 100%, so you can see the uncapped course grade and then apply your instructor’s rule if the class limits extra credit.',
+      ),
+
+      h2('Weighted vs. Unweighted Grades'),
+      h3('What is the difference between weighted and unweighted grades?'),
+      p(
+        'An unweighted grade treats every point or every assignment equally. A weighted grade lets some categories count more, so a 90% exam can lift your course grade more than a 90% homework set. The word also appears in GPA: a weighted GPA adds extra points for honors or AP classes, which is a separate idea from category weights. Use the GPA calculator for that, and this page for the course percentage.',
+      ),
+      h3('Weighted grade calculator for high school, AP and honors classes'),
+      p(
+        'High school teachers usually weight categories such as homework, tests and projects, and the calculator handles that directly. AP and honors weighting normally affects the GPA scale, not the class percentage, so calculate the course grade here first and then enter the letter in the GPA calculator.',
+      ),
+      h3('Weighted grade calculator for college and university modules'),
+      p(
+        'College and university courses often weight coursework, midterms and a final, and modules can carry different credit values. For one course, enter each component with its weight. To combine modules, enter each module’s percentage and use its credit value as the weight: a 40-credit module counts twice as much as a 20-credit module, whatever each result is. Grading scales and degree classifications differ by country, so use the percentage as the reliable result and check your institution’s own table for the letter or class.',
+      ),
+
+      h2('What Grade Do I Need on the Final?'),
+      h3('How to find the score you need on a weighted final exam'),
+      p(
+        'Use the target grade simulator under your results. Enter the grade you want and the weight of the final, and it solves for the exam score. The formula behind it is: needed score = (target − current grade × (1 − final weight)) ÷ final weight. With an 82% current grade, a 30% final and an 80% target, that is (80 − 82 × 0.70) ÷ 0.30 = 75.3%. For a full walkthrough, open the final exam grade calculator.',
+      ),
+
+      h2('Weighted Grade Calculator in Excel, Google Sheets, Canvas and PowerSchool'),
+      h3('How do I make a weighted grade calculator in Excel or Google Sheets?'),
+      p(
+        'Put each category percentage in one column and its weight in the next. Then use =SUMPRODUCT(B2:B6, C2:C6) / SUM(C2:C6), where column B holds the percentages and column C the weights, and the result is your weighted grade. The formula works the same in Excel and Google Sheets. This page does the same sum without any setup, which is handy when you only need a quick answer or a what-if score.',
+      ),
+      h3('Can I use it with Canvas, Blackboard or PowerSchool grades?'),
+      p(
+        'Yes, by typing the numbers in. Read each category’s percentage or points from your school portal, then enter them with the weights from your syllabus. The calculator does not connect to a school account, so nothing is imported, and nothing you type is sent anywhere. That also means you can test what-if scores before your teacher posts the real ones.',
+      ),
+      h3('Semester or full-year weighted grades'),
+      p(
+        'For a semester, enter your categories with their weights. For a full year made of two semesters or terms, enter each term’s grade as a row and give each the weight your school uses, such as 50 and 50. If a term counts for less, give it a smaller weight, and the calculator scales the total to match.',
       ),
 
       h2('Using the Weighted Grade Calculator'),
