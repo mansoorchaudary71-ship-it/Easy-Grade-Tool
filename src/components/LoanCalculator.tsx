@@ -344,8 +344,8 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
       />
       <ToolHeading
         badge="Loan Calculator"
-        title="Loan Calculator — Estimate Monthly Loan Payments"
-        description="Use our free Loan Calculator to compute monthly payments, total loan cost, and principal vs. interest amortization across personal, auto, and student loan terms."
+        title="Loan Calculator — Monthly Payment, Interest & Amortization"
+        description="Use this free online loan calculator to find your monthly payment, total interest and amortization schedule for car, boat, personal, student and business loans. Enter the amount, APR and term."
       />
 
       <div className="relative tool-layout font-sans" data-print-area data-print-title="Loan Payment Summary">
@@ -455,7 +455,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
             id="loan-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
           >
-            Loan Calculator — Monthly Payment &amp; Amortization Schedule Guide
+            Loan Calculator Guide: Monthly Payment, APR &amp; Amortization Schedule
           </h2>
 
           <div className="my-6">
@@ -466,7 +466,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
           </div>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A loan payment calculator is a practical financial tool that empowers borrowers to make informed decisions regarding personal loans, student loans, and auto financing. <strong className="font-semibold text-slate-900 dark:text-white">Understanding your potential monthly payments and total interest costs is crucial for effective financial planning before signing a loan agreement.</strong> If you are specifically comparing 15-year or 30-year home financing, visit our dedicated <Link to="/mortgage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Mortgage Calculator</Link>, or use our <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link> to evaluate APR changes and down-payment ratios.
+            An online loan calculator is a practical financial tool that helps borrowers make informed decisions about car loans, personal loans, student loans, boat and motorcycle financing, and small business loans. <strong className="font-semibold text-slate-900 dark:text-white">Understanding your potential monthly payments and total interest costs is crucial for effective financial planning before signing a loan agreement.</strong> If you are specifically comparing 15-year or 30-year home financing, visit our dedicated <Link to="/mortgage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Mortgage Calculator</Link>, or use our <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link> to evaluate APR changes and down-payment ratios.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -542,7 +542,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Start by entering the net principal balance you plan to borrow, then select or type the repayment duration in years. The calculator immediately updates both your monthly payment summary card and the collapsible year-by-year amortization schedule below it.
+            Start by entering the net principal balance you plan to borrow, then select or type the repayment duration in years. The calculator immediately updates both your monthly payment summary card and the year-by-year amortization schedule below it.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -550,7 +550,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            The interest rate (APR) is a critical factor in determining both your monthly payment and cumulative finance charges. <strong className="font-semibold text-slate-900 dark:text-white">Even a 1% reduction in interest rate can save hundreds or thousands of dollars over a multi-year repayment term.</strong>
+            The interest rate (APR) is a critical factor in determining both your monthly payment and cumulative finance charges. <strong className="font-semibold text-slate-900 dark:text-white">Even a 1% reduction in interest rate can save hundreds or thousands of dollars over a multi-year repayment term.</strong> The APR quoted on a loan offer also includes lender fees, so entering the APR gives the most realistic estimate of what the loan will cost you.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -607,6 +607,90 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Strategic loan management—such as making extra principal payments, avoiding prepayment penalties, and refinancing when interest rates drop—can shorten your payoff timeline significantly. <strong className="font-semibold text-slate-900 dark:text-white">Use the amortization schedule above to track how quickly your principal balance decreases each year and plan ahead with confidence.</strong>
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Loan Calculator for Car, Boat, Motorcycle, RV, Land &amp; Business Loans
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How Do I Calculate a Car Loan Payment?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Subtract your down payment and trade-in value from the vehicle price, then enter the remaining balance as the loan amount. <strong className="font-semibold text-slate-900 dark:text-white">For example, a $30,000 car loan at 7% APR costs about $511.47 per month over 6 years and about $452.78 per month over 7 years, but the longer term adds roughly $1,200 in total interest.</strong> Comparing terms side by side is the quickest way to see what a lower payment really costs.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Boat, Motorcycle, RV, Truck &amp; Equipment Loans
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Any fixed-rate installment loan follows the same amortization math, so this loan calculator also works for boats, motorcycles, recreational vehicles, trucks, and equipment. Enter the amount you finance, the lender&apos;s rate, and the term in years to see the monthly payment and total interest before you visit a dealer.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Land &amp; Small Business Loans
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Business and land loans often carry longer terms and extra fees, but the monthly principal-and-interest estimate still comes from the same formula. <strong className="font-semibold text-slate-900 dark:text-white">Use the result as a planning figure, then confirm fees, balloon terms, and government-backed program rules (such as SBA loans) directly with your lender.</strong>
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Loan Term in Months: 36, 48, 60, 72 &amp; 84 Months
+          </h2>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            This loan calculator takes the term in years, so convert months by dividing by 12:
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            <li><strong className="font-semibold text-slate-900 dark:text-white">36 months</strong> = 3 years</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">48 months</strong> = 4 years</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">60 months</strong> = 5 years</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">72 months</strong> = 6 years</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">84 months</strong> = 7 years</li>
+          </ul>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            <strong className="font-semibold text-slate-900 dark:text-white">Worked example:</strong> a $25,000 loan at 7.5% APR costs about $777.66 per month over 3 years ($2,995.60 total interest), $500.95 per month over 5 years ($5,056.92 total interest), and $383.46 per month over 7 years ($7,210.38 total interest). A longer term lowers the monthly payment but raises the total cost of the loan.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Down Payments, Extra Payments &amp; Paying Off a Loan Early
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How Does a Down Payment Change My Loan Payment?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            A down payment reduces the amount you borrow. Subtract it from the purchase price and enter the remainder as the loan amount to see the lower monthly payment and the interest you save.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How Do Extra Payments Pay Off a Loan Early?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Extra payments are applied to principal, which reduces the interest charged in every later month and shortens the loan. <strong className="font-semibold text-slate-900 dark:text-white">This calculator shows the standard fixed-payment schedule, so to preview paying a loan off early, enter a shorter term and compare the monthly payment and total interest against your original plan.</strong> Check with your lender that there is no prepayment penalty first.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Balloon Payments and Interest-Only Loans
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Balloon loans and interest-only periods use a different schedule, with smaller early payments and a large final payment. This calculator assumes equal payments that fully repay the loan by the end of the term, so ask your lender for balloon or interest-only terms. To compare home financing, use the <Link to="/mortgage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Mortgage Calculator</Link>.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            How Is Total Interest Calculated on a Loan?
+          </h2>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Each month&apos;s interest equals the remaining balance times the annual rate divided by 12. <strong className="font-semibold text-slate-900 dark:text-white">Total interest is the sum of all monthly payments minus the amount you borrowed</strong>, which the results card shows as Total interest next to Total cost. A lower APR, a shorter term, or a larger down payment all reduce it.
           </p>
         </ContentSection>
 

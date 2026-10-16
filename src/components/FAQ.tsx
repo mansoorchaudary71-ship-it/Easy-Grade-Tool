@@ -511,7 +511,7 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
     eyebrow: 'Gratuity & Etiquette FAQs',
     title: 'Tipping & Bill Splitting FAQs',
     description:
-      'Answers on how much to tip at restaurants, salons, for delivery and rideshares, how to calculate 15%, 18% and 20% tips, tip with tax, and splitting the bill.',
+      'Answers to common tipping dilemmas, pre-tax versus post-tax gratuities, mental calculation tricks, and group bill splits.',
     ctaText: 'Use the tip percentage selector and split fields above for instant, fair per-person amounts.',
     items: [
       {
@@ -563,111 +563,13 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         answer:
           'Enter the bill, choose a tip percentage and set the number of people. The tip is added to the bill and the total is divided evenly, so you see the tip, the total and the amount each person pays. A $120 bill with an 18% tip split four ways is $35.40 per person.',
       },
-      {
-        id: 'what-is-a-tip-calculator',
-        category: 'tip',
-        question: 'What is a tip calculator?',
-        answer:
-          'A tip calculator works out how much gratuity to leave on a bill. You enter the bill amount and a tip percentage, and it shows the tip, the total with tip, and, if you set the number of people, what each person pays. For example, an $84 bill with a 20% tip is a $16.80 tip, a $100.80 total, and $50.40 each for two people.',
-      },
-      {
-        id: 'how-to-use-tip-calculator-on-iphone-or-android',
-        category: 'tip',
-        question: 'How do I use a tip calculator on my iPhone or Android phone?',
-        answer:
-          'Open this page in your phone browser, enter the bill, tap a preset such as 15%, 18% or 20%, and set the number of people. There is nothing to download. If your browser offers to install web apps, you can also add the page to your home screen so it opens like an app.',
-      },
-      {
-        id: 'how-much-should-i-tip-at-a-restaurant',
-        category: 'tip',
-        question: 'How much should I tip at a restaurant, and what should I tip a waiter?',
-        answer:
-          'At a sit-down restaurant in the US, 15% is the usual floor for acceptable service, 18% to 20% is standard for good service, and 22% or more is for outstanding service. Tip on the pre-tax subtotal if you want to follow traditional etiquette, or on the full total if you prefer to round up. Check your receipt first, because some restaurants add an automatic gratuity for larger parties.',
-      },
-      {
-        id: 'how-to-calculate-15-18-20-percent-tip',
-        category: 'tip',
-        question: 'How do I calculate a 15%, 18% or 20% tip?',
-        answer:
-          'Multiply the bill by the percentage divided by 100. On an $84 bill, 15% is $12.60, 18% is $15.12, and 20% is $16.80. For quick mental math, find 10% by moving the decimal one place left, then add half of it for 15% or double it for 20%.',
-      },
-      {
-        id: 'how-much-to-tip-for-a-haircut',
-        category: 'tip',
-        question: 'How much should I tip for a haircut, at a salon, or for a barber or hairdresser?',
-        answer:
-          'A tip of 15% to 20% of the service price is the common guideline for haircuts, colour and styling. On a $60 haircut, that is $9 to $12. If a separate assistant washed your hair, many people tip them a few dollars on top. If the salon owner cuts your hair, tipping is still customary in the US, though some people tip a little less.',
-      },
-      {
-        id: 'how-much-to-tip-nail-salon-massage-tattoo',
-        category: 'tip',
-        question: 'How much should I tip at a nail salon, for a massage, or for a tattoo artist?',
-        answer:
-          'For nails (manicure or pedicure) and massage, 15% to 20% of the service price is the usual guideline. For a tattoo, 15% to 25% is commonly suggested, since the artist often does not get tips any other way. Tip on the full price of the service before any discount when you can, and in cash if you are not sure the tip will reach the artist through a card.',
-      },
-      {
-        id: 'how-much-to-tip-delivery-driver',
-        category: 'tip',
-        question: 'How much should I tip a delivery driver for pizza, DoorDash, Uber Eats or Instacart?',
-        answer:
-          'A tip of 10% to 20% of the order is typical for food delivery, with a minimum of about $3 to $5 on small orders. Tip more for bad weather, long distances, many stairs, or a large grocery order. Delivery apps usually ask for a tip at checkout, and you can often change it after delivery.',
-      },
-      {
-        id: 'how-much-to-tip-uber-taxi-bartender',
-        category: 'tip',
-        question: 'How much should I tip a rideshare driver, taxi driver or bartender?',
-        answer:
-          'For taxis and rideshares, 10% to 15% of the fare is typical, and up to 20% for very good service or help with heavy bags. Bartenders usually get $1 to $2 per drink, or 15% to 20% of the tab if you run a tab. At a cafe, a dollar or some spare change is common but optional.',
-      },
-      {
-        id: 'how-much-to-tip-catering-groomer-cruise',
-        category: 'tip',
-        question: 'How much should I tip for catering, a dog groomer, or on a cruise?',
-        answer:
-          'For catering, check whether a service charge is already on the invoice. If not, 10% to 20% is common for the staff. A dog groomer is usually tipped 15% to 20%. Many cruise lines add automatic daily gratuities per guest, so check your booking before adding more.',
-      },
-      {
-        id: 'tip-calculator-with-tax',
-        category: 'tip',
-        question: 'Should the tip calculator include tax?',
-        answer:
-          'You decide by what you enter as the bill. Enter the pre-tax subtotal to tip on food and drink only, or the total after tax to tip on everything. For an $84 subtotal with 8% tax, the total is $90.72. A 20% tip on the subtotal is $16.80, so you pay $107.52. A 20% tip on the post-tax total is $18.14, so you pay $108.86.',
-      },
-      {
-        id: 'reverse-tip-calculator-find-bill-from-total',
-        category: 'tip',
-        question: 'How do I find the original bill from a total that already includes the tip?',
-        answer:
-          'Divide the total by 1 plus the tip rate. If you paid $100.80 including a 20% tip, the bill was $100.80 ÷ 1.20 = $84.00 and the tip was $16.80. The same method works for any rate: use 1.15 for 15% and 1.18 for 18%.',
-      },
-      {
-        id: 'what-is-tip-out-and-tip-pooling',
-        category: 'tip',
-        question: 'What is tip out and tip pooling?',
-        answer:
-          'Tip out is when servers share part of their tips with other staff such as bussers, bartenders and hosts. Tip pooling is when all tips go into a shared pot that is divided by a set rule, such as hours worked. Rules and percentages vary by employer and by state. This calculator is made for customers splitting a bill, so it does not divide tips between employees.',
-      },
-      {
-        id: 'tipping-by-state-ny-ca-tx',
-        category: 'tip',
-        question: 'Do tipping rules change by state, such as New York, California or Texas?',
-        answer:
-          'Tipping is a custom, not a state law, so the usual percentages are the same across the US. What changes is the sales tax. In New York City the combined sales tax is 8.875%, so doubling the tax shown on a restaurant bill gives roughly a 17.75% tip. Check your own receipt, since the rate varies by city and county. Tipped worker wage rules also differ by state, but that does not change the amount customers usually leave.',
-      },
-      {
-        id: 'free-alternative-to-google-tip-calculator',
-        category: 'tip',
-        question: 'Is there a free alternative to the Google tip calculator?',
-        answer:
-          'Yes. This tip calculator is free, needs no sign-up, and works in any browser on a phone or computer. Enter the bill, choose a tip percentage, and set how many people are splitting the check to see the tip, the total and each person’s share.',
-      },
     ],
   },
   percentage: {
     eyebrow: 'Math & Formulas FAQs',
     title: 'Percentage Calculation FAQs',
     description:
-      'Clear explanations and step-by-step mathematical formulas for percentage changes, proportions, and sales discounts.',
+      'Step-by-step answers on how to calculate a percentage, percentage increase and decrease, percentage difference, reverse percentage, marks and grades.',
     ctaText: 'Use the percentage calculators above to compute increases, decreases, and fractions instantly.',
     items: [
       {
@@ -712,49 +614,210 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         answer:
           'Enter the starting value and the new value. The percent change is (new − old) ÷ old × 100: going from 80 to 100 is a 25% increase, and going from 100 to 80 is a 20% decrease. A positive result means growth and a negative result means a drop.',
       },
+      {
+        id: 'how-to-use-a-percentage-calculator',
+        category: 'percentage',
+        question: 'How do I use a percentage calculator?',
+        answer:
+          'Pick the question that matches your problem and fill in the two blanks. Use the first box for X% of a number, the second for X is what percent of Y, and the third for the percentage change from one value to another. The result updates as you type. For example, 20% of 150 is 30, 30 is 20% of 150, and going from 100 to 125 is a 25% increase.',
+      },
+      {
+        id: 'what-is-a-percentage-calculator',
+        category: 'percentage',
+        question: 'What is a percentage calculator?',
+        answer:
+          'A percentage calculator is an online tool that does percent math for you: finding a percentage of a number, working out what percent one number is of another, and measuring how much a value rose or fell in percent. It applies the standard formulas, such as (part ÷ whole) × 100, so you do not have to do the division and multiplication by hand.',
+      },
+      {
+        id: 'how-to-calculate-percentage-increase',
+        category: 'percentage',
+        question: 'How do I calculate a percentage increase?',
+        answer:
+          'Subtract the old value from the new value, divide by the old value, and multiply by 100. A price that rises from 40 to 50 is (50 − 40) ÷ 40 × 100 = 25% higher. In the percentage change box, enter 40 as the start and 50 as the end to get +25%.',
+      },
+      {
+        id: 'how-to-calculate-percentage-decrease',
+        category: 'percentage',
+        question: 'How do I calculate a percentage decrease, reduction or drop?',
+        answer:
+          'Use the same formula as an increase: (new − old) ÷ old × 100. If the answer is negative, it is a decrease. A value that falls from 200 to 150 is (150 − 200) ÷ 200 × 100 = −25%, so it dropped by 25%. Enter 200 as the start and 150 as the end in the percentage change box to see −25%.',
+      },
+      {
+        id: 'increase-or-decrease-number-by-percentage',
+        category: 'percentage',
+        question: 'How do I increase or decrease a number by a percentage?',
+        answer:
+          'To increase a number by a percentage, multiply it by (1 + percent ÷ 100). To decrease it, multiply by (1 − percent ÷ 100). So 120 increased by 15% is 120 × 1.15 = 138, and 120 reduced by 15% is 120 × 0.85 = 102. You can also find 15% of 120 in the first box (18) and add or subtract it.',
+      },
+      {
+        id: 'percentage-difference-between-two-numbers',
+        category: 'percentage',
+        question: 'How do I find the percentage difference between two numbers?',
+        answer:
+          'Percentage difference compares two values without treating either as the starting point. Divide the absolute difference by the average of the two numbers, then multiply by 100. For 50 and 75 the difference is 25 and the average is 62.5, so the percentage difference is 40%. Percentage change from 50 to 75 is a different figure, +50%, because it uses 50 as the base.',
+      },
+      {
+        id: 'percentage-change-vs-percentage-difference',
+        category: 'percentage',
+        question: 'What is the difference between percentage change and percentage difference?',
+        answer:
+          'Percentage change has a clear starting value and divides by it, so the direction matters: 50 to 75 is +50%, while 75 to 50 is −33.33%. Percentage difference divides by the average of both numbers, so the order does not matter and the result is the same either way. Use change for before and after, and difference when comparing two values side by side.',
+      },
+      {
+        id: 'reverse-percentage-original-value',
+        category: 'percentage',
+        question: 'How do I find the original number after a percentage increase or discount (reverse percentage)?',
+        answer:
+          'Divide the final value by the multiplier. After a 20% discount the multiplier is 0.80, so a sale price of 60 came from 60 ÷ 0.80 = 75. After a 20% increase the multiplier is 1.20, so a final value of 60 came from 60 ÷ 1.20 = 50. Do not simply add or subtract 20% from the final price, because the percentage applied to the original number, not the new one.',
+      },
+      {
+        id: 'how-to-calculate-percentage-of-marks-or-grades',
+        category: 'percentage',
+        question: 'How do I calculate a percentage for marks, test scores or grades?',
+        answer:
+          'Divide the marks you scored by the total marks and multiply by 100. A score of 45 out of 50 is (45 ÷ 50) × 100 = 90%, and 425 out of 500 is 85%. In the second box, enter your score as X and the total as Y. For a weighted course grade or a letter grade, use the grade calculators on this site.',
+      },
+      {
+        id: 'how-to-calculate-average-percentage',
+        category: 'percentage',
+        question: 'How do I calculate an average percentage?',
+        answer:
+          'If every item has the same total, add the percentages and divide by how many there are. If the totals differ, add all the points you earned and divide by all the points possible. For example, 80% on a 50-point quiz and 90% on a 100-point exam is (40 + 90) ÷ (50 + 100) = 86.67%, not the simple average of 85%.',
+      },
+      {
+        id: 'percentage-without-calculator',
+        category: 'percentage',
+        question: 'How can I calculate a percentage without a calculator?',
+        answer:
+          'Start from 10% and 1%. To find 10%, move the decimal one place left, and for 1%, move it two places. Then combine them: 15% of 80 is 10% (8) plus half of that (4), which is 12. For 25%, take a quarter, and for 50%, halve the number. Multiply or add these pieces to build any percentage.',
+      },
+      {
+        id: 'convert-percentage-decimal-fraction',
+        category: 'percentage',
+        question: 'How do I convert a percentage to a decimal or fraction, and back?',
+        answer:
+          'Divide the percentage by 100 to get a decimal: 15% becomes 0.15, and 75% becomes 0.75. To go from a decimal to a percentage, multiply by 100, so 0.375 is 37.5%. For a fraction, divide the numerator by the denominator and multiply by 100: 3/8 is 0.375, which is 37.5%.',
+      },
+      {
+        id: 'percentage-calculator-weight-loss',
+        category: 'percentage',
+        question: 'How do I calculate weight loss as a percentage?',
+        answer:
+          'Subtract your current weight from your starting weight, divide by the starting weight, and multiply by 100. Going from 200 lb to 180 lb is (200 − 180) ÷ 200 × 100 = 10% weight loss. In the percentage change box, enter 200 and 180 and read the result as −10%, which means a 10% loss.',
+      },
+      {
+        id: 'percentage-formulas-excel-google-sheets',
+        category: 'percentage',
+        question: 'What are the percentage formulas for Excel and Google Sheets?',
+        answer:
+          'To get what percent A1 is of B1, use =A1/B1 and format the cell as Percentage. For percentage change from A1 to B1, use =(B1-A1)/A1. To increase A1 by 10%, use =A1*(1+10%), and to find 10% of A1, use =A1*10%. Both Excel and Google Sheets use the same formulas.',
+      },
+      {
+        id: 'percentage-points-vs-percent',
+        category: 'percentage',
+        question: 'What is the difference between percentage points and percent?',
+        answer:
+          'Percentage points are the plain subtraction of two percentages, while percent change compares them proportionally. If a rate rises from 10% to 12%, that is an increase of 2 percentage points, but it is a 20% increase in the rate itself, because 2 ÷ 10 = 0.20.',
+      },
+      {
+        id: 'markup-vs-margin-percentage',
+        category: 'percentage',
+        question: 'How do I calculate profit, markup and margin percentages?',
+        answer:
+          'Markup is profit divided by cost, and margin is profit divided by selling price, both times 100. If an item costs 80 and sells for 100, the profit is 20, so the markup is 20 ÷ 80 = 25% and the margin is 20 ÷ 100 = 20%. Use the second box with profit as X and cost or price as Y.',
+      },
     ],
   },
   loan: {
     eyebrow: 'Financing & Interest FAQs',
-    title: 'Loan & Amortization FAQs',
+    title: 'Loan Calculator FAQs: Payments, APR & Amortization',
     description:
-      'Understand how loan amortization schedules work, the impact of APR, and how extra principal payments save money.',
+      'Answers on how to calculate a monthly loan payment, how interest and APR work, how to read an amortization schedule, and how down payments and extra payments change your loan.',
     ctaText: 'Adjust your loan term, interest rate, or principal balance above to see your monthly payment breakdown.',
     items: [
       {
         id: 'monthly-loan-formula',
         category: 'loan',
-        question: 'How is a monthly loan payment calculated?',
+        question: 'How do I calculate a monthly loan payment?',
         answer:
-          'Monthly payments are calculated using the standard amortization formula: M = P [i(1 + i)^n] ÷ [(1 + i)^n - 1], where M is monthly payment, P is principal loan amount, i is monthly interest rate (annual APR ÷ 12), and n is total number of monthly payments.',
+          'Use M = P × [r(1 + r)^n] ÷ [(1 + r)^n − 1], where P is the amount borrowed, r is the monthly rate (annual APR ÷ 12) and n is the number of monthly payments (years × 12). For example, $25,000 at 7.5% APR over 5 years works out to about $500.95 per month.',
       },
       {
-        id: 'principal-vs-interest',
+        id: 'how-loan-calculator-works',
         category: 'loan',
-        question: 'What is the difference between principal and interest?',
+        question: 'How does a loan calculator work?',
         answer:
-          'Principal is the actual capital amount you borrowed and owe back to the lender. Interest is the financing fee charged by the lender for the use of their money. Each monthly payment is divided between paying down accrued interest and reducing the principal balance.',
+          'A loan calculator takes three inputs, the loan amount, the annual interest rate and the term, and applies the fixed-rate amortization formula. It returns your monthly payment, total interest, total cost and a year-by-year amortization schedule, and it recalculates instantly whenever you change a value.',
+      },
+      {
+        id: 'loan-interest-calculation',
+        category: 'loan',
+        question: 'How is interest on a loan calculated?',
+        answer:
+          'On a standard installment loan, each month\'s interest is the remaining balance multiplied by the annual rate divided by 12. Because the balance shrinks with every payment, the interest portion falls over time and the principal portion grows. Total interest is the sum of all payments minus the amount you borrowed.',
       },
       {
         id: 'loan-amortization-schedule',
         category: 'loan',
-        question: 'What is loan amortization?',
+        question: 'What is a loan amortization schedule and how do I read it?',
         answer:
-          'Amortization is the process of paying off debt through regular, scheduled installments over time. In early loan months, the majority of each payment goes toward interest. Over time, as the principal balance decreases, a greater percentage of each payment directly reduces the loan principal.',
-      },
-      {
-        id: 'extra-payments-impact',
-        category: 'loan',
-        question: 'How does making extra payments shorten loan duration and interest?',
-        answer:
-          'Any extra payment made beyond the scheduled monthly installment is applied directly to the principal balance. Lowering principal early reduces future compounded interest calculations, saving thousands of dollars in interest and paying off the loan months or years ahead of schedule.',
+          'An amortization schedule shows how every payment is split between interest and principal and what balance remains afterwards. In the early years most of each payment is interest. Read the table row by row: the principal-paid column grows, the interest-paid column shrinks, and the ending balance reaches zero in the final year.',
       },
       {
         id: 'apr-vs-interest-rate',
         category: 'loan',
         question: 'What is the difference between APR and interest rate?',
         answer:
-          'The interest rate is the cost of borrowing the principal amount per year. The Annual Percentage Rate (APR) reflects the total cost of credit, combining the interest rate along with lender fees, points, and origination charges.',
+          'The interest rate is the yearly cost of borrowing the principal. The Annual Percentage Rate (APR) also folds in lender fees such as origination charges, so it is usually slightly higher. For the closest estimate, enter the APR quoted in your loan offer, then confirm the final payment with your lender.',
+      },
+      {
+        id: 'car-loan-payment',
+        category: 'loan',
+        question: 'How do I calculate a car loan payment?',
+        answer:
+          'Subtract your down payment and trade-in value from the vehicle price, then enter that net amount financed, your APR and the term. A $30,000 car loan at 7% APR costs about $511.47 a month over 6 years and about $452.78 over 7 years, but the longer term adds roughly $1,200 in interest.',
+      },
+      {
+        id: 'loan-term-months-to-years',
+        category: 'loan',
+        question: 'How do I enter a loan term in months, such as 60 or 84 months?',
+        answer:
+          'Divide the number of months by 12 and enter the result in the Term (years) field. A 36-month loan is 3 years, 48 months is 4 years, 60 months is 5 years, 72 months is 6 years and 84 months is 7 years. Whole-year terms also give the cleanest annual amortization table.',
+      },
+      {
+        id: 'down-payment-effect',
+        category: 'loan',
+        question: 'How does a down payment change my loan payment?',
+        answer:
+          'A down payment reduces the amount you borrow, which lowers your monthly payment and total interest. To model it, subtract the down payment from the price and enter the remainder as the loan amount. Putting more down also helps you avoid owing more than the asset is worth.',
+      },
+      {
+        id: 'extra-payments-impact',
+        category: 'loan',
+        question: 'How do extra payments help me pay off a loan early?',
+        answer:
+          'Any amount paid beyond the scheduled installment goes straight to principal, which cuts the interest charged in later months and shortens the loan. This calculator shows the standard schedule; to preview an early payoff, enter a shorter term and compare the monthly payment and total interest with your original plan.',
+      },
+      {
+        id: 'loan-types-supported',
+        category: 'loan',
+        question: 'Can I use this loan calculator for car, boat, motorcycle, personal or business loans?',
+        answer:
+          'Yes. Any fixed-rate installment loan uses the same math, so it works for car, truck, boat, motorcycle, RV, personal, student, land and small business loans. Enter the financed amount, rate and term. Government-backed products such as SBA loans have lender-specific fees, so treat the result as an estimate.',
+      },
+      {
+        id: 'balloon-interest-only',
+        category: 'loan',
+        question: 'Does this calculator include balloon payments or interest-only periods?',
+        answer:
+          'No. It assumes a fixed rate and equal payments that fully repay the loan by the end of the term. Balloon loans and interest-only periods use different schedules with a large final payment, so ask your lender for those terms and use this tool for a fixed-payment comparison.',
+      },
+      {
+        id: 'principal-vs-interest',
+        category: 'loan',
+        question: 'How much interest will I pay on a loan?',
+        answer:
+          'Check the Total interest figure in the results card. It equals your monthly payment times the number of payments minus the amount borrowed. A lower APR, a shorter term or a larger down payment all reduce it, and the principal-versus-interest bar shows how much of your total cost is interest.',
       },
     ],
   },
