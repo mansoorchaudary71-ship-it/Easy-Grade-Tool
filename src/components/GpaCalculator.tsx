@@ -175,8 +175,8 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
       {!hideHeading && (
         <ToolHeading
           badge="GPA Calculator"
-          title="GPA Calculator — Semester & Cumulative 4.0 Scale"
-          description="Use our free college and high school GPA Calculator to add your classes, select credit hours, and calculate both your Semester and Cumulative GPA in real time."
+          title="GPA Calculator: Semester, Cumulative & High School GPA (4.0 Scale)"
+          description="Free online GPA calculator for college, high school and middle school. Add your classes, letter grades and credit hours to see your semester GPA, cumulative GPA and quality points on the 4.0 scale in real time."
         />
       )}
 
@@ -453,7 +453,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             id="gpa-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
           >
-            How to Calculate GPA: Grade Point Average for College &amp; University Registrar
+            How to Calculate GPA: Semester, Cumulative and High School GPA on the 4.0 Scale
           </h2>
 
           <div className="my-6">
@@ -464,7 +464,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </div>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            An essential metric for academic evaluation, the Grade Point Average (GPA) plays a pivotal role in a student&apos;s educational journey. <strong className="font-semibold text-slate-900 dark:text-white">Understanding how to calculate GPA is crucial for every college and university student, especially when considering how different institutions approach semester and cumulative calculations.</strong> This guide demystifies the GPA calculation process, providing clarity on how to convert letter grades and credit hours into an accurate grade-point average. Need to calculate an individual course grade first? Use our <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link> or <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>.
+            An essential metric for academic evaluation, the Grade Point Average (GPA) plays a pivotal role in a student&apos;s educational journey. <strong className="font-semibold text-slate-900 dark:text-white">Understanding how to calculate GPA is crucial for every college and university student, especially when considering how different institutions approach semester and cumulative calculations.</strong> This guide demystifies the GPA calculation process, providing clarity on how to convert letter grades and credit hours into an accurate grade-point average, whether you need a college GPA calculator, a high school or middle school GPA calculator, a cumulative GPA calculator that starts from your current GPA, or a GPA calculator without credits. Need to calculate an individual course grade first? Use our <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link> or <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -522,6 +522,21 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Several institutional rules can influence the final GPA calculation beyond basic grade points. A college or university may use a plus/minus grading scale (where an A- equals 3.7 and a B+ equals 3.3). <strong className="font-semibold text-slate-900 dark:text-white">The credit weight of specific courses, such as 4-credit lab sciences versus 1-credit seminars, also causes high-credit classes to have a much larger impact on your semester and cumulative GPA.</strong> Additionally, pass/fail, audit, or withdrawn courses are typically excluded from the GPA denominator.
           </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Different Ways to Calculate GPA
+          </h2>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            People mean different things by GPA, and the method decides the number. Check which one your school or application uses before you compare results.
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            <li><strong className="font-semibold text-slate-900 dark:text-white">Unweighted, equal credit:</strong> the plain average of grade points, common in middle and high school. Every class counts the same.</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">Credit-weighted GPA:</strong> quality points divided by credits attempted, the standard method at colleges and universities. This calculator uses it.</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">Weighted for rigor:</strong> bonus points for honors, AP or IB courses, often on a 5.0 scale (some districts use 4.5 or 6.0).</li>
+            <li><strong className="font-semibold text-slate-900 dark:text-white">Application-service GPA:</strong> a figure recalculated by a service such as LSAC, AMCAS or CASPA with its own rules (see the college section below).</li>
+          </ul>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
             Weighted vs Unweighted GPA
@@ -617,6 +632,73 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Percentage to GPA: Convert a 100-Point Grade to the 4.0 Scale
+          </h2>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            GPA is built from letters, not percentages, so a percentage to GPA conversion has two steps: find the letter your school gives that percentage, then use the grade points for that letter. This calculator takes letters, so convert first and then enter the letters above. The list shows the common plus/minus scale. On a plain A–F scale, 90–100 is an A (4.0), 80–89 a B (3.0), 70–79 a C (2.0), 60–69 a D (1.0) and below 60 an F (0.0). The <Link to="/letter-grade-calculator/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Letter Grade Calculator</Link> converts any percentage to a letter and GPA points on both scales.
+          </p>
+
+          <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            <li>93–100%: A (4.0)</li>
+            <li>90–92%: A- (3.7)</li>
+            <li>87–89%: B+ (3.3)</li>
+            <li>83–86%: B (3.0)</li>
+            <li>80–82%: B- (2.7)</li>
+            <li>77–79%: C+ (2.3)</li>
+            <li>73–76%: C (2.0)</li>
+            <li>70–72%: C- (1.7)</li>
+            <li>67–69%: D+ (1.3)</li>
+            <li>63–66%: D (1.0)</li>
+            <li>60–62%: D- (0.7)</li>
+            <li>Below 60%: F (0.0)</li>
+          </ul>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            What GPA is an 85, 88 or 93 percent?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            On the plus/minus scale an 85% is a B (3.0), an 88% is a B+ (3.3) and a 93% is an A (4.0). On a plain A–F scale the 88 is a B (3.0) and the 93 is an A (4.0). The same 90% is an A (4.0) on the plain scale but an A- (3.7) on the plus/minus scale, so always use your school&apos;s own cutoffs.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I convert a 100-point average to a 4.0 GPA?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Convert each course percentage to a letter, take the grade points, then weight by credits as usual. Averaging percentages first and converting once can give a different answer, because the scale is not linear. For example, an 89% (B+, 3.3) and a 93% (A, 4.0) in equal-credit courses give a 3.65 GPA, but their 91% average would convert to an A- (3.7).
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            GPA Calculator Without Credits: Middle School and Junior High
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I calculate GPA without credit hours?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            When every class counts the same, GPA is the plain average of the grade points. Leave every course at the same credit value in the calculator above, such as 1.0 or 3.0, and the credit weighting cancels out. Six classes graded A, A, B+, B, A- and B give (4.0 + 4.0 + 3.3 + 3.0 + 3.7 + 3.0) ÷ 6 = 3.5.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I calculate GPA in middle school or junior high?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Use the letter grades on your report card with equal credits for each class. Many middle and junior high schools report GPA on the same 4.0 scale as high school, but some do not calculate one at all, so ask your school before relying on a number.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I calculate GPA without plus or minus grades?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Choose plain A, B, C, D and F in the course list: A is 4.0, B is 3.0, C is 2.0, D is 1.0 and F is 0.0. The calculator uses whichever letters you select, so skipping the plus and minus grades gives a whole-letter GPA.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
             GPA and Course Grades
           </h2>
 
@@ -673,6 +755,102 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            Current GPA, Target GPA and Raising Your GPA
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I calculate GPA with my current GPA?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Enter your cumulative GPA and total credits earned in the prior fields, then add this term&apos;s courses. The calculator adds your prior quality points (GPA × credits) to the new ones and divides by all credits. For example, 45 credits at 3.0 is 135 quality points; 15 credits of B+ (3.3) add 49.5, so 184.5 ÷ 60 = 3.08.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            What GPA do I need next semester to reach my goal?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Use this formula: needed term GPA = (goal GPA × total credits after the term − current quality points) ÷ new credits. With 45 credits at 3.0 and a goal of 3.2 after 15 more credits, you need (3.2 × 60 − 135) ÷ 15 = 3.8. If the answer is above 4.0, the goal cannot be reached in a single term.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How many A&apos;s does it take to raise my GPA?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            It depends on your credits. From a 3.0 over 60 credits, 15 credits of straight A&apos;s reach 3.2, because (180 + 4.0 × 15) ÷ 75 = 3.2. The more credits already on your record, the slower each term moves your cumulative GPA.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            What is the highest GPA I can get this semester?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Set every course in progress to an A and read the cumulative GPA: that is your ceiling for the term. With 45 prior credits at 3.0 and 15 credits of A&apos;s, the best you can reach is (135 + 60) ÷ 60 = 3.25.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Can a GPA calculator tell me what I need on my final exam?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            A GPA calculator works from final course letters, not exam scores. First find the exam score you need for a target course grade with the <Link to="/final-exam-grade-calculator/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Final Exam Grade Calculator</Link>, then enter the resulting letter here to see how it changes your semester and cumulative GPA.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+            GPA Rules That Change the Result: Quarters, Repeats, Pass/Fail and Other Scales
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I calculate GPA for the quarter system?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            The formula is the same: quality points divided by credits, using the credits your school assigns. If you combine semester and quarter credits, convert first, because a quarter credit is two-thirds of a semester credit.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Do pass/fail and withdrawn courses count toward GPA?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            At most schools a passing grade in a pass/fail course, an audited course and a withdrawal do not enter GPA, because they add no quality points and no credits attempted. A failing grade (F) does count as 0.0. Check your registrar&apos;s policy before leaving a course out.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I enter a retaken course?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            If your school replaces the old grade, remove the first attempt from your prior totals by subtracting its credits and quality points, then enter the new grade as a current course. If your school averages both attempts, keep both. Your catalog&apos;s repeat policy decides which applies.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Does this GPA calculator support a 4.3 or 5.0 scale?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            The A+ toggle sets an A+ to 4.0 or 4.33, the closest option for schools that give an A+ extra value. Every other grade follows the standard 4.0 scale, so weighted 5.0 scales are not built in. For a weighted result, add your school&apos;s bonus to the weighted courses before averaging, as described above.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            How do I convert a GPA from a 10-point, 5-point or 12-point scale?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Scale conversions follow rules set by each university or credential evaluator, so a single multiplication can give the wrong result. For 10-point and 5-point CGPA conversions, use the <Link to="/cgpa-to-percentage-calculator/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>, which lists university-specific formulas. For admissions abroad, check what the receiving school or its evaluator requires.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Is this GPA calculator accurate?
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            The arithmetic is exact: each grade&apos;s points times its credits, summed and divided by total credits. Your official GPA can still differ if your school uses other grade values, rounds differently or drops repeated courses, so treat the result as an estimate until it matches your transcript.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
             GPA in College and University
           </h2>
 
@@ -698,6 +876,14 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Honors designations and graduate programs set higher GPA benchmarks to recognize sustained academic excellence. Dean&apos;s List and Latin honors (Cum Laude, Magna Cum Laude, Summa Cum Laude) typically begin between 3.50 and 3.85 cumulative GPA. <strong className="font-semibold text-slate-900 dark:text-white">Graduate and professional schools generally look for an undergraduate GPA of 3.0 to 3.7+ alongside strong upper-division coursework.</strong>
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+            Why Law, Medical and PA School GPAs Can Differ
+          </h3>
+
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Application services such as LSAC (law), AMCAS (medical) and CASPA (PA programs) recalculate GPA from your transcripts using their own grade tables, often count every attempt including repeated courses, and report separate science GPAs. This calculator gives a standard 4.0 estimate, so your official application GPA can differ from it.
           </p>
 
           <div className="mt-8 p-5 rounded-2xl bg-teal-100/80 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

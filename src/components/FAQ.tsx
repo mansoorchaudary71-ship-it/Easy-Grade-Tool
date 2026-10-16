@@ -316,9 +316,9 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
   },
   gpa: {
     eyebrow: 'Academic Standing FAQs',
-    title: 'How is GPA Calculated? College & University FAQs',
+    title: 'GPA Calculator FAQs: How to Calculate Semester & Cumulative GPA',
     description:
-      'Authoritative answers regarding 4.0 grade point averages, credit weighting, quality points, and registrar transcript policies.',
+      'Answers on how GPA is calculated, cumulative GPA with your current GPA, GPA without credits, percentage to GPA, weighted vs unweighted GPA, quality points and registrar rules.',
     ctaText: 'Add your semester courses above to see your cumulative GPA and quality points update in real time.',
     items: [
       {
@@ -350,25 +350,11 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
           'Quality points are grade points multiplied by credits. For a 3-credit course on the 4.0 scale: A (4.0) = 12, A- (3.7) = 11.1, B+ (3.3) = 9.9, B (3.0) = 9, B- (2.7) = 8.1, C+ (2.3) = 6.9, C (2.0) = 6, D (1.0) = 3 and F (0.0) = 0.',
       },
       {
-        id: 'weighted-vs-unweighted-gpa',
-        category: 'gpa',
-        question: 'What is the difference between weighted and unweighted GPA?',
-        answer:
-          'An unweighted GPA is calculated on a standard 4.0 scale where course difficulty is not considered (an A in a standard class and an A in an advanced course both equate to 4.0). A weighted GPA assigns additional weight (often up to 5.0) to advanced, AP, IB, or Honors courses to reflect increased academic challenge and effort.',
-      },
-      {
         id: 'quality-points-explained',
         category: 'gpa',
         question: 'What are quality points and how are they calculated?',
         answer:
           'Quality points represent the numerical value of a grade relative to course credit hours. They are determined by multiplying the assigned grade points for the letter grade by the number of credit hours for that course. For instance, an "A" (4.0 points) in a 4-credit course yields 16 quality points (4.0 × 4 = 16), which are then summed across all courses to find your GPA.',
-      },
-      {
-        id: 'semester-vs-cumulative-gpa',
-        category: 'gpa',
-        question: 'What is the difference between semester GPA and cumulative GPA?',
-        answer:
-          'A semester GPA reflects your academic performance during a single semester or term. The cumulative GPA represents the overall average of all quality points earned across every semester throughout your entire college or university enrollment.',
       },
       {
         id: 'retaken-courses-gpa',
@@ -453,6 +439,132 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         question: 'How do I use a quality points calculator?',
         answer:
           'Quality points are grade points multiplied by credit hours. An A (4.0) in a 3-credit course is 12.0 quality points. Add the quality points for all courses and divide by the total credits to get your GPA. The calculator shows the quality points for each course.',
+      },
+      {
+        id: 'gpa-without-credits',
+        category: 'gpa',
+        question: 'How do I calculate GPA without credits?',
+        answer:
+          'When every class counts the same, GPA is the plain average of the grade points. In this calculator leave every course at the same credit value, such as 1.0 or 3.0, and the credit weighting cancels out. Six classes graded A, A, B+, B, A- and B give (4.0 + 4.0 + 3.3 + 3.0 + 3.7 + 3.0) ÷ 6 = 3.5.',
+      },
+      {
+        id: 'gpa-without-plus-minus',
+        category: 'gpa',
+        question: 'How do I calculate GPA without plus or minus grades?',
+        answer:
+          'Choose plain A, B, C, D and F for each course: A is 4.0, B is 3.0, C is 2.0, D is 1.0 and F is 0.0. The calculator has no separate switch because it uses whichever letters you select, so leaving out the plus and minus grades gives you a whole-letter GPA.',
+      },
+      {
+        id: 'gpa-middle-school',
+        category: 'gpa',
+        question: 'How do I calculate GPA in middle school or junior high?',
+        answer:
+          'Use the letter grades on your report card with equal credits for every class, then read the semester GPA. Many middle and junior high schools report GPA on the same 4.0 scale as high school, but some do not calculate one at all, so ask your school before relying on the number.',
+      },
+      {
+        id: 'gpa-with-current-gpa',
+        category: 'gpa',
+        question: 'How do I calculate GPA with my current GPA?',
+        answer:
+          'Enter your cumulative GPA and the credits you have earned in the prior fields, then add this term’s courses. The calculator adds your prior quality points (GPA × credits) to the new ones and divides by all credits. For example, 45 credits at 3.0 is 135 quality points; 15 credits of B+ (3.3) add 49.5, so 184.5 ÷ 60 = 3.08.',
+      },
+      {
+        id: 'gpa-needed-next-semester',
+        category: 'gpa',
+        question: 'What GPA do I need next semester to reach a target GPA?',
+        answer:
+          'Use needed term GPA = (target GPA × total credits after the term − current quality points) ÷ new credits. With 45 credits at 3.0 and a target of 3.2 after 15 more credits, you need (3.2 × 60 − 135) ÷ 15 = 3.8 this term. If the result is above 4.0, the target cannot be reached in one term.',
+      },
+      {
+        id: 'gpa-credits-to-raise',
+        category: 'gpa',
+        question: 'How many credits of A’s do I need to raise my GPA?',
+        answer:
+          'It depends on how many credits you already have. From a 3.0 over 60 credits, 15 credits of straight A’s reach 3.2, because (180 + 4.0 × 15) ÷ 75 = 3.2. The more credits already on your record, the slower each new term moves your cumulative GPA.',
+      },
+      {
+        id: 'gpa-highest-possible',
+        category: 'gpa',
+        question: 'What is the highest GPA I can get this semester?',
+        answer:
+          'Set every course you are taking to an A and read the cumulative GPA: that is your ceiling for the term. With 45 prior credits at 3.0 and 15 credits of A’s, the best you can reach is (135 + 60) ÷ 60 = 3.25. Grades already earned cannot be changed, only the credits still in progress.',
+      },
+      {
+        id: 'gpa-percentages',
+        category: 'gpa',
+        question: 'How do I use a GPA calculator with percentages?',
+        answer:
+          'GPA comes from letters, so convert each course percentage to a letter first, then enter the letters here. On the common plus/minus scale 93–100 is an A (4.0), 90–92 an A- (3.7), 87–89 a B+ (3.3) and 83–86 a B (3.0). Convert each course separately instead of averaging percentages first, because the scale is not linear.',
+      },
+      {
+        id: 'gpa-85-88-93',
+        category: 'gpa',
+        question: 'What GPA is an 85, 88 or 93 percent?',
+        answer:
+          'On the common plus/minus scale an 85% is a B (3.0), an 88% is a B+ (3.3) and a 93% is an A (4.0). On a plain A–F scale the 88 is a B (3.0) and the 93 is an A (4.0). Your school’s cutoffs decide, so confirm them in your syllabus or student handbook.',
+      },
+      {
+        id: 'gpa-quarter-system',
+        category: 'gpa',
+        question: 'How do I calculate GPA for the quarter system?',
+        answer:
+          'The formula is the same: quality points divided by credits, using the credits your school assigns. If you combine semester and quarter credits, convert first, because a quarter credit is two-thirds of a semester credit. A GPA computed within one system does not change with the credit unit.',
+      },
+      {
+        id: 'gpa-pass-fail-withdrawn',
+        category: 'gpa',
+        question: 'Do pass/fail and withdrawn courses count toward GPA?',
+        answer:
+          'At most schools a passing grade in a pass/fail course, an audited course and a withdrawal do not enter GPA, because they add no quality points and no credits attempted. A failing grade (F) does count as 0.0. Policies differ, so check your registrar before leaving a course out.',
+      },
+      {
+        id: 'gpa-retaken-course-entry',
+        category: 'gpa',
+        question: 'How do I enter a retaken course in a GPA calculator?',
+        answer:
+          'If your school replaces the old grade, remove the first attempt from your prior totals by subtracting its credits and quality points, then enter the new grade as a current course. If your school averages both attempts, keep both. The repeat policy in your catalog decides which applies.',
+      },
+      {
+        id: 'gpa-4-3-5-0-scale',
+        category: 'gpa',
+        question: 'Does this GPA calculator support a 4.3 or 5.0 scale?',
+        answer:
+          'The A+ toggle sets A+ to 4.0 or 4.33, the closest option for schools that give an A+ extra value. Every other grade follows the standard 4.0 scale, so weighted 5.0 scales are not built in. For a weighted result, add your school’s bonus to the weighted courses before averaging.',
+      },
+      {
+        id: 'gpa-other-scales',
+        category: 'gpa',
+        question: 'How do I convert a GPA from a 10-point, 5-point or 12-point scale?',
+        answer:
+          'Scale conversions follow rules set by each university or evaluator, so one multiplication can give the wrong result. For 10-point and 5-point CGPA conversions, use the CGPA to Percentage Calculator, which lists university-specific formulas. For admissions abroad, check what the receiving school or its credential evaluator requires.',
+      },
+      {
+        id: 'gpa-calculator-accuracy',
+        category: 'gpa',
+        question: 'Is this GPA calculator accurate?',
+        answer:
+          'The arithmetic is exact: each grade’s points times its credits, summed and divided by total credits. Your official GPA can still differ if your school uses other grade values, rounds differently, drops repeated courses or excludes some credits, so treat the result as an estimate until it matches your transcript.',
+      },
+      {
+        id: 'gpa-application-services',
+        category: 'gpa',
+        question: 'Why is my LSAC, AMCAS or CASPA GPA different from my school GPA?',
+        answer:
+          'Application services recalculate GPA from your transcripts using their own grade tables, often count every attempt including repeated courses, and report separate science GPAs. This calculator gives a standard 4.0 estimate, so your official application GPA can differ from it.',
+      },
+      {
+        id: 'gpa-final-exam',
+        category: 'gpa',
+        question: 'Can a GPA calculator tell me what I need on my final exam?',
+        answer:
+          'No. GPA is calculated from final course letters, not exam scores. First find the exam score you need for your target course grade with the Final Exam Grade Calculator, then enter the resulting letter here to see how it changes your semester and cumulative GPA.',
+      },
+      {
+        id: 'gpa-print-export',
+        category: 'gpa',
+        question: 'Can I print or export my GPA results?',
+        answer:
+          'Yes. Use the Print Result and Export GPA PDF buttons below the results to save a report of your courses, credits, semester GPA and cumulative GPA. Your courses are not uploaded anywhere, and you do not need an account to use the calculator.',
       },
     ],
   },
