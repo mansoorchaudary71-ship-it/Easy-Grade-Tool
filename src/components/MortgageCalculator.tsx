@@ -39,8 +39,8 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
       />
       <ToolHeading
         badge="Mortgage Calculator"
-        title="Mortgage Calculator & Monthly Payment Estimator"
-        description="Use our free Mortgage Calculator to estimate your monthly home loan payment, principal and interest split, and total interest paid over a 15-year or 30-year mortgage term."
+        title="Mortgage Calculator — Estimate Your Monthly Mortgage Payment"
+        description="Use this free online mortgage calculator to estimate your monthly home loan payment, principal and interest split, and total interest over a 15, 20 or 30-year term. Enter the loan amount, rate and term."
       />
 
       <div className="relative tool-layout font-sans" data-print-area data-print-title="Mortgage Payment Summary">
@@ -146,7 +146,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
             id="mortgage-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
           >
-            Mortgage Loan Calculator &amp; Payment Calculator | Home Mortgage Bank
+            Mortgage Calculator Guide: Monthly Payment, Interest &amp; Loan Terms
           </h2>
 
           <div className="my-6">
@@ -224,7 +224,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
                 </tr>
                 <tr>
                   <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300 font-medium sticky left-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs shadow-[1px_0_0_0_rgba(226,232,240,0.8)] dark:shadow-[1px_0_0_0_rgba(51,65,85,0.8)]">Interest Rate</td>
-                  <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300">The low rate offered by your bank.</td>
+                  <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300">The annual interest rate offered by your lender.</td>
                 </tr>
                 <tr>
                   <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300 font-medium sticky left-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs shadow-[1px_0_0_0_rgba(226,232,240,0.8)] dark:shadow-[1px_0_0_0_rgba(51,65,85,0.8)]">Loan Term</td>
@@ -256,12 +256,12 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
               </thead>
               <tbody>
                 <tr>
-                  <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300 font-medium sticky left-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs shadow-[1px_0_0_0_rgba(226,232,240,0.8)] dark:shadow-[1px_0_0_0_rgba(51,65,85,0.8)]">Estimate potential monthly mortgage payment based on your location and financial profile.</td>
+                  <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300 font-medium sticky left-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs shadow-[1px_0_0_0_rgba(226,232,240,0.8)] dark:shadow-[1px_0_0_0_rgba(51,65,85,0.8)]">Estimate potential monthly mortgage payment based on your loan amount, interest rate and term.</td>
                   <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300">Helps you budget effectively and determine how much home you can truly afford.</td>
                 </tr>
                 <tr>
                   <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300 font-medium sticky left-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs shadow-[1px_0_0_0_rgba(226,232,240,0.8)] dark:shadow-[1px_0_0_0_rgba(51,65,85,0.8)]">See impact of interest rates and loan terms</td>
-                  <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300">Allows you to explore various low mortgage options and make an informed investment decision.</td>
+                  <td className="border-b border-gray-100 dark:border-slate-800 p-3 text-gray-700 dark:text-gray-300">Allows you to explore various mortgage options and make an informed investment decision.</td>
                 </tr>
               </tbody>
             </table>
@@ -276,7 +276,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
           </h3>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-            When considering a mortgage, it&apos;s crucial to understand the various types of mortgage loans available, as each option has different implications for your monthly payment and overall financial commitment. Common types include <strong className="font-semibold text-gray-900 dark:text-gray-100">fixed-rate mortgages, where the interest rate remains constant for the life of the loan</strong>, offering predictable low monthly payments based on your financial situation. Adjustable-rate mortgages (ARMs), on the other hand, have interest rates that can fluctuate, potentially leading to higher or lower monthly payments over time. It is important to use a mortgage calculator to determine the differences.
+            When considering a mortgage, it&apos;s crucial to understand the various types of mortgage loans available, as each option has different implications for your monthly payment and overall financial commitment. Common types include <strong className="font-semibold text-gray-900 dark:text-gray-100">fixed-rate mortgages, where the interest rate remains constant for the life of the loan</strong>, offering predictable monthly payments. Adjustable-rate mortgages (ARMs), on the other hand, have interest rates that can fluctuate, potentially leading to higher or lower monthly payments over time. It is important to use a mortgage calculator to determine the differences.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
@@ -284,7 +284,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
           </h3>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-            Selecting the right mortgage option requires careful consideration of your personal financial situation, risk tolerance, and long-term goals to improve your overall investment. A mortgage calculator can be an invaluable tool during this low process, allowing you to <strong className="font-semibold text-gray-900 dark:text-gray-100">compare the illustrative monthly payment for different loan amounts, interest rates, and loan terms.</strong> Factors such as your credit score, current income, and future financial stability will all impact which mortgage you qualify for and which option is most suitable for your specific needs, helping you make an informed investment.
+            Selecting the right mortgage option requires careful consideration of your personal financial situation, risk tolerance, and long-term goals to improve your overall investment. A mortgage calculator can be an invaluable tool during this process, allowing you to <strong className="font-semibold text-gray-900 dark:text-gray-100">compare the illustrative monthly payment for different loan amounts, interest rates, and loan terms.</strong> Factors such as your credit score, current income, and future financial stability will all impact which mortgage you qualify for and which option is most suitable for your specific needs, helping you make an informed investment.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
@@ -292,7 +292,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
           </h3>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-            Beyond the general types of mortgages, it’s beneficial to explore local mortgage options and lenders. Local banks and credit unions often offer unique low home loan programs tailored to residents in their location, which might include specific grants or lower interest rates. <strong className="font-semibold text-gray-900 dark:text-gray-100">Using a mortgage calculator to compare offers from different local lenders can help you find the best deal</strong> for your financial situation and ensure you secure a competitive monthly payment. Gathering all the required low information for this calculator will enable you to make a sound decision regarding your home.
+            Beyond the general types of mortgages, it’s beneficial to explore local mortgage options and lenders. Local banks and credit unions often offer unique home loan programs tailored to residents in their location, which might include specific grants or lower interest rates. <strong className="font-semibold text-gray-900 dark:text-gray-100">Using a mortgage calculator to compare offers from different local lenders can help you find the best deal</strong> for your financial situation and ensure you secure a competitive monthly payment. Gathering all the required information for this calculator will enable you to make a sound decision regarding your home.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 tracking-tight">
@@ -304,7 +304,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
           </h3>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-            Several crucial factors directly influence your mortgage payment, and understanding them is key to managing your financial obligations. The primary components include the <strong className="font-semibold text-gray-900 dark:text-gray-100">principal loan amount, the interest rate offered by the bank, and the loan term. Additionally, other costs like property taxes, homeowner’s insurance, and low private mortgage insurance (PMI) can significantly improve your monthly payment.</strong> A mortgage calculator can help you estimate how each of these factors impacts your overall monthly mortgage payment.
+            Several crucial factors directly influence your mortgage payment, and understanding them is key to managing your financial obligations. The primary components include the <strong className="font-semibold text-gray-900 dark:text-gray-100">principal loan amount, the interest rate offered by the bank, and the loan term. Additionally, other costs like property taxes, homeowner’s insurance, and private mortgage insurance (PMI) can significantly increase your monthly payment.</strong> A mortgage calculator can help you estimate how each of these factors impacts your overall monthly mortgage payment.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
@@ -312,7 +312,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
           </h3>
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-            Utilizing a payment calculator is an essential step in understanding your potential mortgage costs and how to apply for the best rates. To use this mortgage calculator effectively, you&apos;ll input the specific low loan amount you intend to borrow, the prevailing interest rate, and your desired loan term to apply for the best options. The calculator then provides an illustrative low monthly payment, helping you budget for your home loan. This tool can also be personalized to include additional costs like property taxes and low insurance for a more comprehensive estimate.
+            Utilizing a payment calculator is an essential step in understanding your potential mortgage costs and how to apply for the best rates. To use this mortgage calculator effectively, you&apos;ll input the specific loan amount you intend to borrow, the prevailing interest rate, and your desired loan term to apply for the best options. The calculator then provides an illustrative monthly payment, helping you budget for your home loan. This tool calculates principal and interest only, so add your estimated property taxes and homeowner&apos;s insurance separately for a more comprehensive estimate.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
@@ -349,6 +349,86 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
 
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
             Once you have received multiple loan offers, it&apos;s critical to meticulously compare them to identify the most advantageous mortgage. Focus on the <strong className="font-semibold text-gray-900 dark:text-gray-100">interest rate, the total loan amount, and the overall monthly payment, using a mortgage calculator to determine the long-term cost of each option</strong>, including how much interest you will pay over the life of the loan. This comprehensive comparison will empower you to make an informed investment decision for your home.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 tracking-tight">
+            How Much Mortgage Can I Afford?
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            Can I Afford This Mortgage Payment?
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            Lenders commonly use the 28/36 rule: housing costs should stay near 28% of your gross monthly income, and total monthly debt near 36%. <strong className="font-semibold text-gray-900 dark:text-gray-100">On $8,000 of gross monthly income, that means about $2,240 for housing and $2,880 for all debt payments.</strong> Because housing costs include property taxes and insurance, leave room for them when you choose a loan amount. Try different loan amounts above until the payment fits your budget.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 tracking-tight">
+            30-Year vs 15-Year Mortgage Calculator
+          </h2>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            Enter 30, 15, or any other term to compare. This calculator accepts terms from 1 to 50 years, so you can also test 10, 20, 25, and 40-year mortgages. <strong className="font-semibold text-gray-900 dark:text-gray-100">For a $300,000 loan at 6.5%, the 30-year payment is about $1,896.20 per month with $382,633 in total interest, while the 15-year payment is about $2,613.32 per month with $170,398 in total interest.</strong> The shorter term costs about $717 more each month but saves roughly $212,000 in interest. In practice, 15-year loans usually carry a lower rate than 30-year loans, which widens the savings further.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 tracking-tight">
+            Taxes, Insurance, PMI &amp; Escrow: Beyond Principal and Interest
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            Does a Mortgage Calculator Include Taxes and Insurance?
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            This mortgage calculator shows principal and interest only. <strong className="font-semibold text-gray-900 dark:text-gray-100">To estimate your full monthly cost, divide your annual property tax and homeowner&apos;s insurance by 12 and add them, along with any PMI or HOA dues, to the payment shown above.</strong> Many lenders collect these costs in an escrow account and include them in your monthly bill, which is why your actual payment is usually higher than principal and interest alone.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            Down Payment and Loan Amount
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            Subtract your down payment from the home price and enter the result as the loan amount. A 20% down payment on a $375,000 home leaves a $300,000 loan, and putting down 20% or more generally avoids private mortgage insurance on conventional loans.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 tracking-tight">
+            Paying Off a Mortgage Early &amp; Refinancing
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            How Do Extra Payments Pay Off a Mortgage Early?
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            Extra payments go directly to principal, so every later month&apos;s interest is calculated on a smaller balance. <strong className="font-semibold text-gray-900 dark:text-gray-100">This calculator shows the standard schedule, so to preview paying off a mortgage early, enter a shorter term and compare the monthly payment and total interest with your current loan.</strong> Ask your lender whether extra payments must be marked as principal-only and whether any prepayment penalty applies.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            When Should I Refinance a Mortgage?
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            To test a refinance, enter your remaining balance, the new rate, and the new term, then compare the result with your current payment and total interest. <strong className="font-semibold text-gray-900 dark:text-gray-100">Divide the closing costs by the monthly savings to find your break-even point: $6,000 in costs and $150 saved each month breaks even in 40 months.</strong> If you plan to move before then, refinancing may not pay off.
+          </p>
+
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 tracking-tight">
+            Mortgage Amortization, FHA, VA &amp; Other Loan Types
+          </h2>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            Mortgage Calculator With Amortization
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            Amortization splits each payment into interest and principal, with early payments being mostly interest. The Principal vs Interest bar above shows your overall split. For a year-by-year schedule, enter the same amount, rate, and term in our <Link to="/loan-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Loan Calculator</Link>, which includes an annual amortization table.
+          </p>
+
+          <h3 className="text-xl font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200">
+            FHA, VA, Manufactured Home, Land &amp; Second Home Loans
+          </h3>
+
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+            The principal and interest math is the same for any fixed-rate loan, so you can use this calculator for FHA, VA, conventional, manufactured home, land, and second home loans by entering the rate your lender quotes. <strong className="font-semibold text-gray-900 dark:text-gray-100">Program costs such as the FHA mortgage insurance premium or the VA funding fee are not included,</strong> so add them to your estimate.
           </p>
         </ContentSection>
 

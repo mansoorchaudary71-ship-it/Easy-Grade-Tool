@@ -730,104 +730,76 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
   },
   loan: {
     eyebrow: 'Financing & Interest FAQs',
-    title: 'Loan Calculator FAQs: Payments, APR & Amortization',
+    title: 'Loan & Amortization FAQs',
     description:
-      'Answers on how to calculate a monthly loan payment, how interest and APR work, how to read an amortization schedule, and how down payments and extra payments change your loan.',
+      'Understand how loan amortization schedules work, the impact of APR, and how extra principal payments save money.',
     ctaText: 'Adjust your loan term, interest rate, or principal balance above to see your monthly payment breakdown.',
     items: [
       {
         id: 'monthly-loan-formula',
         category: 'loan',
-        question: 'How do I calculate a monthly loan payment?',
+        question: 'How is a monthly loan payment calculated?',
         answer:
-          'Use M = P × [r(1 + r)^n] ÷ [(1 + r)^n − 1], where P is the amount borrowed, r is the monthly rate (annual APR ÷ 12) and n is the number of monthly payments (years × 12). For example, $25,000 at 7.5% APR over 5 years works out to about $500.95 per month.',
+          'Monthly payments are calculated using the standard amortization formula: M = P [i(1 + i)^n] ÷ [(1 + i)^n - 1], where M is monthly payment, P is principal loan amount, i is monthly interest rate (annual APR ÷ 12), and n is total number of monthly payments.',
       },
       {
-        id: 'how-loan-calculator-works',
+        id: 'principal-vs-interest',
         category: 'loan',
-        question: 'How does a loan calculator work?',
+        question: 'What is the difference between principal and interest?',
         answer:
-          'A loan calculator takes three inputs, the loan amount, the annual interest rate and the term, and applies the fixed-rate amortization formula. It returns your monthly payment, total interest, total cost and a year-by-year amortization schedule, and it recalculates instantly whenever you change a value.',
-      },
-      {
-        id: 'loan-interest-calculation',
-        category: 'loan',
-        question: 'How is interest on a loan calculated?',
-        answer:
-          'On a standard installment loan, each month\'s interest is the remaining balance multiplied by the annual rate divided by 12. Because the balance shrinks with every payment, the interest portion falls over time and the principal portion grows. Total interest is the sum of all payments minus the amount you borrowed.',
+          'Principal is the actual capital amount you borrowed and owe back to the lender. Interest is the financing fee charged by the lender for the use of their money. Each monthly payment is divided between paying down accrued interest and reducing the principal balance.',
       },
       {
         id: 'loan-amortization-schedule',
         category: 'loan',
-        question: 'What is a loan amortization schedule and how do I read it?',
+        question: 'What is loan amortization?',
         answer:
-          'An amortization schedule shows how every payment is split between interest and principal and what balance remains afterwards. In the early years most of each payment is interest. Read the table row by row: the principal-paid column grows, the interest-paid column shrinks, and the ending balance reaches zero in the final year.',
+          'Amortization is the process of paying off debt through regular, scheduled installments over time. In early loan months, the majority of each payment goes toward interest. Over time, as the principal balance decreases, a greater percentage of each payment directly reduces the loan principal.',
+      },
+      {
+        id: 'extra-payments-impact',
+        category: 'loan',
+        question: 'How does making extra payments shorten loan duration and interest?',
+        answer:
+          'Any extra payment made beyond the scheduled monthly installment is applied directly to the principal balance. Lowering principal early reduces future compounded interest calculations, saving thousands of dollars in interest and paying off the loan months or years ahead of schedule.',
       },
       {
         id: 'apr-vs-interest-rate',
         category: 'loan',
         question: 'What is the difference between APR and interest rate?',
         answer:
-          'The interest rate is the yearly cost of borrowing the principal. The Annual Percentage Rate (APR) also folds in lender fees such as origination charges, so it is usually slightly higher. For the closest estimate, enter the APR quoted in your loan offer, then confirm the final payment with your lender.',
-      },
-      {
-        id: 'car-loan-payment',
-        category: 'loan',
-        question: 'How do I calculate a car loan payment?',
-        answer:
-          'Subtract your down payment and trade-in value from the vehicle price, then enter that net amount financed, your APR and the term. A $30,000 car loan at 7% APR costs about $511.47 a month over 6 years and about $452.78 over 7 years, but the longer term adds roughly $1,200 in interest.',
-      },
-      {
-        id: 'loan-term-months-to-years',
-        category: 'loan',
-        question: 'How do I enter a loan term in months, such as 60 or 84 months?',
-        answer:
-          'Divide the number of months by 12 and enter the result in the Term (years) field. A 36-month loan is 3 years, 48 months is 4 years, 60 months is 5 years, 72 months is 6 years and 84 months is 7 years. Whole-year terms also give the cleanest annual amortization table.',
-      },
-      {
-        id: 'down-payment-effect',
-        category: 'loan',
-        question: 'How does a down payment change my loan payment?',
-        answer:
-          'A down payment reduces the amount you borrow, which lowers your monthly payment and total interest. To model it, subtract the down payment from the price and enter the remainder as the loan amount. Putting more down also helps you avoid owing more than the asset is worth.',
-      },
-      {
-        id: 'extra-payments-impact',
-        category: 'loan',
-        question: 'How do extra payments help me pay off a loan early?',
-        answer:
-          'Any amount paid beyond the scheduled installment goes straight to principal, which cuts the interest charged in later months and shortens the loan. This calculator shows the standard schedule; to preview an early payoff, enter a shorter term and compare the monthly payment and total interest with your original plan.',
-      },
-      {
-        id: 'loan-types-supported',
-        category: 'loan',
-        question: 'Can I use this loan calculator for car, boat, motorcycle, personal or business loans?',
-        answer:
-          'Yes. Any fixed-rate installment loan uses the same math, so it works for car, truck, boat, motorcycle, RV, personal, student, land and small business loans. Enter the financed amount, rate and term. Government-backed products such as SBA loans have lender-specific fees, so treat the result as an estimate.',
-      },
-      {
-        id: 'balloon-interest-only',
-        category: 'loan',
-        question: 'Does this calculator include balloon payments or interest-only periods?',
-        answer:
-          'No. It assumes a fixed rate and equal payments that fully repay the loan by the end of the term. Balloon loans and interest-only periods use different schedules with a large final payment, so ask your lender for those terms and use this tool for a fixed-payment comparison.',
-      },
-      {
-        id: 'principal-vs-interest',
-        category: 'loan',
-        question: 'How much interest will I pay on a loan?',
-        answer:
-          'Check the Total interest figure in the results card. It equals your monthly payment times the number of payments minus the amount borrowed. A lower APR, a shorter term or a larger down payment all reduce it, and the principal-versus-interest bar shows how much of your total cost is interest.',
+          'The interest rate is the cost of borrowing the principal amount per year. The Annual Percentage Rate (APR) reflects the total cost of credit, combining the interest rate along with lender fees, points, and origination charges.',
       },
     ],
   },
   mortgage: {
     eyebrow: 'Real Estate & Financing FAQs',
-    title: 'Mortgage & Home Financing FAQs',
+    title: 'Mortgage Calculator FAQs: Payments, Affordability & Terms',
     description:
-      'Key facts on PITI payment components, down payment ratios, private mortgage insurance (PMI), and 15 vs 30-year terms.',
+      'Answers on how to calculate a monthly mortgage payment, how much mortgage you can afford, 15 vs 30-year terms, PITI, PMI, extra payments and refinancing.',
     ctaText: 'Calculate your estimated monthly mortgage payment, taxes, and insurance using our tool above.',
     items: [
+      {
+        id: 'mortgage-payment-formula',
+        category: 'mortgage',
+        question: 'How do I calculate a monthly mortgage payment?',
+        answer:
+          'Use M = P × [r(1 + r)^n] ÷ [(1 + r)^n − 1], where P is the loan amount, r is the monthly rate (annual rate ÷ 12) and n is the number of payments (years × 12). A $300,000 loan at 6.5% over 30 years comes to about $1,896.20 a month in principal and interest.',
+      },
+      {
+        id: 'how-mortgage-calculator-works',
+        category: 'mortgage',
+        question: 'How does a mortgage calculator work?',
+        answer:
+          'A mortgage calculator takes the loan amount, interest rate and term, applies the fixed-rate amortization formula, and returns your monthly payment, total interest and total cost. Change any input to see how a different rate or term affects what you pay each month and over the life of the loan.',
+      },
+      {
+        id: 'how-much-mortgage-afford',
+        category: 'mortgage',
+        question: 'How much mortgage can I afford?',
+        answer:
+          'A common guide is the 28/36 rule. On $8,000 of gross monthly income, housing costs should stay near $2,240 (28%) and total debt payments near $2,880 (36%). Remember your housing cost includes taxes and insurance, not just principal and interest, so leave room for them when choosing a loan amount.',
+      },
       {
         id: 'what-is-piti',
         category: 'mortgage',
@@ -850,6 +822,27 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
           'A 30-year mortgage has lower monthly payments because loan payoff is spread across 360 months, but results in far higher total interest over the life of the loan. A 15-year mortgage requires higher monthly payments, but has lower interest rates and saves tens of thousands of dollars in overall interest.',
       },
       {
+        id: 'mortgage-calculator-taxes-insurance',
+        category: 'mortgage',
+        question: 'Does this mortgage calculator include taxes and insurance?',
+        answer:
+          'No. It calculates principal and interest only. To estimate your full monthly cost, divide your annual property tax and homeowners insurance by 12 and add them, plus any PMI or HOA dues, to the result. Lenders often collect these in an escrow account alongside your payment.',
+      },
+      {
+        id: 'mortgage-down-payment',
+        category: 'mortgage',
+        question: 'How does a down payment affect my mortgage payment?',
+        answer:
+          'A larger down payment lowers the amount you borrow, which reduces your monthly payment and total interest. Subtract the down payment from the home price and enter the result as the loan amount. Putting down 20% or more also avoids PMI on most conventional loans.',
+      },
+      {
+        id: 'mortgage-extra-payments',
+        category: 'mortgage',
+        question: 'How do extra payments help pay off a mortgage early?',
+        answer:
+          'Extra payments go straight to principal, so interest is charged on a smaller balance for the rest of the loan. That shortens the payoff date and cuts total interest. This calculator shows the standard schedule; enter a shorter term to preview an early payoff, and confirm your lender has no prepayment penalty.',
+      },
+      {
         id: 'closing-costs-budget',
         category: 'mortgage',
         question: 'How much should I budget for mortgage closing costs?',
@@ -862,6 +855,34 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         question: 'What is the 28/36 rule in mortgage qualification?',
         answer:
           'The 28/36 rule is a standard lending guideline: your monthly housing costs (PITI) should not exceed 28% of your gross monthly income, and total debt obligations (housing plus car loans, student debt, credit cards) should not exceed 36% of your gross income.',
+      },
+      {
+        id: 'when-to-refinance-mortgage',
+        category: 'mortgage',
+        question: 'When should I refinance a mortgage?',
+        answer:
+          'Refinancing can make sense when a new rate is meaningfully lower and you will stay long enough to recover the closing costs. Divide the closing costs by your monthly savings to find the break-even point. For example, $6,000 in costs and $150 saved per month breaks even in 40 months.',
+      },
+      {
+        id: 'mortgage-calculator-accuracy',
+        category: 'mortgage',
+        question: 'Are mortgage calculators accurate?',
+        answer:
+          'The principal and interest figure is exact for a fixed-rate loan when you enter the correct rate and term. Your real payment can differ because of property taxes, insurance, PMI, HOA dues, fees and rate changes on adjustable loans, so treat the result as an estimate and confirm it with your lender.',
+      },
+      {
+        id: 'mortgage-loan-types-supported',
+        category: 'mortgage',
+        question: 'Can I use this calculator for FHA, VA, manufactured home, land or second home loans?',
+        answer:
+          'Yes, for the principal and interest portion of any fixed-rate loan. Program costs such as the FHA mortgage insurance premium or the VA funding fee are not included, and rates for manufactured homes, land and second homes are often higher, so enter the rate your lender quotes.',
+      },
+      {
+        id: 'mortgage-amortization-schedule',
+        category: 'mortgage',
+        question: 'What is a mortgage amortization schedule?',
+        answer:
+          'An amortization schedule shows how each payment is split between interest and principal and how the balance falls over time. Early payments are mostly interest. For a year-by-year schedule, enter the same amount, rate and term in the Loan Calculator, which includes an annual amortization table.',
       },
     ],
   },
