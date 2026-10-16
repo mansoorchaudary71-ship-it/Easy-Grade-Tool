@@ -413,11 +413,11 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
     imageKey: 'grade-curve',
     imageAlt: 'Score charts and a desk calculator on a wooden desk, used to curve grades with a bell curve.',
     blocks: [
-      title('Grade Curve Calculator: Four Ways to Curve Test Scores'),
+      title('Grade Curve Calculator: How to Curve Grades and Test Scores'),
       p(
         'A ',
         ['grade curve calculator', true],
-        ' adjusts raw test scores with a rule applied to every student, then shows the before-and-after scores, the class mean and median, and the letter grade each student ends up with. It helps teachers choose a fair curve and helps students estimate what a curve might do.',
+        ' adjusts raw test scores with a rule applied to every student, then shows the before-and-after scores, the class mean and median, and the letter grade each student ends up with. It helps teachers choose a fair curve and helps students estimate what a curve might do. This free online tool curves four ways and works for any maximum score.',
       ),
 
       h2('What Is a Grade Curve?'),
@@ -426,26 +426,41 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('Curve vs. bell curve'),
       p(
-        'The four methods below move every score by a fixed rule, so the order of students and the gaps between them stay recognizable. A bell-curve policy assigns letters by rank or by distance from the mean, which can leave some students lower. This calculator never lowers a score.',
+        'The four methods below move every score by a fixed rule, so the order of students and the gaps between them stay recognizable. A bell-curve policy assigns letters by rank or by distance from the class mean and standard deviation, which can leave some students lower than their raw score. This calculator never lowers a score.',
       ),
 
-      h2('The Four Curving Methods'),
-      h3('Flat points'),
-      p('Add the same number of points to everyone: curved score = raw score + k. A +5 curve turns a 70 into a 75 and keeps every gap between students the same.'),
-      h3('Top score to 100'),
-      p('Add the difference between 100 and the highest raw score: curved score = raw score + (100 − highest score). If the best score was 85, everyone gains 15 points.'),
-      h3('Square-root curve'),
-      p('For a 100-point test, curved score = 10 × √raw score. A 64 becomes 80 and a 36 becomes 60, so low scores gain the most and the spread of the class narrows.'),
-      h3('Target class average'),
-      p('Shift every score by the gap between your target mean and the actual mean: curved score = raw score + (target − mean). Raising a class mean of 70 to 78 adds 8 points to each score.'),
+      h2('How to Curve Grades: The Four Methods'),
+      h3('How do you grade on a curve with flat points?'),
+      p('Add the same number of points to everyone: curved score = raw score + k. A +5 curve turns a 70 into a 75 and keeps every gap between students the same, which makes it a linear grade curve.'),
+      h3('How do you curve a test so the top score is 100?'),
+      p('Add the difference between the maximum score and the highest raw score: curved score = raw score + (maximum − highest score). If the best score was 85 out of 100, everyone gains 15 points.'),
+      h3('What is a square root grade curve?'),
+      p('For a 100-point test, curved score = 10 × √raw score. A 64 becomes 80 and a 36 becomes 60, so low scores gain the most and the spread of the class narrows. A cube-root curve works the same way with a stronger lift, but this calculator offers the square root.'),
+      h3('How do you curve grades using the class average?'),
+      p('Shift every score by the gap between your target mean and the actual mean: curved score = raw score + (target − mean). If the class mean is 64 and the department expects 75, add 11 points to each score, so a 58 becomes 69.'),
+
+      h2('Grade Curve Calculator with Mean, Median and Standard Deviation'),
+      h3('How do I find the class mean and median?'),
+      p('The mean is the sum of all scores divided by the number of scores, and the median is the middle score once they are sorted. For 55, 62, 70, 78 and 85 both come to 70. The calculator shows the mean and median before and after the curve, so you can see how far each method moves the class.'),
+      h3('How do I curve grades using the mean and standard deviation?'),
+      p('Convert each score to a z-score, (score − mean) ÷ standard deviation, then rebuild it with the mean and spread you want: new score = target mean + target spread × z. With a class mean of 70 and a standard deviation of 10, an 80 has z = 1, so a target mean of 78 and spread of 8 gives 86. This calculator does not compute standard deviation, so work that step out in a spreadsheet with STDEV and use the target-average method here when you only need to move the mean.'),
 
       h2('How to Use the Grade Curve Calculator'),
       ol(
         'Paste the raw scores, one per line or separated by commas.',
+        'Set the maximum score if the test was not out of 100 points.',
         'Choose a curving method and enter its setting (points to add, or the target average).',
-        'Decide whether scores should be capped at 100.',
+        'Decide whether scores should be capped at the maximum.',
         'Compare the before-and-after table, the mean, the median and the letter grades, then print the result.',
       ),
+
+      h2('Grade Curve Calculator from Points, for Exams and Final Grades'),
+      h3('How do I curve a test that is not out of 100?'),
+      p('Enter the points the test was worth as the maximum score. The square-root curve then becomes maximum × √(raw ÷ maximum), so a 36 on a 50-point test becomes 42.4, and the cap and top-score method use your maximum too.'),
+      h3('Can I curve a final exam or a final grade?'),
+      p('Yes. Paste the final exam scores and apply the curve, then enter the curved scores in the weighted grade calculator to see course grades. Many schools curve single assessments rather than the finished course grade, so check the policy first.'),
+      h3('What is my letter grade after the curve?'),
+      p('Every curved score in the results table carries a letter on the A–F or plus/minus scale. A raw 74 with a +8 curve becomes 82, which is a B on the A–F scale and a B- on plus/minus.'),
 
       h2('Choosing a Fair Curve'),
       ul(
@@ -455,12 +470,17 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'Use the target average when your department expects a particular class mean.',
       ),
       p(
-        'Capping at 100 hides what happens at the top: scores of 97 and 99 can both become 100 after a +5 curve. View the uncapped values first, then decide what your gradebook should record.',
+        'Capping at the maximum hides what happens at the top: scores of 97 and 99 can both become 100 after a +5 curve. View the uncapped values first, then decide what your gradebook should record.',
+      ),
+
+      h2('How to Grade on a Curve in Excel or Google Sheets'),
+      p(
+        'Put the raw scores in column A. A flat +5 curve capped at 100 is =MIN(100, A2+5), a target average of 78 is =MIN(100, A2+(78-AVERAGE($A$2:$A$30))), and the square-root curve is =10*SQRT(A2). Fill the formula down the column. The calculator does the same sum without setup and adds the mean, median and letters.',
       ),
 
       h2('Curved Grades and the Gradebook'),
       p(
-        'After curving, enter the curved scores in the weighted grade calculator to see course grades, and check the cutoffs behind each letter with the letter grade calculator.',
+        'After curving, enter the curved scores in the weighted grade calculator to see course grades, and check the cutoffs behind each letter with the letter grade calculator. Teachers can compare all four curves on the same class before posting grades, and students in high school or college can paste the scores they know to estimate the effect. The official curve is always the instructor’s decision.',
       ),
     ],
   },

@@ -222,7 +222,7 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
     eyebrow: 'Curving & Class Stats FAQs',
     title: 'Grade Curve Calculator FAQs',
     description:
-      'Answers on the four curving methods, class mean and median, capping at 100 and how a curve changes each student’s letter grade.',
+      'Answers on the four curving methods, curving with the class average or mean and standard deviation, tests not out of 100, final exams, Excel formulas, capping at 100 and the letter grade after a curve.',
     ctaText: 'Paste your class scores above and compare all four curving methods side by side.',
   },
   'letter-grade-calculator': {

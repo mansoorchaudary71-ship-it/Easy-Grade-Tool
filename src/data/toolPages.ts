@@ -277,24 +277,37 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/grade-curve-calculator/',
     navLabel: 'Grade Curve',
     h1: 'Grade Curve Calculator',
-    title: 'Grade Curve Calculator — 4 Curving Methods Compared',
+    title: 'Free Grade Curve Calculator: Curve Test Scores 4 Ways',
     metaDescription:
-      'Paste class test scores and curve them four ways: add flat points, lift the top score to 100, square-root curve, or move the class average to a target.',
+      'Free grade curve calculator: paste test scores and curve them with flat points, top score to 100, a square-root curve or a target class average. See the new mean and letters.',
     badge: 'For teachers and TAs',
     intro:
-      'Paste the raw scores, choose a curving method and compare before and after: every score, the class mean and median, and the letter grade each student ends up with.',
+      'Paste the raw scores, choose a curving method and compare before and after: every score, the class mean and median, and the letter grade each student ends up with. Works for any maximum score, so tests out of 50 or 75 points curve as easily as tests out of 100.',
     keywords: [
       'grade curve calculator',
       'test curve calculator',
-      'square root curve',
       'curve grades calculator',
+      'grade on a curve calculator',
+      'how to grade on a curve calculator',
+      'grade curve calculator using average',
+      'grade curve calculator with mean and standard deviation',
+      'grade curve calculator with median',
+      'square root grade curve calculator',
+      'linear grade curve calculator',
+      'grade curve calculator from points',
+      'final grade calculator with curve',
+      'letter grade calculator with curve',
+      'grade curve calculator for teachers',
+      'grade curve calculator excel',
       'how to curve a test',
     ],
     featureList: [
       'Flat-points, top-score, square-root and target-average curves',
       'Before and after table with class mean and median',
       'Standard and plus/minus letter grades for each score',
+      'Any maximum score, so tests marked in points curve correctly',
       'Optional cap at 100 and printable results',
+      'Free and private: scores stay in your browser',
     ],
     sections: [
       {
@@ -377,11 +390,62 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         answer:
           'There is no single right number, because it depends on your goal. To bring the class average from 70 up to 78 you add 8 points, and to make an 85 the top score of 100 you add 15. Try each method on your own scores and compare the results before deciding.',
       },
+      {
+        question: 'How do I curve grades using the class average?',
+        answer:
+          'Find the class mean, subtract it from the average you want, and add that difference to every score. If the mean is 64 and you want 75, add 11 points, so a 58 becomes 69. Choose the target average method above and the calculator shows the new mean, median and letters.',
+      },
+      {
+        question: 'How do I curve grades with the mean and standard deviation?',
+        answer:
+          'Convert each score to a z-score, (score − mean) ÷ standard deviation, then rebuild it with the mean and spread you want. With a class mean of 70 and a standard deviation of 10, an 80 has z = 1, and for a target mean of 78 and spread of 8 it becomes 86. This calculator shows the mean and median but does not compute standard deviation, so use STDEV in a spreadsheet for that step.',
+      },
+      {
+        question: 'What is a linear grade curve?',
+        answer:
+          'A linear curve changes every score by the same straight-line rule, such as adding a fixed number of points or shifting to a target average. The gaps between students stay the same. The flat-points, top-score and target-average methods are linear, while the square-root curve is not.',
+      },
+      {
+        question: 'Is there a cube root or exponential grade curve?',
+        answer:
+          'The calculator offers the square-root curve, not a cube-root or exponential one. A cube-root curve works the same way with a stronger lift: 100 × (raw ÷ 100)^(1/3) turns a 64 into 86.2, where the square root gives 80. Exponential curves are not a standard classroom method, so check your instructor’s policy first.',
+      },
+      {
+        question: 'How do I curve a test that is not out of 100 points?',
+        answer:
+          'Set the maximum score to the points the test was worth, then paste the raw scores. The square-root curve then uses maximum × √(raw ÷ maximum), so a 36 on a 50-point test becomes 42.4. The cap and the top-score method also use your maximum instead of 100.',
+      },
+      {
+        question: 'Can I curve a final exam or a final grade?',
+        answer:
+          'Yes. Paste the final exam scores and apply the curve you want, then enter the curved scores in the weighted grade calculator to see course grades. A curve on the final course grade works the same way, though many schools apply curves to assessments rather than to the finished course grade.',
+      },
+      {
+        question: 'How do I see my letter grade after a curve?',
+        answer:
+          'The results table shows a letter next to every curved score, on either the A–F or the plus/minus scale. A raw 74 with a curve of +8 becomes 82, a B on the A–F scale and a B- on plus/minus. Use the letter grade calculator to see the cutoffs behind each letter.',
+      },
+      {
+        question: 'How do I grade on a curve in Excel or Google Sheets?',
+        answer:
+          'Put the raw scores in column A and use a formula for each method. For a flat +5 curve capped at 100 use =MIN(100, A2+5), for a target average of 78 use =MIN(100, A2+(78-AVERAGE($A$2:$A$30))), and for a square-root curve use =10*SQRT(A2). Fill the formula down the column.',
+      },
+      {
+        question: 'Which curving method should I use?',
+        answer:
+          'Match the method to the problem. Use flat points for one unclear question, top score to 100 when nobody reached full marks, the square-root curve when many scores are low, and the target average when the class mean must hit a set value. Compare all four on your own scores before deciding.',
+      },
+      {
+        question: 'Is this grade curve calculator free for teachers and students?',
+        answer:
+          'Yes. It is free, needs no account and runs in your browser, so the scores you paste are not uploaded. Teachers use it to pick a fair curve for a class, and students use it to estimate the effect of a curve at school or college. The official curve is always your instructor’s decision.',
+      },
     ],
     related: [
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Percentage and letter for one test, with bonus points.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'See the cutoffs behind each letter.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Turn curved scores into a course grade.' },
+      { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the exam score you need after a curve.' },
       { path: '/', label: 'Quick Grade chart', blurb: 'Print a score chart for a stack of tests.' },
     ],
   },
