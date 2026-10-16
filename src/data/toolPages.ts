@@ -83,16 +83,27 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/test-grade-calculator/',
     navLabel: 'Test Grade',
     h1: 'Test Grade Calculator',
-    title: 'Test Grade Calculator — Score Percentage & Letter Grade',
+    title: 'Free Test Grade Calculator: Percentage, Points & Letter Grade',
     metaDescription:
-      'Free test score percentage calculator: enter points earned and points possible to get your test percentage and letter grade, with bonus points and late penalties.',
+      'Free test grade calculator: enter points earned and possible for your test percentage and letter grade, with extra credit, penalties and the points needed to pass.',
     badge: 'Single test or quiz',
     intro:
-      'Type the points you earned and the points the test was worth. You get the percentage, the letter grade on your chosen scale, and the points you would have needed for the next grade up.',
+      'Type the points you earned and the points the test was worth. You get your test percentage, the letter grade on the A–F or plus/minus scale, and the points you needed for the next grade up. Add extra credit or a late penalty if your teacher uses them.',
     keywords: [
       'test grade calculator',
-      'quiz grade calculator',
       'test score percentage calculator',
+      'quiz grade calculator',
+      'test grade calculator with points',
+      'test grade calculator with extra credit',
+      'test grade calculator with partial credit',
+      'multiple choice test grade calculator',
+      'test grade calculator number of questions',
+      'test grade calculator to pass',
+      'what test grade do i need',
+      'what if test grade calculator',
+      'next test grade calculator',
+      'test grade calculator for teachers',
+      'free test grade calculator',
       'how to calculate test percentage',
       'how to calculate grade percentage',
       'points possible to percentage',
@@ -102,9 +113,11 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     ],
     featureList: [
       'Percentage and letter grade from points earned and points possible',
-      'Bonus points and late-penalty adjustments',
-      'Points needed for A, B, C and D on any test size',
-      'Standard and plus/minus letter scales',
+      'Extra credit, bonus points and late-penalty adjustments',
+      'Partial credit and half points with decimal scores',
+      'Points needed for A, B, C and D (or a pass mark) on any test size',
+      'Standard A–F and plus/minus letter scales',
+      'Free, instant and private: nothing you type leaves your browser',
     ],
     sections: [
       {
@@ -198,12 +211,64 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         answer:
           'Divide the points you earned by the points possible and multiply by 100. A 17 out of 20 is 85%, a 22 out of 25 is 88%, and a 26 out of 30 is 86.7%. The calculator does this for any test size and shows the letter grade next to it.',
       },
+      {
+        question: 'What test grade do I need to pass?',
+        answer:
+          'Multiply the points possible by your pass mark. A 60% pass mark on a 50-point test is 0.60 × 50 = 30 points, a 70% pass mark on a 40-point test is 28 points, and 60% on a 25-point test is 15 points. The points-needed table under the calculator lists every grade cutoff for the test size you enter.',
+      },
+      {
+        question: 'How do I calculate a test grade with partial credit or half points?',
+        answer:
+          'Add the partial credit to your points earned as decimals, then divide by the points possible. Scoring 38.5 of 50 gives 38.5 ÷ 50 × 100 = 77%. The points earned box accepts decimals such as 7.5, so half points and quarter points work without any rounding.',
+      },
+      {
+        question: 'How much is each question worth on a multiple choice test?',
+        answer:
+          'Divide 100 by the number of questions when every question is worth one point. Each question is worth 2% on a 50-question test, 2.5% on a 40-question test and 5% on a 20-question test. Getting 45 of 50 right is therefore 90%, an A on the common 10-point scale.',
+      },
+      {
+        question: 'What score do I need on my next test to raise my grade?',
+        answer:
+          'Multiply the percentage you want by the points possible on the next test, then round up to the next point your teacher awards. To see a what-if result, type a possible score in the points earned box and read the percentage and letter. For the effect on your course average, add the test to the weighted grade calculator.',
+      },
+      {
+        question: 'How much will one test affect my overall grade?',
+        answer:
+          'Multiply the test’s weight in the syllabus by the change in your test percentage. If a test is worth 20% of the course, scoring 90% instead of 70% moves your course grade by 0.20 × 20 = 4 percentage points. Tests with a larger weight, such as a midterm or final, move the course grade more.',
+      },
+      {
+        question: 'Can I drop my lowest test grade?',
+        answer:
+          'This calculator grades one test at a time, so work out each test percentage first, remove the lowest one and average the rest. With tests of 72%, 85%, 90% and 88%, dropping the 72% lifts the average from 83.75% to 87.7%. The average grade calculator can add up the remaining scores for you.',
+      },
+      {
+        question: 'What happens if my final exam replaces my lowest test grade?',
+        answer:
+          'Swap the lowest test percentage for the final exam percentage when the final is higher, then average or weight the tests as before. If your tests are 72%, 85%, 90% and 88% and the final is 84%, the 84% replaces the 72% and the average becomes 86.75%. Check your syllabus, because some teachers only replace the grade when the final is higher.',
+      },
+      {
+        question: 'How do I calculate a weighted test grade when tests count more than quizzes?',
+        answer:
+          'Average the tests and the quizzes separately, then multiply each average by its weight and add the results. With tests worth 70% at an 84% average and quizzes worth 30% at a 92% average, the grade is 0.70 × 84 + 0.30 × 92 = 86.4%. The weighted grade calculator does this for any set of categories.',
+      },
+      {
+        question: 'Can I use this calculator for AP, SAT or IELTS tests?',
+        answer:
+          'No. This is a classroom test grade calculator that turns points earned and points possible into a percentage. AP, SAT, IELTS and state exams are scaled with their own official score conversions, so use the score report or the exam board’s conversion table for those.',
+      },
+      {
+        question: 'Is this test grade calculator free for teachers and students?',
+        answer:
+          'Yes. It is free with no sign-up and runs in your browser, so nothing you type is stored on a server. Students use it to check a score before the grade is posted, and teachers use it to grade one paper at a time. To grade a whole stack from one printed sheet, use the Quick Grade chart.',
+      },
     ],
     related: [
       { path: '/', label: 'Quick Grade chart', blurb: 'Printable score for every number of wrong answers.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Combine tests, homework and projects into a course grade.' },
       { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the exam score you need for your target grade.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Percent, letter and GPA points on common scales.' },
+      { path: '/grade-curve-calculator/', label: 'Grade curve calculator', blurb: 'Curve a low-scoring test four ways.' },
+      { path: '/average-grade-calculator/', label: 'Average grade calculator', blurb: 'Average several tests or drop the lowest one.' },
     ],
   },
 

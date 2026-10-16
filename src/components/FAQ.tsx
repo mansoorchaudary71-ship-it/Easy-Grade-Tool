@@ -215,7 +215,7 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
     eyebrow: 'Test & Quiz Scoring FAQs',
     title: 'Test Grade Calculator FAQs',
     description:
-      'Quick answers on turning points into a percentage, adding extra credit, applying late penalties and finding the letter grade for a single test.',
+      'Quick answers on turning points into a percentage, partial credit and extra credit, late penalties, the points needed to pass, dropping the lowest test and how one test affects your overall grade.',
     ctaText: 'Enter your points earned and points possible above to get your test percentage and letter grade.',
   },
   'grade-curve-calculator': {

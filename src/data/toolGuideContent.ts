@@ -274,11 +274,11 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
     imageAlt:
       'Printed test score reports and a desk calculator on a wooden desk, used to calculate a test grade percentage.',
     blocks: [
-      title('Test Grade Calculator: How to Calculate Test Percentage'),
+      title('Test Grade Calculator: How to Calculate Test Percentage and Letter Grade'),
       p(
         'A ',
         ['test grade calculator', true],
-        ' turns points into a percentage and a letter grade in one step. Enter the points you earned and the points possible, add any bonus points or late penalty, and see how your score compares with each grade cutoff.',
+        ' turns points into a percentage and a letter grade in one step. Enter the points you earned and the points possible, add any extra credit, bonus points or late penalty, and see how your score compares with each grade cutoff. It is free, works for school and college tests and quizzes, and shows the points you needed for the next grade up.',
       ),
 
       h2('How to Calculate Test Percentage'),
@@ -314,6 +314,25 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'If you only know how many questions you missed, subtract them first: (total − wrong) ÷ total × 100. Missing 4 questions on a 25-question test gives 21 ÷ 25 = 84%. Each question on a 25-question test is worth 4 percentage points, so every extra miss costs 4%.',
       ),
 
+      h2('Test Grade Calculator Based on Points or Number of Questions'),
+      h3('How does a test grade calculator based on points work?'),
+      p(
+        'Many tests give questions different values, such as 2-point multiple choice, 5-point short answers and a 10-point essay. Add up every point you earned, then divide by the total points available. Scores of 12, 20 and 9 on three sections worth 15, 25 and 10 points give 41 out of 50 points, or 82%. Type the two totals into the calculator and it does the rest.',
+      ),
+      h3('Multiple choice test grade calculator: how much is each question worth?'),
+      p(
+        'When every question is worth one point, divide 100 by the number of questions to find what each one is worth:',
+      ),
+      ul(
+        '20 questions: each is worth 5%, so 18 correct is 90%.',
+        '40 questions: each is worth 2.5%, so 34 correct is 85%.',
+        '50 questions: each is worth 2%, so 45 correct is 90%.',
+      ),
+      h3('Test grade calculator with partial credit and half points'),
+      p(
+        'Add partial credit to your points earned as a decimal before you divide. A paper with 38.5 points out of 50 is 77%. The points earned box accepts decimals such as 7.5, so half points and quarter points need no rounding.',
+      ),
+
       h2('Using the Test Score Percentage Calculator'),
       ol(
         'Type the points earned and the points possible.',
@@ -322,21 +341,69 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'Choose the standard or plus/minus grading scale, then read the percentage, the letter grade and the points needed for the next grade up.',
       ),
 
+      h2('What Test Grade Do I Need? Points to Pass and Points for Each Letter'),
+      h3('What test grade do I need to pass?'),
+      p(
+        'Multiply the points possible by the pass mark. A 60% pass mark on a 50-point test is 30 points, a 70% pass mark on a 40-point test is 28 points, and 60% on a 25-point test is 15 points. Your syllabus sets the pass mark, so check it before you plan.',
+      ),
+      h3('How many points do I need for an A, B, C or D?'),
+      p('On a 50-point test with the common 10-point scale, the cutoffs are:'),
+      ul(
+        'A (90%): 45 points',
+        'B (80%): 40 points',
+        'C (70%): 35 points',
+        'D (60%): 30 points',
+      ),
+      p(
+        'The “points needed” table under the calculator builds this list for any test size and for the plus/minus scale.',
+      ),
+      h3('How many questions can I miss and still get a B?'),
+      p(
+        'Take 20% of the points possible and round down. On a 25-question test you can miss 5 questions and keep 80%, and on a 50-question test you can miss 10.',
+      ),
+
       h2('From Test Percentage to Letter Grade'),
       p(
         'The percentage is math; the letter is policy. On the common 10-point scale 90% and up is an A, 80–89% a B, 70–79% a C, 60–69% a D and anything below 60% an F. On a plus/minus scale the same 88% becomes a B+. Your syllabus decides which scale applies, which is why the calculator lets you switch.',
       ),
 
-      h2('Extra Credit, Penalties and Rounding'),
+      h2('Test Grade Calculator with Extra Credit, Bonus Points and Penalties'),
       ul(
         'Extra credit raises the points earned only, so a score can pass 100%. Some teachers cap it at 100%.',
         'A penalty in points is subtracted before dividing. A percentage penalty is taken off the finished result.',
         'Round only at the end. Rounding early can push a score across a grade cutoff by mistake.',
       ),
-
-      h2('Test Grades and Your Course Grade'),
       p(
-        'One test is only part of the course grade. To see how it moves your overall average, add it as an assessment in the weighted grade calculator, and use the final exam calculator to plan the last big score.',
+        'Example: 42 points on a 50-point test plus 2 bonus points is 44 ÷ 50 = ',
+        ['88%', true],
+        ', and a 5-point late penalty on the original 42 would give 37 ÷ 50 = 74%.',
+      ),
+
+      h2('What If? How a Test Score Affects Your Overall Grade'),
+      h3('What if I get a certain score on my next test?'),
+      p(
+        'Type the score you hope for into the points earned box and read the percentage and letter, or compare it with the points-needed table to see the lowest score that reaches your target. Because every field updates as you type, you can try several scores in a few seconds.',
+      ),
+      h3('How much will one test affect my overall grade?'),
+      p(
+        'A test moves your course grade by its weight times the change in your score. If a test counts for 20% of the course, a 90% instead of a 70% adds 0.20 × 20 = 4 percentage points to the course grade. This calculator grades one test, so enter the test as an assessment in the weighted grade calculator to see the effect on the whole course.',
+      ),
+      h3('Dropping the lowest test or replacing it with the final exam'),
+      p(
+        'Work out each test percentage first. To drop the lowest, remove it and average the others: 72%, 85%, 90% and 88% average 83.75%, but without the 72% they average 87.7%. If the final exam replaces your lowest test, put the final percentage in its place when it is higher. The average grade calculator and the final exam calculator handle the next step.',
+      ),
+      h3('Weighted test grades: tests versus quizzes'),
+      p(
+        'When tests count more than quizzes, average each group, multiply by its weight and add the results. A test average of 84% at 70% weight and a quiz average of 92% at 30% weight give 0.70 × 84 + 0.30 × 92 = 86.4%.',
+      ),
+
+      h2('Test Grade Calculator for Teachers, Students, High School and College'),
+      p(
+        'Students use a test grade calculator to check a score before the grade is posted and to see what a retake or extra-credit question would change. Teachers use it to grade one paper at a time, and the Quick Grade chart lists the score for every number of wrong answers when a whole class needs grading from one sheet. The math is the same in high school and college. The scale and any rounding rule come from your syllabus.',
+      ),
+      h3('Is this the right calculator for AP, SAT or IELTS scores?'),
+      p(
+        'No. Those exams are scored with official conversion tables, not with a simple points-over-possible percentage. This page is for classroom tests, quizzes and exams marked in points. To see how a single test fits into the semester, use the weighted grade calculator, and use the final exam calculator to plan the last big score.',
       ),
     ],
   },
