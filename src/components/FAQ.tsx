@@ -460,7 +460,7 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
     eyebrow: 'CGPA Conversion & University FAQs',
     title: 'CGPA to Percentage Conversion FAQs',
     description:
-      'Answers on how to convert CGPA to percentage, including 7.5 CGPA, 9.9 CGPA and 60% to CGPA, across 10.0, 5.0 and 4.0 scales, university formulas, and SGPA to CGPA.',
+      'Verified answers on converting CGPA to percentage across 10.0, 5.0, and 4.0 grading scales, official university circulars, and SGPA to CGPA formulas.',
     ctaText: 'Select your grading scale and university above to compute your exact percentage and download an official PDF report.',
     items: [
       {
@@ -497,111 +497,6 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         question: 'What is the difference between SGPA and CGPA, and how do I convert SGPA to CGPA?',
         answer:
           'SGPA (Semester Grade Point Average) measures your academic performance in a single semester, whereas CGPA (Cumulative Grade Point Average) is the credit-weighted average of your SGPAs across all completed semesters: CGPA = Σ(Semester SGPA × Semester Credits) ÷ Total Credits. If all semesters carry equal credits, CGPA is the simple arithmetic mean of all semester SGPAs.',
-      },
-      {
-        id: 'what-is-7-5-cgpa-in-percentage',
-        category: 'cgpa',
-        question: 'What is 7.5 CGPA in percentage?',
-        answer:
-          'It depends on your university. With the standard UGC and CBSE multiplier, 7.5 CGPA × 9.5 = 71.25%. VTU, MAKAUT, SPPU and AKTU give (7.5 − 0.75) × 10 = 67.50%, GTU gives 70.00%, and Anna University, KTU and DU (NEP) give 7.5 × 10 = 75.00%. Mumbai University general programmes give (7.1 × 7.5) + 11 = 64.25%.',
-      },
-      {
-        id: 'does-7-5-cgpa-mean-75-percent',
-        category: 'cgpa',
-        question: 'Does 7.5 CGPA mean 75%?',
-        answer:
-          'Only if your university uses the CGPA × 10 rule, as Anna University, KTU, BITS Pilani, VIT, SRM and Delhi University (NEP) do. Under the standard × 9.5 rule, 7.5 CGPA is 71.25%, and under the (CGPA − 0.75) × 10 rule used by VTU and MAKAUT it is 67.50%. Check the conversion note printed on your marksheet.',
-      },
-      {
-        id: 'what-is-7-6-cgpa-in-percentage',
-        category: 'cgpa',
-        question: 'What is 7.6 CGPA in percentage? What about 7.60 or 7.61?',
-        answer:
-          '7.6 and 7.60 are the same value. On the standard × 9.5 rule it is 72.20%. VTU, MAKAUT and SPPU give 68.50%, GTU gives 71.00%, and × 10 universities give 76.00%. A 7.61 CGPA adds 0.01 grade point, which is about 0.095% on the × 9.5 rule (72.30%) and 0.1% on the × 10 rules.',
-      },
-      {
-        id: 'what-percentage-is-9-9-cgpa',
-        category: 'cgpa',
-        question: 'What percentage is 9.9 CGPA?',
-        answer:
-          'On the standard × 9.5 rule, 9.9 CGPA is 94.05%. Under (CGPA − 0.75) × 10 (VTU, MAKAUT, SPPU) it is 91.50%, under GTU’s (CGPA − 0.5) × 10 it is 94.00%, and under a CGPA × 10 rule it is 99.00%. Mumbai University’s general formula gives (7.1 × 9.9) + 11 = 81.29%.',
-      },
-      {
-        id: 'is-7-45-cgpa-good',
-        category: 'cgpa',
-        question: 'Is 7.45 CGPA good? What about 7.77 CGPA?',
-        answer:
-          'Yes, both are solid first-class scores. 7.45 CGPA is about 70.78% on the × 9.5 rule, and 7.77 CGPA is about 73.8%. Both clear the 60% first-class line and the 60% to 65% eligibility cut-offs used by most campus placements and many postgraduate programmes. A CGPA of 8.0 or higher is usually considered strong, and 75% or more is often the distinction mark, so check the exact cut-off in your target application.',
-      },
-      {
-        id: 'what-does-7-cgpa-mean',
-        category: 'cgpa',
-        question: 'What does 7 CGPA mean, and what percentage is it?',
-        answer:
-          'A 7.0 CGPA on a 10-point scale usually corresponds to a B+ or good grade and a first-class result. On the standard × 9.5 rule it equals 66.50%. VTU and MAKAUT give 62.50%, GTU gives 65.00%, × 10 universities give 70.00%, and Mumbai University gives 60.70% (general) or 63.80% (Engineering, 2015–16 onward).',
-      },
-      {
-        id: 'convert-cgpa-to-percentage-vtu-makaut-ktu',
-        category: 'cgpa',
-        question: 'How do I convert my CGPA to a percentage in MAKAUT or KTU?',
-        answer:
-          'MAKAUT (formerly WBUT) uses Percentage = (CGPA − 0.75) × 10, so 8.0 CGPA is 72.50%. KTU uses Percentage = CGPA × 10, so 8.0 CGPA is 80.00%. VTU, like MAKAUT, uses (CGPA − 0.75) × 10. Pick your university in the calculator above to apply its rule instantly, and confirm against your latest regulation notice.',
-      },
-      {
-        id: 'cgpa-to-percentage-formula-anna-gtu-sppu',
-        category: 'cgpa',
-        question: 'What is the CGPA to percentage formula for Anna University, GTU and SPPU?',
-        answer:
-          'Anna University (R-2015 to R-2021) uses Percentage = CGPA × 10. GTU and BPUT use (CGPA − 0.5) × 10. SPPU, VTU, MAKAUT, AKTU, JNTU and BAMU use (CGPA − 0.75) × 10. Delhi University uses CGPA × 10 for NEP batches and CGPA × 9.5 for CBCS batches up to 2021–22.',
-      },
-      {
-        id: 'what-is-a-good-sgpa-score',
-        category: 'cgpa',
-        question: 'What is a good SGPA score?',
-        answer:
-          'On a 10-point scale, an SGPA of 8.0 or above is generally considered very good, 7.0 to 7.99 is good, and 6.0 to 6.99 is average and still a first class in most universities. Anything under 5.0 may put you at risk of backlogs or academic probation, depending on your university rules. Because SGPA is a one-semester figure, your CGPA is the number that employers and universities usually look at.',
-      },
-      {
-        id: 'how-to-convert-sgpa-to-percentage',
-        category: 'cgpa',
-        question: 'How do I convert my SGPA to a percentage? How much is 7.5 SGPA in percentage?',
-        answer:
-          'Apply the same formula your university uses for CGPA. On the standard × 9.5 rule, 7.5 SGPA is 71.25%. Under (SGPA − 0.75) × 10 it is 67.50%, and under SGPA × 10 it is 75.00%. Use the SGPA to CGPA panel above if you want to combine several semesters into a cumulative percentage first.',
-      },
-      {
-        id: 'how-to-convert-cgpa-to-gpa',
-        category: 'cgpa',
-        question: 'How do I convert my CGPA to GPA?',
-        answer:
-          'Convert CGPA to a percentage first, then divide by 25 to get an approximate 4.0 GPA, which is the method this calculator uses. For example, 8.5 CGPA × 9.5 = 80.75%, and 80.75 ÷ 25 = 3.23 GPA. Foreign universities and evaluators such as WES may use their own conversion tables, so check what your target school accepts.',
-      },
-      {
-        id: 'what-percentage-is-0-8-gpa-or-2-7-cgpa',
-        category: 'cgpa',
-        question: 'What percentage is a 0.8 GPA, a 2.7 CGPA, or a 3.7 GPA?',
-        answer:
-          'On a 4.0 scale each grade point is worth 25%, so a 0.8 GPA is 20%, a 2.7 CGPA is 67.50%, and a 3.7 GPA is 92.50%. If 2.7 is on a 10-point scale instead, the standard × 9.5 rule gives only 25.65%, so select the right scale before you convert.',
-      },
-      {
-        id: 'how-much-is-60-percent-in-cgpa',
-        category: 'cgpa',
-        question: 'How much is 60% in CGPA? What is 60% of a 4.0 GPA?',
-        answer:
-          '60% equals 6.32 CGPA on the standard × 9.5 rule, 6.00 under CGPA × 10, 6.50 under GTU’s rule, 6.75 under (CGPA − 0.75) × 10, and 6.90 under Mumbai University’s general formula. On a 4.0 scale, 60% is a 2.4 GPA (60 ÷ 25), and on a 5.0 scale it is 3.0 (60 ÷ 20). Note that 60% of the number 4.0 is also 2.4.',
-      },
-      {
-        id: 'how-to-convert-percentage-to-cgpa',
-        category: 'cgpa',
-        question: 'How do I convert a percentage to a CGPA? What is 75% as CGPA?',
-        answer:
-          'Reverse your university’s formula. Under the standard rule, CGPA = Percentage ÷ 9.5, so 75% is 7.89 CGPA. Under (CGPA − 0.75) × 10 it is 8.25, under GTU’s rule it is 8.00, and under a CGPA × 10 rule it is 7.50. On a 4.0 scale, 75% is a 3.0 GPA, and 70% is a 2.8 GPA. Use the Percentage to CGPA tab above for the exact value.',
-      },
-      {
-        id: 'cgpa-out-of-other-scales-and-cbse-class-10',
-        category: 'cgpa',
-        question: 'How do I convert CGPA out of 8, 6, 5 or 10 for CBSE Class 10 or a diploma?',
-        answer:
-          'For CBSE Class 10, multiply your CGPA by 9.5, so a 9.2 CGPA is 87.40%. This calculator supports 10.0, 5.0 and 4.0 scales directly. For any other maximum, such as 8 or 6, a proportional estimate is Percentage = (CGPA ÷ Maximum CGPA) × 100, but only your board or university can say whether that is officially accepted. Diploma and polytechnic boards publish their own rules, so use the board’s notice if it exists.',
       },
       {
         id: 'which-formula-for-job-applications',
@@ -674,7 +569,7 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
     eyebrow: 'Math & Formulas FAQs',
     title: 'Percentage Calculation FAQs',
     description:
-      'Clear explanations and step-by-step mathematical formulas for percentage changes, proportions, and sales discounts.',
+      'Step-by-step answers on how to calculate a percentage, percentage increase and decrease, percentage difference, reverse percentage, marks and grades.',
     ctaText: 'Use the percentage calculators above to compute increases, decreases, and fractions instantly.',
     items: [
       {
@@ -718,6 +613,118 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         question: 'How do I use the percent change calculator?',
         answer:
           'Enter the starting value and the new value. The percent change is (new − old) ÷ old × 100: going from 80 to 100 is a 25% increase, and going from 100 to 80 is a 20% decrease. A positive result means growth and a negative result means a drop.',
+      },
+      {
+        id: 'how-to-use-a-percentage-calculator',
+        category: 'percentage',
+        question: 'How do I use a percentage calculator?',
+        answer:
+          'Pick the question that matches your problem and fill in the two blanks. Use the first box for X% of a number, the second for X is what percent of Y, and the third for the percentage change from one value to another. The result updates as you type. For example, 20% of 150 is 30, 30 is 20% of 150, and going from 100 to 125 is a 25% increase.',
+      },
+      {
+        id: 'what-is-a-percentage-calculator',
+        category: 'percentage',
+        question: 'What is a percentage calculator?',
+        answer:
+          'A percentage calculator is an online tool that does percent math for you: finding a percentage of a number, working out what percent one number is of another, and measuring how much a value rose or fell in percent. It applies the standard formulas, such as (part ÷ whole) × 100, so you do not have to do the division and multiplication by hand.',
+      },
+      {
+        id: 'how-to-calculate-percentage-increase',
+        category: 'percentage',
+        question: 'How do I calculate a percentage increase?',
+        answer:
+          'Subtract the old value from the new value, divide by the old value, and multiply by 100. A price that rises from 40 to 50 is (50 − 40) ÷ 40 × 100 = 25% higher. In the percentage change box, enter 40 as the start and 50 as the end to get +25%.',
+      },
+      {
+        id: 'how-to-calculate-percentage-decrease',
+        category: 'percentage',
+        question: 'How do I calculate a percentage decrease, reduction or drop?',
+        answer:
+          'Use the same formula as an increase: (new − old) ÷ old × 100. If the answer is negative, it is a decrease. A value that falls from 200 to 150 is (150 − 200) ÷ 200 × 100 = −25%, so it dropped by 25%. Enter 200 as the start and 150 as the end in the percentage change box to see −25%.',
+      },
+      {
+        id: 'increase-or-decrease-number-by-percentage',
+        category: 'percentage',
+        question: 'How do I increase or decrease a number by a percentage?',
+        answer:
+          'To increase a number by a percentage, multiply it by (1 + percent ÷ 100). To decrease it, multiply by (1 − percent ÷ 100). So 120 increased by 15% is 120 × 1.15 = 138, and 120 reduced by 15% is 120 × 0.85 = 102. You can also find 15% of 120 in the first box (18) and add or subtract it.',
+      },
+      {
+        id: 'percentage-difference-between-two-numbers',
+        category: 'percentage',
+        question: 'How do I find the percentage difference between two numbers?',
+        answer:
+          'Percentage difference compares two values without treating either as the starting point. Divide the absolute difference by the average of the two numbers, then multiply by 100. For 50 and 75 the difference is 25 and the average is 62.5, so the percentage difference is 40%. Percentage change from 50 to 75 is a different figure, +50%, because it uses 50 as the base.',
+      },
+      {
+        id: 'percentage-change-vs-percentage-difference',
+        category: 'percentage',
+        question: 'What is the difference between percentage change and percentage difference?',
+        answer:
+          'Percentage change has a clear starting value and divides by it, so the direction matters: 50 to 75 is +50%, while 75 to 50 is −33.33%. Percentage difference divides by the average of both numbers, so the order does not matter and the result is the same either way. Use change for before and after, and difference when comparing two values side by side.',
+      },
+      {
+        id: 'reverse-percentage-original-value',
+        category: 'percentage',
+        question: 'How do I find the original number after a percentage increase or discount (reverse percentage)?',
+        answer:
+          'Divide the final value by the multiplier. After a 20% discount the multiplier is 0.80, so a sale price of 60 came from 60 ÷ 0.80 = 75. After a 20% increase the multiplier is 1.20, so a final value of 60 came from 60 ÷ 1.20 = 50. Do not simply add or subtract 20% from the final price, because the percentage applied to the original number, not the new one.',
+      },
+      {
+        id: 'how-to-calculate-percentage-of-marks-or-grades',
+        category: 'percentage',
+        question: 'How do I calculate a percentage for marks, test scores or grades?',
+        answer:
+          'Divide the marks you scored by the total marks and multiply by 100. A score of 45 out of 50 is (45 ÷ 50) × 100 = 90%, and 425 out of 500 is 85%. In the second box, enter your score as X and the total as Y. For a weighted course grade or a letter grade, use the grade calculators on this site.',
+      },
+      {
+        id: 'how-to-calculate-average-percentage',
+        category: 'percentage',
+        question: 'How do I calculate an average percentage?',
+        answer:
+          'If every item has the same total, add the percentages and divide by how many there are. If the totals differ, add all the points you earned and divide by all the points possible. For example, 80% on a 50-point quiz and 90% on a 100-point exam is (40 + 90) ÷ (50 + 100) = 86.67%, not the simple average of 85%.',
+      },
+      {
+        id: 'percentage-without-calculator',
+        category: 'percentage',
+        question: 'How can I calculate a percentage without a calculator?',
+        answer:
+          'Start from 10% and 1%. To find 10%, move the decimal one place left, and for 1%, move it two places. Then combine them: 15% of 80 is 10% (8) plus half of that (4), which is 12. For 25%, take a quarter, and for 50%, halve the number. Multiply or add these pieces to build any percentage.',
+      },
+      {
+        id: 'convert-percentage-decimal-fraction',
+        category: 'percentage',
+        question: 'How do I convert a percentage to a decimal or fraction, and back?',
+        answer:
+          'Divide the percentage by 100 to get a decimal: 15% becomes 0.15, and 75% becomes 0.75. To go from a decimal to a percentage, multiply by 100, so 0.375 is 37.5%. For a fraction, divide the numerator by the denominator and multiply by 100: 3/8 is 0.375, which is 37.5%.',
+      },
+      {
+        id: 'percentage-calculator-weight-loss',
+        category: 'percentage',
+        question: 'How do I calculate weight loss as a percentage?',
+        answer:
+          'Subtract your current weight from your starting weight, divide by the starting weight, and multiply by 100. Going from 200 lb to 180 lb is (200 − 180) ÷ 200 × 100 = 10% weight loss. In the percentage change box, enter 200 and 180 and read the result as −10%, which means a 10% loss.',
+      },
+      {
+        id: 'percentage-formulas-excel-google-sheets',
+        category: 'percentage',
+        question: 'What are the percentage formulas for Excel and Google Sheets?',
+        answer:
+          'To get what percent A1 is of B1, use =A1/B1 and format the cell as Percentage. For percentage change from A1 to B1, use =(B1-A1)/A1. To increase A1 by 10%, use =A1*(1+10%), and to find 10% of A1, use =A1*10%. Both Excel and Google Sheets use the same formulas.',
+      },
+      {
+        id: 'percentage-points-vs-percent',
+        category: 'percentage',
+        question: 'What is the difference between percentage points and percent?',
+        answer:
+          'Percentage points are the plain subtraction of two percentages, while percent change compares them proportionally. If a rate rises from 10% to 12%, that is an increase of 2 percentage points, but it is a 20% increase in the rate itself, because 2 ÷ 10 = 0.20.',
+      },
+      {
+        id: 'markup-vs-margin-percentage',
+        category: 'percentage',
+        question: 'How do I calculate profit, markup and margin percentages?',
+        answer:
+          'Markup is profit divided by cost, and margin is profit divided by selling price, both times 100. If an item costs 80 and sells for 100, the profit is 20, so the markup is 20 ÷ 80 = 25% and the margin is 20 ÷ 100 = 20%. Use the second box with profit as X and cost or price as Y.',
       },
     ],
   },
