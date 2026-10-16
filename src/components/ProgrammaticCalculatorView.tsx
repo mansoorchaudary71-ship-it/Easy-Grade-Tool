@@ -183,7 +183,9 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
         applicationCategory="EducationalApplication"
         featureList={[
           `${entry.h1} Engine`,
-          'Step-by-Step Mathematical Walkthrough',
+          'Required Final Exam Score from Current Grade, Exam Weight and Target Grade',
+          'Percent and Points Methods with Step-by-Step Worked Examples',
+          'Extra Credit, Secured and Out-of-Reach Target Detection',
           'Interactive Target Solver',
           'Print & PDF Friendly Format',
           'Zero Account Needed & 100% Client-Side Privacy',

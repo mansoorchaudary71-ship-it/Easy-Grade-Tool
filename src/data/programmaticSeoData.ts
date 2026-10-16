@@ -52,15 +52,15 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
     path: '/final-exam-grade-calculator/',
     toolKey: 'quick',
     h1: 'Final Exam Grade Calculator',
-    title: 'Final Grade Calculator — What Do You Need on the Final?',
+    title: 'Final Exam Grade Calculator — Grade Needed on the Final',
     metaDescription:
-      'Final exam grade calculator: find the grade needed on the final to pass or earn an A, B or C. Enter your current grade, exam weight and target for the exact score.',
+      'Final exam grade calculator: enter your current grade, final exam weight and target to see the score you need to pass or earn an A, B or C, by percent or points.',
     targetAudience: 'college',
     badge: 'Final Exam Target Solver',
     summary:
       'Solve for the minimum score you must achieve on your cumulative or semester final exam to reach your goal letter grade.',
     intentContext:
-      'Instead of calculating what grade you currently have, this specialized final exam calculator solves the inverse equation. Enter your current course standing, your desired final class grade, and the percentage weight of your final exam to reveal your required target score.',
+      'This final exam grade calculator solves for the score you need on the final. Enter your current course grade, the final exam weight and the grade you want, for college, high school or any class graded by percentages or points, and it shows the exam score required.',
     mode: 'weighted',
     scale: 'standard',
     courseName: 'Final Exam Preparation',
@@ -223,6 +223,83 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
         question: 'How does a heavier final exam weight change the score I need?',
         answer:
           'A heavier final means less is banked, so the exam matters more. With a 78% average on the 60% of the course already graded, a 40% final and an 80% target, you bank 46.8 points and need (80 − 46.8) ÷ 0.40 = 83% on the final.',
+      },
+      {
+        id: 'faq-final-by-points',
+        category: 'final-exam',
+        question: 'How do I calculate the final exam grade I need if my class uses points?',
+        answer:
+          'Work in points. Multiply the percentage you want by the total points in the course, then subtract the points you have already earned. With 412 of 500 points so far, a 100-point final and an 80% target, 0.80 × 600 = 480, and 480 − 412 = 68 points, so you need 68 out of 100. Entering an 82.4% current grade and a 16.7% weight in the calculator gives the same 68%.',
+      },
+      {
+        id: 'faq-final-with-midterm',
+        category: 'final-exam',
+        question: 'How do I include a midterm in my final exam grade calculation?',
+        answer:
+          'Count the midterm as part of your current grade. If homework is 20% of the course at 90% and the midterm is 30% at 70%, the graded work is worth 50% and banks 18 + 21 = 39 points, a 78% current grade. With a 50% final and an 80% target, you need (80 − 39) ÷ 0.50 = 82% on the final.',
+      },
+      {
+        id: 'faq-final-two-quarters',
+        category: 'final-exam',
+        question: 'How do I calculate my final exam grade when the year has two quarters?',
+        answer:
+          'Average the quarters according to their weights, then use that as your current grade. If each of two quarters counts for 40% and the final exam for 20%, quarter grades of 85% and 78% give an 81.5% current grade. For an 80% year grade you need (80 − 81.5 × 0.80) ÷ 0.20 = 74% on the exam.',
+      },
+      {
+        id: 'faq-final-minimum-for-c',
+        category: 'final-exam',
+        question: 'What is the lowest score I can get on the final and still earn a C?',
+        answer:
+          'Set the target to the lowest C on your scale and solve for the exam. With a 76% current grade and a final worth 20%, you bank 60.8 points, and (70 − 60.8) ÷ 0.20 = 46%. Any exam score at or above 46% keeps a 70% course grade.',
+      },
+      {
+        id: 'faq-final-replaces-lowest-test',
+        category: 'final-exam',
+        question: 'How do I calculate a final exam that replaces my lowest test grade?',
+        answer:
+          'Swap the final’s score in for the lowest test and recalculate. If each test is worth 10% of the course, your lowest test was a 60% and the final earns 85%, the replacement adds (85 − 60) × 0.10 = 2.5 points to your course grade. To plan ahead, enter your tests in the weighted grade calculator and replace the low score with a hypothetical exam score.',
+      },
+      {
+        id: 'faq-final-no-final-exam',
+        category: 'final-exam',
+        question: 'How do I find my semester grade if there is no final exam?',
+        answer:
+          'Without a final, the semester grade is the weighted average of everything that was graded. Enter each category with its weight in the weighted grade calculator, which divides by the weights you enter, so they do not have to add up to 100. This page is for classes where one exam is still to come.',
+      },
+      {
+        id: 'faq-final-high-school-college',
+        category: 'final-exam',
+        question: 'Does the final exam grade calculator work for high school and college?',
+        answer:
+          'Yes. The formula is the same for any class: the graded work banks points and the final supplies the rest. If your final is split into an exam and a culminating task, add their weights together and treat them as one block; the result is the average score you need across both.',
+      },
+      {
+        id: 'faq-final-curve',
+        category: 'final-exam',
+        question: 'Can I use the calculator if my instructor curves the final exam?',
+        answer:
+          'The calculator uses the score you enter, so add the curve to the score you expect before you compare it with the result. For example, a raw 70% plus a 5-point curve counts as 75%. The grade curve calculator shows how common curving methods change a set of scores.',
+      },
+      {
+        id: 'faq-final-effect-on-grade',
+        category: 'final-exam',
+        question: 'How much does my final exam affect my overall grade?',
+        answer:
+          'Each percentage point on the exam moves your course grade by the exam weight. On a 25% final, a 10-point swing in the exam score changes the course grade by 2.5 points, and on a 40% final it changes it by 4 points. The heavier the final, the more it can lift or lower your letter grade.',
+      },
+      {
+        id: 'faq-final-gpa-effect',
+        category: 'final-exam',
+        question: 'How does my final exam grade affect my GPA?',
+        answer:
+          'The exam changes your course percentage, which sets the course letter grade, and that letter sets the grade points used in your GPA. Find the course grade here first, then enter the letter and credit hours in the GPA calculator to see the semester or cumulative result.',
+      },
+      {
+        id: 'faq-final-excel-formula',
+        category: 'final-exam',
+        question: 'What is the final exam grade formula to use in Excel or Google Sheets?',
+        answer:
+          'Put your current grade in A1, your target in B1 and the final weight as a decimal in C1, then enter =(B1-A1*(1-C1))/C1. With 84, 80 and 0.25 it returns 68, the exam percentage you need. This page gives the same answer and also flags targets that are already secured or out of reach.',
       },
     ],
     searchVolumeTier: 'high',

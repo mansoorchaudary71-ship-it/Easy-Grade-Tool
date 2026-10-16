@@ -208,7 +208,7 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
     eyebrow: 'Final Exam Target FAQs',
     title: 'Final Exam Grade Calculator FAQs',
     description:
-      'Clear answers about the score you need on a final exam, how exam weight works, and what to do when your target grade is out of reach.',
+      'Clear answers about the score you need on a final exam, by percent or points: passing, midterms, quarters, replaced or missing finals, curves, GPA and spreadsheet formulas.',
     ctaText: 'Enter your current grade, target grade and final exam weight above to see the exact score you need.',
   },
   'test-grade-calculator': {
