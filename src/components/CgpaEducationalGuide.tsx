@@ -81,6 +81,7 @@ export function getCgpaHowToSchema(canonicalOrigin: string = BASE_CANONICAL_ORIG
 }
 
 const REFERENCE_CGPAS_10 = [10.0, 9.5, 9.0, 8.5, 8.0, 7.5, 7.0, 6.5, 6.0, 5.5, 5.0];
+const QUICK_ANSWER_CGPAS = [9.9, 9.0, 8.5, 8.0, 7.77, 7.61, 7.5, 7.45, 7.0, 6.5];
 const REFERENCE_SCALE_4_5 = [
   { cgpa4: 4.0, pct4: 100.0, cgpa5: 5.0, pct5: 100.0, division: 'Distinction' },
   { cgpa4: 3.7, pct4: 92.5, cgpa5: 4.5, pct5: 90.0, division: 'Distinction' },
@@ -230,7 +231,7 @@ export const CgpaEducationalGuide: React.FC = () => {
             id="cgpa-guide-heading"
             className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight mb-4"
           >
-            How to Convert CGPA to Percentage: Formulas, Scales &amp; University Rules
+            How Do I Convert CGPA to Percentage? Formulas, Scales &amp; University Rules
           </h2>
 
           <div className="my-6">
@@ -242,6 +243,9 @@ export const CgpaEducationalGuide: React.FC = () => {
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Whether you are filling out a campus placement portal, applying for postgraduate admissions abroad, or registering for competitive examinations like GATE, CAT, UPSC, or PSU recruitments, applications frequently ask for your marks as a <strong>percentage</strong> even when your transcript lists a <strong>Cumulative Grade Point Average (CGPA)</strong>. Because universities across India, Pakistan, the UAE, Europe, and North America grade on different point scales and apply distinct mathematical ordinances, using the right conversion formula is essential.
+          </p>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            To convert CGPA to percentage online, pick your grading scale, choose your university rule, and enter your CGPA in the calculator above. The tool applies the right formula, shows each step, and can work backwards from a percentage to a CGPA. It also converts a CGPA to an approximate 4.0 GPA, so you can use the same result for engineering, B.Tech, degree, MBA and postgraduate forms, and for CBSE Class 10 and Class 12 results.
           </p>
 
           {/* 10-Point Side-by-Side Comparison Table */}
@@ -417,9 +421,91 @@ export const CgpaEducationalGuide: React.FC = () => {
             </table>
           </div>
 
+          {/* Common CGPA Questions: direct-answer headings */}
+          <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white mt-8 mb-3 tracking-tight">
+            What Percentage Is My CGPA? Quick Answers for 7.0 to 9.9
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4 text-sm sm:text-base">
+            Students most often search for a specific number, such as 7.5 CGPA in percentage or what percentage is 9.9 CGPA. The table shows the same CGPAs under the four most common rules, so you can see how much the answer changes with your university.
+          </p>
+
+          <div className="overflow-x-auto rounded-2xl border border-slate-200/80 dark:border-slate-700/80 bg-white/90 dark:bg-slate-900/90 mb-6 shadow-2xs">
+            <table className="w-full text-left text-xs sm:text-sm border-collapse">
+              <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold border-b border-slate-200 dark:border-slate-700">
+                <tr>
+                  <th className="py-3 px-3.5 font-mono">CGPA</th>
+                  <th className="py-3 px-3.5">Standard (× 9.5)</th>
+                  <th className="py-3 px-3.5">VTU / MAKAUT / SPPU</th>
+                  <th className="py-3 px-3.5">GTU</th>
+                  <th className="py-3 px-3.5">× 10 (Anna / KTU)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800 font-mono text-slate-700 dark:text-slate-300">
+                {QUICK_ANSWER_CGPAS.map((val) => (
+                  <tr key={val} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50">
+                    <td className="py-2.5 px-3.5 font-bold text-teal-700 dark:text-teal-400">{val.toFixed(2)}</td>
+                    <td className="py-2.5 px-3.5">{computeCgpaToPercentage(val, 10, 'normal').percentage.toFixed(2)}%</td>
+                    <td className="py-2.5 px-3.5">{computeCgpaToPercentage(val, 10, 'vtu').percentage.toFixed(2)}%</td>
+                    <td className="py-2.5 px-3.5">{computeCgpaToPercentage(val, 10, 'gtu').percentage.toFixed(2)}%</td>
+                    <td className="py-2.5 px-3.5">{computeCgpaToPercentage(val, 10, 'anna-university').percentage.toFixed(2)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            What Is 7.5 CGPA in Percentage? Does 7.5 CGPA Mean 75%?
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Not always. A 7.5 CGPA is <strong>71.25%</strong> on the standard UGC/CBSE × 9.5 rule, <strong>67.50%</strong> for VTU, MAKAUT and SPPU, <strong>70.00%</strong> for GTU, and <strong>75.00%</strong> only where the university uses CGPA × 10, such as Anna University, KTU and Delhi University (NEP). The same logic answers 7.6 CGPA in percentage (72.20% on the standard rule) and 7.61 CGPA (72.30%). Always use the rule printed on your marksheet when one is given.
+          </p>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            What Percentage Is 9.9 CGPA, and What Does a 7 CGPA Mean?
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            A 9.9 CGPA is <strong>94.05%</strong> on the standard rule and <strong>99.00%</strong> under CGPA × 10. A 7.0 CGPA is <strong>66.50%</strong> on the standard rule, which is a first class in most Indian universities. Both numbers change if your university uses a different ordinance, so choose it in the calculator before quoting the result on a form.
+          </p>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            Is 7.45 or 7.77 CGPA Good? What Is a Good SGPA Score?
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Yes. 7.45 CGPA is about 70.8% and 7.77 CGPA is about 73.8% on the standard rule, which are comfortable first-class results that meet the 60% to 65% cut-offs common in campus placements and postgraduate applications. On a 10-point scale, an SGPA of 8.0 or higher is generally seen as very good, 7.0 to 7.99 as good, and 6.0 or above as first class in most universities.
+          </p>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            How Do I Convert CGPA to Percentage in MAKAUT, KTU, VTU or Anna University?
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            MAKAUT and VTU use <code>(CGPA − 0.75) × 10</code>, KTU and Anna University use <code>CGPA × 10</code>, GTU uses <code>(CGPA − 0.5) × 10</code>, and SPPU uses <code>(CGPA − 0.75) × 10</code> for the 2019 pattern. Open the university selector above and pick yours to apply the rule automatically. The directory table further down lists every supported university with its status.
+          </p>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            How Do I Convert Percentage to CGPA? How Much Is 60% or 75% in CGPA?
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Reverse the formula. On the standard rule, CGPA = Percentage ÷ 9.5, so <strong>60% is 6.32 CGPA</strong> and <strong>75% is 7.89 CGPA</strong>. Under CGPA × 10 they are 6.00 and 7.50. On a 4.0 scale, 60% is a 2.4 GPA and 75% is a 3.0 GPA. The Percentage to CGPA tab in the tool above does this for any value and any selected university.
+          </p>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            How Do I Convert CGPA to GPA, and What Percentage Is a 3.7 GPA or 0.8 GPA?
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            To get a 4.0 GPA from a 10-point CGPA, convert to a percentage first and divide by 25. For 8.5 CGPA that gives 80.75% ÷ 25 = 3.23. In the other direction, a 4.0 GPA is multiplied by 25, so a 3.7 GPA is 92.5%, a 2.7 CGPA on a 4.0 scale is 67.5%, and a 0.8 GPA is 20%. On a 5.0 scale, multiply by 20 instead.
+          </p>
+
+          <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-100 mt-5 mb-2">
+            CGPA to Percentage for Engineering, B.Tech, CBSE Class 10, Diploma and Other Scales
+          </h3>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+            Engineering and B.Tech programmes usually follow the technical university&apos;s rule (VTU, AKTU, JNTU, GTU, Mumbai University Engineering, Anna University, RGPV or BPUT). For CBSE Class 10 and Class 12, multiply the CGPA by 9.5. Diploma and polytechnic boards, and scales with other maximums such as 6, 7, 8 or 9, are not built into the calculator. A proportional estimate is (CGPA ÷ maximum CGPA) × 100, but only your board or university can confirm that it is accepted.
+          </p>
+
           {/* SGPA to CGPA Section */}
           <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white mt-8 mb-3 tracking-tight">
-            How to Calculate CGPA from Semester SGPA Scores
+            How to Calculate CGPA from Semester SGPA Scores (and Convert SGPA to Percentage)
           </h2>
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Your <strong>SGPA (Semester Grade Point Average)</strong> reflects your grade point average for a single academic term, while your <strong>CGPA</strong> aggregates performance across all completed semesters weighted by each semester&apos;s total credit hours:
@@ -428,7 +514,7 @@ export const CgpaEducationalGuide: React.FC = () => {
             CGPA = &Sigma;(Semester SGPA &times; Semester Credits) &divide; &Sigma;(Total Semester Credits)
           </div>
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            For example, if you earned an SGPA of <strong>8.10</strong> in Semester 1 (22 credits) and <strong>8.50</strong> in Semester 2 (24 credits), your cumulative GPA is <code>[(8.10 × 22) + (8.50 × 24)] ÷ (22 + 24) = (178.2 + 204.0) ÷ 46 = 8.31 CGPA</code>. You can use the built-in <strong>SGPA to CGPA &amp; Percentage Calculator</strong> panel above to compute this automatically across up to 12 semesters. Need to compute US 4.0 letter-grade GPA from course credits, calculate weighted syllabus grades, or check raw percentage differences? Explore our <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">4.0 GPA Calculator</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, and <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link>.
+            For example, if you earned an SGPA of <strong>8.10</strong> in Semester 1 (22 credits) and <strong>8.50</strong> in Semester 2 (24 credits), your cumulative GPA is <code>[(8.10 × 22) + (8.50 × 24)] ÷ (22 + 24) = (178.2 + 204.0) ÷ 46 = 8.31 CGPA</code>. To convert SGPA to percentage, apply your university&apos;s CGPA rule to the SGPA value (for example, 7.5 SGPA × 9.5 = 71.25% on the standard rule). You can use the built-in <strong>SGPA to CGPA &amp; Percentage Calculator</strong> panel above to compute this automatically across up to 12 semesters. Need to compute US 4.0 letter-grade GPA from course credits, calculate weighted syllabus grades, or check raw percentage differences? Explore our <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">4.0 GPA Calculator</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, and <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link>.
           </p>
         </ContentSection>
 

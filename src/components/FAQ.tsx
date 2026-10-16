@@ -316,9 +316,9 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
   },
   gpa: {
     eyebrow: 'Academic Standing FAQs',
-    title: 'GPA Calculator FAQs: How to Calculate Semester & Cumulative GPA',
+    title: 'How is GPA Calculated? College & University FAQs',
     description:
-      'Answers on how GPA is calculated, cumulative GPA with your current GPA, GPA without credits, percentage to GPA, weighted vs unweighted GPA, quality points and registrar rules.',
+      'Authoritative answers regarding 4.0 grade point averages, credit weighting, quality points, and registrar transcript policies.',
     ctaText: 'Add your semester courses above to see your cumulative GPA and quality points update in real time.',
     items: [
       {
@@ -350,11 +350,25 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
           'Quality points are grade points multiplied by credits. For a 3-credit course on the 4.0 scale: A (4.0) = 12, A- (3.7) = 11.1, B+ (3.3) = 9.9, B (3.0) = 9, B- (2.7) = 8.1, C+ (2.3) = 6.9, C (2.0) = 6, D (1.0) = 3 and F (0.0) = 0.',
       },
       {
+        id: 'weighted-vs-unweighted-gpa',
+        category: 'gpa',
+        question: 'What is the difference between weighted and unweighted GPA?',
+        answer:
+          'An unweighted GPA is calculated on a standard 4.0 scale where course difficulty is not considered (an A in a standard class and an A in an advanced course both equate to 4.0). A weighted GPA assigns additional weight (often up to 5.0) to advanced, AP, IB, or Honors courses to reflect increased academic challenge and effort.',
+      },
+      {
         id: 'quality-points-explained',
         category: 'gpa',
         question: 'What are quality points and how are they calculated?',
         answer:
           'Quality points represent the numerical value of a grade relative to course credit hours. They are determined by multiplying the assigned grade points for the letter grade by the number of credit hours for that course. For instance, an "A" (4.0 points) in a 4-credit course yields 16 quality points (4.0 × 4 = 16), which are then summed across all courses to find your GPA.',
+      },
+      {
+        id: 'semester-vs-cumulative-gpa',
+        category: 'gpa',
+        question: 'What is the difference between semester GPA and cumulative GPA?',
+        answer:
+          'A semester GPA reflects your academic performance during a single semester or term. The cumulative GPA represents the overall average of all quality points earned across every semester throughout your entire college or university enrollment.',
       },
       {
         id: 'retaken-courses-gpa',
@@ -440,139 +454,13 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         answer:
           'Quality points are grade points multiplied by credit hours. An A (4.0) in a 3-credit course is 12.0 quality points. Add the quality points for all courses and divide by the total credits to get your GPA. The calculator shows the quality points for each course.',
       },
-      {
-        id: 'gpa-without-credits',
-        category: 'gpa',
-        question: 'How do I calculate GPA without credits?',
-        answer:
-          'When every class counts the same, GPA is the plain average of the grade points. In this calculator leave every course at the same credit value, such as 1.0 or 3.0, and the credit weighting cancels out. Six classes graded A, A, B+, B, A- and B give (4.0 + 4.0 + 3.3 + 3.0 + 3.7 + 3.0) ÷ 6 = 3.5.',
-      },
-      {
-        id: 'gpa-without-plus-minus',
-        category: 'gpa',
-        question: 'How do I calculate GPA without plus or minus grades?',
-        answer:
-          'Choose plain A, B, C, D and F for each course: A is 4.0, B is 3.0, C is 2.0, D is 1.0 and F is 0.0. The calculator has no separate switch because it uses whichever letters you select, so leaving out the plus and minus grades gives you a whole-letter GPA.',
-      },
-      {
-        id: 'gpa-middle-school',
-        category: 'gpa',
-        question: 'How do I calculate GPA in middle school or junior high?',
-        answer:
-          'Use the letter grades on your report card with equal credits for every class, then read the semester GPA. Many middle and junior high schools report GPA on the same 4.0 scale as high school, but some do not calculate one at all, so ask your school before relying on the number.',
-      },
-      {
-        id: 'gpa-with-current-gpa',
-        category: 'gpa',
-        question: 'How do I calculate GPA with my current GPA?',
-        answer:
-          'Enter your cumulative GPA and the credits you have earned in the prior fields, then add this term’s courses. The calculator adds your prior quality points (GPA × credits) to the new ones and divides by all credits. For example, 45 credits at 3.0 is 135 quality points; 15 credits of B+ (3.3) add 49.5, so 184.5 ÷ 60 = 3.08.',
-      },
-      {
-        id: 'gpa-needed-next-semester',
-        category: 'gpa',
-        question: 'What GPA do I need next semester to reach a target GPA?',
-        answer:
-          'Use needed term GPA = (target GPA × total credits after the term − current quality points) ÷ new credits. With 45 credits at 3.0 and a target of 3.2 after 15 more credits, you need (3.2 × 60 − 135) ÷ 15 = 3.8 this term. If the result is above 4.0, the target cannot be reached in one term.',
-      },
-      {
-        id: 'gpa-credits-to-raise',
-        category: 'gpa',
-        question: 'How many credits of A’s do I need to raise my GPA?',
-        answer:
-          'It depends on how many credits you already have. From a 3.0 over 60 credits, 15 credits of straight A’s reach 3.2, because (180 + 4.0 × 15) ÷ 75 = 3.2. The more credits already on your record, the slower each new term moves your cumulative GPA.',
-      },
-      {
-        id: 'gpa-highest-possible',
-        category: 'gpa',
-        question: 'What is the highest GPA I can get this semester?',
-        answer:
-          'Set every course you are taking to an A and read the cumulative GPA: that is your ceiling for the term. With 45 prior credits at 3.0 and 15 credits of A’s, the best you can reach is (135 + 60) ÷ 60 = 3.25. Grades already earned cannot be changed, only the credits still in progress.',
-      },
-      {
-        id: 'gpa-percentages',
-        category: 'gpa',
-        question: 'How do I use a GPA calculator with percentages?',
-        answer:
-          'GPA comes from letters, so convert each course percentage to a letter first, then enter the letters here. On the common plus/minus scale 93–100 is an A (4.0), 90–92 an A- (3.7), 87–89 a B+ (3.3) and 83–86 a B (3.0). Convert each course separately instead of averaging percentages first, because the scale is not linear.',
-      },
-      {
-        id: 'gpa-85-88-93',
-        category: 'gpa',
-        question: 'What GPA is an 85, 88 or 93 percent?',
-        answer:
-          'On the common plus/minus scale an 85% is a B (3.0), an 88% is a B+ (3.3) and a 93% is an A (4.0). On a plain A–F scale the 88 is a B (3.0) and the 93 is an A (4.0). Your school’s cutoffs decide, so confirm them in your syllabus or student handbook.',
-      },
-      {
-        id: 'gpa-quarter-system',
-        category: 'gpa',
-        question: 'How do I calculate GPA for the quarter system?',
-        answer:
-          'The formula is the same: quality points divided by credits, using the credits your school assigns. If you combine semester and quarter credits, convert first, because a quarter credit is two-thirds of a semester credit. A GPA computed within one system does not change with the credit unit.',
-      },
-      {
-        id: 'gpa-pass-fail-withdrawn',
-        category: 'gpa',
-        question: 'Do pass/fail and withdrawn courses count toward GPA?',
-        answer:
-          'At most schools a passing grade in a pass/fail course, an audited course and a withdrawal do not enter GPA, because they add no quality points and no credits attempted. A failing grade (F) does count as 0.0. Policies differ, so check your registrar before leaving a course out.',
-      },
-      {
-        id: 'gpa-retaken-course-entry',
-        category: 'gpa',
-        question: 'How do I enter a retaken course in a GPA calculator?',
-        answer:
-          'If your school replaces the old grade, remove the first attempt from your prior totals by subtracting its credits and quality points, then enter the new grade as a current course. If your school averages both attempts, keep both. The repeat policy in your catalog decides which applies.',
-      },
-      {
-        id: 'gpa-4-3-5-0-scale',
-        category: 'gpa',
-        question: 'Does this GPA calculator support a 4.3 or 5.0 scale?',
-        answer:
-          'The A+ toggle sets A+ to 4.0 or 4.33, the closest option for schools that give an A+ extra value. Every other grade follows the standard 4.0 scale, so weighted 5.0 scales are not built in. For a weighted result, add your school’s bonus to the weighted courses before averaging.',
-      },
-      {
-        id: 'gpa-other-scales',
-        category: 'gpa',
-        question: 'How do I convert a GPA from a 10-point, 5-point or 12-point scale?',
-        answer:
-          'Scale conversions follow rules set by each university or evaluator, so one multiplication can give the wrong result. For 10-point and 5-point CGPA conversions, use the CGPA to Percentage Calculator, which lists university-specific formulas. For admissions abroad, check what the receiving school or its credential evaluator requires.',
-      },
-      {
-        id: 'gpa-calculator-accuracy',
-        category: 'gpa',
-        question: 'Is this GPA calculator accurate?',
-        answer:
-          'The arithmetic is exact: each grade’s points times its credits, summed and divided by total credits. Your official GPA can still differ if your school uses other grade values, rounds differently, drops repeated courses or excludes some credits, so treat the result as an estimate until it matches your transcript.',
-      },
-      {
-        id: 'gpa-application-services',
-        category: 'gpa',
-        question: 'Why is my LSAC, AMCAS or CASPA GPA different from my school GPA?',
-        answer:
-          'Application services recalculate GPA from your transcripts using their own grade tables, often count every attempt including repeated courses, and report separate science GPAs. This calculator gives a standard 4.0 estimate, so your official application GPA can differ from it.',
-      },
-      {
-        id: 'gpa-final-exam',
-        category: 'gpa',
-        question: 'Can a GPA calculator tell me what I need on my final exam?',
-        answer:
-          'No. GPA is calculated from final course letters, not exam scores. First find the exam score you need for your target course grade with the Final Exam Grade Calculator, then enter the resulting letter here to see how it changes your semester and cumulative GPA.',
-      },
-      {
-        id: 'gpa-print-export',
-        category: 'gpa',
-        question: 'Can I print or export my GPA results?',
-        answer:
-          'Yes. Use the Print Result and Export GPA PDF buttons below the results to save a report of your courses, credits, semester GPA and cumulative GPA. Your courses are not uploaded anywhere, and you do not need an account to use the calculator.',
-      },
     ],
   },
   cgpa: {
     eyebrow: 'CGPA Conversion & University FAQs',
     title: 'CGPA to Percentage Conversion FAQs',
     description:
-      'Verified answers on converting CGPA to percentage across 10.0, 5.0, and 4.0 grading scales, official university circulars, and SGPA to CGPA formulas.',
+      'Answers on how to convert CGPA to percentage, including 7.5 CGPA, 9.9 CGPA and 60% to CGPA, across 10.0, 5.0 and 4.0 scales, university formulas, and SGPA to CGPA.',
     ctaText: 'Select your grading scale and university above to compute your exact percentage and download an official PDF report.',
     items: [
       {
@@ -609,6 +497,111 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         question: 'What is the difference between SGPA and CGPA, and how do I convert SGPA to CGPA?',
         answer:
           'SGPA (Semester Grade Point Average) measures your academic performance in a single semester, whereas CGPA (Cumulative Grade Point Average) is the credit-weighted average of your SGPAs across all completed semesters: CGPA = Σ(Semester SGPA × Semester Credits) ÷ Total Credits. If all semesters carry equal credits, CGPA is the simple arithmetic mean of all semester SGPAs.',
+      },
+      {
+        id: 'what-is-7-5-cgpa-in-percentage',
+        category: 'cgpa',
+        question: 'What is 7.5 CGPA in percentage?',
+        answer:
+          'It depends on your university. With the standard UGC and CBSE multiplier, 7.5 CGPA × 9.5 = 71.25%. VTU, MAKAUT, SPPU and AKTU give (7.5 − 0.75) × 10 = 67.50%, GTU gives 70.00%, and Anna University, KTU and DU (NEP) give 7.5 × 10 = 75.00%. Mumbai University general programmes give (7.1 × 7.5) + 11 = 64.25%.',
+      },
+      {
+        id: 'does-7-5-cgpa-mean-75-percent',
+        category: 'cgpa',
+        question: 'Does 7.5 CGPA mean 75%?',
+        answer:
+          'Only if your university uses the CGPA × 10 rule, as Anna University, KTU, BITS Pilani, VIT, SRM and Delhi University (NEP) do. Under the standard × 9.5 rule, 7.5 CGPA is 71.25%, and under the (CGPA − 0.75) × 10 rule used by VTU and MAKAUT it is 67.50%. Check the conversion note printed on your marksheet.',
+      },
+      {
+        id: 'what-is-7-6-cgpa-in-percentage',
+        category: 'cgpa',
+        question: 'What is 7.6 CGPA in percentage? What about 7.60 or 7.61?',
+        answer:
+          '7.6 and 7.60 are the same value. On the standard × 9.5 rule it is 72.20%. VTU, MAKAUT and SPPU give 68.50%, GTU gives 71.00%, and × 10 universities give 76.00%. A 7.61 CGPA adds 0.01 grade point, which is about 0.095% on the × 9.5 rule (72.30%) and 0.1% on the × 10 rules.',
+      },
+      {
+        id: 'what-percentage-is-9-9-cgpa',
+        category: 'cgpa',
+        question: 'What percentage is 9.9 CGPA?',
+        answer:
+          'On the standard × 9.5 rule, 9.9 CGPA is 94.05%. Under (CGPA − 0.75) × 10 (VTU, MAKAUT, SPPU) it is 91.50%, under GTU’s (CGPA − 0.5) × 10 it is 94.00%, and under a CGPA × 10 rule it is 99.00%. Mumbai University’s general formula gives (7.1 × 9.9) + 11 = 81.29%.',
+      },
+      {
+        id: 'is-7-45-cgpa-good',
+        category: 'cgpa',
+        question: 'Is 7.45 CGPA good? What about 7.77 CGPA?',
+        answer:
+          'Yes, both are solid first-class scores. 7.45 CGPA is about 70.78% on the × 9.5 rule, and 7.77 CGPA is about 73.8%. Both clear the 60% first-class line and the 60% to 65% eligibility cut-offs used by most campus placements and many postgraduate programmes. A CGPA of 8.0 or higher is usually considered strong, and 75% or more is often the distinction mark, so check the exact cut-off in your target application.',
+      },
+      {
+        id: 'what-does-7-cgpa-mean',
+        category: 'cgpa',
+        question: 'What does 7 CGPA mean, and what percentage is it?',
+        answer:
+          'A 7.0 CGPA on a 10-point scale usually corresponds to a B+ or good grade and a first-class result. On the standard × 9.5 rule it equals 66.50%. VTU and MAKAUT give 62.50%, GTU gives 65.00%, × 10 universities give 70.00%, and Mumbai University gives 60.70% (general) or 63.80% (Engineering, 2015–16 onward).',
+      },
+      {
+        id: 'convert-cgpa-to-percentage-vtu-makaut-ktu',
+        category: 'cgpa',
+        question: 'How do I convert my CGPA to a percentage in MAKAUT or KTU?',
+        answer:
+          'MAKAUT (formerly WBUT) uses Percentage = (CGPA − 0.75) × 10, so 8.0 CGPA is 72.50%. KTU uses Percentage = CGPA × 10, so 8.0 CGPA is 80.00%. VTU, like MAKAUT, uses (CGPA − 0.75) × 10. Pick your university in the calculator above to apply its rule instantly, and confirm against your latest regulation notice.',
+      },
+      {
+        id: 'cgpa-to-percentage-formula-anna-gtu-sppu',
+        category: 'cgpa',
+        question: 'What is the CGPA to percentage formula for Anna University, GTU and SPPU?',
+        answer:
+          'Anna University (R-2015 to R-2021) uses Percentage = CGPA × 10. GTU and BPUT use (CGPA − 0.5) × 10. SPPU, VTU, MAKAUT, AKTU, JNTU and BAMU use (CGPA − 0.75) × 10. Delhi University uses CGPA × 10 for NEP batches and CGPA × 9.5 for CBCS batches up to 2021–22.',
+      },
+      {
+        id: 'what-is-a-good-sgpa-score',
+        category: 'cgpa',
+        question: 'What is a good SGPA score?',
+        answer:
+          'On a 10-point scale, an SGPA of 8.0 or above is generally considered very good, 7.0 to 7.99 is good, and 6.0 to 6.99 is average and still a first class in most universities. Anything under 5.0 may put you at risk of backlogs or academic probation, depending on your university rules. Because SGPA is a one-semester figure, your CGPA is the number that employers and universities usually look at.',
+      },
+      {
+        id: 'how-to-convert-sgpa-to-percentage',
+        category: 'cgpa',
+        question: 'How do I convert my SGPA to a percentage? How much is 7.5 SGPA in percentage?',
+        answer:
+          'Apply the same formula your university uses for CGPA. On the standard × 9.5 rule, 7.5 SGPA is 71.25%. Under (SGPA − 0.75) × 10 it is 67.50%, and under SGPA × 10 it is 75.00%. Use the SGPA to CGPA panel above if you want to combine several semesters into a cumulative percentage first.',
+      },
+      {
+        id: 'how-to-convert-cgpa-to-gpa',
+        category: 'cgpa',
+        question: 'How do I convert my CGPA to GPA?',
+        answer:
+          'Convert CGPA to a percentage first, then divide by 25 to get an approximate 4.0 GPA, which is the method this calculator uses. For example, 8.5 CGPA × 9.5 = 80.75%, and 80.75 ÷ 25 = 3.23 GPA. Foreign universities and evaluators such as WES may use their own conversion tables, so check what your target school accepts.',
+      },
+      {
+        id: 'what-percentage-is-0-8-gpa-or-2-7-cgpa',
+        category: 'cgpa',
+        question: 'What percentage is a 0.8 GPA, a 2.7 CGPA, or a 3.7 GPA?',
+        answer:
+          'On a 4.0 scale each grade point is worth 25%, so a 0.8 GPA is 20%, a 2.7 CGPA is 67.50%, and a 3.7 GPA is 92.50%. If 2.7 is on a 10-point scale instead, the standard × 9.5 rule gives only 25.65%, so select the right scale before you convert.',
+      },
+      {
+        id: 'how-much-is-60-percent-in-cgpa',
+        category: 'cgpa',
+        question: 'How much is 60% in CGPA? What is 60% of a 4.0 GPA?',
+        answer:
+          '60% equals 6.32 CGPA on the standard × 9.5 rule, 6.00 under CGPA × 10, 6.50 under GTU’s rule, 6.75 under (CGPA − 0.75) × 10, and 6.90 under Mumbai University’s general formula. On a 4.0 scale, 60% is a 2.4 GPA (60 ÷ 25), and on a 5.0 scale it is 3.0 (60 ÷ 20). Note that 60% of the number 4.0 is also 2.4.',
+      },
+      {
+        id: 'how-to-convert-percentage-to-cgpa',
+        category: 'cgpa',
+        question: 'How do I convert a percentage to a CGPA? What is 75% as CGPA?',
+        answer:
+          'Reverse your university’s formula. Under the standard rule, CGPA = Percentage ÷ 9.5, so 75% is 7.89 CGPA. Under (CGPA − 0.75) × 10 it is 8.25, under GTU’s rule it is 8.00, and under a CGPA × 10 rule it is 7.50. On a 4.0 scale, 75% is a 3.0 GPA, and 70% is a 2.8 GPA. Use the Percentage to CGPA tab above for the exact value.',
+      },
+      {
+        id: 'cgpa-out-of-other-scales-and-cbse-class-10',
+        category: 'cgpa',
+        question: 'How do I convert CGPA out of 8, 6, 5 or 10 for CBSE Class 10 or a diploma?',
+        answer:
+          'For CBSE Class 10, multiply your CGPA by 9.5, so a 9.2 CGPA is 87.40%. This calculator supports 10.0, 5.0 and 4.0 scales directly. For any other maximum, such as 8 or 6, a proportional estimate is Percentage = (CGPA ÷ Maximum CGPA) × 100, but only your board or university can say whether that is officially accepted. Diploma and polytechnic boards publish their own rules, so use the board’s notice if it exists.',
       },
       {
         id: 'which-formula-for-job-applications',
