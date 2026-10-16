@@ -490,11 +490,13 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
     imageKey: 'letter-grade',
     imageAlt: 'Graduation cap beside an academic transcript and calculator, showing how percentages convert to letter grades.',
     blocks: [
-      title('Letter Grade Calculator: Percent to Letter Grade and the A–F Scale'),
+      title('Letter Grade Calculator: Percent to Letter Grade, GPA and the A–F Scale'),
       p(
         'A ',
         ['letter grade calculator', true],
-        ' converts any percentage into a letter and 4.0 GPA points, or shows the percentage range behind a letter. It follows the A–F grading scale most US schools use, plus the common plus/minus version.',
+        ' converts any percentage into a letter and 4.0 GPA points, or shows the percentage range behind a letter. It works as a ',
+        ['percent to letter grade calculator', true],
+        ' for high school and college classes, on the A–F grading scale most US schools use and on the common plus/minus version.',
       ),
 
       h2('Understanding the A–F Grading Scale'),
@@ -521,6 +523,10 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       p(
         'Most classes need 90%, and some schools require 93%. Check your syllabus: under a 93 cutoff a 91.5% is an A-, not an A, and the rounding rule decides what happens to an 89.5%.',
       ),
+      h3('What percentage is a B grade?'),
+      p(
+        'A B is 80–89% on the standard scale. On the plus/minus scale a B- is 80–82.99%, a B is 83–86.99% and a B+ is 87–89.99%.',
+      ),
 
       h2('Percent to Letter Grade: How the Calculator Works'),
       ol(
@@ -529,15 +535,90 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'Read the letter, the GPA points and how far you are from the next cutoff.',
         'To go the other way, choose a letter to see its percentage range and midpoint.',
       ),
+      h3('How do I calculate my letter grade?'),
+      p(
+        'First turn your score into a percentage: points earned ÷ points possible × 100. Then match the percentage to your scale. For example, 42 out of 50 is 42 ÷ 50 × 100 = 84%, which is a B on both common scales.',
+      ),
+      h3('How do I convert points or a score to a letter grade?'),
+      p(
+        'Points, scores and numbers all work the same way: divide by the total possible, multiply by 100, and enter the percentage. If you have several assessments with different weights, build the course percentage in the weighted grade calculator first.',
+      ),
+
+      h2('What Letter Grade Is My Score? Common Percentages'),
+      ul(
+        '96% (48 out of 50): A on the standard scale (4.0), A on plus/minus (4.0)',
+        '93%: A (4.0) on both scales',
+        '88%: B (3.0) on the standard scale, B+ (3.3) on plus/minus',
+        '85%: B (3.0) on both scales',
+        '80%: B (3.0) on the standard scale, B- (2.7) on plus/minus',
+        '73%: C (2.0) on both scales',
+        '70% (35 out of 50): C (2.0) on the standard scale, C- (1.7) on plus/minus',
+        '66%: D (1.0) on both scales',
+        '60% (30 out of 50): D (1.0) on the standard scale, D- (0.7) on plus/minus',
+      ),
+      h3('Is 80% what letter grade?'),
+      p(
+        'An 80% is a B on the standard scale and a B- on the plus/minus scale, because 80 is the lowest B- there. It is the bottom of the B range on both.',
+      ),
+      h3('Is a 93% an A or a B?'),
+      p(
+        'A 93% is an A on both common scales. It is a B only if your school uses a very high A cutoff such as 94 or 95.',
+      ),
+      h3('What letter grade is 70%, and is a 30 out of 50 a bad grade?'),
+      p(
+        'A 70% (35 out of 50) is a C on the standard scale and a C- on the plus/minus scale. A 30 out of 50 is 60%, a D or a D-, which passes at most schools but only just. For comparison, 48 out of 50 is 96%, an A.',
+      ),
+      h3('What letter grade is an 85 in college?'),
+      p(
+        'An 85% is a B (3.0) at most colleges, on both the standard and the plus/minus scale. Some colleges publish their own table, so the course syllabus decides.',
+      ),
+
+      h2('Letter Grade to GPA Calculator: Points on the 4.0 Scale'),
+      h3('How do I convert a percentage to a 4.0 GPA?'),
+      p(
+        'Convert the percentage to a letter, then read the points for that letter. The calculator shows both at once. A 92% is an A (4.0) on the standard scale and an A- (3.7) on the plus/minus scale.',
+      ),
+      h3('How many GPA points does each letter grade earn?'),
+      ul(
+        'A+ and A: 4.0, A-: 3.7',
+        'B+: 3.3, B: 3.0, B-: 2.7',
+        'C+: 2.3, C: 2.0, C-: 1.7',
+        'D+: 1.3, D: 1.0, D-: 0.7',
+        'F: 0.0',
+      ),
+      h3('Is GPA determined by letter grade?'),
+      p(
+        'Yes. Each course’s letter becomes grade points, the points are multiplied by the course’s credit hours, and the total is divided by the total credits. The percentage behind the letter is not part of the GPA, only the letter is.',
+      ),
+      h3('Is a 3.9 GPA an A, and are all B’s a 3.5 GPA?'),
+      p(
+        'A 3.9 is an A average. With equal-credit courses, one B among ten A grades gives exactly 3.9. All B grades give a 3.0, not a 3.5: a 3.5 needs about half A grades and half B grades.',
+      ),
+      h3('Is a 2.7 GPA a B-?'),
+      p(
+        'On the common plus/minus scale a 2.7 is worth a B-. A 2.75 sits slightly above a B- and below a B (3.0).',
+      ),
+      h3('Will one C ruin a 4.0 GPA?'),
+      p(
+        'No. One C among ten equal-credit A courses gives a 3.8, and among forty courses it gives a 3.95. The more credits you have, the less a single grade moves your GPA.',
+      ),
+
+      h2('Letter Grades for College, High School and Teachers'),
+      p(
+        'Colleges and universities often use the plus/minus scale and weight each course by its credit hours. Many high schools use the plain A–F scale, and some add extra points for honors or AP courses, which this calculator does not include. Teachers can use the same cutoff table to turn a class percentage into a report-card letter.',
+      ),
+      p(
+        'Outside the US the rules differ. Canadian schools often use a 4.0 or 4.3 letter scale that varies by province and university, and many Australian universities grade with High Distinction, Distinction, Credit and Pass instead of A–F. Use your institution’s published table for those.',
+      ),
 
       h2('Why Your School’s Scale May Differ'),
       p(
         'Seven-point scales that start an A at 93, cutoffs at 94 or 95, and an A+ worth 4.3 all exist, and so do different rounding rules. When your syllabus lists cutoffs, they override any generic chart, including this one.',
       ),
 
-      h2('From Letter Grade to GPA'),
+      h2('From Letter Grade to GPA and Final Grade'),
       p(
-        'A letter turns into grade points, and grade points are weighted by credit hours. Take the letters you find here to the GPA calculator to get your semester and cumulative GPA.',
+        'A letter turns into grade points, and grade points are weighted by credit hours. Take the letters you find here to the GPA calculator to get your semester and cumulative GPA. To apply a curve before converting, use the grade curve calculator, and to find the final exam score you need for a target letter, use the final exam grade calculator.',
       ),
     ],
   },
