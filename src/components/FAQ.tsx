@@ -729,56 +729,140 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
     ],
   },
   loan: {
-    eyebrow: 'Financing & Interest FAQs',
-    title: 'Loan & Amortization FAQs',
+    eyebrow: 'Loan Calculator FAQs',
+    title: 'Loan Calculator FAQs: Payments, Interest & Payoff',
     description:
-      'Understand how loan amortization schedules work, the impact of APR, and how extra principal payments save money.',
-    ctaText: 'Adjust your loan term, interest rate, or principal balance above to see your monthly payment breakdown.',
+      'Answers on how a loan calculator works, car and personal loan payments, total interest, amortization, APR, extra payments and paying a loan off early.',
+    ctaText: 'Adjust your loan amount, APR or term above to see your monthly payment and interest breakdown.',
     items: [
       {
         id: 'monthly-loan-formula',
         category: 'loan',
         question: 'How is a monthly loan payment calculated?',
         answer:
-          'Monthly payments are calculated using the standard amortization formula: M = P [i(1 + i)^n] ÷ [(1 + i)^n - 1], where M is monthly payment, P is principal loan amount, i is monthly interest rate (annual APR ÷ 12), and n is total number of monthly payments.',
+          'Monthly payments use the standard amortization formula: M = P [i(1 + i)^n] ÷ [(1 + i)^n − 1], where M is the monthly payment, P is the loan amount, i is the monthly interest rate (annual APR ÷ 12) and n is the total number of monthly payments.',
+      },
+      {
+        id: 'how-loan-calculator-works',
+        category: 'loan',
+        question: 'How does a loan calculator work?',
+        answer:
+          'Enter the amount you want to borrow, the annual interest rate (APR) and the term in years. The calculator applies the fixed-rate amortization formula to find your monthly payment, adds up every payment to show total interest and total cost, and builds a year-by-year schedule of principal paid, interest paid and remaining balance.',
+      },
+      {
+        id: 'car-loan-payment',
+        category: 'loan',
+        question: 'How do I calculate a car loan payment?',
+        answer:
+          'Subtract your down payment and any trade-in value from the vehicle price, then enter that balance as the loan amount along with the lender\'s APR and the term. For example, a $30,000 car loan at 7% APR costs about $511.47 a month over 6 years or about $452.78 a month over 7 years, with roughly $1,200 more total interest on the longer term.',
+      },
+      {
+        id: 'total-interest-on-loan',
+        category: 'loan',
+        question: 'How much interest will I pay on a loan?',
+        answer:
+          'Total interest is the sum of all your monthly payments minus the amount you borrowed. A $25,000 loan at 7.5% APR over 5 years has a payment of about $500.95 and total interest of $5,056.92. A lower APR, a shorter term or a larger down payment all reduce it.',
       },
       {
         id: 'principal-vs-interest',
         category: 'loan',
         question: 'What is the difference between principal and interest?',
         answer:
-          'Principal is the actual capital amount you borrowed and owe back to the lender. Interest is the financing fee charged by the lender for the use of their money. Each monthly payment is divided between paying down accrued interest and reducing the principal balance.',
+          'Principal is the amount you borrowed and owe back to the lender. Interest is the fee the lender charges for lending it. Each monthly payment is split between interest on the remaining balance and a reduction of the principal.',
       },
       {
         id: 'loan-amortization-schedule',
         category: 'loan',
         question: 'What is loan amortization?',
         answer:
-          'Amortization is the process of paying off debt through regular, scheduled installments over time. In early loan months, the majority of each payment goes toward interest. Over time, as the principal balance decreases, a greater percentage of each payment directly reduces the loan principal.',
+          'Amortization is paying off a debt through equal, scheduled installments. In the early months most of each payment goes toward interest. As the balance falls, a growing share of every payment reduces principal, which the amortization schedule shows year by year.',
       },
       {
         id: 'extra-payments-impact',
         category: 'loan',
-        question: 'How does making extra payments shorten loan duration and interest?',
+        question: 'How do extra payments help pay off a loan early?',
         answer:
-          'Any extra payment made beyond the scheduled monthly installment is applied directly to the principal balance. Lowering principal early reduces future compounded interest calculations, saving thousands of dollars in interest and paying off the loan months or years ahead of schedule.',
+          'Any amount paid above the scheduled payment goes to principal, which lowers the interest charged in every later month. On a $25,000 loan at 7.5% over 5 years, adding $100 a month pays it off in about 49 months instead of 60 and saves roughly $1,014 in interest. Check first that your loan has no prepayment penalty.',
+      },
+      {
+        id: 'loan-term-in-months',
+        category: 'loan',
+        question: 'How do I enter a loan term in months, such as 60 or 72 months?',
+        answer:
+          'The calculator takes the term in years, so divide the months by 12: 36 months is 3 years, 48 is 4, 60 is 5, 72 is 6 and 84 is 7. Longer terms lower the monthly payment but raise total interest.',
       },
       {
         id: 'apr-vs-interest-rate',
         category: 'loan',
         question: 'What is the difference between APR and interest rate?',
         answer:
-          'The interest rate is the cost of borrowing the principal amount per year. The Annual Percentage Rate (APR) reflects the total cost of credit, combining the interest rate along with lender fees, points, and origination charges.',
+          'The interest rate is the yearly cost of borrowing the principal. The Annual Percentage Rate (APR) also includes lender fees and origination charges, so it reflects the total cost of credit. Entering the APR gives the most realistic payment estimate.',
+      },
+      {
+        id: 'simple-vs-amortized-interest',
+        category: 'loan',
+        question: 'What is the difference between simple interest and an amortized loan?',
+        answer:
+          'Simple interest multiplies the original principal by the rate and the number of years, which overstates the cost of a loan you repay in installments. An amortized loan charges interest only on the balance you still owe, so the interest shrinks with each payment. This calculator uses the amortized method, which is how most car and personal loans work.',
+      },
+      {
+        id: 'biweekly-loan-payments',
+        category: 'loan',
+        question: 'Do biweekly payments save money on a loan?',
+        answer:
+          'They can. Paying half the monthly amount every two weeks adds up to 13 full payments a year instead of 12. If your lender applies each payment promptly, the extra goes to principal and shortens the loan. Ask your lender how biweekly payments are credited, as some hold them until the monthly due date.',
+      },
+      {
+        id: 'which-loan-pay-first',
+        category: 'loan',
+        question: 'Which loan should I pay off first?',
+        answer:
+          'Pay at least the minimum on every loan, then put extra money toward the loan with the highest interest rate to minimize total interest. Another approach is to pay off the smallest balance first for momentum. Compare your loans in the calculator and check for prepayment penalties before paying extra.',
+      },
+      {
+        id: 'loan-affordability',
+        category: 'loan',
+        question: 'How much loan can I afford?',
+        answer:
+          'Start with the monthly payment that fits your budget, then try different loan amounts in the calculator until the payment matches it. Change the term to see how a longer or shorter loan changes the amount you can borrow at that payment. Lenders also look at your income, debts and credit.',
+      },
+      {
+        id: 'supported-loan-types',
+        category: 'loan',
+        question: 'Can I use this calculator for personal, auto, boat, RV, home equity or business loans?',
+        answer:
+          'Yes, for any fixed-rate loan with equal payments, including car, personal, boat, motorcycle, RV, equipment, land, business and fixed-rate home equity loans. It does not model balloon payments, interest-only periods, variable rates, HELOCs, or program fees such as VA, FHA or SBA charges, so treat it as a baseline and confirm the full terms with your lender.',
       },
     ],
   },
   mortgage: {
     eyebrow: 'Real Estate & Financing FAQs',
-    title: 'Mortgage & Home Financing FAQs',
+    title: 'Mortgage Calculator FAQs: Payments, Affordability & Terms',
     description:
-      'Key facts on PITI payment components, down payment ratios, private mortgage insurance (PMI), and 15 vs 30-year terms.',
+      'Answers on how to calculate a monthly mortgage payment, how much mortgage you can afford, 15 vs 30-year terms, PITI, PMI, extra payments and refinancing.',
     ctaText: 'Calculate your estimated monthly mortgage payment, taxes, and insurance using our tool above.',
     items: [
+      {
+        id: 'mortgage-payment-formula',
+        category: 'mortgage',
+        question: 'How do I calculate a monthly mortgage payment?',
+        answer:
+          'Use M = P × [r(1 + r)^n] ÷ [(1 + r)^n − 1], where P is the loan amount, r is the monthly rate (annual rate ÷ 12) and n is the number of payments (years × 12). A $300,000 loan at 6.5% over 30 years comes to about $1,896.20 a month in principal and interest.',
+      },
+      {
+        id: 'how-mortgage-calculator-works',
+        category: 'mortgage',
+        question: 'How does a mortgage calculator work?',
+        answer:
+          'A mortgage calculator takes the loan amount, interest rate and term, applies the fixed-rate amortization formula, and returns your monthly payment, total interest and total cost. Change any input to see how a different rate or term affects what you pay each month and over the life of the loan.',
+      },
+      {
+        id: 'how-much-mortgage-afford',
+        category: 'mortgage',
+        question: 'How much mortgage can I afford?',
+        answer:
+          'A common guide is the 28/36 rule. On $8,000 of gross monthly income, housing costs should stay near $2,240 (28%) and total debt payments near $2,880 (36%). Remember your housing cost includes taxes and insurance, not just principal and interest, so leave room for them when choosing a loan amount.',
+      },
       {
         id: 'what-is-piti',
         category: 'mortgage',
@@ -801,6 +885,27 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
           'A 30-year mortgage has lower monthly payments because loan payoff is spread across 360 months, but results in far higher total interest over the life of the loan. A 15-year mortgage requires higher monthly payments, but has lower interest rates and saves tens of thousands of dollars in overall interest.',
       },
       {
+        id: 'mortgage-calculator-taxes-insurance',
+        category: 'mortgage',
+        question: 'Does this mortgage calculator include taxes and insurance?',
+        answer:
+          'No. It calculates principal and interest only. To estimate your full monthly cost, divide your annual property tax and homeowners insurance by 12 and add them, plus any PMI or HOA dues, to the result. Lenders often collect these in an escrow account alongside your payment.',
+      },
+      {
+        id: 'mortgage-down-payment',
+        category: 'mortgage',
+        question: 'How does a down payment affect my mortgage payment?',
+        answer:
+          'A larger down payment lowers the amount you borrow, which reduces your monthly payment and total interest. Subtract the down payment from the home price and enter the result as the loan amount. Putting down 20% or more also avoids PMI on most conventional loans.',
+      },
+      {
+        id: 'mortgage-extra-payments',
+        category: 'mortgage',
+        question: 'How do extra payments help pay off a mortgage early?',
+        answer:
+          'Extra payments go straight to principal, so interest is charged on a smaller balance for the rest of the loan. That shortens the payoff date and cuts total interest. This calculator shows the standard schedule; enter a shorter term to preview an early payoff, and confirm your lender has no prepayment penalty.',
+      },
+      {
         id: 'closing-costs-budget',
         category: 'mortgage',
         question: 'How much should I budget for mortgage closing costs?',
@@ -814,119 +919,77 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         answer:
           'The 28/36 rule is a standard lending guideline: your monthly housing costs (PITI) should not exceed 28% of your gross monthly income, and total debt obligations (housing plus car loans, student debt, credit cards) should not exceed 36% of your gross income.',
       },
+      {
+        id: 'when-to-refinance-mortgage',
+        category: 'mortgage',
+        question: 'When should I refinance a mortgage?',
+        answer:
+          'Refinancing can make sense when a new rate is meaningfully lower and you will stay long enough to recover the closing costs. Divide the closing costs by your monthly savings to find the break-even point. For example, $6,000 in costs and $150 saved per month breaks even in 40 months.',
+      },
+      {
+        id: 'mortgage-calculator-accuracy',
+        category: 'mortgage',
+        question: 'Are mortgage calculators accurate?',
+        answer:
+          'The principal and interest figure is exact for a fixed-rate loan when you enter the correct rate and term. Your real payment can differ because of property taxes, insurance, PMI, HOA dues, fees and rate changes on adjustable loans, so treat the result as an estimate and confirm it with your lender.',
+      },
+      {
+        id: 'mortgage-loan-types-supported',
+        category: 'mortgage',
+        question: 'Can I use this calculator for FHA, VA, manufactured home, land or second home loans?',
+        answer:
+          'Yes, for the principal and interest portion of any fixed-rate loan. Program costs such as the FHA mortgage insurance premium or the VA funding fee are not included, and rates for manufactured homes, land and second homes are often higher, so enter the rate your lender quotes.',
+      },
+      {
+        id: 'mortgage-amortization-schedule',
+        category: 'mortgage',
+        question: 'What is a mortgage amortization schedule?',
+        answer:
+          'An amortization schedule shows how each payment is split between interest and principal and how the balance falls over time. Early payments are mostly interest. For a year-by-year schedule, enter the same amount, rate and term in the Loan Calculator, which includes an annual amortization table.',
+      },
     ],
   },
   password: {
-    eyebrow: 'Password Generator FAQs',
-    title: 'Password Generator FAQs: Strong, Safe & Secure Passwords',
+    eyebrow: 'Cybersecurity & Privacy FAQs',
+    title: 'Password Security & Privacy FAQs',
     description:
-      'Direct answers on how a random password generator works, how long a strong password should be, which passwords to avoid, and where to keep them safe.',
-    ctaText: 'Use the password generator above to create a strong, random password with your own length, numbers and symbols.',
+      'Best practices for generating high-entropy passwords, password manager security, and protecting digital accounts against credential stuffing.',
+    ctaText: 'Use the password generator above to create cryptographically strong passwords with custom length and symbols.',
     items: [
       {
         id: 'cryptographic-security',
         category: 'security',
-        question: 'Do password generators create strong, unique passwords?',
+        question: 'What makes a password cryptographically secure?',
         answer:
-          'A good one does. This generator picks every character with your browser\'s cryptographic random source (crypto.getRandomValues), so the result follows no pattern, uses no dictionary words and has nothing to do with your personal details. Generate a fresh password for each account and every one will be unique.',
-      },
-      {
-        id: 'why-strong-passwords',
-        category: 'security',
-        question: 'Why should passwords be strong?',
-        answer:
-          'Attackers do not guess by hand. They run automated tools that try leaked passwords, common words and every short combination. A long, random password makes those attacks impractical, and it protects the email, banking and shopping accounts that can be reached through a single weak login.',
+          'A secure password possesses high entropy: it should be at least 16 characters in length, combine uppercase and lowercase letters, numbers, and symbols, and contain no dictionary words, personal details, or predictable keyboard patterns.',
       },
       {
         id: 'length-vs-complexity',
         category: 'security',
-        question: 'How long should a strong password be: 8, 12, 16 or 20 characters?',
+        question: 'Why is password length more important than complexity alone?',
         answer:
-          'Use 12 characters as a minimum and 16 or more for important accounts such as email, banking and your password manager. With this generator\'s default character set, 8 characters give about 49 bits of randomness, 12 about 73, 16 about 98 and 20 about 122. Each extra character multiplies the work an attacker needs. Use 8 only where a site forces it.',
-      },
-      {
-        id: 'eight-four-rule',
-        category: 'security',
-        question: 'What is the 8 4 rule for passwords?',
-        answer:
-          'It is not an official standard. People usually mean the older composition rule of at least 8 characters containing 4 types: uppercase, lowercase, number and symbol. It is a weak target. A random 8-character password can still be cracked, so aim for 12 to 16 or more characters, and pick length over clever substitutions.',
-      },
-      {
-        id: 'typical-password-requirements',
-        category: 'security',
-        question: 'What are typical password requirements?',
-        answer:
-          'Most sites ask for 8 or more characters and a mix of uppercase and lowercase letters, numbers and symbols. Some cap the length or reject certain symbols. Set the length above to the maximum the site allows, then edit the symbols field if a particular character is refused.',
-      },
-      {
-        id: 'no-special-characters',
-        category: 'tool',
-        question: 'Can I generate a password with no special characters?',
-        answer:
-          'Yes. Clear the Symbols field and the generator uses only letters and the numbers you list. Because you lose the symbol characters, add length to compensate: a 16-character letters-and-numbers password is stronger than a 10-character one with symbols.',
-      },
-      {
-        id: 'look-alike-characters',
-        category: 'tool',
-        question: 'Why does the generator leave out I, O, l, 1 and 0?',
-        answer:
-          'Those five characters are easy to confuse on screen and on paper. Removing them makes a password easier to read aloud, type from a phone and copy by hand, such as a WiFi password or a temporary login. The pool is still large enough to stay strong at a sensible length.',
-      },
-      {
-        id: 'most-hacked-passwords',
-        category: 'security',
-        question: 'What is the most hacked password, and which passwords should never be used?',
-        answer:
-          'Breach lists are topped year after year by simple number runs such as 123456 and by the word "password" itself. Never use those, keyboard patterns like qwerty, names, birthdays, pet names, the site\'s own name, or any password you already use elsewhere.',
-      },
-      {
-        id: 'strongest-password',
-        category: 'security',
-        question: 'What is the strongest password in the world?',
-        answer:
-          'There is no single strongest password. Strength comes from length and randomness, not from a specific string. A long password generated at random and used on one account only is as strong as passwords get, and adding two-step verification covers the rest.',
-      },
-      {
-        id: 'check-password-secure',
-        category: 'security',
-        question: 'How can I check if my password is secure?',
-        answer:
-          'Check three things: it is at least 12 to 16 characters, it is random rather than a word or pattern, and you use it on only one account. You can also check whether it has appeared in a breach with a reputable service such as Have I Been Pwned. Never type a real password into a site you do not trust.',
+          'Password length increases brute-force search space exponentially. An 8-character password with mixed characters can be cracked in hours or days by modern GPU clusters, whereas a 16-character random password requires septillions of guesses, taking centuries to crack.',
       },
       {
         id: 'password-managers-safety',
         category: 'security',
-        question: 'Is there a free password manager to keep my generated passwords?',
+        question: 'Are password managers safe to store generated passwords?',
         answer:
-          'Yes, several. Open-source options such as KeePass are free, some managers including Bitwarden offer a free tier, and most browsers and phones include a built-in manager. Whichever you choose, pick one that encrypts your vault so the company cannot read it, and protect it with a long master password and two-step verification.',
-      },
-      {
-        id: 'never-hacked-manager',
-        category: 'security',
-        question: 'Which password manager has never been hacked?',
-        answer:
-          'No provider can honestly promise that it never will be. What matters is how a manager is built: with zero-knowledge encryption, a breach exposes only encrypted vaults that cannot be opened without your master password. Choose a well-reviewed, independently audited manager and keep your master password strong and unique.',
-      },
-      {
-        id: 'where-not-to-store-passwords',
-        category: 'security',
-        question: 'Where should you not store passwords?',
-        answer:
-          'Avoid sticky notes, plain text files, unprotected notes apps, spreadsheets, email drafts and messages to yourself, and the saved-password prompt on a shared or public computer. Keep passwords in an encrypted password manager instead.',
+          'Yes! Reputable password managers employ end-to-end encryption using military-grade standards (like AES-256). Even if the service\'s servers are breached, your data cannot be decrypted without your private master password and secret recovery key.',
       },
       {
         id: 'password-reuse-danger',
         category: 'security',
         question: 'Why should I never reuse passwords across multiple accounts?',
         answer:
-          'When one website suffers a data breach, attackers test the leaked email and password pair against thousands of other services in automated "credential stuffing" attacks. A unique password for every account means a breach on one site cannot unlock your others.',
+          'When one website suffers a data breach, hackers test the leaked email/password pair against thousands of other popular services in automated "credential stuffing" attacks. Using a unique password for every account guarantees that a breach on one site never compromises your other accounts.',
       },
       {
         id: 'how-often-change-passwords',
         category: 'security',
         question: 'How often should I change my passwords?',
         answer:
-          'Current guidance, including NIST\'s, advises against routine forced changes because they push people toward predictable variations. Use long, random, unique passwords, and change one right away if a service reports a breach or you notice suspicious activity.',
+          'Current cybersecurity standards (including NIST guidelines) advise against routine arbitrary password changes, as this encourages users to pick predictable variations. Instead, create long, random passwords stored in a password manager, and only change them immediately if a specific service notifies you of a breach or suspicious activity.',
       },
     ],
   },
