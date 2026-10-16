@@ -222,7 +222,7 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
     eyebrow: 'Curving & Class Stats FAQs',
     title: 'Grade Curve Calculator FAQs',
     description:
-      'Answers on the four curving methods, curving with the class average or mean and standard deviation, tests not out of 100, final exams, Excel formulas, capping at 100 and the letter grade after a curve.',
+      'Answers on the four curving methods, class mean and median, capping at 100 and how a curve changes each student’s letter grade.',
     ctaText: 'Paste your class scores above and compare all four curving methods side by side.',
   },
   'letter-grade-calculator': {
@@ -236,7 +236,7 @@ export const PAGE_FAQ_HEADINGS: Record<string, FaqHeading> = {
     eyebrow: 'Average Grade FAQs',
     title: 'Average Grade Calculator FAQs',
     description:
-      'Answers on averaging scores out of different totals, mean versus median, and what letter grade your average earns.',
+      'Answers on the overall average grade formula, averaging scores out of different totals, weights and credits, the average needed on remaining tests, mean versus median, C grades and GPA.',
     ctaText: 'Paste your scores above to see your average, median and letter grade update instantly.',
   },
   'grading-scale': {
