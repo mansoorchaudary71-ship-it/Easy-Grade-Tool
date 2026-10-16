@@ -152,7 +152,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           ogImage={activeSeo.ogImagePlaceholder}
           applicationCategory={activeSeo.applicationCategory}
           featureList={activeSeo.featureList}
-          name={isWeightedRoute ? 'Weighted Grade Calculator' : 'Easy Grade Calculator & Quick Grade Chart'}
+          name={isWeightedRoute ? 'Weighted Grade Calculator' : 'Easy Grade Calculator'}
           breadcrumbLabel={isWeightedRoute ? 'Weighted Grade Calculator' : 'Quick Grade Calculator'}
         />
       )}
@@ -160,10 +160,10 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       {!hideHeading && (
         <ToolHeading
           badge={calcTab === 'quick-chart' ? 'Quick Grade' : 'Weighted Grade'}
-          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator & Quick Chart' : 'Weighted Grade & Final Exam Calculator'}
+          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator: Test Score to Percentage & Letter Grade' : 'Weighted Grade & Final Exam Calculator'}
           description={
             calcTab === 'quick-chart'
-              ? 'Calculate instant test percentage scores, letter grades, and printable quick charts for any test length.'
+              ? 'Free easy grade calculator for teachers and students. Enter the number of questions to get percentage scores, letter grades and a printable chart, with half points.'
               : 'Add your assessments, calculate weighted averages, and simulate the exact score needed on your final exam.'
           }
         />

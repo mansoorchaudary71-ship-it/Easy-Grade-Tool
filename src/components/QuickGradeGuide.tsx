@@ -24,9 +24,9 @@ const OL = 'list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leadi
 const A = 'text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600';
 
 const HOME_FAQ_HEADING: FaqHeading = {
-  eyebrow: 'Quick Grade FAQs',
-  title: 'Quick Grade FAQ',
-  description: 'Short answers on the Quick Grade (EZ Grader) chart, the percentage formula, grading scales and printing.',
+  eyebrow: 'Easy Grade Calculator FAQs',
+  title: 'Easy Grade Calculator FAQ',
+  description: 'Short answers on using the easy grade calculator, half points, number correct, class tallies, spreadsheets, students and the EZ grader chart.',
   ctaText: 'Enter your number of questions above to see the full percentage and letter grade chart.',
 };
 
@@ -36,7 +36,7 @@ export const QuickGradeGuide: React.FC = () => (
     <ContentSection labelledBy="home-guide-title">
       <div>
         <h2 id="home-guide-title" className={H2_MAIN}>
-          Easy Grade Calculator: Free Easy Grader Tool and EZ Grader Chart for Teachers
+          Easy Grade Calculator for Teachers and Students: Free Online Easy Grader and EZ Grader Chart
         </h2>
 
         <div className="my-6">
@@ -47,11 +47,47 @@ export const QuickGradeGuide: React.FC = () => (
         </div>
 
         <p className={P}>
-          This <strong>easy grade calculator</strong> is a free <strong>easy grader tool</strong> built for the
-          moment a stack of tests lands on your desk: an <strong>easy grader for teachers</strong> that turns the number
-          of questions into an EZ grader chart, with the percentage and letter grade for every possible number of wrong
-          answers, ready to look up or print. Students can use the same chart to check a score, and the tools below
-          cover weighted grades, final exams and GPA.
+          This <strong>free easy grade calculator</strong> turns a test score into a percentage and a letter grade
+          without any arithmetic. It is an <strong>easy grader for teachers</strong>: enter the number of questions and
+          you get an EZ grader chart with the percentage and letter for every possible number of wrong answers, ready to
+          look up or print. It is just as useful as an <strong>easy grade calculator for students</strong> who want to
+          check a quiz or exam result, and the tools below cover weighted grades, final exams and GPA.
+        </p>
+      </div>
+
+      <div>
+        <h2 className={H2}>How to Use the Easy Grade Calculator</h2>
+
+        <h3 className={H3}>How do I use an online easy grade calculator?</h3>
+        <p className={P}>
+          Enter the number of questions on the test in the box at the top of the page. The chart below it fills in at
+          once, showing the percentage and letter grade next to every possible number of wrong answers. To grade a paper,
+          find the row that matches its wrong answers. To work through a pile, type each student&apos;s wrong answers into
+          the grading panel and press Next student, and the calculator keeps a running class tally and average.
+        </p>
+
+        <h3 className={H3}>Easy grade calculator with half points</h3>
+        <p className={P}>
+          Some tests award partial credit, so a single answer can be worth half a point. Switch on Half points in the
+          advanced settings and the chart lists wrong answers in steps of 0.5. A paper with 2.5 wrong answers on a
+          40-question test scores 37.5 ÷ 40 × 100 = 93.75%, and the letter grade follows from your scale.
+        </p>
+
+        <h3 className={H3}>Easy grade calculator by number correct, points and percentage</h3>
+        <p className={P}>
+          Every row of the chart shows the number correct beside the wrong answers, so you can start from whichever
+          count you have. Each question on a 25-question test is worth 4 percentage points, which means 22 correct is
+          88% and 20 correct is 80%. When your test uses uneven point values rather than a simple count of questions, the{' '}
+          <Link to="/test-grade-calculator/" className={A}>test grade calculator</Link> converts points earned and points
+          possible to a percentage, and handles bonus points and penalties.
+        </p>
+
+        <h3 className={H3}>Easy test grade calculator for a whole class</h3>
+        <p className={P}>
+          For test scores across a class, grade each paper in the grading panel and watch the tally build. It shows how
+          many students earned each letter and the class average. When you finish, download the list as a CSV file or
+          copy it straight into Excel or Google Sheets, and clear the tally before the next class. Nothing is uploaded;
+          the list lives in your browser tab until you close it.
         </p>
       </div>
 
@@ -161,6 +197,48 @@ export const QuickGradeGuide: React.FC = () => (
           An EZ grader chart lists every possible score for one test size, so it is built for speed across many papers.
           An online grade calculator takes any set of points and weights and computes one result at a time, so it is
           built for flexibility. Teachers usually want both, which is why they live side by side here.
+        </p>
+      </div>
+
+      <div>
+        <h2 className={H2}>Easy Grade Calculator for Students: Course Grades, Finals and GPA</h2>
+
+        <h3 className={H3}>What is the simplest way to calculate my current course grade?</h3>
+        <p className={P}>
+          Start with the quiz or test in front of you: the questions you got right, divided by the questions asked,
+          times 100. A course grade is the same idea applied to several graded items, and when your syllabus gives each
+          category its own weight, the{' '}
+          <Link to="/grade-calculator/" className={A}>weighted grade calculator</Link> does the combining for you.
+        </p>
+
+        <h3 className={H3}>How do I find the score I need on the final exam?</h3>
+        <p className={P}>
+          Decide the course grade you want, then work backwards from the weight of the final. The{' '}
+          <Link to="/final-exam-grade-calculator/" className={A}>final exam grade calculator</Link> takes your current
+          average, the final&apos;s weight and your target, and reports the percentage you need, or tells you the target
+          is already safe or out of reach.
+        </p>
+
+        <h3 className={H3}>How do I understand my grade average across assignment categories?</h3>
+        <p className={P}>
+          Treat each category as its own average first. Homework might sit at 94%, quizzes at 82% and exams at 76%.
+          A category with a bigger weight pulls the course grade harder, so a lower exam average can outweigh strong
+          homework. Seeing the categories separately shows where a few extra points would change the final letter.
+        </p>
+
+        <h3 className={H3}>Simple grade calculator for high school and college students</h3>
+        <p className={P}>
+          High school and college courses both come down to percentages, weights and a grading scale. Pick the standard
+          A–F scale or the plus/minus scale, or enter your school&apos;s own cutoffs, and the letters match what your
+          teacher uses. When the semester ends, take your course letters to the{' '}
+          <Link to="/gpa-calculator/" className={A}>GPA calculator</Link> to track your GPA.
+        </p>
+
+        <h3 className={H3}>Is there a free easy grade calculator app?</h3>
+        <p className={P}>
+          The calculator is free and runs in any modern browser on a phone, tablet or laptop, so there is nothing to
+          download and no account to create. If you like an icon on your home screen, use your browser&apos;s install
+          option to add Easy Grade Tool as an app. It keeps working without a connection after your first visit.
         </p>
       </div>
 
