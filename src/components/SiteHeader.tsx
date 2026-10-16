@@ -15,12 +15,12 @@ interface SiteHeaderProps {
  *   centre Quick Grade link + Tools dropdown
  *   right  search (Ctrl+K), 100% Private, theme
  *
- * Background is a clean, stark surface (white / near-black) with a hairline bottom edge and the shared geometric accents.
+ * Surface: stark white / near-black with a faint gradient, a 1px low-opacity edge, a soft lifting shadow (.elev-chrome) and the shared layered accents.
  * Mounted once in App.tsx above <Routes>.
  */
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool, onOpenCommandPalette }) => (
   <div
-    className="sticky top-0 z-50 isolate border-b border-slate-200/80 bg-white print:hidden dark:border-white/10 dark:bg-[#0B0F17]"
+    className="elev-chrome sticky top-0 z-50 isolate print:hidden"
     data-site-chrome
   >
     <ChromeAccents variant="header" />

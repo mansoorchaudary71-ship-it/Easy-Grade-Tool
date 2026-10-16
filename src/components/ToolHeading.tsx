@@ -12,8 +12,8 @@ interface ToolHeadingProps {
 }
 
 /**
- * Tool name bar: the same stark surface as the header and footer (white / near-black), a hairline edge, a fluid
- * heading and the shared geometric accents. Used by every tool and info page, so changing it here restyles them all.
+ * Tool name bar: the same lit surface as the header and footer (.elev-card in premium.css: frosted faint-blue gradient,
+ * 1px low-opacity edge, layered shadows), a fluid heading and the shared layered accents. Used by every tool and info page, so changing it here restyles them all.
  *
  * The accents live in an absolutely positioned, overflow-hidden, pointer-events-none layer (see <ChromeAccents />),
  * so they never clip the text or block a click. Heading colours are set in premium.css (.chrome-bar-title) because
@@ -30,7 +30,7 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
   const HeadingTag = headingTag;
 
   return (
-    <div className="chrome-bar relative isolate mb-6 flex flex-col gap-5 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white px-6 py-8 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_20px_40px_-30px_rgba(15,23,42,0.22)] dark:border-white/10 dark:bg-[#0B0F17] dark:shadow-none sm:flex-row sm:items-center sm:justify-between sm:rounded-[32px] sm:px-10 sm:py-10 print:border-0 print:shadow-none">
+    <div className="chrome-bar elev-card relative isolate mb-8 flex flex-col gap-5 overflow-hidden rounded-[28px] px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:rounded-[32px] sm:px-10 sm:py-10">
       <ChromeAccents variant="bar" />
 
       <div className="relative z-10 min-w-0">

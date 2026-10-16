@@ -28,11 +28,11 @@ const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];
  * pill underline, so it never relies on colour alone.
  */
 const linkBase =
-  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[14px] font-medium tracking-[-0.01em] no-underline touch-manipulation transition-colors duration-150 lg:px-6 [-webkit-tap-highlight-color:transparent]';
+  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[14.5px] font-medium tracking-[-0.01em] no-underline touch-manipulation transition-[color,background-color,box-shadow] duration-200 lg:px-6 [-webkit-tap-highlight-color:transparent]';
 const linkIdle =
-  'text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white';
+  'text-slate-600 hover:bg-slate-900/[0.04] hover:text-slate-950 dark:text-slate-300 dark:hover:bg-white/[0.06] dark:hover:text-white';
 const linkActive =
-  'text-slate-950 dark:text-white after:absolute after:bottom-1.5 after:left-1/2 after:h-0.5 after:w-5 after:-translate-x-1/2 after:rounded-full after:bg-blue-600 dark:after:bg-blue-400';
+  'font-semibold text-slate-950 dark:text-white after:absolute after:bottom-1 after:left-1/2 after:h-[3px] after:w-7 after:-translate-x-1/2 after:rounded-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:shadow-[0_2px_10px_rgba(59,130,246,0.65)] dark:after:from-blue-400 dark:after:to-indigo-400';
 
 /**
  * Desktop primary navigation (md and up): ONE visible link (Quick Grade) plus ONE "Tools" dropdown that holds

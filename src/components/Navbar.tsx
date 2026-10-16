@@ -77,9 +77,9 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 const focusRing =
   'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#0B0F17]';
 
-/** Shared look for the round header controls (search icon on phones, hamburger, theme switch): pure white pills. */
+/** Shared look for the round header controls (search icon on phones, hamburger, theme switch): pure white, fine-edged, lifted pills. */
 const glassControl =
-  'border border-slate-200 bg-white text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white';
+  'elev-pill text-slate-700 hover:text-slate-950 active:translate-y-px dark:text-slate-200 dark:hover:text-white';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -173,7 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Search className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
 
-            <div className="group relative hidden w-56 transition-[width] duration-300 ease-out xl:block 2xl:w-64 xl:focus-within:w-64 2xl:focus-within:w-72">
+            <div className="group relative hidden w-64 transition-[width] duration-300 ease-out xl:block 2xl:w-72 xl:focus-within:w-72 2xl:focus-within:w-80">
               <Search
                 className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors duration-300 group-focus-within:text-blue-600 dark:text-slate-400 dark:group-focus-within:text-blue-300"
                 strokeWidth={ICON_STROKE}
@@ -203,16 +203,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="h-11 w-full cursor-pointer rounded-full border border-slate-200 bg-white py-2 pl-11 pr-20 text-[13.5px] font-medium tracking-tight text-slate-800 shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/25 dark:border-white/10 dark:bg-[#151B26] dark:text-slate-100 dark:shadow-none dark:placeholder:text-slate-400 dark:hover:border-white/20 dark:focus:border-blue-400 dark:focus:ring-blue-400/40"
+                className="elev-pill h-11 w-full cursor-pointer rounded-full py-2 pl-11 pr-[4.75rem] text-[13.5px] font-medium tracking-tight text-slate-800 outline-none placeholder:text-slate-500 dark:text-slate-100 dark:placeholder:text-slate-400"
               />
-              <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
+              <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-full border border-slate-900/10 bg-slate-50 px-2 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 shadow-[0_1px_1px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:shadow-none">
                 {shortcutLabel}
               </kbd>
             </div>
 
             {/* 100% Private: white pill, shield only from lg, with the words from xl */}
             <div
-              className="hidden h-11 items-center gap-2 rounded-full border border-emerald-200 bg-white px-3.5 text-[13px] font-medium tracking-tight text-emerald-800 shadow-[0_1px_2px_rgba(15,23,42,0.04)] dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300 dark:shadow-none lg:inline-flex"
+              className="elev-pill elev-pill--ok hidden h-11 items-center gap-2 rounded-full px-3.5 text-[13px] font-medium tracking-tight text-emerald-800 dark:text-emerald-300 lg:inline-flex"
               title="100% Private: everything runs in your browser"
             >
               <PrivacyShieldIcon className="size-4 shrink-0" />

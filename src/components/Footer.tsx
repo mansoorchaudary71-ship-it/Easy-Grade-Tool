@@ -53,18 +53,20 @@ const FOOTER_PREMIUM_CSS = `
 .ft-news{position:relative;color:#0F172A}
 .ft-title-accent{color:inherit}
 .ft-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:500;color:#475569;
-  background:#fff;border:1px solid #e2e8f0}
+  background:#fff;border:1px solid rgba(15,23,42,.1);box-shadow:0 1px 2px rgba(15,23,42,.05),0 6px 12px -8px rgba(15,23,42,.14)}
 .dark .ft-chip{color:#cbd5e1;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.12)}
-.ft-form{display:flex;align-items:center;gap:.4rem;padding:.35rem;border-radius:9999px;background:#fff;border:1px solid #e2e8f0;
-  box-shadow:0 1px 2px rgba(15,23,42,.04);transition:box-shadow .2s,border-color .2s}
+.ft-form{display:flex;align-items:center;gap:.4rem;padding:.35rem;border-radius:9999px;background:#fff;border:1px solid rgba(15,23,42,.1);
+  box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(15,23,42,.05),0 10px 20px -12px rgba(15,23,42,.2);transition:box-shadow .25s,border-color .2s}
+.ft-form:hover{border-color:rgba(37,99,235,.38);box-shadow:inset 0 1px 0 #fff,0 0 0 4px rgba(37,99,235,.08),0 12px 24px -12px rgba(37,99,235,.35)}
 .dark .ft-form{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);box-shadow:none}
-.ft-form:focus-within{border-color:#2563eb;box-shadow:0 0 0 4px rgba(37,99,235,.15)}
+.ft-form:focus-within{border-color:rgba(37,99,235,.65);box-shadow:inset 0 1px 0 #fff,0 0 0 4px rgba(37,99,235,.16),0 14px 28px -12px rgba(37,99,235,.4)}
 .dark .ft-form:focus-within{border-color:#60a5fa;box-shadow:0 0 0 4px rgba(96,165,250,.25)}
 .ft-form input{background:transparent!important;border:0!important;box-shadow:none!important;color:#0F172A}
 .dark .ft-form input{color:#f8fafc}
 .ft-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
-  font-weight:600;font-size:.875rem;color:#fff;background:#2563eb;transition:background-color .2s,scale .2s}
-.ft-btn:hover:not(:disabled){background:#1d4ed8}
+  font-weight:600;font-size:.875rem;color:#fff;background:linear-gradient(180deg,#3b82f6 0%,#2563eb 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 6px 14px -6px rgba(37,99,235,.6);transition:background-color .2s,scale .2s,box-shadow .2s}
+.ft-btn:hover:not(:disabled){background:linear-gradient(180deg,#2563eb 0%,#1d4ed8 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 10px 20px -6px rgba(37,99,235,.7)}
 .ft-btn:active:not(:disabled){scale:.97}
 .ft-btn:disabled{opacity:.75;cursor:wait}
 .ft-btn:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
@@ -72,7 +74,7 @@ const FOOTER_PREMIUM_CSS = `
 .ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
 .ft-msg{animation:ft-pop .35s cubic-bezier(.2,1.2,.3,1) both}
 .ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .9rem;border-radius:9999px;cursor:pointer;
-  font-size:12px;font-weight:600;color:#334155;background:#fff;border:1px solid #e2e8f0;transition:background .2s,color .2s,border-color .2s}
+  font-size:12px;font-weight:600;color:#334155;background:#fff;border:1px solid rgba(15,23,42,.1);box-shadow:0 1px 2px rgba(15,23,42,.05),0 6px 12px -8px rgba(15,23,42,.14);transition:background .2s,color .2s,border-color .2s,box-shadow .2s}
 .dark .ft-more-btn{color:#e2e8f0;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14)}
 .ft-more-btn:hover{background:#2563eb;color:#fff;border-color:#2563eb}
 .ft-more-btn:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
@@ -508,18 +510,18 @@ export const Footer: React.FC<FooterProps> = ({
   const linkCls =
     'inline-flex items-center text-left text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.04)] dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-none hover:border-[#2563EB] hover:bg-[#2563EB] hover:text-white dark:hover:border-[#2563EB] dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
+    'elev-pill size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full text-slate-700 dark:text-slate-200 hover:!bg-[#2563EB] hover:text-white transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
-      <footer className="site-footer relative isolate w-full mt-20 overflow-hidden border-t border-slate-200/80 bg-white font-sans dark:border-white/10 dark:bg-[#0B0F17]" aria-label="Site footer">
+      <footer className="site-footer elev-footer relative isolate w-full mt-20 overflow-hidden font-sans" aria-label="Site footer">
         <style dangerouslySetInnerHTML={{ __html: FOOTER_PREMIUM_CSS }} />
         <ChromeAccents variant="footer" />
         {/* Newsletter banner: overlaps the top edge of the white footer panel (Backed by POST /api/subscribe) */}
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-14 sm:pt-16">
           <section
             aria-label="Newsletter"
-            className="ft-news grid md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 pb-12 border-b border-slate-200/80 dark:border-white/10"
+            className="ft-news grid md:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 pb-12 border-b border-slate-900/[0.08] dark:border-white/10"
           >
             {/* Illustration (decorative) */}
             <div className="hidden md:flex justify-center ft-float" aria-hidden="true">
@@ -845,7 +847,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Bottom bar */}
-          <div className="relative z-10 border-t border-slate-200/80 dark:border-white/10">
+          <div className="relative z-10 border-t border-slate-900/[0.08] dark:border-white/10">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
               <p className="m-0 text-center md:text-left">
                 &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite. Engineered with{' '}

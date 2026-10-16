@@ -225,6 +225,138 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
   color: #F8FAFC;
 }
 
+/* ==========================================================================
+   Elevation system. One lighting model for the header, the tool name bar and the footer:
+   light comes from the top-left, so every surface gets an inset top highlight, a 1px low-opacity edge,
+   and 3-4 stacked shadows (contact, near, ambient, tinted bloom). Unlayered, so these win over Tailwind utilities.
+   ========================================================================== */
+:root {
+  --el-edge: rgba(15, 23, 42, 0.08);
+  --el-edge-strong: rgba(15, 23, 42, 0.14);
+  --el-glow: rgba(37, 99, 235, 0.35);
+}
+
+/* Header: faint cool gradient, hairline edge, soft shadow so it floats above the canvas */
+.elev-chrome {
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+  border-bottom: 1px solid var(--el-edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 10px 24px -14px rgba(15, 23, 42, 0.2);
+}
+.dark .elev-chrome {
+  background-image: linear-gradient(180deg, #121826 0%, #0B0F17 100%);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 12px 28px -14px rgba(0, 0, 0, 0.75);
+}
+
+/* Name bar card: frosted, tinted, glossy, clearly lifted */
+.elev-card {
+  background-image:
+    radial-gradient(120% 120% at 0% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(244, 248, 255, 0.92) 55%, rgba(232, 240, 255, 0.9) 100%);
+  border: 1px solid var(--el-edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.03),
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 8px 16px -6px rgba(15, 23, 42, 0.08),
+    0 22px 44px -16px rgba(15, 23, 42, 0.14),
+    0 44px 80px -32px rgba(37, 99, 235, 0.24);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+}
+.dark .elev-card {
+  background-image:
+    radial-gradient(120% 120% at 0% 0%, rgba(96, 165, 250, 0.1) 0%, rgba(96, 165, 250, 0) 55%),
+    linear-gradient(135deg, #131A28 0%, #0E1420 55%, #0B0F17 100%);
+  border-color: rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 14px 28px -10px rgba(0, 0, 0, 0.55),
+    0 40px 70px -30px rgba(37, 99, 235, 0.3);
+}
+
+/* Footer: gradient rises from a tinted top edge; shadow falls UP onto the page above it */
+.elev-footer {
+  background-image: linear-gradient(180deg, #F3F6FD 0%, #FFFFFF 36%, #FFFFFF 100%);
+  border-top: 1px solid var(--el-edge);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 -1px 2px rgba(15, 23, 42, 0.03),
+    0 -16px 36px -24px rgba(15, 23, 42, 0.22);
+}
+.dark .elev-footer {
+  background-image: linear-gradient(180deg, #121826 0%, #0B0F17 40%, #0B0F17 100%);
+  border-top-color: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 -16px 36px -24px rgba(0, 0, 0, 0.8);
+}
+
+/* Pills and fields: pure white, 1px low-opacity edge, small contact shadow; hover/focus add a blue bloom */
+.elev-pill {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 6px 12px -8px rgba(15, 23, 42, 0.16);
+  transition: border-color 0.2s ease, box-shadow 0.25s ease, background-color 0.2s ease, width 0.3s ease;
+}
+.elev-pill:hover {
+  border-color: rgba(37, 99, 235, 0.38);
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 0 0 4px rgba(37, 99, 235, 0.08),
+    0 10px 20px -10px var(--el-glow);
+}
+.elev-pill:focus,
+.elev-pill:focus-visible {
+  border-color: rgba(37, 99, 235, 0.65);
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 0 0 4px rgba(37, 99, 235, 0.16),
+    0 12px 26px -10px var(--el-glow);
+}
+.elev-pill--ok {
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #F0FDF7 100%);
+  border-color: rgba(16, 185, 129, 0.32);
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 8px 16px -10px rgba(16, 185, 129, 0.45);
+}
+.elev-pill--ok:hover {
+  border-color: rgba(16, 185, 129, 0.55);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 0 0 4px rgba(16, 185, 129, 0.1), 0 10px 20px -10px rgba(16, 185, 129, 0.55);
+}
+.dark .elev-pill {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 14px -8px rgba(0, 0, 0, 0.7);
+}
+.dark .elev-pill:hover {
+  border-color: rgba(96, 165, 250, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 4px rgba(96, 165, 250, 0.12), 0 10px 22px -10px rgba(59, 130, 246, 0.6);
+}
+.dark .elev-pill:focus,
+.dark .elev-pill:focus-visible {
+  border-color: rgba(96, 165, 250, 0.8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 4px rgba(96, 165, 250, 0.22), 0 12px 26px -10px rgba(59, 130, 246, 0.7);
+}
+.dark .elev-pill--ok {
+  background-image: none;
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+@media print {
+  .elev-chrome, .elev-card, .elev-footer, .elev-pill { box-shadow: none !important; background-image: none !important; }
+}
+
 @keyframes premium-rise {
   from { opacity: 0; transform: translateY(8px) scale(0.99); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
