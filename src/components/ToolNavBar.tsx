@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { ChevronDown, LayoutGrid } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { Link } from './SlashLink';
 import { ToolsMenu } from './ToolsMenu';
 import { PRIMARY_NAV_ITEM, TOOL_GROUPS, TOOLS_MENU_ITEMS } from '../data/navItems';
@@ -19,17 +19,17 @@ export const ICON_STROKE = 2;
 
 /** Focus ring shared by the header controls. */
 export const headerFocusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#0B0F17]';
 
 const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];
 
-/** 44px-tall text link; state is carried by colour AND a 2px underline so it never relies on colour alone. */
+/** 44px-tall text link: small tracked capitals; state is carried by colour AND a hairline underline so it never relies on colour alone. */
 const linkBase =
-  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 text-sm font-semibold no-underline touch-manipulation transition-colors duration-150 [-webkit-tap-highlight-color:transparent]';
+  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-3.5 text-[12.5px] font-medium uppercase tracking-[0.12em] no-underline touch-manipulation transition-colors duration-150 lg:px-5 [-webkit-tap-highlight-color:transparent]';
 const linkIdle =
-  'text-slate-700 hover:bg-slate-200/70 hover:text-slate-950 dark:text-slate-200 dark:hover:bg-slate-700/60 dark:hover:text-white';
+  'text-slate-600 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white';
 const linkActive =
-  'text-blue-800 dark:text-blue-300 after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:rounded-full after:bg-blue-600 dark:after:bg-blue-400';
+  'text-slate-950 dark:text-white after:absolute after:inset-x-4 after:bottom-1.5 after:h-0.5 after:rounded-full after:bg-blue-600 dark:after:bg-blue-400 lg:after:inset-x-5';
 
 /**
  * Desktop primary navigation (md and up): ONE visible link (Quick Grade) plus ONE "Tools" dropdown that holds
@@ -52,7 +52,7 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
 
   return (
     <>
-      <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+      <nav className="hidden items-center gap-1 md:flex lg:gap-3" aria-label="Main">
         <Link
           to={PRIMARY_NAV_ITEM.path}
           onClick={() => {
@@ -78,10 +78,9 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
           onMouseEnter={() => TOOLS_MENU_ITEMS.slice(0, 3).forEach((t) => void preloadForPath(t.path))}
           className={`${linkBase} ${headerFocusRing} ${activeTool || open ? linkActive : linkIdle}`}
         >
-          <LayoutGrid className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
           <span>{activeTool ? activeTool.label : 'Tools'}</span>
           <ChevronDown
-            className={`size-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+            className={`size-3.5 shrink-0 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
             strokeWidth={ICON_STROKE}
             aria-hidden="true"
           />

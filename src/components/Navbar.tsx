@@ -74,13 +74,13 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 /* Shared class strings                                                        */
 /* -------------------------------------------------------------------------- */
 
-/** The header is a light grey-blue surface (deep slate in dark mode), so the focus ring offset follows the theme. */
+/** The header is a stark white surface (near-black in dark mode), so the focus ring offset follows the theme. */
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#0B0F17]';
 
-/** Shared look for the round glass controls (search icon on phones, theme switch). */
+/** Shared look for the round header controls (search icon on phones, hamburger, theme switch): pure white pills. */
 const glassControl =
-  'border border-slate-500 bg-white text-slate-800 shadow-sm hover:bg-slate-100 hover:text-slate-950 dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100 dark:shadow-none dark:hover:bg-slate-700 dark:hover:text-white';
+  'border border-slate-200 bg-white text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:border-slate-300 hover:bg-slate-50 hover:text-slate-950 dark:border-white/10 dark:bg-white/5 dark:text-slate-200 dark:shadow-none dark:hover:bg-white/10 dark:hover:text-white';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -123,56 +123,60 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <MotionConfig reducedMotion="user">
-      {/* Transparent: the gradient + contour artwork is painted once by <SiteHeader /> behind the header row. */}
       <header className="relative print:hidden">
-        {/* ------------------------------ Top bar ------------------------------ */}
-        <div className="mx-auto flex h-14 max-w-[1240px] items-center justify-between px-3.5 sm:h-[68px] sm:px-6">
-          <div className="flex items-center gap-1 sm:gap-3">
-          {/* Hamburger: phones only. Opens the grouped tools drawer. */}
-          <button
-            type="button"
-            onClick={() => setDrawerOpen(true)}
-            aria-label="Open menu"
-            aria-haspopup="dialog"
-            aria-expanded={drawerOpen}
-            className={`-ml-1 inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full ${glassControl} md:hidden ${focusRing}`}
-          >
-            <Menu className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
-          </button>
-          <Link
-            className={`brand rounded-xl ${focusRing}`}
-            to="/"
-            onClick={() => {
-              onSelectTool('quick');
-            }}
-            onMouseEnter={() => preloadTool('quick')}
-            onPointerDown={() => preloadTool('quick')}
-            onTouchStart={() => preloadTool('quick')}
-            aria-label="Easy Grade Tool Home"
-          >
-            <Logo />
-          </Link>
-          {/* Desktop: Quick Grade link + grouped Tools dropdown */}
-          <div className="ml-2 hidden md:block">
-            <ToolNavBar onSelectTool={onSelectTool} />
-          </div>
+        {/* Phones: logo left, actions right.  md+: 3-column grid so the links are perfectly centred. */}
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-2 px-3.5 sm:px-6 md:grid md:h-[76px] md:grid-cols-[1fr_auto_1fr] lg:px-10">
+          {/* ------------------------------ Left: logo ------------------------------ */}
+          <div className="flex min-w-0 items-center gap-1 sm:gap-3 md:justify-self-start">
+            {/* Hamburger: phones only. Opens the grouped tools drawer. */}
+            <button
+              type="button"
+              onClick={() => setDrawerOpen(true)}
+              aria-label="Open menu"
+              aria-haspopup="dialog"
+              aria-expanded={drawerOpen}
+              className={`-ml-1 inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full ${glassControl} md:hidden ${focusRing}`}
+            >
+              <Menu className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
+            </button>
+            <Link
+              className={`brand rounded-xl ${focusRing}`}
+              to="/"
+              onClick={() => {
+                onSelectTool('quick');
+              }}
+              onMouseEnter={() => preloadTool('quick')}
+              onPointerDown={() => preloadTool('quick')}
+              onTouchStart={() => preloadTool('quick')}
+              aria-label="Easy Grade Tool Home"
+            >
+              <Logo />
+            </Link>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Search: compact icon button on phones, expanding field from md up */}
+          {/* ------------------------------ Centre: main links ------------------------------ */}
+          <div className="hidden md:flex md:justify-center">
+            <ToolNavBar onSelectTool={onSelectTool} />
+          </div>
+
+          {/* ------------------------------ Right: actions ------------------------------ */}
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5 md:justify-self-end">
+            {/* Search: icon button on phones and tablets, pure-white pill field from xl up */}
             <button
               type="button"
               onClick={onOpenCommandPalette}
               onTouchStart={() => preloadTool('command-palette')}
+              onMouseEnter={() => preloadTool('command-palette')}
               aria-label={`Open calculator search (${shortcutLabel})`}
-              className={`inline-flex size-11 items-center justify-center rounded-full ${glassControl} md:hidden ${focusRing}`}
+              title={`Search calculators (${shortcutLabel})`}
+              className={`inline-flex size-11 items-center justify-center rounded-full ${glassControl} xl:hidden ${focusRing}`}
             >
               <Search className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
 
-            <div className="group relative hidden w-44 transition-[width] duration-300 ease-out md:block lg:w-64 xl:w-72 md:focus-within:w-56 lg:focus-within:w-80">
+            <div className="group relative hidden w-56 transition-[width] duration-300 ease-out xl:block 2xl:w-64 xl:focus-within:w-64 2xl:focus-within:w-72">
               <Search
-                className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-slate-500 transition-colors duration-300 group-focus-within:text-blue-600 dark:text-[#94A3B8] dark:group-focus-within:text-blue-300"
+                className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors duration-300 group-focus-within:text-blue-600 dark:text-slate-400 dark:group-focus-within:text-blue-300"
                 strokeWidth={ICON_STROKE}
                 aria-hidden="true"
               />
@@ -200,29 +204,30 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="h-11 w-full cursor-pointer rounded-full border border-slate-500 bg-white py-2 pl-10 pr-16 text-sm font-medium text-slate-800 shadow-sm backdrop-blur-md outline-none transition-all duration-300 placeholder:text-slate-600 hover:border-slate-700 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/40 dark:border-slate-500 dark:bg-slate-800 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] dark:placeholder:text-slate-300 dark:hover:border-slate-300 dark:focus:border-blue-400 dark:focus:ring-blue-400/50"
+                className="h-11 w-full cursor-pointer rounded-full border border-slate-200 bg-white py-2 pl-11 pr-20 text-[13px] font-medium tracking-tight text-slate-800 shadow-[0_1px_2px_rgba(15,23,42,0.04)] outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/25 dark:border-white/10 dark:bg-[#151B26] dark:text-slate-100 dark:shadow-none dark:placeholder:text-slate-400 dark:hover:border-white/20 dark:focus:border-blue-400 dark:focus:ring-blue-400/40"
               />
-              <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-slate-300/70 bg-white/70 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-[#94A3B8] lg:inline-flex">
+              <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-md border border-slate-200 bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
                 {shortcutLabel}
               </kbd>
             </div>
 
-            {/* 100% Private badge */}
-            <div className="hidden items-center gap-1.5 rounded-full border border-blue-200/80 bg-blue-50/80 px-3 py-1.5 text-xs font-semibold text-blue-700 backdrop-blur-md dark:border-white/10 dark:bg-[#2563EB]/20 dark:text-blue-200 lg:inline-flex">
-              <PrivacyShieldIcon className="size-3.5 shrink-0" />
-              <span>100% Private</span>
+            {/* 100% Private: quiet shield chip from lg, with the words from 2xl */}
+            <div
+              className="hidden items-center gap-1.5 rounded-full border border-emerald-200/80 bg-emerald-50/70 px-2.5 py-1.5 text-xs font-semibold text-emerald-800 dark:border-emerald-400/20 dark:bg-emerald-400/10 dark:text-emerald-300 lg:inline-flex"
+              title="100% Private: everything runs in your browser"
+            >
+              <PrivacyShieldIcon className="size-4 shrink-0" />
+              <span className="hidden 2xl:inline">100% Private</span>
+              <span className="sr-only 2xl:hidden">100% Private</span>
             </div>
 
-            {/* In-app PWA install trigger */}
-            <PWAInstallButton />
-
-            {/* Theme switcher: System -> Light -> Dark */}
+            {/* Theme switcher: System -> Light -> Dark (icon-only to keep the header clean) */}
             <button
               type="button"
               onClick={cycleTheme}
               aria-label={`Current theme: ${theme}. Click to switch theme.`}
               title={`Theme: ${themeLabel} (Click to cycle)`}
-              className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-full px-3 text-xs font-semibold ${glassControl} ${focusRing}`}
+              className={`inline-flex size-11 items-center justify-center rounded-full ${glassControl} ${focusRing}`}
             >
               <span className="relative inline-flex size-4 items-center justify-center">
                 <AnimatePresence mode="wait" initial={false}>
@@ -244,8 +249,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </motion.span>
                 </AnimatePresence>
               </span>
-              <span className="hidden capitalize lg:inline">{theme}</span>
             </button>
+
+            {/* In-app PWA install trigger: dark pill */}
+            <PWAInstallButton />
           </div>
         </div>
       </header>
