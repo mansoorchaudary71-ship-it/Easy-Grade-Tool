@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Printer, Settings, Check, Search, RotateCcw, SlidersHorizontal, BookOpen } from 'lucide-react';
 import { SegmentedControl } from './ui/SegmentedControl';
+import { ToolHeading } from './ToolHeading';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 
@@ -150,18 +151,12 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
   return (
     <div className="w-full max-w-5xl mx-auto space-y-8 font-sans">
-      {/* 1. Header & Title */}
-      <div className="text-center space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 text-xs font-semibold uppercase tracking-wider">
-          <span>Quick Grade Chart</span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-          Easy Grade Calculator &amp; EZ Grader
-        </h1>
-        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
-          Calculate instant test scores, percentage grades, and printable quick grading charts for any number of test questions.
-        </p>
-      </div>
+      {/* 1. Header & Title: shared premium hero, identical on every tool */}
+      <ToolHeading
+        badge="Quick Grade Chart"
+        title="Easy Grade Calculator & EZ Grader"
+        description="Calculate instant test scores, percentage grades, and printable quick grading charts for any number of test questions."
+      />
 
       {/* 2. Top Controls & Configuration Card */}
       <section

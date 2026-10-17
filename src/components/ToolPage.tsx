@@ -64,7 +64,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         breadcrumbLabel={entry.navLabel}
       />
 
-      <ToolHeading title={entry.h1} description={entry.intro} />
+      <ToolHeading badge={entry.navLabel} title={entry.h1} description={entry.intro} />
 
       {(entry.questions || Tool) && (
         <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>

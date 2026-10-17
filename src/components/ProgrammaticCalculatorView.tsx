@@ -201,7 +201,7 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
 
       <div className="programmatic-calc-wrapper w-full max-w-5xl mx-auto space-y-8">
         {/* Hero banner: same slate banner as every other tool page */}
-        <ToolHeading title={entry.h1} description={entry.intentContext} />
+        <ToolHeading badge="Final Grade Calculator" title={entry.h1} description={entry.intentContext} />
 
         {/* Interactive Workspace */}
         <section aria-label="Interactive Workspace" className="w-full">
