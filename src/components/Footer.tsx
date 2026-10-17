@@ -100,6 +100,9 @@ const FOOTER_VISIBLE_LINKS = 4;
 const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string }[] = [
   { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/' },
   { label: 'Grading Scales', title: 'Grading scale charts by number of questions', path: '/grading-scale/' },
+  { label: 'Weighted GPA', title: 'Weighted GPA calculator', path: '/weighted-gpa-calculator/' },
+  { label: 'Weighted vs Unweighted GPA', title: 'Weighted vs unweighted GPA explained', path: '/weighted-vs-unweighted-gpa/' },
+  { label: 'Questions I Can Miss', title: 'How many questions can I miss and still pass?', path: '/how-many-questions-can-i-miss/' },
 ];
 
 export const Footer: React.FC<FooterProps> = ({
@@ -723,7 +726,7 @@ export const Footer: React.FC<FooterProps> = ({
                     toolKey: t.toolKey as ToolKey | null,
                   })),
                   ...(group === 'academic' ? FOOTER_EXTRA_ACADEMIC_LINKS.map((t) => ({ ...t, toolKey: null as ToolKey | null })) : []),
-                ];
+                ].filter((t, i, all) => all.findIndex((o) => o.path === t.path) === i); // never list the same page twice
                 const userChoice = openGroups[group];
                 const hasMore = items.length > FOOTER_VISIBLE_LINKS;
                 // Keep the expanded group open when the visitor is on one of its hidden pages.
