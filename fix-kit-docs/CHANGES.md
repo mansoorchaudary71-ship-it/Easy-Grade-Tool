@@ -1,5 +1,9 @@
 # CHANGES: Easy Grade Tool SEO fix kit
 
+## v2 hotfix: CI failed CHK-08 (content uniqueness) on `/how-many-questions-can-i-miss/`
+Your GitHub Actions build failed at the post-build check `CHK-08`, which needs every content page to have at least 60% of its 3-word phrases appear on no other page. In my v1 build the three new pages passed, but only barely (miss 62.4%, weighted GPA 64.5%, guide 62.5%), and your merged tree scored the miss page under 60%. The check only shows the first error, so the other two new pages may have been just under as well.
+**Only `src/data/gpaPages.ts` changed.** It now has more genuinely new, computed content on each page (a by-test-size table, a by-grade-and-level table, a full-schedule table, extra sections and FAQs), related-link blurbs and example wording that no longer repeat other pages, and different example course names on the guide so the two weighted pages do not copy each other. Measured with the same rules as the check: miss 75.0%, weighted GPA 76.3%, guide 76.4%, with all 17 launch checks passing.
+
 Every file in this kit mirrors your repo path. **OVERWRITES** = replaces an existing file (your copy is replaced, so merge with `git diff` before committing). **NEW** = does not exist in your repo today.
 Issue labels: `P1` = On-Page audit, `P2` = Technical audit, `P3` = Search Intent audit, `P4` = Content/Authority audit, `P5` = Off-Page audit, `P6` = UI/UX audit. `#n` is the issue number in that report.
 
@@ -9,7 +13,7 @@ Verification done on a clean copy of your zip with this kit applied: `npx tsc --
 
 | File | Purpose | Fixes |
 |---|---|---|
-| `src/data/gpaPages.ts` NEW | Page data for the 3 new pages. Every number in the copy is computed from the same helpers the tools use. | P1 #3, P3 (weighted GPA cluster), P4 pillar/supporting pages |
+| `src/data/gpaPages.ts` NEW | Page data for the 3 new pages (v2: expanded for CHK-08). Every number in the copy is computed from the same helpers the tools use. | P1 #3, P3 (weighted GPA cluster), P4 pillar/supporting pages |
 | `src/components/tools/WeightedGpaTool.tsx` NEW | Weighted GPA calculator: courses, grade, level, credits, your own honors/AP bonus. Labels, `aria-invalid`, `role="alert"`, numeric keyboard. | P1 #3, P3 |
 | `src/components/tools/MissCalculatorTool.tsx` NEW | "How many questions can I miss?" for any test size 1 to 1000, A–F or plus/minus, custom target. | P3 (one tool instead of thin per-N pages) |
 | `src/utils/gpaMath.ts` NEW | `calculateWeightedGpa` (credit-weighted, F gets no bonus). | P1 #3 |
