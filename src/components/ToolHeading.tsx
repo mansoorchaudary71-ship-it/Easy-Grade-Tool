@@ -44,7 +44,7 @@ const HeroTexture: React.FC = () => (
 
     {/* Soft waves, anchored bottom-right so they never sit under the heading */}
     <svg
-      className="hero-lines-wave absolute -bottom-10 -right-16 h-[260px] w-[620px] max-w-none sm:-right-10 sm:h-[300px] sm:w-[760px]"
+      className="hero-lines-wave absolute -bottom-12 -right-16 h-[200px] w-[560px] max-w-none sm:-right-10 sm:h-[230px] sm:w-[700px]"
       viewBox="0 0 760 300"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -80,12 +80,12 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
   const HeadingTag = headingTag;
 
   return (
-    <div className="chrome-bar hero-card relative isolate mb-8 flex flex-col gap-6 overflow-hidden rounded-[32px] p-7 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:rounded-[40px] sm:p-12 lg:p-14">
+    <div className="chrome-bar hero-card relative isolate mb-6 flex flex-col gap-4 overflow-hidden rounded-[28px] px-6 py-5 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:rounded-[36px] sm:px-9 sm:py-7 lg:px-11 lg:py-8">
       <HeroTexture />
 
       <div className="relative z-10 min-w-0">
         {pillText && (
-          <span className="hero-badge mb-4 inline-flex max-w-full items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] sm:mb-5 sm:text-xs">
+          <span className="hero-badge mb-2.5 inline-flex max-w-full items-center gap-2 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] sm:mb-3 sm:text-xs">
             <span className="hero-badge-dot h-1.5 w-1.5 shrink-0 rounded-full" aria-hidden="true" />
             <span className="truncate">{pillText}</span>
           </span>
@@ -94,7 +94,7 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
         <HeadingTag className="hero-title m-0 [text-wrap:balance]">{title}</HeadingTag>
 
         {descText && (
-          <p className="hero-sub mt-3 max-w-2xl font-medium sm:mt-4">{descText}</p>
+          <p className="hero-sub mt-2 max-w-2xl font-medium sm:mt-2.5">{descText}</p>
         )}
       </div>
 

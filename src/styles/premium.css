@@ -216,31 +216,30 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
 }
 /* ==========================================================================
    Tool hero (<ToolHeading />): mobile-first, One UI-inspired "soft UI" card.
-   Mint-to-white surface, 40px corners, highly diffused shadow, vibrant blue pill badge, rich slate heading,
+   Soft brown-to-cream surface, 36px corners, highly diffused shadow, vibrant blue pill badge, rich slate heading,
    muted gray subheading and a faint SVG grid + wave texture (.hero-lines). Unlayered, so it wins over index.css h1 colours.
    ========================================================================== */
 .hero-card {
-  --hero-blue: #2563EB;
-  background-color: #F2FBF6;
-  background-image: linear-gradient(135deg, #F2FBF6 0%, #F8FDFA 55%, #FFFFFF 100%);
-  border: 1px solid rgba(15, 23, 42, 0.05);
+  background-color: #F6EDE3;
+  background-image: linear-gradient(135deg, #F3E8DC 0%, #F8F1E9 55%, #FDFAF6 100%);
+  border: 1px solid rgba(122, 83, 52, 0.12);
   box-shadow:
-    0 2px 6px rgba(15, 23, 42, 0.03),
-    0 18px 40px -12px rgba(15, 23, 42, 0.08),
-    0 48px 90px -28px rgba(15, 23, 42, 0.14);
+    0 2px 6px rgba(74, 47, 27, 0.04),
+    0 16px 36px -12px rgba(74, 47, 27, 0.10),
+    0 40px 80px -28px rgba(74, 47, 27, 0.16);
 }
 .dark .hero-card {
-  background-color: #0F1A19;
-  background-image: linear-gradient(135deg, #10201E 0%, #0F1A19 55%, #0F172A 100%);
-  border-color: rgba(255, 255, 255, 0.08);
+  background-color: #1C1611;
+  background-image: linear-gradient(135deg, #251C15 0%, #1C1611 55%, #14100C 100%);
+  border-color: rgba(214, 180, 145, 0.14);
   box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.6);
 }
 
 .hero-title {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(1.75rem, 1.25rem + 2.1vw, 3rem);
+  font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.375rem);
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1.12;
   letter-spacing: -0.035em;
   color: #0F172A;
 }
@@ -248,17 +247,17 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
 
 .hero-sub {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(0.9375rem, 0.88rem + 0.3vw, 1.125rem);
-  line-height: 1.65;
-  color: #5B6676;
+  font-size: clamp(0.875rem, 0.84rem + 0.25vw, 1rem);
+  line-height: 1.6;
+  color: #5F5A55;
 }
-.dark .hero-sub { color: #AAB4C3; }
+.dark .hero-sub { color: #BDB3A9; }
 
 .hero-badge {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #1D4ED8;
   background-color: rgba(37, 99, 235, 0.1);
-  border: 1px solid rgba(37, 99, 235, 0.22);
+  border: 1px solid rgba(37, 99, 235, 0.24);
 }
 .hero-badge-dot { background-color: #2563EB; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18); }
 .dark .hero-badge {
@@ -268,13 +267,13 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
 }
 .dark .hero-badge-dot { background-color: #60A5FA; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2); }
 
-/* Texture: stroke colours only, kept very low-opacity so it never competes with the text */
-.hero-lines { color: #0F766E; }
+/* Texture: brown stroke lines, kept very low-opacity */
+.hero-lines { color: #8A5A38; }
 .hero-lines .hero-lines-grid { opacity: 0.1; }
-.hero-lines .hero-lines-wave { opacity: 0.14; color: #2563EB; }
-.dark .hero-lines { color: #5EEAD4; }
+.hero-lines .hero-lines-wave { opacity: 0.16; color: #8A5A38; }
+.dark .hero-lines { color: #D6B491; }
 .dark .hero-lines .hero-lines-grid { opacity: 0.07; }
-.dark .hero-lines .hero-lines-wave { opacity: 0.16; color: #60A5FA; }
+.dark .hero-lines .hero-lines-wave { opacity: 0.14; color: #D6B491; }
 
 @media print {
   .hero-card { box-shadow: none !important; background-image: none !important; background-color: #fff !important; }
