@@ -55,7 +55,7 @@ export interface SEOProps {
    * Type of software schema ('WebApplication' or 'SoftwareApplication').
    * Defaults to 'WebApplication'.
    */
-  schemaType?: 'WebApplication' | 'SoftwareApplication';
+  schemaType?: 'WebApplication' | 'SoftwareApplication' | 'AboutPage' | 'WebPage';
 
   /**
    * Specific features provided by this utility/educational tool.
@@ -136,6 +136,8 @@ export const SEO: React.FC<SEOProps> = ({
   const featureKey = featureList ? featureList.join('\u0001') : '';
   const schemaKey = schemaData ? JSON.stringify(schemaData) : '';
 
+  const isAppSchema = schemaType === 'WebApplication' || schemaType === 'SoftwareApplication';
+
   const { webAppJson, breadcrumbJson, orgJson } = useMemo(() => {
     const structuredData =
       schemaData ||
@@ -145,10 +147,14 @@ export const SEO: React.FC<SEOProps> = ({
         '@id': `${resolvedCanonical}#webapp`,
         name: productName,
         url: resolvedCanonical,
-        applicationCategory: normalizedCategory,
-        operatingSystem: 'All',
-        browserRequirements: 'Requires JavaScript. Requires HTML5.',
-        softwareVersion: '1.0.0',
+        ...(isAppSchema
+          ? {
+              applicationCategory: normalizedCategory,
+              operatingSystem: 'All',
+              browserRequirements: 'Requires JavaScript. Requires HTML5.',
+              softwareVersion: '1.0.0',
+            }
+          : {}),
         inLanguage: 'en-US',
         isAccessibleForFree: true,
         description,
@@ -166,8 +172,8 @@ export const SEO: React.FC<SEOProps> = ({
           url: `${BASE_CANONICAL_ORIGIN}/`,
           logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/icon.svg` },
         },
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-        ...(featureList && featureList.length > 0 ? { featureList } : {}),
+        ...(isAppSchema ? { offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } } : {}),
+        ...(isAppSchema && featureList && featureList.length > 0 ? { featureList } : {}),
       };
 
     const isRoot =

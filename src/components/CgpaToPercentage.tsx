@@ -527,7 +527,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
         <ToolHeading
           badge="30+ University Formulas • 10.0 / 5.0 / 4.0 Scales"
           title="CGPA to Percentage Calculator"
-          description="Convert CGPA to percentage online on 10.0, 5.0 or 4.0 scales using university formulas (VTU, Mumbai University, MAKAUT, KTU, GTU, SPPU, Anna University, BHU) or the standard UGC/CBSE × 9.5 rule. Also converts SGPA to CGPA, percentage to CGPA and CGPA to GPA."
+          description="Convert your 10.0, 5.0, or 4.0 scale CGPA into an exact percentage using verified university ordinances (VTU, Mumbai University, MAKAUT, GTU, SPPU, Anna University, BHU) or standard UGC/CBSE multipliers."
         />
       )}
 
@@ -542,7 +542,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
         >
           {/* Uniformed Card Header */}
           <div className="pb-5 border-b border-slate-200/60 dark:border-slate-800">
-            <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase block mb-1">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
               Academic Converter
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">
@@ -751,7 +751,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                           <>
                             {popularFiltered.length > 0 && (
                               <div role="group" aria-label="Popular Universities">
-                                <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 bg-slate-50/90 dark:bg-slate-800/50">
+                                <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-50/90 dark:bg-slate-800/50">
                                   Popular Universities &amp; Standard
                                 </div>
                                 {popularFiltered.map((uni) => {
@@ -801,7 +801,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
 
                             {otherFiltered.length > 0 && (
                               <div role="group" aria-label="Other Universities">
-                                <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 bg-slate-50/90 dark:bg-slate-800/50">
+                                <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-50/90 dark:bg-slate-800/50">
                                   Other Universities (A–Z)
                                 </div>
                                 {otherFiltered.map((uni) => {
@@ -918,7 +918,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
 
               {/* Quick CGPA Preset Chips (Uniformed UI Chips) */}
               <div className="flex items-center gap-1.5 pt-1 flex-wrap">
-                <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mr-1">
+                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mr-1">
                   Presets:
                 </span>
                 {SCALE_PRESETS[scale].map((presetVal) => {
@@ -1082,7 +1082,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             {/* Step-by-Step Formula Box */}
             <div className="space-y-3 mb-6">
               <div className="p-4 rounded-[20px] bg-[#F8F9FA] dark:bg-slate-800/60 border border-black/5 dark:border-slate-800 shadow-sm">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-1">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
                   Formula &amp; Step-by-Step Calculation
                 </div>
                 <div className="font-mono text-xs sm:text-sm font-semibold text-teal-700 dark:text-teal-300">
@@ -1095,7 +1095,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-4 rounded-[20px] bg-[#FFE8C2] dark:bg-amber-950/55 border border-black/5 dark:border-amber-800/50 shadow-sm">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                     Class / Division
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5">
@@ -1103,7 +1103,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                   </div>
                 </div>
                 <div className="p-4 rounded-[20px] bg-[#D6E1FF] dark:bg-indigo-950/55 border border-black/5 dark:border-indigo-800/50 shadow-sm">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                     Letter Equivalent
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5 font-mono">
@@ -1165,7 +1165,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-6 border-b border-slate-200/60 dark:border-slate-800">
           <div>
-            <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase block mb-1">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
               Multi-Semester &amp; Reverse Tools
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">

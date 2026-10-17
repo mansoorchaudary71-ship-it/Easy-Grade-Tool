@@ -1,142 +1,154 @@
 {
   "/": {
-    "hash": "4dbf923008b54879",
-    "lastmod": "2026-10-14"
+    "hash": "a37a8b8ecc70bc05",
+    "lastmod": "2026-10-16"
   },
   "/grade-calculator/": {
-    "hash": "4be912d64ee1d88e",
-    "lastmod": "2026-10-14"
+    "hash": "1d70f20a78345554",
+    "lastmod": "2026-10-16"
   },
   "/gpa-calculator/": {
-    "hash": "d432a49d08117476",
-    "lastmod": "2026-10-14"
+    "hash": "9b0e280940f77c00",
+    "lastmod": "2026-10-16"
   },
   "/cgpa-to-percentage-calculator/": {
-    "hash": "0c660011270ea042",
-    "lastmod": "2026-10-14"
+    "hash": "dd5404e740b803a3",
+    "lastmod": "2026-10-16"
   },
   "/tip-calculator/": {
-    "hash": "b92abe414f6b4909",
-    "lastmod": "2026-10-14"
+    "hash": "556198115b96e0c1",
+    "lastmod": "2026-10-16"
   },
   "/percentage-calculator/": {
-    "hash": "af6bd9d205f5647d",
-    "lastmod": "2026-10-14"
+    "hash": "7011600e4259db8b",
+    "lastmod": "2026-10-16"
   },
   "/loan-calculator/": {
-    "hash": "cfd3b6fb72998c5c",
-    "lastmod": "2026-10-14"
+    "hash": "371b34a3ea0ae553",
+    "lastmod": "2026-10-16"
   },
   "/mortgage-calculator/": {
-    "hash": "1ca7677fd618c716",
-    "lastmod": "2026-10-14"
+    "hash": "5a29daa62d13c2f0",
+    "lastmod": "2026-10-16"
   },
   "/password-generator/": {
-    "hash": "051b01cfa4fef21d",
-    "lastmod": "2026-10-14"
+    "hash": "4520ff75cc969821",
+    "lastmod": "2026-10-16"
   },
   "/about/": {
-    "hash": "de2c4ecfa6a51294",
-    "lastmod": "2026-10-14"
+    "hash": "1f8754aa0a1dc9db",
+    "lastmod": "2026-10-16"
   },
   "/privacy/": {
-    "hash": "a615460a1e6817d2",
-    "lastmod": "2026-10-14"
+    "hash": "499e397b36503efd",
+    "lastmod": "2026-10-15"
   },
   "/terms/": {
-    "hash": "a543d04f9e5a4afa",
-    "lastmod": "2026-10-14"
+    "hash": "e5dcfe23fc0660cf",
+    "lastmod": "2026-10-15"
   },
   "/final-exam-grade-calculator/": {
-    "hash": "a15be18edad2be5c",
-    "lastmod": "2026-10-14"
+    "hash": "5a38754ea663fa2f",
+    "lastmod": "2026-10-16"
   },
   "/test-grade-calculator/": {
-    "hash": "1de0fb886c1e97c2",
-    "lastmod": "2026-10-14"
+    "hash": "f70064054d9c17ac",
+    "lastmod": "2026-10-16"
   },
   "/grade-curve-calculator/": {
-    "hash": "20a15d2cda7e3994",
-    "lastmod": "2026-10-14"
+    "hash": "2e17d5f899783e75",
+    "lastmod": "2026-10-16"
   },
   "/letter-grade-calculator/": {
-    "hash": "aa2aa16dd6a9cbc6",
-    "lastmod": "2026-10-14"
+    "hash": "70c14a9cb9231f4d",
+    "lastmod": "2026-10-16"
   },
   "/average-grade-calculator/": {
-    "hash": "99c5e8be5b6d7eca",
-    "lastmod": "2026-10-14"
+    "hash": "4c615cfd9e9e3464",
+    "lastmod": "2026-10-16"
+  },
+  "/weighted-gpa-calculator/": {
+    "hash": "6dce53ee00caea68",
+    "lastmod": "2026-10-16"
+  },
+  "/weighted-vs-unweighted-gpa/": {
+    "hash": "6aedb34744b62da5",
+    "lastmod": "2026-10-16"
+  },
+  "/how-many-questions-can-i-miss/": {
+    "hash": "6715805bbab54db4",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/": {
-    "hash": "49836e2d35b37886",
-    "lastmod": "2026-10-14"
+    "hash": "50f924b85bdf7db6",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/5-questions/": {
-    "hash": "52cfc08186335840",
-    "lastmod": "2026-10-14"
+    "hash": "568ade3190710f57",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/10-questions/": {
-    "hash": "911e10fc87261c37",
-    "lastmod": "2026-10-14"
+    "hash": "eec6cc68947a0187",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/12-questions/": {
-    "hash": "b8c36e2e7b671e76",
-    "lastmod": "2026-10-14"
+    "hash": "784305be8bf8aff4",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/15-questions/": {
-    "hash": "45bf687be4e19a97",
-    "lastmod": "2026-10-14"
+    "hash": "dfc4ce9443152ca9",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/16-questions/": {
-    "hash": "d6f2ca35dac7246b",
-    "lastmod": "2026-10-14"
+    "hash": "7a450b3a885d8b89",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/18-questions/": {
-    "hash": "7ada3fd4aef95baa",
-    "lastmod": "2026-10-14"
+    "hash": "4d3efd7495184ae1",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/20-questions/": {
-    "hash": "f9590100ab9ae132",
-    "lastmod": "2026-10-14"
+    "hash": "5549ef3c32ecf348",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/25-questions/": {
-    "hash": "e4ee558cee690b06",
-    "lastmod": "2026-10-14"
+    "hash": "63a5e2fe229b25bb",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/30-questions/": {
-    "hash": "89f7ee64a9c7abbf",
-    "lastmod": "2026-10-14"
+    "hash": "fceeca061ae0cecf",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/35-questions/": {
-    "hash": "8921ac80e3cafe3d",
-    "lastmod": "2026-10-14"
+    "hash": "07986f51265fece5",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/40-questions/": {
-    "hash": "8a97cff335be221a",
-    "lastmod": "2026-10-14"
+    "hash": "89cdaa444d680293",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/45-questions/": {
-    "hash": "611177f64a82d487",
-    "lastmod": "2026-10-14"
+    "hash": "9d958e5029ddb8ce",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/50-questions/": {
-    "hash": "b85c77cfaf80e7d6",
-    "lastmod": "2026-10-14"
+    "hash": "dbb6cd29aa350dc7",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/60-questions/": {
-    "hash": "716466cb8d9946c0",
-    "lastmod": "2026-10-14"
+    "hash": "1095aede2e46291b",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/75-questions/": {
-    "hash": "8c634d36e75396fb",
-    "lastmod": "2026-10-14"
+    "hash": "249994e6589679d4",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/80-questions/": {
-    "hash": "45014c333501fe4e",
-    "lastmod": "2026-10-14"
+    "hash": "a606a4380e2fb4b0",
+    "lastmod": "2026-10-16"
   },
   "/grading-scale/100-questions/": {
-    "hash": "fe19a1e18765f536",
-    "lastmod": "2026-10-14"
+    "hash": "90068e6c6e9fbf3b",
+    "lastmod": "2026-10-16"
   }
 }

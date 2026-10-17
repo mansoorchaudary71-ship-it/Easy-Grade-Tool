@@ -226,6 +226,9 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/grade-curve-calculator" element={<CompToolPage slug="grade-curve-calculator" />} />
               <Route path="/letter-grade-calculator" element={<CompToolPage slug="letter-grade-calculator" />} />
               <Route path="/average-grade-calculator" element={<CompToolPage slug="average-grade-calculator" />} />
+              <Route path="/weighted-gpa-calculator" element={<CompToolPage slug="weighted-gpa-calculator" />} />
+              <Route path="/weighted-vs-unweighted-gpa" element={<CompToolPage slug="weighted-vs-unweighted-gpa" />} />
+              <Route path="/how-many-questions-can-i-miss" element={<CompToolPage slug="how-many-questions-can-i-miss" />} />
               <Route path="/grading-scale" element={<CompToolPage slug="grading-scale" />} />
               <Route path="/grading-scale/:size" element={<GradingScaleRoute ToolPage={CompToolPage} />} />
 

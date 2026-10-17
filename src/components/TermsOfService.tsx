@@ -24,6 +24,7 @@ export const TermsOfService: React.FC = () => {
         keywords={seo.keywords}
         applicationCategory={seo.applicationCategory}
         featureList={seo.featureList}
+        schemaType={seo.schemaType}
       />
 
       <ToolHeading

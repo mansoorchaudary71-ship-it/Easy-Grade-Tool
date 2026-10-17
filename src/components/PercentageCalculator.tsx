@@ -72,8 +72,8 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
       />
       <ToolHeading
         badge="Percentage Calculator"
-        title="Percentage Calculator — % of a Number, Increase & Decrease"
-        description="Use our free online percentage calculator to find X% of a number, see what percent one number is of another, or work out percentage increase, decrease and change between two numbers."
+        title="Percentage Calculator — % of a Number & Percent Change"
+        description="Use our free Percentage Calculator to find X% of a number, calculate what percent one number is of another, or compute percentage increase and decrease."
       />
 
       <div className="relative max-w-4xl mx-auto font-sans">
@@ -84,7 +84,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
           className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 space-y-6"
         >
           <div className="pb-5 border-b border-slate-200/60 dark:border-slate-800">
-            <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase block mb-1">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
               Percentage Tools
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">Percentage Calculators</h2>
@@ -330,107 +330,6 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             <strong className="font-semibold text-slate-900 dark:text-white">Converting a percentage to a decimal is a simple yet vital step in many percentage calculations, particularly when working with percentages and decimals.</strong> The &quot;percent sign&quot; (%) literally means &quot;per hundred,&quot; so to convert a percentage to a decimal, you simply divide the percentage value by 100, effectively moving the decimal two digits to the left. For instance, 75% becomes 0.75. A percentage calculator often performs this conversion internally, but understanding this process is essential for manual calculations, especially when you need to multiply a number by a percentage or get a percentage. This also helps in understanding a fraction of 100 as a percentage of the total.
-          </p>
-
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
-            How Do You Calculate a Percentage? Common Questions and Worked Examples
-          </h2>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Most percentage questions come down to three formulas, which are the three calculators above. Find a part of a number with <code>Percentage ÷ 100 × Number</code>, find what percent one number is of another with <code>Part ÷ Whole × 100</code>, and measure a rise or fall with <code>(New − Old) ÷ Old × 100</code>. The sections below show how to use them for the questions people ask most.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            What Is a Percentage Calculator and How Do I Use It?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A percentage calculator does the division and multiplication for you. Choose the box that matches your question, type the two numbers, and the result updates instantly. For example, 20% of 150 is 30, 30 is 20% of 150, and going from 100 to 125 is a 25% increase.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Calculate Percentage Increase and Decrease?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Subtract the old value from the new value, divide by the old value, and multiply by 100. A price that goes from 40 to 50 is up <strong>25%</strong>, and a value that falls from 200 to 150 is down <strong>25%</strong>. The percentage change box shows a plus sign for an increase and a minus sign for a decrease. The same formula covers a percentage drop, reduction, growth, gain or loss. Percent change from zero is undefined, because there is no starting value to divide by.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Add or Subtract a Percentage From a Number?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Find the percentage in the first box, then add it to or subtract it from the original number. You can also multiply by a single factor: <code>Number × (1 + Percentage ÷ 100)</code> to add, or <code>Number × (1 − Percentage ÷ 100)</code> to subtract. Adding 15% to 120 gives 120 × 1.15 = 138, and taking 15% off 120 gives 120 × 0.85 = 102. The same method works for a pay rise, a sale price, a price with sales tax, or a salary increase. For instance, a 4% raise on 50,000 is 52,000, and 8% sales tax on 50 makes it 54.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Find the Percentage Difference Between Two Numbers?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Percentage difference treats both numbers equally, so it divides by their average instead of by a starting value: <code>|A − B| ÷ ((A + B) ÷ 2) × 100</code>. For 50 and 75, the difference is 25 and the average is 62.5, so the percentage difference is <strong>40%</strong>. Percentage change from 50 to 75 is <strong>+50%</strong> because it uses 50 as the base. Use difference when neither value comes first, and change when you have a before and after.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Calculate a Reverse Percentage (Find the Original Price)?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Divide the final value by the multiplier. After a 20% discount, a price of 60 came from 60 ÷ 0.80 = <strong>75</strong>. After a 20% increase, a value of 60 came from 60 ÷ 1.20 = <strong>50</strong>. Adding 20% back to the final price gives the wrong answer, because the percentage was applied to the original number, not the new one.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Calculate a Percentage for Marks, Test Scores and Grades?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Divide your score by the total marks and multiply by 100. A score of 45 out of 50 is 90%, and 425 out of 500 is 85%. Use the second box, with your score as X and the total as Y. When every test has the same total, the average percentage is the mean of the percentages. When totals differ, add all points earned and divide by all points possible: 80% on 50 points and 90% on 100 points is (40 + 90) ÷ 150 = 86.67%. For weighted course grades, use our <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, or turn a GPA or CGPA into a percentage with the <Link to="/cgpa-to-percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Calculate Weight Loss, Profit, Markup and Margin Percentages?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Weight loss percentage is the weight lost divided by your starting weight: going from 200 lb to 180 lb is 20 ÷ 200 = 10%. Enter 200 and 180 in the percentage change box and read the −10%. For business, markup is profit ÷ cost and margin is profit ÷ selling price. An item that costs 80 and sells for 100 has a 25% markup and a 20% margin.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Convert a Percentage to a Decimal or Fraction?
-          </h3>
-
-          <ul className="list-disc pl-6 mb-4 text-slate-600 dark:text-slate-300 space-y-1">
-            <li>Percentage to decimal: divide by 100, so 15% = 0.15 and 75% = 0.75.</li>
-            <li>Decimal to percentage: multiply by 100, so 0.375 = 37.5%.</li>
-            <li>Fraction to percentage: divide the top by the bottom, then multiply by 100, so 3/8 = 0.375 = 37.5%.</li>
-          </ul>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Calculate a Percentage Without a Calculator?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Start from 10% by moving the decimal one place left, and from 1% by moving it two places. Then build the rest: 15% of 80 is 10% (8) plus 5% (4), which is 12. For 50%, halve the number, and for 25%, halve it twice.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            What Are the Percentage Formulas in Excel and Google Sheets?
-          </h3>
-
-          <ul className="list-disc pl-6 mb-4 text-slate-600 dark:text-slate-300 space-y-1">
-            <li>What percent A1 is of B1: <code>=A1/B1</code>, formatted as Percentage.</li>
-            <li>Percentage change from A1 to B1: <code>=(B1-A1)/A1</code>.</li>
-            <li>Increase A1 by 10%: <code>=A1*(1+10%)</code>. Decrease it by 10%: <code>=A1*(1-10%)</code>.</li>
-            <li>Find 10% of A1: <code>=A1*10%</code>.</li>
-          </ul>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            What Is the Difference Between Percentage Points and Percent?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Percentage points are the plain gap between two percentages, while percent change compares them proportionally. A rate that rises from 10% to 12% went up 2 percentage points, but it increased by 20% in relative terms, because 2 ÷ 10 = 0.20.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">

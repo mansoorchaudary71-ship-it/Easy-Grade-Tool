@@ -17,7 +17,7 @@ import { SEO } from './SEO';
 import { ToolHeading } from './ToolHeading';
 import { AmbientAura } from './AmbientAura';
 import { SEO_STATIC_PAGES, CONTACT_EMAIL } from '../data/seoConfig';
-import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON, CORRECTIONS_EMAIL } from '../data/siteIdentity';
+import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON, CORRECTIONS_EMAIL, SITE_OWNER } from '../data/siteIdentity';
 
 export const AboutMethodology: React.FC = () => {
   const seo = SEO_STATIC_PAGES.about;
@@ -31,6 +31,7 @@ export const AboutMethodology: React.FC = () => {
         keywords={seo.keywords}
         applicationCategory={seo.applicationCategory}
         featureList={seo.featureList}
+        schemaType={seo.schemaType}
       />
 
       <ToolHeading
@@ -66,7 +67,8 @@ export const AboutMethodology: React.FC = () => {
               Who runs Easy Grade Tool, and how we keep it accurate
             </h2>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 m-0">
-              Easy Grade Tool is built and maintained by the <strong>Easy Grade Tool team</strong>.
+              Easy Grade Tool is built and maintained by{' '}
+              {SITE_OWNER ? <><strong>{SITE_OWNER.name}</strong> ({SITE_OWNER.jobTitle.toLowerCase()})</> : <>the <strong>Easy Grade Tool team</strong></>}.
               {ACADEMIC_REVIEWER ? ` Grading methodology is reviewed by ${ACADEMIC_REVIEWER.name}, ${ACADEMIC_REVIEWER.credential}.` : ''}{' '}
               The site has no ads, no accounts and no tracking; calculations run in your browser.
             </p>
@@ -89,7 +91,7 @@ export const AboutMethodology: React.FC = () => {
                 <GraduationCap className="w-5 h-5" aria-hidden="true" />
               </div>
               <div>
-                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Standard Academic Model
                 </span>
                 <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white m-0">
@@ -238,7 +240,7 @@ export const AboutMethodology: React.FC = () => {
                 <Layers className="w-5 h-5" aria-hidden="true" />
               </div>
               <div>
-                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Mathematical Breakdown
                 </span>
                 <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white m-0">
@@ -256,7 +258,7 @@ export const AboutMethodology: React.FC = () => {
               <div className="p-3 bg-slate-800/80 rounded-xl text-center font-bold text-white text-sm sm:text-base">
                 Final Grade (%) = &Sigma; [ (Earned / Max) &times; Weight ] / &Sigma; [ Total Weight ]
               </div>
-              <p className="text-xs text-slate-400 m-0 font-sans leading-relaxed">
+              <p className="text-xs text-slate-600 dark:text-slate-400 m-0 font-sans leading-relaxed">
                 If the weights already sum to 100%, the denominator is 100. If your syllabus weights only sum to 80% so far (because the final has not occurred yet), our engine normalizes the active weight so your current standing is always represented accurately without distortion.
               </p>
             </div>
@@ -281,7 +283,7 @@ export const AboutMethodology: React.FC = () => {
                 <Globe2 className="w-5 h-5" aria-hidden="true" />
               </div>
               <div>
-                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Global Academic Equivalencies
                 </span>
                 <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white m-0">
@@ -347,7 +349,7 @@ export const AboutMethodology: React.FC = () => {
                 <ShieldCheck className="w-5 h-5" aria-hidden="true" />
               </div>
               <div>
-                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Trust, Authority &amp; Contact
                 </span>
                 <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white m-0">

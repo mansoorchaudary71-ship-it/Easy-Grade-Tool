@@ -23,6 +23,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Average Grade', title: 'Average grade calculator', path: '/average-grade-calculator/', group: 'academic', toolKey: 'quick', icon: Sigma },
   { label: 'Letter Grade', title: 'Letter grade calculator', path: '/letter-grade-calculator/', group: 'academic', toolKey: 'quick', icon: Type },
   { label: 'GPA', title: 'GPA calculator', path: '/gpa-calculator/', group: 'academic', toolKey: 'gpa', icon: BookOpen },
+  { label: 'Weighted GPA', title: 'Weighted GPA calculator', path: '/weighted-gpa-calculator/', group: 'academic', toolKey: 'gpa', icon: BookOpen },
   { label: 'CGPA to %', title: 'CGPA to percentage calculator', path: '/cgpa-to-percentage-calculator/', group: 'academic', toolKey: 'cgpa', icon: Calculator },
   { label: 'Percentage', title: 'Percentage calculator', path: '/percentage-calculator/', group: 'academic', toolKey: 'percentage', icon: Percent },
   { label: 'Tip', title: 'Tip calculator', path: '/tip-calculator/', group: 'utility', toolKey: 'tip', icon: Lightbulb },
@@ -64,7 +65,7 @@ export const TOOL_GROUPS: NavGroup[] = [
   {
     id: 'gpa',
     heading: 'GPA and percentages',
-    items: byPath(['/gpa-calculator/', '/cgpa-to-percentage-calculator/', '/percentage-calculator/']),
+    items: byPath(['/gpa-calculator/', '/weighted-gpa-calculator/', '/cgpa-to-percentage-calculator/', '/percentage-calculator/']),
   },
   {
     id: 'everyday',

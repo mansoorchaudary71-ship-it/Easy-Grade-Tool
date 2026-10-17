@@ -186,7 +186,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             />
             {/* Quick Presets */}
             <div className="flex items-center gap-1.5 pt-1 flex-wrap">
-              <span className="text-[11px] font-semibold text-slate-400">Presets:</span>
+              <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400">Presets:</span>
               <SegmentedControl
                 ariaLabel="Question count presets"
                 variant="chips"

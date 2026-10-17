@@ -12,9 +12,6 @@ import { FAQ } from './FAQ';
 import { ContentSection } from './GuideShell';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 
-const TIP_REFERENCE_BILLS = [20, 40, 60, 84, 100, 150];
-const TIP_REFERENCE_PERCENTS = [15, 18, 20, 25];
-
 interface TipCalculatorProps {
   setToast?: (msg: string) => void;
 }
@@ -55,8 +52,8 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
       />
       <ToolHeading
         badge="Tip Calculator"
-        title="Tip Calculator — Calculate a Tip & Split the Bill Online"
-        description="Use our free online tip calculator to work out 15%, 18% or 20% tips for restaurants, delivery, salons and rideshares, then split the total between any number of people."
+        title="Tip Calculator — Calculate Gratuity & Split the Bill"
+        description="Use our free Tip Calculator to set your gratuity percentage, select quick restaurant presets, and instantly calculate per-person bill splits."
       />
 
       <div className="relative tool-layout font-sans">
@@ -68,7 +65,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
           className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col gap-6"
         >
           <div className="pb-5 border-b border-slate-200/60 dark:border-slate-800">
-            <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase block mb-1">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
               Dining &amp; Gratuity
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">Bill Details</h2>
@@ -383,137 +380,6 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
             <li><strong>The 20% Calculation:</strong> Shift the decimal point one place to the left and double the value (e.g., $7.00 × 2 = $14.00).</li>
             <li><strong>Half of 10 Percent:</strong> For a 5% baseline or incremental adjustment, simply take half of 10 percent of the bill.</li>
           </ul>
-
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
-            How Much Should I Tip? Tip Percentages for Every Service
-          </h2>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Most tipping questions come down to one number: what percentage of the bill to leave. The sections below answer the questions people ask most, from how to use a tip calculator on a phone to how much to tip for a haircut, a pizza delivery or a ride.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            What Is a Tip Calculator and How Do I Use It on My Phone?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A tip calculator turns a bill and a tip percentage into the tip amount, the total, and each person&apos;s share. This one is a free web page, so it works in the browser on an iPhone, Android phone or computer with no download or sign-up. Enter the bill, tap a preset such as 15%, 18% or 20%, and set the number of people. If your browser offers to install web apps, you can add it to your home screen so it opens like an app.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Calculate a 15%, 18% or 20% Tip?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Multiply the bill by the tip percentage divided by 100. On an $84 bill, a 15% tip is $12.60, an 18% tip is $15.12, and a 20% tip is $16.80. The table shows common bill sizes at the most popular tip percentages.
-          </p>
-
-          <ScrollableTableContainer className="my-6" ariaLabel="Tip amounts by bill size and tip percentage">
-            <table className="w-full border-collapse text-left">
-              <thead>
-                <tr className="bg-slate-100 dark:bg-slate-800/80 border-b-2 border-slate-200 dark:border-slate-700">
-                  <th className="p-3 font-semibold text-slate-900 dark:text-white sticky left-0 z-10 bg-slate-100/95 dark:bg-slate-800/95 backdrop-blur-xs min-w-[140px]">Bill</th>
-                  {TIP_REFERENCE_PERCENTS.map((pct) => (
-                    <th key={pct} className="p-3 font-semibold text-slate-900 dark:text-white">{pct}% tip</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {TIP_REFERENCE_BILLS.map((bill) => (
-                  <tr key={bill}>
-                    <td className="border-b border-slate-100 dark:border-slate-800 p-3 text-slate-700 dark:text-slate-300 font-medium sticky left-0 z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs shadow-[1px_0_0_0_rgba(226,232,240,0.8)] dark:shadow-[1px_0_0_0_rgba(51,65,85,0.8)]">${bill.toFixed(2)}</td>
-                    {TIP_REFERENCE_PERCENTS.map((pct) => (
-                      <td key={pct} className="border-b border-slate-100 dark:border-slate-800 p-3 text-slate-700 dark:text-slate-300">${((bill * pct) / 100).toFixed(2)}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </ScrollableTableContainer>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Much Should I Tip at a Restaurant, and What Should I Tip a Waiter?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            At a sit-down restaurant in the US, 15% is the usual floor for acceptable service, 18% to 20% is standard for good service, and 22% or more is for outstanding service. A tip of 20% on a $100 check is $20. Look at your receipt first, because many restaurants add an automatic gratuity for larger parties.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Much Should I Tip for a Haircut, a Barber or a Hairdresser?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A tip of 15% to 20% of the service price is the common guideline for haircuts, colour and styling, so $9 to $12 on a $60 haircut. If a separate assistant washed your hair, many people tip them a few dollars on top.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Much Should I Tip at a Nail Salon, for a Massage or for a Tattoo?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            For a manicure, pedicure or massage, 15% to 20% of the service price is the usual guideline. For a tattoo, 15% to 25% is commonly suggested, because the artist often has no other way to receive tips. Where you can, base the tip on the full price before any discount.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Much Should I Tip a Delivery Driver (Pizza, DoorDash, Uber Eats, Instacart)?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A tip of 10% to 20% of the order is typical for food delivery, with a minimum of about $3 to $5 on small orders. Tip more for bad weather, a long distance, many flights of stairs, or a large grocery order. Delivery apps usually ask for a tip at checkout and often let you change it after the order arrives.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Much Should I Tip Rideshare Drivers, Bartenders, Caterers and Groomers?
-          </h3>
-
-          <ul className="list-disc pl-6 mb-4 text-slate-600 dark:text-slate-300 space-y-1">
-            <li><strong>Taxi or rideshare:</strong> 10% to 15% of the fare, and up to 20% for very good service or help with heavy bags.</li>
-            <li><strong>Bartender:</strong> $1 to $2 per drink, or 15% to 20% of the tab if you keep one open.</li>
-            <li><strong>Catering:</strong> check for a service charge on the invoice first. If there is none, 10% to 20% is common for the staff.</li>
-            <li><strong>Dog groomer:</strong> 15% to 20% of the service price.</li>
-            <li><strong>Cruise:</strong> many cruise lines add automatic daily gratuities per guest, so check your booking before adding more.</li>
-          </ul>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            Should a Tip Calculator Include Tax?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            That depends on the number you enter as the bill. Enter the pre-tax subtotal to tip on food and drink only, or the post-tax total to tip on everything. For an $84 subtotal with 8% sales tax, the total is $90.72. A 20% tip on the subtotal is $16.80 and brings the payment to $107.52. A 20% tip on the post-tax total is $18.14 and brings it to $108.86.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            How Do I Find the Bill From a Total That Already Includes the Tip?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Divide the total by 1 plus the tip rate. If you paid $100.80 with a 20% tip, the bill was $100.80 ÷ 1.20 = $84.00, and the tip was $16.80. Use 1.15 for a 15% tip and 1.18 for 18%.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            What Is Tip Out and Tip Pooling?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Tip out is when servers share part of their tips with bussers, bartenders and hosts. Tip pooling is when all tips go into one pot that is divided by a rule such as hours worked. The rules vary by employer and by state. This calculator is built for customers splitting a bill, so it does not divide tips between employees.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            Do Tipping Rules Change in New York, California, Texas or Florida?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Tipping is a custom, not a state law, so the usual percentages are the same across the US. What differs is sales tax. In New York City the combined sales tax is 8.875%, so doubling the tax on a restaurant bill gives roughly a 17.75% tip. The rate varies by city and county, so check your own receipt.
-          </p>
-
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
-            Is There a Free Alternative to the Google Tip Calculator?
-          </h3>
-
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Yes. This tip calculator is free, needs no account, and works in any browser. Enter the bill, choose a percentage, and set how many people are splitting the check to see the tip, the total, and each person&apos;s share.
-          </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
             Bill Splitting and Special Gratuity Rules

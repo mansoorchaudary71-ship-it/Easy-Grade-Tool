@@ -5,11 +5,13 @@ import { ToolHeading } from './ToolHeading';
 import { SEO } from './SEO';
 import { TOOL_PAGES, ToolPageSlug, toolPageCanonical } from '../data/toolPages';
 import { OG_IMAGES } from '../data/seoConfig';
-import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON } from '../data/siteIdentity';
+import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON, SITE_OWNER } from '../data/siteIdentity';
 import { TestGradeTool } from './tools/TestGradeTool';
 import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
 import { AverageGradeTool } from './tools/AverageGradeTool';
+import { WeightedGpaTool } from './tools/WeightedGpaTool';
+import { MissCalculatorTool } from './tools/MissCalculatorTool';
 import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
 import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
@@ -21,6 +23,8 @@ const TOOLS: Record<string, React.ComponentType> = {
   'grade-curve-calculator': GradeCurveTool,
   'letter-grade-calculator': LetterGradeTool,
   'average-grade-calculator': AverageGradeTool,
+  'weighted-gpa-calculator': WeightedGpaTool,
+  'how-many-questions-can-i-miss': MissCalculatorTool,
   'grading-scale': GradingScaleIndexTool,
 };
 
@@ -55,15 +59,49 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         keywords={entry.keywords}
         featureList={entry.featureList}
         applicationCategory="EducationalApplication"
+        schemaType={entry.schemaType}
         name={entry.h1}
         breadcrumbLabel={entry.navLabel}
       />
 
       <ToolHeading title={entry.h1} description={entry.intro} />
 
-      <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
-        {entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : Tool ? <Tool /> : null}
-      </section>
+      {(entry.questions || Tool) && (
+        <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>
+          {entry.questions ? <QuestionCountChartTool questions={entry.questions} /> : Tool ? <Tool /> : null}
+        </section>
+      )}
+
+      {entry.lookupTables?.map((table) => (
+        <section key={table.heading} aria-label={table.heading} className="max-w-4xl space-y-3">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{table.heading}</h2>
+          {table.intro && <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed m-0">{table.intro}</p>}
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table className="w-full text-left text-sm border-collapse bg-white dark:bg-slate-900">
+              <thead>
+                <tr className="bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                  {table.columns.map((c) => (
+                    <th key={c} scope="col" className="px-4 py-2.5 font-bold">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {table.rows.map((row) => (
+                  <tr key={row.join('|')} className="border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+                    {row.map((cell, i) =>
+                      i === 0 ? (
+                        <th key={i} scope="row" className="px-4 py-2 font-bold">{cell}</th>
+                      ) : (
+                        <td key={i} className="px-4 py-2 font-mono tabular-nums">{cell}</td>
+                      )
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ))}
 
       {guideKey ? (
         <ToolContentGuide guide={guideKey} />
@@ -124,7 +162,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       <footer className="max-w-3xl text-xs text-slate-500 dark:text-slate-400 flex items-start gap-2 print:hidden">
         <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5 text-teal-700 dark:text-teal-400" aria-hidden="true" />
         <p className="m-0">
-          Built and maintained by the Easy Grade Tool team.
+          {SITE_OWNER ? `Built and maintained by ${SITE_OWNER.name}, Easy Grade Tool.` : 'Built and maintained by the Easy Grade Tool team.'}
           {ACADEMIC_REVIEWER ? ` Academic review: ${ACADEMIC_REVIEWER.name}, ${ACADEMIC_REVIEWER.credential}.` : ''}{' '}
           Formulas last checked {formatDate(CONTENT_REVIEWED_ON)}. See the <Link to="/about/" className="underline">methodology and corrections policy</Link>.
           Results are estimates; your teacher’s or school’s grading policy decides your official grade.

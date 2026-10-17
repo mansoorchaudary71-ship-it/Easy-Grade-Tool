@@ -16,7 +16,11 @@ export interface SitePerson {
 }
 
 /** Keep null to publish no personal name anywhere (About page, bylines, schema). Set an object to show one. */
-export const SITE_OWNER: SitePerson | null = null;
+export const SITE_OWNER: SitePerson | null = {
+  name: 'Muhammad Mansoor Haidar',
+  jobTitle: 'Owner and developer',
+  sameAs: [], // add real profile URLs (GitHub, LinkedIn) here when you have them
+};
 
 export const ACADEMIC_REVIEWER: (SitePerson & { credential: string }) | null = null;
 

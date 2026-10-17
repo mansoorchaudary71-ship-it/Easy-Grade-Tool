@@ -15,6 +15,9 @@ export const SELF_MANAGED_SEO_PATHS: string[] = [
   '/grade-curve-calculator',
   '/letter-grade-calculator',
   '/average-grade-calculator',
+  '/weighted-gpa-calculator',
+  '/weighted-vs-unweighted-gpa',
+  '/how-many-questions-can-i-miss',
   '/grading-scale',
 ];
 

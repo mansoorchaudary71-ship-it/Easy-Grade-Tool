@@ -152,7 +152,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           ogImage={activeSeo.ogImagePlaceholder}
           applicationCategory={activeSeo.applicationCategory}
           featureList={activeSeo.featureList}
-          name={isWeightedRoute ? 'Weighted Grade Calculator' : 'Easy Grade Calculator'}
+          name={isWeightedRoute ? 'Weighted Grade Calculator' : 'Easy Grade Calculator & Quick Grade Chart'}
           breadcrumbLabel={isWeightedRoute ? 'Weighted Grade Calculator' : 'Quick Grade Calculator'}
         />
       )}
@@ -160,11 +160,11 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       {!hideHeading && (
         <ToolHeading
           badge={calcTab === 'quick-chart' ? 'Quick Grade' : 'Weighted Grade'}
-          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator: Test Score to Percentage & Letter Grade' : 'Weighted Grade Calculator: Course Grade & Final Exam Score'}
+          title={calcTab === 'quick-chart' ? 'EZ Grader Chart & Easy Grade Calculator' : 'Weighted Grade & Final Exam Calculator'}
           description={
             calcTab === 'quick-chart'
-              ? 'Free easy grade calculator for teachers and students. Enter the number of questions to get percentage scores, letter grades and a printable chart, with half points.'
-              : 'Free weighted grade calculator for school and college. Add categories, scores and weights, or use total points, then see the score you need on the final exam.'
+              ? 'EZ grader chart online: enter the number of questions to see the percentage and letter grade for every number of wrong answers, then print the chart or save it as a PDF.'
+              : 'Add your assessments, calculate weighted averages, and simulate the exact score needed on your final exam.'
           }
         />
       )}
@@ -181,9 +181,9 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                   <Link
                     to={gradingScalePath(n)}
                     className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] px-4 rounded-full border border-stone-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold text-stone-800 dark:text-slate-100 hover:border-teal-600 no-underline"
-                    aria-label={`${n}-question grading scale`}
                   >
                     {n}
+                    <span className="sr-only">-question grading scale</span>
                   </Link>
                 </li>
               ))}
@@ -509,7 +509,6 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                 <div className="pt-4 border-t border-slate-200/60 dark:border-slate-800 flex flex-wrap items-center gap-2 print:hidden">
                   <button
                     type="button"
-                    aria-label="Print grade calculation result"
                     onClick={() => {
                       triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                       try {

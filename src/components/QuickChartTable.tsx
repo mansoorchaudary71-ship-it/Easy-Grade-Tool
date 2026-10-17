@@ -86,6 +86,7 @@ const ChartRow = memo<RowProps>(({ item, total, selected, onPick, printView }) =
       </th>
       <td className={`${cellBorder} px-3 py-2 text-right font-mono text-sm tabular-nums text-slate-800 dark:text-slate-200`}>
         {correct}
+        <span className="text-slate-600 dark:text-slate-400">/{total}</span>
       </td>
       <td className={`${cellBorder} px-3 py-2 text-right font-mono text-base font-bold tabular-nums ${tone.text}`}>
         {item.text}%

@@ -3,6 +3,7 @@ import { GRADING_SCALE_SIZES, gradingScalePath, gradingScaleSlug } from './gradi
 import {
   SCALE_PLUS_MINUS,
   SCALE_STANDARD,
+  bandRanges,
   computeStats,
   percentToLetter,
   roundTo,
@@ -116,10 +117,10 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     path: gradingScalePath(n),
     navLabel: `${n} Questions`,
     h1: `${n}-Question Grading Scale`,
-    title: `${n}-Question Grading Scale: Score Chart for ${n} Questions`,
+    title: `${n}-Question Test Grading Scale & Score Chart`,
     metaDescription: `${n}-question grading scale: each answer is worth ${fmt(p, 2)}%. See the percentage and letter grade for every score, for example ${exampleWrong} wrong = ${ex.formattedPercentage}%.`,
     badge: `${n}-question test`,
-    intro: `Find the percentage and letter grade for any score on a ${n}-question test. Each question is worth ${fmt(p, 2)}%, and the chart below shows the result for every number of wrong answers from 0 to ${n}.`,
+    intro: `Each question on a ${n}-question test is worth ${fmt(p, 2)}%. On the common 90/80/70/60 scale you can miss ${allowParts.join(', ')}. The chart below shows the percentage and letter grade for every number of wrong answers from 0 to ${n}.`,
     questions: n,
     keywords: [
       `${n} question grading scale`,
@@ -200,6 +201,26 @@ export function buildGradingScaleIndexPage(): ToolPageEntry {
       'quiz grading scale',
     ],
     featureList: ['Charts for 17 common test sizes', 'Standard and plus/minus letter grades', 'Printable, free, no sign-up'],
+    lookupTables: [
+      {
+        heading: 'A–F grading scale (90/80/70/60)',
+        intro: 'The common US scale without plus or minus. Your school may use different cutoffs.',
+        columns: ['Letter', 'Percent range', 'GPA points'],
+        rows: bandRanges(SCALE_STANDARD)
+          .filter((b) => b.letter !== 'F')
+          .map((b) => [b.letter, `${b.from}–${b.to}%`, b.gpa.toFixed(1)])
+          .concat([['F', 'Below 60%', '0.0']]),
+      },
+      {
+        heading: 'Plus/minus grading scale',
+        intro: 'The common US plus/minus scale. GPA points are the usual 4.0-scale values.',
+        columns: ['Letter', 'Percent range', 'GPA points'],
+        rows: bandRanges(SCALE_PLUS_MINUS)
+          .filter((b) => b.letter !== 'F')
+          .map((b) => [b.letter, `${b.from}–${b.to}%`, b.gpa.toFixed(1)])
+          .concat([['F', 'Below 60%', '0.0']]),
+      },
+    ],
     sections: [
       {
         heading: 'How these charts work',
@@ -309,115 +330,25 @@ export function buildAverageGradePage(): ToolPageEntry {
     path: '/average-grade-calculator/',
     navLabel: 'Average Grade',
     h1: 'Average Grade Calculator',
-    title: 'Free Average Grade Calculator: Mean, Median & Letter Grade',
-    metaDescription: 'Free average grade calculator: paste your test, quiz or assignment scores to get your average grade, median, highest and lowest score and letter grade. No weights needed.',
+    title: 'Average Grade Calculator: Mean, Median & Letter Grade',
+    metaDescription: 'Paste your scores to get the average grade, the median, the highest and lowest score, and the letter grade. Works for tests, quizzes and assignments.',
     badge: 'Mean and median',
-    intro: 'Enter your scores separated by commas, spaces or new lines. You get the average percentage, the median, the highest and lowest score and the letter grade on the A–F or plus/minus scale. It works for two grades or twenty, for one class or a whole semester.',
-    keywords: [
-      'average grade calculator',
-      'grade average calculator',
-      'calculate average grade',
-      'overall average grade calculator',
-      'average grade calculator without weights',
-      'average grade calculator with percentages',
-      'average grade calculator with points',
-      'average grade calculator with letters',
-      'average quiz grade calculator',
-      'average test grade calculator',
-      'class average calculator',
-      'semester average grade calculator',
-      'final average grade calculator',
-      'average grade needed calculator',
-      'average grade calculator for college',
-      'average grade calculator for high school',
-      'average grade calculator excel',
-      'mean of test scores',
-    ],
-    featureList: [
-      'Mean, median, highest and lowest score',
-      'Letter grade on standard or plus/minus scale',
-      'Any number of scores, with a custom maximum score',
-      'Flags values it cannot read instead of ignoring them',
-      'Free and private: scores stay in your browser',
-    ],
+    intro: 'Enter your scores separated by commas, spaces or new lines. You get the average percentage, the median, the highest and lowest score and the letter grade on your chosen scale.',
+    keywords: ['average grade calculator', 'calculate average grade', 'mean of test scores', 'class average calculator'],
+    featureList: ['Mean, median, highest and lowest score', 'Letter grade on standard or plus/minus scale', 'Flags values it cannot read instead of ignoring them'],
     sections: [
       {
         heading: 'How to calculate an average grade',
         paragraphs: [
           'Add up all the scores and divide by how many there are: average = sum of scores ÷ number of scores. This is the arithmetic mean, and it treats every score as equally important.',
-          'Each score is first a percentage of its own total: percentage = points earned ÷ points possible × 100. If your categories have different weights, such as exams worth more than homework, a plain average is not your course grade. Use the weighted grade calculator for that.',
-        ],
-        bullets: [
-          'Step 1: write every score as a percentage of its own total.',
-          'Step 2: add the percentages.',
-          'Step 3: divide the sum by the number of scores.',
-          'Step 4: compare the result with your school’s grading scale to get the letter.',
-        ],
-      },
-      {
-        heading: 'How do I calculate my overall average grade?',
-        paragraphs: [
-          'List every score you want to include, whether they are quizzes, tests or assignments from one class or grades from several classes, and take the mean of the list. For 50, 59 and 71 the sum is 180 and 180 ÷ 3 gives 60%, while the median is 59%.',
-          'The same steps work for two, three, four or any number of grades. Paste them into the calculator and it also shows the highest and lowest score, so you can see which result is pulling the average up or down.',
-        ],
-      },
-      {
-        heading: 'Average grade calculator with points or percentages',
-        paragraphs: [
-          'The calculator has one setting, “Each score is out of”, so every score you paste must share that maximum, such as 100 points or 50 points. Scores out of different totals should be converted to percentages first. A 9 out of 10 and a 45 out of 50 are both 90%, but averaging 9 and 45 gives a meaningless 27.',
-          'Two ways of averaging can disagree. With 18 out of 20 and 60 out of 100, the average of the percentages is (90 + 60) ÷ 2 = 75%, while total points give 78 ÷ 120 = 65%. Ask your teacher which method the gradebook uses.',
-        ],
-      },
-      {
-        heading: 'Average grade calculator without weights, and when to use weights',
-        paragraphs: [
-          'This is an unweighted average grade calculator: every score counts the same, so no weights or credits are needed. That fits a set of quizzes, a run of tests or a single subject where each assessment is worth the same.',
-          'When some grades matter more, use the weighted grade calculator. For module or course credits, enter each credit value as the weight: a 90% in a 3-credit course and a 70% in a 1-credit course give (270 + 70) ÷ 4 = 85%, not the simple average of 80%.',
+          'If your categories have different weights, such as exams worth more than homework, a plain average is not your course grade. Use the weighted grade calculator for that.',
         ],
       },
       {
         heading: 'Mean, median and why both matter',
         paragraphs: [
           'The median is the middle score when the list is sorted. One very low or very high score pulls the mean but barely moves the median, so comparing them shows whether a single outlier is driving your average.',
-          'For a class, add all the students’ scores and divide by the number of students to get the class average, then check the median to see whether most of the class sits above or below it.',
-        ],
-      },
-      {
-        heading: 'Average grade for a quiz, test, semester, quarter or year',
-        paragraphs: [
-          'For quizzes or tests, paste the scores and read the mean. For a semester, term, quarter or report card, average the period grades when each counts equally: four quarter grades of 88, 92, 79 and 95 give 354 ÷ 4 = 88.5%.',
-          'If a final exam or a midterm counts for more than the other grades, the period average alone is not the final average. Use the weighted grade calculator, or the final exam calculator to find the score you still need.',
-        ],
-      },
-      {
-        heading: 'What average grade do I need on the remaining scores?',
-        paragraphs: [
-          'Multiply the average you want by the total number of scores, subtract what you have already earned, and divide by the scores left: needed = (target × total count − points so far) ÷ scores left. With four tests of 82, 78, 90 and 85 (335 in total) and a target of 85 across five tests, you need 85 × 5 − 335 = 90 on the last one.',
-        ],
-      },
-      {
-        heading: 'What letter grade is my average? Is a C average okay?',
-        paragraphs: [
-          'On the common A–F scale 90% and up is an A, 80–89% a B, 70–79% a C, 60–69% a D and below 60% an F. On the plus/minus scale 70% is a C- and 77% is a C+, so the same average can carry a different letter at another school.',
-          'A C is a passing grade at most schools and is widely treated as the average grade, though some programs require a C or better to count a course toward a major. Grading systems also differ by country, so check your school’s own table.',
-        ],
-      },
-      {
-        heading: 'From average grade to GPA',
-        paragraphs: [
-          'A GPA averages grade points weighted by credits, not percentages. On the common scale an A is 4.0 and a C is 2.0, so a 95% average is normally a 4.0, though some schools score 90–92% as an A-. Use the GPA calculator for the exact figure, and the GPA to percentage page to go the other way.',
-        ],
-      },
-      {
-        heading: 'Average grade in Excel or Google Sheets',
-        paragraphs: [
-          'Put the scores in a column, for example A2:A20. Then =AVERAGE(A2:A20) gives the mean, =MEDIAN(A2:A20) the median, and =MAX(A2:A20) and =MIN(A2:A20) the highest and lowest. This page gives the same results without setup, and it also names the letter grade.',
-        ],
-      },
-      {
-        heading: 'Who is this average grade calculator for?',
-        paragraphs: [
-          'Students in high school and college use it to check where they stand before grades are posted, and teachers use it to find a class average or to average a set of quizzes. It is free, needs no account and runs in your browser, so nothing you type is uploaded.',
+          'Scores out of different totals should be converted to percentages first. A 9 out of 10 and a 45 out of 50 are both 90%, but averaging 9 and 45 gives a meaningless 27.',
         ],
       },
     ],
@@ -449,74 +380,11 @@ export function buildAverageGradePage(): ToolPageEntry {
         question: 'Why did the calculator leave out one of my values?',
         answer: 'It only accepts plain numbers. Text, negative numbers and values above the maximum score are listed under the input with the reason, so you can fix them.',
       },
-      {
-        question: 'How do I calculate my overall average grade?',
-        answer: 'Take every score you want to include and find the mean of the list. For four quarter grades of 88, 92, 79 and 95 the sum is 354, and 354 ÷ 4 gives 88.5%. If some grades count for more than others, use the weighted grade calculator instead.',
-      },
-      {
-        question: 'What is the average of 50, 59 and 71?',
-        answer: 'The sum is 50 + 59 + 71 = 180, and 180 ÷ 3 = 60, so the average is 60%. The median is the middle value, 59. On the common A–F scale an average of 60% is the lowest D.',
-      },
-      {
-        question: 'What is the formula for calculating a grade?',
-        answer: 'A single grade is points earned ÷ points possible × 100. An average grade is the sum of all the percentages ÷ the number of scores. For example, 42 out of 50 is 84%, and averaging it with 90% and 78% gives (84 + 90 + 78) ÷ 3 = 84%.',
-      },
-      {
-        question: 'How do I average grades that are out of different totals?',
-        answer: 'Convert each score to a percentage and average the percentages, or add all the points earned and divide by all the points possible. With 18 out of 20 and 60 out of 100 the first method gives 75% and the second gives 65%, so follow the method your teacher uses.',
-      },
-      {
-        question: 'Can I calculate an average grade without weights?',
-        answer: 'Yes. This calculator is unweighted, so every score counts equally and you only need the scores themselves. Add them, divide by how many there are and read the mean, median and letter grade.',
-      },
-      {
-        question: 'Can I use credits or weights in this average grade calculator?',
-        answer: 'No, it treats every score equally. For credits or weights, use the weighted grade calculator and enter each credit value as the weight. A 90% in 3 credits and a 70% in 1 credit average 85% that way, compared with 80% unweighted.',
-      },
-      {
-        question: 'How do I find the average grade for a class?',
-        answer: 'Paste every student’s score into the calculator, or add them and divide by the number of students. The mean is the class average and the median shows the middle student. If the class average is lower than you planned, the grade curve calculator can compare ways to adjust it.',
-      },
-      {
-        question: 'What average do I need on my remaining tests?',
-        answer: 'Use (target × total number of scores − points so far) ÷ scores left. With four tests totalling 335 and a goal of 85 across five tests, the last test must be 85 × 5 − 335 = 90. Enter the scores you have to see your current average first.',
-      },
-      {
-        question: 'Is 70% a C or a D?',
-        answer: 'On the common A–F scale 70% is the lowest C. On a plus/minus scale it is a C-, and some schools set a higher cutoff for a C, so your syllabus decides. Switch the scale in the calculator to see both letters.',
-      },
-      {
-        question: 'Is a C+ an average grade?',
-        answer: 'A C+ is slightly above the traditional average. On a plus/minus scale it covers roughly 77% to 79.9%, and a plain C is usually thought of as the average grade. Averages differ by school, so compare yours with your class average.',
-      },
-      {
-        question: 'Is a C a fail?',
-        answer: 'No. A C is a passing grade at most schools, and a fail is normally an F, which is below 60% on the common scale. Some majors, scholarships and graduate programs require a C or better, or a B, so check the rule for yours.',
-      },
-      {
-        question: 'Is 95% a 4.0 GPA?',
-        answer: 'On the common scale where 90% and up is an A, a 95% average earns a 4.0. Some schools put an A- at 90–92% and give it 3.7, so check your school’s table. The GPA calculator gives the exact result for a list of courses.',
-      },
-      {
-        question: 'Will one C ruin a 4.0 GPA?',
-        answer: 'It lowers it, but by an amount that depends on how many courses you have. With equal credits, nine A grades and one C average 3.8, and four A grades and one C average 3.6. The more courses already in your GPA, the smaller the drop.',
-      },
-      {
-        question: 'How do I find an average grade in Excel or Google Sheets?',
-        answer: 'Put the scores in a column and use =AVERAGE(A2:A20) for the mean and =MEDIAN(A2:A20) for the median. Use =MAX and =MIN for the highest and lowest. The calculator on this page does the same without any setup and adds the letter grade.',
-      },
-      {
-        question: 'Is this average grade calculator free for students and teachers?',
-        answer: 'Yes. It is free, needs no sign-up and runs in your browser, so your scores are not uploaded. Students use it for tests, quizzes and report card averages, and teachers use it for class averages.',
-      },
     ],
     related: [
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Categories with different weights.' },
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Points earned out of points possible.' },
       { path: '/grade-curve-calculator/', label: 'Grade curve calculator', blurb: 'See how a curve changes the class average.' },
-      { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the score you need to reach your target.' },
-      { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'Turn course grades and credits into a GPA.' },
-      { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'See the percentage cutoffs behind each letter.' },
       { path: '/grading-scale/', label: 'Grading scale charts', blurb: 'Score charts for 5 to 100 questions.' },
     ],
   };

@@ -375,6 +375,17 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
     });
   };
 
+  const handleDownloadPdf = async () => {
+    triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
+    try {
+      setToast?.('Preparing PDF...');
+      await exportPdf();
+      setToast?.(`PDF downloaded for the ${total}-question chart.`);
+    } catch {
+      setToast?.('Could not create the PDF. Use Print chart and choose Save as PDF.');
+    }
+  };
+
   const handlePrint = async () => {
     triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
     const isInIframe = typeof window !== 'undefined' && window.self !== window.top;
@@ -499,18 +510,36 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               </div>
             </div>
 
-            <button
-              type="button"
-              onClick={handlePrint}
-              onMouseEnter={preloadPdf}
-              onFocus={preloadPdf}
-              onTouchStart={preloadPdf}
-              className={`w-full ${BTN_OUTLINE}`}
-              aria-label="Print the grading chart"
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={handlePrint}
+                onMouseEnter={preloadPdf}
+                onFocus={preloadPdf}
+                onTouchStart={preloadPdf}
+                className={`w-full ${BTN_OUTLINE}`}
+              >
+                <Printer className="w-4 h-4" aria-hidden="true" />
+                <span>Print chart</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleDownloadPdf}
+                onMouseEnter={preloadPdf}
+                onFocus={preloadPdf}
+                onTouchStart={preloadPdf}
+                className={`w-full ${BTN_OUTLINE}`}
+              >
+                <Download className="w-4 h-4" aria-hidden="true" />
+                <span>Download PDF</span>
+              </button>
+            </div>
+            <a
+              href="#ez-print-section"
+              className="md:hidden self-start text-sm font-semibold text-blue-700 dark:text-blue-300 underline underline-offset-2 min-h-[44px] inline-flex items-center"
             >
-              <Printer className="w-4 h-4" aria-hidden="true" />
-              <span>Print chart</span>
-            </button>
+              Jump to the chart ↓
+            </a>
 
             {/* Advanced settings: folded away by default (Miller's Law). Scale, decimal precision, cutoffs, half points. */}
             <div className="rounded-2xl border border-slate-300 dark:border-slate-600">
@@ -717,7 +746,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               <span>Clear</span>
             </button>
           </div>
-          <p className={`${HELP_TEXT} m-0`}>
+          <p className={`${HELP_TEXT} m-0 hidden md:block`}>
             Shortcuts while this panel is focused: ↑ ↓ change wrong answers, Enter or R saves the student and starts the next one. You can also tap any row in the chart.
           </p>
 
@@ -791,19 +820,31 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 {halfPoints && total <= 200 ? ', in half-point steps' : ''}.
               </p>
             </div>
-            <button
-              type="button"
-              className={`${BTN_SOLID} self-start sm:self-auto print:hidden`}
-              onClick={handlePrint}
-              onMouseEnter={preloadPdf}
-              onFocus={preloadPdf}
-              onTouchStart={preloadPdf}
-              onPointerDown={preloadPdf}
-              aria-label="Print or export grading chart"
-            >
-              <Printer className="w-4 h-4" aria-hidden="true" />
-              <span>Print Chart</span>
-            </button>
+            <div className="flex flex-wrap gap-2 self-start sm:self-auto print:hidden">
+              <button
+                type="button"
+                className={BTN_SOLID}
+                onClick={handlePrint}
+                onMouseEnter={preloadPdf}
+                onFocus={preloadPdf}
+                onTouchStart={preloadPdf}
+                onPointerDown={preloadPdf}
+              >
+                <Printer className="w-4 h-4" aria-hidden="true" />
+                <span>Print chart</span>
+              </button>
+              <button
+                type="button"
+                className={BTN_OUTLINE}
+                onClick={handleDownloadPdf}
+                onMouseEnter={preloadPdf}
+                onFocus={preloadPdf}
+                onTouchStart={preloadPdf}
+              >
+                <Download className="w-4 h-4" aria-hidden="true" />
+                <span>Download PDF</span>
+              </button>
+            </div>
           </div>
 
           {/* Short summary only; the chart itself is not a live region. */}

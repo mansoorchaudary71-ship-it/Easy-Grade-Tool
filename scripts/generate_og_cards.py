@@ -2,6 +2,8 @@
 Run: python3 scripts/generate_og_cards.py   (needs Pillow + DejaVu fonts)"""
 from PIL import Image, ImageDraw, ImageFont
 import os
+import re
+import sys
 
 BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
@@ -22,10 +24,15 @@ CARDS = {
     "og-cards/letter-grade-calculator-1200x630.png": ("Letter Grade\nCalculator", "Percent to letter and GPA points"),
     "og-cards/average-grade-calculator-1200x630.png": ("Average Grade\nCalculator", "Mean, median and letter for any list of scores"),
     "og-cards/grading-scale-1200x630.png": ("Grading Scale Charts", "Score charts for tests of 5 to 100 questions"),
+    "og-cards/weighted-gpa-calculator-1200x630.png": ("Weighted GPA\nCalculator", "Honors, AP and IB bonus points, weighted and unweighted"),
+    "og-cards/weighted-vs-unweighted-gpa-1200x630.png": ("Weighted vs\nUnweighted GPA", "What each means, with a side-by-side example"),
+    "og-cards/how-many-questions-can-i-miss-1200x630.png": ("How Many Questions\nCan I Miss?", "Most wrong answers allowed for an A, B or C"),
 }
 
-# One card per /grading-scale/N-questions/ page. Keep this list in sync with src/data/gradingScaleSizes.ts.
-GRADING_SCALE_SIZES = [5, 10, 12, 15, 16, 18, 20, 25, 30, 35, 40, 45, 50, 60, 75, 80, 100]
+# One card per /grading-scale/N-questions/ page. The list is read from src/data/gradingScaleSizes.ts so there is a single source of truth.
+_sizes_src = open(os.path.join(os.path.dirname(__file__), "..", "src", "data", "gradingScaleSizes.ts"), encoding="utf8").read()
+_m = re.search(r"GRADING_SCALE_SIZES[^=]*=\s*\[([^\]]*)\]", _sizes_src)
+GRADING_SCALE_SIZES = [int(x) for x in re.findall(r"\d+", _m.group(1))]
 for _n in GRADING_SCALE_SIZES:
     CARDS[f"og-cards/grading-scale-{_n}-questions-1200x630.png"] = (
         f"{_n}-Question\nGrading Scale",
@@ -66,5 +73,9 @@ def make(path, title, sub):
     img.save(full, optimize=True)
     print("wrote", path, os.path.getsize(full) // 1024, "KB")
 
+# Pass --missing to create only the cards that do not exist yet (leaves existing PNGs untouched).
+only_missing = "--missing" in sys.argv
 for p, (t, s) in CARDS.items():
+    if only_missing and os.path.exists(os.path.join(OUT, p)):
+        continue
     make(p, t, s)

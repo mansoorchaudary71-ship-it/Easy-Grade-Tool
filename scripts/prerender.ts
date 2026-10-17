@@ -300,6 +300,16 @@ export async function runPrerender(): Promise<void> {
   }
   console.log(`✅ [SSG] Wrote ${stubCount} legacy redirect stubs`);
 
+  // Real 301s for hosts that support them (Cloudflare Pages / Netlify read this file; GitHub Pages ignores it).
+  // Same table as the stubs above, so the two can never disagree.
+  const redirectLines = Object.entries(LEGACY_REDIRECTS)
+    .filter(([from]) => from.replace(/^\/+|\/+$/g, ''))
+    .flatMap(([from, to]) => {
+      const bare = from.replace(/\/+$/, '');
+      return [`${bare} ${to} 301`, `${bare}/ ${to} 301`];
+    });
+  fs.writeFileSync(path.resolve(distDir, '_redirects'), `${redirectLines.join('\n')}\n`, 'utf-8');
+
   console.log(`🎉 SSG completed: ${successCount}/${PRERENDER_ROUTES.length} primary routes pre-rendered with zero duplicate content!`);
 }
 

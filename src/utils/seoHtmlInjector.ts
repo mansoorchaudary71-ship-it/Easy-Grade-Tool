@@ -191,7 +191,7 @@ export function resolveSeoForPath(rawPath: string): ResolvedRouteSeo {
         ogImagePlaceholder: toolPage.ogImage ?? SEO_ROUTES.quick.ogImagePlaceholder,
         ogType: 'website',
         keywords: toolPage.keywords,
-        schemaType: 'WebApplication',
+        schemaType: toolPage.schemaType ?? 'WebApplication',
         applicationCategory: 'EducationalApplication',
         featureList: toolPage.featureList,
       },
@@ -336,6 +336,8 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
   });
 
   // 5. Build JSON-LD Schemas
+  // About/Privacy/Terms are plain pages, not applications: they must not claim app-only properties.
+  const isAppSchema = !config.schemaType || config.schemaType === 'WebApplication' || config.schemaType === 'SoftwareApplication';
   const webAppSchema = {
     '@context': 'https://schema.org',
     '@type': config.schemaType || 'WebApplication',
@@ -343,10 +345,14 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     name: config.title.split(/\s[—|]\s/)[0].trim(),
     url: config.canonicalUrl,
     isPartOf: { '@id': `${BASE_CANONICAL_ORIGIN}/#website` },
-    applicationCategory: config.applicationCategory,
-    operatingSystem: 'All',
-    browserRequirements: 'Requires JavaScript. Requires HTML5.',
-    softwareVersion: '1.0.0',
+    ...(isAppSchema
+      ? {
+          applicationCategory: config.applicationCategory,
+          operatingSystem: 'All',
+          browserRequirements: 'Requires JavaScript. Requires HTML5.',
+          softwareVersion: '1.0.0',
+        }
+      : {}),
     inLanguage: 'en-US',
     isAccessibleForFree: true,
     description: config.description,
@@ -369,12 +375,16 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
         url: `${BASE_CANONICAL_ORIGIN}/icon.svg`,
       },
     },
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-    ...(config.featureList && config.featureList.length > 0
+    ...(isAppSchema
+      ? {
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+        }
+      : {}),
+    ...(isAppSchema && config.featureList && config.featureList.length > 0
       ? { featureList: config.featureList }
       : {}),
   };

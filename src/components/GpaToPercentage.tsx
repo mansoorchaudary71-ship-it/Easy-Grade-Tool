@@ -197,7 +197,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
       >
         <div className="tool-card-head flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-5 border-b border-slate-200/60 dark:border-slate-800">
           <div>
-            <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase block mb-1">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
               Converter
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0 flex items-center gap-2">
@@ -362,7 +362,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
       >
         <div>
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold tracking-widest text-slate-400 uppercase">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase">
               {conversionDirection === 'gpa-to-pct' ? 'Converted Percentage' : 'Equivalent GPA'}
             </span>
             <div className="relative">

@@ -1,6 +1,7 @@
 import { BASE_CANONICAL_ORIGIN } from './constants';
 import { buildAverageGradePage, buildGradingScaleIndexPage, buildQuestionCountPage } from './gradingScalePages';
 import { GRADING_SCALE_SIZES } from './gradingScaleSizes';
+import { buildMissCalculatorPage, buildWeightedGpaPage, buildWeightedVsUnweightedPage } from './gpaPages';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, applyCurve, calculateTestGrade, computeStats, percentToLetter, roundTo } from '../utils/academicMath';
 
 /**
@@ -28,6 +29,14 @@ export interface ToolPageSection {
   bullets?: string[];
 }
 
+/** A simple data table rendered as a real <table> (good for lookups and snippet-style answers). */
+export interface ToolPageTable {
+  heading: string;
+  intro?: string;
+  columns: string[];
+  rows: string[][];
+}
+
 export interface ToolPageRelated {
   path: string;
   label: string;
@@ -46,6 +55,10 @@ export interface ToolPageEntry {
   keywords: string[];
   featureList: string[];
   sections: ToolPageSection[];
+  /** Use 'WebPage' for pages without an interactive tool (guides). Defaults to WebApplication. */
+  schemaType?: 'WebApplication' | 'WebPage';
+  /** Optional lookup tables shown right after the tool. */
+  lookupTables?: ToolPageTable[];
   example: {
     heading: string;
     scenario: string;
@@ -83,27 +96,16 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/test-grade-calculator/',
     navLabel: 'Test Grade',
     h1: 'Test Grade Calculator',
-    title: 'Free Test Grade Calculator: Percentage, Points & Letter Grade',
+    title: 'Test Grade Calculator — Score Percentage & Letter Grade',
     metaDescription:
-      'Free test grade calculator: enter points earned and possible for your test percentage and letter grade, with extra credit, penalties and the points needed to pass.',
+      'Free test score percentage calculator: enter points earned and points possible to get the percentage and letter grade, with bonus points and penalties.',
     badge: 'Single test or quiz',
     intro:
-      'Type the points you earned and the points the test was worth. You get your test percentage, the letter grade on the A–F or plus/minus scale, and the points you needed for the next grade up. Add extra credit or a late penalty if your teacher uses them.',
+      'Type the points you earned and the points the test was worth. You get the percentage, the letter grade on your chosen scale, and the points you would have needed for the next grade up.',
     keywords: [
       'test grade calculator',
-      'test score percentage calculator',
       'quiz grade calculator',
-      'test grade calculator with points',
-      'test grade calculator with extra credit',
-      'test grade calculator with partial credit',
-      'multiple choice test grade calculator',
-      'test grade calculator number of questions',
-      'test grade calculator to pass',
-      'what test grade do i need',
-      'what if test grade calculator',
-      'next test grade calculator',
-      'test grade calculator for teachers',
-      'free test grade calculator',
+      'test score percentage calculator',
       'how to calculate test percentage',
       'how to calculate grade percentage',
       'points possible to percentage',
@@ -113,11 +115,9 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     ],
     featureList: [
       'Percentage and letter grade from points earned and points possible',
-      'Extra credit, bonus points and late-penalty adjustments',
-      'Partial credit and half points with decimal scores',
-      'Points needed for A, B, C and D (or a pass mark) on any test size',
-      'Standard A–F and plus/minus letter scales',
-      'Free, instant and private: nothing you type leaves your browser',
+      'Bonus points and late-penalty adjustments',
+      'Points needed for A, B, C and D on any test size',
+      'Standard and plus/minus letter scales',
     ],
     sections: [
       {
@@ -211,64 +211,12 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         answer:
           'Divide the points you earned by the points possible and multiply by 100. A 17 out of 20 is 85%, a 22 out of 25 is 88%, and a 26 out of 30 is 86.7%. The calculator does this for any test size and shows the letter grade next to it.',
       },
-      {
-        question: 'What test grade do I need to pass?',
-        answer:
-          'Multiply the points possible by your pass mark. A 60% pass mark on a 50-point test is 0.60 × 50 = 30 points, a 70% pass mark on a 40-point test is 28 points, and 60% on a 25-point test is 15 points. The points-needed table under the calculator lists every grade cutoff for the test size you enter.',
-      },
-      {
-        question: 'How do I calculate a test grade with partial credit or half points?',
-        answer:
-          'Add the partial credit to your points earned as decimals, then divide by the points possible. Scoring 38.5 of 50 gives 38.5 ÷ 50 × 100 = 77%. The points earned box accepts decimals such as 7.5, so half points and quarter points work without any rounding.',
-      },
-      {
-        question: 'How much is each question worth on a multiple choice test?',
-        answer:
-          'Divide 100 by the number of questions when every question is worth one point. Each question is worth 2% on a 50-question test, 2.5% on a 40-question test and 5% on a 20-question test. Getting 45 of 50 right is therefore 90%, an A on the common 10-point scale.',
-      },
-      {
-        question: 'What score do I need on my next test to raise my grade?',
-        answer:
-          'Multiply the percentage you want by the points possible on the next test, then round up to the next point your teacher awards. To see a what-if result, type a possible score in the points earned box and read the percentage and letter. For the effect on your course average, add the test to the weighted grade calculator.',
-      },
-      {
-        question: 'How much will one test affect my overall grade?',
-        answer:
-          'Multiply the test’s weight in the syllabus by the change in your test percentage. If a test is worth 20% of the course, scoring 90% instead of 70% moves your course grade by 0.20 × 20 = 4 percentage points. Tests with a larger weight, such as a midterm or final, move the course grade more.',
-      },
-      {
-        question: 'Can I drop my lowest test grade?',
-        answer:
-          'This calculator grades one test at a time, so work out each test percentage first, remove the lowest one and average the rest. With tests of 72%, 85%, 90% and 88%, dropping the 72% lifts the average from 83.75% to 87.7%. The average grade calculator can add up the remaining scores for you.',
-      },
-      {
-        question: 'What happens if my final exam replaces my lowest test grade?',
-        answer:
-          'Swap the lowest test percentage for the final exam percentage when the final is higher, then average or weight the tests as before. If your tests are 72%, 85%, 90% and 88% and the final is 84%, the 84% replaces the 72% and the average becomes 86.75%. Check your syllabus, because some teachers only replace the grade when the final is higher.',
-      },
-      {
-        question: 'How do I calculate a weighted test grade when tests count more than quizzes?',
-        answer:
-          'Average the tests and the quizzes separately, then multiply each average by its weight and add the results. With tests worth 70% at an 84% average and quizzes worth 30% at a 92% average, the grade is 0.70 × 84 + 0.30 × 92 = 86.4%. The weighted grade calculator does this for any set of categories.',
-      },
-      {
-        question: 'Can I use this calculator for AP, SAT or IELTS tests?',
-        answer:
-          'No. This is a classroom test grade calculator that turns points earned and points possible into a percentage. AP, SAT, IELTS and state exams are scaled with their own official score conversions, so use the score report or the exam board’s conversion table for those.',
-      },
-      {
-        question: 'Is this test grade calculator free for teachers and students?',
-        answer:
-          'Yes. It is free with no sign-up and runs in your browser, so nothing you type is stored on a server. Students use it to check a score before the grade is posted, and teachers use it to grade one paper at a time. To grade a whole stack from one printed sheet, use the Quick Grade chart.',
-      },
     ],
     related: [
       { path: '/', label: 'Quick Grade chart', blurb: 'Printable score for every number of wrong answers.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Combine tests, homework and projects into a course grade.' },
       { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the exam score you need for your target grade.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Percent, letter and GPA points on common scales.' },
-      { path: '/grade-curve-calculator/', label: 'Grade curve calculator', blurb: 'Curve a low-scoring test four ways.' },
-      { path: '/average-grade-calculator/', label: 'Average grade calculator', blurb: 'Average several tests or drop the lowest one.' },
     ],
   },
 
@@ -277,37 +225,24 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/grade-curve-calculator/',
     navLabel: 'Grade Curve',
     h1: 'Grade Curve Calculator',
-    title: 'Free Grade Curve Calculator: Curve Test Scores 4 Ways',
+    title: 'Grade Curve Calculator — 4 Curving Methods Compared',
     metaDescription:
-      'Free grade curve calculator: paste test scores and curve them with flat points, top score to 100, a square-root curve or a target class average. See the new mean and letters.',
+      'Paste class test scores and curve them four ways: add flat points, lift the top score to 100, square-root curve, or move the class average to a target.',
     badge: 'For teachers and TAs',
     intro:
-      'Paste the raw scores, choose a curving method and compare before and after: every score, the class mean and median, and the letter grade each student ends up with. Works for any maximum score, so tests out of 50 or 75 points curve as easily as tests out of 100.',
+      'Paste the raw scores, choose a curving method and compare before and after: every score, the class mean and median, and the letter grade each student ends up with.',
     keywords: [
       'grade curve calculator',
       'test curve calculator',
+      'square root curve',
       'curve grades calculator',
-      'grade on a curve calculator',
-      'how to grade on a curve calculator',
-      'grade curve calculator using average',
-      'grade curve calculator with mean and standard deviation',
-      'grade curve calculator with median',
-      'square root grade curve calculator',
-      'linear grade curve calculator',
-      'grade curve calculator from points',
-      'final grade calculator with curve',
-      'letter grade calculator with curve',
-      'grade curve calculator for teachers',
-      'grade curve calculator excel',
       'how to curve a test',
     ],
     featureList: [
       'Flat-points, top-score, square-root and target-average curves',
       'Before and after table with class mean and median',
       'Standard and plus/minus letter grades for each score',
-      'Any maximum score, so tests marked in points curve correctly',
       'Optional cap at 100 and printable results',
-      'Free and private: scores stay in your browser',
     ],
     sections: [
       {
@@ -390,62 +325,11 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         answer:
           'There is no single right number, because it depends on your goal. To bring the class average from 70 up to 78 you add 8 points, and to make an 85 the top score of 100 you add 15. Try each method on your own scores and compare the results before deciding.',
       },
-      {
-        question: 'How do I curve grades using the class average?',
-        answer:
-          'Find the class mean, subtract it from the average you want, and add that difference to every score. If the mean is 64 and you want 75, add 11 points, so a 58 becomes 69. Choose the target average method above and the calculator shows the new mean, median and letters.',
-      },
-      {
-        question: 'How do I curve grades with the mean and standard deviation?',
-        answer:
-          'Convert each score to a z-score, (score − mean) ÷ standard deviation, then rebuild it with the mean and spread you want. With a class mean of 70 and a standard deviation of 10, an 80 has z = 1, and for a target mean of 78 and spread of 8 it becomes 86. This calculator shows the mean and median but does not compute standard deviation, so use STDEV in a spreadsheet for that step.',
-      },
-      {
-        question: 'What is a linear grade curve?',
-        answer:
-          'A linear curve changes every score by the same straight-line rule, such as adding a fixed number of points or shifting to a target average. The gaps between students stay the same. The flat-points, top-score and target-average methods are linear, while the square-root curve is not.',
-      },
-      {
-        question: 'Is there a cube root or exponential grade curve?',
-        answer:
-          'The calculator offers the square-root curve, not a cube-root or exponential one. A cube-root curve works the same way with a stronger lift: 100 × (raw ÷ 100)^(1/3) turns a 64 into 86.2, where the square root gives 80. Exponential curves are not a standard classroom method, so check your instructor’s policy first.',
-      },
-      {
-        question: 'How do I curve a test that is not out of 100 points?',
-        answer:
-          'Set the maximum score to the points the test was worth, then paste the raw scores. The square-root curve then uses maximum × √(raw ÷ maximum), so a 36 on a 50-point test becomes 42.4. The cap and the top-score method also use your maximum instead of 100.',
-      },
-      {
-        question: 'Can I curve a final exam or a final grade?',
-        answer:
-          'Yes. Paste the final exam scores and apply the curve you want, then enter the curved scores in the weighted grade calculator to see course grades. A curve on the final course grade works the same way, though many schools apply curves to assessments rather than to the finished course grade.',
-      },
-      {
-        question: 'How do I see my letter grade after a curve?',
-        answer:
-          'The results table shows a letter next to every curved score, on either the A–F or the plus/minus scale. A raw 74 with a curve of +8 becomes 82, a B on the A–F scale and a B- on plus/minus. Use the letter grade calculator to see the cutoffs behind each letter.',
-      },
-      {
-        question: 'How do I grade on a curve in Excel or Google Sheets?',
-        answer:
-          'Put the raw scores in column A and use a formula for each method. For a flat +5 curve capped at 100 use =MIN(100, A2+5), for a target average of 78 use =MIN(100, A2+(78-AVERAGE($A$2:$A$30))), and for a square-root curve use =10*SQRT(A2). Fill the formula down the column.',
-      },
-      {
-        question: 'Which curving method should I use?',
-        answer:
-          'Match the method to the problem. Use flat points for one unclear question, top score to 100 when nobody reached full marks, the square-root curve when many scores are low, and the target average when the class mean must hit a set value. Compare all four on your own scores before deciding.',
-      },
-      {
-        question: 'Is this grade curve calculator free for teachers and students?',
-        answer:
-          'Yes. It is free, needs no account and runs in your browser, so the scores you paste are not uploaded. Teachers use it to pick a fair curve for a class, and students use it to estimate the effect of a curve at school or college. The official curve is always your instructor’s decision.',
-      },
     ],
     related: [
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Percentage and letter for one test, with bonus points.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'See the cutoffs behind each letter.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Turn curved scores into a course grade.' },
-      { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the exam score you need after a curve.' },
       { path: '/', label: 'Quick Grade chart', blurb: 'Print a score chart for a stack of tests.' },
     ],
   },
@@ -455,31 +339,26 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/letter-grade-calculator/',
     navLabel: 'Letter Grade',
     h1: 'Letter Grade Calculator',
-    title: 'Letter Grade Calculator: Percent to Letter Grade & GPA (4.0)',
+    title: 'Letter Grade Calculator — Percent to Letter & GPA Points',
     metaDescription:
-      'Free letter grade calculator: convert a percentage to a letter grade and 4.0 GPA points on A–F and plus/minus scales. See what an 80, 85 or 93 is.',
+      'Convert any percentage to a letter grade and 4.0 GPA points. See what GPA a 73, 85 or 90 is, plus the cutoffs for each letter on A–F and plus/minus scales.',
     badge: 'Percent ↔ letter',
     intro:
-      'Enter a percentage to see its letter grade and GPA points, or pick a letter to see the percentage range and midpoint. Works for high school and college on the standard A–F scale and the common plus/minus scale.',
+      'Enter a percentage to see its letter grade and GPA points, or pick a letter to see the percentage range and midpoint. Switch between the standard A–F scale and the common plus/minus scale.',
     keywords: [
       'letter grade calculator',
-      'percent to letter grade calculator',
-      'percentage to letter grade',
-      'letter grade to gpa calculator',
-      'gpa to letter grade 4.0 scale',
-      'college letter grade calculator',
-      'high school letter grade calculator',
-      'what is my letter grade',
-      'score to letter grade',
-      'letter grade percentage chart',
+      'percent to letter grade',
+      'percentage to gpa',
+      'grade scale chart',
       'a-f grading scale',
+      'letter grade percentage chart',
       'what percentage is an a grade',
     ],
     featureList: [
       'Percent to letter grade and 4.0 GPA points',
-      'Letter grade to percentage range and midpoint',
-      'Standard A–F and plus/minus scales with full cutoff tables',
-      'Printable letter grade percentage chart',
+      'Letter to percentage range and midpoint',
+      'Standard and plus/minus scales with full cutoff tables',
+      'Printable grade scale reference',
     ],
     sections: [
       {
@@ -501,13 +380,6 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         paragraphs: [
           'A 73% is a C on both common scales, worth 2.0 on the 4.0 scale. On the plus/minus scale it is the lowest C: 70 to 72.99 is a C- (1.7) and 77 starts a C+ (2.3).',
           'The same logic applies to other scores. A 90% is an A (4.0) on the standard scale or an A- (3.7) on the plus/minus scale, and an 85% is a B (3.0) on both. Use the calculator above for any other percentage.',
-        ],
-      },
-      {
-        heading: 'Percent to letter grade for college, high school and teachers',
-        paragraphs: [
-          'College and university courses often use the plus/minus scale and weight each course by its credit hours, while many high schools use the plain A–F scale. Teachers can use the same table to turn a class percentage into a report-card letter.',
-          'If you only have points, divide the points earned by the points possible and multiply by 100 first, then enter that percentage. The result is an unweighted letter and GPA value; honors or AP weighting is added by your school.',
         ],
       },
       {
@@ -590,111 +462,6 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
         answer:
           'On the common 4.0 scale an A is 4.0, A- 3.7, B+ 3.3, B 3.0, B- 2.7, C+ 2.3, C 2.0, C- 1.7, D+ 1.3, D 1.0, D- 0.7 and F 0.0. Your registrar may use a different table, so check the official scale.',
       },
-      {
-        question: 'What is the formula for calculating a letter grade?',
-        answer:
-          'Divide the points you earned by the points possible and multiply by 100 to get a percentage, then match that percentage to your scale. For example, 42 out of 50 is 42 ÷ 50 × 100 = 84%, which is a B on both common scales.',
-      },
-      {
-        question: 'Is 80% what letter grade?',
-        answer:
-          'An 80% is a B on the standard A–F scale and a B- (2.7 GPA points) on the plus/minus scale, where 80 is the lowest B-. If your school starts a B at 83, an 80 would be a B- or a C+ depending on its table.',
-      },
-      {
-        question: 'Is a 93% an A or a B?',
-        answer:
-          'A 93% is an A on both common scales. On the standard scale it is 4.0 GPA points, and on the plus/minus scale 93 is the lowest plain A, with 90 to 92.99 an A-. It is a B only if your school sets an unusually high A cutoff such as 94 or 95.',
-      },
-      {
-        question: 'What letter grade is 70%?',
-        answer:
-          'A 70% is a C (2.0 GPA points) on the standard scale and a C- (1.7) on the plus/minus scale, where 70 is the lowest C-. It is the bottom of the C range, so a point less is a D on the standard scale.',
-      },
-      {
-        question: 'What is a 35 out of 50 as a letter grade?',
-        answer:
-          '35 out of 50 is 70%, which is a C on the standard scale and a C- on the plus/minus scale. It is an average result rather than a failing one, and it sits right on the cutoff, so check whether your school rounds.',
-      },
-      {
-        question: 'Is a 30/50 a bad grade?',
-        answer:
-          '30 out of 50 is 60%, which is a D (1.0 GPA points) on the standard scale and a D- (0.7) on the plus/minus scale. It is a passing grade at most schools, but only just, and some programs need a C or better.',
-      },
-      {
-        question: 'Is 48 out of 50 an A?',
-        answer:
-          'Yes. 48 out of 50 is 96%, which is an A (4.0 GPA points) on the standard scale and a plain A on the plus/minus scale, where an A+ starts at 97%. You would need 49 out of 50 for an A+.',
-      },
-      {
-        question: 'What letter grade is an 85 in college?',
-        answer:
-          'An 85% is a B (3.0 GPA points) on both the standard and the plus/minus scale. Colleges that use a different table, such as an A starting at 93 or a B starting at 85, may print different cutoffs, so check the grading policy for your course.',
-      },
-      {
-        question: 'What percentage is a B grade?',
-        answer:
-          'A B is 80–89% on the standard scale. On the plus/minus scale a plain B is 83–86.99%, a B+ is 87–89.99% and a B- is 80–82.99%. Every B-range grade is worth about 3.0 on the 4.0 scale, from 2.7 for a B- to 3.3 for a B+.',
-      },
-      {
-        question: 'Is a B a poor grade?',
-        answer:
-          'No. A B is above average and is worth 3.0 GPA points, a solid result in most courses. It only matters if a program sets a higher bar, for example an A in a prerequisite or a minimum GPA for a scholarship.',
-      },
-      {
-        question: 'How do I convert a percentage to a 4.0 GPA?',
-        answer:
-          'Convert the percentage to a letter using your scale, then read the points for that letter: A 4.0, B 3.0, C 2.0, D 1.0, F 0.0 on the standard scale, with 3.7, 3.3, 2.7, 2.3, 1.7, 1.3 and 0.7 for the minus and plus grades. A 92% is an A- or a 4.0, depending on the scale.',
-      },
-      {
-        question: 'Is GPA determined by letter grade?',
-        answer:
-          'Yes. Each course’s letter grade becomes grade points, those points are multiplied by the course’s credit hours, and the total is divided by the total credits. The percentage behind the letter does not count in GPA, only the letter does.',
-      },
-      {
-        question: 'Is a 3.9 GPA an A?',
-        answer:
-          'A 3.9 GPA is an A average. It sits between an A- (3.7) and an A (4.0). With courses of equal credit, one B among ten A grades gives exactly 3.9, so a 3.9 means nearly all A grades.',
-      },
-      {
-        question: 'Is a 2.7 GPA a B-?',
-        answer:
-          'On the common 4.0 scale a 2.7 is the value of a B-, so a 2.7 GPA means your average is a B- across your courses. A 2.75 is slightly higher than a B- and closer to a B- than to a B, which is 3.0.',
-      },
-      {
-        question: 'Are all B’s a 3.5 GPA?',
-        answer:
-          'No. All B grades give a 3.0 GPA, because a B is worth 3.0 points. A 3.5 sits halfway between a B and an A, which equals about half A grades and half B grades in courses of equal credit.',
-      },
-      {
-        question: 'Will one C ruin a 4.0 GPA?',
-        answer:
-          'One C lowers a 4.0 but does not ruin it. Among ten equal-credit courses a single C (2.0) with nine A grades gives a 3.8, and among forty courses it gives a 3.95. The more credits you have, the less one grade moves your GPA.',
-      },
-      {
-        question: 'What is considered a good GPA?',
-        answer:
-          'A 3.0 is a B average and a common minimum for scholarships and graduate programs, and a 3.5 or higher is generally seen as strong. What counts as good depends on your school, program and goal, so check the requirement you are aiming for.',
-      },
-      {
-        question: 'How do I use a letter grade calculator with a curve?',
-        answer:
-          'Curve the scores first, then convert the curved percentage to a letter. The grade curve calculator shows the curved scores, and you can enter any of them here. This calculator does not apply a curve on its own.',
-      },
-      {
-        question: 'How do I turn points into a letter grade?',
-        answer:
-          'Divide the points earned by the points possible and multiply by 100, then enter that percentage here. For example, 87 out of 100 points is 87%, which is a B on the standard scale and a B+ on the plus/minus scale.',
-      },
-      {
-        question: 'What letter grade is a 66 or an 88?',
-        answer:
-          'A 66% is a D (1.0 GPA points) on both common scales, 4 points below a C on the standard scale. An 88% is a B (3.0) on the standard scale and a B+ (3.3) on the plus/minus scale.',
-      },
-      {
-        question: 'Do Canadian and Australian universities use the same letter grades?',
-        answer:
-          'Not always. Canadian schools often use a 4.0 or 4.3 letter scale that varies by province and university, and many Australian universities use High Distinction, Distinction, Credit and Pass rather than A–F. This tool shows the common US scales, so use your institution’s published table.',
-      },
     ],
     related: [
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'Combine letters and credits into semester and cumulative GPA.' },
@@ -710,9 +477,48 @@ CORE_PAGES['test-grade-calculator'].related.push({ path: '/grading-scale/', labe
 CORE_PAGES['letter-grade-calculator'].related.push({ path: '/grading-scale/', label: 'Grading scale charts', blurb: 'Percent and letter for every score on 5 to 100 questions.' });
 CORE_PAGES['grade-curve-calculator'].related.push({ path: '/average-grade-calculator/', label: 'Average grade calculator', blurb: 'Mean and median for a list of scores.' });
 
+// Quick-answer content added by the SEO fix kit (search-intent audit): every figure is computed from the shared scales.
+{
+  const pct = (n: number) => roundTo(n, 1);
+  const lookupRows: string[][] = [];
+  for (let p = 100; p >= 60; p--) {
+    const std = percentToLetter(p, SCALE_STANDARD);
+    const pm = percentToLetter(p, SCALE_PLUS_MINUS);
+    lookupRows.push([`${p}%`, std.letter, pm.letter, pm.gpa.toFixed(1)]);
+  }
+  lookupRows.push(['Below 60%', 'F', 'F', '0.0']);
+  const p75std = percentToLetter(75, SCALE_STANDARD);
+  const p75pm = percentToLetter(75, SCALE_PLUS_MINUS);
+  CORE_PAGES['letter-grade-calculator'].lookupTables = [
+    {
+      heading: 'Percent to letter grade chart',
+      intro: 'Find any whole percentage from 60 to 100. The A–F column uses the 90/80/70/60 scale; the plus/minus column uses the 97/93/90/87/83/80/77/73/70/67/63/60 scale with its GPA points.',
+      columns: ['Percent', 'Letter (A–F scale)', 'Letter (plus/minus)', 'GPA points (plus/minus)'],
+      rows: lookupRows,
+    },
+  ];
+  CORE_PAGES['letter-grade-calculator'].sections.unshift({
+    heading: 'What grade is 75 percent?',
+    paragraphs: [
+      `A 75% is a ${p75std.letter} on the standard A–F scale and a ${p75pm.letter} on the plus/minus scale, which is ${p75pm.gpa.toFixed(1)} GPA points. Use the chart above to look up any other percentage from 60 to 100.`,
+    ],
+  });
+  const t44 = calculateTestGrade({ earned: 44, possible: 60 });
+  const t44pct = pct(t44.percent);
+  CORE_PAGES['test-grade-calculator'].sections.unshift({
+    heading: 'What grade is 44 out of 60?',
+    paragraphs: [
+      `44 out of 60 is ${t44pct}%, which is a ${percentToLetter(t44pct, SCALE_STANDARD).letter} on the standard A–F scale and a ${percentToLetter(t44pct, SCALE_PLUS_MINUS).letter} on the plus/minus scale. The same method works for any score: divide points earned by points possible and multiply by 100.`,
+    ],
+  });
+}
+
 export const TOOL_PAGES: Record<string, ToolPageEntry> = {
   ...CORE_PAGES,
   'average-grade-calculator': buildAverageGradePage(),
+  'weighted-gpa-calculator': buildWeightedGpaPage(),
+  'weighted-vs-unweighted-gpa': buildWeightedVsUnweightedPage(),
+  'how-many-questions-can-i-miss': buildMissCalculatorPage(),
   'grading-scale': buildGradingScaleIndexPage(),
   ...Object.fromEntries(GRADING_SCALE_SIZES.map((n) => {
     const entry = buildQuestionCountPage(n);

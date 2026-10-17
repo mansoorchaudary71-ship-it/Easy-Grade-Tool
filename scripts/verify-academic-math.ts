@@ -21,6 +21,8 @@ import {
   mapLetterToScale,
 } from '../src/utils/academicMath';
 import { solveFinalExam } from '../src/utils/finalExam';
+import { DEFAULT_BONUS, calculateWeightedGpa } from '../src/utils/gpaMath';
+import { buildMissTable, maxWrongForMinPercent } from '../src/utils/missMath';
 import {
   buildQuickChart,
   calculateMultiAssessmentGrade,
@@ -193,6 +195,30 @@ eq('final exam: target above reach is unreachable', solveFinalExam({ current: 90
 eq('final exam: already secured', solveFinalExam({ current: 100, target: 80, weight: 20 }).status, 'secured');
 eq('final exam: 100 current, 90 target, 20% weight needs a 50', solveFinalExam({ current: 100, target: 90, weight: 20 }).status, 'ok');
 eq('final exam: blank current is invalid', solveFinalExam({ current: '', target: 90, weight: 20 }).status, 'invalid');
+
+// Weighted GPA (SEO fix kit)
+const wg = calculateWeightedGpa(
+  [
+    { letter: 'A', credits: 1, level: 'ap' },
+    { letter: 'B', credits: 1, level: 'honors' },
+    { letter: 'A', credits: 1, level: 'regular' },
+  ],
+  DEFAULT_BONUS
+);
+eq('weighted gpa example: unweighted 3.67', wg?.unweighted, 3.67);
+eq('weighted gpa example: weighted 4.17', wg?.weighted, 4.17);
+eq('weighted gpa: F gets no bonus', calculateWeightedGpa([{ letter: 'F', credits: 1, level: 'ap' }], DEFAULT_BONUS)?.weighted, 0);
+eq('weighted gpa: credits weight the average', calculateWeightedGpa([{ letter: 'A', credits: 3, level: 'regular' }, { letter: 'C', credits: 1, level: 'regular' }], DEFAULT_BONUS)?.unweighted, 3.5);
+eq('weighted gpa: nothing valid -> null', calculateWeightedGpa([{ letter: 'A', credits: 0, level: 'regular' }], DEFAULT_BONUS), null);
+
+// How many can I miss (same rounding rule as the chart)
+eq('miss: 25 questions A=2', maxWrongForMinPercent(25, 90), 2);
+eq('miss: 25 questions B=5', maxWrongForMinPercent(25, 80), 5);
+eq('miss: 75 questions A=7 (90.7%)', maxWrongForMinPercent(75, 90), 7);
+eq('miss: 12 questions A=1', maxWrongForMinPercent(12, 90), 1);
+eq('miss: 100% target allows 0', maxWrongForMinPercent(10, 100), 0);
+eq('miss: invalid target -> null', maxWrongForMinPercent(10, 101), null);
+eq('miss table skips F', buildMissTable(20, SCALE_STANDARD).map((r) => r.letter), ['A', 'B', 'C', 'D']);
 
 if (failed) {
   console.error(`\n${failed} check(s) failed`);
