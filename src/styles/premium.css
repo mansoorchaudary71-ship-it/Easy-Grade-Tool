@@ -51,7 +51,7 @@ html [class*="tool-theme-"] {
 
 /* Light canvas: a cooler grey so the slate chrome sits naturally on it */
 html:not(.dark) body {
-  background-color: #F8FAFC; /* slate-50: the 60% neutral */
+  background-color: #FAF9F7; /* crisp warm off-white canvas */
 }
 
 /* --------------------------------------------------------------------------
@@ -170,7 +170,7 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
 .premium-surface :is(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select):focus {
   outline: none;
   border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.32);
+  box-shadow: 0 0 0 3px rgba(166, 138, 109, 0.32);
 }
 
 /* ==========================================================================
@@ -179,12 +179,12 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
    dark cards get the requested rgba(255,255,255,0.1) edge.
    ========================================================================== */
 .premium-surface .glow-surface {
-  border-color: rgba(148, 163, 184, 0.28);
-  box-shadow: var(--ds-shadow-card);
+  border-color: rgba(122, 97, 73, 0.14);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 .dark .premium-surface .glow-surface {
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 20px 44px -20px rgba(0, 0, 0, 0.65);
+  box-shadow: none;
 }
 
 /* Result panels rise in softly and carry a blue glow */
@@ -209,7 +209,7 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
   font-weight: 800;
   line-height: 1.12;
   letter-spacing: -0.03em;
-  color: #0F172A;
+  color: #2A221A;
 }
 .dark .chrome-bar-title {
   color: #F8FAFC;
@@ -219,142 +219,194 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.03em;
-  color: #0F172A;
+  color: #2A221A;
 }
 .dark .ft-news-title {
   color: #F8FAFC;
 }
 
 /* ==========================================================================
-   Elevation system. One lighting model for the header, the tool name bar and the footer:
-   light comes from the top-left, so every surface gets an inset top highlight, a 1px low-opacity edge,
-   and 3-4 stacked shadows (contact, near, ambient, tinted bloom). Unlayered, so these win over Tailwind utilities.
+   Minimal sand system. One quiet lighting model for the header, the tool name bar, the footer and every tool card.
+
+   Palette (warm, never blue):
+     --sand-canvas  #FAF9F7   crisp off-white page
+     --sand-bar     #F2EBE1   name bar surface (soft warm sand)
+     --taupe        #A68A6D   hairlines, sheen, thin active line
+     --taupe-deep   #7A6149   active text and filled controls (5.9:1 on white)
+   Depth is almost gone: surfaces are flat, with a 1px warm edge and, at most, one ambient shadow of 3% black.
+   The "gloss" is LOCALIZED, like light catching one corner of a physical card: a soft warm bloom and a hairline that
+   fade in toward the top-right corner. It never covers the whole surface and never blurs what is behind it.
+   Unlayered, so these rules win over Tailwind utilities.
    ========================================================================== */
 :root {
-  --el-edge: rgba(15, 23, 42, 0.08);
-  --el-edge-strong: rgba(15, 23, 42, 0.14);
-  --el-glow: rgba(37, 99, 235, 0.35);
+  --sand-canvas: #FAF9F7;
+  --sand-bar: #F2EBE1;
+  --sand-soft: #F7F3EE;
+  --taupe: #A68A6D;
+  --taupe-deep: #7A6149;
+  --taupe-ink: #2A221A;
+
+  --el-edge: rgba(122, 97, 73, 0.16);
+  --el-edge-strong: rgba(122, 97, 73, 0.32);
+  --el-ambient: 0 4px 20px rgba(0, 0, 0, 0.03);
+
+  /* Localized sheen for white cards: top hairline + right hairline + corner bloom, all fading away from the top-right corner */
+  --sheen-img:
+    linear-gradient(270deg, rgba(190, 155, 115, 0.7) 0%, rgba(190, 155, 115, 0) 55%),
+    linear-gradient(180deg, rgba(190, 155, 115, 0.4) 0%, rgba(190, 155, 115, 0) 55%),
+    radial-gradient(85% 95% at 100% 0%, rgba(205, 176, 142, 0.26) 0%, rgba(205, 176, 142, 0.09) 38%, rgba(205, 176, 142, 0) 64%);
+  --sheen-size: 100% 1px, 1px 100%, 100% 100%;
+  --sheen-pos: top left, top right, 0 0;
+}
+:root.dark {
+  --sheen-img:
+    linear-gradient(270deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(85% 95% at 100% 0%, rgba(214, 190, 160, 0.1) 0%, rgba(214, 190, 160, 0.03) 38%, rgba(214, 190, 160, 0) 64%);
 }
 
-/* Header: faint cool gradient, hairline edge, soft shadow so it floats above the canvas */
+/* Shared sheen layers (longhand, so the surface keeps its own background-color, e.g. Tailwind's bg-white) */
+.sheen,
+.glow-surface,
+.elev-card {
+  background-repeat: no-repeat;
+}
+.sheen,
+.glow-surface {
+  background-image: var(--sheen-img);
+  background-size: var(--sheen-size);
+  background-position: var(--sheen-pos);
+}
+
+/* Header: completely flat, one 1px warm hairline underneath */
 .elev-chrome {
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%);
+  background-color: #FFFFFF;
+  background-image: none;
   border-bottom: 1px solid var(--el-edge);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 10px 24px -14px rgba(15, 23, 42, 0.2);
+  box-shadow: none;
 }
 .dark .elev-chrome {
-  background-image: linear-gradient(180deg, #121826 0%, #0B0F17 100%);
+  background-color: #0F172A;
   border-bottom-color: rgba(255, 255, 255, 0.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 12px 28px -14px rgba(0, 0, 0, 0.75);
 }
 
-/* Name bar card: frosted, tinted, glossy, clearly lifted */
+/* Name bar: warm sand, 1px warm edge, the only surface that gets the barely-there ambient lift.
+   Sheen = white hairline + soft white bloom in the top-right corner (visible on sand; ChromeAccents adds the diagonal sweep). */
 .elev-card {
+  background-color: var(--sand-bar);
   background-image:
-    radial-gradient(120% 120% at 0% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 55%),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(244, 248, 255, 0.92) 55%, rgba(232, 240, 255, 0.9) 100%);
+    linear-gradient(270deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(80% 110% at 100% 0%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.16) 40%, rgba(255, 255, 255, 0) 66%);
+  background-size: 100% 1px, 1px 100%, 100% 100%;
+  background-position: top left, top right, 0 0;
   border: 1px solid var(--el-edge);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 1),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.03),
-    0 1px 2px rgba(15, 23, 42, 0.05),
-    0 8px 16px -6px rgba(15, 23, 42, 0.08),
-    0 22px 44px -16px rgba(15, 23, 42, 0.14),
-    0 44px 80px -32px rgba(37, 99, 235, 0.24);
-  -webkit-backdrop-filter: blur(16px) saturate(1.3);
-  backdrop-filter: blur(16px) saturate(1.3);
+  box-shadow: var(--el-ambient);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 .dark .elev-card {
+  background-color: #1A1713;
   background-image:
-    radial-gradient(120% 120% at 0% 0%, rgba(96, 165, 250, 0.1) 0%, rgba(96, 165, 250, 0) 55%),
-    linear-gradient(135deg, #131A28 0%, #0E1420 55%, #0B0F17 100%);
-  border-color: rgba(255, 255, 255, 0.09);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 1px 2px rgba(0, 0, 0, 0.4),
-    0 14px 28px -10px rgba(0, 0, 0, 0.55),
-    0 40px 70px -30px rgba(37, 99, 235, 0.3);
+    linear-gradient(270deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(80% 110% at 100% 0%, rgba(214, 190, 160, 0.12) 0%, rgba(214, 190, 160, 0.04) 40%, rgba(214, 190, 160, 0) 66%);
+  border-color: rgba(214, 190, 160, 0.16);
+  box-shadow: none;
 }
 
-/* Footer: gradient rises from a tinted top edge; shadow falls UP onto the page above it */
+/* Footer: flat, one 1px hairline on top */
 .elev-footer {
-  background-image: linear-gradient(180deg, #F3F6FD 0%, #FFFFFF 36%, #FFFFFF 100%);
+  background-color: #FFFFFF;
+  background-image: none;
   border-top: 1px solid var(--el-edge);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 -1px 2px rgba(15, 23, 42, 0.03),
-    0 -16px 36px -24px rgba(15, 23, 42, 0.22);
+  box-shadow: none;
 }
 .dark .elev-footer {
-  background-image: linear-gradient(180deg, #121826 0%, #0B0F17 40%, #0B0F17 100%);
+  background-color: #0F172A;
   border-top-color: rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 -16px 36px -24px rgba(0, 0, 0, 0.8);
 }
 
-/* Pills and fields: pure white, 1px low-opacity edge, small contact shadow; hover/focus add a blue bloom */
+/* Pills and fields (search, 100% Private, theme toggle, round buttons): pure white, 1px edge, no shadow, no bloom */
 .elev-pill {
   background-color: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  box-shadow:
-    inset 0 1px 0 #FFFFFF,
-    0 1px 2px rgba(15, 23, 42, 0.05),
-    0 6px 12px -8px rgba(15, 23, 42, 0.16);
-  transition: border-color 0.2s ease, box-shadow 0.25s ease, background-color 0.2s ease, width 0.3s ease;
+  background-image: none;
+  border: 1px solid rgba(122, 97, 73, 0.2);
+  box-shadow: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease, width 0.3s ease;
 }
 .elev-pill:hover {
-  border-color: rgba(37, 99, 235, 0.38);
-  box-shadow:
-    inset 0 1px 0 #FFFFFF,
-    0 0 0 4px rgba(37, 99, 235, 0.08),
-    0 10px 20px -10px var(--el-glow);
+  border-color: rgba(122, 97, 73, 0.45);
+  box-shadow: none;
 }
 .elev-pill:focus,
 .elev-pill:focus-visible {
-  border-color: rgba(37, 99, 235, 0.65);
-  box-shadow:
-    inset 0 1px 0 #FFFFFF,
-    0 0 0 4px rgba(37, 99, 235, 0.16),
-    0 12px 26px -10px var(--el-glow);
+  border-color: var(--taupe);
+  box-shadow: 0 0 0 3px rgba(166, 138, 109, 0.18);
 }
 .elev-pill--ok {
-  background-image: linear-gradient(180deg, #FFFFFF 0%, #F0FDF7 100%);
-  border-color: rgba(16, 185, 129, 0.32);
-  box-shadow:
-    inset 0 1px 0 #FFFFFF,
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 8px 16px -10px rgba(16, 185, 129, 0.45);
+  background-image: none;
+  border-color: rgba(122, 97, 73, 0.2);
+  box-shadow: none;
 }
 .elev-pill--ok:hover {
-  border-color: rgba(16, 185, 129, 0.55);
-  box-shadow: inset 0 1px 0 #FFFFFF, 0 0 0 4px rgba(16, 185, 129, 0.1), 0 10px 20px -10px rgba(16, 185, 129, 0.55);
+  border-color: rgba(122, 97, 73, 0.45);
+  box-shadow: none;
 }
 .dark .elev-pill {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 6px 14px -8px rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(214, 190, 160, 0.2);
+  box-shadow: none;
 }
 .dark .elev-pill:hover {
-  border-color: rgba(96, 165, 250, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 4px rgba(96, 165, 250, 0.12), 0 10px 22px -10px rgba(59, 130, 246, 0.6);
+  border-color: rgba(214, 190, 160, 0.42);
+  box-shadow: none;
 }
 .dark .elev-pill:focus,
 .dark .elev-pill:focus-visible {
-  border-color: rgba(96, 165, 250, 0.8);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 0 0 4px rgba(96, 165, 250, 0.22), 0 12px 26px -10px rgba(59, 130, 246, 0.7);
+  border-color: #D6BEA0;
+  box-shadow: 0 0 0 3px rgba(214, 190, 160, 0.2);
 }
 .dark .elev-pill--ok {
   background-image: none;
-  background-color: rgba(16, 185, 129, 0.1);
-  border-color: rgba(52, 211, 153, 0.3);
+  background-color: rgba(255, 255, 255, 0.04);
+  border-color: rgba(214, 190, 160, 0.2);
 }
 
+/* Diagonal light sweep drawn by <ChromeAccents />: a crisp-edged band, strongest at the top-right corner, masked away from the text */
+.chrome-sheen {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(52%, 640px);
+  -webkit-mask-image: radial-gradient(130% 150% at 100% 0%, #000 0%, rgba(0, 0, 0, 0.55) 38%, transparent 72%);
+  mask-image: radial-gradient(130% 150% at 100% 0%, #000 0%, rgba(0, 0, 0, 0.55) 38%, transparent 72%);
+}
+.chrome-sheen::before,
+.chrome-sheen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+/* wide soft band with a crisp leading edge */
+.chrome-sheen::before {
+  background: linear-gradient(112deg, rgba(var(--sheen-rgb), 0) 34%, rgba(var(--sheen-rgb), var(--sheen-a)) 34.4%, rgba(var(--sheen-rgb), calc(var(--sheen-a) * 0.35)) 56%, rgba(var(--sheen-rgb), 0) 80%);
+}
+/* thin specular streak just behind the band */
+.chrome-sheen::after {
+  background: linear-gradient(112deg, rgba(var(--sheen-rgb), 0) 60%, rgba(var(--sheen-rgb), calc(var(--sheen-a) * 1.1)) 60.4%, rgba(var(--sheen-rgb), 0) 61.6%);
+}
+.chrome-sheen--bar    { --sheen-rgb: 255, 255, 255; --sheen-a: 0.6; }
+.chrome-sheen--header,
+.chrome-sheen--footer { --sheen-rgb: 190, 155, 115; --sheen-a: 0.1; }
+.dark .chrome-sheen--bar,
+.dark .chrome-sheen--header,
+.dark .chrome-sheen--footer { --sheen-rgb: 255, 255, 255; --sheen-a: 0.07; }
+.chrome-sheen--header { width: min(40%, 520px); }
+
 @media print {
-  .elev-chrome, .elev-card, .elev-footer, .elev-pill { box-shadow: none !important; background-image: none !important; }
+  .elev-chrome, .elev-card, .elev-footer, .elev-pill, .sheen, .glow-surface { box-shadow: none !important; background-image: none !important; }
 }
 
 @keyframes premium-rise {

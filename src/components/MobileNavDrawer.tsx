@@ -43,12 +43,12 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
   if (typeof document === 'undefined') return null;
 
   const rowBase =
-    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-medium no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400';
+    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-medium no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#A68A6D] dark:focus-visible:ring-[#D6BEA0]';
   const rowClass = (active: boolean) =>
     `${rowBase} ${
       active
-        ? 'bg-blue-50 text-blue-800 dark:bg-blue-950/60 dark:text-blue-200'
-        : 'text-slate-900 hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-800'
+        ? 'bg-[#F5EFE7] text-[#5E4A36] dark:bg-[#2A2118] dark:text-[#E6D5BF]'
+        : 'text-slate-900 hover:bg-[#FAF6F1] dark:text-slate-100 dark:hover:bg-slate-800'
     }`;
 
   const renderItem = (item: NavItem) => {
@@ -86,7 +86,7 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
         aria-modal="true"
         aria-labelledby="mobile-nav-title"
         tabIndex={-1}
-        className={`flex h-full w-[min(88vw,22rem)] flex-col bg-white shadow-2xl focus:outline-none dark:bg-slate-900 transition-transform duration-200 ease-out motion-reduce:transition-none pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] ${
+        className={`flex h-full w-[min(88vw,22rem)] flex-col bg-white shadow-[0_4px_20px_rgba(0,0,0,0.08)] focus:outline-none dark:bg-slate-900 transition-transform duration-200 ease-out motion-reduce:transition-none pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] ${
           shown ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

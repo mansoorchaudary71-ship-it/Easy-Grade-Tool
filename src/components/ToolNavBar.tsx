@@ -19,20 +19,20 @@ export const ICON_STROKE = 2;
 
 /** Focus ring shared by the header controls. */
 export const headerFocusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#0B0F17]';
+  'outline-none focus-visible:ring-2 focus-visible:ring-[#A68A6D] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-[#D6BEA0] dark:focus-visible:ring-offset-[#0F172A]';
 
 const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];
 
 /**
- * 44px-tall text link in sentence case: 14px medium with slightly tightened tracking. State is carried by colour AND a short
- * pill underline, so it never relies on colour alone.
+ * 44px-tall text link in sentence case: 14px medium with slightly tightened tracking. The active state is a heavier weight,
+ * the light-brown ink and ONE thin 1.5px line under the label, so it never relies on colour alone.
  */
 const linkBase =
-  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[14.5px] font-medium tracking-[-0.01em] no-underline touch-manipulation transition-[color,background-color,box-shadow] duration-200 lg:px-6 [-webkit-tap-highlight-color:transparent]';
+  'relative inline-flex min-h-11 shrink-0 cursor-pointer select-none items-center justify-center gap-1.5 whitespace-nowrap rounded-full px-4 text-[14.5px] font-medium tracking-[-0.01em] no-underline touch-manipulation transition-[color,background-color,box-shadow] duration-200 lg:px-7 [-webkit-tap-highlight-color:transparent]';
 const linkIdle =
-  'text-slate-600 hover:bg-slate-900/[0.04] hover:text-slate-950 dark:text-slate-300 dark:hover:bg-white/[0.06] dark:hover:text-white';
+  'text-[#7A6D5F] hover:text-[#2A221A] dark:text-slate-300 dark:hover:text-white';
 const linkActive =
-  'font-semibold text-slate-950 dark:text-white after:absolute after:bottom-1 after:left-1/2 after:h-[3px] after:w-7 after:-translate-x-1/2 after:rounded-full after:bg-gradient-to-r after:from-blue-500 after:to-indigo-500 after:shadow-[0_2px_10px_rgba(59,130,246,0.65)] dark:after:from-blue-400 dark:after:to-indigo-400';
+  'font-semibold text-[#5E4A36] dark:text-[#E6D5BF] after:absolute after:bottom-1.5 after:left-1/2 after:h-[1.5px] after:w-6 after:-translate-x-1/2 after:rounded-full after:bg-[#A68A6D] dark:after:bg-[#D6BEA0]';
 
 /**
  * Desktop primary navigation (md and up): ONE visible link (Quick Grade) plus ONE "Tools" dropdown that holds
@@ -55,7 +55,7 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
 
   return (
     <>
-      <nav className="hidden items-center gap-1 md:flex lg:gap-4" aria-label="Main">
+      <nav className="hidden items-center gap-2 md:flex lg:gap-5" aria-label="Main">
         <Link
           to={PRIMARY_NAV_ITEM.path}
           onClick={() => {

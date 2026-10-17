@@ -12,8 +12,8 @@ interface ToolHeadingProps {
 }
 
 /**
- * Tool name bar: the same lit surface as the header and footer (.elev-card in premium.css: frosted faint-blue gradient,
- * 1px low-opacity edge, layered shadows), a fluid heading and the shared layered accents. Used by every tool and info page, so changing it here restyles them all.
+ * Tool name bar: a soft warm-sand card (.elev-card in premium.css) with a 1px warm edge, one barely-there ambient shadow,
+ * a localized corner sheen, a fluid heading and the shared light sweep from <ChromeAccents />. Used by every tool and info page, so changing it here restyles them all.
  *
  * The accents live in an absolutely positioned, overflow-hidden, pointer-events-none layer (see <ChromeAccents />),
  * so they never clip the text or block a click. Heading colours are set in premium.css (.chrome-bar-title) because
@@ -30,13 +30,13 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
   const HeadingTag = headingTag;
 
   return (
-    <div className="chrome-bar elev-card relative isolate mb-8 flex flex-col gap-5 overflow-hidden rounded-[28px] px-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:rounded-[32px] sm:px-10 sm:py-10">
+    <div className="chrome-bar elev-card relative isolate mb-10 flex flex-col gap-6 overflow-hidden rounded-[28px] px-7 py-10 sm:flex-row sm:items-center sm:justify-between sm:rounded-[32px] sm:px-12 sm:py-12">
       <ChromeAccents variant="bar" />
 
       <div className="relative z-10 min-w-0">
         <HeadingTag className="chrome-bar-title m-0 [text-wrap:balance]">{title}</HeadingTag>
         {descText && (
-          <p className="mt-2.5 max-w-2xl text-[15px] font-normal leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
+          <p className="mt-3 max-w-2xl text-[15px] font-normal leading-relaxed text-[#6B5C4D] dark:text-slate-300 sm:text-base">
             {descText}
           </p>
         )}

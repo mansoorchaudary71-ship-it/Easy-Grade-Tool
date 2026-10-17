@@ -73,13 +73,13 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 /* Shared class strings                                                        */
 /* -------------------------------------------------------------------------- */
 
-/** The header is a stark white surface (near-black in dark mode), so the focus ring offset follows the theme. */
+/** The header is a flat white surface (canvas colour in dark mode), so the focus ring offset follows the theme. */
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-[#0B0F17]';
+  'outline-none focus-visible:ring-2 focus-visible:ring-[#A68A6D] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-[#D6BEA0] dark:focus-visible:ring-offset-[#0F172A]';
 
-/** Shared look for the round header controls (search icon on phones, hamburger, theme switch): pure white, fine-edged, lifted pills. */
+/** Shared look for the round header controls (search icon on phones, hamburger, theme switch): pure white, 1px edge, weightless pills. */
 const glassControl =
-  'elev-pill text-slate-700 hover:text-slate-950 active:translate-y-px dark:text-slate-200 dark:hover:text-white';
+  'elev-pill text-[#5E4A36] hover:text-[#2A221A] active:translate-y-px dark:text-slate-200 dark:hover:text-white';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     <MotionConfig reducedMotion="user">
       <header className="relative print:hidden">
         {/* Phones: logo left, actions right.  md+: 3-column grid so the links are perfectly centred. */}
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-2 px-3.5 sm:px-6 md:grid md:h-[76px] md:grid-cols-[1fr_auto_1fr] lg:px-10">
+        <div className="mx-auto flex h-[68px] max-w-[1440px] items-center justify-between gap-2 px-4 sm:px-8 md:grid md:h-20 md:grid-cols-[1fr_auto_1fr] lg:px-12">
           {/* ------------------------------ Left: logo ------------------------------ */}
           <div className="flex min-w-0 items-center gap-1 sm:gap-3 md:justify-self-start">
             {/* Hamburger: phones only. Opens the grouped tools drawer. */}
@@ -159,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* ------------------------------ Right: actions ------------------------------ */}
-          <div className="flex shrink-0 items-center gap-2 sm:gap-3 md:justify-self-end">
+          <div className="flex shrink-0 items-center gap-2.5 sm:gap-3.5 md:justify-self-end">
             {/* Search: icon button on phones and tablets, pure-white pill field from xl up */}
             <button
               type="button"
@@ -175,7 +175,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <div className="group relative hidden w-64 transition-[width] duration-300 ease-out xl:block 2xl:w-72 xl:focus-within:w-72 2xl:focus-within:w-80">
               <Search
-                className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400 transition-colors duration-300 group-focus-within:text-blue-600 dark:text-slate-400 dark:group-focus-within:text-blue-300"
+                className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-[#A39583] transition-colors duration-300 group-focus-within:text-[#7A6149] dark:text-slate-400 dark:group-focus-within:text-[#D6BEA0]"
                 strokeWidth={ICON_STROKE}
                 aria-hidden="true"
               />
@@ -203,16 +203,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="elev-pill h-11 w-full cursor-pointer rounded-full py-2 pl-11 pr-[4.75rem] text-[13.5px] font-medium tracking-tight text-slate-800 outline-none placeholder:text-slate-500 dark:text-slate-100 dark:placeholder:text-slate-400"
+                className="elev-pill h-11 w-full cursor-pointer rounded-full py-2 pl-11 pr-[4.75rem] text-[13.5px] font-medium tracking-tight text-[#2A221A] outline-none placeholder:text-[#8C7F70] dark:text-slate-100 dark:placeholder:text-slate-400"
               />
-              <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-full border border-slate-900/10 bg-slate-50 px-2 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-slate-500 shadow-[0_1px_1px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:shadow-none">
+              <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-full border border-[#7A6149]/15 bg-[#FAF9F7] px-2 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-[#8C7F70] dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
                 {shortcutLabel}
               </kbd>
             </div>
 
-            {/* 100% Private: white pill, shield only from lg, with the words from xl */}
+            {/* 100% Private: white pill with a 1px edge, shield only from lg, with the words from xl */}
             <div
-              className="elev-pill elev-pill--ok hidden h-11 items-center gap-2 rounded-full px-3.5 text-[13px] font-medium tracking-tight text-emerald-800 dark:text-emerald-300 lg:inline-flex"
+              className="elev-pill elev-pill--ok hidden h-11 items-center gap-2 rounded-full px-3.5 text-[13px] font-medium tracking-tight text-[#5E4A36] dark:text-[#E6D5BF] lg:inline-flex"
               title="100% Private: everything runs in your browser"
             >
               <PrivacyShieldIcon className="size-4 shrink-0" />

@@ -15,7 +15,7 @@ interface SiteHeaderProps {
  *   centre Quick Grade link + Tools dropdown
  *   right  search (Ctrl+K), 100% Private, theme
  *
- * Surface: stark white / near-black with a faint gradient, a 1px low-opacity edge, a soft lifting shadow (.elev-chrome) and the shared layered accents.
+ * Surface: completely flat (.elev-chrome): white, a razor-thin 1px warm hairline underneath, no shadow, and the faint localized sheen from <ChromeAccents />.
  * Mounted once in App.tsx above <Routes>.
  */
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool, onOpenCommandPalette }) => (
