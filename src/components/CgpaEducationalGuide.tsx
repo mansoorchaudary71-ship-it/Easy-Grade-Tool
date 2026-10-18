@@ -231,7 +231,7 @@ export const CgpaEducationalGuide: React.FC = () => {
             id="cgpa-guide-heading"
             className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight mb-4"
           >
-            How Do I Convert CGPA to Percentage? Formulas, Scales &amp; University Rules
+            How Do I Convert CGPA to Percentage? Formulas and University Rules
           </h2>
 
           <div className="my-6">
@@ -505,7 +505,7 @@ export const CgpaEducationalGuide: React.FC = () => {
 
           {/* SGPA to CGPA Section */}
           <h2 className="text-xl sm:text-2xl font-semibold text-slate-900 dark:text-white mt-8 mb-3 tracking-tight">
-            How to Calculate CGPA from Semester SGPA Scores (and Convert SGPA to Percentage)
+            How to Calculate CGPA from Semester SGPA (and Convert to Percentage)
           </h2>
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
             Your <strong>SGPA (Semester Grade Point Average)</strong> reflects your grade point average for a single academic term, while your <strong>CGPA</strong> aggregates performance across all completed semesters weighted by each semester&apos;s total credit hours:

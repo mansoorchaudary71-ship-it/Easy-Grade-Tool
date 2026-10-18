@@ -83,10 +83,10 @@ export const PrivacyPolicy: React.FC = () => {
             
             {/* 1. In-Browser Calculator Processing */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">1</span>
-                <span>Calculators Run Locally in the Browser</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">1</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Calculators Run Locally in the Browser</h2>
+              </div>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
                 All calculation tools provided on this website—including the <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>, <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link>, <Link to="/gpa-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">GPA Calculator</Link>, <Link to="/cgpa-to-percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">CGPA to Percentage Calculator</Link>, <Link to="/percentage-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Percentage Calculator</Link>, <Link to="/tip-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Tip Calculator</Link>, <Link to="/loan-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Loan &amp; Mortgage Calculator</Link>, and <Link to="/password-generator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Password Generator</Link>—execute entirely within your device&apos;s web browser using JavaScript and HTML5.
               </p>
@@ -104,10 +104,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 2. Voluntary Data Submissions */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">2</span>
-                <span>Data Collection Points: What Is Sent to Our Server and Stored</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">2</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Data Collection Points: What Is Sent to Our Server and Stored</h2>
+              </div>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                 We only receive and store personal data when you explicitly and voluntarily submit information through our interactive forms. The following section audits every data collection point and backend endpoint in our application:
               </p>
@@ -187,10 +187,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 3. Storage Location & Security */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">3</span>
-                <span>Where Submitted Data Is Stored &amp; How It Is Protected</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">3</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Where Submitted Data Is Stored &amp; How It Is Protected</h2>
+              </div>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
                 Voluntary form submissions are stored securely in dedicated JSON files located within the application&apos;s protected server directory (<code className="text-xs font-mono bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded">server-data/</code>) on our hosting server:
               </p>
@@ -207,10 +207,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 4. Data Retention */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">4</span>
-                <span>Data Retention Policy</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">4</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Data Retention Policy</h2>
+              </div>
               <div className="w-full">
                 <table className="block sm:table w-full text-left text-xs sm:text-sm border-collapse">
                   <thead className="hidden sm:table-header-group">
@@ -253,10 +253,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 5. How to Unsubscribe and Delete Data */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">5</span>
-                <span>How to Unsubscribe, Access, or Delete Your Data</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">5</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">How to Unsubscribe, Access, or Delete Your Data</h2>
+              </div>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
                 You maintain complete ownership of your personal information. You have the right to request access to the data we hold regarding your email address, request corrections, or request permanent deletion of all records associated with you.
               </p>
@@ -283,10 +283,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 6. Cookies and Local Storage */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">6</span>
-                <span>Browser Storage &amp; Cookies</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">6</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Browser Storage &amp; Cookies</h2>
+              </div>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
                 This application does <strong>not</strong> use tracking cookies, cross-site advertising identifiers, or third-party marketing beacons. We use standard browser <code className="text-xs bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded font-mono">localStorage</code> solely to preserve your non-sensitive interface preferences across visits:
               </p>
@@ -301,10 +301,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 7. Third-Party Network Services (Google Fonts & PWA) */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">7</span>
-                <span>Third-Party Network Requests &amp; Offline PWA</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">7</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Third-Party Network Requests &amp; Offline PWA</h2>
+              </div>
               <div className="space-y-3 text-slate-600 dark:text-slate-300 leading-relaxed text-xs sm:text-sm">
                 <p>
                   <strong>Google Fonts:</strong> To provide legible, high-performance typography, our site loads the Plus Jakarta Sans and Inter font families from Google&apos;s Content Delivery Network (<code className="font-mono text-xs">fonts.googleapis.com</code> and <code className="font-mono text-xs">fonts.gstatic.com</code>). When your browser downloads font files, standard HTTP request metadata (your IP address and browser User-Agent) is transmitted to Google LLC as necessary to serve web assets. No calculation inputs, grades, or personal identifiers are ever transmitted to Google.
@@ -317,10 +317,10 @@ export const PrivacyPolicy: React.FC = () => {
 
             {/* 8. Contact Information */}
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight mb-3 flex items-center gap-2">
-                <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">8</span>
-                <span>Contact Email &amp; Inquiries</span>
-              </h2>
+              <div className="flex items-center gap-2 mb-3">
+                <span aria-hidden="true" className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-100 dark:bg-teal-900/50 text-teal-800 dark:text-teal-300 text-sm font-bold">8</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight m-0">Contact Email &amp; Inquiries</h2>
+              </div>
               <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4 text-xs sm:text-sm">
                 If you have questions regarding this Privacy Policy, wish to exercise your data access or deletion rights, or have inquiries regarding our data handling practices, please contact us directly:
               </p>

@@ -36,13 +36,13 @@ export const QuickGradeGuide: React.FC = () => (
     <ContentSection labelledBy="home-guide-title">
       <div>
         <h2 id="home-guide-title" className={H2_MAIN}>
-          Easy Grade Calculator: Free Easy Grader Tool and EZ Grader Chart for Teachers
+          Easy Grade Calculator: Free Easy Grader Tool and EZ Grader Chart
         </h2>
 
         <div className="my-6">
           <SemanticGuideImage
             toolKey="quick"
-            alt="Study desk with a notebook of course grades, a scientific calculator and a laptop for calculating test scores"
+            alt="Study desk with a notebook of grades, a scientific calculator and a laptop for scoring tests"
           />
         </div>
 

@@ -47,7 +47,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
   weighted: {
     imageKey: 'weighted',
     imageAlt:
-      'A hand presses buttons on a pocket calculator next to a paper showing weighted course syllabus percentages and final exam targets.',
+      'Hand pressing a pocket calculator beside a syllabus listing weighted grade percentages.',
     blocks: [
       title('Weighted Grade Calculator: How to Calculate Weighted Grades'),
       p(
@@ -124,7 +124,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'Use the target grade simulator under your results. Enter the grade you want and the weight of the final, and it solves for the exam score. The formula behind it is: needed score = (target − current grade × (1 − final weight)) ÷ final weight. With an 82% current grade, a 30% final and an 80% target, that is (80 − 82 × 0.70) ÷ 0.30 = 75.3%. For a full walkthrough, open the final exam grade calculator.',
       ),
 
-      h2('Weighted Grade Calculator in Excel, Google Sheets, Canvas and PowerSchool'),
+      h2('Weighted Grade Calculator in Excel, Google Sheets, Canvas, PowerSchool'),
       h3('How do I make a weighted grade calculator in Excel or Google Sheets?'),
       p(
         'Put each category percentage in one column and its weight in the next. Then use =SUMPRODUCT(B2:B6, C2:C6) / SUM(C2:C6), where column B holds the percentages and column C the weights, and the result is your weighted grade. The formula works the same in Excel and Google Sheets. This page does the same sum without any setup, which is handy when you only need a quick answer or a what-if score.',
@@ -163,7 +163,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
   'final-exam': {
     imageKey: 'final-exam',
     imageAlt:
-      'Study desk with a notebook of course grades, a calculator and a pen, set up to work out the score needed on a final exam.',
+      'Notebook, calculator and pen on a desk for working out the score needed on a final exam.',
     blocks: [
       title('Final Exam Grade Calculator: Find the Score You Need on the Final'),
       p(
@@ -272,9 +272,9 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
   'test-grade': {
     imageKey: 'test-grade',
     imageAlt:
-      'Printed test score reports and a desk calculator on a wooden desk, used to calculate a test grade percentage.',
+      'Printed test score reports and a desk calculator used to work out a test grade percentage.',
     blocks: [
-      title('Test Grade Calculator: How to Calculate Test Percentage and Letter Grade'),
+      title('Test Grade Calculator: Test Percentage and Letter Grade'),
       p(
         'A ',
         ['test grade calculator', true],
@@ -488,9 +488,9 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
   /* ------------------------------------------------------------------ /letter-grade-calculator/ */
   'letter-grade': {
     imageKey: 'letter-grade',
-    imageAlt: 'Graduation cap beside an academic transcript and calculator, showing how percentages convert to letter grades.',
+    imageAlt: 'Graduation cap beside a transcript and calculator, showing percent-to-letter-grade conversion.',
     blocks: [
-      title('Letter Grade Calculator: Percent to Letter Grade, GPA and the A–F Scale'),
+      title('Letter Grade Calculator: Percent to Letter Grade, GPA and A–F Scale'),
       p(
         'A ',
         ['letter grade calculator', true],

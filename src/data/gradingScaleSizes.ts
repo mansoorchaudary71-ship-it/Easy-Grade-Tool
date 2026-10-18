@@ -14,3 +14,14 @@ export function isGradingScaleParam(param: string | undefined): boolean {
   const m = /^(\d+)-questions$/.exec(param);
   return !!m && GRADING_SCALE_SIZES.includes(Number(m[1]));
 }
+
+/**
+ * "a" or "an" for a number said aloud: "an 8-question", "an 18-question", "an 80-question" but "a 20-question".
+ * Used wherever a question count follows an article so headings and body copy read correctly.
+ */
+export function aOrAn(n: number, capital = false): string {
+  const digits = String(Math.trunc(Math.abs(n)));
+  const an = digits[0] === '8' || digits === '11' || digits === '18';
+  const word = an ? 'an' : 'a';
+  return capital ? word[0].toUpperCase() + word.slice(1) : word;
+}

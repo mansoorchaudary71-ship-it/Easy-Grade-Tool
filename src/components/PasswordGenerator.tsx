@@ -300,7 +300,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </div>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            In today&apos;s digital landscape, safeguarding your online presence begins with credential strength. Modern security standards require diverse character sets—blending uppercase letters, lowercase letters, numbers, and symbols—to resist unauthorized access. This guide explains how password generators produce unpredictable credentials and passphrases, especially when you need to <strong className="font-semibold text-slate-900 dark:text-white">create strong, random passwords quickly and efficiently</strong>. Establishing unique credentials across every account is your most reliable defense against automated credential-stuffing and data breaches.
+            A strong password is your first defense against account theft. The best passwords are long and mix upper-case letters, lower-case letters, numbers and symbols. This guide explains how a password generator works and how to <strong className="font-semibold text-slate-900 dark:text-white">create strong, random passwords quickly</strong>. Use a different password for every account. That is the best way to stay safe when one site is hacked, because attackers try stolen passwords on other sites.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -308,7 +308,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h2>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Navigating online security requires reliable, automated tools. A password generator serves as a cornerstone of digital hygiene, replacing predictable human habits with algorithmic unpredictability to protect sensitive personal and financial information across all your accounts.
+            A password generator makes passwords for you. It replaces the habits people fall into, such as pet names and simple patterns, with random choices that no one can predict. That helps keep your email, banking and shopping accounts safe.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -316,7 +316,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A password generator is a software tool designed to create cryptographically unpredictable credentials on demand. <strong className="font-semibold text-slate-900 dark:text-white">Using our generator, you can create complex passwords that are virtually impervious to dictionary and brute-force attacks.</strong> Unlike human-created passwords that often rely on memorable names, birthdates, or keyboard patterns, a random generator samples characters with uniform probability to deliver maximum entropy and security.
+            A password generator is a small program that builds a random password on demand. <strong className="font-semibold text-slate-900 dark:text-white">Our generator makes passwords that are very hard to crack with dictionary lists or brute-force guessing.</strong> People tend to pick names, birthdays or keyboard patterns. A random generator picks every character by chance, so there is no pattern to find.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -324,7 +324,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A random password generator works by employing cryptographic algorithms to generate random passwords from a diverse set of characters, including uppercase letters, lowercase letters, numbers, and special characters. Users can typically specify the desired password length, often recommending at least 16 characters for maximum security. This generator creates a strong and unique password by ensuring there are no discernible patterns, making it virtually impossible for brute-force attacks or dictionary attacks to compromise your credentials. Many browser built-in password generator tools or free password generator services operate on these principles, helping users who need a strong password.
+            A random password generator picks each character by chance from a set you choose: upper-case letters, lower-case letters, numbers and symbols. You choose the length, and we suggest at least 16 characters. Because every character is picked on its own, the result has no pattern to guess. Our generator uses the Web Cryptography API built into your browser, so each password is made on your device and is never sent anywhere. Many browsers and password managers have a built-in generator that works in a similar way.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -332,7 +332,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            The primary benefit of using a password generator is establishing unique credentials across every account without relying on password reuse. <strong className="font-semibold text-slate-900 dark:text-white">Using a secure generator ensures that a compromise on one platform never exposes your identity elsewhere.</strong> High-entropy generators produce resilient passwords in milliseconds, eliminating the friction of manual password creation while ensuring compliance with modern security guidelines.
+            The main benefit is that you can have a different password for every account without reusing one. <strong className="font-semibold text-slate-900 dark:text-white">If one site is hacked, your other accounts stay safe.</strong> A generator also saves time. It makes a strong password in a fraction of a second, so you do not have to invent one yourself.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -344,7 +344,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Protecting your online account requires vigilance, and having a strong password for every service is paramount, as you need a strong password to defend against potential threats. Cybercriminals, often referred to as hackers, constantly attempt to compromise sensitive information through various attack vectors, making it essential to use the password wisely, as you need a strong password to thwart their efforts. A weak or reused password creates a significant vulnerability, potentially exposing your entire digital life, as one password can lead to multiple breaches. Therefore, <strong className="font-semibold text-slate-900 dark:text-white">Utilizing a password generator to create one strong password is not just a recommendation but a necessity.</strong> For robust password security, consider using password managers that help manage your passwords across multiple platforms.
+            Attackers try stolen and common passwords on many sites at once. A weak or reused password can let them into your email, and from there into your other accounts. <strong className="font-semibold text-slate-900 dark:text-white">A random, unique password for each account is the simplest way to stop this.</strong> A password manager can remember them all for you.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -352,7 +352,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Creating a strong password is simplified with a secure password generator or a password manager, both of which help you manage your passwords effectively. Instead of manually trying to combine various characters, you can rely on these generator tools to create strong passwords automatically. A good password typically involves a mix of uppercase letters, lowercase letters, numbers, and special characters, and is of a substantial password length, often recommended to be at least 16 characters. This process ensures you create a strong and unique password every time, which is essential to never reuse passwords across multiple accounts.
+            The easiest way is to let a generator do it. Choose a length of at least 16 characters and keep upper-case letters, lower-case letters, numbers and symbols turned on. Then save the password in a password manager. Do not try to build one by hand. People tend to make small, predictable changes, such as swapping an a for an @ sign, and attackers know those tricks.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -360,7 +360,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            A strong and unique password generated by a password generator is fundamentally unpredictable, allowing you to use one password confidently across various platforms, which is crucial when you need a strong password. It doesn&apos;t contain easily guessable personal information, dictionary words, or common passwords. Instead, a strong password generator creates a new password using a truly random assortment of characters. This complexity, combined with a sufficient password length, helps you generate strong passwords that are incredibly resistant to brute-force attacks. Each unique password for every online account provides individual protection, preventing the domino effect of a single leaked password.
+            A strong password is long, random and used for only one account. It has no personal details, no dictionary words and no common passwords such as 123456. When every account has its own password, one leaked password cannot open your other accounts.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -372,7 +372,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Many excellent <strong className="font-semibold text-slate-900 dark:text-white">free password generator tools are available to help you create different passwords without cost, ensuring you can easily generate a strong password.</strong> These services often include options to customize the password length and character types, such as uppercase letters, lowercase letters, numbers, and special characters, allowing you to create a personal password that meets your needs. Some popular choices might be found through a quick browser search, while certain browser built-in password generator features help you generate passwords within a secure environment. They aim to help you generate a strong and unique password for every need.
+            Many free password generators are available. <strong className="font-semibold text-slate-900 dark:text-white">Look for one that lets you set the length and the character types.</strong> You can find one with a quick browser search, and most modern browsers and password managers include one. Our generator is free, needs no account and runs in your browser.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -380,7 +380,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            When using a free random password generator, it&apos;s crucial to select reputable services to ensure your sensitive information remains protected from leaked passwords. While these generators help create secure passwords, the primary concern is that the password generator uses a method that isn&apos;t logging or storing the passwords it creates, ensuring you can manage your passwords effectively. Ideally, a free password generator should generate the passwords locally on your device or use secure, ephemeral connections to protect your passwords that are easy to guess. Always pair this with a secure password manager to store strong passwords safely.
+            Pick a generator you trust. The safest ones make the password on your own device and never store or send it, and the page should say so. If a generator sends your password to a server, you cannot know who can see it. After you create a password, save it in a password manager rather than a note or a text file.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -388,7 +388,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Comparing different free password generator options involves looking at their features, ease of use, and reputation. Some generators might integrate directly into your browser, offering a built-in password generator automatically, while others are standalone websites or applications designed to help you need a strong password effortlessly. A good password generator should allow you to specify password length, include or exclude certain character types, and generate strong and unique passwords quickly, as you need a strong password for optimal security. Many users find a secure password manager like LastPass also has a robust password generator built-in, offering comprehensive password security and the ability to create and store passwords securely, which helps you manage your passwords more efficiently.
+            When you compare generators, look at three things. Can you choose the length and the character types? Is it easy to use? Does it keep your passwords private? Browser generators are handy because they can save the password for you. Standalone sites such as ours work in any browser and need no sign-in. Password managers also include a generator and keep your passwords in an encrypted vault.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -400,7 +400,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            In today&apos;s interconnected world, <strong className="font-semibold text-slate-900 dark:text-white">robust password security is non-negotiable for safeguarding your digital life, as it directly impacts your ability to create and manage your passwords effectively.</strong> A strong password acts as the first line of defense against hackers and unauthorized access to your sensitive information stored across various online accounts, making it essential to use the password wisely. Without a strong and unique password for every service, you risk one password being leaked, leading to a domino effect, exposing everything from your email to financial accounts. Therefore, utilizing a password generator to create strong, random passwords is a foundational element of sound password security.
+            <strong className="font-semibold text-slate-900 dark:text-white">Good password habits protect your email, your money and your personal files.</strong> Your email account matters most, because many sites let you reset a password by email. If someone gets into it, they can often get into the rest. A strong, unique password on every account stops one leak from turning into many.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -408,7 +408,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            While a password generator excels at creating strong and unique passwords, an enterprise password manager provides additional layers of security and management for your passwords across platforms. <strong className="font-semibold text-slate-900 dark:text-white">A password manager is essential for securely storing and organizing complex credentials without memorizing them.</strong> A secure password manager not only includes a built-in password generator to create strong passwords, but also encrypts and stores all your credentials in a single vault. This eliminates the need to remember multiple random passwords and drastically reduces the temptation to reuse passwords, further enhancing your overall password security and protecting your online accounts.
+            A generator makes strong passwords, and a password manager remembers them. <strong className="font-semibold text-slate-900 dark:text-white">A password manager keeps your passwords in one encrypted vault, so you only need to remember one strong master password.</strong> Most managers can also fill in passwords for you and warn you about reused ones. That makes it much easier to give every account its own password.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -416,7 +416,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Several common mistakes can undermine even the strongest passwords. The most prevalent vulnerability is <strong className="font-semibold text-slate-900 dark:text-white">password reuse, where the same strong password is used for multiple online accounts</strong>, creating a massive risk if one service experiences a breach. Another error is using easily guessable information, such as birthdays or common dictionary words, even with added special characters. Always avoid sharing passwords or storing them insecurely on sticky notes. Our generator runs 100% locally in your browser using the Web Cryptography API—learn more in our <Link to="/privacy" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Client-Side Privacy Policy</Link> and <Link to="/about" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Technical Methodology</Link>, or return to our <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Easy Grade Tool</Link>.
+            A few common mistakes can weaken even strong passwords. The biggest is <strong className="font-semibold text-slate-900 dark:text-white">reusing the same password on several accounts</strong>. If one site is breached, attackers try that password everywhere else. Other mistakes are using birthdays or dictionary words, even with a symbol added, and keeping passwords on sticky notes or in shared documents. Our generator runs entirely in your browser using the Web Cryptography API. You can read more in our <Link to="/privacy" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Client-Side Privacy Policy</Link> and <Link to="/about" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Technical Methodology</Link>, or return to our <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Easy Grade Tool</Link>.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
@@ -428,7 +428,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Many users often wonder about the safety and effectiveness of a password generator. Common questions include how to verify that a free password generator is truly random, if generated passwords can be recovered, and the ideal password length for creating secure passwords. Generally, a good password generator creates truly random passwords that are difficult to predict. Most reputable password generators do not store the passwords they generate, ensuring privacy. <strong className="font-semibold text-slate-900 dark:text-white">Use a secure password generator to create strong passwords of at least 16 characters, including uppercase letters, lowercase letters, numbers, and special characters.</strong> For optimal password security, it is important to create a new password every time for each account and to never reuse passwords across multiple sites.
+            People often ask how to tell whether a generator is truly random, whether a generated password can be recovered, and how long a password should be. A good generator picks characters by chance. Ours does not store or send what it makes, so a lost password cannot be recovered. Save each one in a password manager straight away. <strong className="font-semibold text-slate-900 dark:text-white">Use at least 16 characters, with upper-case letters, lower-case letters, numbers and symbols.</strong> Make a new password for every account and never reuse one.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -436,7 +436,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Choosing the right password generator involves evaluating several factors to ensure you create strong passwords securely. Look for a password generator tool that offers customization options for password length, character types (uppercase letters, lowercase letters, numbers, special characters), and the ability to exclude ambiguous characters. A reputable free password generator will prioritize privacy, ideally generating passwords locally or without storing them, ensuring that passwords are hard to crack. Consider a secure password manager that includes a built-in password generator, providing a comprehensive solution for generating and managing strong and unique passwords for every online account, ensuring they are easy to remember.
+            Choose a generator that lets you set the length and the character types, and that can leave out look-alike characters such as I, O, l, 1 and 0. It should also protect your privacy by making the password on your device and not storing it. A password manager with a built-in generator is a good choice, because it creates the password and saves it in one step.
           </p>
 
           <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
@@ -444,7 +444,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           </h3>
 
           <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Understanding how randomly generated passwords from a password generator use cryptographic methods is key to appreciating their strength and their ability to create a unique password for each account, which is vital when you need a strong password. When a random password generator creates a new password, it typically generates a sequence of characters that lacks any discernible patterns or personal information, which is crucial for creating a unique password. This makes the complex passwords incredibly resistant to brute-force and dictionary attacks. The generated strong password should be a random mix of uppercase letters, lowercase letters, numbers, and special characters, with a sufficient password length of at least 16 characters long to enhance security. This ensures that each unique password for every online account provides maximum protection against hackers.
+            A generated password is a random string with no pattern and no personal details. It is meant to be saved in a password manager, not memorized. That randomness is what makes it hard to crack with dictionary lists or brute force. For the best results, use at least 16 characters and a mix of upper-case letters, lower-case letters, numbers and symbols, and use a different password for every account.
           </p>
         </ContentSection>
 

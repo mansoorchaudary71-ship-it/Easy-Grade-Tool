@@ -54,7 +54,7 @@ export const OG_IMAGE_PLACEHOLDERS = OG_IMAGES;
 export const SEO_HOME: RouteSeoConfig = {
   title: 'EZ Grader Chart & Easy Grade Calculator | Easy Grade Tool',
   description:
-    'Free EZ grader chart and easy grade calculator online. Enter the number of questions to see every score and letter grade, then print the chart or save a PDF.',
+    'Free EZ grader chart and easy grade calculator. Enter the number of questions to see every score and letter grade, then print the chart or save a PDF.',
   canonicalPath: '/',
   canonicalUrl: `${BASE_CANONICAL_ORIGIN}/`,
   ogImagePlaceholder: OG_IMAGES.quick,
@@ -246,7 +246,7 @@ export const SEO_ROUTES: Record<ToolKey, RouteSeoConfig> = {
   tip: {
     title: 'Tip Calculator & Split Bill Calculator — Gratuity Per Person',
     description:
-      'Free tip calculator and split bill calculator: pick a tip percentage, enter the bill and the number of people, and see the tip, total and per-person amount.',
+      'Free tip calculator and split bill calculator: pick a tip percentage, enter the bill and number of people, and see the tip, total and per-person amount.',
     canonicalPath: '/tip-calculator/',
     canonicalUrl: `${BASE_CANONICAL_ORIGIN}/tip-calculator/`,
     ogImagePlaceholder: OG_IMAGE_PLACEHOLDERS.tip,

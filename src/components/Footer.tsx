@@ -698,6 +698,8 @@ export const Footer: React.FC<FooterProps> = ({
                   title="Go to Easy Grade Tool Home"
                 >
                   <Logo size="md" />
+                  {/* The logo is an SVG, so give the link real text for crawlers (invisible on screen). */}
+                  <span className="sr-only">Easy Grade Tool Home</span>
                 </Link>
 
                 <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs m-0">

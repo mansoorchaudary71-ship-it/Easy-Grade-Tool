@@ -146,7 +146,7 @@ export const MortgageCalculator: React.FC<MortgageCalculatorProps> = ({ setToast
             id="mortgage-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
           >
-            Mortgage Loan Calculator &amp; Payment Calculator | Home Mortgage Bank
+            Mortgage Loan Calculator &amp; Monthly Payment Calculator
           </h2>
 
           <div className="my-6">

@@ -452,7 +452,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             id="gpa-guide-title"
             className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
           >
-            How to Calculate GPA: Grade Point Average for College &amp; University Registrar
+            How to Calculate GPA: Grade Point Average for College &amp; University
           </h2>
 
           <div className="my-6">

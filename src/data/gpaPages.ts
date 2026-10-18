@@ -1,4 +1,5 @@
 import type { ToolPageEntry } from './toolPages';
+import { aOrAn } from './gradingScaleSizes';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, roundTo } from '../utils/academicMath';
 import { DEFAULT_BONUS, WeightedCourse, calculateWeightedGpa, pointsForLetter } from '../utils/gpaMath';
 import { buildMissTable, maxWrongForMinPercent } from '../utils/missMath';
@@ -239,11 +240,11 @@ export function buildMissCalculatorPage(): ToolPageEntry {
     path: '/how-many-questions-can-i-miss/',
     navLabel: 'How many can I miss',
     h1: 'How Many Questions Can I Miss?',
-    title: 'How Many Questions Can You Miss? Wrong Answers Calculator',
+    title: 'How Many Questions Can You Miss on a Test? Calculator',
     metaDescription:
       'Find the most questions you can get wrong on a test and still earn an A, B or C. Enter the number of questions and your target grade.',
     badge: 'Wrong answers allowed',
-    intro: `Type in the length of the test and the grade you are aiming for, and the calculator names the largest number of wrong answers that still keeps that grade. A ${total}-question test on the usual 90/80/70/60 scale leaves room for ${get('A').maxWrong} misses at A level, ${get('B').maxWrong} at B level, ${get('C').maxWrong} at C level and ${get('D').maxWrong} at D level.`,
+    intro: `Type in the length of the test and the grade you are aiming for, and the calculator names the largest number of wrong answers that still keeps that grade. ${aOrAn(total, true)} ${total}-question test on the usual 90/80/70/60 scale leaves room for ${get('A').maxWrong} misses at A level, ${get('B').maxWrong} at B level, ${get('C').maxWrong} at C level and ${get('D').maxWrong} at D level.`,
     keywords: [
       'how many questions can you miss',
       'how many questions can you get wrong',
@@ -268,7 +269,7 @@ export function buildMissCalculatorPage(): ToolPageEntry {
       {
         heading: 'Why the limit is always a whole number',
         paragraphs: [
-          `Nobody can miss half a question, so the limit lands on the last whole miss that stays above the line, and the score at that point usually sits a little higher than the cutoff itself. On a ${exTotal}-question quiz an A needs ${SCALE_STANDARD[0].min}%, yet the most you can miss is ${exGet('A').maxWrong}, which leaves ${exGet('A').percentAtMax}%. The gap between ${exGet('A').percentAtMax}% and ${SCALE_STANDARD[0].min}% is score you cannot spend.`,
+          `Nobody can miss half a question, so the limit lands on the last whole miss that stays above the line, and the score at that point usually sits a little higher than the cutoff itself. On ${aOrAn(exTotal)} ${exTotal}-question quiz an A needs ${SCALE_STANDARD[0].min}%, yet the most you can miss is ${exGet('A').maxWrong}, which leaves ${exGet('A').percentAtMax}%. The gap between ${exGet('A').percentAtMax}% and ${SCALE_STANDARD[0].min}% is score you cannot spend.`,
           `The next miss costs a full step: ${exGet('A').maxWrong + 1} wrong would leave ${pctAfter(exTotal, exGet('A').maxWrong + 1)}% and drop the result a letter.`,
         ],
       },
@@ -293,7 +294,7 @@ export function buildMissCalculatorPage(): ToolPageEntry {
       },
     ],
     example: {
-      heading: `Worked example: a ${exTotal}-question quiz`,
+      heading: `Worked example: ${aOrAn(exTotal)} ${exTotal}-question quiz`,
       scenario: `With ${exTotal} questions, a single miss moves the score by ${roundTo(100 / exTotal, 2)} points. Here is the largest miss count that holds each grade on the A–F scale, followed by two plus/minus grades.`,
       rows: [
         ...exStd.map((r) => ({ label: `Hold ${/^[AEHILMNORSX]/i.test(r.letter) ? 'an' : 'a'} ${r.letter} (${r.min}%)`, value: `${r.maxWrong} wrong, ${r.percentAtMax}% left` })),
@@ -304,7 +305,7 @@ export function buildMissCalculatorPage(): ToolPageEntry {
     },
     faqs: [
       {
-        question: `What is my wrong-answer allowance for a B on a ${longTotal}-question exam?`,
+        question: `What is my wrong-answer allowance for a B on ${aOrAn(longTotal)} ${longTotal}-question exam?`,
         answer: `Multiply ${longTotal} by 0.20 and round down, then confirm with the rounded score. You can miss ${longB} and still hold ${pctAfter(longTotal, longB)}%. A single extra miss leaves ${pctAfter(longTotal, longB + 1)}%, which falls under the B line on the 90/80/70/60 scale.`,
       },
       {

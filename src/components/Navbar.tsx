@@ -150,6 +150,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-label="Easy Grade Tool Home"
             >
               <Logo />
+              {/* The logo is an SVG, so give the link real text for crawlers (invisible on screen). */}
+              <span className="sr-only">Easy Grade Tool Home</span>
             </Link>
           </div>
 

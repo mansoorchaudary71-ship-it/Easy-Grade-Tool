@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import { ScrollableTableContainer } from './ScrollableTableContainer';
 import { gradeTone } from '../utils/gradeTone';
+import { aOrAn } from '../data/gradingScaleSizes';
 
 export interface QuickChartItem {
   wrong: number;
@@ -188,7 +189,7 @@ export const QuickChartTable: React.FC<QuickChartTableProps> = ({
 
   return (
     <ScrollableTableContainer
-      ariaLabel={`Quick grade chart for a ${total}-question test`}
+      ariaLabel={`Quick grade chart for ${aOrAn(total)} ${total}-question test`}
       maxHeightClassName={maxHeightClassName}
       className="rounded-xl border border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-900"
     >

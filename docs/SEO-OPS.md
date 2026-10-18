@@ -33,9 +33,30 @@ Footer contact/subscribe forms need a relay on static hosting. Create a Formspre
 
 ## Security headers on GitHub Pages (C6)
 
-GitHub Pages does not read `public/_headers`, so the live site sends no Content-Security-Policy, X-Frame-Options or Permissions-Policy header. Two options:
+**Why Screaming Frog still flags these.** The audit checks real HTTP response headers. GitHub Pages cannot send custom headers and ignores `public/_headers`, so these four findings stay on all 53 URLs until the headers come from a CDN or a host that supports them:
 
-1. Put Cloudflare (or another CDN) in front of the domain and mirror `public/_headers` as response header rules.
-2. Add a `<meta http-equiv="Content-Security-Policy">` tag. This covers script, style and connect sources but not `frame-ancestors`, which browsers ignore in meta tags.
+| Screaming Frog finding | Header to send |
+| --- | --- |
+| Missing X-Frame-Options | `X-Frame-Options: SAMEORIGIN` |
+| Missing X-Content-Type-Options | `X-Content-Type-Options: nosniff` |
+| Missing Secure Referrer-Policy | `Referrer-Policy: strict-origin-when-cross-origin` |
+| Missing Content-Security-Policy | the policy in `public/_headers` |
 
-The inline `<style>` block in `Footer.tsx` would need `'unsafe-inline'` under a strict policy. Moving it to a stylesheet (finding B13) removes that need.
+A `<meta>` tag cannot replace them: browsers ignore `X-Frame-Options` and `frame-ancestors` in meta tags, and crawlers do not read meta tags as headers. (`index.html` already sets `<meta name="referrer">`, which protects visitors but does not clear the audit flag.)
+
+**Option A (free, no hosting change): Cloudflare in front of GitHub Pages**
+1. Add the domain to Cloudflare and switch the `www` DNS record to Proxied (orange cloud).
+2. Rules > Transform Rules > Modify Response Header > Create rule.
+3. Name it `Security headers`. Apply to: All incoming requests (or Hostname equals `www.easygradetool.com`).
+4. Under Modify response header, add one "Set static" entry per line below `/*` in `public/_headers` (X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy, Strict-Transport-Security, Content-Security-Policy). Copy the values exactly.
+5. Save and deploy.
+
+**Option B: move hosting to Cloudflare Pages or Netlify.** Both read `public/_headers` from the build output automatically, so no rule setup is needed.
+
+**Verify (about a minute after the rule is live):**
+```
+curl -sI https://www.easygradetool.com/ | grep -iE "x-frame|x-content-type|referrer-policy|content-security-policy"
+```
+All four lines should appear. Then re-crawl in Screaming Frog; the four Security issues should drop to 0.
+
+**Test the CSP once after enabling it.** Open the home page and each calculator, download a PDF chart, and try the PWA install button. If something is blocked, DevTools > Console shows `Refused to ...` with the directive to loosen. The policy allows only same-origin resources, plus Formspree and Web3Forms for the footer forms. If `VITE_FORM_ENDPOINT` points at another provider, add its host to both `connect-src` and `form-action`. The inline `<style>` block in `Footer.tsx` and React inline styles need `style-src 'unsafe-inline'`; scripts stay strict (`script-src 'self'`).

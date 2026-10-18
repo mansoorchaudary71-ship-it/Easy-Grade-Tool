@@ -1,5 +1,5 @@
 import type { ToolPageEntry, ToolPageFaq, ToolPageRelated } from './toolPages';
-import { GRADING_SCALE_SIZES, gradingScalePath, gradingScaleSlug } from './gradingScaleSizes';
+import { GRADING_SCALE_SIZES, aOrAn, gradingScalePath, gradingScaleSlug } from './gradingScaleSizes';
 import {
   SCALE_PLUS_MINUS,
   SCALE_STANDARD,
@@ -47,12 +47,12 @@ function sizeContext(n: number, p: number): string {
     return `On a short ${n}-question quiz every single answer matters: one missed question moves the score by ${fmt(p)} percentage points, which is often enough to change the letter grade.`;
   }
   if (n <= 25) {
-    return `A ${n}-question test is a common size for unit quizzes and chapter tests. One missed question costs ${fmt(p)} points, so a single slip rarely decides the letter on its own but two or three often do.`;
+    return `${aOrAn(n, true)} ${n}-question test is a common size for unit quizzes and chapter tests. One missed question costs ${fmt(p)} points, so a single slip rarely decides the letter on its own but two or three often do.`;
   }
   if (n <= 50) {
     return `With ${n} questions each answer is worth only ${fmt(p)}%, so the grade is steadier than on a short quiz. This size is typical for midterms and multi-section exams.`;
   }
-  return `A ${n}-question exam spreads the risk thinly: each answer is worth just ${fmt(p)}%, so you can miss several questions before the letter grade moves.`;
+  return `${aOrAn(n, true)} ${n}-question exam spreads the risk thinly: each answer is worth just ${fmt(p)}%, so you can miss several questions before the letter grade moves.`;
 }
 
 function pickWrongs(n: number): number[] {
@@ -83,8 +83,8 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
   const prev = idx > 0 ? GRADING_SCALE_SIZES[idx - 1] : null;
   const next = idx < GRADING_SCALE_SIZES.length - 1 ? GRADING_SCALE_SIZES[idx + 1] : null;
   const related: ToolPageRelated[] = [];
-  if (prev) related.push({ path: gradingScalePath(prev), label: `${prev}-question grading scale`, blurb: `Score chart for a ${prev}-question test.` });
-  if (next) related.push({ path: gradingScalePath(next), label: `${next}-question grading scale`, blurb: `Score chart for a ${next}-question test.` });
+  if (prev) related.push({ path: gradingScalePath(prev), label: `${prev}-question grading scale`, blurb: `Score chart for ${aOrAn(prev)} ${prev}-question test.` });
+  if (next) related.push({ path: gradingScalePath(next), label: `${next}-question grading scale`, blurb: `Score chart for ${aOrAn(next)} ${next}-question test.` });
   related.push(
     { path: '/grading-scale/', label: 'All grading scale charts', blurb: 'Pick any test size from 5 to 100 questions.' },
     { path: '/', label: 'Quick Grade calculator', blurb: 'Grade a whole class and print a chart for any size.' },
@@ -93,22 +93,22 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
 
   const faqs: ToolPageFaq[] = [
     {
-      question: `How much is each question worth on a ${n}-question test?`,
+      question: `How much is each question worth on ${aOrAn(n)} ${n}-question test?`,
       answer: `Each question is worth 100 ÷ ${n} = ${fmt(p, 3)}% when every question has the same weight. Missing one question leaves ${fmt(100 - p, 2)}%, and each further miss lowers the score by another ${fmt(p, 3)} points.`,
     },
     {
-      question: `How many questions can I get wrong on a ${n}-question test and still get an A?`,
-      answer: `On a ${n}-question test with the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
+      question: `How many questions can I get wrong on ${aOrAn(n)} ${n}-question test and still get an A?`,
+      answer: `On ${aOrAn(n)} ${n}-question test with the common 90/80/70/60 scale you can miss ${allowParts[0]}. For the other letters you can miss ${allowParts.slice(1).join(', ')}. Your teacher’s scale may use different cutoffs, so check the syllabus.`,
     },
     {
       question: `What grade is ${faqWrong} wrong out of ${n}?`,
       answer: `${plural(faqWrong, 'wrong answer', 'wrong answers')} leaves ${n - faqWrong} correct, which is ${fq.formattedPercentage}%. That is a ${fq.letter} on the standard A–F scale and a ${plusLetter(fq.rawPercentage)} on the plus/minus scale.`,
     },
     {
-      question: `Can I give partial credit on a ${n}-question test?`,
+      question: `Can I give partial credit on ${aOrAn(n)} ${n}-question test?`,
       answer: half
-        ? `Yes. On a ${n}-question test, turn on half points in the Quick Grade calculator and a half-credit answer counts as ${fmt(p / 2, 3)}% instead of ${fmt(p, 3)}%. The chart on this page uses whole questions only.`
-        : `For partial credit on a ${n}-question test, use a points-based calculation: add the points earned on every question, divide by the points possible and multiply by 100.`,
+        ? `Yes. On ${aOrAn(n)} ${n}-question test, turn on half points in the Quick Grade calculator and a half-credit answer counts as ${fmt(p / 2, 3)}% instead of ${fmt(p, 3)}%. The chart on this page uses whole questions only.`
+        : `For partial credit on ${aOrAn(n)} ${n}-question test, use a points-based calculation: add the points earned on every question, divide by the points possible and multiply by 100.`,
     },
   ];
 
@@ -120,7 +120,7 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     title: `${n}-Question Test Grading Scale & Score Chart`,
     metaDescription: `${n}-question grading scale: each answer is worth ${fmt(p, 2)}%. See the percentage and letter grade for every score, for example ${exampleWrong} wrong = ${ex.formattedPercentage}%.`,
     badge: `${n}-question test`,
-    intro: `Each question on a ${n}-question test is worth ${fmt(p, 2)}%. On the common 90/80/70/60 scale you can miss ${allowParts.join(', ')}. The chart below shows the percentage and letter grade for every number of wrong answers from 0 to ${n}.`,
+    intro: `Each question on ${aOrAn(n)} ${n}-question test is worth ${fmt(p, 2)}%. On the common 90/80/70/60 scale you can miss ${allowParts.join(', ')}. The chart below shows the percentage and letter grade for every number of wrong answers from 0 to ${n}.`,
     questions: n,
     keywords: [
       `${n} question grading scale`,
@@ -135,7 +135,7 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     ],
     sections: [
       {
-        heading: `How a ${n}-question test is scored`,
+        heading: `How ${aOrAn(n)} ${n}-question test is scored`,
         paragraphs: [
           `Divide the number of correct answers by ${n} and multiply by 100. With ${n} questions worth the same amount, each one is ${fmt(p, 3)}% of the grade. ${sizeContext(n, p)}`,
           `On the common 90/80/70/60 scale you can miss ${allowParts.join(', ')}. Anything below the D line is an F.`,
@@ -162,7 +162,7 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
       },
     ],
     example: {
-      heading: `Worked example: ${exampleWrong} wrong on a ${n}-question test`,
+      heading: `Worked example: ${exampleWrong} wrong on ${aOrAn(n)} ${n}-question test`,
       scenario: `A student misses ${exampleWrong} of ${n} questions.`,
       rows: [
         { label: 'Correct answers', value: `${n - exampleWrong} of ${n}` },
