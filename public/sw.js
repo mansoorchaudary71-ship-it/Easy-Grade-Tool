@@ -107,6 +107,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Never intercept cross-origin requests (e.g. Google Analytics / gtag)
+  if (url.origin !== self.location.origin) {
+    return;
+  }
+
   // Strategy A: /manifest.json - Stale-While-Revalidate
   if (url.pathname === '/manifest.json' || url.pathname.endsWith('/manifest.json')) {
     event.respondWith(staleWhileRevalidate(request, CACHE_NAMES.MANIFEST));
