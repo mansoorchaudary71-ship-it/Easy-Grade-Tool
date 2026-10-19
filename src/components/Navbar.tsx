@@ -6,8 +6,9 @@ import { ToolKey } from '../types';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { preloadTool } from '../utils/toolPreloader';
+import { preloadForPath } from '../utils/lazyRoutes';
 import { Logo } from './Logo';
-import { ToolNavBar } from './ToolNavBar';
+import { ToolNavBar, headerFocusRing, headerTextBase, headerTextIdle } from './ToolNavBar';
 import { MobileNavDrawer } from './MobileNavDrawer';
 import { PRIMARY_NAV_ITEM, TOOL_GROUPS } from '../data/navItems';
 import { TOOL_PATHS } from '../data/constants';
@@ -73,13 +74,13 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 /* Shared class strings                                                        */
 /* -------------------------------------------------------------------------- */
 
-/** The header is a flat white surface (canvas colour in dark mode), so the focus ring offset follows the theme. */
-const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-[#A68A6D] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-[#D6BEA0] dark:focus-visible:ring-offset-[#0F172A]';
+/** Round ghost buttons (hamburger, search icon on small screens, theme switch): no border, grey chip on hover. */
+const ghostControl =
+  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0D0C22] transition-colors duration-150 hover:bg-[#F3F3F6] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
 
-/** Shared look for the round header controls (search icon on phones, hamburger, theme switch): pure white, 1px edge, weightless pills. */
-const glassControl =
-  'elev-pill text-[#5E4A36] hover:text-[#2A221A] active:translate-y-px dark:text-slate-200 dark:hover:text-white';
+/** Dark pill call to action (same role as "Log in" in the reference). White in dark mode. */
+const ctaPill =
+  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#0D0C22] px-6 text-[15px] font-semibold tracking-[-0.011em] text-white no-underline transition-colors duration-150 hover:bg-[#2A2940] active:scale-[0.98] 2xl:text-base dark:bg-white dark:text-[#0D0C22] dark:hover:bg-slate-200';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -120,26 +121,39 @@ export const Navbar: React.FC<NavbarProps> = ({
   const shortcutLabel = isMac ? '⌘K' : 'Ctrl+K';
   const themeLabel = theme.charAt(0).toUpperCase() + theme.slice(1);
 
+  const isStaticPage = ['/about', '/privacy', '/terms', '/methodology'].some((p) => location.pathname.startsWith(p));
+  const primaryActive = !isStaticPage && isSamePath(location.pathname, PRIMARY_NAV_ITEM.path);
+  const aboutActive = location.pathname.startsWith('/about');
+
+  const warmPrimary = () => {
+    preloadTool(PRIMARY_NAV_ITEM.toolKey);
+    void preloadForPath(PRIMARY_NAV_ITEM.path);
+  };
+
   return (
     <MotionConfig reducedMotion="user">
       <header className="relative print:hidden">
-        {/* Phones: logo left, actions right.  md+: 3-column grid so the links are perfectly centred. */}
-        <div className="mx-auto flex h-[68px] max-w-[1440px] items-center justify-between gap-2 px-4 sm:px-8 md:grid md:h-20 md:grid-cols-[1fr_auto_1fr] lg:px-12">
-          {/* ------------------------------ Left: logo ------------------------------ */}
-          <div className="flex min-w-0 items-center gap-1 sm:gap-3 md:justify-self-start">
-            {/* Hamburger: phones only. Opens the grouped tools drawer. */}
+        {/*
+          One row, same structure as the reference header:
+          logo | search pill (grows) | grouped menus | text link | dark pill | theme.
+          Below lg the menus, text link and pill move into the hamburger drawer.
+        */}
+        <div className="mx-auto flex h-[68px] max-w-[1600px] items-center gap-2 px-4 sm:px-8 lg:h-20 lg:gap-4 lg:px-10 xl:gap-5 2xl:gap-7">
+          {/* ------------------------------ Logo ------------------------------ */}
+          <div className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-3">
+            {/* Hamburger: below lg only. Opens the grouped tools drawer. */}
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
               aria-haspopup="dialog"
               aria-expanded={drawerOpen}
-              className={`-ml-1 inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full ${glassControl} md:hidden ${focusRing}`}
+              className={`-ml-2 ${ghostControl} lg:hidden ${headerFocusRing}`}
             >
               <Menu className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
             <Link
-              className={`brand rounded-xl ${focusRing}`}
+              className={`brand rounded-xl ${headerFocusRing}`}
               to="/"
               onClick={() => {
                 onSelectTool('quick');
@@ -155,44 +169,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             </Link>
           </div>
 
-          {/* ------------------------------ Centre: main links ------------------------------ */}
-          <div className="hidden md:flex md:justify-center">
-            <ToolNavBar onSelectTool={onSelectTool} />
-          </div>
-
-          {/* ------------------------------ Right: actions ------------------------------ */}
-          <div className="flex shrink-0 items-center gap-2.5 sm:gap-3.5 md:justify-self-end">
-            {/* Search: icon button on phones and tablets, pure-white pill field from xl up */}
-            <button
-              type="button"
-              onClick={onOpenCommandPalette}
-              onTouchStart={() => preloadTool('command-palette')}
-              onMouseEnter={() => preloadTool('command-palette')}
-              aria-label={`Open calculator search (${shortcutLabel})`}
-              title={`Search calculators (${shortcutLabel})`}
-              className={`inline-flex size-11 items-center justify-center rounded-full ${glassControl} xl:hidden ${focusRing}`}
-            >
-              <Search className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
-            </button>
-
-            <div className="group relative hidden w-64 transition-[width] duration-300 ease-out xl:block 2xl:w-72 xl:focus-within:w-72 2xl:focus-within:w-80">
-              <Search
-                className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-[#A39583] transition-colors duration-300 group-focus-within:text-[#7A6149] dark:text-slate-400 dark:group-focus-within:text-[#D6BEA0]"
-                strokeWidth={ICON_STROKE}
-                aria-hidden="true"
-              />
-              {/*
-                The field is the entry point to the command palette (which owns the real
-                search UI). Focusing it expands + rings it; click, Enter, or the first
-                typed character hands off to the palette.
-              */}
+          {/* ------------------------------ Search pill (lg and up) ------------------------------ */}
+          {/*
+            The pill is the entry point to the command palette (which owns the real search UI).
+            Click, Enter, or the first typed character hands off to the palette.
+          */}
+          <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[440px] 2xl:max-w-[560px]">
+            <div className="flex h-12 items-center rounded-full bg-[#F3F3F6] pl-5 pr-1 transition-shadow duration-200 focus-within:ring-2 focus-within:ring-[#2563EB]/45 dark:bg-white/[0.08]">
               <input
                 type="text"
                 readOnly
                 role="searchbox"
                 autoComplete="off"
                 spellCheck={false}
-                placeholder="Search calculators..."
+                placeholder="Search calculators"
                 aria-label={`Search calculators (${shortcutLabel})`}
                 title={`Switch calculators with the command palette (${shortcutLabel})`}
                 onClick={onOpenCommandPalette}
@@ -205,22 +195,79 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="elev-pill h-11 w-full cursor-pointer rounded-full py-2 pl-11 pr-[4.75rem] text-[13.5px] font-medium tracking-tight text-[#2A221A] outline-none placeholder:text-[#8C7F70] dark:text-slate-100 dark:placeholder:text-slate-400"
+                className="header-search-field h-full min-w-0 flex-1 cursor-pointer truncate bg-transparent text-[15px] font-normal tracking-[-0.011em] text-[#0D0C22] outline-none placeholder:text-[#6E6D7A] 2xl:text-base dark:text-slate-100 dark:placeholder:text-slate-400"
               />
-              <kbd className="pointer-events-none absolute right-3 top-1/2 inline-flex -translate-y-1/2 items-center rounded-full border border-[#7A6149]/15 bg-[#FAF9F7] px-2 py-0.5 font-mono text-[11px] font-semibold tracking-wide text-[#8C7F70] dark:border-white/10 dark:bg-white/5 dark:text-slate-400">
+              <span
+                className="mr-3 hidden shrink-0 text-[15px] font-semibold tracking-[-0.011em] text-[#3A3546] 2xl:inline dark:text-slate-300"
+                aria-hidden="true"
+              >
                 {shortcutLabel}
-              </kbd>
+              </span>
+              <button
+                type="button"
+                onClick={onOpenCommandPalette}
+                onTouchStart={() => preloadTool('command-palette')}
+                onMouseEnter={() => preloadTool('command-palette')}
+                aria-label={`Open calculator search (${shortcutLabel})`}
+                className={`inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#2563EB] text-white transition-colors duration-150 hover:bg-[#1D4ED8] active:scale-95 ${headerFocusRing}`}
+              >
+                <Search className="size-[18px]" strokeWidth={ICON_STROKE} aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+
+          {/* ------------------------------ Grouped menus ------------------------------ */}
+          <ToolNavBar onSelectTool={onSelectTool} />
+
+          {/* ------------------------------ Right cluster ------------------------------ */}
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 lg:ml-0 xl:gap-3">
+            {/* Search icon: below lg only (the pill takes over from lg) */}
+            <button
+              type="button"
+              onClick={onOpenCommandPalette}
+              onTouchStart={() => preloadTool('command-palette')}
+              onMouseEnter={() => preloadTool('command-palette')}
+              aria-label={`Open calculator search (${shortcutLabel})`}
+              title={`Search calculators (${shortcutLabel})`}
+              className={`${ghostControl} lg:hidden ${headerFocusRing}`}
+            >
+              <Search className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
+            </button>
+
+            {/* 100% Private: icon only, min-[1700px] and up (the words stay available as the tooltip and to screen readers) */}
+            <div
+              role="img"
+              aria-label="100% Private: everything runs in your browser"
+              title="100% Private: everything runs in your browser"
+              className="hidden size-11 items-center justify-center text-[#6E6D7A] min-[1700px]:inline-flex dark:text-slate-400"
+            >
+              <PrivacyShieldIcon className="size-5" />
             </div>
 
-            {/* 100% Private: white pill with a 1px edge, shield only from lg, with the words from xl */}
-            <div
-              className="elev-pill elev-pill--ok hidden h-11 items-center gap-2 rounded-full px-3.5 text-[13px] font-medium tracking-tight text-[#5E4A36] dark:text-[#E6D5BF] lg:inline-flex"
-              title="100% Private: everything runs in your browser"
+            {/* Plain text link (same role as "Sign up" in the reference), 2xl and up (the drawer has it below that) */}
+            <Link
+              to="/about/"
+              aria-current={aboutActive ? 'page' : undefined}
+              className={`${headerTextBase.replace('inline-flex ', '')} ${headerTextIdle} ${headerFocusRing} hidden 2xl:inline-flex ${aboutActive ? 'underline decoration-[#2563EB] decoration-2 underline-offset-8' : ''}`}
             >
-              <PrivacyShieldIcon className="size-4 shrink-0" />
-              <span className="hidden xl:inline">100% Private</span>
-              <span className="sr-only xl:hidden">100% Private</span>
-            </div>
+              About
+            </Link>
+
+            {/* Dark pill: the home page and most-used calculator, lg and up */}
+            <Link
+              to={PRIMARY_NAV_ITEM.path}
+              onClick={() => {
+                if (isSamePath(TOOL_PATHS[PRIMARY_NAV_ITEM.toolKey], PRIMARY_NAV_ITEM.path)) onSelectTool(PRIMARY_NAV_ITEM.toolKey);
+              }}
+              onMouseEnter={warmPrimary}
+              onFocus={warmPrimary}
+              onTouchStart={warmPrimary}
+              aria-current={primaryActive ? 'page' : undefined}
+              title={PRIMARY_NAV_ITEM.title}
+              className={`${ctaPill} ${headerFocusRing} hidden lg:inline-flex`}
+            >
+              {PRIMARY_NAV_ITEM.label}
+            </Link>
 
             {/* Theme switcher: System -> Light -> Dark (icon-only to keep the header clean) */}
             <button
@@ -228,9 +275,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={cycleTheme}
               aria-label={`Current theme: ${theme}. Click to switch theme.`}
               title={`Theme: ${themeLabel} (Click to cycle)`}
-              className={`inline-flex size-11 items-center justify-center rounded-full ${glassControl} ${focusRing}`}
+              className={`${ghostControl} ${headerFocusRing}`}
             >
-              <span className="relative inline-flex size-4 items-center justify-center">
+              <span className="relative inline-flex size-5 items-center justify-center">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
                     key={theme === 'system' ? 'system' : resolvedTheme}
@@ -241,11 +288,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     transition={{ duration: 0.18, ease: 'easeOut' }}
                   >
                     {theme === 'system' ? (
-                      <SunMoonSplitIcon className="size-4" />
+                      <SunMoonSplitIcon className="size-5" />
                     ) : resolvedTheme === 'dark' ? (
-                      <Moon className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
+                      <Moon className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
                     ) : (
-                      <Sun className="size-4" strokeWidth={ICON_STROKE} aria-hidden="true" />
+                      <Sun className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
                     )}
                   </motion.span>
                 </AnimatePresence>

@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Typography layer. Imported LAST in main.tsx (after ux-refactor.css).
+
+   Text style copied from the reference header and applied site-wide:
+     - one clean grotesque family (Inter, already self-hosted, so no new font request)
+     - semibold (600) for anything you read as a label, link or button
+     - near-black "ink" #0D0C22 on white, soft grey #6E6D7A for secondary text
+     - sentence case, slightly tightened tracking (-0.011em body, -0.022em headings)
+     - ultra-light grey #F3F3F6 for pills and fields
+   Unlayered on purpose: it wins over Tailwind's layered utilities and the older rules in index.css / premium.css.
+   ========================================================================== */
+
+:root {
+  --ink: #0D0C22;
+  --ink-soft: #3A3546;
+  --ink-muted: #6E6D7A;
+  --surface-soft: #F3F3F6;
+  --track-body: -0.011em;
+  --track-head: -0.022em;
+}
+html.dark {
+  --ink: #F4F4F8;
+  --ink-soft: #D4D4E0;
+  --ink-muted: #A3A3B5;
+  --surface-soft: rgba(255, 255, 255, 0.08);
+}
+
+/* 1. Body: Inter, tight tracking, crisp rendering */
+body {
+  font-family: var(--app-font-sans);
+  letter-spacing: var(--track-body);
+  font-optical-sizing: auto;
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+html:not(.dark) body { color: var(--ink); }
+
+/* 2. Headings: semibold-to-bold (no 800 weights), tight tracking. Their ink colour is set at the source (index.css / premium.css). */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: var(--track-head);
+  text-wrap: balance;
+}
+h1 { font-weight: 700; letter-spacing: -0.028em; }
+h2 { font-weight: 700; }
+h3, h4 { font-weight: 600; }
+h5, h6 { font-weight: 600; }
+
+/* Page banner and footer headings that carry their own sizes */
+.chrome-bar-title,
+.ft-news-title,
+.hero-title {
+  font-weight: 700;
+  letter-spacing: -0.028em;
+}
+
+/* Banner sub-text: regular weight, soft grey (like the search placeholder in the reference) */
+.hero-sub { font-weight: 400; letter-spacing: var(--track-body); }
+
+/* Banner badge: sentence case instead of tracked caps */
+.hero-badge {
+  text-transform: none;
+  letter-spacing: -0.005em;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+/* 3. Weights: nothing heavier than bold. 800/900 utilities read as shouting next to the lighter header */
+.font-extrabold, .font-black { font-weight: 700; }
+
+/* 4. Small all-caps labels (tables, eyebrows): keep the caps where they structure data, but calm the tracking */
+.uppercase.tracking-widest,
+.uppercase.tracking-wider { letter-spacing: 0.05em; }
+.uppercase.tracking-wide { letter-spacing: 0.03em; }
+
+/* 5. Buttons and form controls inherit the page family and tracking (their weights stay as set by each component) */
+button, input, select, textarea, optgroup { font-family: inherit; letter-spacing: inherit; }
+::placeholder { color: var(--ink-muted); opacity: 1; font-weight: 400; }
+
+/* 6. Header surface: the hairline is barely there, like the reference */
+.elev-chrome { border-bottom-color: rgba(13, 12, 34, 0.07); }
+html.dark .elev-chrome { border-bottom-color: rgba(255, 255, 255, 0.08); }
+
+/* The header search input sits inside the grey pill, so it must stay transparent and borderless
+   (ux-refactor.css paints every text input white in light mode). */
+html .elev-chrome input[type="text"].header-search-field {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* 7. Keyboard focus inside the header uses the blue ring (the tools keep the site-wide ring) */
+.elev-chrome :focus-visible { outline: none; }
+
+@media print {
+  body { letter-spacing: normal; }
+}

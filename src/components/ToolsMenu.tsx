@@ -15,12 +15,12 @@ interface ToolsMenuProps {
   onNavigate: (item: NavItem) => void;
 }
 
-const WIDTH = 320;
+const WIDTH = 300;
 const GAP = 8;
 const MARGIN = 12;
 
 /**
- * Desktop "Tools" dropdown (Hick's Law: the header shows one link plus this one menu instead of 14 tabs).
+ * Desktop tool-group dropdown (Hick's Law: the header shows three grouped menus instead of 14 tabs).
  *
  * Non-modal, keyboard friendly:
  *  - opens under the button, clamped inside the viewport; focus starts on the first link
@@ -106,17 +106,17 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
     <div
       ref={panelRef}
       role="group"
-      aria-label="Tools"
+      aria-label={groups.length === 1 ? groups[0].heading : 'Tools'}
       style={{ top: pos.top, left: pos.left, width: WIDTH }}
-      className={`fixed z-[9999] max-h-[calc(100vh-96px)] origin-top-left overflow-y-auto overscroll-contain rounded-2xl border border-[#7A6149]/15 bg-white p-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition duration-150 ease-out motion-reduce:transition-none dark:border-slate-700 dark:bg-slate-900 dark:shadow-black/40 ${
+      className={`fixed z-[9999] max-h-[calc(100vh-96px)] origin-top-left overflow-y-auto overscroll-contain rounded-2xl border border-[#0D0C22]/10 bg-white p-2 shadow-[0_12px_32px_rgba(13,12,34,0.10)] transition duration-150 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-[#161B2E] dark:shadow-black/40 ${
         shown ? 'translate-y-0 scale-100 opacity-100' : '-translate-y-1 scale-[0.98] opacity-0'
       }`}
     >
       {groups.map((group, gi) => (
-        <section key={group.id} aria-labelledby={`tools-menu-${group.id}`} className={gi > 0 ? 'mt-1.5 border-t border-[#7A6149]/12 pt-1.5 dark:border-slate-700' : ''}>
+        <section key={group.id} aria-labelledby={`tools-menu-${group.id}`} className={gi > 0 ? 'mt-1.5 border-t border-[#0D0C22]/8 pt-1.5 dark:border-white/10' : ''}>
           <h2
             id={`tools-menu-${group.id}`}
-            className="m-0 px-3 pb-1 pt-2 text-xs font-semibold text-slate-600 dark:text-slate-300"
+            className={groups.length === 1 ? 'sr-only' : 'm-0 px-3 pb-1 pt-2 text-sm font-semibold tracking-[-0.011em] text-[#6E6D7A] dark:text-slate-300'}
           >
             {group.heading}
           </h2>
@@ -136,17 +136,17 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
                     onFocus={() => void preloadForPath(item.path)}
                     aria-current={active ? 'page' : undefined}
                     title={item.title}
-                    className={`group flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-medium no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#A68A6D] dark:focus-visible:ring-[#D6BEA0] ${
+                    className={`group flex min-h-11 items-center gap-3 rounded-xl px-3 text-[15px] font-semibold tracking-[-0.011em] no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#2563EB] dark:focus-visible:ring-[#60A5FA] ${
                       active
-                        ? 'bg-[#F5EFE7] text-[#5E4A36] dark:bg-[#2A2118] dark:text-[#E6D5BF]'
-                        : 'text-slate-800 hover:bg-[#FAF6F1] dark:text-slate-100 dark:hover:bg-slate-800'
+                        ? 'bg-[#F3F3F6] text-[#0D0C22] dark:bg-white/10 dark:text-white'
+                        : 'text-[#0D0C22] hover:bg-[#F3F3F6] dark:text-slate-100 dark:hover:bg-white/10'
                     }`}
                   >
                     <span
                       className={`inline-flex size-8 shrink-0 items-center justify-center rounded-lg ${
                         active
-                          ? 'bg-[#EADFCF] text-[#6B5640] dark:bg-[#3A2E22] dark:text-[#E6D5BF]'
-                          : 'bg-[#F5F1EB] text-[#6F6254] dark:bg-slate-800 dark:text-slate-200'
+                          ? 'bg-[#DBE6FD] text-[#2563EB] dark:bg-[#2563EB]/25 dark:text-[#93B4FB]'
+                          : 'bg-[#F3F3F6] text-[#3A3546] dark:bg-white/10 dark:text-slate-200'
                       }`}
                     >
                       <Icon className="size-4" strokeWidth={2} aria-hidden="true" />

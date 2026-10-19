@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Search } from 'lucide-react';
+import { X, Search, Info } from 'lucide-react';
 import { Link } from './SlashLink';
 import { NavGroup, NavItem } from '../data/navItems';
 import { isSamePath } from '../utils/paths';
@@ -43,12 +43,12 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
   if (typeof document === 'undefined') return null;
 
   const rowBase =
-    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-medium no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#A68A6D] dark:focus-visible:ring-[#D6BEA0]';
+    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-semibold tracking-[-0.011em] no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#2563EB] dark:focus-visible:ring-[#60A5FA]';
   const rowClass = (active: boolean) =>
     `${rowBase} ${
       active
-        ? 'bg-[#F5EFE7] text-[#5E4A36] dark:bg-[#2A2118] dark:text-[#E6D5BF]'
-        : 'text-slate-900 hover:bg-[#FAF6F1] dark:text-slate-100 dark:hover:bg-slate-800'
+        ? 'bg-[#F3F3F6] text-[#0D0C22] dark:bg-white/10 dark:text-white'
+        : 'text-[#0D0C22] hover:bg-[#F3F3F6] dark:text-slate-100 dark:hover:bg-white/10'
     }`;
 
   const renderItem = (item: NavItem) => {
@@ -91,14 +91,14 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
         }`}
       >
         <div className="flex items-center justify-between border-b border-slate-200 px-4 py-2 dark:border-slate-700">
-          <h2 id="mobile-nav-title" className="m-0 text-lg font-bold text-slate-900 dark:text-slate-50">
+          <h2 id="mobile-nav-title" className="m-0 text-lg font-semibold tracking-[-0.02em] text-[#0D0C22] dark:text-slate-50">
             Menu
           </h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="-mr-2 inline-flex size-12 cursor-pointer items-center justify-center rounded-full text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
+            className="-mr-2 inline-flex size-12 cursor-pointer items-center justify-center rounded-full text-[#0D0C22] hover:bg-[#F3F3F6] dark:text-slate-200 dark:hover:bg-white/10"
           >
             <X className="size-5" aria-hidden="true" />
           </button>
@@ -111,11 +111,11 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
               onClose();
               onOpenSearch();
             }}
-            className="mb-3 flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-xl border border-slate-300 bg-slate-50 px-3 text-left text-base font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+            className="mb-3 flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-full bg-[#F3F3F6] px-4 text-left text-base font-normal tracking-[-0.011em] text-[#6E6D7A] hover:bg-[#EBEBF0] dark:bg-white/[0.08] dark:text-slate-300 dark:hover:bg-white/15"
           >
             <Search className="size-5 shrink-0" aria-hidden="true" />
-            <span className="flex-1">Search calculators</span>
-            <kbd className="hidden rounded-md border border-slate-300 px-1.5 py-0.5 font-mono text-xs text-slate-600 dark:border-slate-600 dark:text-slate-300 sm:inline">
+            <span className="flex-1">What do you want to calculate?</span>
+            <kbd className="hidden font-sans text-sm font-semibold text-[#3A3546] dark:text-slate-300 sm:inline">
               {shortcutLabel}
             </kbd>
           </button>
@@ -124,12 +124,26 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
 
           {groups.map((group) => (
             <section key={group.id} aria-labelledby={`drawer-${group.id}`} className="mt-3 border-t border-slate-200 pt-2 dark:border-slate-700">
-              <h3 id={`drawer-${group.id}`} className="m-0 px-3 pb-1 pt-1 text-sm font-semibold text-slate-600 dark:text-slate-300">
+              <h3 id={`drawer-${group.id}`} className="m-0 px-3 pb-1 pt-1 text-sm font-semibold tracking-[-0.011em] text-[#6E6D7A] dark:text-slate-300">
                 {group.heading}
               </h3>
               <ul className="m-0 list-none space-y-0.5 p-0">{group.items.map(renderItem)}</ul>
             </section>
           ))}
+
+          <ul className="m-0 mt-3 list-none border-t border-slate-200 p-0 pt-2 dark:border-slate-700">
+            <li>
+              <Link
+                to="/about/"
+                onClick={onClose}
+                aria-current={currentPath.startsWith('/about') ? 'page' : undefined}
+                className={rowClass(currentPath.startsWith('/about'))}
+              >
+                <Info className="size-5 shrink-0" strokeWidth={2} aria-hidden="true" />
+                <span>About</span>
+              </Link>
+            </li>
+          </ul>
         </nav>
       </div>
     </div>,

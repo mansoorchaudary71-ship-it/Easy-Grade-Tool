@@ -60,7 +60,7 @@ const HeroTexture: React.FC = () => (
 
 /**
  * Tool name hero: a mobile-first, One UI-inspired card with generous padding, heavily rounded corners, a highly diffused
- * soft-UI shadow, a vibrant blue pill badge above a fluid Plus Jakarta Sans heading, a muted-gray subheading, and a
+ * soft-UI shadow, a vibrant blue pill badge above a fluid Inter heading, a muted-gray subheading, and a
  * low-opacity SVG grid + wave texture behind the text. Used by every tool and info page, so changing it here restyles them all.
  *
  * Colours, shadow and fluid type sizes live in premium.css (.hero-card, .hero-title, .hero-sub, .hero-badge) because
