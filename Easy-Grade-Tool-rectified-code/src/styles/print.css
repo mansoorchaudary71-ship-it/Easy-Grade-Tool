@@ -1,0 +1,151 @@
+/* Print: the only place raw colours are allowed (paper is always white-on-black). */
+
+/* Printing from dark mode must not print dark surfaces: force the light token values for the whole page. */
+@media print {
+  :root, :root.dark, .dark {
+    --c-canvas: #ffffff; --c-surface: #ffffff; --c-sunken: #f1f5f9; --c-field: #ffffff;
+    --c-line: #cbd5e1; --c-line-strong: #64748b;
+    --c-ink: #000000; --c-ink-2: #1e293b; --c-ink-3: #334155;
+    --c-brand: #3d476b; --c-brand-hover: #3d476b; --c-brand-soft: #e4e8f3; --c-brand-line: #ccd3e8; --c-brand-ink: #272d44; --c-on-brand: #ffffff;
+    --c-good: #047857; --c-fair: #b45309; --c-poor: #be123c; --c-focus: #000000;
+  }
+  body { background: #ffffff !important; color: #000000 !important; }
+  .card, .panel, .guide-card, .menu, .dialog { box-shadow: none !important; }
+}
+
+/* Quick Chart table: opaque cells, black text, no sticky headers, rows never split across pages. */
+@media print {
+  .ez-chart-table { width: 100% !important; min-width: 0 !important; border-collapse: collapse !important; font-size: 11pt; }
+  .ez-chart-table thead th { position: static !important; box-shadow: none !important; background: #f1f5f9 !important; color: #000000 !important; border-bottom: 1px solid #94a3b8 !important; }
+  .ez-chart-table th, .ez-chart-table td { background: #ffffff !important; color: #000000 !important; border-bottom: 1px solid #cbd5e1 !important; padding: 3px 6px !important; }
+  .ez-chart-table th[scope="colgroup"] { background: #e2e8f0 !important; border-top: 1px solid #94a3b8 !important; }
+  .ez-chart-table tr { break-inside: avoid; page-break-inside: avoid; }
+  .ez-chart-table tbody { break-inside: auto; }
+  .ez-chart-table span, .ez-chart-table strong { color: #000000 !important; background: transparent !important; border-color: transparent !important; }
+  [data-print-area] button.ez-chart-pick {
+    display: inline-flex !important; min-height: 0 !important; width: auto !important; padding: 0 !important;
+    border: 0 !important; background: transparent !important; color: #000000 !important;
+  }
+  [data-scroll-shadow] { display: none !important; }
+}
+@media print {
+  .page {
+    overflow: visible !important;
+    height: auto !important;
+    max-width: 100% !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .site-footer,
+  .command-palette-backdrop,
+  .educational-guide {
+    display: none !important;
+  }
+
+  #ez-print-section .space-y-6 {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+
+  #ez-print-section .space-y-2\.5 {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #ez-print-section [class*="bg-surface"],
+  #ez-print-section [class*="bg-sunken"] {
+    background: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+
+  #ez-print-section strong.text-rose-600 {
+    color: #dc2626 !important;
+  }
+
+  .tool-card,
+  .result-panel {
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .result-panel::before {
+    display: none !important;
+  }
+
+  .result-panel * {
+    color: #0f172a !important;
+    text-shadow: none !important;
+  }
+
+  .result-panel .bg-\[\#F8F9FA\] {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+}
+
+@page { margin: 14mm; }
+
+@media print {
+  .site-footer, .command-palette-backdrop, .print\:hidden {
+    display: none !important;
+  }
+  .content-auto { content-visibility: visible; }
+}
+
+@media print {
+  .scale-tab[data-active="true"]::after { display: none !important; }
+}
+
+@page {
+  size: A4;
+  margin: 16mm 14mm 18mm;
+}
+
+@media print {
+  [data-print-area] .contain-strict[aria-hidden="true"],
+  [data-print-area] .sr-only,
+  [data-print-area] .print\:hidden {
+    display: none !important;
+  }
+  [data-print-area].tool-layout,
+  [data-print-area] .tool-layout {
+    display: block !important;
+  }
+  [data-print-area].tool-layout > *,
+  [data-print-area] .tool-layout > * {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 14px !important;
+  }
+  [data-print-area] .tool-card,
+  [data-print-area] .result-panel {
+    border: 1px solid #d3d7e3 !important;
+    border-radius: 8px !important;
+    padding: 12px 14px !important;
+    break-inside: auto;
+  }
+  [data-print-area] .result-panel {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  #ez-print-section .space-y-6 > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+  #ez-print-section .space-y-6 > :last-child:nth-child(odd) .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  [data-print-area] .text-rose-600,
+  [data-print-area] .text-rose-700 { color: #b42318 !important; }
+}

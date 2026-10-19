@@ -1,0 +1,155 @@
+/* ==========================================================================
+   COMPONENTS: one definition per UI element. Layout (spacing, flex, grid) stays in Tailwind utilities.
+   Rule of thumb: if two places need the same look, they use the same class from this file.
+
+     Page      .shell  .page  .page-header  .page-lead  .section  .prose-block
+     Surfaces  .card  .panel  .menu  .dialog
+     Controls  .btn (+ -primary -secondary -ghost -danger -icon)  .field  .field-label  .field-hint  .field-error  .chip
+     Chrome    .site-header  .site-footer  .nav-link  .toast
+     Tones     .tone-good  .tone-fair  .tone-poor  .tone-brand
+   ========================================================================== */
+@layer components {
+  /* ---------- Page ---------- */
+  .shell { width: 100%; max-width: var(--page-w); margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 640px) { .shell { padding-inline: 1.5rem; } }
+
+  /* Every page body: same column, same vertical rhythm (32px on phones, 40px from 640px) */
+  .page { display: flex; flex-direction: column; gap: 2rem; width: 100%; padding-block: 1.5rem 3rem; }
+  @media (min-width: 640px) { .page { gap: 2.5rem; padding-block: 2.5rem 4rem; } }
+
+  .page-header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 1.5rem; }
+  .page-header > div { min-width: 0; }
+  .page-lead { margin-top: 0.5rem; max-width: var(--measure); font-size: 1.0625rem; line-height: 1.6; color: var(--c-ink-2); }
+
+  .section { display: flex; flex-direction: column; gap: 1rem; }
+  .prose-block { max-width: var(--measure); }
+  .prose-block > * + * { margin-top: 0.75rem; }
+  .prose-block p, .prose-block li { color: var(--c-ink-2); line-height: 1.75; }
+  .prose-block ul { list-style: disc; padding-left: 1.25rem; }
+  .prose-block ol { list-style: decimal; padding-left: 1.25rem; }
+  .prose-block h2 { margin-top: 2rem; }
+  .prose-block h3 { margin-top: 1.5rem; }
+
+  /* ---------- Surfaces ---------- */
+  .card { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-card); padding: 1.25rem; min-width: 0; }
+  @media (min-width: 640px) { .card { padding: 1.75rem; } }
+  .panel { background: var(--c-sunken); border-radius: var(--r-field); padding: 1rem; min-width: 0; }
+  .menu {
+    background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-card);
+    box-shadow: var(--shadow-lg); padding: 0.5rem;
+  }
+  .dialog-backdrop {
+    position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; padding: 1rem;
+    background: rgb(15 23 42 / 0.55);
+  }
+  .drawer-backdrop { position: fixed; inset: 0; z-index: 70; background: rgb(15 23 42 / 0.55); }
+  .dialog {
+    position: relative; width: 100%; max-width: 32rem; max-height: calc(100dvh - 2rem); overflow-y: auto;
+    background: var(--c-surface); color: var(--c-ink); border: 1px solid var(--c-line); border-radius: var(--r-card);
+    box-shadow: var(--shadow-lg); padding: 1.5rem;
+  }
+
+  /* ---------- Buttons: pill, 44px minimum (48px on touch), three emphasis levels ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; flex-shrink: 0;
+    min-height: var(--touch); min-width: var(--touch); padding: 0 1.25rem;
+    border: 1px solid transparent; border-radius: var(--r-pill);
+    font: inherit; font-size: 0.9375rem; font-weight: 600; line-height: 1.2; white-space: nowrap; text-decoration: none;
+    cursor: pointer; user-select: none; touch-action: manipulation;
+    transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  @media (pointer: coarse) { .btn { min-height: 3rem; min-width: 3rem; } }
+  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.5; cursor: not-allowed; }
+  .btn svg { width: 1.125rem; height: 1.125rem; flex-shrink: 0; }
+  .btn-primary { background: var(--c-brand); color: var(--c-on-brand); }
+  .btn-primary:hover:not(:disabled) { background: var(--c-brand-hover); color: var(--c-on-brand); }
+  .btn-secondary { background: var(--c-surface); color: var(--c-ink); border-color: var(--c-line-strong); }
+  .btn-secondary:hover:not(:disabled) { background: var(--c-sunken); color: var(--c-ink); }
+  .btn-ghost { background: transparent; color: var(--c-ink-2); }
+  .btn-ghost:hover:not(:disabled) { background: var(--c-sunken); color: var(--c-ink); }
+  .btn-danger { background: var(--c-surface); color: var(--c-poor); border-color: currentColor; }
+  .btn-danger:hover:not(:disabled) { background: var(--c-sunken); }
+  .btn-icon { padding: 0; width: var(--touch); }
+  @media (pointer: coarse) { .btn-icon { width: 3rem; } }
+  .btn-block { width: 100%; }
+
+  /* Toggle chip / segmented option: aria-pressed="true" (or .is-active) marks the selected one */
+  .chip {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem;
+    min-height: var(--touch); min-width: var(--touch); padding: 0 1rem; border-radius: var(--r-pill);
+    background: var(--c-surface); color: var(--c-ink-2); border: 1px solid var(--c-line-strong);
+    font: inherit; font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-decoration: none;
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .chip:hover { background: var(--c-sunken); color: var(--c-ink); }
+  .preset-btn { display: inline-flex; align-items: center; justify-content: center; min-height: var(--touch); min-width: var(--touch); padding: 0 1rem; border-radius: var(--r-pill); background: var(--c-surface); color: var(--c-ink-2); border: 1px solid var(--c-line-strong); font: inherit; font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+  .preset-btn:hover { background: var(--c-sunken); color: var(--c-ink); }
+  .preset-btn[aria-pressed="true"], .preset-btn.active, .preset-btn[data-active="true"] { background: var(--c-brand); border-color: var(--c-brand); color: var(--c-on-brand); }
+  .chip[aria-pressed="true"], .chip[aria-selected="true"], .chip[aria-current="true"], .chip.is-active {
+    background: var(--c-brand); border-color: var(--c-brand); color: var(--c-on-brand);
+  }
+
+  /* ---------- Forms ---------- */
+  .field { width: 100%; }
+  .field-label { display: block; margin-bottom: 0.375rem; font-size: 0.875rem; font-weight: 600; color: var(--c-ink); }
+  .field-hint { margin-top: 0.375rem; font-size: 0.875rem; color: var(--c-ink-3); }
+  .field-error { margin-top: 0.375rem; font-size: 0.875rem; font-weight: 500; color: var(--c-poor); }
+
+  /* ---------- Chrome ---------- */
+  .site-header { position: sticky; top: 0; z-index: 40; background: var(--c-surface); border-bottom: 1px solid var(--c-line); }
+  .site-header__row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; height: var(--header-h); }
+  @media (min-width: 768px) { .site-header__row { display: grid; grid-template-columns: 1fr auto 1fr; } }
+
+  .nav-link {
+    position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.375rem;
+    min-height: var(--touch); padding: 0 1rem; border-radius: var(--r-pill); border: 0; background: transparent;
+    font: inherit; font-size: 0.9375rem; font-weight: 500; color: var(--c-ink-2); text-decoration: none; cursor: pointer; white-space: nowrap;
+    transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .nav-link:hover { background: var(--c-sunken); color: var(--c-ink); }
+  .nav-link[aria-current="page"], .nav-link[data-active="true"] { background: var(--c-brand-soft); color: var(--c-brand-ink); font-weight: 600; }
+
+  .site-footer { background: var(--c-surface); border-top: 1px solid var(--c-line); margin-top: 4rem; }
+  .footer-link { display: inline-flex; align-items: center; min-height: var(--touch); color: var(--c-ink-2); text-decoration: none; font-size: 0.9375rem; background: none; border: 0; padding: 0; font-family: inherit; cursor: pointer; }
+  .footer-link:hover { color: var(--c-brand); text-decoration: underline; }
+  /* Mouse users get compact rows; touch users keep the full 44px target (see --touch). */
+  @media (pointer: fine) { .footer-link { min-height: 2.25rem; } }
+
+  .toast {
+    position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 1.25rem); z-index: 80; transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 0.5rem; max-width: calc(100vw - 2rem); padding: 0.75rem 1.25rem;
+    border-radius: var(--r-pill); background: var(--c-ink); color: var(--c-canvas);
+    font-size: 0.9375rem; font-weight: 600; box-shadow: var(--shadow-lg); animation: toast-in 200ms var(--ease) both;
+  }
+  .toast svg { width: 1.125rem; height: 1.125rem; flex-shrink: 0; }
+  @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 0.5rem); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+  /* ---------- Tones: the only way grade/status colour is applied ---------- */
+  .tone-good { background: color-mix(in srgb, var(--c-good) 10%, var(--c-surface)); border-color: color-mix(in srgb, var(--c-good) 35%, var(--c-surface)); color: var(--c-good); }
+  .tone-fair { background: color-mix(in srgb, var(--c-fair) 10%, var(--c-surface)); border-color: color-mix(in srgb, var(--c-fair) 35%, var(--c-surface)); color: var(--c-fair); }
+  .tone-poor { background: color-mix(in srgb, var(--c-poor) 10%, var(--c-surface)); border-color: color-mix(in srgb, var(--c-poor) 35%, var(--c-surface)); color: var(--c-poor); }
+  .tone-brand { background: var(--c-brand-soft); border-color: var(--c-brand-line); color: var(--c-brand-ink); }
+}
+
+/* ==========================================================================
+   LONG-FORM CONTENT: guides, FAQ, legal text. Same card as everywhere else, text at the normal body size.
+   ========================================================================== */
+@layer components {
+  .guide-shell, .seo-content { width: 100%; max-width: none; margin: 0; padding: 0; border: 0; content-visibility: auto; contain-intrinsic-size: 1px 900px; }
+  .guide-card { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--r-card); padding: 1.25rem; }
+  @media (min-width: 640px) { .guide-card { padding: 1.75rem; } }
+
+  .guide-card h2, .seo-article h2 { margin: 0 0 0.75rem; }
+  .guide-card h3, .seo-article h3 { margin: 1.5rem 0 0.5rem; }
+  .guide-card p, .seo-article p, .guide-card li, .seo-article li { color: var(--c-ink-2); line-height: 1.7; }
+  .guide-card p, .seo-article p { margin: 0 0 1rem; max-width: var(--measure); }
+  .guide-card p:last-child, .seo-article p:last-child { margin-bottom: 0; }
+  .guide-card ul, .guide-card ol, .seo-article ul, .seo-article ol { display: grid; gap: 0.5rem; margin: 0 0 1rem; padding-left: 1.25rem; max-width: var(--measure); }
+  .guide-card ul, .seo-article ul { list-style: disc; }
+  .guide-card ol, .seo-article ol { list-style: decimal; }
+  .guide-card li::marker, .seo-article li::marker { color: var(--c-brand); font-weight: 700; }
+  .guide-card strong, .seo-article strong { color: var(--c-ink); }
+  .faq-desc { margin: 0.375rem 0 0; max-width: var(--measure); color: var(--c-ink-2); }
+  .faq-q { color: var(--c-ink); font-weight: 700; line-height: 1.4; }
+  .faq-a, .faq-a p { color: var(--c-ink-2); line-height: 1.7; margin: 0; }
+}

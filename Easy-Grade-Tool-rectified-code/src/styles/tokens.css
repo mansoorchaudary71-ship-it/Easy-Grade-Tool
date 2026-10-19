@@ -1,0 +1,163 @@
+/* ==========================================================================
+   DESIGN TOKENS: the single source of truth for colour, shape, type and motion.
+   Brand: indigo-slate #4C5985 (same as the logo, app icon and manifest) + slate neutrals.
+   Nothing else in the codebase should contain a raw hex colour. Change a value here and the whole site follows.
+   ========================================================================== */
+
+/* `static` = always emitted as CSS variables (components.css and base.css read them with var()).
+   Tailwind utilities generated from the tokens: bg-canvas, bg-surface, bg-sunken, text-ink, text-ink-2, text-ink-3,
+   border-line, border-line-strong, bg-brand, text-brand, bg-brand-soft, text-brand-ink, text-on-brand, brand-50..950 */
+@theme static {
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Static brand ramp (600 = logo colour). Use the adaptive tokens below for anything that must follow dark mode. */
+  --color-brand-50: #f3f5fa;
+  --color-brand-100: #e4e8f3;
+  --color-brand-200: #ccd3e8;
+  --color-brand-300: #aab5d6;
+  --color-brand-400: #8a98c4;
+  --color-brand-500: #6676a8;
+  --color-brand-600: #4c5985;
+  --color-brand-700: #3d476b;
+  --color-brand-800: #323a57;
+  --color-brand-900: #272d44;
+  --color-brand-950: #181c2c;
+
+  /* Two elevations only: sm for resting cards, lg for floating layers (menus, dialogs, toasts). */
+  --shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.05);
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.06), 0 1px 3px 0 rgb(15 23 42 / 0.04);
+  --shadow-md: 0 1px 2px 0 rgb(15 23 42 / 0.06), 0 1px 3px 0 rgb(15 23 42 / 0.04);
+  --shadow-lg: 0 12px 32px -8px rgb(15 23 42 / 0.22), 0 2px 6px -2px rgb(15 23 42 / 0.1);
+  --shadow-xl: 0 12px 32px -8px rgb(15 23 42 / 0.22), 0 2px 6px -2px rgb(15 23 42 / 0.1);
+  --shadow-2xl: 0 12px 32px -8px rgb(15 23 42 / 0.22), 0 2px 6px -2px rgb(15 23 42 / 0.1);
+}
+
+/* Adaptive tokens: one name, two values. They are what components should use. */
+@theme inline {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-sunken: var(--c-sunken);
+  --color-line: var(--c-line);
+  --color-line-strong: var(--c-line-strong);
+  --color-ink: var(--c-ink);
+  --color-ink-2: var(--c-ink-2);
+  --color-ink-3: var(--c-ink-3);
+  --color-brand: var(--c-brand);
+  --color-brand-hover: var(--c-brand-hover);
+  --color-brand-soft: var(--c-brand-soft);
+  --color-brand-line: var(--c-brand-line);
+  --color-brand-ink: var(--c-brand-ink);
+  --color-on-brand: var(--c-on-brand);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* Surfaces */
+  --c-canvas: #f5f7fa;
+  --c-surface: #ffffff;
+  --c-sunken: #eef1f6;
+  --c-line: #e2e8f0;
+  --c-line-strong: #7c8aa0;     /* form-field borders: 3.5:1 on white (WCAG 1.4.11) */
+  --c-field: #ffffff;           /* form-field fill */
+  /* Text (all >= 4.5:1 on surface, canvas and sunken) */
+  --c-ink: #0f172a;
+  --c-ink-2: #475569;
+  --c-ink-3: #55637a;
+  /* Brand */
+  --c-brand: #4c5985;           /* 6.8:1 with white text */
+  --c-brand-hover: #3d476b;
+  --c-brand-soft: #e4e8f3;
+  --c-brand-line: #ccd3e8;
+  --c-brand-ink: #3d476b;
+  --c-on-brand: #ffffff;
+  --c-focus: #4c5985;
+  /* Grade tones (see utils/gradeTone.ts, the only place that decides which grade gets which tone) */
+  --c-good: #047857;
+  --c-fair: #b45309;
+  --c-poor: #be123c;
+
+  /* Shape: three radii and nothing else (plus 8px for tiny controls) */
+  --r-field: 0.75rem;           /* inputs, tiles, menus */
+  --r-card: 1rem;               /* cards, dialogs */
+  --r-pill: 9999px;             /* buttons, chips, toggles */
+
+  /* Layout */
+  --page-w: 64rem;              /* every page column: 1024px */
+  --measure: 44rem;             /* comfortable line length for long text */
+  --header-h: 4rem;
+  --touch: 2.75rem;             /* 44px minimum target */
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --dur: 160ms;
+
+  /* ---- Legacy aliases (HSL triplets) so older rules keep working. Do not use in new code. ---- */
+  --background: 216 33% 97%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-border: 214 32% 91%;
+  --border: 214 32% 91%;
+  --input: 217 16% 56%;
+  --secondary: 218 31% 95%;
+  --secondary-foreground: 217 33% 17%;
+  --muted: 218 31% 95%;
+  --muted-foreground: 215 19% 35%;
+  --primary: 226 27% 41%;
+  --tool-primary: 226 27% 41%;
+  --tool-deep: 227 27% 33%;
+  --tool-soft: 224 38% 92%;
+  --accent: 226 27% 41%;
+  --shadow-subtle: 0 1px 2px rgb(15 23 42 / 0.06);
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 1px 3px rgb(15 23 42 / 0.04);
+  --shadow-hover: 0 12px 32px -8px rgb(15 23 42 / 0.22);
+  --shadow-drawer: -12px 0 32px -8px rgb(15 23 42 / 0.22);
+  --ease-spring: var(--ease);
+  --duration-fast: var(--dur);
+  --duration-normal: 220ms;
+  --app-font-sans: var(--font-sans);
+  --app-font-serif: var(--font-sans);
+  --app-font-mono: var(--font-mono);
+}
+
+.dark {
+  --c-canvas: #0f172a;
+  --c-surface: #1e293b;
+  --c-sunken: #273449;
+  --c-line: #334155;
+  --c-line-strong: #64748b;
+  --c-field: #0f172a;
+  --c-ink: #f1f5f9;
+  --c-ink-2: #cbd5e1;
+  --c-ink-3: #94a3b8;
+  --c-brand: #9aa8d4;
+  --c-brand-hover: #b4bfe2;
+  --c-brand-soft: #2c3658;
+  --c-brand-line: #3d476b;
+  --c-brand-ink: #c3cbea;
+  --c-on-brand: #0f172a;
+  --c-focus: #b4bfe2;
+  --c-good: #6ee7b7;
+  --c-fair: #fcd34d;
+  --c-poor: #fda4af;
+  --background: 222 47% 11%;
+  --foreground: 210 40% 96%;
+  --card: 217 33% 17%;
+  --card-border: 215 25% 27%;
+  --border: 215 25% 27%;
+  --input: 215 16% 47%;
+  --secondary: 217 30% 22%;
+  --secondary-foreground: 214 32% 91%;
+  --muted: 217 30% 22%;
+  --muted-foreground: 213 27% 84%;
+  --primary: 226 40% 72%;
+  --tool-primary: 226 40% 72%;
+  --tool-deep: 225 34% 63%;
+  --tool-soft: 226 33% 20%;
+  --accent: 226 40% 72%;
+  --shadow-subtle: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-hover: 0 12px 32px -8px rgb(0 0 0 / 0.6);
+  --shadow-drawer: -12px 0 32px -8px rgb(0 0 0 / 0.6);
+}

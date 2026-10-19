@@ -1,0 +1,13 @@
+/* Single stylesheet entry. Order matters: fonts, Tailwind, then our layers from low to high specificity.
+     tokens.css      colours, radii, shadows, layout sizes (the only place values are decided)
+     base.css        element defaults and the type scale
+     components.css  .btn .field .card .chip .menu .dialog .page ... (one definition per component)
+     tools.css       calculator internals not yet migrated to components
+     print.css       print stylesheet */
+@import "./fonts.css";
+@import "tailwindcss";
+@import "./styles/tokens.css";
+@import "./styles/base.css";
+@import "./styles/components.css";
+@import "./styles/tools.css";
+@import "./styles/print.css";

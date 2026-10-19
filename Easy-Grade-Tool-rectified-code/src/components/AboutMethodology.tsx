@@ -1,0 +1,399 @@
+import React from 'react';
+import { Link } from './SlashLink';
+import {
+  GraduationCap,
+  BookOpen,
+  Calculator,
+  Globe2,
+  Mail,
+  ShieldCheck,
+  CheckCircle2,
+  HelpCircle,
+  Award,
+  Layers,
+  Sparkles,
+} from 'lucide-react';
+import { SEO } from './SEO';
+import { ToolHeading } from './ToolHeading';
+import { SEO_STATIC_PAGES, CONTACT_EMAIL } from '../data/seoConfig';
+import { ACADEMIC_REVIEWER, CONTENT_REVIEWED_ON, CORRECTIONS_EMAIL, SITE_OWNER } from '../data/siteIdentity';
+
+export const AboutMethodology: React.FC = () => {
+  const seo = SEO_STATIC_PAGES.about;
+  return (
+    <>
+      <SEO
+        title={seo.title}
+        description={seo.description}
+        canonicalUrl={seo.canonicalUrl}
+        ogImage={seo.ogImagePlaceholder}
+        keywords={seo.keywords}
+        applicationCategory={seo.applicationCategory}
+        featureList={seo.featureList}
+        schemaType={seo.schemaType}
+      />
+
+      <ToolHeading
+        badge="About & Methodology"
+        title="Grading Formulas & Academic Methodology"
+        description="Clear, transparent explanations of the mathematical models behind our weighted grade, cumulative GPA, and test scoring calculators."
+      />
+
+      <div className="relative">
+
+        <div className="w-full max-w-3xl space-y-10">
+          {/* Mission & Purpose Card */}
+          <section className="card w-full space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-soft text-brand-ink text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-brand" aria-hidden="true" />
+              <span>Mission &amp; Transparency</span>
+            </div>
+            <h2 className="m-0">
+              Why We Built Easy Grade Tool
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed text-ink-2 font-medium">
+              Grading policies vary dramatically across schools, departments, and professors. Some syllabi use pure point totals; others assign percentage weights to exams, lab work, and homework; and colleges evaluate transcripts using weighted GPA credit hours.
+            </p>
+            <p className="text-sm sm:text-base leading-relaxed text-ink-2 font-medium">
+              We created <strong>Easy Grade Tool</strong> to provide students, parents, and educators with an immediate, mathematically rigorous, and tracker-free toolset—including our <Link to="/" className="text-brand font-semibold underline hover:text-brand-600">Quick Grade Chart</Link>, <Link to="/grade-calculator" className="text-brand font-semibold underline hover:text-brand-600">Weighted Grade Calculator</Link>, <Link to="/gpa-calculator" className="text-brand font-semibold underline hover:text-brand-600">4.0 GPA Calculator</Link>, and <Link to="/cgpa-to-percentage-calculator" className="text-brand font-semibold underline hover:text-brand-600">CGPA to Percentage Calculator</Link>. Every formula on this site is documented below and covered by our <Link to="/privacy" className="text-brand font-semibold underline hover:text-brand-600">Client-Side Privacy Policy</Link>.
+            </p>
+          </section>
+
+          {/* Accountability: who runs the site, how accuracy is checked, how to report errors */}
+          <section aria-labelledby="accountability-title" className="bg-surface/80 rounded-2xl border border-line/70 shadow-sm p-6 sm:p-8 space-y-4">
+            <h2 id="accountability-title" className="m-0">
+              Who runs Easy Grade Tool, and how we keep it accurate
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed text-ink-2 m-0">
+              Easy Grade Tool is built and maintained by{' '}
+              {SITE_OWNER ? <><strong>{SITE_OWNER.name}</strong> ({SITE_OWNER.jobTitle.toLowerCase()})</> : <>the <strong>Easy Grade Tool team</strong></>}.
+              {ACADEMIC_REVIEWER ? ` Grading methodology is reviewed by ${ACADEMIC_REVIEWER.name}, ${ACADEMIC_REVIEWER.credential}.` : ''}{' '}
+              The site has no ads, no accounts and no tracking; calculations run in your browser.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-sm sm:text-base leading-relaxed text-ink-2">
+              <li>Every formula is written as a plain function and checked by automated tests before each release, including the worked examples printed on the calculator pages.</li>
+              <li>Grading scales shown here are the most common ones, not official for every school. Your syllabus or registrar always wins.</li>
+              <li>Formulas and tables were last reviewed on {new Date(`${CONTENT_REVIEWED_ON}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}.</li>
+              <li>University-specific CGPA conversions follow each university’s published ordinance; if one changes, tell us and it will be corrected.</li>
+            </ul>
+            <p className="text-sm sm:text-base leading-relaxed text-ink-2 m-0">
+              <strong>Corrections policy:</strong> found a wrong result or an outdated formula? Email{' '}
+              <a className="underline font-semibold" href={`mailto:${CORRECTIONS_EMAIL}`}>{CORRECTIONS_EMAIL}</a> with the calculator, the numbers you entered and the result you expected. Verified errors are fixed and the review date above is updated.
+            </p>
+          </section>
+
+          {/* 1. The Standard 4.0 US GPA Scale */}
+          <section className="bg-surface/80 rounded-2xl border border-line/70 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-brand-soft flex items-center justify-center text-brand-ink shrink-0">
+                <GraduationCap className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <span className="text-xs font-semibold tabular-nums text-ink-2">
+                  Standard Academic Model
+                </span>
+                <h2 className="m-0">
+                  1. The Standard 4.0 US GPA Scale
+                </h2>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
+              In the United States and many North American institutions, Grade Point Average (GPA) converts letter grades into numerical quality points on a scale ranging from 0.0 to 4.0.
+            </p>
+
+            <div className="overflow-x-auto rounded-2xl border border-line/80 p-2 bg-surface">
+              <table className="w-full text-left text-xs sm:text-sm border-separate border-spacing-y-1.5">
+                <thead className="bg-sunken text-ink-2 font-semibold">
+                  <tr>
+                    <th className="py-2.5 px-4 rounded-l-2xl">Letter Grade</th>
+                    <th className="py-2.5 px-4">Grade Points (Plus/Minus)</th>
+                    <th className="py-2.5 px-4">Standard Cutoff (%)</th>
+                    <th className="py-2.5 px-4 rounded-r-2xl">Description</th>
+                  </tr>
+                </thead>
+                <tbody className="tabular-nums text-xs sm:text-sm">
+                  <tr className="bg-emerald-50/60 hover:bg-emerald-50 text-emerald-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        A / A+
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">4.0</td>
+                    <td className="py-2.5 px-4">93.0% – 100%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Excellent / Outstanding</td>
+                  </tr>
+                  <tr className="bg-emerald-50/60 hover:bg-emerald-50 text-emerald-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                        A−
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">3.7</td>
+                    <td className="py-2.5 px-4">90.0% – 92.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Superior</td>
+                  </tr>
+                  <tr className="bg-brand-50/60 hover:bg-brand-50 text-brand-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-brand-50 text-brand-800 border border-brand-line">
+                        B+
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">3.3</td>
+                    <td className="py-2.5 px-4">87.0% – 89.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Very Good</td>
+                  </tr>
+                  <tr className="bg-brand-50/60 hover:bg-brand-50 text-brand-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-brand-50 text-brand-800 border border-brand-line">
+                        B
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">3.0</td>
+                    <td className="py-2.5 px-4">83.0% – 86.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Good / Above Average</td>
+                  </tr>
+                  <tr className="bg-brand-50/60 hover:bg-brand-50 text-brand-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-brand-50 text-brand-800 border border-brand-line">
+                        B−
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">2.7</td>
+                    <td className="py-2.5 px-4">80.0% – 82.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Competent</td>
+                  </tr>
+                  <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                        C+
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">2.3</td>
+                    <td className="py-2.5 px-4">77.0% – 79.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Average High</td>
+                  </tr>
+                  <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                        C
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">2.0</td>
+                    <td className="py-2.5 px-4">73.0% – 76.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Satisfactory / Minimum Major Requirement</td>
+                  </tr>
+                  <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                        C−
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">1.7</td>
+                    <td className="py-2.5 px-4">70.0% – 72.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Marginal Pass</td>
+                  </tr>
+                  <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                        D+ / D
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">1.3 / 1.0</td>
+                    <td className="py-2.5 px-4">60.0% – 69.9%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Poor / Minimum Credit Pass</td>
+                  </tr>
+                  <tr className="bg-rose-50/60 hover:bg-rose-50 text-rose-800 rounded-2xl transition-colors">
+                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-rose-50 text-rose-800 border border-rose-200">
+                        F
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-4">0.0</td>
+                    <td className="py-2.5 px-4">&lt; 60.0%</td>
+                    <td className="py-2.5 px-4 rounded-r-2xl">Failing / No Credit Earned</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-brand-soft/80 border border-brand-line/60">
+              <h3 className="m-0 mb-1 flex items-center gap-1.5">
+                <Calculator className="w-4 h-4 text-brand shrink-0" aria-hidden="true" />
+                <span>The Cumulative GPA Formula</span>
+              </h3>
+              <p className="text-xs sm:text-sm tabular-nums text-brand-ink m-0">
+                GPA = &Sigma;(Course Grade Points &times; Course Credit Hours) / &Sigma;(Total Credit Hours)
+              </p>
+              <p className="text-xs text-brand mt-2 m-0">
+                Each course grade point is weighted by the credit value of the course. For example, earning an &quot;A&quot; (4.0) in a 4-credit course yields 16.0 quality points, whereas an &quot;A&quot; in a 1-credit lab yields 4.0 quality points.
+              </p>
+            </div>
+          </section>
+
+          {/* 2. The Weighted Grade Formula */}
+          <section className="bg-surface/80 rounded-2xl border border-line/70 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-brand-soft flex items-center justify-center text-brand shrink-0">
+                <Layers className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <span className="text-xs font-semibold tabular-nums text-ink-2">
+                  Mathematical Breakdown
+                </span>
+                <h2 className="m-0">
+                  2. The Weighted Grade Formula
+                </h2>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
+              When professors assign percentages to categories (e.g., 20% Homework, 30% Midterm, 50% Final), simple averaging produces incorrect results. Our calculator executes a normalized weighted arithmetic mean:
+            </p>
+
+            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-ink dark:bg-canvas border border-slate-800 tabular-nums text-xs sm:text-sm space-y-3">
+              <div className="text-brand-400 font-semibold">Normalized Weighted Percentage</div>
+              <div className="p-3 bg-slate-800/80 rounded-xl text-center font-bold text-white text-sm sm:text-base">
+                Final Grade (%) = &Sigma; [ (Earned / Max) &times; Weight ] / &Sigma; [ Total Weight ]
+              </div>
+              <p className="text-xs text-ink-2 m-0 leading-relaxed">
+                If the weights already sum to 100%, the denominator is 100. If your syllabus weights only sum to 80% so far (because the final has not occurred yet), our engine normalizes the active weight so your current standing is always represented accurately without distortion.
+              </p>
+            </div>
+
+            <div className="space-y-3 pt-2">
+              <h3 className="m-0">
+                Final Exam Target Formula
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-2 leading-relaxed m-0">
+                To calculate the exact score you need on a final exam to reach a target class grade, we solve the algebraic equation:
+              </p>
+              <div className="p-3 bg-sunken rounded-xl tabular-nums text-xs sm:text-sm text-ink">
+                Score Needed = [ Target Grade &minus; (Current Grade &times; (1 &minus; Final Weight)) ] / Final Weight
+              </div>
+            </div>
+          </section>
+
+          {/* 3. How International Credit Systems Differ */}
+          <section className="bg-surface/80 rounded-2xl border border-line/70 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-brand-soft flex items-center justify-center text-brand-ink shrink-0">
+                <Globe2 className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <span className="text-xs font-semibold tabular-nums text-ink-2">
+                  Global Academic Equivalencies
+                </span>
+                <h2 className="m-0">
+                  3. How International Credit Systems Differ
+                </h2>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
+              If you study outside the US or are applying for study abroad programs, grade point translations are not 1:1. Here is how standard US scales differ from major global systems:
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <div className="panel p-5 space-y-2">
+                <div className="text-xs font-bold text-brand tabular-nums">
+                  Europe (ECTS)
+                </div>
+                <h3 className="text-sm font-bold text-ink m-0">
+                  European Credit System
+                </h3>
+                <p className="text-xs text-ink-2 leading-relaxed m-0">
+                  ECTS measures student workload (60 credits = 1 academic year, ~1500–1800 hours). Grading uses relative cohorts (top 10% get A, next 25% get B) rather than absolute percentage floors.
+                </p>
+              </div>
+
+              <div className="panel p-5 space-y-2">
+                <div className="text-xs font-bold text-brand tabular-nums">
+                  United Kingdom
+                </div>
+                <h3 className="text-sm font-bold text-ink m-0">
+                  Honours Classification
+                </h3>
+                <p className="text-xs text-ink-2 leading-relaxed m-0">
+                  UK universities use Honours classes: First Class (70%+), Upper Second 2:1 (60–69%), Lower Second 2:2 (50–59%), and Third (40–49%). A 70% in the UK is roughly equivalent to a US &quot;A&quot; (4.0).
+                </p>
+              </div>
+
+              <div className="panel p-5 space-y-2">
+                <div className="text-xs font-bold text-brand tabular-nums">
+                  Canada &amp; Others
+                </div>
+                <h3 className="text-sm font-bold text-ink m-0">
+                  Provincial Scales
+                </h3>
+                <p className="text-xs text-ink-2 leading-relaxed m-0">
+                  Canadian universities often use either a 4.0 or a 4.33/9.0/12.0 point scale with varying percentage cutoffs (an A may start at 85% instead of 90% or 93%).
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-amber-50/70 dark:bg-amber-950/60 border border-amber-200/60 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200 flex items-start gap-2.5">
+              <HelpCircle className="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" aria-hidden="true" />
+              <span>
+                <strong>Important Note:</strong> Because university registrar rules and international transcript evaluations (such as WES) apply bespoke conversion policies, our tools are intended for academic planning and estimation. Always verify official policies directly with your university registrar.
+              </span>
+            </div>
+          </section>
+
+          {/* 4. Authorship, Maintenance & Contact */}
+          <section className="card space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-brand-soft flex items-center justify-center text-brand shrink-0">
+                <ShieldCheck className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <div>
+                <span className="text-xs font-semibold tabular-nums text-ink-2">
+                  Trust, Authority &amp; Contact
+                </span>
+                <h2 className="m-0">
+                  4. Author &amp; Engineering Team
+                </h2>
+              </div>
+            </div>
+
+            <p className="text-sm sm:text-base text-ink-2 leading-relaxed">
+              <strong>Easy Grade Tool</strong> is actively designed and maintained by a dedicated software engineer specializing in offline-first web technologies, mathematical algorithms, and student utility tools.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="panel p-4 space-y-1">
+                <div className="text-xs tabular-nums text-ink-3">Maintainer &amp; Support</div>
+                <div className="font-bold text-sm text-ink">Engineering &amp; Editorial Team</div>
+                <div className="text-xs text-ink-2 font-medium">
+                  Direct communication: <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand hover:underline font-semibold">{CONTACT_EMAIL}</a>
+                </div>
+              </div>
+
+              <div className="panel p-4 space-y-1">
+                <div className="text-xs tabular-nums text-ink-3">Release &amp; Audit Status</div>
+                <div className="font-bold text-sm text-ink">Formulas Verified for Accuracy</div>
+                <div className="text-xs text-ink-2 font-medium">
+                  Continuous integration with automated TypeScript regression tests.
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-line/60">
+              <p className="text-xs text-ink-3 m-0">
+                Have a question about a formula, custom university scale, or found a discrepancy in a course calculation?
+              </p>
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white dark:bg-brand-600 dark:hover:bg-brand-500 text-xs font-bold transition-all shadow-sm shrink-0"
+              >
+                <Mail className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Contact Maintainer</span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </>
+  );
+};
+export default AboutMethodology;

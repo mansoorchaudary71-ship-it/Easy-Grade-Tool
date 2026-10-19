@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Easy Grade Tool: design system</title>
+<!-- Open this file directly in a browser. It loads the REAL stylesheets from ../src/styles, so what you see here is what ships. -->
+<style>
+  @font-face { font-family: 'Plus Jakarta Sans'; font-weight: 200 800; font-display: swap; src: url(../public/fonts/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Ko20yw.woff2) format('woff2'); }
+</style>
+<style>
+  /* Tailwind normally emits these from the @theme block in tokens.css; this static page has no Tailwind, so mirror them here. */
+  :root { --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; --font-mono: ui-monospace, Menlo, Consolas, monospace; --shadow-lg: 0 12px 32px -8px rgb(15 23 42 / 0.22), 0 2px 6px -2px rgb(15 23 42 / 0.1); }
+</style>
+<link rel="stylesheet" href="../src/styles/tokens.css">
+<link rel="stylesheet" href="../src/styles/base.css">
+<link rel="stylesheet" href="../src/styles/components.css">
+<style>
+  /* Layout helpers for THIS page only (the app uses Tailwind utilities for the same job). */
+  .g { display: grid; gap: 1rem; } .g2 { grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); } .g3 { grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+  .row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 1rem; }
+  .sw { border-radius: var(--r-field); border: 1px solid var(--c-line); overflow: hidden; background: var(--c-surface); }
+  .sw i { display: block; height: 3.25rem; } .sw b { display: block; padding: .5rem .75rem .1rem; font-size: .8125rem; } .sw span { display: block; padding: 0 .75rem .6rem; font-size: .75rem; color: var(--c-ink-3); }
+  code.t { font-size: .75rem; color: var(--c-ink-3); }
+  .field input, .field select, .field textarea { width: 100%; }
+  .mock-bar { flex-wrap: wrap; height: auto; min-height: var(--header-h); }
+  .note { font-size: .875rem; color: var(--c-ink-2); max-width: var(--measure); }
+  .mock-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+</style>
+</head>
+<body>
+<div class="site-header"><div class="shell mock-bar">
+  <span style="font-weight:800;letter-spacing:-.02em">Easy Grade <span style="font-weight:300">Tool</span></span>
+  <nav class="row" style="gap:.25rem" aria-label="Main">
+    <a class="nav-link" href="#" aria-current="page">Quick Grade</a>
+    <a class="nav-link" href="#">Tools</a>
+  </nav>
+  <button class="btn btn-secondary" id="theme" type="button">Toggle dark mode</button>
+</div></div>
+
+<main class="shell">
+<div class="page">
+
+  <header class="page-header">
+    <div>
+      <h1>Design system</h1>
+      <p class="page-lead">One palette, three radii, one typeface, one definition per component. Everything below comes from <code>src/styles</code>.</p>
+    </div>
+  </header>
+
+  <section class="card stack" aria-labelledby="c">
+    <h2 id="c">Colour</h2>
+    <p class="note">Brand indigo-slate <b>#4C5985</b> (the logo colour) on slate neutrals. Values flip automatically in dark mode; components never hard-code a colour.</p>
+    <div class="g g3">
+      <div class="sw"><i style="background:var(--c-canvas)"></i><b>canvas</b><span>page background</span></div>
+      <div class="sw"><i style="background:var(--c-surface)"></i><b>surface</b><span>cards, header</span></div>
+      <div class="sw"><i style="background:var(--c-sunken)"></i><b>sunken</b><span>panels, tracks</span></div>
+      <div class="sw"><i style="background:var(--c-line)"></i><b>line</b><span>dividers</span></div>
+      <div class="sw"><i style="background:var(--c-line-strong)"></i><b>line-strong</b><span>field borders, 3:1+</span></div>
+      <div class="sw"><i style="background:var(--c-ink)"></i><b>ink</b><span>headings, body</span></div>
+      <div class="sw"><i style="background:var(--c-ink-2)"></i><b>ink-2</b><span>secondary text</span></div>
+      <div class="sw"><i style="background:var(--c-ink-3)"></i><b>ink-3</b><span>captions, hints</span></div>
+      <div class="sw"><i style="background:var(--c-brand)"></i><b>brand</b><span>primary action, links</span></div>
+      <div class="sw"><i style="background:var(--c-brand-soft)"></i><b>brand-soft</b><span>selected, tinted</span></div>
+      <div class="sw"><i style="background:var(--c-good)"></i><b>good</b><span>grades A, B</span></div>
+      <div class="sw"><i style="background:var(--c-fair)"></i><b>fair</b><span>grade C</span></div>
+      <div class="sw"><i style="background:var(--c-poor)"></i><b>poor</b><span>grades D, F, errors</span></div>
+    </div>
+  </section>
+
+  <section class="card stack" aria-labelledby="t">
+    <h2 id="t">Type</h2>
+    <p class="note">Plus Jakarta Sans only. Numbers use tabular figures instead of a monospace face. 12px is the smallest text.</p>
+    <div class="stack" style="gap:.75rem">
+      <div><h1>Heading 1: 28 to 36px / 800</h1></div>
+      <div><h2>Heading 2: 20 to 24px / 700</h2></div>
+      <div><h3>Heading 3: 17px / 700</h3></div>
+      <div><h4>Heading 4: 15px / 700</h4></div>
+      <p>Body text is 16px with a 1.6 line height, set in ink on surface. Long passages stay under about 70 characters per line so they are comfortable to read.</p>
+      <p style="font-size:.875rem;color:var(--c-ink-2)">Secondary text, 14px in ink-2.</p>
+      <p style="font-size:.75rem;color:var(--c-ink-3)">Caption, 12px in ink-3 (the minimum size).</p>
+      <p class="tabular" style="font-size:1.5rem;font-weight:700">1,234.56 &nbsp; 98.7% &nbsp; A+</p>
+    </div>
+  </section>
+
+  <section class="card stack" aria-labelledby="b">
+    <h2 id="b">Buttons and chips</h2>
+    <p class="note">Pill shaped, 44px minimum height (48px on touch screens). Three levels of emphasis; one primary action per view.</p>
+    <div class="row">
+      <button class="btn btn-primary" type="button">Primary</button>
+      <button class="btn btn-secondary" type="button">Secondary</button>
+      <button class="btn btn-ghost" type="button">Ghost</button>
+      <button class="btn btn-danger" type="button">Danger</button>
+      <button class="btn btn-primary" type="button" disabled>Disabled</button>
+      <button class="btn btn-secondary btn-icon" type="button" aria-label="Add">+</button>
+    </div>
+    <div class="row" role="group" aria-label="Example chips">
+      <button class="chip" type="button" aria-pressed="true">A-F</button>
+      <button class="chip" type="button" aria-pressed="false">+/-</button>
+      <button class="chip" type="button" aria-pressed="false">Custom</button>
+    </div>
+  </section>
+
+  <section class="card stack" aria-labelledby="f">
+    <h2 id="f">Form fields</h2>
+    <p class="note">One look for input, select and textarea: 48px tall, 12px radius, a 3:1 border, a single brand focus ring.</p>
+    <div class="g g2">
+      <div class="field"><label class="field-label" for="f1">Score</label><input id="f1" type="number" value="87.5"><p class="field-hint">Out of 100</p></div>
+      <div class="field"><label class="field-label" for="f2">Course</label><input id="f2" type="text" placeholder="e.g. Biology 101"></div>
+      <div class="field"><label class="field-label" for="f3">Scale</label><select id="f3"><option>Standard 4.0</option><option>Plus / minus</option></select></div>
+      <div class="field"><label class="field-label" for="f4">Email</label><input id="f4" type="email" value="not-an-email" aria-invalid="true"><p class="field-error">Please enter a valid email address.</p></div>
+      <div class="field"><label class="field-label" for="f5">Disabled</label><input id="f5" type="text" value="Read only" disabled></div>
+      <div class="field"><label class="field-label" for="f6">Notes</label><textarea id="f6" placeholder="Anything else?"></textarea></div>
+    </div>
+  </section>
+
+  <section class="card stack" aria-labelledby="s">
+    <h2 id="s">Surfaces</h2>
+    <div class="g g2">
+      <div class="card" style="padding:1.25rem"><h3>Card</h3><p class="note">Surface, 1px line, 16px radius. No shadow at rest.</p>
+        <div class="panel" style="margin-top:.75rem"><h4>Panel</h4><p class="note">Sunken tile, 12px radius, no border. Cards contain panels, never the other way round.</p></div></div>
+      <div class="stack">
+        <div class="tone-good" style="border:1px solid;border-radius:var(--r-field);padding:.75rem 1rem;font-weight:600">Good: grade A or B</div>
+        <div class="tone-fair" style="border:1px solid;border-radius:var(--r-field);padding:.75rem 1rem;font-weight:600">Fair: grade C</div>
+        <div class="tone-poor" style="border:1px solid;border-radius:var(--r-field);padding:.75rem 1rem;font-weight:600">Poor: grade D or F, errors</div>
+        <div class="tone-brand" style="border:1px solid;border-radius:var(--r-field);padding:.75rem 1rem;font-weight:600">Brand: neutral result</div>
+      </div>
+    </div>
+    <div class="g g2" style="align-items:start">
+      <div class="menu" style="max-width:18rem"><a class="nav-link" style="display:flex;justify-content:flex-start;width:100%" href="#" aria-current="page">Quick Grade</a><a class="nav-link" style="display:flex;justify-content:flex-start;width:100%" href="#">GPA</a><a class="nav-link" style="display:flex;justify-content:flex-start;width:100%" href="#">Loan</a></div>
+      <div class="dialog" style="max-width:none"><h3>Dialog</h3><p class="note" style="margin:.5rem 0 1rem">Used for contact, report and request forms.</p><div class="row" style="justify-content:flex-end"><button class="btn btn-ghost" type="button">Cancel</button><button class="btn btn-primary" type="button">Send</button></div></div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<footer class="site-footer"><div class="shell" style="padding-block:2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+  <span class="note">&copy; Easy Grade Tool</span>
+  <span class="row"><a class="footer-link" href="#">About &amp; methodology</a><a class="footer-link" href="#">Privacy policy</a><a class="footer-link" href="#">Terms of service</a></span>
+</div></footer>
+
+<script>
+  document.getElementById('theme').addEventListener('click', function () { document.documentElement.classList.toggle('dark'); });
+  if (location.hash === '#dark') document.documentElement.classList.add('dark');
+</script>
+</body>
+</html>
