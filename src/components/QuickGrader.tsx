@@ -864,7 +864,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 inputMode={halfPoints ? 'decimal' : 'numeric'}
                 enterKeyHint="search"
                 autoComplete="off"
-                placeholder="Jump to a wrong-answer count, e.g. 3"
+                placeholder="Jump to wrong answers (e.g. 3)"
                 value={filterInput}
                 onChange={(e) => setFilterInput(e.target.value)}
                 aria-invalid={filterCheck.error ? true : undefined}

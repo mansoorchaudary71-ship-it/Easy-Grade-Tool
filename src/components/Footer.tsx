@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useId } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
+import { DecorLines } from './DecorLines';
 import {
   Shield,
   Sparkles,
@@ -82,8 +83,8 @@ const FOOTER_PREMIUM_CSS = `
 .ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .85rem;border-radius:9999px;cursor:pointer;
   font-size:12px;font-weight:700;color:#3454be;background:#eef2ff;border:1px solid #c7d4fb;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
 .dark .ft-more-btn{color:#bfd0ff;background:rgb(30 41 59);border-color:rgb(71 85 105)}
-.ft-more-btn:hover{background:#4468d8;color:#fff;border-color:#4468d8;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(68,104,216,.9)}
-.ft-more-btn:focus-visible{outline:3px solid #4468d8;outline-offset:2px}
+.ft-more-btn:hover{background:#0056D2;color:#fff;border-color:#0056D2;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(68,104,216,.9)}
+.ft-more-btn:focus-visible{outline:3px solid #0056D2;outline-offset:2px}
 .ft-more-chev{transition:transform .25s}
 .ft-more-in{animation:ft-reveal .28s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ft-grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
@@ -522,7 +523,7 @@ export const Footer: React.FC<FooterProps> = ({
   const linkCls =
     'inline-flex items-center min-h-[28px] text-left text-sm font-normal text-[#4F5D75] dark:text-slate-400 hover:text-[#0056D2] hover:underline underline-offset-4 dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg bg-[#F0F6FF] dark:bg-slate-800 text-[#0056D2] dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] transition-colors cursor-pointer active:scale-95';
+    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-[#F0F6FF] dark:bg-slate-800 text-[#0056D2] dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
@@ -530,7 +531,12 @@ export const Footer: React.FC<FooterProps> = ({
         <style dangerouslySetInnerHTML={{ __html: FOOTER_PREMIUM_CSS }} />
         {/* Newsletter band (Coursera-style pale-blue strip above the link columns). Backed by POST /api/subscribe */}
         <section aria-label="Newsletter" className="cs-news">
-          <div className="cs-container cs-news-inner">
+          <div className="cs-container">
+          <div className="cs-news-card">
+            <DecorLines variant="waves" className="cs-news-lines" />
+            <DecorLines variant="arcs" className="cs-news-arcs" />
+            <DecorLines variant="plane" className="cs-news-plane" />
+          <div className="cs-news-inner">
             <div className="min-w-0">
               <h2 className="cs-news-title">Get updates on new grade formulas &amp; academic tools</h2>
               <p className="cs-news-sub">
@@ -578,7 +584,7 @@ export const Footer: React.FC<FooterProps> = ({
               {subscribeMessage && (
                 <div
                   role="status"
-                  className={`mt-3 max-w-md text-sm font-semibold px-4 py-2.5 rounded-lg flex items-center gap-2 border ${
+                  className={`mt-3 max-w-md text-sm font-semibold px-4 py-2.5 rounded-2xl flex items-center gap-2 border ${
                     subscribeMessage.isError
                       ? 'bg-rose-50 text-rose-800 border-rose-200'
                       : 'bg-emerald-50 text-emerald-800 border-emerald-200'
@@ -594,10 +600,13 @@ export const Footer: React.FC<FooterProps> = ({
               )}
             </div>
           </div>
+          </div>
+          </div>
         </section>
 
         {/* White footer panel */}
         <div className="cs-footer-panel relative pt-12 md:pt-14 dark:bg-slate-900 transition-colors">
+          <DecorLines variant="divider" className="cs-divider" />
           <div className="cs-container">
             <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 pb-12">
               {/* Brand */}
@@ -844,7 +853,7 @@ export const Footer: React.FC<FooterProps> = ({
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-lg text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -972,14 +981,14 @@ export const Footer: React.FC<FooterProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveModal(null)}
-                      className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={contactLoading}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-xl transition-all cursor-pointer shadow-xs disabled:opacity-60"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
                     >
                       {contactLoading ? (
                         <>
@@ -1022,7 +1031,7 @@ export const Footer: React.FC<FooterProps> = ({
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-lg text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -1133,14 +1142,14 @@ export const Footer: React.FC<FooterProps> = ({
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
-                    className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer"
+                    className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={issueLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-xl transition-all cursor-pointer shadow-xs disabled:opacity-60"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
                   >
                     {issueLoading ? (
                       <>
@@ -1182,7 +1191,7 @@ export const Footer: React.FC<FooterProps> = ({
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-lg text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -1292,14 +1301,14 @@ export const Footer: React.FC<FooterProps> = ({
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
-                    className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer"
+                    className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={featureLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-xl transition-all cursor-pointer shadow-xs disabled:opacity-60"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
                   >
                     {featureLoading ? (
                       <>

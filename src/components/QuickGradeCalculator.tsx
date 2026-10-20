@@ -122,7 +122,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
       return 'bg-emerald-50 text-emerald-800 border border-emerald-200';
     }
     if (letter.startsWith('B')) {
-      return 'bg-indigo-50 text-indigo-800 border border-indigo-200';
+      return 'bg-blue-50 text-blue-800 border border-blue-200';
     }
     if (letter.startsWith('C')) {
       return 'bg-amber-50 text-amber-800 border border-amber-200';
@@ -181,7 +181,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             />
             {/* Quick Presets */}
             <div className="flex items-center gap-1.5 pt-1 flex-wrap">
-              <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400">Presets:</span>
+              <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">Presets:</span>
               <SegmentedControl
                 ariaLabel="Question count presets"
                 variant="chips"
@@ -234,7 +234,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
           {/* Quick Metrics & Actions */}
           <div className="flex flex-col justify-between space-y-4">
             <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
+              <span className="text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
                 Points Per Question
               </span>
               <span className="text-2xl sm:text-3xl font-extrabold text-teal-950 dark:text-teal-100 font-mono block mt-0.5">

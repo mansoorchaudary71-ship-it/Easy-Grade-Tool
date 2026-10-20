@@ -39,9 +39,9 @@ export function getTierVisualConfig(percent: number, passThreshold = 60): TierVi
     return {
       isPassing: true,
       statusText: 'Passing — Above Average (Tier B)',
-      badgeBg: '#eef2ff', // bg-indigo-50
-      badgeBorder: '#c7d2fe', // border-indigo-200
-      badgeColor: '#3730a3', // text-indigo-800
+      badgeBg: '#eef2ff', // bg-blue-50
+      badgeBorder: '#c7d2fe', // border-blue-200
+      badgeColor: '#3730a3', // text-blue-800
       barGradient: 'linear-gradient(90deg, #4338ca 0%, #6366f1 50%, #818cf8 100%)',
       barShadow: '0 0 12px rgba(99, 102, 241, 0.4)',
       accentColor: '#3730a3',

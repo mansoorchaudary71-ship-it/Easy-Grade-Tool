@@ -160,13 +160,13 @@ export const CgpaEducationalGuide: React.FC = () => {
               to="/gpa-calculator"
               onMouseEnter={() => preloadTool('gpa')}
               onFocus={() => preloadTool('gpa')}
-              className="group p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/70 dark:border-slate-700/70 hover:border-indigo-400 dark:hover:border-indigo-500 transition-all flex flex-col justify-between no-underline shadow-2xs"
+              className="group p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/70 dark:border-slate-700/70 hover:border-blue-400 dark:hover:border-blue-500 transition-all flex flex-col justify-between no-underline shadow-2xs"
             >
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                <span className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center">
                   <GraduationCap className="w-4 h-4" aria-hidden="true" />
                 </span>
-                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
+                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white m-0">
@@ -342,7 +342,7 @@ export const CgpaEducationalGuide: React.FC = () => {
               <tbody className="divide-y divide-slate-200/60 dark:divide-slate-800 font-mono text-slate-700 dark:text-slate-300">
                 {REFERENCE_SCALE_4_5.map((row, idx) => (
                   <tr key={idx} className="hover:bg-slate-50/80 dark:hover:bg-slate-800/50">
-                    <td className="py-2 px-4 font-bold text-indigo-700 dark:text-indigo-400">
+                    <td className="py-2 px-4 font-bold text-blue-700 dark:text-blue-400">
                       {row.cgpa4.toFixed(2)}
                     </td>
                     <td className="py-2 px-4">{row.pct4.toFixed(2)}%</td>
@@ -401,12 +401,12 @@ export const CgpaEducationalGuide: React.FC = () => {
                     </td>
                     <td className="py-2.5 px-4 whitespace-nowrap">
                       {uni.verified ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/60">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/70 dark:border-emerald-800/60">
                           <CheckCircle2 className="w-3 h-3" aria-hidden="true" />
                           <span>Verified</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200/70 dark:border-amber-800/60">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200/70 dark:border-amber-800/60">
                           <Info className="w-3 h-3" aria-hidden="true" />
                           <span>Standard estimate</span>
                         </span>

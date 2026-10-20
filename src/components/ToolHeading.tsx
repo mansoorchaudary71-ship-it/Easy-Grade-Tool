@@ -1,4 +1,5 @@
 import React from 'react';
+import { DecorLines } from './DecorLines';
 
 interface ToolHeadingProps {
   badge?: string;
@@ -33,6 +34,7 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
 
   return (
     <div className="chrome-bar cs-banner mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <DecorLines variant="waves" className="cs-banner-lines" />
       <div className="relative z-10 min-w-0">
         {eyebrowText && <p className="cs-eyebrow">{eyebrowText}</p>}
         <HeadingTag className="cs-banner-title [text-wrap:balance]">{title}</HeadingTag>

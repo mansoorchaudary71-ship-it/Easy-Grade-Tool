@@ -61,7 +61,7 @@ export const PrivacyPolicy: React.FC = () => {
               </div>
 
               <div className="p-4 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 shadow-xs">
-                <Database className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mb-2" aria-hidden="true" />
+                <Database className="w-5 h-5 text-blue-600 dark:text-blue-400 mb-2" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-slate-800 dark:text-white">Voluntary Submissions</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 font-medium mt-1">
                   When you submit a newsletter subscription, feedback message, or issue report, only your submitted details are stored on our server.
@@ -132,7 +132,7 @@ export const PrivacyPolicy: React.FC = () => {
                 {/* 2.2 Contact / Feedback */}
                 <div className="p-4 sm:p-5 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60">
                   <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">
-                    <FileText className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                    <FileText className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                     <span>B. Contact &amp; Feedback Form (<code className="text-xs font-mono bg-slate-100 dark:bg-slate-700 px-1.5 py-0.5 rounded">POST /api/contact</code>)</span>
                   </h3>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed mb-2">

@@ -606,7 +606,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                         />
                       )}
                       <span className="text-xs sm:text-sm font-mono font-bold">{s.label}</span>
-                      <span className="text-[10px] opacity-80 leading-tight hidden sm:inline">
+                      <span className="text-xs opacity-80 leading-tight hidden sm:inline">
                         {s.badge}
                       </span>
                     </button>
@@ -633,7 +633,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                 </label>
                 {scale === 10.0 && (
                   <span
-                    className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold ${
+                    className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold ${
                       selectedUniversity.verified
                         ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200/60 dark:border-emerald-800/60'
                         : 'bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200/60 dark:border-amber-800/60'
@@ -751,7 +751,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                           <>
                             {popularFiltered.length > 0 && (
                               <div role="group" aria-label="Popular Universities">
-                                <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-50/90 dark:bg-slate-800/50">
+                                <div className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-50/90 dark:bg-slate-800/50">
                                   Popular Universities &amp; Standard
                                 </div>
                                 {popularFiltered.map((uni) => {
@@ -785,7 +785,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                                         </div>
                                       </div>
                                       <span
-                                        className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                                        className={`shrink-0 px-2 py-0.5 rounded-full text-xs font-semibold ${
                                           uni.verified
                                             ? 'bg-emerald-100/80 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
                                             : 'bg-amber-100/80 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
@@ -801,7 +801,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
 
                             {otherFiltered.length > 0 && (
                               <div role="group" aria-label="Other Universities">
-                                <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-50/90 dark:bg-slate-800/50">
+                                <div className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 bg-slate-50/90 dark:bg-slate-800/50">
                                   Other Universities (A–Z)
                                 </div>
                                 {otherFiltered.map((uni) => {
@@ -835,7 +835,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                                         </div>
                                       </div>
                                       <span
-                                        className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-semibold ${
+                                        className={`shrink-0 px-2 py-0.5 rounded-full text-xs font-semibold ${
                                           uni.verified
                                             ? 'bg-emerald-100/80 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300'
                                             : 'bg-amber-100/80 dark:bg-amber-950 text-amber-800 dark:text-amber-300'
@@ -918,7 +918,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
 
               {/* Quick CGPA Preset Chips (Uniformed UI Chips) */}
               <div className="flex items-center gap-1.5 pt-1 flex-wrap">
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mr-1">
+                <span className="text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mr-1">
                   Presets:
                 </span>
                 {SCALE_PRESETS[scale].map((presetVal) => {
@@ -987,7 +987,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                   calculationResult.division.badgeColor === 'emerald'
                     ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                     : calculationResult.division.badgeColor === 'blue'
-                    ? 'bg-indigo-50 text-indigo-800 border border-indigo-200'
+                    ? 'bg-blue-50 text-blue-800 border border-blue-200'
                     : calculationResult.division.badgeColor === 'amber'
                     ? 'bg-amber-50 text-amber-800 border border-amber-200'
                     : 'bg-rose-50 text-rose-800 border border-rose-200'
@@ -1057,7 +1057,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                     <span className="font-mono text-xs font-extrabold text-teal-950 dark:text-teal-100">
                       {isValidMainInput ? `${Math.round(calculationResult.percentage)}%` : '0%'}
                     </span>
-                    <span className="text-[9px] font-semibold uppercase tracking-wider text-slate-400">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
                       Score
                     </span>
                   </div>
@@ -1074,7 +1074,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                 />
               </div>
 
-              <p className="mt-3 text-[11px] text-slate-500 dark:text-slate-400 italic m-0 text-center sm:text-left">
+              <p className="mt-3 text-xs text-slate-500 dark:text-slate-400 italic m-0 text-center sm:text-left">
                 Estimates only, check your university&apos;s official marksheet.
               </p>
             </div>
@@ -1082,7 +1082,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             {/* Step-by-Step Formula Box */}
             <div className="space-y-3 mb-6">
               <div className="p-4 rounded-[20px] bg-[#F8F9FA] dark:bg-slate-800/60 border border-black/5 dark:border-slate-800 shadow-sm">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1">
                   Formula &amp; Step-by-Step Calculation
                 </div>
                 <div className="font-mono text-xs sm:text-sm font-semibold text-teal-700 dark:text-teal-300">
@@ -1095,15 +1095,15 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-4 rounded-[20px] bg-[#FFE8C2] dark:bg-amber-950/55 border border-black/5 dark:border-amber-800/50 shadow-sm">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                     Class / Division
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5">
                     {isValidMainInput ? calculationResult.division.label : '—'}
                   </div>
                 </div>
-                <div className="p-4 rounded-[20px] bg-[#D6E1FF] dark:bg-indigo-950/55 border border-black/5 dark:border-indigo-800/50 shadow-sm">
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+                <div className="p-4 rounded-[20px] bg-[#D6E1FF] dark:bg-blue-950/55 border border-black/5 dark:border-blue-800/50 shadow-sm">
+                  <div className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                     Letter Equivalent
                   </div>
                   <div className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100 mt-0.5 font-mono">
@@ -1207,7 +1207,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
         {secondaryMode === 'sgpa' ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             <div className="lg:col-span-7 bg-[#F8F9FA] dark:bg-slate-800/60 rounded-[24px] border border-stone-100 dark:border-slate-800 p-4 sm:p-5 space-y-3">
-              <div className="grid grid-cols-12 gap-2 px-1 text-[11px] font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+              <div className="grid grid-cols-12 gap-2 px-1 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
                 <div className="col-span-4">Term</div>
                 <div className="col-span-4">SGPA (Max {scale.toFixed(1)})</div>
                 <div className="col-span-3">Credits</div>
@@ -1289,7 +1289,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm border border-stone-100 dark:border-slate-800">
-                  <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     Cumulative CGPA
                   </div>
                   <div className="font-mono text-2xl sm:text-3xl font-extrabold text-teal-950 dark:text-teal-100 mt-1">
@@ -1297,7 +1297,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
                   </div>
                 </div>
                 <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 shadow-sm border border-stone-100 dark:border-slate-800">
-                  <div className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                  <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                     Equivalent %
                   </div>
                   <div className="font-mono text-2xl sm:text-3xl font-extrabold text-teal-950 dark:text-teal-100 mt-1">
@@ -1351,14 +1351,14 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               </p>
             </div>
 
-            <div className="lg:col-span-6 p-5 rounded-[28px] bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#A5BCF0] dark:border-indigo-800/60 shadow-sm">
-              <div className="text-xs font-semibold uppercase tracking-widest text-indigo-900 dark:text-indigo-300">
+            <div className="lg:col-span-6 p-5 rounded-[28px] bg-[#D6E1FF] dark:bg-blue-950/60 border border-[#A5BCF0] dark:border-blue-800/60 shadow-sm">
+              <div className="text-xs font-semibold uppercase tracking-widest text-blue-900 dark:text-blue-300">
                 Required / Equivalent CGPA
               </div>
-              <div className="font-mono text-3xl sm:text-4xl font-extrabold text-indigo-950 dark:text-indigo-100 mt-1 tabular-nums">
+              <div className="font-mono text-3xl sm:text-4xl font-extrabold text-blue-950 dark:text-blue-100 mt-1 tabular-nums">
                 {reversePctError ? '—' : `${reverseResult.cgpa.toFixed(2)} / ${scale.toFixed(1)}`}
               </div>
-              <div className="mt-2 font-mono text-xs text-indigo-900/80 dark:text-indigo-300/80">
+              <div className="mt-2 font-mono text-xs text-blue-900/80 dark:text-blue-300/80">
                 {reversePctError ? 'Enter a valid percentage' : reverseResult.stepByStep}
               </div>
             </div>

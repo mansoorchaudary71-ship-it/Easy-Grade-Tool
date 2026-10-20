@@ -231,7 +231,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
                 onChange={(e) => setNumbersToInclude(e.target.value)}
                 placeholder="23456789"
               />
-              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                 Look-alike numbers (0 and 1) are automatically excluded.
               </span>
             </div>
@@ -263,7 +263,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
               Security &amp; Entropy
             </span>
             <div className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white tracking-tight mt-3 flex items-center gap-2">
-              <KeyRound className="w-6 h-6 text-purple-600 dark:text-purple-400" aria-hidden="true" />
+              <KeyRound className="w-6 h-6 text-blue-600 dark:text-blue-400" aria-hidden="true" />
               <span>Cryptographic</span>
             </div>
             <p className="text-slate-600 dark:text-slate-300 font-medium text-sm mt-2">

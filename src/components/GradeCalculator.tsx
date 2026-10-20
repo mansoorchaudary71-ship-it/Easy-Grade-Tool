@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from './SlashLink';
-import { Plus, X, RotateCcw, Target, Download, Printer } from 'lucide-react';
+import { Plus, X, RotateCcw, Target, Download, Printer, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { gradeTone } from '../utils/gradeTone';
 import { SegmentedControl } from './ui/SegmentedControl';
@@ -176,10 +176,23 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                 <Link to="/gpa-calculator/" className="cs-btn cs-btn-outline">GPA calculator</Link>
               </div>
               <ul className="cs-banner-facts" aria-label="Highlights">
-                <li>Free, no sign-up</li>
-                <li>Private: runs in your browser</li>
-                <li>Print or save as PDF</li>
+                {['Free, no sign-up', 'Private: runs in your browser', 'Print or save as PDF'].map((f) => (
+                  <li key={f}>
+                    <span className="cs-check" aria-hidden="true"><Check className="size-3.5" strokeWidth={3} /></span>
+                    {f}
+                  </li>
+                ))}
               </ul>
+              <div className="cs-popular" role="group" aria-label="Popular calculators">
+                <span className="cs-popular-label">Popular:</span>
+                <div className="cs-popular-row">
+                  <Link to="/final-exam-grade-calculator/" className="cs-chip">Final exam grade</Link>
+                  <Link to="/percentage-calculator/" className="cs-chip">Percentage</Link>
+                  <Link to="/grading-scale/" className="cs-chip">Grading scale</Link>
+                  <Link to="/grade-curve-calculator/" className="cs-chip">Grade curve</Link>
+                  <Link to="/tip-calculator/" className="cs-chip">Tip</Link>
+                </div>
+              </div>
             </>
           )}
         </ToolHeading>
@@ -449,7 +462,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               {/* Target Final Exam Simulator */}
               <div className="bg-white dark:bg-slate-800/60 rounded-[24px] border border-stone-200/80 dark:border-slate-700 shadow-sm p-5 space-y-4">
                 <div className="flex items-center gap-2">
-                  <Target className="w-4 h-4 text-purple-700 dark:text-purple-300" aria-hidden="true" />
+                  <Target className="w-4 h-4 text-blue-700 dark:text-blue-300" aria-hidden="true" />
                   <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">Target Final Exam Simulator</span>
                 </div>
 

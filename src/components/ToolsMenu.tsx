@@ -139,7 +139,7 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
                     onFocus={() => void preloadForPath(item.path)}
                     aria-current={active ? 'page' : undefined}
                     title={item.title}
-                    className={`group flex min-h-11 items-center gap-3 rounded-lg px-3 text-[15px] font-semibold no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#0056D2] dark:focus-visible:ring-[#4F9CFF] ${
+                    className={`group flex min-h-11 items-center gap-3 rounded-full px-4 text-[15px] font-semibold no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#0056D2] dark:focus-visible:ring-[#4F9CFF] ${
                       active
                         ? 'bg-[#F0F6FF] text-[#0F1114] dark:bg-white/10 dark:text-white'
                         : 'text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-100 dark:hover:bg-white/10'

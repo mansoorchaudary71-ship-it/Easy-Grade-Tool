@@ -116,9 +116,9 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
         color: '#6366f1',
         stroke: '#6366f1',
         label: 'Tier B — Above Average Range',
-        bgClass: 'bg-indigo-50 border-indigo-200 rounded-2xl',
-        textClass: 'text-indigo-800',
-        badgeClass: 'bg-indigo-50 text-indigo-800 border border-indigo-200',
+        bgClass: 'bg-blue-50 border-blue-200 rounded-2xl',
+        textClass: 'text-blue-800',
+        badgeClass: 'bg-blue-50 text-blue-800 border border-blue-200',
         remark: 'Solid above-average academic performance.',
       };
     }
@@ -375,7 +375,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
                 aria-label="Information regarding university grading formulas"
               >
                 <HelpCircle className="w-4 h-4 text-primary" />
-                <span className="text-[11px] underline">Methodology</span>
+                <span className="text-xs underline">Methodology</span>
               </button>
 
               {/* Informational Hover-Card Tooltip */}
@@ -449,7 +449,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
                   </div>
                 )}
 
-                <span className={`text-[11px] font-bold font-mono mt-1 px-3 py-1 rounded-2xl border ${tierColor.badgeClass}`}>
+                <span className={`text-xs font-bold font-mono mt-1 px-3 py-1 rounded-2xl border ${tierColor.badgeClass}`}>
                   {tierColor.label}
                 </span>
               </div>
@@ -483,7 +483,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
               <strong className="block text-xl font-bold text-slate-800 dark:text-white font-mono">{calculatedGpa.toFixed(2)}</strong>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Equivalent GPA</span>
             </div>
-            <div className="bg-[#D6E1FF] dark:bg-indigo-950/55 rounded-[20px] p-4 border border-black/5 dark:border-indigo-800/50 shadow-xs text-center">
+            <div className="bg-[#D6E1FF] dark:bg-blue-950/55 rounded-[20px] p-4 border border-black/5 dark:border-blue-800/50 shadow-xs text-center">
               <strong className="block text-xl font-bold text-slate-800 dark:text-white font-mono">{calculatedPercent.toFixed(1)}%</strong>
               <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Percentage</span>
             </div>

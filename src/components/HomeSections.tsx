@@ -4,6 +4,7 @@ import {
   ShieldCheck, WifiOff, Printer, Zap,
 } from 'lucide-react';
 import { Link } from './SlashLink';
+import { DecorLines } from './DecorLines';
 import { TOOL_GROUPS } from '../data/navItems';
 import { preloadForPath } from '../utils/lazyRoutes';
 
@@ -116,6 +117,7 @@ export const HomeSections: React.FC = () => {
       <section aria-labelledby={`${baseId}-explore`} className="cs-section pt-4">
         <p className="cs-eyebrow">Explore</p>
         <h2 id={`${baseId}-explore`} className="cs-h2">Calculators for every kind of grade and number</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
         <p className="cs-lead">Pick a category, or press Ctrl+K to search every tool.</p>
         <div className="cs-cat-grid">
           {TOOL_GROUPS.map((group) => {
@@ -150,6 +152,7 @@ export const HomeSections: React.FC = () => {
       {/* 2. What brings you here today? */}
       <section aria-labelledby={`${baseId}-who`} className="cs-section">
         <h2 id={`${baseId}-who`} className="cs-h2">What brings you here today?</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
         <p className="cs-lead">Choose what describes you and jump straight to the tools people like you use most.</p>
         <div role="tablist" aria-label="Who are you?" className="cs-tabs">
           {PERSONAS.map((p, i) => (
@@ -171,6 +174,7 @@ export const HomeSections: React.FC = () => {
           ))}
         </div>
         <div role="tabpanel" id={`${baseId}-panel`} aria-labelledby={`${baseId}-tab-${persona.id}`} className="cs-panel">
+          <DecorLines variant="arcs" className="cs-panel-arcs" />
           <div>
             <span className="cs-cat-icon" aria-hidden="true"><PersonaIcon className="size-6" strokeWidth={2} /></span>
             <h3>{persona.title}</h3>
@@ -196,6 +200,7 @@ export const HomeSections: React.FC = () => {
       {/* 3. Why people choose Easy Grade Tool */}
       <section aria-labelledby={`${baseId}-why`} className="cs-section pb-2">
         <h2 id={`${baseId}-why`} className="cs-h2">Why people choose Easy Grade Tool</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
         <p className="cs-lead">Simple, accurate and respectful of your data.</p>
         <div className="cs-trust">
           {TRUST.map((t) => {

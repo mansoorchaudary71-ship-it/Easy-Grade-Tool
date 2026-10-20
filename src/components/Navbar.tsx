@@ -80,7 +80,7 @@ const ghostControl =
 
 /** Dark pill call to action (same role as "Log in" in the reference). White in dark mode. */
 const ctaPill =
-  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#0056D2] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#00419E] active:scale-[0.98] dark:bg-[#4F9CFF] dark:text-[#0B1220] dark:hover:bg-[#7DB6FF]';
+  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#0056D2] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#00419E] active:scale-[0.98] dark:bg-[#4F9CFF] dark:text-[#0B1220] dark:hover:bg-[#7DB6FF]';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */

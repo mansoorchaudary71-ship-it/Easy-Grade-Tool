@@ -187,7 +187,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
                 <strong className="block text-xl font-bold text-slate-800 dark:text-white">{formatCurrency(tipAmount)}</strong>
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Tip amount</span>
               </div>
-              <div className="bg-[#D6E1FF] dark:bg-indigo-950/55 rounded-[24px] p-4 border border-black/5 dark:border-indigo-800/50 shadow-xs">
+              <div className="bg-[#D6E1FF] dark:bg-blue-950/55 rounded-[24px] p-4 border border-black/5 dark:border-blue-800/50 shadow-xs">
                 <strong className="block text-xl font-bold text-slate-800 dark:text-white">{formatCurrency(totalWithTip)}</strong>
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total with tip</span>
               </div>

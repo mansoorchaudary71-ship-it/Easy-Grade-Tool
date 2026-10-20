@@ -132,7 +132,7 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
             {defaultValue !== undefined && String(value) !== String(defaultValue) && (
               <button
                 type="button"
-                className="text-[11px] font-semibold text-stone-700 hover:bg-stone-50 inline-flex items-center gap-1 transition-colors px-3 py-1 rounded-full border border-stone-200 bg-white shadow-xs cursor-pointer"
+                className="text-xs font-semibold text-stone-700 hover:bg-stone-50 inline-flex items-center gap-1 transition-colors px-3 py-1 rounded-full border border-stone-200 bg-white shadow-xs cursor-pointer"
                 onClick={handleReset}
                 title={`Reset to default (${defaultValue})`}
                 aria-label={`Reset to default ${defaultValue}`}

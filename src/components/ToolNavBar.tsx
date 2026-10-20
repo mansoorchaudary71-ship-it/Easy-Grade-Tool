@@ -21,7 +21,7 @@ export const headerFocusRing =
 
 /** Header text link style: 16px semibold, near-black ink, pale-blue chip on hover. */
 export const headerTextBase =
-  'relative inline-flex h-11 shrink-0 cursor-pointer select-none items-center gap-1 whitespace-nowrap rounded-lg px-3 text-base font-semibold no-underline touch-manipulation transition-colors duration-150 [-webkit-tap-highlight-color:transparent]';
+  'relative inline-flex h-11 shrink-0 cursor-pointer select-none items-center gap-1 whitespace-nowrap rounded-full px-4 text-base font-semibold no-underline touch-manipulation transition-colors duration-150 [-webkit-tap-highlight-color:transparent]';
 export const headerTextIdle = 'text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-100 dark:hover:bg-white/10';
 
 const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];

@@ -68,7 +68,7 @@ export const TermsOfService: React.FC = () => {
               </div>
 
               <div className="p-4 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 shadow-xs">
-                <HardDrive className="w-5 h-5 text-indigo-600 dark:text-indigo-400 mb-2" aria-hidden="true" />
+                <HardDrive className="w-5 h-5 text-blue-600 dark:text-blue-400 mb-2" aria-hidden="true" />
                 <h3 className="text-sm font-bold text-slate-800 dark:text-white">Essential Storage Only</h3>
                 <p className="text-xs text-slate-600 dark:text-slate-300 font-medium mt-1">
                   No tracking cookies. Only local UI preferences stored in your browser.

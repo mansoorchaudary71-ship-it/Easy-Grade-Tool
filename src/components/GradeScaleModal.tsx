@@ -187,7 +187,7 @@ const GradeScaleModalDialog: React.FC<{
               <span className="text-xs font-bold text-slate-700 dark:text-slate-200 block">
                 Minimum Percentage Thresholds:
               </span>
-              <span className="text-[11px] font-mono font-medium text-slate-500 dark:text-slate-400">
+              <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
                 A &gt; B &gt; C &gt; D &gt; F
               </span>
             </div>

@@ -29,7 +29,7 @@ export const NotFound: React.FC = () => {
       </p>
       <Link
         to="/"
-        className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
+        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
       >
         <ArrowLeft className="w-4 h-4" aria-hidden="true" />
         <span>Return to Easy Grade Tool</span>

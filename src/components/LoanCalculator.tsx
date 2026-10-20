@@ -109,7 +109,7 @@ export const AmortizationScheduleTable: React.FC<{
       >
         <table className="w-full min-w-full sm:min-w-max text-left text-xs sm:text-sm border-collapse">
           <thead>
-            <tr className="border-b border-slate-200/60 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-semibold text-[11px] uppercase tracking-wider">
+            <tr className="border-b border-slate-200/60 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-semibold text-xs uppercase tracking-wider">
               <th className="py-3 px-3 sticky left-0 z-10 bg-slate-50/95 dark:bg-slate-900/95 backdrop-blur-xs min-w-[80px]">
                 Year
               </th>
@@ -186,7 +186,7 @@ export const PaymentResultCard: React.FC<PaymentResultCardProps> = ({
           <p className="text-slate-600 dark:text-slate-300 font-medium text-sm mt-1 m-0">
             Fixed monthly payment over {years} {years === 1 ? 'year' : 'years'}.
           </p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 italic mt-2 m-0 leading-tight">
+          <p className="text-xs text-slate-500 dark:text-slate-400 italic mt-2 m-0 leading-tight">
             * Estimates only, not financial advice. Actual payment terms, interest rates, and loan fees vary by lender.
           </p>
         </div>
@@ -196,7 +196,7 @@ export const PaymentResultCard: React.FC<PaymentResultCardProps> = ({
             <strong className="block text-xl font-bold text-slate-800 dark:text-white">{formatCurrency(totalCost)}</strong>
             <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total cost</span>
           </div>
-          <div className="bg-[#D6E1FF] dark:bg-indigo-950/55 rounded-[24px] p-4 border border-black/5 dark:border-indigo-800/50 shadow-xs">
+          <div className="bg-[#D6E1FF] dark:bg-blue-950/55 rounded-[24px] p-4 border border-black/5 dark:border-blue-800/50 shadow-xs">
             <strong className="block text-xl font-bold text-slate-800 dark:text-white">{formatCurrency(totalInterest)}</strong>
             <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total interest</span>
           </div>
@@ -263,7 +263,7 @@ export const PaymentResultCard: React.FC<PaymentResultCardProps> = ({
               <span>Skip to Amortization Schedule</span>
               <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" aria-hidden="true" />
             </a>
-            <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400">
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
               {years} {years === 1 ? 'Year' : 'Years'}
             </span>
           </div>

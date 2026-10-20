@@ -135,9 +135,9 @@ export const AboutMethodology: React.FC = () => {
                     <td className="py-2.5 px-4">90.0% – 92.9%</td>
                     <td className="py-2.5 px-4 font-sans rounded-r-2xl">Superior</td>
                   </tr>
-                  <tr className="bg-indigo-50/60 hover:bg-indigo-50 text-indigo-800 rounded-2xl transition-colors">
+                  <tr className="bg-blue-50/60 hover:bg-blue-50 text-blue-800 rounded-2xl transition-colors">
                     <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-indigo-50 text-indigo-800 border border-indigo-200">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
                         B+
                       </span>
                     </td>
@@ -145,9 +145,9 @@ export const AboutMethodology: React.FC = () => {
                     <td className="py-2.5 px-4">87.0% – 89.9%</td>
                     <td className="py-2.5 px-4 font-sans rounded-r-2xl">Very Good</td>
                   </tr>
-                  <tr className="bg-indigo-50/60 hover:bg-indigo-50 text-indigo-800 rounded-2xl transition-colors">
+                  <tr className="bg-blue-50/60 hover:bg-blue-50 text-blue-800 rounded-2xl transition-colors">
                     <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-indigo-50 text-indigo-800 border border-indigo-200">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
                         B
                       </span>
                     </td>
@@ -155,9 +155,9 @@ export const AboutMethodology: React.FC = () => {
                     <td className="py-2.5 px-4">83.0% – 86.9%</td>
                     <td className="py-2.5 px-4 font-sans rounded-r-2xl">Good / Above Average</td>
                   </tr>
-                  <tr className="bg-indigo-50/60 hover:bg-indigo-50 text-indigo-800 rounded-2xl transition-colors">
+                  <tr className="bg-blue-50/60 hover:bg-blue-50 text-blue-800 rounded-2xl transition-colors">
                     <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-indigo-50 text-indigo-800 border border-indigo-200">
+                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
                         B−
                       </span>
                     </td>
@@ -298,7 +298,7 @@ export const AboutMethodology: React.FC = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/60 dark:border-slate-700/60 space-y-2">
-                <div className="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wider font-mono">
+                <div className="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wider font-mono">
                   Europe (ECTS)
                 </div>
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white m-0">
@@ -386,7 +386,7 @@ export const AboutMethodology: React.FC = () => {
               </p>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white dark:bg-teal-600 dark:hover:bg-teal-500 text-xs font-bold transition-all shadow-sm shadow-teal-700/20 shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-teal-700 hover:bg-teal-800 text-white dark:bg-teal-600 dark:hover:bg-teal-500 text-xs font-bold transition-all shadow-sm shadow-teal-700/20 shrink-0"
               >
                 <Mail className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Contact Maintainer</span>

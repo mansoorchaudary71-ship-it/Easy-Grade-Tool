@@ -140,7 +140,7 @@ export const PWAInstallButton: React.FC<PWAInstallButtonProps> = ({
             <button
               type="button"
               onClick={() => setShowIOSModal(false)}
-              className="mt-5 w-full rounded-xl bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-700 py-2.5 text-xs font-semibold text-white shadow-sm shadow-teal-700/20 transition cursor-pointer"
+              className="mt-5 w-full rounded-full bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-700 py-2.5 text-xs font-semibold text-white shadow-sm shadow-teal-700/20 transition cursor-pointer"
             >
               Got it, close
             </button>

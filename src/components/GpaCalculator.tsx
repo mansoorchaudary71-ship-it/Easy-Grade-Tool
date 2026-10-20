@@ -370,20 +370,20 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             </div>
 
             {/* Cumulative GPA - Master Output Container */}
-            <div className="bg-[#D6E1FF] dark:bg-indigo-950/60 border border-[#A5BCF0] dark:border-indigo-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#D6E1FF] dark:bg-blue-950/60 border border-[#A5BCF0] dark:border-blue-800/60 rounded-[28px] p-5 shadow-sm">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold tracking-widest text-indigo-900 dark:text-indigo-300 uppercase">
+                <span className="text-xs font-semibold tracking-widest text-blue-900 dark:text-blue-300 uppercase">
                   Cumulative GPA
                 </span>
                 {hasPriorHistory && (
-                  <span className="text-[11px] font-semibold text-indigo-900 dark:text-indigo-200 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-[#A5BCF0] dark:border-indigo-800/60 shadow-xs">
+                  <span className="text-xs font-semibold text-blue-900 dark:text-blue-200 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-[#A5BCF0] dark:border-blue-800/60 shadow-xs">
                     Includes Prior History
                   </span>
                 )}
               </div>
-              <div className="text-3xl sm:text-4xl font-extrabold text-indigo-950 dark:text-indigo-100 font-mono tracking-tight mt-2 flex items-baseline gap-1.5">
+              <div className="text-3xl sm:text-4xl font-extrabold text-blue-950 dark:text-blue-100 font-mono tracking-tight mt-2 flex items-baseline gap-1.5">
                 <span>{cumulativeGpa.toFixed(2)}</span>
-                <span className="text-sm font-medium text-indigo-800/80 dark:text-indigo-400">
+                <span className="text-sm font-medium text-blue-800/80 dark:text-blue-400">
                   / {aPlusValue === 4.33 ? '4.33' : '4.0'}
                 </span>
               </div>
@@ -710,7 +710,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             </div>
             <Link
               to="/cgpa-to-percentage-calculator"
-              className="shrink-0 min-h-[44px] px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white text-xs sm:text-sm font-semibold inline-flex items-center justify-center transition-colors no-underline"
+              className="shrink-0 min-h-[44px] px-5 py-2.5 rounded-full bg-teal-600 hover:bg-teal-500 text-white text-xs sm:text-sm font-semibold inline-flex items-center justify-center transition-colors no-underline"
             >
               Open CGPA to % Calculator &rarr;
             </Link>
