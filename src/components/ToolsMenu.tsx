@@ -15,7 +15,8 @@ interface ToolsMenuProps {
   onNavigate: (item: NavItem) => void;
 }
 
-const WIDTH = 300;
+const SINGLE_WIDTH = 300;
+const MEGA_WIDTH = 860;
 const GAP = 8;
 const MARGIN = 12;
 
@@ -29,6 +30,7 @@ const MARGIN = 12;
  * Every row is at least 44px tall (Fitts's Law). Portalled to <body> so the header's backdrop-filter cannot trap it.
  */
 export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, anchorRef, onClose, onNavigate }) => {
+  const isMega = groups.length > 1;
   const panelRef = useRef<HTMLDivElement | null>(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
@@ -39,9 +41,10 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
     const anchor = anchorRef.current;
     if (!anchor) return;
     const r = anchor.getBoundingClientRect();
-    const left = Math.min(Math.max(r.left, MARGIN), window.innerWidth - WIDTH - MARGIN);
+    const width = Math.min(isMega ? MEGA_WIDTH : SINGLE_WIDTH, window.innerWidth - MARGIN * 2);
+    const left = Math.min(Math.max(r.left, MARGIN), window.innerWidth - width - MARGIN);
     setPos({ top: r.bottom + GAP, left });
-  }, [anchorRef]);
+  }, [anchorRef, isMega]);
 
   useEffect(() => {
     const anchor = anchorRef.current;
@@ -107,16 +110,16 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
       ref={panelRef}
       role="group"
       aria-label={groups.length === 1 ? groups[0].heading : 'Tools'}
-      style={{ top: pos.top, left: pos.left, width: WIDTH }}
-      className={`fixed z-[9999] max-h-[calc(100vh-96px)] origin-top-left overflow-y-auto overscroll-contain rounded-2xl border border-[#0D0C22]/10 bg-white p-2 shadow-[0_12px_32px_rgba(13,12,34,0.10)] transition duration-150 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-[#161B2E] dark:shadow-black/40 ${
+      style={{ top: pos.top, left: pos.left, width: Math.min(isMega ? MEGA_WIDTH : SINGLE_WIDTH, window.innerWidth - MARGIN * 2) }}
+      className={`fixed z-[9999] max-h-[calc(100vh-96px)] origin-top-left overflow-y-auto overscroll-contain cs-mega rounded-xl border border-[#0F1114]/10 bg-white p-2 ${isMega ? 'grid grid-cols-3 gap-x-2 p-4' : ''} shadow-[0_12px_32px_rgba(13,12,34,0.10)] transition duration-150 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-[#161B2E] dark:shadow-black/40 ${
         shown ? 'translate-y-0 scale-100 opacity-100' : '-translate-y-1 scale-[0.98] opacity-0'
       }`}
     >
       {groups.map((group, gi) => (
-        <section key={group.id} aria-labelledby={`tools-menu-${group.id}`} className={gi > 0 ? 'mt-1.5 border-t border-[#0D0C22]/8 pt-1.5 dark:border-white/10' : ''}>
+        <section key={group.id} aria-labelledby={`tools-menu-${group.id}`} className={!isMega && gi > 0 ? 'mt-1.5 border-t border-[#0F1114]/8 pt-1.5 dark:border-white/10' : ''}>
           <h2
             id={`tools-menu-${group.id}`}
-            className={groups.length === 1 ? 'sr-only' : 'm-0 px-3 pb-1 pt-2 text-sm font-semibold tracking-[-0.011em] text-[#6E6D7A] dark:text-slate-300'}
+            className={groups.length === 1 ? 'sr-only' : 'm-0 px-3 pb-2 pt-1 text-sm font-bold text-[#0F1114] dark:text-white'}
           >
             {group.heading}
           </h2>
@@ -136,17 +139,17 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
                     onFocus={() => void preloadForPath(item.path)}
                     aria-current={active ? 'page' : undefined}
                     title={item.title}
-                    className={`group flex min-h-11 items-center gap-3 rounded-xl px-3 text-[15px] font-semibold tracking-[-0.011em] no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#2563EB] dark:focus-visible:ring-[#60A5FA] ${
+                    className={`group flex min-h-11 items-center gap-3 rounded-lg px-3 text-[15px] font-semibold no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#0056D2] dark:focus-visible:ring-[#4F9CFF] ${
                       active
-                        ? 'bg-[#F3F3F6] text-[#0D0C22] dark:bg-white/10 dark:text-white'
-                        : 'text-[#0D0C22] hover:bg-[#F3F3F6] dark:text-slate-100 dark:hover:bg-white/10'
+                        ? 'bg-[#F0F6FF] text-[#0F1114] dark:bg-white/10 dark:text-white'
+                        : 'text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-100 dark:hover:bg-white/10'
                     }`}
                   >
                     <span
                       className={`inline-flex size-8 shrink-0 items-center justify-center rounded-lg ${
                         active
-                          ? 'bg-[#DBE6FD] text-[#2563EB] dark:bg-[#2563EB]/25 dark:text-[#93B4FB]'
-                          : 'bg-[#F3F3F6] text-[#3A3546] dark:bg-white/10 dark:text-slate-200'
+                          ? 'bg-[#E3EEFF] text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#93B4FB]'
+                          : 'bg-[#F0F6FF] text-[#3A3546] dark:bg-white/10 dark:text-slate-200'
                       }`}
                     >
                       <Icon className="size-4" strokeWidth={2} aria-hidden="true" />

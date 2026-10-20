@@ -7,6 +7,7 @@ import './styles/a11y-touch.css';
 import './styles/premium.css';
 import './styles/ux-refactor.css';
 import './styles/typography.css';
+import './styles/coursera.css';
 import { preloadForPath } from './utils/lazyRoutes';
 import { installPrintFocus } from './utils/printFocus';
 

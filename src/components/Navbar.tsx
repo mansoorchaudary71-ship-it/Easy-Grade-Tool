@@ -76,11 +76,11 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 /** Round ghost buttons (hamburger, search icon on small screens, theme switch): no border, grey chip on hover. */
 const ghostControl =
-  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0D0C22] transition-colors duration-150 hover:bg-[#F3F3F6] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
+  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0F1114] transition-colors duration-150 hover:bg-[#F0F6FF] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
 
 /** Dark pill call to action (same role as "Log in" in the reference). White in dark mode. */
 const ctaPill =
-  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#0D0C22] px-6 text-[15px] font-semibold tracking-[-0.011em] text-white no-underline transition-colors duration-150 hover:bg-[#2A2940] active:scale-[0.98] 2xl:text-base dark:bg-white dark:text-[#0D0C22] dark:hover:bg-slate-200';
+  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-lg bg-[#0056D2] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#00419E] active:scale-[0.98] dark:bg-[#4F9CFF] dark:text-[#0B1220] dark:hover:bg-[#7DB6FF]';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -138,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           logo | search pill (grows) | grouped menus | text link | dark pill | theme.
           Below lg the menus, text link and pill move into the hamburger drawer.
         */}
-        <div className="mx-auto flex h-[68px] max-w-[1600px] items-center gap-2 px-4 sm:px-8 lg:h-20 lg:gap-4 lg:px-10 xl:gap-5 2xl:gap-7">
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-2 px-4 sm:px-6 lg:h-[72px] lg:gap-4 lg:px-8 xl:gap-5">
           {/* ------------------------------ Logo ------------------------------ */}
           <div className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-3">
             {/* Hamburger: below lg only. Opens the grouped tools drawer. */}
@@ -174,15 +174,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             The pill is the entry point to the command palette (which owns the real search UI).
             Click, Enter, or the first typed character hands off to the palette.
           */}
-          <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[440px] 2xl:max-w-[560px]">
-            <div className="flex h-12 items-center rounded-full bg-[#F3F3F6] pl-5 pr-1 transition-shadow duration-200 focus-within:ring-2 focus-within:ring-[#2563EB]/45 dark:bg-white/[0.08]">
+          <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]">
+            <div className="flex h-12 items-center rounded-full border border-[#8A94A6] bg-white pl-5 pr-1 transition-colors duration-200 hover:border-[#0F1114] focus-within:border-[#0056D2] focus-within:ring-1 focus-within:ring-[#0056D2] dark:border-slate-500 dark:bg-white/[0.06]">
               <input
                 type="text"
                 readOnly
                 role="searchbox"
                 autoComplete="off"
                 spellCheck={false}
-                placeholder="Search calculators"
+                placeholder="What do you want to calculate?"
                 aria-label={`Search calculators (${shortcutLabel})`}
                 title={`Switch calculators with the command palette (${shortcutLabel})`}
                 onClick={onOpenCommandPalette}
@@ -195,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="header-search-field h-full min-w-0 flex-1 cursor-pointer truncate bg-transparent text-[15px] font-normal tracking-[-0.011em] text-[#0D0C22] outline-none placeholder:text-[#6E6D7A] 2xl:text-base dark:text-slate-100 dark:placeholder:text-slate-400"
+                className="header-search-field h-full min-w-0 flex-1 cursor-pointer truncate bg-transparent text-[15px] font-normal tracking-[-0.011em] text-[#0F1114] outline-none placeholder:text-[#6E6D7A] 2xl:text-base dark:text-slate-100 dark:placeholder:text-slate-400"
               />
               <span
                 className="mr-3 hidden shrink-0 text-[15px] font-semibold tracking-[-0.011em] text-[#3A3546] 2xl:inline dark:text-slate-300"
@@ -209,7 +209,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onTouchStart={() => preloadTool('command-palette')}
                 onMouseEnter={() => preloadTool('command-palette')}
                 aria-label={`Open calculator search (${shortcutLabel})`}
-                className={`inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#2563EB] text-white transition-colors duration-150 hover:bg-[#1D4ED8] active:scale-95 ${headerFocusRing}`}
+                className={`inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#0056D2] text-white transition-colors duration-150 hover:bg-[#00419E] active:scale-95 ${headerFocusRing}`}
               >
                 <Search className="size-[18px]" strokeWidth={ICON_STROKE} aria-hidden="true" />
               </button>
@@ -248,7 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Link
               to="/about/"
               aria-current={aboutActive ? 'page' : undefined}
-              className={`${headerTextBase.replace('inline-flex ', '')} ${headerTextIdle} ${headerFocusRing} hidden 2xl:inline-flex ${aboutActive ? 'underline decoration-[#2563EB] decoration-2 underline-offset-8' : ''}`}
+              className={`${headerTextBase.replace('inline-flex ', '')} ${headerTextIdle} ${headerFocusRing} hidden xl:inline-flex ${aboutActive ? 'underline decoration-[#0056D2] decoration-2 underline-offset-8' : ''}`}
             >
               About
             </Link>

@@ -518,173 +518,87 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   // Shared footer styles (single place to tweak the look)
-  const colHeadCls = 'text-[15px] font-bold text-slate-900 dark:text-white m-0 mb-5';
+  const colHeadCls = 'text-base font-bold text-[#0F1114] dark:text-white m-0 mb-4';
   const linkCls =
-    'inline-flex items-center text-left text-[13px] font-medium text-slate-600 dark:text-slate-400 hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
+    'inline-flex items-center min-h-[28px] text-left text-sm font-normal text-[#4F5D75] dark:text-slate-400 hover:text-[#0056D2] hover:underline underline-offset-4 dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-[#2563EB] hover:text-white dark:hover:bg-[#2563EB] transition-colors cursor-pointer active:scale-95';
+    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-lg bg-[#F0F6FF] dark:bg-slate-800 text-[#0056D2] dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
-      <footer className="site-footer relative w-full mt-24 font-sans" aria-label="Site footer">
+      <footer className="site-footer relative w-full mt-16 font-sans" aria-label="Site footer">
         <style dangerouslySetInnerHTML={{ __html: FOOTER_PREMIUM_CSS }} />
-        {/* Newsletter banner: overlaps the top edge of the white footer panel (Backed by POST /api/subscribe) */}
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
-          <section
-            aria-label="Newsletter"
-            className="ft-news grid md:grid-cols-[minmax(0,15rem)_minmax(0,1fr)] items-center gap-6 md:gap-10 px-6 py-9 sm:px-10 rounded-[24px]"
-          >
-            <span className="ft-orb ft-orb-a" aria-hidden="true" />
-            <span className="ft-orb ft-orb-b" aria-hidden="true" />
-            {/* Decorative arcs + wave: no fill, non-interactive, clipped by the banner's overflow-hidden */}
-            <svg
-              className="pointer-events-none absolute inset-0 -z-10 h-full w-full"
-              viewBox="0 0 800 300"
-              preserveAspectRatio="xMidYMid slice"
-              fill="none"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <g stroke="rgba(255, 255, 255, 0.08)" strokeWidth="1.5">
-                <circle cx="720" cy="270" r="80" />
-                <circle cx="720" cy="270" r="145" />
-                <circle cx="720" cy="270" r="215" />
-                <circle cx="720" cy="270" r="290" />
-                <path d="M-20 70 C 140 20, 280 130, 450 76 S 700 10, 830 60" />
-              </g>
-            </svg>
-            {/* Illustration (decorative) */}
-            <div className="hidden md:flex justify-center ft-float" aria-hidden="true">
-              <svg viewBox="0 0 240 230" className="w-56 h-auto -mt-16 drop-shadow-[0_18px_24px_rgba(20,35,100,0.35)]" fill="none">
-                <defs>
-                  <linearGradient id="fnScreen" x1="72" y1="70" x2="164" y2="106" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#4468D8" />
-                    <stop offset="1" stopColor="#7C5CE0" />
-                  </linearGradient>
-                  <linearGradient id="fnBody" x1="60" y1="50" x2="180" y2="200" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#E3EDFF" />
-                    <stop offset="1" stopColor="#9DBBF6" />
-                  </linearGradient>
-                  <linearGradient id="fnScreen" x1="76" y1="68" x2="164" y2="102" gradientUnits="userSpaceOnUse">
-                    <stop stopColor="#2E4AAE" />
-                    <stop offset="1" stopColor="#3E5FCC" />
-                  </linearGradient>
-                </defs>
-                <ellipse cx="120" cy="214" rx="78" ry="9" fill="#1B2D78" opacity="0.28" />
-                <rect x="66" y="62" width="120" height="146" rx="20" fill="#7FA0EC" />
-                <rect x="58" y="54" width="120" height="146" rx="20" fill="url(#fnBody)" />
-                <rect x="72" y="70" width="92" height="36" rx="10" fill="url(#fnScreen)" />
-                <text x="118" y="95" textAnchor="middle" fontSize="22" fontWeight="800" fill="#fff" fontFamily="Inter, sans-serif">A+</text>
-                {[0, 1, 2].map((r) =>
-                  [0, 1, 2].map((c) => (
-                    <rect
-                      key={`${r}-${c}`}
-                      x={74 + c * 31}
-                      y={120 + r * 25}
-                      width="24"
-                      height="18"
-                      rx="6"
-                      fill={r === 2 && c === 2 ? '#E8795A' : '#FFFFFF'}
-                      opacity={r === 2 && c === 2 ? 1 : 0.92}
-                    />
-                  ))
-                )}
-                <path d="M118 12 L184 36 L118 60 L52 36 Z" fill="#1E2B63" />
-                <path d="M82 49 V68 C82 76 154 76 154 68 V49 L118 62 Z" fill="#2B3B80" />
-                <path d="M174 40 V62" stroke="#E8795A" strokeWidth="3" strokeLinecap="round" />
-                <circle cx="174" cy="66" r="4.5" fill="#E8795A" />
-                <path className="ft-spark" d="M205 78 q0 12 12 12 q-12 0 -12 12 q0 -12 -12 -12 q12 0 12 -12 Z" fill="#fff" />
-                <path className="ft-spark" d="M34 58 q0 9 9 9 q-9 0 -9 9 q0 -9 -9 -9 q9 0 9 -9 Z" fill="#fff" />
-                <path className="ft-spark" d="M44 128 q0 7 7 7 q-7 0 -7 7 q0 -7 -7 -7 q7 0 7 -7 Z" fill="#fff" opacity="0.9" />
-              </svg>
-            </div>
-
+        {/* Newsletter band (Coursera-style pale-blue strip above the link columns). Backed by POST /api/subscribe */}
+        <section aria-label="Newsletter" className="cs-news">
+          <div className="cs-container cs-news-inner">
             <div className="min-w-0">
-              <p className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-200 m-0 mb-3">
-                <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
-                Free study updates
+              <h2 className="cs-news-title">Get updates on new grade formulas &amp; academic tools</h2>
+              <p className="cs-news-sub">
+                Free study updates when new grading scales, curve calculators and semester planning tools are added. No spam, unsubscribe anytime.
               </p>
-              <h2 className="text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight text-white m-0 max-w-lg [text-wrap:balance]">
-                Subscribe to get updates on new <span className="ft-title-accent">grade formulas &amp; academic tools</span>
-              </h2>
-              <p className="mt-3 text-[13px] sm:text-sm font-medium text-white/85 m-0 max-w-lg">
-                Get notified when new grading scales, curve calculators, and semester planning tools are added.
-              </p>
-
-              <form onSubmit={handleSubscribe} noValidate className="mt-5 max-w-lg">
+            </div>
+            <div className="min-w-0">
+              <form onSubmit={handleSubscribe} noValidate className="cs-news-form">
                 <label htmlFor={subscribeEmailId} className="sr-only">
                   Email address for updates
                 </label>
-                <div className="ft-form">
-                  <Mail className="w-4 h-4 ml-3 text-white/85 shrink-0" aria-hidden="true" />
-                  <input
-                    id={subscribeEmailId}
-                    type="email"
-                    value={subscribeEmail}
-                    onChange={(e) => {
-                      setSubscribeEmail(e.target.value);
-                      if (subscribeMessage) setSubscribeMessage(null);
-                    }}
-                    placeholder="Enter your email"
-                    autoComplete="email"
-                    className="flex-1 min-w-0 min-h-[44px] bg-transparent border-0 text-white placeholder:text-white/70 px-1 py-2 text-base sm:text-sm font-medium focus:outline-none focus:ring-0"
-                  />
-                  <button type="submit" disabled={subscribeLoading} className="ft-btn">
-                    {subscribeLoading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
-                        <span>Subscribing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <span>Subscribe</span>
-                        <ArrowRight className="ft-arrow w-4 h-4" aria-hidden="true" />
-                      </>
-                    )}
-                  </button>
-                </div>
+                <input
+                  id={subscribeEmailId}
+                  type="email"
+                  value={subscribeEmail}
+                  onChange={(e) => {
+                    setSubscribeEmail(e.target.value);
+                    if (subscribeMessage) setSubscribeMessage(null);
+                  }}
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                  className="cs-input min-w-0 flex-1"
+                />
+                <button type="submit" disabled={subscribeLoading} className="cs-btn cs-btn-primary">
+                  {subscribeLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                      <span>Subscribing...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Subscribe</span>
+                      <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    </>
+                  )}
+                </button>
               </form>
-
-              <ul className="mt-4 p-0 m-0 list-none flex flex-wrap gap-2">
-                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />No spam</li>
-                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />Free forever</li>
-                <li className="ft-chip"><Check className="w-3.5 h-3.5 text-emerald-300" aria-hidden="true" />Unsubscribe anytime</li>
-              </ul>
-
-              <p className="mt-3 text-[11px] leading-relaxed text-white/80 m-0 max-w-md">
+              <p className="cs-news-fine">
                 By subscribing, you agree to our{' '}
-                <Link
-                  to="/privacy"
-                  onClick={scrollToTop}
-                  className="text-white font-semibold underline underline-offset-2 hover:text-amber-200 transition-colors"
-                >
+                <Link to="/privacy" onClick={scrollToTop} className="underline underline-offset-2">
                   Privacy Policy
                 </Link>
                 .
               </p>
-
               {subscribeMessage && (
                 <div
                   role="status"
-                  className={`ft-msg mt-3 max-w-md text-xs font-semibold px-4 py-2.5 rounded-full flex items-center gap-1.5 shadow-lg ${
-                    subscribeMessage.isError ? 'bg-rose-50 text-rose-800' : 'bg-white text-emerald-800'
+                  className={`mt-3 max-w-md text-sm font-semibold px-4 py-2.5 rounded-lg flex items-center gap-2 border ${
+                    subscribeMessage.isError
+                      ? 'bg-rose-50 text-rose-800 border-rose-200'
+                      : 'bg-emerald-50 text-emerald-800 border-emerald-200'
                   }`}
                 >
                   {subscribeMessage.isError ? (
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                    <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
                   ) : (
-                    <Check className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                    <Check className="w-4 h-4 shrink-0" aria-hidden="true" />
                   )}
                   <span>{subscribeMessage.text}</span>
                 </div>
               )}
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
 
         {/* White footer panel */}
-        <div className="relative -mt-16 pt-28 md:pt-24 bg-white dark:bg-slate-900 border-t border-slate-200/70 dark:border-slate-800 shadow-[0_-12px_50px_-20px_rgba(70,100,210,0.25)] dark:shadow-none transition-colors">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="cs-footer-panel relative pt-12 md:pt-14 dark:bg-slate-900 transition-colors">
+          <div className="cs-container">
             <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 pb-12">
               {/* Brand */}
               <div className="col-span-2 md:col-span-4 space-y-5">
@@ -777,7 +691,7 @@ export const Footer: React.FC<FooterProps> = ({
                                 // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
                                 if (tool.toolKey && isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
                               }}
-                              className={`${linkCls} no-underline ${isActive ? '!text-[#4468D8] dark:!text-blue-300 font-bold' : ''}`}
+                              className={`${linkCls} no-underline ${isActive ? '!text-[#0056D2] dark:!text-blue-300 font-bold' : ''}`}
                               aria-current={isActive ? 'page' : undefined}
                               title={tool.title}
                             >
@@ -850,7 +764,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title={`Copy direct email address: ${CONTACT_EMAIL}`}
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#0056D2] text-white flex items-center justify-center shrink-0">
                         {copiedEmail ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Mail className="w-3.5 h-3.5" aria-hidden="true" />}
                       </span>
                       <span className="break-all">{copiedEmail ? 'Copied!' : CONTACT_EMAIL}</span>
@@ -867,7 +781,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title="Send a message or feedback directly to the engineering team via backend"
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#2563EB] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#0056D2] text-white flex items-center justify-center shrink-0">
                         <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                       </span>
                       <span>Contact &amp; Feedback</span>
@@ -879,8 +793,8 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Bottom bar */}
-          <div className="border-t border-slate-200/80 dark:border-slate-800">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+          <div className="cs-footer-bottom">
+            <div className="cs-container py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
               <p className="m-0 text-center md:text-left">
                 &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite. Engineered with{' '}
                 <Heart className="w-3 h-3 text-rose-500 fill-rose-500 inline -mt-0.5" aria-hidden="true" /> for students and educators.
@@ -892,15 +806,15 @@ export const Footer: React.FC<FooterProps> = ({
                   onMouseEnter={() => preloadTool('about')}
                   onFocus={() => preloadTool('about')}
                   onTouchStart={() => preloadTool('about')}
-                  className="no-underline hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors"
+                  className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors"
                   title="Learn about our grading methodology, GPA formulas, and project mission"
                 >
                   About &amp; Methodology
                 </Link>
-                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors" title="Read our Privacy Policy">
+                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors" title="Read our Privacy Policy">
                   Privacy Policy
                 </Link>
-                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#4468D8] dark:hover:text-blue-300 transition-colors" title="View Terms of Service & Educational Disclaimer">
+                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors" title="View Terms of Service & Educational Disclaimer">
                   Terms of Service
                 </Link>
               </nav>

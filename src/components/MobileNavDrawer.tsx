@@ -43,12 +43,12 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
   if (typeof document === 'undefined') return null;
 
   const rowBase =
-    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-semibold tracking-[-0.011em] no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#2563EB] dark:focus-visible:ring-[#60A5FA]';
+    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-semibold tracking-[-0.011em] no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#0056D2] dark:focus-visible:ring-[#4F9CFF]';
   const rowClass = (active: boolean) =>
     `${rowBase} ${
       active
-        ? 'bg-[#F3F3F6] text-[#0D0C22] dark:bg-white/10 dark:text-white'
-        : 'text-[#0D0C22] hover:bg-[#F3F3F6] dark:text-slate-100 dark:hover:bg-white/10'
+        ? 'bg-[#F0F6FF] text-[#0F1114] dark:bg-white/10 dark:text-white'
+        : 'text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-100 dark:hover:bg-white/10'
     }`;
 
   const renderItem = (item: NavItem) => {
@@ -91,14 +91,14 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
         }`}
       >
         <div className="flex items-center justify-between border-b border-slate-200 px-4 py-2 dark:border-slate-700">
-          <h2 id="mobile-nav-title" className="m-0 text-lg font-semibold tracking-[-0.02em] text-[#0D0C22] dark:text-slate-50">
+          <h2 id="mobile-nav-title" className="m-0 text-lg font-semibold tracking-[-0.02em] text-[#0F1114] dark:text-slate-50">
             Menu
           </h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="-mr-2 inline-flex size-12 cursor-pointer items-center justify-center rounded-full text-[#0D0C22] hover:bg-[#F3F3F6] dark:text-slate-200 dark:hover:bg-white/10"
+            className="-mr-2 inline-flex size-12 cursor-pointer items-center justify-center rounded-full text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-200 dark:hover:bg-white/10"
           >
             <X className="size-5" aria-hidden="true" />
           </button>
@@ -111,7 +111,7 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
               onClose();
               onOpenSearch();
             }}
-            className="mb-3 flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-full bg-[#F3F3F6] px-4 text-left text-base font-normal tracking-[-0.011em] text-[#6E6D7A] hover:bg-[#EBEBF0] dark:bg-white/[0.08] dark:text-slate-300 dark:hover:bg-white/15"
+            className="mb-3 flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-full bg-[#F0F6FF] px-4 text-left text-base font-normal tracking-[-0.011em] text-[#6E6D7A] hover:bg-[#EBEBF0] dark:bg-white/[0.08] dark:text-slate-300 dark:hover:bg-white/15"
           >
             <Search className="size-5 shrink-0" aria-hidden="true" />
             <span className="flex-1">What do you want to calculate?</span>

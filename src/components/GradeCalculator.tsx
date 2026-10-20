@@ -18,6 +18,7 @@ import { AmbientAura } from './AmbientAura';
 import { triggerHapticFeedback, DEFAULT_HAPTIC_DURATION } from '../utils/haptics';
 import { SEO_HOME, SEO_ROUTES } from '../data/seoConfig';
 import { EducationalGuide } from './EducationalGuide';
+import { HomeSections } from './HomeSections';
 import { GRADING_SCALE_SIZES, gradingScalePath } from '../data/gradingScaleSizes';
 
 export interface GradeCalculatorProps {
@@ -60,6 +61,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
   const location = useLocation();
   const isWeightedRoute = location.pathname.replace(/\/+$/, '') === '/grade-calculator';
   const activeSeo = isWeightedRoute ? SEO_ROUTES.quick : SEO_HOME;
+  const isHomeRoute = location.pathname.replace(/\/+$/, '') === '';
 
   // Quick Grade (/) and Weighted Grade (/grade-calculator) are separate tools; the view is derived from the route.
   const calcTab: 'quick-chart' | 'calculator' =
@@ -166,7 +168,21 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               ? 'EZ grader chart online: enter the number of questions to see the percentage and letter grade for every number of wrong answers, then print the chart or save it as a PDF.'
               : 'Add your assessments, calculate weighted averages, and simulate the exact score needed on your final exam.'
           }
-        />
+        >
+          {calcTab === 'quick-chart' && isHomeRoute && (
+            <>
+              <div className="cs-banner-actions">
+                <Link to="/grade-calculator/" className="cs-btn cs-btn-primary">Weighted grade calculator</Link>
+                <Link to="/gpa-calculator/" className="cs-btn cs-btn-outline">GPA calculator</Link>
+              </div>
+              <ul className="cs-banner-facts" aria-label="Highlights">
+                <li>Free, no sign-up</li>
+                <li>Private: runs in your browser</li>
+                <li>Print or save as PDF</li>
+              </ul>
+            </>
+          )}
+        </ToolHeading>
       )}
 
       {calcTab === 'quick-chart' ? (
@@ -194,6 +210,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               </li>
             </ul>
           </nav>
+          {isHomeRoute && <HomeSections />}
         </div>
       ) : (
         <div

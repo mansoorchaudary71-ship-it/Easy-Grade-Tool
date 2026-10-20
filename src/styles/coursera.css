@@ -1,0 +1,424 @@
+/* ==========================================================================
+   Coursera-inspired design system for Easy Grade Tool.
+   Imported LAST in main.tsx (after typography.css). Unlayered on purpose, so it wins over
+   Tailwind utilities and the older sand / slate rules in index.css, premium.css, ux-refactor.css.
+
+   What is copied from the reference (coursera.org), without copying any of its content or artwork:
+     - one confident blue (#0056D2) for every primary action and link
+     - white canvas, pale-blue bands (#F0F6FF) to separate sections
+     - 8px corners on buttons and fields, 16px on cards, hairline borders instead of shadows
+     - a thin utility bar above the main header, an "Explore" menu, one big search field
+     - left-aligned page banners, card grids, a tabbed "what brings you here" block, a multi-column footer
+   Only colour, border, radius, shadow and type are touched for existing components; layout of the
+   calculators is left alone, so calculation behaviour and offline / privacy features are unchanged.
+   ========================================================================== */
+
+:root {
+  --cs-blue: #0056D2;
+  --cs-blue-hover: #00419E;
+  --cs-blue-ink: #003E9C;
+  --cs-tint: #F0F6FF;
+  --cs-tint-2: #E3EEFF;
+  --cs-ink: #0F1114;
+  --cs-text: #1F2937;
+  --cs-muted: #4F5D75;
+  --cs-border: #DDE3EC;
+  --cs-field: #8A94A6;
+  --cs-white: #FFFFFF;
+  --cs-radius-btn: 8px;
+  --cs-radius-card: 16px;
+  --cs-container: 1280px;
+  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #0056D2;
+
+  /* Re-point the older palettes at the Coursera blue so every existing accent follows */
+  --ds-blue: #0056D2;
+  --ds-blue-hover: #00419E;
+  --primary: 217 100% 41%;
+  --accent: 217 100% 41%;
+  --ds-shadow-cta: none;
+  --ds-shadow-cta-hover: 0 4px 12px rgba(0, 86, 210, 0.28);
+  --el-ambient: none;
+  --color-teal-50: #f0f6ff;
+  --color-teal-100: #e3eeff;
+  --color-teal-200: #c4dbff;
+  --color-teal-300: #94bcff;
+  --color-teal-400: #5b94f0;
+  --color-teal-500: #2a6fdc;
+  --color-teal-600: #0056d2;
+  --color-teal-700: #00419e;
+  --color-teal-800: #003e9c;
+  --color-teal-900: #002f78;
+  --color-teal-950: #001f52;
+}
+html [class*="tool-theme-"] {
+  --tool-primary: 217 100% 41%;
+  --tool-deep: 217 100% 31%;
+  --tool-soft: 214 100% 97%;
+}
+
+html.dark {
+  --cs-blue: #4F9CFF;
+  --cs-blue-hover: #7DB6FF;
+  --cs-blue-ink: #9CC7FF;
+  --cs-tint: rgba(79, 156, 255, 0.10);
+  --cs-tint-2: rgba(79, 156, 255, 0.18);
+  --cs-ink: #F4F7FB;
+  --cs-text: #D7DEE9;
+  --cs-muted: #A5B1C4;
+  --cs-border: rgba(255, 255, 255, 0.12);
+  --cs-field: #6B7A92;
+  --cs-white: #131C31;
+  --cs-focus: 0 0 0 2px #0F172A, 0 0 0 4px #4F9CFF;
+}
+
+/* --------------------------------------------------------------------------
+   1. Canvas: plain white, like the reference
+   -------------------------------------------------------------------------- */
+html:not(.dark) body,
+html:not(.dark) .app-shell,
+html:not(.dark) .premium-surface {
+  background-color: #FFFFFF;
+}
+html:not(.dark) body {
+  color: var(--cs-text);
+}
+html:not(.dark) main :is(a:not([class*="bg-"]):not([class*="text-"]):not(.cs-btn):not(.cs-card-link)) {
+  color: var(--cs-blue);
+}
+
+/* Visible, consistent keyboard focus */
+:is(a, button, input, select, textarea, summary, [role="tab"], [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: var(--cs-focus);
+  border-radius: var(--cs-radius-btn);
+}
+
+/* --------------------------------------------------------------------------
+   2. Shared building blocks (used by the new header, hero, home sections and footer)
+   -------------------------------------------------------------------------- */
+.cs-container {
+  width: 100%;
+  max-width: var(--cs-container);
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) { .cs-container { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .cs-container { padding-inline: 2rem; } }
+
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0 1.5rem;
+  border-radius: var(--cs-radius-btn);
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.cs-btn-primary { background: var(--cs-blue); color: #fff !important; }
+.cs-btn-primary:hover { background: var(--cs-blue-hover); }
+html.dark .cs-btn-primary { color: #0B1220 !important; }
+.cs-btn-outline { background: transparent; color: var(--cs-blue) !important; border-color: var(--cs-blue); }
+.cs-btn-outline:hover { background: var(--cs-tint); }
+.cs-btn:disabled { opacity: 0.6; cursor: wait; }
+
+.cs-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 1rem;
+  border-radius: var(--cs-radius-btn);
+  border: 1px solid var(--cs-field);
+  background: #fff;
+  color: var(--cs-ink);
+  font-size: 1rem;
+}
+html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
+.cs-input::placeholder { color: var(--cs-muted); }
+.cs-input:hover { border-color: var(--cs-ink); }
+.cs-input:focus { border-color: var(--cs-blue); box-shadow: 0 0 0 1px var(--cs-blue); outline: none; }
+
+.cs-card {
+  background: var(--cs-white);
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius-card);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.cs-card:hover { border-color: #B9C6DB; box-shadow: 0 6px 20px rgba(15, 17, 20, 0.08); }
+html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
+
+.cs-section { padding-block: 2.5rem; }
+@media (min-width: 768px) { .cs-section { padding-block: 3.5rem; } }
+.cs-h2 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--cs-ink);
+}
+.cs-lead { margin: 0 0 1.75rem; max-width: 42rem; font-size: 1.0625rem; line-height: 1.55; color: var(--cs-muted); }
+.cs-eyebrow { margin: 0 0 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--cs-blue); letter-spacing: 0; }
+
+/* --------------------------------------------------------------------------
+   3. Header: utility bar + main row
+   -------------------------------------------------------------------------- */
+.cs-utility {
+  background: var(--cs-tint);
+  border-bottom: 1px solid var(--cs-border);
+}
+.cs-utility-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--cs-text) !important;
+  text-decoration: none;
+}
+.cs-utility-link:hover { color: var(--cs-blue) !important; }
+.cs-utility-link[aria-current="page"] { font-weight: 700; color: var(--cs-ink) !important; }
+.cs-utility-link[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 0.25rem;
+  right: 0.25rem;
+  bottom: 0;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--cs-blue);
+}
+
+/* The header surface itself: white, one hairline, no sheen (overrides .elev-chrome) */
+html:not(.dark) .elev-chrome {
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--cs-border);
+  box-shadow: none;
+}
+.cs-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--cs-blue);
+  border-radius: var(--cs-radius-btn);
+  background: transparent;
+  color: var(--cs-blue);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+.cs-explore:hover,
+.cs-explore[aria-expanded="true"] { background: var(--cs-tint); }
+
+/* Search field: pill with a round blue button, as on the reference */
+.elev-pill, .header-search-field { box-shadow: none; }
+
+/* Mega menu (the "Explore" dropdown) */
+.cs-mega { border-radius: 12px !important; border: 1px solid var(--cs-border) !important; box-shadow: 0 12px 32px rgba(15, 17, 20, 0.14) !important; }
+
+/* --------------------------------------------------------------------------
+   4. Page banner (<ToolHeading />) - pale blue band, left aligned
+   -------------------------------------------------------------------------- */
+.cs-banner {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--cs-tint);
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius-card);
+  padding: 1.5rem 1.25rem;
+}
+@media (min-width: 640px) { .cs-banner { padding: 2rem 2.25rem; } }
+@media (min-width: 1024px) { .cs-banner { padding: 2.5rem 3rem; } }
+.cs-banner::before,
+.cs-banner::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+.cs-banner::before { width: 22rem; height: 22rem; right: -7rem; top: -9rem; background: rgba(0, 86, 210, 0.07); }
+.cs-banner::after { width: 12rem; height: 12rem; right: 6rem; bottom: -7rem; background: rgba(0, 86, 210, 0.05); }
+html.dark .cs-banner::before { background: rgba(79, 156, 255, 0.10); }
+html.dark .cs-banner::after { background: rgba(79, 156, 255, 0.06); }
+.cs-banner-title {
+  margin: 0;
+  max-width: 46rem;
+  font-size: clamp(1.75rem, 1.25rem + 1.8vw, 2.75rem);
+  line-height: 1.12;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--cs-ink);
+}
+.cs-banner-sub {
+  margin: 0.75rem 0 0;
+  max-width: 40rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.55;
+  color: var(--cs-muted);
+}
+.cs-banner-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; margin-top: 1.5rem; }
+.cs-banner-facts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 1.25rem 0 0; padding: 0; list-style: none; font-size: 0.9375rem; color: var(--cs-text); }
+.cs-banner-facts li { display: inline-flex; align-items: center; gap: 0.4rem; }
+
+/* --------------------------------------------------------------------------
+   5. Home sections (category cards, tabs, trust tiles)
+   -------------------------------------------------------------------------- */
+.cs-cat-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .cs-cat-grid { grid-template-columns: repeat(3, 1fr); } }
+.cs-cat { display: flex; flex-direction: column; padding: 1.5rem; }
+.cs-cat-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 3rem; height: 3rem; margin-bottom: 1rem;
+  border-radius: 12px; background: var(--cs-tint-2); color: var(--cs-blue);
+}
+.cs-cat h3 { margin: 0 0 0.375rem; font-size: 1.25rem; font-weight: 700; color: var(--cs-ink); letter-spacing: -0.015em; }
+.cs-cat p { margin: 0 0 1rem; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-muted); }
+.cs-cat ul { margin: 0 0 1rem; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.cs-cat li a {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
+  min-height: 44px; padding: 0 0.25rem;
+  border-top: 1px solid var(--cs-border);
+  font-size: 0.9375rem; font-weight: 600; color: var(--cs-ink) !important; text-decoration: none;
+}
+.cs-cat li:first-child a { border-top: 0; }
+.cs-cat li a:hover { color: var(--cs-blue) !important; }
+.cs-card-link { margin-top: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; color: var(--cs-blue); text-decoration: none; min-height: 44px; }
+.cs-card-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.cs-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.cs-tab {
+  min-height: 44px; padding: 0 1.125rem;
+  border-radius: 9999px; border: 1px solid var(--cs-border);
+  background: transparent; color: var(--cs-text);
+  font-size: 0.9375rem; font-weight: 600; cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.cs-tab:hover { background: var(--cs-tint); border-color: var(--cs-blue); }
+.cs-tab[aria-selected="true"] { background: var(--cs-blue); border-color: var(--cs-blue); color: #fff; }
+html.dark .cs-tab[aria-selected="true"] { color: #0B1220; }
+.cs-panel {
+  display: grid; gap: 1.5rem; padding: 1.5rem;
+  background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card);
+}
+@media (min-width: 768px) { .cs-panel { grid-template-columns: 1.1fr 1fr; padding: 2rem 2.5rem; align-items: center; } }
+.cs-panel h3 { margin: 0 0 0.5rem; font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem); font-weight: 700; letter-spacing: -0.02em; color: var(--cs-ink); }
+.cs-panel p { margin: 0 0 1.25rem; font-size: 1.0625rem; line-height: 1.55; color: var(--cs-muted); }
+.cs-panel-links { display: grid; gap: 0.625rem; margin: 0; padding: 0; list-style: none; }
+.cs-panel-links a {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  min-height: 52px; padding: 0 1rem;
+  background: var(--cs-white); border: 1px solid var(--cs-border); border-radius: 12px;
+  font-weight: 600; color: var(--cs-ink) !important; text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(0, 86, 210, 0.12); color: var(--cs-blue) !important; }
+
+.cs-trust { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .cs-trust { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .cs-trust { grid-template-columns: repeat(4, 1fr); } }
+.cs-trust-item { padding: 1.5rem; background: var(--cs-white); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card); }
+.cs-trust-item svg { color: var(--cs-blue); margin-bottom: 0.75rem; }
+.cs-trust-item h3 { margin: 0 0 0.375rem; font-size: 1.0625rem; font-weight: 700; color: var(--cs-ink); }
+.cs-trust-item p { margin: 0; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-muted); }
+
+/* --------------------------------------------------------------------------
+   6. Footer
+   -------------------------------------------------------------------------- */
+.cs-news { background: var(--cs-tint); border-block: 1px solid var(--cs-border); }
+.cs-news-inner { display: grid; gap: 1.5rem; padding-block: 2.5rem; align-items: center; }
+@media (min-width: 768px) { .cs-news-inner { grid-template-columns: 1fr 1fr; gap: 3rem; } }
+.cs-news-title { margin: 0 0 0.5rem; font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--cs-ink); }
+.cs-news-sub { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--cs-muted); }
+.cs-news-form { display: flex; flex-direction: column; gap: 0.75rem; }
+@media (min-width: 480px) { .cs-news-form { flex-direction: row; } }
+.cs-news-fine { margin: 0.75rem 0 0; font-size: 0.8125rem; color: var(--cs-muted); }
+.cs-news-fine a { color: var(--cs-blue) !important; font-weight: 600; }
+.cs-footer-panel { background: var(--cs-white); }
+.cs-footer-bottom { border-top: 1px solid var(--cs-border); }
+html:not(.dark) .site-footer { background: #fff; }
+
+/* --------------------------------------------------------------------------
+   7. Existing calculators: recolour + reshape through attribute selectors
+   (Beats the sand rules in ux-refactor.css because it comes later with the same specificity.)
+   -------------------------------------------------------------------------- */
+/* Cards: hairline border, 16px corners, no sheen, no heavy shadow */
+html:not(.dark) main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"], [class*="rounded-[36px]"])[class*="bg-white"]:not(.cs-banner) {
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius-card);
+  box-shadow: none;
+  background-image: none;
+}
+html.dark main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"])[class*="dark:bg-slate-"]:not(.cs-banner) {
+  border-radius: var(--cs-radius-card);
+  background-image: none;
+}
+main [class*="rounded-[24px]"] { border-radius: 12px; }
+
+/* Text pills (min-h-[48px]) become 8px-corner buttons and fields; round icon buttons keep their shape */
+main :is(button, a, input, select)[class*="min-h-[48px]"].rounded-full,
+main :is(button, a, input, select)[class*="min-h-[44px]"].rounded-full {
+  border-radius: var(--cs-radius-btn);
+}
+
+/* Fields: white, 1px grey border, blue focus (Coursera form style) */
+html:not(.dark) :is(
+  input[type="number"], input[type="text"], input[type="email"], input[type="search"],
+  input[type="url"], input[type="tel"], input[type="password"], textarea, select, .field-input, .tool-input
+):not(.elev-pill):not(.header-search-field) {
+  background-color: #FFFFFF;
+  border: 1px solid var(--cs-field);
+  box-shadow: none;
+}
+html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .tool-input):not(.elev-pill):not(.header-search-field):hover {
+  border-color: var(--cs-ink);
+}
+.premium-surface :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select
+):focus {
+  outline: none;
+  border-color: var(--cs-blue);
+  box-shadow: 0 0 0 1px var(--cs-blue);
+}
+
+/* Primary buttons: flat Coursera blue (drops the gradient, glow and lift) */
+.premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled),
+.premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled) {
+  background-image: none;
+  background-color: var(--cs-blue);
+  box-shadow: none;
+}
+@media (hover: hover) {
+  .premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled):hover,
+  .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled):hover {
+    translate: 0 0;
+    background-color: var(--cs-blue-hover);
+    box-shadow: none;
+  }
+}
+
+/* Links inside long-form guides */
+html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue); text-underline-offset: 3px; }
+
+@media print {
+  .cs-utility, .cs-news, .cs-footer-panel { display: none !important; }
+  .cs-banner { background: #fff !important; border: 0 !important; padding: 0 !important; }
+  .cs-banner::before, .cs-banner::after { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-btn, .cs-card, .cs-tab, .cs-panel-links a { transition: none; }
+}
