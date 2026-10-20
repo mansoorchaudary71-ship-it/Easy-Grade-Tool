@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
 import { ToolsMenu } from './ToolsMenu';
-import { TOOL_GROUPS } from '../data/navItems';
+import { NavGroup, TOOL_GROUPS } from '../data/navItems';
 import { TOOL_PATHS } from '../data/constants';
 import { isSamePath } from '../utils/paths';
 import { preloadForPath } from '../utils/lazyRoutes';
@@ -26,44 +26,38 @@ export const headerTextIdle = 'text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate
 
 const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];
 
-/**
- * Desktop primary navigation (lg and up): ONE "Explore" button (the same pattern as the reference) that opens a
- * three-column menu with every tool group. Rendered inside the single header row by <Navbar />.
- * On phones and tablets the same groups live in <MobileNavDrawer /> behind the hamburger button.
- */
-export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
+/** One header button that opens the dropdown for a single tool group. */
+const GroupButton: React.FC<{ group: NavGroup; onSelectTool: (tool: ToolKey) => void }> = ({ group, onSelectTool }) => {
   const location = useLocation();
   const anchorRef = useRef<HTMLButtonElement | null>(null);
   const [open, setOpen] = useState(false);
 
   const isStaticPage = STATIC_PREFIXES.some((p) => location.pathname.startsWith(p));
-  const hasActive = !isStaticPage && TOOL_GROUPS.some((g) => g.items.some((t) => isSamePath(location.pathname, t.path)));
+  const hasActive = !isStaticPage && group.items.some((t) => isSamePath(location.pathname, t.path));
 
   return (
     <>
-      <nav className="hidden items-center lg:flex" aria-label="Main">
-        <button
-          ref={anchorRef}
-          type="button"
-          aria-haspopup="true"
-          aria-expanded={open}
-          data-active={hasActive}
-          onClick={() => setOpen((o) => !o)}
-          onMouseEnter={() => TOOL_GROUPS.forEach((g) => g.items.slice(0, 2).forEach((t) => void preloadForPath(t.path)))}
-          className={`cs-explore ${headerFocusRing}`}
-        >
-          <span>Explore</span>
-          <ChevronDown
-            className={`size-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
-            strokeWidth={ICON_STROKE}
-            aria-hidden="true"
-          />
-        </button>
-      </nav>
+      <button
+        ref={anchorRef}
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        data-active={hasActive}
+        onClick={() => setOpen((o) => !o)}
+        onMouseEnter={() => group.items.slice(0, 2).forEach((t) => void preloadForPath(t.path))}
+        className={`cs-explore ${headerFocusRing}`}
+      >
+        <span>{group.heading}</span>
+        <ChevronDown
+          className={`size-4 shrink-0 transition-transform duration-200 motion-reduce:transition-none ${open ? 'rotate-180' : ''}`}
+          strokeWidth={ICON_STROKE}
+          aria-hidden="true"
+        />
+      </button>
 
       {open && (
         <ToolsMenu
-          groups={TOOL_GROUPS}
+          groups={[group]}
           currentPath={location.pathname}
           anchorRef={anchorRef}
           onClose={() => setOpen(false)}
@@ -75,5 +69,18 @@ export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => {
     </>
   );
 };
+
+/**
+ * Desktop primary navigation (xl and up): THREE buttons (Grade tools, GPA and percentages, Everyday tools),
+ * each opening a dropdown with only its own tools. Rendered inside the single header row by <Navbar />.
+ * Below xl the same groups live in <MobileNavDrawer /> behind the hamburger button.
+ */
+export const ToolNavBar: React.FC<ToolNavBarProps> = ({ onSelectTool }) => (
+  <nav className="hidden items-center gap-2 xl:flex" aria-label="Main">
+    {TOOL_GROUPS.map((group) => (
+      <GroupButton key={group.id} group={group} onSelectTool={onSelectTool} />
+    ))}
+  </nav>
+);
 
 export default ToolNavBar;

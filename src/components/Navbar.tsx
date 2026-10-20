@@ -8,7 +8,7 @@ import { useTheme } from '../context/ThemeContext';
 import { preloadTool } from '../utils/toolPreloader';
 import { preloadForPath } from '../utils/lazyRoutes';
 import { Logo } from './Logo';
-import { ToolNavBar, headerFocusRing, headerTextBase, headerTextIdle } from './ToolNavBar';
+import { ToolNavBar, headerFocusRing } from './ToolNavBar';
 import { MobileNavDrawer } from './MobileNavDrawer';
 import { PRIMARY_NAV_ITEM, TOOL_GROUPS } from '../data/navItems';
 import { TOOL_PATHS } from '../data/constants';
@@ -123,7 +123,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const isStaticPage = ['/about', '/privacy', '/terms', '/methodology'].some((p) => location.pathname.startsWith(p));
   const primaryActive = !isStaticPage && isSamePath(location.pathname, PRIMARY_NAV_ITEM.path);
-  const aboutActive = location.pathname.startsWith('/about');
 
   const warmPrimary = () => {
     preloadTool(PRIMARY_NAV_ITEM.toolKey);
@@ -141,14 +140,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-2 px-4 sm:px-6 lg:h-[72px] lg:gap-4 lg:px-8 xl:gap-5">
           {/* ------------------------------ Logo ------------------------------ */}
           <div className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-3">
-            {/* Hamburger: below lg only. Opens the grouped tools drawer. */}
+            {/* Hamburger: below xl only. Opens the grouped tools drawer. */}
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
               aria-label="Open menu"
               aria-haspopup="dialog"
               aria-expanded={drawerOpen}
-              className={`-ml-2 ${ghostControl} lg:hidden ${headerFocusRing}`}
+              className={`-ml-2 ${ghostControl} xl:hidden ${headerFocusRing}`}
             >
               <Menu className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
             </button>
@@ -174,7 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             The pill is the entry point to the command palette (which owns the real search UI).
             Click, Enter, or the first typed character hands off to the palette.
           */}
-          <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]">
+          <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[360px]">
             <div className="flex h-12 items-center rounded-full border border-[#8A94A6] bg-white pl-5 pr-1 transition-colors duration-200 hover:border-[#0F1114] focus-within:border-[#0056D2] focus-within:ring-1 focus-within:ring-[#0056D2] dark:border-slate-500 dark:bg-white/[0.06]">
               <input
                 type="text"
@@ -216,11 +215,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          {/* ------------------------------ Grouped menus ------------------------------ */}
+          {/* ------------------------------ Quick Grade, then the three group menus ------------------------------ */}
+          {/* Quick Grade pill: sits right after the search bar (lg and up) */}
+          <Link
+            to={PRIMARY_NAV_ITEM.path}
+            onClick={() => {
+              if (isSamePath(TOOL_PATHS[PRIMARY_NAV_ITEM.toolKey], PRIMARY_NAV_ITEM.path)) onSelectTool(PRIMARY_NAV_ITEM.toolKey);
+            }}
+            onMouseEnter={warmPrimary}
+            onFocus={warmPrimary}
+            onTouchStart={warmPrimary}
+            aria-current={primaryActive ? 'page' : undefined}
+            title={PRIMARY_NAV_ITEM.title}
+            className={`${ctaPill} ${headerFocusRing} hidden lg:inline-flex`}
+          >
+            {PRIMARY_NAV_ITEM.label}
+          </Link>
+
           <ToolNavBar onSelectTool={onSelectTool} />
 
           {/* ------------------------------ Right cluster ------------------------------ */}
-          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 lg:ml-0 xl:gap-3">
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 xl:gap-3">
             {/* Search icon: below lg only (the pill takes over from lg) */}
             <button
               type="button"
@@ -243,31 +258,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <PrivacyShieldIcon className="size-5" />
             </div>
-
-            {/* Plain text link (same role as "Sign up" in the reference), 2xl and up (the drawer has it below that) */}
-            <Link
-              to="/about/"
-              aria-current={aboutActive ? 'page' : undefined}
-              className={`${headerTextBase.replace('inline-flex ', '')} ${headerTextIdle} ${headerFocusRing} hidden xl:inline-flex ${aboutActive ? 'underline decoration-[#0056D2] decoration-2 underline-offset-8' : ''}`}
-            >
-              About
-            </Link>
-
-            {/* Dark pill: the home page and most-used calculator, lg and up */}
-            <Link
-              to={PRIMARY_NAV_ITEM.path}
-              onClick={() => {
-                if (isSamePath(TOOL_PATHS[PRIMARY_NAV_ITEM.toolKey], PRIMARY_NAV_ITEM.path)) onSelectTool(PRIMARY_NAV_ITEM.toolKey);
-              }}
-              onMouseEnter={warmPrimary}
-              onFocus={warmPrimary}
-              onTouchStart={warmPrimary}
-              aria-current={primaryActive ? 'page' : undefined}
-              title={PRIMARY_NAV_ITEM.title}
-              className={`${ctaPill} ${headerFocusRing} hidden lg:inline-flex`}
-            >
-              {PRIMARY_NAV_ITEM.label}
-            </Link>
 
             {/* Theme switcher: System -> Light -> Dark (icon-only to keep the header clean) */}
             <button

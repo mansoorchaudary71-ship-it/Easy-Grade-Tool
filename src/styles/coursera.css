@@ -416,7 +416,7 @@ html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .too
 html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue); text-underline-offset: 3px; }
 
 @media print {
-  .cs-utility, .cs-news, .cs-footer-panel { display: none !important; }
+  .cs-news, .cs-footer-panel { display: none !important; }
   .cs-banner { background: #fff !important; border: 0 !important; padding: 0 !important; }
   .cs-banner::before, .cs-banner::after { display: none; }
 }
