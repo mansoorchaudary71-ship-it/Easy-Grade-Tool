@@ -25,6 +25,12 @@ const BLOCKED = /easygradecalculator\.com/i;
 
 const PAGES = [
   '/',
+  '/loan-calculator',
+  '/password-generator',
+  '/percentage-calculator',
+  '/weighted-gpa-calculator',
+  '/grading-scale/75-questions',
+  '/grading-scale/80-questions',
   '/gpa-calculator',
   '/grade-calculator',
   '/cgpa-to-percentage-calculator',
@@ -63,6 +69,17 @@ async function checkPage(urlPath: string): Promise<string[]> {
   if (!ogImage.startsWith(EXPECTED_ORIGIN + '/')) problems.push(`${urlPath}: og:image is "${ogImage}"`);
   if (!twImage.startsWith(EXPECTED_ORIGIN + '/')) problems.push(`${urlPath}: twitter:image is "${twImage}"`);
   if (BLOCKED.test(html)) problems.push(`${urlPath}: page contains a blocked foreign domain`);
+
+  // Every hashed /assets/ file the page links to must exist (a stale cached page points at deleted bundles = 404).
+  const assetRefs = Array.from(new Set(Array.from(html.matchAll(/(?:src|href)="(\/assets\/[^"]+)"/g), (m) => m[1])));
+  for (const ref of assetRefs) {
+    try {
+      const r = await fetch(ORIGIN + ref, { method: 'HEAD', headers: { 'Cache-Control': 'no-cache' } });
+      if (r.status !== 200) problems.push(`${urlPath}: ${ref} returns HTTP ${r.status} (page HTML is stale or cached from an older deploy)`);
+    } catch (err) {
+      problems.push(`${urlPath}: ${ref} request failed (${(err as Error).message})`);
+    }
+  }
 
   const localTitle = readLocalTitle(urlPath);
   if (localTitle && title !== localTitle) {

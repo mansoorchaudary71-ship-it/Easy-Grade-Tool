@@ -43,9 +43,9 @@ export const AboutMethodology: React.FC = () => {
       <div className="relative tool-layout font-sans">
         <AmbientAura />
 
-        <div className="w-full max-w-4xl mx-auto space-y-10">
+        <div className="w-full min-w-0 max-w-4xl mx-auto space-y-6 sm:space-y-10">
           {/* Mission & Purpose Card */}
-          <section className="bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 rounded-3xl border border-white/80 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 w-full space-y-4">
+          <section className="bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 rounded-3xl border border-white/80 dark:border-white/10 shadow-sm p-4 sm:p-8 md:p-10 w-full space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-100 dark:bg-teal-950/70 text-teal-800 dark:text-teal-300 text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" aria-hidden="true" />
               <span>Mission &amp; Transparency</span>
@@ -62,7 +62,7 @@ export const AboutMethodology: React.FC = () => {
           </section>
 
           {/* Accountability: who runs the site, how accuracy is checked, how to report errors */}
-          <section aria-labelledby="accountability-title" className="bg-white/80 dark:bg-slate-900/80 rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-6 sm:p-8 space-y-4">
+          <section aria-labelledby="accountability-title" className="bg-white/80 dark:bg-slate-900/80 rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-4 sm:p-8 space-y-4">
             <h2 id="accountability-title" className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white m-0">
               Who runs Easy Grade Tool, and how we keep it accurate
             </h2>
@@ -80,17 +80,17 @@ export const AboutMethodology: React.FC = () => {
             </ul>
             <p className="text-sm sm:text-base leading-relaxed text-slate-600 dark:text-slate-300 m-0">
               <strong>Corrections policy:</strong> found a wrong result or an outdated formula? Email{' '}
-              <a className="underline font-semibold" href={`mailto:${CORRECTIONS_EMAIL}`}>{CORRECTIONS_EMAIL}</a> with the calculator, the numbers you entered and the result you expected. Verified errors are fixed and the review date above is updated.
+              <a className="underline font-semibold break-all" href={`mailto:${CORRECTIONS_EMAIL}`}>{CORRECTIONS_EMAIL}</a> with the calculator, the numbers you entered and the result you expected. Verified errors are fixed and the review date above is updated.
             </p>
           </section>
 
           {/* 1. The Standard 4.0 US GPA Scale */}
-          <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+          <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-4 sm:p-8 md:p-10 space-y-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950/60 flex items-center justify-center text-teal-800 dark:text-teal-300 shrink-0">
                 <GraduationCap className="w-5 h-5" aria-hidden="true" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Standard Academic Model
                 </span>
@@ -104,116 +104,116 @@ export const AboutMethodology: React.FC = () => {
               In the United States and many North American institutions, Grade Point Average (GPA) converts letter grades into numerical quality points on a scale ranging from 0.0 to 4.0.
             </p>
 
-            <div className="overflow-x-auto rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-2 bg-white dark:bg-slate-900">
-              <table className="w-full text-left text-xs sm:text-sm border-separate border-spacing-y-1.5">
+            <div className="overflow-x-auto rounded-2xl border border-slate-200/80 dark:border-slate-700/80 p-1 sm:p-2 bg-white dark:bg-slate-900">
+              <table className="w-full min-w-0 text-left text-xs sm:text-sm border-separate border-spacing-y-1.5">
                 <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold">
                   <tr>
-                    <th className="py-2.5 px-4 rounded-l-2xl">Letter Grade</th>
-                    <th className="py-2.5 px-4">Grade Points (Plus/Minus)</th>
-                    <th className="py-2.5 px-4">Standard Cutoff (%)</th>
-                    <th className="py-2.5 px-4 rounded-r-2xl">Description</th>
+                    <th className="py-2 px-1.5 sm:py-2.5 sm:px-4 rounded-l-2xl">Grade</th>
+                    <th className="py-2 px-1.5 sm:py-2.5 sm:px-4"><span className="sm:hidden">Points</span><span className="hidden sm:inline">Grade Points (Plus/Minus)</span></th>
+                    <th className="py-2 px-1.5 sm:py-2.5 sm:px-4"><span className="sm:hidden">Cutoff</span><span className="hidden sm:inline">Standard Cutoff (%)</span></th>
+                    <th className="py-2 px-1.5 sm:py-2.5 sm:px-4 rounded-r-2xl">Description</th>
                   </tr>
                 </thead>
-                <tbody className="font-mono text-xs sm:text-sm">
+                <tbody className="font-mono text-[11px] leading-snug sm:text-sm">
                   <tr className="bg-emerald-50/60 hover:bg-emerald-50 text-emerald-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200">
                         A / A+
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">4.0</td>
-                    <td className="py-2.5 px-4">93.0% – 100%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Excellent / Outstanding</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">4.0</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">93.0% – 100%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Excellent / Outstanding</td>
                   </tr>
                   <tr className="bg-emerald-50/60 hover:bg-emerald-50 text-emerald-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-emerald-50 text-emerald-800 border border-emerald-200">
                         A−
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">3.7</td>
-                    <td className="py-2.5 px-4">90.0% – 92.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Superior</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">3.7</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">90.0% – 92.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Superior</td>
                   </tr>
                   <tr className="bg-blue-50/60 hover:bg-blue-50 text-blue-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
                         B+
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">3.3</td>
-                    <td className="py-2.5 px-4">87.0% – 89.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Very Good</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">3.3</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">87.0% – 89.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Very Good</td>
                   </tr>
                   <tr className="bg-blue-50/60 hover:bg-blue-50 text-blue-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
                         B
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">3.0</td>
-                    <td className="py-2.5 px-4">83.0% – 86.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Good / Above Average</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">3.0</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">83.0% – 86.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Good / Above Average</td>
                   </tr>
                   <tr className="bg-blue-50/60 hover:bg-blue-50 text-blue-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-blue-50 text-blue-800 border border-blue-200">
                         B−
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">2.7</td>
-                    <td className="py-2.5 px-4">80.0% – 82.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Competent</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">2.7</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">80.0% – 82.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Competent</td>
                   </tr>
                   <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
                         C+
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">2.3</td>
-                    <td className="py-2.5 px-4">77.0% – 79.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Average High</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">2.3</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">77.0% – 79.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Average High</td>
                   </tr>
                   <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
                         C
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">2.0</td>
-                    <td className="py-2.5 px-4">73.0% – 76.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Satisfactory / Minimum Major Requirement</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">2.0</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">73.0% – 76.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Satisfactory / Minimum Major Requirement</td>
                   </tr>
                   <tr className="bg-amber-50/60 hover:bg-amber-50 text-amber-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-amber-50 text-amber-800 border border-amber-200">
                         C−
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">1.7</td>
-                    <td className="py-2.5 px-4">70.0% – 72.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Marginal Pass</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">1.7</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">70.0% – 72.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Marginal Pass</td>
                   </tr>
                   <tr className="bg-orange-50/60 hover:bg-orange-50 text-orange-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-orange-50 text-orange-800 border border-orange-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-orange-50 text-orange-800 border border-orange-200">
                         D+ / D
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">1.3 / 1.0</td>
-                    <td className="py-2.5 px-4">60.0% – 69.9%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Poor / Minimum Credit Pass</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">1.3 / 1.0</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">60.0% – 69.9%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Poor / Minimum Credit Pass</td>
                   </tr>
                   <tr className="bg-rose-50/60 hover:bg-rose-50 text-rose-800 rounded-2xl transition-colors">
-                    <td className="py-2.5 px-4 font-bold rounded-l-2xl">
-                      <span className="inline-block px-2.5 py-0.5 rounded-2xl bg-rose-50 text-rose-800 border border-rose-200">
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-bold rounded-l-2xl">
+                      <span className="inline-block whitespace-nowrap px-1.5 sm:px-2.5 py-0.5 rounded-2xl bg-rose-50 text-rose-800 border border-rose-200">
                         F
                       </span>
                     </td>
-                    <td className="py-2.5 px-4">0.0</td>
-                    <td className="py-2.5 px-4">&lt; 60.0%</td>
-                    <td className="py-2.5 px-4 font-sans rounded-r-2xl">Failing / No Credit Earned</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4">0.0</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 sm:whitespace-nowrap">&lt; 60.0%</td>
+                    <td className="py-2 px-1.5 sm:py-2.5 sm:px-4 font-sans rounded-r-2xl">Failing / No Credit Earned</td>
                   </tr>
                 </tbody>
               </table>
@@ -224,7 +224,7 @@ export const AboutMethodology: React.FC = () => {
                 <Calculator className="w-4 h-4 text-teal-700 dark:text-teal-400 shrink-0" aria-hidden="true" />
                 <span>The Cumulative GPA Formula</span>
               </h3>
-              <p className="text-xs sm:text-sm font-mono text-teal-800 dark:text-teal-300 m-0">
+              <p className="text-xs sm:text-sm font-mono text-teal-800 dark:text-teal-300 m-0 break-words">
                 GPA = &Sigma;(Course Grade Points &times; Course Credit Hours) / &Sigma;(Total Credit Hours)
               </p>
               <p className="text-xs text-teal-700 dark:text-teal-300 mt-2 m-0 font-sans">
@@ -234,12 +234,12 @@ export const AboutMethodology: React.FC = () => {
           </section>
 
           {/* 2. The Weighted Grade Formula */}
-          <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+          <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-4 sm:p-8 md:p-10 space-y-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950/60 flex items-center justify-center text-teal-700 dark:text-teal-300 shrink-0">
                 <Layers className="w-5 h-5" aria-hidden="true" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Mathematical Breakdown
                 </span>
@@ -255,10 +255,10 @@ export const AboutMethodology: React.FC = () => {
 
             <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-slate-100 dark:bg-slate-950 border border-slate-800 font-mono text-xs sm:text-sm space-y-3">
               <div className="text-teal-400 font-semibold">Normalized Weighted Percentage</div>
-              <div className="p-3 bg-slate-800/80 rounded-xl text-center font-bold text-white text-sm sm:text-base">
+              <div className="p-3 bg-slate-800/80 rounded-xl text-center font-bold text-white text-xs sm:text-base break-words">
                 Final Grade (%) = &Sigma; [ (Earned / Max) &times; Weight ] / &Sigma; [ Total Weight ]
               </div>
-              <p className="text-xs text-slate-600 dark:text-slate-400 m-0 font-sans leading-relaxed">
+              <p className="text-xs text-slate-300 m-0 font-sans leading-relaxed">
                 If the weights already sum to 100%, the denominator is 100. If your syllabus weights only sum to 80% so far (because the final has not occurred yet), our engine normalizes the active weight so your current standing is always represented accurately without distortion.
               </p>
             </div>
@@ -270,19 +270,19 @@ export const AboutMethodology: React.FC = () => {
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed m-0">
                 To calculate the exact score you need on a final exam to reach a target class grade, we solve the algebraic equation:
               </p>
-              <div className="p-3 bg-slate-100 dark:bg-slate-800/60 rounded-xl font-mono text-xs sm:text-sm text-slate-800 dark:text-slate-200">
+              <div className="p-3 bg-slate-100 dark:bg-slate-800/60 rounded-xl font-mono text-xs sm:text-sm text-slate-800 dark:text-slate-200 break-words">
                 Score Needed = [ Target Grade &minus; (Current Grade &times; (1 &minus; Final Weight)) ] / Final Weight
               </div>
             </div>
           </section>
 
           {/* 3. How International Credit Systems Differ */}
-          <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+          <section className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200/70 dark:border-slate-800 shadow-sm p-4 sm:p-8 md:p-10 space-y-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950/60 flex items-center justify-center text-teal-800 dark:text-teal-300 shrink-0">
                 <Globe2 className="w-5 h-5" aria-hidden="true" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Global Academic Equivalencies
                 </span>
@@ -343,12 +343,12 @@ export const AboutMethodology: React.FC = () => {
           </section>
 
           {/* 4. Authorship, Maintenance & Contact */}
-          <section className="bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 rounded-3xl border border-white/80 dark:border-white/10 shadow-sm p-6 sm:p-8 md:p-10 space-y-6">
+          <section className="bg-gradient-to-r from-slate-50/95 to-blue-50/90 backdrop-blur-xl dark:from-slate-900/95 dark:to-slate-800/90 rounded-3xl border border-white/80 dark:border-white/10 shadow-sm p-4 sm:p-8 md:p-10 space-y-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950/60 flex items-center justify-center text-teal-700 dark:text-teal-300 shrink-0">
                 <ShieldCheck className="w-5 h-5" aria-hidden="true" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <span className="text-xs font-semibold font-mono uppercase tracking-wider text-slate-600 dark:text-slate-400">
                   Trust, Authority &amp; Contact
                 </span>
@@ -367,7 +367,7 @@ export const AboutMethodology: React.FC = () => {
                 <div className="text-xs font-mono text-slate-500 uppercase tracking-wider">Maintainer &amp; Support</div>
                 <div className="font-bold text-sm text-slate-900 dark:text-white">Engineering &amp; Editorial Team</div>
                 <div className="text-xs text-slate-600 dark:text-slate-300 font-medium">
-                  Direct communication: <a href={`mailto:${CONTACT_EMAIL}`} className="text-teal-600 dark:text-teal-400 hover:underline font-semibold">{CONTACT_EMAIL}</a>
+                  Direct communication: <a href={`mailto:${CONTACT_EMAIL}`} className="text-teal-600 dark:text-teal-400 hover:underline font-semibold break-all">{CONTACT_EMAIL}</a>
                 </div>
               </div>
 
@@ -380,7 +380,7 @@ export const AboutMethodology: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-200/60 dark:border-slate-800/60">
+            <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-slate-200/60 dark:border-slate-800/60">
               <p className="text-xs text-slate-500 dark:text-slate-400 m-0">
                 Have a question about a formula, custom university scale, or found a discrepancy in a course calculation?
               </p>
