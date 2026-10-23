@@ -351,6 +351,38 @@ export function buildAverageGradePage(): ToolPageEntry {
           'Scores out of different totals should be converted to percentages first. A 9 out of 10 and a 45 out of 50 are both 90%, but averaging 9 and 45 gives a meaningless 27.',
         ],
       },
+      {
+        heading: 'Averaging scores with different totals',
+        paragraphs: [
+          'Tests are rarely all marked out of the same number. Convert each result to a percentage, then average the percentages: a 9 out of 10, a 45 out of 50 and an 18 out of 25 become 90%, 90% and 72%, which average 84%.',
+          'Adding the raw points instead gives 72 out of 85, or 84.7%. That figure leans toward the longer assessments, so it fits a course where every point counts the same. Your syllabus tells you which method your instructor uses.',
+        ],
+      },
+      {
+        heading: 'When the median tells a different story',
+        paragraphs: [
+          'Take five quiz results of 90, 92, 88, 91 and 30. The mean is 78.2%, yet four of the five sit around 90%. The median is 90%, which describes a typical result far better. When the two numbers drift apart, one unusual score is doing the damage, and it is worth asking whether your instructor drops it.',
+          'If the mean and median land within a point or two of each other, the scores are evenly spread and either number is a fair summary.',
+        ],
+      },
+      {
+        heading: 'Dropping the lowest score',
+        paragraphs: [
+          'Remove the lowest value and average what is left. Dropping the 79 from 88, 92, 79, 95 and 84 leaves 359 across four scores, so the average rises from 87.6% to 89.75%. Only do this where the syllabus allows it; the calculator cannot know your instructor’s policy.',
+        ],
+      },
+      {
+        heading: 'What score lifts your average to a target?',
+        paragraphs: [
+          'Multiply the target by the number of scores you will have, then subtract the total you already hold. From 438 points across five tests, an 88% average after six tests needs 88 × 6 − 438 = 90 on the sixth. A 90% average would need 102, which is out of reach without extra credit, so you would have to plan across several tests.',
+        ],
+      },
+      {
+        heading: 'Average and median in Excel or Google Sheets',
+        paragraphs: [
+          'Put your percentages in one column, say A1:A5, then use =AVERAGE(A1:A5) for the mean and =MEDIAN(A1:A5) for the middle value. To drop the lowest score, use =(SUM(A1:A5)-MIN(A1:A5))/(COUNT(A1:A5)-1). Paste the same numbers here when you want the letter and a quick cross-check.',
+        ],
+      },
     ],
     example: {
       heading: 'Worked example: five test scores',
@@ -379,6 +411,18 @@ export function buildAverageGradePage(): ToolPageEntry {
       {
         question: 'Why did the calculator leave out one of my values?',
         answer: 'It only accepts plain numbers. Text, negative numbers and values above the maximum score are listed under the input with the reason, so you can fix them.',
+      },
+      {
+        question: 'Should I average percentages or add up all the points?',
+        answer: 'Averaging percentages gives every assessment equal weight, while adding raw points lets longer assessments count for more. Results of 9/10, 45/50 and 18/25 average 84% by percentage but come to 84.7% by pooled points. Follow the method your syllabus names.',
+      },
+      {
+        question: 'How do I drop the lowest score from an average?',
+        answer: 'Take it out of the list and average the rest. Scores of 88, 92, 79, 95 and 84 average 87.6%; without the 79 they average 89.75%. Only drop a score when your instructor’s policy allows it.',
+      },
+      {
+        question: 'What score do I need on the next test to reach a target average?',
+        answer: 'Multiply the target by the number of scores including the next one, then subtract the sum so far. With a total of 438 over five tests, an 88% average needs 90 on the sixth.',
       },
     ],
     related: [

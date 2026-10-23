@@ -1,154 +1,154 @@
 {
   "/": {
-    "hash": "a37a8b8ecc70bc05",
-    "lastmod": "2026-10-16"
+    "hash": "182a34e4246b2e94",
+    "lastmod": "2026-10-23"
   },
   "/grade-calculator/": {
-    "hash": "1d70f20a78345554",
-    "lastmod": "2026-10-16"
+    "hash": "9fa46f340e27264e",
+    "lastmod": "2026-10-23"
   },
   "/gpa-calculator/": {
-    "hash": "9b0e280940f77c00",
-    "lastmod": "2026-10-16"
+    "hash": "c5fd4e71cb01803a",
+    "lastmod": "2026-10-23"
   },
   "/cgpa-to-percentage-calculator/": {
-    "hash": "dd5404e740b803a3",
-    "lastmod": "2026-10-16"
+    "hash": "c8ddff7d858647db",
+    "lastmod": "2026-10-23"
   },
   "/tip-calculator/": {
-    "hash": "556198115b96e0c1",
-    "lastmod": "2026-10-16"
+    "hash": "29c1f5849507ed3f",
+    "lastmod": "2026-10-23"
   },
   "/percentage-calculator/": {
-    "hash": "7011600e4259db8b",
-    "lastmod": "2026-10-16"
+    "hash": "27edc728b059862d",
+    "lastmod": "2026-10-23"
   },
   "/loan-calculator/": {
-    "hash": "371b34a3ea0ae553",
-    "lastmod": "2026-10-16"
+    "hash": "43f2e69e07afb61e",
+    "lastmod": "2026-10-23"
   },
   "/mortgage-calculator/": {
-    "hash": "5a29daa62d13c2f0",
-    "lastmod": "2026-10-16"
+    "hash": "32a1fb17876d7d27",
+    "lastmod": "2026-10-23"
   },
   "/password-generator/": {
-    "hash": "946bd4bff548916b",
-    "lastmod": "2026-10-17"
+    "hash": "7a77ad36f1bdb123",
+    "lastmod": "2026-10-23"
   },
   "/about/": {
-    "hash": "1f8754aa0a1dc9db",
-    "lastmod": "2026-10-16"
+    "hash": "a9e6e48b5ccb0427",
+    "lastmod": "2026-10-23"
   },
   "/privacy/": {
-    "hash": "499e397b36503efd",
-    "lastmod": "2026-10-15"
+    "hash": "ae02c806f4ad32f3",
+    "lastmod": "2026-10-23"
   },
   "/terms/": {
-    "hash": "e5dcfe23fc0660cf",
-    "lastmod": "2026-10-15"
+    "hash": "b10e8913f9529190",
+    "lastmod": "2026-10-23"
   },
   "/final-exam-grade-calculator/": {
-    "hash": "5a38754ea663fa2f",
-    "lastmod": "2026-10-16"
+    "hash": "27c9216abd65c991",
+    "lastmod": "2026-10-23"
   },
   "/test-grade-calculator/": {
-    "hash": "f70064054d9c17ac",
-    "lastmod": "2026-10-16"
+    "hash": "d8ff0f1c0382d340",
+    "lastmod": "2026-10-23"
   },
   "/grade-curve-calculator/": {
-    "hash": "2e17d5f899783e75",
-    "lastmod": "2026-10-16"
+    "hash": "0af419e8d7cc6d89",
+    "lastmod": "2026-10-23"
   },
   "/letter-grade-calculator/": {
-    "hash": "70c14a9cb9231f4d",
-    "lastmod": "2026-10-16"
+    "hash": "eed9da263e80eee6",
+    "lastmod": "2026-10-23"
   },
   "/average-grade-calculator/": {
-    "hash": "4c615cfd9e9e3464",
-    "lastmod": "2026-10-16"
+    "hash": "21091e1bf31b0d2e",
+    "lastmod": "2026-10-23"
   },
   "/weighted-gpa-calculator/": {
-    "hash": "87a04a8955cdf88a",
-    "lastmod": "2026-10-17"
+    "hash": "8a16be940f0eea8f",
+    "lastmod": "2026-10-23"
   },
   "/weighted-vs-unweighted-gpa/": {
-    "hash": "142636d8a7aa4028",
-    "lastmod": "2026-10-17"
+    "hash": "5369c03578e189b5",
+    "lastmod": "2026-10-23"
   },
   "/how-many-questions-can-i-miss/": {
-    "hash": "303f9d82f93bc51c",
-    "lastmod": "2026-10-17"
+    "hash": "efc9aab7dfc9dbe3",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/": {
-    "hash": "50f924b85bdf7db6",
-    "lastmod": "2026-10-16"
+    "hash": "2bcf04419d90f484",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/5-questions/": {
-    "hash": "568ade3190710f57",
-    "lastmod": "2026-10-16"
+    "hash": "970c2faf1194a5d3",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/10-questions/": {
-    "hash": "eec6cc68947a0187",
-    "lastmod": "2026-10-16"
+    "hash": "565c9bc881777905",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/12-questions/": {
-    "hash": "784305be8bf8aff4",
-    "lastmod": "2026-10-16"
+    "hash": "7b051176ed077250",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/15-questions/": {
-    "hash": "dfc4ce9443152ca9",
-    "lastmod": "2026-10-16"
+    "hash": "3c2cb984f5301830",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/16-questions/": {
-    "hash": "7a450b3a885d8b89",
-    "lastmod": "2026-10-16"
+    "hash": "56af232310c94c1b",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/18-questions/": {
-    "hash": "4d3efd7495184ae1",
-    "lastmod": "2026-10-16"
+    "hash": "0177e2017c97753d",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/20-questions/": {
-    "hash": "5549ef3c32ecf348",
-    "lastmod": "2026-10-16"
+    "hash": "1f4f544b25ac266d",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/25-questions/": {
-    "hash": "63a5e2fe229b25bb",
-    "lastmod": "2026-10-16"
+    "hash": "b763acb2ca9fa2c3",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/30-questions/": {
-    "hash": "fceeca061ae0cecf",
-    "lastmod": "2026-10-16"
+    "hash": "c0ea879187ccdcb8",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/35-questions/": {
-    "hash": "07986f51265fece5",
-    "lastmod": "2026-10-16"
+    "hash": "cdd87b7e2197d70f",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/40-questions/": {
-    "hash": "89cdaa444d680293",
-    "lastmod": "2026-10-16"
+    "hash": "5cde65baa36c2797",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/45-questions/": {
-    "hash": "9d958e5029ddb8ce",
-    "lastmod": "2026-10-16"
+    "hash": "661192b61cd19d48",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/50-questions/": {
-    "hash": "dbb6cd29aa350dc7",
-    "lastmod": "2026-10-16"
+    "hash": "45243444c8071cb9",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/60-questions/": {
-    "hash": "1095aede2e46291b",
-    "lastmod": "2026-10-16"
+    "hash": "d1753664a52fcc3d",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/75-questions/": {
-    "hash": "249994e6589679d4",
-    "lastmod": "2026-10-16"
+    "hash": "4565791cfc9676fc",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/80-questions/": {
-    "hash": "a606a4380e2fb4b0",
-    "lastmod": "2026-10-16"
+    "hash": "d21954b9c3fda3fb",
+    "lastmod": "2026-10-23"
   },
   "/grading-scale/100-questions/": {
-    "hash": "90068e6c6e9fbf3b",
-    "lastmod": "2026-10-16"
+    "hash": "73a00ea4e637b35b",
+    "lastmod": "2026-10-23"
   }
 }

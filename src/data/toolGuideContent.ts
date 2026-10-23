@@ -58,7 +58,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
 
       h2('How to Calculate Weighted Grades'),
       p(
-        'Weighted grades follow one idea: a category that is worth more in the syllabus moves your course grade more. The steps below work for any class, on paper or in the calculator.',
+        'Weighted grades follow one idea: a category that is worth more in the syllabus moves your course total more. The steps below work for any class, on paper or in the calculator.',
       ),
       h3('How do I calculate my weighted grade for a class?'),
       ol(
@@ -74,7 +74,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('Weighted average grade vs. simple average'),
       p(
-        'A simple average treats every score the same. A weighted average grade does not. If you score 100% on a quiz worth 10% of the course and 70% on an exam worth 90%, the simple average of the two scores is 85%, but the weighted average is 0.10 × 100 + 0.90 × 70 = 73%. The weights decide the outcome, which is why reading the syllabus first matters.',
+        'A simple average treats every score the same. A weighted average does not. If you score 100% on a quiz worth 10% of the course and 70% on an exam worth 90%, the simple average of the two scores is 85%, but the weighted average is 0.10 × 100 + 0.90 × 70 = 73%. The weights decide the outcome, which is why reading the syllabus first matters.',
       ),
 
       h2('How Does a Weighted Grading System Work?'),
@@ -93,7 +93,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       h2('Weighted Grade Calculator with Points or Percentages'),
       h3('How does a weighted grade calculator work with total points?'),
       p(
-        'Some courses skip category weights and simply add up points: every point counts the same, and the grade is points earned divided by points possible. Switch the calculator to Points mode for that. Scores of 45 out of 50, 88 out of 100 and 27 out of 30 give 160 of 180 points, or 88.9%. In Weighted (%) mode the same rows would each need a weight instead.',
+        'Some courses skip category weights and simply add up points: every point counts the same, and the result is points earned divided by points possible. Switch the calculator to Points mode for that. Scores of 45 out of 50, 88 out of 100 and 27 out of 30 give 160 of 180 points, or 88.9%. In Weighted (%) mode the same rows would each need a weight instead.',
       ),
       h3('Weighted grade calculator by percent: 80/20 and 60/40 splits'),
       p(
@@ -101,17 +101,17 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('Weighted grade calculator with extra credit'),
       p(
-        'To add extra credit, type a score that is higher than the Out Of value for that row, such as 105 out of 100, or add a separate bonus row. The calculator does not cap the result at 100%, so you can see the uncapped course grade and then apply your instructor’s rule if the class limits extra credit.',
+        'To add extra credit, type a score that is higher than the Out Of value for that row, such as 105 out of 100, or add a separate bonus row. The calculator does not cap the result at 100%, so you can see the uncapped course total and then apply your instructor’s rule if the class limits extra credit.',
       ),
 
       h2('Weighted vs. Unweighted Grades'),
       h3('What is the difference between weighted and unweighted grades?'),
       p(
-        'An unweighted grade treats every point or every assignment equally. A weighted grade lets some categories count more, so a 90% exam can lift your course grade more than a 90% homework set. The word also appears in GPA: a weighted GPA adds extra points for honors or AP classes, which is a separate idea from category weights. Use the GPA calculator for that, and this page for the course percentage.',
+        'An unweighted result treats every point or every assignment equally. A weighted one lets some categories count more, so a 90% exam can lift your course total more than a 90% homework set. The word also appears in GPA: a weighted GPA adds extra points for honors or AP classes, which is a separate idea from category weights. Use the GPA calculator for that, and this page for the course percentage.',
       ),
       h3('Weighted grade calculator for high school, AP and honors classes'),
       p(
-        'High school teachers usually weight categories such as homework, tests and projects, and the calculator handles that directly. AP and honors weighting normally affects the GPA scale, not the class percentage, so calculate the course grade here first and then enter the letter in the GPA calculator.',
+        'High school teachers usually weight categories such as homework, tests and projects, and the calculator handles that directly. AP and honors weighting normally affects the GPA scale, not the class percentage, so calculate the course percentage here first and then enter the letter in the GPA calculator.',
       ),
       h3('Weighted grade calculator for college and university modules'),
       p(
@@ -121,13 +121,13 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       h2('What Grade Do I Need on the Final?'),
       h3('How to find the score you need on a weighted final exam'),
       p(
-        'Use the target grade simulator under your results. Enter the grade you want and the weight of the final, and it solves for the exam score. The formula behind it is: needed score = (target − current grade × (1 − final weight)) ÷ final weight. With an 82% current grade, a 30% final and an 80% target, that is (80 − 82 × 0.70) ÷ 0.30 = 75.3%. For a full walkthrough, open the final exam grade calculator.',
+        'Use the target simulator under your results. Enter the course total you want and the weight of the exam, and it solves for the score required. The formula behind it is: needed score = (target − current × (1 − exam weight)) ÷ exam weight. With an 82% standing, a 30% exam and an 80% target, that is (80 − 82 × 0.70) ÷ 0.30 = 75.3%. For a full walkthrough, open the final exam grade calculator.',
       ),
 
       h2('Weighted Grade Calculator in Excel, Google Sheets, Canvas, PowerSchool'),
       h3('How do I make a weighted grade calculator in Excel or Google Sheets?'),
       p(
-        'Put each category percentage in one column and its weight in the next. Then use =SUMPRODUCT(B2:B6, C2:C6) / SUM(C2:C6), where column B holds the percentages and column C the weights, and the result is your weighted grade. The formula works the same in Excel and Google Sheets. This page does the same sum without any setup, which is handy when you only need a quick answer or a what-if score.',
+        'Put each category percentage in one column and its weight in the next. Then use =SUMPRODUCT(B2:B6, C2:C6) / SUM(C2:C6), where column B holds the percentages and column C the weights, and the result is your weighted percentage. The formula works the same in Excel and Google Sheets. This page does the same sum without any setup, which is handy when you only need a quick answer or a what-if score.',
       ),
       h3('Can I use it with Canvas, Blackboard or PowerSchool grades?'),
       p(
@@ -135,18 +135,18 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('Semester or full-year weighted grades'),
       p(
-        'For a semester, enter your categories with their weights. For a full year made of two semesters or terms, enter each term’s grade as a row and give each the weight your school uses, such as 50 and 50. If a term counts for less, give it a smaller weight, and the calculator scales the total to match.',
+        'For a semester, enter your categories with their weights. For a full year made of two semesters or terms, enter each term’s result as a row and give each the weight your school uses, such as 50 and 50. If a term counts for less, give it a smaller weight, and the calculator scales the total to match.',
       ),
 
       h2('Using the Weighted Grade Calculator'),
       ol(
         'Add one row per category or assignment with the score you earned, the points possible and the syllabus weight.',
         'Check that the weights match your syllabus; the running total is shown next to the list.',
-        'Read your weighted percentage and letter grade, which update as you type.',
-        'Open the target grade simulator to test a hypothetical exam score and see the course grade it would produce.',
+        'Read your weighted percentage and letter, which update as you type.',
+        'Open the target simulator to test a hypothetical exam score and see the course total it would produce.',
       ),
       p(
-        'To work backwards from a goal, use the final exam grade calculator, which reverses the same formula to give the exact score you need on the final. For a single quiz or test, the test grade calculator gives the percentage and letter grade first.',
+        'To work backwards from a goal, use the final exam grade calculator, which reverses the same formula to give the exact score you need on the exam. For a single quiz or test, the test grade calculator gives the percentage and letter first.',
       ),
 
       h2('Common Weighted Grade Mistakes'),
@@ -169,7 +169,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       p(
         'A ',
         ['final exam grade calculator', true],
-        ' (also called a final grade calculator) answers the question every student asks in finals week: what score do I need on the final exam to finish the course with the grade I want? Enter your current grade, the weight of the final and your target, and the calculator solves for the final exam score needed. It works for college and high school classes, and for courses graded by percentages or by points.',
+        ' (also called a final grade calculator) answers the question every student asks in finals week: what score do I need on the last exam to finish the course where I want to? Enter your current standing, the exam’s weight and your target, and the tool solves for the mark required. It suits college and high school classes, whether the course runs on percentages or on points.',
       ),
 
       h2('How Do I Calculate What I Need on My Final?'),
@@ -177,60 +177,60 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'The calculation reverses the weighted-average formula. Your coursework has already banked a number of points, and the final has to supply the rest.',
       ),
       ol(
-        'Find your current grade in your gradebook or with the weighted grade calculator.',
+        'Find your current percentage in your gradebook or with the weighted grade calculator.',
         'Find the final exam weight in the syllabus and write it as a decimal (25% is 0.25).',
-        'Choose your target course grade, for example 80%.',
-        'Apply the formula: required score = (target − current grade × (1 − weight)) ÷ weight.',
+        'Choose the course result you are aiming for, for example 80%.',
+        'Apply the formula: required score = (target − current percentage × (1 − weight)) ÷ weight.',
       ),
       p(
-        'With a current grade of 84%, a final worth 25% and a target of 80%, the coursework banks 84 × 0.75 = 63 points. Then (80 − 63) ÷ 0.25 = ',
+        'Say you hold 84%, the exam counts for 25% and you want 80%. Your coursework banks 84 × 0.75 = 63 points, so (80 − 63) ÷ 0.25 = ',
         ['68%', true],
-        ', so a 68% on the final secures an 80% course grade.',
+        ', and a 68% on the exam secures an 80% course total.',
       ),
 
       h2('What Grade Do I Need on My Final Exam to Pass?'),
       p(
-        'Passing is just another target. Set the target grade to the lowest passing mark in your syllabus (often 60% for a D, or 70% where a C is required) and read the result.',
+        'Passing is just another target. Enter the lowest passing mark in your syllabus (often 60% for a D, or 70% where a C is required) as your goal and read the result.',
       ),
       h3('What score do I need to pass?'),
       p(
-        'Take a student with a 72% average and a final worth 30%. To finish at 60%, the coursework banks 72 × 0.70 = 50.4 points, and (60 − 50.4) ÷ 0.30 = 32%. A 32% on the exam is enough to pass. If the program requires 70%, the same student needs (70 − 50.4) ÷ 0.30 = 65.3%.',
+        'Take a student with a 72% average and an exam worth 30%. To finish at 60%, the coursework banks 72 × 0.70 = 50.4 points, and (60 − 50.4) ÷ 0.30 = 32%. A 32% on the exam is enough to pass. If the program requires 70%, the same student needs (70 − 50.4) ÷ 0.30 = 65.3%.',
       ),
       h3('Grade needed on final for an A, B or C'),
       p(
-        'Using the 84% current grade and 25% final from the example above, a B (80%) needs 68% on the exam, a B+ (86%) needs 92%, and an A (90%) would need 108%, which is impossible without extra credit or a curve. Always compare the answer with 100% before you plan around it.',
+        'Using the same 84% standing and 25% weighting as the example above, a B (80%) needs 68% on the exam and a B+ (86%) needs 92%. An A (90%) would need 108%, which is impossible without extra credit or a curve, so compare every answer with 100% before you plan around it.',
       ),
 
       h2('Final Exam Grade Calculator by Points'),
       h3('How do I find the final exam grade I need when my class uses points?'),
       p(
-        'You can skip percentages and work in points. Multiply your target percentage by the total points in the course, then subtract the points you have already earned. A student with 412 of 500 points, a 100-point final and an 80% target needs 0.80 × 600 − 412 = 68 points, which is ',
+        'You can skip percentages and work in points. Multiply your target percentage by the total points in the course, then subtract the points you have already earned. A student with 412 of 500 points, a 100-point exam and an 80% target needs 0.80 × 600 − 412 = 68 points, which is ',
         ['68 out of 100', true],
-        '. To use the calculator instead, enter the current percentage (82.4%) and the final’s share of the total points (100 ÷ 600, or 16.7%).',
+        '. To use the calculator instead, enter the current percentage (82.4%) and the exam’s share of the total points (100 ÷ 600, or 16.7%).',
       ),
 
       h2('Final Exam Grade Calculator for College and High School'),
       h3('How do I include a midterm and other graded work?'),
       p(
-        'Everything graded before the final belongs in your current grade. Homework worth 20% at 90% and a midterm worth 30% at 70% bank 18 + 21 = 39 points out of the 50 that are graded, so the current grade is 78%. With a final worth the other 50% and a goal of 80%, the exam must earn (80 − 39) ÷ 0.50 = 82%. If you do not know your current grade, the weighted grade calculator finds it.',
+        'Everything marked before the exam belongs in your current percentage. Homework worth 20% at 90% and a midterm worth 30% at 70% bank 18 + 21 = 39 points out of the 50 that are graded, so you stand at 78%. With the exam covering the other 50% and a goal of 80%, it must earn (80 − 39) ÷ 0.50 = 82%. Not sure where you stand? The weighted grade calculator finds it.',
       ),
       h3('What if the year has quarters, or the final has two parts?'),
       p(
-        'For two quarters worth 40% each and an exam worth 20%, quarter grades of 85% and 78% give a current grade of 81.5%. Reaching 80% then takes (80 − 81.5 × 0.80) ÷ 0.20 = 74% on the exam. When a high school final is split into an exam and a culminating task, add the two weights and treat them as one block. The answer is the average score you need across both parts.',
+        'For two quarters worth 40% each and an exam worth 20%, quarter results of 85% and 78% give a running total of 81.5%. Reaching 80% then takes (80 − 81.5 × 0.80) ÷ 0.20 = 74% on the exam. When a high school exam is split into a written paper and a culminating task, add the two weights and treat them as one block; the answer is the average you need across both parts.',
       ),
       h3('What is the lowest final exam score that still earns a C?'),
       p(
-        'Choose the lowest C on your scale as the target. With a 76% current grade and a 20% final, the work so far banks 60.8 points, and (70 − 60.8) ÷ 0.20 = 46%. The same method gives the minimum for any letter: change the target and read the new score.',
+        'Choose the lowest C on your scale as the target. With a 76% standing and a 20% exam, the work so far banks 60.8 points, and (70 − 60.8) ÷ 0.20 = 46%. The same method gives the minimum for any letter: change the target and read the new score.',
       ),
 
       h2('Dropped, Replaced or Missing Final Exams'),
       h3('How does a final exam that replaces my lowest test work?'),
       p(
-        'The final’s score takes the place of the lowest test, so your course grade rises by the gap between the two scores multiplied by that test’s weight. If each test is worth 10%, the lowest was 60% and the final earns 85%, the course grade gains 0.10 × 25 = 2.5 points. To plan it, enter your tests in the weighted grade calculator and swap in a hypothetical exam score for the low one.',
+        'The exam score takes the place of your lowest test, so your course total rises by the gap between the two scores multiplied by that test’s weight. If each test is worth 10%, the lowest was 60% and the replacement earns 85%, you gain 0.10 × 25 = 2.5 points. To plan it, enter your tests in the weighted grade calculator and swap in a hypothetical score for the low one.',
       ),
       h3('How do I calculate a semester grade without a final exam?'),
       p(
-        'With no final, your semester grade is the weighted average of everything that was graded, so there is nothing to solve for. The weighted grade calculator handles that case. If a dropped score changes your current grade, recalculate before using this page.',
+        'Without an exam, your semester result is simply the weighted average of everything marked, so there is nothing to solve for; the weighted grade calculator handles that case. If a dropped score changes your standing, recalculate before using this page.',
       ),
       h3('What if my instructor curves the final?'),
       p(
@@ -239,23 +239,23 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
 
       h2('How Much Does the Final Exam Affect My Grade?'),
       p(
-        'Every point on the exam moves your course grade by the exam weight. On a 25% final, ten extra points on the exam add 2.5 points to the course grade, and on a 40% final they add 4. After you know your course percentage, the GPA calculator turns the letter into grade points for your semester or cumulative GPA.',
+        'Every point on the exam moves your course total by the exam’s weight. On a 25% weighting, ten extra points add 2.5 to the course percentage, and on a 40% weighting they add 4. Once you know the percentage, the GPA calculator turns the letter into grade points for your semester or cumulative GPA.',
       ),
       h3('Final exam grade formula for Excel or Google Sheets'),
       p(
-        'Put the current grade in A1, the target in B1 and the final weight as a decimal in C1, then use =(B1-A1*(1-C1))/C1. The inputs 84, 80 and 0.25 return 68. A negative result means the target is already secured, and a result above 100 means it is out of reach without extra credit.',
+        'Put your current percentage in A1, the target in B1 and the exam weight as a decimal in C1, then use =(B1-A1*(1-C1))/C1. The inputs 84, 80 and 0.25 return 68. A negative result means the target is already secured, and a result above 100 means it is out of reach without extra credit.',
       ),
 
       h2('How to Read the Final Exam Score Needed'),
       ul(
-        'Below 0%: you have already locked in that grade. Even a zero on the final would not pull you under it.',
+        'Below 0%: you have already locked in that result. Even a zero on the exam would not pull you under it.',
         'Between 0% and 100%: this is your target. Study toward it with a margin of a few points.',
-        'Above 100%: the target is out of reach with regular exam points. Pick the next realistic grade or ask your instructor about extra credit.',
+        'Above 100%: the target is out of reach with regular exam points. Pick the next realistic target or ask your instructor about extra credit.',
       ),
 
       h2('Final Grade Calculator vs. Weighted Grade Calculator'),
       p(
-        'A weighted grade calculator tells you where you stand now by combining every graded category. A final exam grade calculator tells you what the last assessment must deliver. Use both: find your current weighted average first, then feed it to the final exam calculator.',
+        'A weighted grade calculator tells you where you stand now by combining every graded category. A final exam grade calculator tells you what the last assessment must deliver. Use both: find your current weighted average first, then feed it into this page.',
       ),
 
       h2('Turn the Number into a Study Plan'),
@@ -278,7 +278,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       p(
         'A ',
         ['test grade calculator', true],
-        ' turns points into a percentage and a letter grade in one step. Enter the points you earned and the points possible, add any extra credit, bonus points or late penalty, and see how your score compares with each grade cutoff. It is free, works for school and college tests and quizzes, and shows the points you needed for the next grade up.',
+        ' turns a raw score into a percentage and a letter grade in one step. Enter what you earned and what the test was worth, add any extra credit, bonus marks or a late penalty, and see how your result compares with each cutoff. It is free, works for school and college tests and quizzes, and shows how far you were from the next letter up.',
       ),
 
       h2('How to Calculate Test Percentage'),
@@ -287,7 +287,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('How to calculate grade percentage'),
       p(
-        'A grade percentage is the share of the available points you earned. If a test is worth 50 points and you scored 42, divide 42 by 50 to get 0.84 and multiply by 100 for ',
+        'A grade percentage is the share of the available marks you earned. If a test is worth 50 points and you scored 42, divide 42 by 50 to get 0.84 and multiply by 100 for ',
         ['84%', true],
         '.',
       ),
@@ -295,15 +295,15 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ol(
         'Write down the points you earned.',
         'Write down the points possible. Use the number of questions only if every question is worth one point.',
-        'Divide the points earned by the points possible.',
+        'Divide what you earned by what the test was worth.',
         'Multiply by 100 and round the way your teacher does.',
       ),
       h3('Points possible to percentage for common test sizes'),
       ul(
-        '17 out of 20 points is 85%.',
-        '22 out of 25 points is 88%.',
-        '26 out of 30 points is 86.7%.',
-        '33 out of 40 points is 82.5%.',
+        '17 out of 20 is 85%.',
+        '22 out of 25 is 88%.',
+        '26 out of 30 is 86.7%.',
+        '33 out of 40 is 82.5%.',
       ),
       h3('What percentage is X out of Y questions?'),
       p(
@@ -317,7 +317,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       h2('Test Grade Calculator Based on Points or Number of Questions'),
       h3('How does a test grade calculator based on points work?'),
       p(
-        'Many tests give questions different values, such as 2-point multiple choice, 5-point short answers and a 10-point essay. Add up every point you earned, then divide by the total points available. Scores of 12, 20 and 9 on three sections worth 15, 25 and 10 points give 41 out of 50 points, or 82%. Type the two totals into the calculator and it does the rest.',
+        'Many tests give questions different values, such as 2-mark multiple choice, 5-mark short answers and a 10-mark essay. Add up everything you earned, then divide by the total available. Scores of 12, 20 and 9 on three sections worth 15, 25 and 10 give 41 out of 50, or 82%. Type the two totals into the calculator and it does the rest.',
       ),
       h3('Multiple choice test grade calculator: how much is each question worth?'),
       p(
@@ -330,36 +330,36 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('Test grade calculator with partial credit and half points'),
       p(
-        'Add partial credit to your points earned as a decimal before you divide. A paper with 38.5 points out of 50 is 77%. The points earned box accepts decimals such as 7.5, so half points and quarter points need no rounding.',
+        'Add partial credit to your total as a decimal before you divide. A paper with 38.5 out of 50 is 77%. The earned box accepts decimals such as 7.5, so half and quarter marks need no rounding.',
       ),
 
       h2('Using the Test Score Percentage Calculator'),
       ol(
         'Type the points earned and the points possible.',
-        'Add bonus points if your teacher gave extra credit. They are added to the points earned only.',
-        'Enter a late penalty in points if your teacher deducts them.',
-        'Choose the standard or plus/minus grading scale, then read the percentage, the letter grade and the points needed for the next grade up.',
+        'Add bonus marks if your teacher gave extra credit; they count toward the earned side only.',
+        'Enter a late penalty if your teacher deducts points for it.',
+        'Choose the standard or plus/minus grading scale, then read the percentage, the letter grade and the gap to the next letter.',
       ),
 
       h2('What Test Grade Do I Need? Points to Pass and Points for Each Letter'),
       h3('What test grade do I need to pass?'),
       p(
-        'Multiply the points possible by the pass mark. A 60% pass mark on a 50-point test is 30 points, a 70% pass mark on a 40-point test is 28 points, and 60% on a 25-point test is 15 points. Your syllabus sets the pass mark, so check it before you plan.',
+        'Multiply the total available by the pass mark. A 60% pass mark on a 50-point test is 30, a 70% pass mark on a 40-point test is 28, and 60% on a 25-point test is 15. Your syllabus sets the pass mark, so check it before you plan.',
       ),
       h3('How many points do I need for an A, B, C or D?'),
       p('On a 50-point test with the common 10-point scale, the cutoffs are:'),
       ul(
-        'A (90%): 45 points',
-        'B (80%): 40 points',
-        'C (70%): 35 points',
-        'D (60%): 30 points',
+        'A (90%): 45 of 50',
+        'B (80%): 40 of 50',
+        'C (70%): 35 of 50',
+        'D (60%): 30 of 50',
       ),
       p(
         'The “points needed” table under the calculator builds this list for any test size and for the plus/minus scale.',
       ),
       h3('How many questions can I miss and still get a B?'),
       p(
-        'Take 20% of the points possible and round down. On a 25-question test you can miss 5 questions and keep 80%, and on a 50-question test you can miss 10.',
+        'Take 20% of the test total and round down. On a 25-question test you can miss 5 questions and keep 80%, and on a 50-question test you can miss 10.',
       ),
 
       h2('From Test Percentage to Letter Grade'),
@@ -374,7 +374,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'Round only at the end. Rounding early can push a score across a grade cutoff by mistake.',
       ),
       p(
-        'Example: 42 points on a 50-point test plus 2 bonus points is 44 ÷ 50 = ',
+        'Example: 42 on a 50-point test plus 2 bonus marks is 44 ÷ 50 = ',
         ['88%', true],
         ', and a 5-point late penalty on the original 42 would give 37 ÷ 50 = 74%.',
       ),
@@ -382,7 +382,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       h2('What If? How a Test Score Affects Your Overall Grade'),
       h3('What if I get a certain score on my next test?'),
       p(
-        'Type the score you hope for into the points earned box and read the percentage and letter, or compare it with the points-needed table to see the lowest score that reaches your target. Because every field updates as you type, you can try several scores in a few seconds.',
+        'Type the score you hope for into the earned box and read the percentage and letter, or compare it with the needed-score table to see the lowest result that reaches your target. Because every field updates as you type, you can try several scores in a few seconds.',
       ),
       h3('How much will one test affect my overall grade?'),
       p(
@@ -403,7 +403,7 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       h3('Is this the right calculator for AP, SAT or IELTS scores?'),
       p(
-        'No. Those exams are scored with official conversion tables, not with a simple points-over-possible percentage. This page is for classroom tests, quizzes and exams marked in points. To see how a single test fits into the semester, use the weighted grade calculator, and use the final exam calculator to plan the last big score.',
+        'No. Those exams are scored with official conversion tables, not with a simple earned-over-possible percentage. This page is for classroom tests, quizzes and exams marked in points. To see how a single test fits into the semester, use the weighted grade calculator, and use the final exam calculator to plan the last big score.',
       ),
     ],
   },

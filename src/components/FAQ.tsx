@@ -961,35 +961,35 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
         category: 'security',
         question: 'What makes a password cryptographically secure?',
         answer:
-          'A secure password possesses high entropy: it should be at least 16 characters in length, combine uppercase and lowercase letters, numbers, and symbols, and contain no dictionary words, personal details, or predictable keyboard patterns.',
+          'A secure one has high entropy: at least 16 characters, a mix of uppercase and lowercase letters, numbers and symbols, and no dictionary words, personal details or predictable keyboard patterns.',
       },
       {
         id: 'length-vs-complexity',
         category: 'security',
         question: 'Why is password length more important than complexity alone?',
         answer:
-          'Password length increases brute-force search space exponentially. An 8-character password with mixed characters can be cracked in hours or days by modern GPU clusters, whereas a 16-character random password requires septillions of guesses, taking centuries to crack.',
+          'Every extra character multiplies the number of guesses an attacker needs. An 8-character password with mixed characters can fall in hours or days to a modern GPU cluster, whereas a random 16-character one needs septillions of guesses, which would take centuries.',
       },
       {
         id: 'password-managers-safety',
         category: 'security',
         question: 'Are password managers safe to store generated passwords?',
         answer:
-          'Yes! Reputable password managers employ end-to-end encryption using military-grade standards (like AES-256). Even if the service\'s servers are breached, your data cannot be decrypted without your private master password and secret recovery key.',
+          'Yes, if you choose a reputable one. Good managers encrypt your vault on your device with strong ciphers such as AES-256, so even if the service\'s servers are breached, the data cannot be read without your master password and secret recovery key.',
       },
       {
         id: 'password-reuse-danger',
         category: 'security',
         question: 'Why should I never reuse passwords across multiple accounts?',
         answer:
-          'When one website suffers a data breach, hackers test the leaked email/password pair against thousands of other popular services in automated "credential stuffing" attacks. Using a unique password for every account guarantees that a breach on one site never compromises your other accounts.',
+          'When one website suffers a data breach, attackers test the leaked email and password pair against thousands of other services in automated "credential stuffing" attacks. A unique login for every account means a breach on one site cannot unlock your other accounts.',
       },
       {
         id: 'how-often-change-passwords',
         category: 'security',
         question: 'How often should I change my passwords?',
         answer:
-          'Current cybersecurity standards (including NIST guidelines) advise against routine arbitrary password changes, as this encourages users to pick predictable variations. Instead, create long, random passwords stored in a password manager, and only change them immediately if a specific service notifies you of a breach or suspicious activity.',
+          'Current guidance, including NIST’s, advises against routine forced changes because they push people toward predictable variations. Create long, random ones, keep them in a password manager, and change one right away only if a service reports a breach or you notice suspicious activity.',
       },
     ],
   },

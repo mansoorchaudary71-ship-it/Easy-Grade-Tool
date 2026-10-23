@@ -144,9 +144,9 @@ export const QuickGradeGuide: React.FC = () => (
 
         <h3 className={H3}>Best grade calculator for teachers</h3>
         <p className={P}>
-          A good grade calculator for teachers handles both single tests and whole courses, and shows its formula so you
-          can check the math. Use the weighted grade calculator for category weights, then the average grade calculator
-          when you need a class mean, median and letter grade for a set of scores.
+          A good calculator for teachers handles both single tests and whole courses, and shows its formula so you
+          can check the math. Use the weighted version for category weights, then the average tool when you need a
+          class mean, median and letter for a set of scores.
         </p>
 
         <h3 className={H3}>Online grader for classroom tests</h3>
@@ -167,10 +167,10 @@ export const QuickGradeGuide: React.FC = () => (
       <div>
         <h2 className={H2}>How Grades Connect Across Tools</h2>
         <p className={P}>
-          A test percentage becomes one assessment in a weighted course grade, and the course letter feeds your GPA.
-          Start with the chart or test grade calculator, move to the weighted grade calculator for the course, use the
-          final exam calculator to plan the last assessment, and take the letters to the GPA calculator for a semester
-          or cumulative GPA.
+          A test percentage becomes one assessment in a weighted course total, and the course letter feeds your GPA.
+          Start with the chart or the test calculator, move on to the weighted calculator for the whole course, use
+          the final exam page to plan the last assessment, and take the letters to the GPA calculator for a semester
+          or cumulative figure.
         </p>
       </div>
     </ContentSection>
