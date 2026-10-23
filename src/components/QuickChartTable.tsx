@@ -153,7 +153,7 @@ export const QuickChartTable: React.FC<QuickChartTableProps> = ({
           <tbody key={group.letter} className="ez-chart-group">
             <tr>
               <th
-                scope="colgroup"
+                scope="rowgroup"
                 colSpan={4}
                 className={`border-y px-3 py-2 text-left text-sm font-bold ${tone.surface} ${tone.text}`}
               >

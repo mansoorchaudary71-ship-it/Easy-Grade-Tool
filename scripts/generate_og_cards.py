@@ -54,10 +54,13 @@ def make(path, title, sub):
     d = ImageDraw.Draw(img, "RGBA")
     d.ellipse((760, -220, 1380, 400), fill=(102, 118, 168, 40))
     d.ellipse((-200, 380, 360, 940), fill=(102, 118, 168, 28))
+    # brand logo mark (the same artwork as public/icon.svg, rendered into public/pwa-512x512.png)
+    mark = Image.open(os.path.join(OUT, "pwa-512x512.png")).convert("RGBA").resize((72, 72), Image.LANCZOS)
+    img.paste(mark, (90, 76), mark)
     # brand pill
     pill_font = ImageFont.truetype(BOLD, 26)
-    d.rounded_rectangle((90, 90, 420, 142), radius=26, fill=(102, 118, 168, 40), outline=(102, 118, 168, 160), width=2)
-    d.text((118, 102), "EASY GRADE TOOL", font=pill_font, fill=(160, 172, 214))
+    d.rounded_rectangle((182, 86, 512, 138), radius=26, fill=(102, 118, 168, 40), outline=(102, 118, 168, 160), width=2)
+    d.text((210, 98), "EASY GRADE TOOL", font=pill_font, fill=(160, 172, 214))
     # title
     size = 84 if "\n" not in title and len(title) < 22 else 72
     tf = ImageFont.truetype(BOLD, size)

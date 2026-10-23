@@ -49,7 +49,7 @@ html.dark :focus-visible { outline-color: #D6BEA0; }
   .ez-chart-table { width: 100% !important; min-width: 0 !important; border-collapse: collapse !important; font-size: 11pt; }
   .ez-chart-table thead th { position: static !important; box-shadow: none !important; background: #f1f5f9 !important; color: #000 !important; border-bottom: 1px solid #94a3b8 !important; }
   .ez-chart-table th, .ez-chart-table td { background: #fff !important; color: #000 !important; border-bottom: 1px solid #cbd5e1 !important; padding: 3px 6px !important; }
-  .ez-chart-table th[scope="colgroup"] { background: #e2e8f0 !important; border-top: 1px solid #94a3b8 !important; }
+  .ez-chart-table th[scope="rowgroup"] { background: #e2e8f0 !important; border-top: 1px solid #94a3b8 !important; }
   .ez-chart-table tr { break-inside: avoid; page-break-inside: avoid; }
   .ez-chart-table tbody { break-inside: auto; }
   .ez-chart-table span, .ez-chart-table strong { color: #000 !important; background: transparent !important; border-color: transparent !important; }

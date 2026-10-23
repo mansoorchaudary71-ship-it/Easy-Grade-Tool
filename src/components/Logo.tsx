@@ -4,7 +4,7 @@ import { BRAND, LOCKUP, WORDMARK } from '../brand/brand';
 /**
  * Easy Grade Tool brand logo.
  *
- * The mark: a deep-emerald squircle with a soft light sheen, a bold rounded white "A"
+ * The mark: a deep indigo-blue squircle with a soft light sheen, a bold rounded white "A"
  * and a gold crossbar + "+" (grade "A+"). The wordmark is outlined vector text
  * ("Easy Grade" bold, "Tool" light), so it never depends on a web font.
  *

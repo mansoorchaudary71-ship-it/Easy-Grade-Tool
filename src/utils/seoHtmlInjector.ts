@@ -372,7 +372,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
       url: `${BASE_CANONICAL_ORIGIN}/`,
       logo: {
         '@type': 'ImageObject',
-        url: `${BASE_CANONICAL_ORIGIN}/icon.svg`,
+        url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png`,
       },
     },
     ...(isAppSchema
@@ -436,7 +436,7 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     ...(SITE_OWNER ? { founder: { '@type': 'Person', name: SITE_OWNER.name } } : {}),
     logo: {
       '@type': 'ImageObject',
-      url: `${BASE_CANONICAL_ORIGIN}/icon.svg`,
+      url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png`,
       width: 512,
       height: 512,
     },

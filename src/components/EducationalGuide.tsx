@@ -57,7 +57,7 @@ export function getEducationalGuideSchema(
       url: `${cleanOrigin}/`,
       logo: {
         '@type': 'ImageObject',
-        url: `${cleanOrigin}/icon.svg`,
+        url: `${cleanOrigin}/pwa-512x512.png`,
       },
     },
   };

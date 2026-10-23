@@ -3,17 +3,32 @@
   <head>
     <!-- Stale-asset recovery: reloads once if a hashed /assets/ file from an older deploy 404s -->
     <script src="/asset-recovery.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H9RJ2Q89XF"></script>
+    <!-- Google tag (gtag.js): the loader below injects gtag.js after first paint -->
     <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-H9RJ2Q89XF');
+  // Load gtag.js after the page has painted (first interaction, or 3.5 s after load) so it never competes with
+  // the first render on slow mobile connections. Events queued above are sent as soon as it arrives.
+  (function () {
+    var started = false;
+    function load() {
+      if (started) return;
+      started = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-H9RJ2Q89XF';
+      document.head.appendChild(s);
+    }
+    ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (t) {
+      window.addEventListener(t, load, { once: true, passive: true });
+    });
+    window.addEventListener('load', function () { window.setTimeout(load, 3500); });
+  })();
 </script>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Easy Grade Calculator: Test Score, Percent &amp; Letter Grade</title>
     <meta name="description" content="Free easy grade calculator for teachers and students. Get every percentage and letter grade for any test size, with half points and a printable chart." />
     <meta name="theme-color" content="#F3F4F6" media="(prefers-color-scheme: light)" />
@@ -25,9 +40,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Easy Grade Tool" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" sizes="any" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="canonical" href="https://www.easygradetool.com/" />
     
     <!-- Self-Hosted Critical Fonts Preload -->
@@ -78,7 +95,7 @@
         "url": "https://www.easygradetool.com/",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://www.easygradetool.com/icon.svg"
+          "url": "https://www.easygradetool.com/pwa-512x512.png"
         }
       },
       "offers": {
@@ -120,7 +137,7 @@
       "email": "support@easygradetool.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.easygradetool.com/icon.svg",
+        "url": "https://www.easygradetool.com/pwa-512x512.png",
         "width": 512,
         "height": 512
       }

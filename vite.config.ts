@@ -29,7 +29,10 @@ export default defineConfig({
       injectRegister: 'auto',
       manifestFilename: 'manifest.json',
       includeAssets: [
+        'favicon.ico',
         'favicon.png',
+        'favicon-48x48.png',
+        'favicon-96x96.png',
         'apple-touch-icon.png',
         'icon.svg',
         'icon-maskable.svg',
@@ -200,25 +203,21 @@ export default defineConfig({
     target: 'es2020',
     cssCodeSplit: true,
     cssMinify: 'esbuild',
+    // Public source maps so large first-party bundles can be debugged in production (Lighthouse best practice).
+    sourcemap: true,
     minify: 'esbuild',
     modulePreload: {
       polyfill: false,
       resolveDependencies: (_filename, deps) =>
-        deps.filter((dep) => !dep.includes('vendor-pdf') && !dep.includes('pdfExport')),
+        deps.filter((dep) => !/(vendor-pdf|pdfExport|jspdf|html2canvas|canvg|purify)/.test(dep)),
     },
     chunkSizeWarningLimit: 300,
     rollupOptions: {
       output: {
         manualChunks(id) {
-          // Isolate heavyweight PDF generation (jspdf, html2canvas, canvg)
-          if (
-            id.includes('node_modules/jspdf') ||
-            id.includes('node_modules/html2canvas') ||
-            id.includes('node_modules/canvg') ||
-            id.includes('node_modules/dompurify')
-          ) {
-            return 'vendor-pdf';
-          }
+          // PDF generation (jspdf, html2canvas, canvg, dompurify) is deliberately NOT forced into a manual chunk:
+          // it is only ever reached through dynamic import() on an export click, so letting the bundler split it
+          // naturally guarantees it can never be pulled into the first page load (it was ~240 KB on mobile).
           // Isolate charting visualization engine (recharts)
           if (id.includes('node_modules/recharts')) {
             return 'vendor-charts';

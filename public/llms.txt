@@ -1,0 +1,30 @@
+# Easy Grade Tool
+
+> Free, ad-free grade calculators for students and teachers: quick grade chart, weighted grade, final exam score, test grade, curve, letter grade, GPA and CGPA. All calculations run in the browser; no account is needed and no scores are sent to a server.
+
+## Grade tools
+- [Easy Grade Calculator and quick grade chart](https://www.easygradetool.com/): percentage and letter grade for any test size, with a printable chart
+- [Weighted grade calculator](https://www.easygradetool.com/grade-calculator/): course grade from weighted categories
+- [Final exam grade calculator](https://www.easygradetool.com/final-exam-grade-calculator/): score needed on the final for a target grade
+- [Test grade calculator](https://www.easygradetool.com/test-grade-calculator/): percent and letter from points earned
+- [Grade curve calculator](https://www.easygradetool.com/grade-curve-calculator/): four curving methods
+- [Letter grade calculator](https://www.easygradetool.com/letter-grade-calculator/): percent to letter and GPA points
+- [Average grade calculator](https://www.easygradetool.com/average-grade-calculator/): mean, median and letter for a list of scores
+- [How many questions can I miss?](https://www.easygradetool.com/how-many-questions-can-i-miss/): most wrong answers allowed for an A, B or C
+
+## GPA tools
+- [GPA calculator](https://www.easygradetool.com/gpa-calculator/): semester and cumulative GPA on the 4.0 scale
+- [Weighted GPA calculator](https://www.easygradetool.com/weighted-gpa-calculator/): honors, AP and IB bonus points
+- [CGPA to percentage calculator](https://www.easygradetool.com/cgpa-to-percentage-calculator/): 10.0, 5.0 and 4.0 scale conversions
+
+## Everyday tools
+- [Percentage calculator](https://www.easygradetool.com/percentage-calculator/)
+- [Tip calculator](https://www.easygradetool.com/tip-calculator/)
+- [Loan calculator](https://www.easygradetool.com/loan-calculator/)
+- [Mortgage calculator](https://www.easygradetool.com/mortgage-calculator/)
+- [Password generator](https://www.easygradetool.com/password-generator/)
+
+## About
+- [About and methodology](https://www.easygradetool.com/about/)
+- [Privacy policy](https://www.easygradetool.com/privacy/)
+- [Terms of service](https://www.easygradetool.com/terms/)

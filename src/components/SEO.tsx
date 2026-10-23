@@ -170,7 +170,7 @@ export const SEO: React.FC<SEOProps> = ({
           '@type': 'Organization',
           name: 'Easy Grade Tool',
           url: `${BASE_CANONICAL_ORIGIN}/`,
-          logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/icon.svg` },
+          logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png` },
         },
         ...(isAppSchema ? { offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } } : {}),
         ...(isAppSchema && featureList && featureList.length > 0 ? { featureList } : {}),
@@ -198,7 +198,7 @@ export const SEO: React.FC<SEOProps> = ({
       name: 'Easy Grade Tool',
       url: `${BASE_CANONICAL_ORIGIN}/`,
       email: CONTACT_EMAIL,
-      logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/icon.svg`, width: 512, height: 512 },
+      logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png`, width: 512, height: 512 },
     };
 
     return {

@@ -23,6 +23,10 @@ export const SemanticGuideImage: React.FC<SemanticGuideImageProps> = ({
   priority = false,
 }) => {
   const src = getGuideImageUrl(toolKey);
+  // An 800 px copy of every photo (public/images/*-800.webp) is offered to phones; the 1200 px original is used on
+  // large or high-density screens. This roughly halves the image bytes a mobile visitor downloads.
+  const src800 = src.replace(/\.webp$/, '-800.webp');
+  const srcSet = src800 !== src ? `${src800} 800w, ${src} 1200w` : undefined;
   const placeholder = GUIDE_PLACEHOLDERS[toolKey] || GUIDE_PLACEHOLDERS.quick;
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -46,6 +50,8 @@ export const SemanticGuideImage: React.FC<SemanticGuideImageProps> = ({
       <img
         ref={imgRef}
         src={src}
+        srcSet={srcSet}
+        sizes="(max-width: 768px) 100vw, 800px"
         alt={alt}
         width={1200}
         height={800}
@@ -58,6 +64,7 @@ export const SemanticGuideImage: React.FC<SemanticGuideImageProps> = ({
           const target = e.currentTarget;
           const fallback = RAW_GUIDE_IMAGES[toolKey] || 'images/easy-grade-calculator-guide.webp';
           if (target.src !== fallback && !target.src.endsWith(fallback)) {
+            target.removeAttribute('srcset');
             target.src = fallback;
           }
         }}

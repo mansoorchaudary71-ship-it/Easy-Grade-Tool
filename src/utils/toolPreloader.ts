@@ -25,15 +25,19 @@ export function preloadGuideImage(src: string): void {
 /**
  * Preloads the chunk for a secondary route or modal on user intent (hover, pointerdown, touchstart, or focus).
  */
-export function preloadTool(tool: ToolKey | string): void {
+export function preloadTool(tool: ToolKey | string, options: { images?: boolean } = {}): void {
+  // Preload the corresponding guide image only on real user intent (hover/touch/focus). The idle warm-up passes
+  // `images: false`: it used to download ~280 KB of photos for tools the visitor never opened.
+  // preloadGuideImage de-duplicates by URL, so a later hover still fetches the image after a code-only warm-up.
+  if (options.images !== false) {
+    const imageSrc = getGuideImageUrl(tool);
+    if (imageSrc) {
+      preloadGuideImage(imageSrc);
+    }
+  }
+
   if (preloadedSet.has(tool)) return;
   preloadedSet.add(tool);
-
-  // Preload corresponding semantic guide image on hover/touch
-  const imageSrc = getGuideImageUrl(tool);
-  if (imageSrc) {
-    preloadGuideImage(imageSrc);
-  }
 
   switch (tool) {
     case 'quick':
@@ -91,15 +95,25 @@ export function preloadAllTools(): void {
 
   const warm = () => {
     // Most likely next stops for a grading visitor. Finance/utility tools load on intent only.
-    preloadTool('gpa');
-    preloadTool('cgpa');
-    preloadTool('percentage');
-    preloadTool('command-palette');
+    // Code only, never images: photos are fetched when the visitor shows intent (hover/touch/focus).
+    preloadTool('gpa', { images: false });
+    preloadTool('cgpa', { images: false });
+    preloadTool('percentage', { images: false });
+    preloadTool('command-palette', { images: false });
   };
 
-  if ('requestIdleCallback' in window) {
-    (window as any).requestIdleCallback(warm, { timeout: 4000 });
-  } else {
-    setTimeout(warm, 3000);
-  }
+  // Wait until the page has fully loaded, then a couple of seconds more, so the warm-up never competes with
+  // the first paint on a slow phone connection.
+  const schedule = () => {
+    window.setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        (window as any).requestIdleCallback(warm, { timeout: 4000 });
+      } else {
+        window.setTimeout(warm, 1000);
+      }
+    }, 2500);
+  };
+
+  if (document.readyState === 'complete') schedule();
+  else window.addEventListener('load', schedule, { once: true });
 }
