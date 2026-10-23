@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Stale-asset recovery: reloads once if a hashed /assets/ file from an older deploy 404s -->
+    <script src="/asset-recovery.js"></script>
+    <!-- Google tag (gtag.js): the loader below injects gtag.js after first paint -->
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-H9RJ2Q89XF');
+  // Load gtag.js after the page has painted (first interaction, or 8 s after load) so it never competes with
+  // the first render on slow mobile connections. Events queued above are sent as soon as it arrives.
+  (function () {
+    var started = false;
+    function load() {
+      if (started) return;
+      started = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-H9RJ2Q89XF';
+      document.head.appendChild(s);
+    }
+    ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (t) {
+      window.addEventListener(t, load, { once: true, passive: true });
+    });
+    window.addEventListener('load', function () { window.setTimeout(load, 8000); });
+  })();
+</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Easy Grade Calculator: Test Score, Percent &amp; Letter Grade</title>
+    <meta name="description" content="Free easy grade calculator for teachers and students. Get every percentage and letter grade for any test size, with half points and a printable chart." />
+    <meta name="theme-color" content="#F3F4F6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Easy Grade Tool" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" sizes="any" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="canonical" href="https://www.easygradetool.com/" />
+    
+    <!-- Self-Hosted Critical Fonts Preload -->
+    <link rel="preload" href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin />
+
+    <meta property="og:title" content="Easy Grade Calculator: Test Score, Percent &amp; Letter Grade" />
+    <meta property="og:description" content="Free easy grade calculator for teachers and students. Get every percentage and letter grade for any test size, with half points and a printable chart." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.easygradetool.com/" />
+    <meta property="og:site_name" content="Easy Grade Tool" />
+    <meta property="og:image" content="https://www.easygradetool.com/og-cards/grade-calculator-1200x630.png" />
+    <meta property="og:image:secure_url" content="https://www.easygradetool.com/og-cards/grade-calculator-1200x630.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Easy Grade Tool — free easy grade calculator and EZ grader chart" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Easy Grade Calculator: Test Score, Percent &amp; Letter Grade" />
+    <meta name="twitter:description" content="Free easy grade calculator for teachers and students. Get every percentage and letter grade for any test size, with half points and a printable chart." />
+    <meta name="twitter:image" content="https://www.easygradetool.com/og-cards/grade-calculator-1200x630.png" />
+    <meta name="twitter:image:alt" content="Easy Grade Tool — free easy grade calculator and EZ grader chart" />
+    <script id="schema-org-webapp" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "@id": "https://www.easygradetool.com/#webapp",
+      "name": "Easy Grade Tool",
+      "alternateName": "Easy Grade Calculator",
+      "url": "https://www.easygradetool.com/",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "softwareVersion": "1.0.0",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
+      "description": "Free easy grade calculator and EZ grader chart.",
+      "datePublished": "2026-10-01T00:00:00Z",
+      "dateModified": "2026-10-06T00:00:00Z",
+      "author": {
+        "@type": "Organization",
+        "name": "Easy Grade Tool",
+        "url": "https://www.easygradetool.com/",
+        "email": "support@easygradetool.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Easy Grade Tool",
+        "url": "https://www.easygradetool.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.easygradetool.com/pwa-512x512.png"
+        }
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Weighted & Points-based Grade Calculation",
+        "Target Final Exam Score Simulator",
+        "Customizable Standard and Plus/Minus Grading Scales",
+        "Semester & Cumulative 4.0 GPA Calculation",
+        "Offline PWA Utility Support"
+      ]
+    }
+    </script>
+    <script id="schema-org-breadcrumb" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://www.easygradetool.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Easy Grade Tool",
+          "item": "https://www.easygradetool.com/"
+        }
+      ]
+    }
+    </script>
+    <script id="schema-org-organization" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": "https://www.easygradetool.com/#organization",
+      "name": "Easy Grade Tool",
+      "url": "https://www.easygradetool.com/",
+      "email": "support@easygradetool.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.easygradetool.com/pwa-512x512.png",
+        "width": 512,
+        "height": 512
+      }
+    }
+    </script>
+    <script id="schema-org-faq" type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the Easy Grade Calculator (Quick Grade) work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply enter the total number of questions on your test or quiz and the number of wrong answers. The calculator immediately computes your percentage score and letter grade using the formula: Percentage = ((Total Questions − Wrong Answers) ÷ Total Questions) × 100."
+          }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-[#F3F4F6] text-stone-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
