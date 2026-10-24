@@ -114,6 +114,12 @@ const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string 
   { label: 'Weighted GPA', title: 'Weighted GPA calculator', path: '/weighted-gpa-calculator/' },
   { label: 'Weighted vs Unweighted GPA', title: 'Weighted vs unweighted GPA explained', path: '/weighted-vs-unweighted-gpa/' },
   { label: 'How Many Can I Miss', title: 'How many questions can you miss calculator', path: '/how-many-questions-can-i-miss/' },
+  { label: 'Semester GPA', title: 'Semester GPA calculator', path: '/semester-gpa-calculator/' },
+  { label: 'Cumulative GPA', title: 'Cumulative GPA calculator', path: '/cumulative-gpa-calculator/' },
+  { label: 'For Schools', title: 'Embed free grade calculators on your school website', path: '/for-schools/' },
+  { label: 'Blog', title: 'Grading guides and articles', path: '/blog/' },
+  { label: 'Grade 30 Tests in 15 Minutes', title: 'How to grade a stack of 30 tests in 15 minutes', path: '/blog/how-to-grade-30-tests-in-15-minutes/' },
+  { label: 'When to Curve Grades', title: 'When to curve grades: a teacher’s guide', path: '/blog/when-to-curve-grades/' },
 ];
 
 export const Footer: React.FC<FooterProps> = ({

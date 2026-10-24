@@ -7052,3 +7052,17 @@ input[type="number"]:focus {
   [data-print-area] .text-rose-600,
   [data-print-area] .text-rose-700 { color: #b42318 !important; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Embed mode (?embed=1) — used by the free school embeds.             */
+/* Header/footer are not rendered by App.tsx in this mode; here we     */
+/* hide everything on a tool page except the tool itself, so an        */
+/* embedded calculator shows no guide text, FAQs or related links.     */
+/* ------------------------------------------------------------------ */
+.embed-mode article > :not(section[data-print-area]) {
+  display: none !important;
+}
+.embed-mode main {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

@@ -20,6 +20,7 @@ const METHODS: { key: CurveMethod; label: string }[] = [
   { key: 'scale-top', label: 'Top score → max' },
   { key: 'sqrt', label: 'Square root' },
   { key: 'linear-target', label: 'Target average' },
+  { key: 'bell', label: 'Bell curve' },
 ];
 
 const MAX_ROWS = 300;
@@ -30,6 +31,8 @@ export const GradeCurveTool: React.FC = () => {
   const [method, setMethod] = useState<CurveMethod>('flat');
   const [flat, setFlat] = useState('5');
   const [target, setTarget] = useState('78');
+  const [bellMean, setBellMean] = useState('75');
+  const [bellSd, setBellSd] = useState('10');
   const [cap, setCap] = useState(true);
   const [plus, setPlus] = useState(false);
   const scale = plus ? SCALE_PLUS_MINUS : SCALE_STANDARD;
@@ -46,10 +49,12 @@ export const GradeCurveTool: React.FC = () => {
       method,
       flatPoints: parseStrictNumber(flat) ?? undefined,
       targetAverage: parseStrictNumber(target) ?? undefined,
+      bellMean: parseStrictNumber(bellMean) ?? undefined,
+      bellSd: parseStrictNumber(bellSd) ?? undefined,
       maxScore: maxScore ?? 100,
       capAtMax: cap,
     }),
-    [method, flat, target, maxScore, cap]
+    [method, flat, target, bellMean, bellSd, maxScore, cap]
   );
 
   const problem = maxError || validateCurveParams(scores, params);
@@ -131,6 +136,21 @@ export const GradeCurveTool: React.FC = () => {
           <div className="max-w-[12rem]">
             <label htmlFor="gc-target" className={LABEL}>Target class average</label>
             <input id="gc-target" className={INPUT} type="text" inputMode="decimal" enterKeyHint="done" value={target} onChange={(e) => setTarget(e.target.value)} />
+          </div>
+        )}
+        {method === 'bell' && (
+          <div className="flex flex-wrap gap-4">
+            <div className="max-w-[12rem]">
+              <label htmlFor="gc-bell-mean" className={LABEL}>Bell curve average</label>
+              <input id="gc-bell-mean" className={INPUT} type="text" inputMode="decimal" enterKeyHint="done" value={bellMean} onChange={(e) => setBellMean(e.target.value)} />
+            </div>
+            <div className="max-w-[12rem]">
+              <label htmlFor="gc-bell-sd" className={LABEL}>Spread (std. deviation)</label>
+              <input id="gc-bell-sd" className={INPUT} type="text" inputMode="decimal" enterKeyHint="done" value={bellSd} onChange={(e) => setBellSd(e.target.value)} />
+            </div>
+            <p className="w-full text-sm text-slate-600 dark:text-slate-300 m-0">
+              Scores are rescaled so the class average becomes the bell curve average, keeping every student&apos;s rank order. A spread of 10 puts most students within about 20 points of the average.
+            </p>
           </div>
         )}
 

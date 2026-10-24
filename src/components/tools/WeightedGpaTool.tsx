@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 import { parseStrictNumber } from '../../utils/academicMath';
 import {
@@ -30,6 +30,30 @@ const START_ROWS: Row[] = [
 
 const SELECT = `${INPUT} appearance-auto cursor-pointer`;
 
+const STORAGE_KEY = 'egt-weighted-gpa-v1';
+
+interface SavedState {
+  rows: Row[];
+  honors: string;
+  ap: string;
+}
+
+function loadSaved(): SavedState | null {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as SavedState;
+    if (!Array.isArray(parsed.rows) || parsed.rows.length === 0 || parsed.rows.length > MAX_ROWS) return null;
+    const rows = parsed.rows.filter(
+      (r) => r && typeof r.name === 'string' && typeof r.letter === 'string' && typeof r.credits === 'string' && (r.level === 'regular' || r.level === 'honors' || r.level === 'ap'),
+    ) as Row[];
+    if (rows.length === 0) return null;
+    return { rows, honors: typeof parsed.honors === 'string' ? parsed.honors : String(DEFAULT_BONUS.honors), ap: typeof parsed.ap === 'string' ? parsed.ap : String(DEFAULT_BONUS.ap) };
+  } catch {
+    return null;
+  }
+}
+
 function parseBonus(raw: string): { value: number | null; error: string | null } {
   const n = parseStrictNumber(raw);
   if (n === null) return { value: null, error: 'Enter a number such as 0.5 or 1.' };
@@ -42,6 +66,37 @@ export const WeightedGpaTool: React.FC = () => {
   const [nextId, setNextId] = useState(4);
   const [honorsRaw, setHonorsRaw] = useState(String(DEFAULT_BONUS.honors));
   const [apRaw, setApRaw] = useState(String(DEFAULT_BONUS.ap));
+  const hydrated = useRef(false);
+
+  // Restore courses saved on this device (after mount, so prerendered HTML and hydration match).
+  useEffect(() => {
+    const saved = loadSaved();
+    if (saved) {
+      setRows(saved.rows);
+      setNextId(Math.max(...saved.rows.map((r) => r.id)) + 1);
+      setHonorsRaw(saved.honors);
+      setApRaw(saved.ap);
+    }
+    hydrated.current = true;
+  }, []);
+
+  // Save on this device only: nothing is uploaded, and clearing site data removes it.
+  useEffect(() => {
+    if (!hydrated.current) return;
+    try {
+      const state: SavedState = { rows, honors: honorsRaw, ap: apRaw };
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      /* storage blocked: the calculator still works, courses just are not remembered */
+    }
+  }, [rows, honorsRaw, apRaw]);
+
+  const reset = () => {
+    setRows(START_ROWS);
+    setNextId(4);
+    setHonorsRaw(String(DEFAULT_BONUS.honors));
+    setApRaw(String(DEFAULT_BONUS.ap));
+  };
 
   const honors = parseBonus(honorsRaw);
   const ap = parseBonus(apRaw);
@@ -135,10 +190,18 @@ export const WeightedGpaTool: React.FC = () => {
           })}
         </ul>
 
-        <button type="button" onClick={add} disabled={rows.length >= MAX_ROWS} className={BTN_PRIMARY}>
-          <Plus className="w-4 h-4" aria-hidden="true" />
-          <span>Add course</span>
-        </button>
+        <div className="flex flex-wrap items-center gap-3">
+          <button type="button" onClick={add} disabled={rows.length >= MAX_ROWS} className={BTN_PRIMARY}>
+            <Plus className="w-4 h-4" aria-hidden="true" />
+            <span>Add course</span>
+          </button>
+          <button type="button" onClick={reset} className="text-sm font-semibold text-slate-600 dark:text-slate-300 underline underline-offset-2 cursor-pointer">
+            Reset to the example courses
+          </button>
+        </div>
+        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+          Your courses are saved on this device only, in your browser, so they are here when you come back. Nothing is uploaded or shared.
+        </p>
       </section>
 
       <section aria-label="Weighted GPA result" className={`${CARD} space-y-4`}>

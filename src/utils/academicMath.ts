@@ -41,6 +41,15 @@ export const SCALE_PLUS_MINUS: LetterBand[] = [
   { letter: 'F', min: 0, gpa: 0.0 },
 ];
 
+/** Common US 7-point scale (A starts at 93). Used by many middle/high schools. */
+export const SCALE_SEVEN_POINT: LetterBand[] = [
+  { letter: 'A', min: 93, gpa: 4.0 },
+  { letter: 'B', min: 86, gpa: 3.0 },
+  { letter: 'C', min: 79, gpa: 2.0 },
+  { letter: 'D', min: 72, gpa: 1.0 },
+  { letter: 'F', min: 0, gpa: 0.0 },
+];
+
 export interface Cutoffs {
   A: number;
   B: number;
@@ -184,7 +193,7 @@ export function pointsNeededForTarget(possible: number, targetPercent: number): 
 /* Grade curve                                                         */
 /* ------------------------------------------------------------------ */
 
-export type CurveMethod = 'flat' | 'scale-top' | 'sqrt' | 'linear-target';
+export type CurveMethod = 'flat' | 'scale-top' | 'sqrt' | 'linear-target' | 'bell';
 
 export interface CurveParams {
   method: CurveMethod;
@@ -196,6 +205,10 @@ export interface CurveParams {
   maxScore?: number;
   /** Cap curved scores at maxScore (default true). */
   capAtMax?: boolean;
+  /** bell: desired class average after the bell curve (default 75). */
+  bellMean?: number;
+  /** bell: desired standard deviation after the bell curve (default 10). Must be above 0. */
+  bellSd?: number;
 }
 
 export interface CurveStats {
@@ -234,6 +247,12 @@ export function validateCurveParams(scores: number[], params: CurveParams): stri
   if (params.method === 'scale-top' && Math.max(...scores) <= 0) {
     return 'The highest score is 0, so there is nothing to scale.';
   }
+  if (params.method === 'bell') {
+    const m = params.bellMean ?? 75;
+    if (!Number.isFinite(m) || m < 0 || m > maxScore) return `The bell curve average must be between 0 and ${maxScore}.`;
+    const sd = params.bellSd ?? 10;
+    if (!Number.isFinite(sd) || sd <= 0) return 'The bell curve spread (standard deviation) must be above 0.';
+  }
   return null;
 }
 
@@ -243,6 +262,7 @@ export function validateCurveParams(scores: number[], params: CurveParams): stri
  *  - scale-top:     score + (maxScore - highest score)       (top student becomes maxScore)
  *  - sqrt:          maxScore * sqrt(score / maxScore)         (10 * sqrt(score) when maxScore = 100)
  *  - linear-target: score + (target average - current average)
+ *  - bell:          z-score rescale onto a target mean and standard deviation (rank order preserved)
  * An invalid maxScore (0, negative, NaN) returns the scores unchanged instead of NaN.
  */
 export function applyCurve(scores: number[], params: CurveParams): number[] {
@@ -265,6 +285,14 @@ export function applyCurve(scores: number[], params: CurveParams): number[] {
     case 'linear-target':
       out = scores.map((s) => s + ((params.targetAverage ?? stats.mean) - stats.mean));
       break;
+    case 'bell': {
+      // Rescale by z-score so the class lands on the requested mean/spread, keeping rank order.
+      const bellMean = params.bellMean ?? 75;
+      const bellSd = params.bellSd ?? 10;
+      const sd = Math.sqrt(scores.reduce((a, s) => a + (s - stats.mean) ** 2, 0) / scores.length);
+      out = sd === 0 ? scores.map(() => bellMean) : scores.map((s) => bellMean + ((s - stats.mean) / sd) * bellSd);
+      break;
+    }
     default:
       out = [...scores];
   }

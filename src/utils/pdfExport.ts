@@ -1,4 +1,4 @@
-import { CalculationMode, CourseItem, ValidatedAssessment } from '../types';
+import { CalculationMode, CourseItem, GradingScaleType, ValidatedAssessment } from '../types';
 import { GRADING_SCALES, GRADE_POINT_MAP } from '../data/constants';
 import { SITE_URL } from '../data/seoConfig';
 
@@ -6,7 +6,7 @@ interface GradeReportOptions {
   courseName?: string;
   studentName?: string;
   mode: CalculationMode;
-  scale: 'standard' | 'plus';
+  scale: GradingScaleType;
   percent: number;
   letter: string;
   targetGrade?: string | number;
@@ -86,7 +86,7 @@ export async function exportGradeReportPdf(data: GradeReportOptions): Promise<vo
       : data.mode === 'quick-grader'
       ? 'EZ Grader (Test Score)'
       : 'Total Points Based';
-  const scaleLabel = data.scale === 'plus' ? 'Plus / Minus Scale' : 'Standard 10-Point Scale';
+  const scaleLabel = data.scale === 'plus' ? 'Plus / Minus Scale' : data.scale === 'seven' ? '7-Point Scale' : 'Standard 10-Point Scale';
   doc.text(`${modeLabel} (${scaleLabel})`, margin + 42, y + 13);
 
   if (data.studentName?.trim()) {
@@ -591,7 +591,7 @@ export async function exportLoanReportPdf(data: {
 
 export interface QuickGradePdfOptions {
   totalQuestions: number;
-  scaleType: 'standard' | 'plus';
+  scaleType: GradingScaleType;
   showDecimals: boolean;
   thresholds: { A: number; B: number; C: number; D: number };
   letterGroups: Array<{
@@ -631,7 +631,9 @@ export async function exportQuickGradePdf(options: QuickGradePdfOptions): Promis
   const scaleDesc =
     options.scaleType === 'plus'
       ? 'Scale: Plus / Minus (A, A-, B+...)'
-      : `Scale: Standard (A≥${options.thresholds.A}%, B≥${options.thresholds.B}%, C≥${options.thresholds.C}%, D≥${options.thresholds.D}%)`;
+      : options.scaleType === 'seven'
+        ? 'Scale: 7-Point (A≥93%, B≥86%, C≥79%, D≥72%)'
+        : `Scale: Standard (A≥${options.thresholds.A}%, B≥${options.thresholds.B}%, C≥${options.thresholds.C}%, D≥${options.thresholds.D}%)`;
   doc.text(
     `Total Questions: ${options.totalQuestions}  |  ${scaleDesc}  |  Decimals: ${options.showDecimals ? 'Yes' : 'No'}`,
     margin + 6,

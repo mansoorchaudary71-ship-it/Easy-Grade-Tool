@@ -54,7 +54,8 @@ export function preloadForPath(pathname: string): Promise<unknown> {
   if (p === '/terms') return loaders.terms();
   if (p === '/about') return loaders.about();
   if (p === '/final-exam-grade-calculator') return loaders.programmatic();
-  if (['/test-grade-calculator', '/grade-curve-calculator', '/letter-grade-calculator', '/average-grade-calculator', '/grading-scale', '/weighted-gpa-calculator', '/weighted-vs-unweighted-gpa', '/how-many-questions-can-i-miss'].includes(p)) return loaders.toolPage();
+  if (['/test-grade-calculator', '/grade-curve-calculator', '/letter-grade-calculator', '/average-grade-calculator', '/grading-scale', '/weighted-gpa-calculator', '/weighted-vs-unweighted-gpa', '/how-many-questions-can-i-miss', '/semester-gpa-calculator', '/cumulative-gpa-calculator', '/for-schools', '/blog'].includes(p)) return loaders.toolPage();
+  if (p.startsWith('/blog/')) return loaders.toolPage();
   if (p.startsWith('/grading-scale/')) return loaders.toolPage();
   return Promise.resolve();
 }

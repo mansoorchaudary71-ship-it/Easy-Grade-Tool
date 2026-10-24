@@ -1,7 +1,9 @@
 import { BASE_CANONICAL_ORIGIN } from './constants';
 import { buildAverageGradePage, buildGradingScaleIndexPage, buildQuestionCountPage } from './gradingScalePages';
 import { GRADING_SCALE_SIZES } from './gradingScaleSizes';
-import { buildMissCalculatorPage, buildWeightedGpaPage, buildWeightedVsUnweightedPage } from './gpaPages';
+import { buildCumulativeGpaPage, buildMissCalculatorPage, buildSemesterGpaPage, buildWeightedGpaPage, buildWeightedVsUnweightedPage } from './gpaPages';
+import { buildForSchoolsPage } from './forSchoolsPage';
+import { buildBlogIndexPage, buildCurveGuidePost, buildGradeFasterPost } from './blogPages';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, applyCurve, calculateTestGrade, computeStats, percentToLetter, roundTo } from '../utils/academicMath';
 
 /**
@@ -87,6 +89,7 @@ const curveFlat = applyCurve(curveRaw, { method: 'flat', flatPoints: 5 });
 const curveTop = applyCurve(curveRaw, { method: 'scale-top' });
 const curveSqrt = applyCurve(curveRaw, { method: 'sqrt' });
 const curveTarget = applyCurve(curveRaw, { method: 'linear-target', targetAverage: 78, capAtMax: false });
+const curveBell = applyCurve(curveRaw, { method: 'bell', bellMean: 75, bellSd: 10 });
 
 const fmtList = (xs: number[]) => xs.map((x) => roundTo(x, 1)).join(', ');
 
@@ -225,9 +228,9 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     path: '/grade-curve-calculator/',
     navLabel: 'Grade Curve',
     h1: 'Grade Curve Calculator',
-    title: 'Grade Curve Calculator — 4 Curving Methods Compared',
+    title: 'Grade Curve Calculator — 5 Curving Methods Compared',
     metaDescription:
-      'Paste class test scores and curve them four ways: add flat points, lift the top score to 100, square-root curve, or move the class average to a target.',
+      'Paste class test scores and curve them five ways: add flat points, lift the top score to 100, square-root curve, move the class average to a target, or apply a bell curve.',
     badge: 'For teachers and TAs',
     intro:
       'Paste the raw scores, choose a curving method and compare before and after: every score, the class mean and median, and the letter grade each student ends up with.',
@@ -239,22 +242,23 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       'how to curve a test',
     ],
     featureList: [
-      'Flat-points, top-score, square-root and target-average curves',
+      'Flat-points, top-score, square-root, target-average and bell curves',
       'Before and after table with class mean and median',
       'Standard and plus/minus letter grades for each score',
       'Optional cap at 100 and printable results',
     ],
     sections: [
       {
-        heading: 'The four curving methods',
+        heading: 'The five curving methods',
         paragraphs: [
-          'Curving means adjusting raw scores with a rule that is applied to everyone. These are the four most common rules, and the calculator applies each exactly as written.',
+          'Curving means adjusting raw scores with a rule that is applied to everyone. These are the five most common rules, and the calculator applies each exactly as written.',
         ],
         bullets: [
           'Flat points: curved score = raw score + k. Everyone gains the same number of points, so gaps between students do not change.',
           'Top score to 100: curved score = raw score + (100 − highest raw score). The best score becomes 100 and everyone shifts up by the same amount.',
           'Square-root curve: curved score = 10 × √raw score (for a 100-point test). Low scores gain more than high scores, so the spread narrows.',
           'Target average: curved score = raw score + (target mean − current mean). The class average lands exactly on the value you choose.',
+          'Bell curve: each score is converted to a z-score, (score − class mean) ÷ standard deviation, then rebuilt on the average and spread you choose. Rank order never changes, but unlike the other four methods a bell curve can move a score down as well as up.',
         ],
       },
       {
@@ -273,13 +277,14 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       },
     ],
     example: {
-      heading: 'Worked example: five scores, four methods',
+      heading: 'Worked example: five scores, five methods',
       scenario: `A small quiz returns the raw scores ${curveRaw.join(', ')} (mean ${roundTo(curveStatsBefore.mean, 1)}, median ${roundTo(curveStatsBefore.median, 1)}).`,
       rows: [
         { label: 'Flat +5', value: fmtList(curveFlat) },
         { label: 'Top score to 100 (+15)', value: fmtList(curveTop) },
         { label: 'Square-root curve', value: fmtList(curveSqrt) },
         { label: 'Target average 78', value: fmtList(curveTarget) },
+        { label: 'Bell curve (average 75, spread 10)', value: fmtList(curveBell) },
       ],
       takeaway:
         'The target-average curve adds 8 points to everyone so the mean moves from 70 to 78. The square-root curve lifts the lowest score the most (55 becomes 74.2) and the highest the least (85 becomes 92.2).',
@@ -288,7 +293,7 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       {
         question: 'How do you curve a test?',
         answer:
-          'Pick one rule and apply it to every score: add the same points to everyone, raise the top score to 100, take the square root, or shift scores so the class average hits a target. Paste the scores above to compare the results.',
+          'Pick one rule and apply it to every score: add the same points to everyone, raise the top score to 100, take the square root, shift scores so the class average hits a target, or rescale the class onto a bell curve. Paste the scores above to compare the results.',
       },
       {
         question: 'What is a square root curve?',
@@ -298,7 +303,7 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       {
         question: 'Does curving lower anyone’s grade?',
         answer:
-          'The four methods here never lower a score. Curving that lowers grades, such as ranking-based bell curves, is a different policy and is not what this calculator does.',
+          'Four of the five methods here never lower a score: flat points, top score to 100, square root and target average only move scores up or keep them level. The bell curve is different by design: it rescales the whole class onto a chosen average and spread, so a score far above the class mean can come down. Check the before-and-after table before you apply it.',
       },
       {
         question: 'Should curved scores be capped at 100?',
@@ -313,7 +318,12 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
       {
         question: 'What is the difference between these curves and a bell curve?',
         answer:
-          'The four methods here move every score by one fixed rule, so the order of students and the gaps between them stay recognisable. A bell-curve policy assigns letters by rank or by distance from the class mean, which can leave some students lower than their raw score suggests. Ask your instructor which policy applies.',
+          'Flat points, top score, square root and target average move every score by one fixed rule, so the gaps between students stay recognisable. The bell curve method rescales scores by their distance from the class mean (the z-score), then rebuilds them on the average and spread you set, so the shape of the class distribution changes while the rank order stays the same. Ask your instructor which policy applies.',
+      },
+      {
+        question: 'How does the bell curve method work?',
+        answer:
+          'Each raw score becomes a z-score: (score − class mean) ÷ standard deviation. The curved score is then bell average + z × bell spread. With the defaults (average 75, spread 10), a student exactly one standard deviation above the class mean receives 85, and a student one below receives 65, whatever the raw scores were.',
       },
       {
         question: 'How do I find the class mean and median before curving?',
@@ -517,6 +527,12 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
   ...CORE_PAGES,
   'average-grade-calculator': buildAverageGradePage(),
   'weighted-gpa-calculator': buildWeightedGpaPage(),
+  'semester-gpa-calculator': buildSemesterGpaPage(),
+  'cumulative-gpa-calculator': buildCumulativeGpaPage(),
+  'for-schools': buildForSchoolsPage(),
+  'blog': buildBlogIndexPage(),
+  'blog/how-to-grade-30-tests-in-15-minutes': buildGradeFasterPost(),
+  'blog/when-to-curve-grades': buildCurveGuidePost(),
   'weighted-vs-unweighted-gpa': buildWeightedVsUnweightedPage(),
   'how-many-questions-can-i-miss': buildMissCalculatorPage(),
   'grading-scale': buildGradingScaleIndexPage(),

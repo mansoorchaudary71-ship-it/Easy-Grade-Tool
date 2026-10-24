@@ -8,7 +8,7 @@ import {
   KeyRound,
 } from 'lucide-react';
 import { AssessmentItem, CourseItem, FaqItem, ScaleGrade, ToolKey } from '../types';
-import { SCALE_PLUS_MINUS, SCALE_STANDARD, LetterBand } from '../utils/academicMath';
+import { SCALE_PLUS_MINUS, SCALE_SEVEN_POINT, SCALE_STANDARD, LetterBand } from '../utils/academicMath';
 
 /**
  * Single source of truth for the official application contact and support email.
@@ -64,9 +64,10 @@ export const GRADE_POINT_MAP: Record<string, number> = (() => {
   return map;
 })();
 
-export const GRADING_SCALES: Record<'standard' | 'plus', ScaleGrade[]> = {
+export const GRADING_SCALES: Record<'standard' | 'plus' | 'seven', ScaleGrade[]> = {
   standard: withColors(SCALE_STANDARD),
   plus: withColors(SCALE_PLUS_MINUS),
+  seven: withColors(SCALE_SEVEN_POINT),
 };
 
 export interface ToolDef {

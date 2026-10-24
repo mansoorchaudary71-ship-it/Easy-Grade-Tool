@@ -86,6 +86,10 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   const CompToolPage = syncComponents?.ToolPage || LazyToolPage;
   const CompProgrammatic = syncComponents?.ProgrammaticCalculatorView || LazyProgrammatic;
 
+  // Embed mode (?embed=1): chrome-free view used by the free school embeds (/for-schools/).
+  // The tool section stays; header, footer and in-page content are hidden (see .embed-mode in index.css).
+  const isEmbed = useMemo(() => new URLSearchParams(location.search).get('embed') === '1', [location.search]);
+
   // Derive active tool dynamically from URL pathname with immediate local state sync
   const activeTool: ToolKey = useMemo(() => getToolKeyFromPath(location.pathname), [location.pathname]);
 
@@ -193,18 +197,28 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   );
 
   return (
-    <div className={`app-shell tool-theme-${activeTool} w-full max-w-full overflow-x-clip`}>
+    <div className={`app-shell tool-theme-${activeTool}${isEmbed ? ' embed-mode' : ''} w-full max-w-full overflow-x-clip`}>
       {!isProgrammaticRoute && <SEOHead tool={activeTool} />}
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{routeAnnouncement}</div>
+      {!isEmbed && (
       <SiteHeader
         activeTool={activeTool}
         onSelectTool={handleSelectTool}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
+      )}
 
       <main id="main-content" ref={mainRef} tabIndex={-1} className={`main-wrap premium-surface tool-theme-${activeTool} w-full max-w-full overflow-x-clip px-4 sm:px-6 focus:outline-none`}>
         <div className="tool-transition-container w-full max-w-full">
+          {isEmbed && (
+            <p className="text-center text-sm text-slate-500 dark:text-slate-400 pt-3 m-0">
+              Free grading tools by{' '}
+              <a href="https://www.easygradetool.com/" target="_top" rel="noopener" className="font-semibold underline">
+                Easy Grade Tool
+              </a>
+            </p>
+          )}
           <Suspense fallback={<CalculatorSkeleton />}>
             <Routes>
               <Route path="/" element={<CompGrade setToast={setToastMessage} />} />
@@ -227,6 +241,12 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/letter-grade-calculator" element={<CompToolPage slug="letter-grade-calculator" />} />
               <Route path="/average-grade-calculator" element={<CompToolPage slug="average-grade-calculator" />} />
               <Route path="/weighted-gpa-calculator" element={<CompToolPage slug="weighted-gpa-calculator" />} />
+              <Route path="/semester-gpa-calculator" element={<CompToolPage slug="semester-gpa-calculator" />} />
+              <Route path="/cumulative-gpa-calculator" element={<CompToolPage slug="cumulative-gpa-calculator" />} />
+              <Route path="/for-schools" element={<CompToolPage slug="for-schools" />} />
+              <Route path="/blog" element={<CompToolPage slug="blog" />} />
+              <Route path="/blog/how-to-grade-30-tests-in-15-minutes" element={<CompToolPage slug="blog/how-to-grade-30-tests-in-15-minutes" />} />
+              <Route path="/blog/when-to-curve-grades" element={<CompToolPage slug="blog/when-to-curve-grades" />} />
               <Route path="/weighted-vs-unweighted-gpa" element={<CompToolPage slug="weighted-vs-unweighted-gpa" />} />
               <Route path="/how-many-questions-can-i-miss" element={<CompToolPage slug="how-many-questions-can-i-miss" />} />
               <Route path="/grading-scale" element={<CompToolPage slug="grading-scale" />} />
@@ -245,14 +265,16 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
           </Suspense>
         </div>
       </main>
-      <UpdatePrompt />
+      {!isEmbed && <UpdatePrompt />}
 
+      {!isEmbed && (
       <Footer
         activeTool={activeTool}
         onSelectTool={handleSelectTool}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
         setToast={setToastMessage}
       />
+      )}
 
       {isCommandPaletteOpen && (
         <Suspense fallback={null}>

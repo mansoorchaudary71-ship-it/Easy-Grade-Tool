@@ -1,7 +1,7 @@
 import type { ToolPageEntry } from './toolPages';
 import { aOrAn } from './gradingScaleSizes';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, roundTo } from '../utils/academicMath';
-import { DEFAULT_BONUS, WeightedCourse, calculateWeightedGpa, pointsForLetter } from '../utils/gpaMath';
+import { DEFAULT_BONUS, GPA_LETTERS, WeightedCourse, calculateWeightedGpa, pointsForLetter } from '../utils/gpaMath';
 import { buildMissTable, maxWrongForMinPercent } from '../utils/missMath';
 
 /**
@@ -19,6 +19,18 @@ const exampleResult = calculateWeightedGpa(EXAMPLE_COURSES, DEFAULT_BONUS)!;
 const bonusOf = (level: WeightedCourse['level']) => (level === 'honors' ? DEFAULT_BONUS.honors : level === 'ap' ? DEFAULT_BONUS.ap : 0);
 const levelLabel = (level: WeightedCourse['level']) => (level === 'honors' ? 'Honors' : level === 'ap' ? 'AP / IB' : 'Regular');
 const gap = roundTo(exampleResult.weighted - exampleResult.unweighted, 2).toFixed(2);
+
+const SCHEDULE_COURSES: (WeightedCourse & { name: string })[] = [
+  { name: 'AP Biology', letter: 'A', credits: 1, level: 'ap' },
+  { name: 'Honors English', letter: 'A-', credits: 1, level: 'honors' },
+  { name: 'US History', letter: 'B+', credits: 1, level: 'regular' },
+  { name: 'Algebra II', letter: 'B', credits: 1, level: 'regular' },
+  { name: 'Spanish', letter: 'A', credits: 1, level: 'regular' },
+  { name: 'AP Psychology', letter: 'B', credits: 1, level: 'ap' },
+];
+const scheduleResult = calculateWeightedGpa(SCHEDULE_COURSES, DEFAULT_BONUS)!;
+const straightA = (levels: WeightedCourse['level'][]) =>
+  calculateWeightedGpa(levels.map((level) => ({ letter: 'A', credits: 1, level })), DEFAULT_BONUS)!.weighted.toFixed(2);
 
 export function buildWeightedGpaPage(): ToolPageEntry {
   return {
@@ -43,6 +55,7 @@ export function buildWeightedGpaPage(): ToolPageEntry {
       'Weighted and unweighted GPA side by side',
       'Credit-weighted average',
       'Plus/minus letter grades',
+      'Your courses are saved on this device, so they are here when you come back',
       'Runs in your browser, nothing is uploaded',
     ],
     sections: [
@@ -69,6 +82,67 @@ export function buildWeightedGpaPage(): ToolPageEntry {
         heading: 'Why the number on your transcript may not be the number a college uses',
         paragraphs: [
           'Some colleges recalculate GPA from your transcript with their own rules, for example by using only core academic courses or by removing school-specific bonus points. Check the admissions pages of the colleges you apply to to see which GPA they ask for.',
+        ],
+      },
+      {
+        heading: 'Worked example: a full six-course schedule',
+        paragraphs: [
+          `One A in an AP class is easy to follow. A real schedule is not, so here is a complete semester worked end to end with the same bonuses this calculator starts with (honors ${DEFAULT_BONUS.honors}, AP/IB ${DEFAULT_BONUS.ap.toFixed(1)}), one credit per course.`,
+          `Adding the six weighted values gives ${SCHEDULE_COURSES.map((c) => ((pointsForLetter(c.letter) ?? 0) + bonusOf(c.level)).toFixed(1)).join(' + ')} = ${SCHEDULE_COURSES.reduce((a, c) => a + (pointsForLetter(c.letter) ?? 0) + bonusOf(c.level), 0).toFixed(1)} points over 6 credits, a weighted GPA of ${scheduleResult.weighted.toFixed(2)}. The same grades with no bonuses total ${SCHEDULE_COURSES.reduce((a, c) => a + (pointsForLetter(c.letter) ?? 0), 0).toFixed(1)} points, an unweighted GPA of ${scheduleResult.unweighted.toFixed(2)}. The two AP courses and one honors course lift the result by ${roundTo(scheduleResult.weighted - scheduleResult.unweighted, 2).toFixed(2)}.`,
+        ],
+        bullets: SCHEDULE_COURSES.map(
+          (c) => `${c.name} (${levelLabel(c.level)}): ${c.letter} = ${(pointsForLetter(c.letter) ?? 0).toFixed(1)} points${bonusOf(c.level) ? ` + ${bonusOf(c.level).toFixed(1)} bonus` : ''} = ${((pointsForLetter(c.letter) ?? 0) + bonusOf(c.level)).toFixed(1)} weighted points`,
+        ),
+      },
+      {
+        heading: 'How many AP classes does it take to reach a 4.5 weighted GPA?',
+        paragraphs: [
+          'With straight As in six one-credit courses, the table below shows how the weighted GPA climbs as regular courses are swapped for honors and AP ones. Three AP courses are enough to pass 4.5, because each AP A contributes 5.0 instead of 4.0.',
+          'Real schedules include Bs, and a B in an AP course counts 4.0 weighted, exactly the same as an A in a regular course. That is why counselors say an AP B rarely hurts a weighted GPA, while it does lower the unweighted one.',
+        ],
+      },
+      {
+        heading: 'Common mistakes when calculating a weighted GPA',
+        paragraphs: [
+          'Most wrong answers come from one of these five slips. All of them are easy to avoid once you know to look for them.',
+        ],
+        bullets: [
+          'Using another school’s bonus. A 0.5/1.0 split is common but not universal; your school’s course catalog is the only source that counts.',
+          'Forgetting the credits. A two-credit course moves the average twice as much as a one-credit course, in either direction.',
+          'Adding a bonus to an F. Most schools, and this calculator, give no bonus on a failing grade.',
+          'Mixing semester and year grades. Pick one set of final grades and use it consistently; do not average a semester GPA with year-long course grades.',
+          'Comparing weighted GPAs across schools. Different bonuses and different ceilings (some schools cap at 4.5, others allow 5.0+) make the numbers non-comparable. Colleges know this and often recalculate.',
+        ],
+      },
+      {
+        heading: 'Weighted GPA on the 5.0 scale: what the ceiling really is',
+        paragraphs: [
+          'A weighted GPA is often described as “out of 5.0”, but 5.0 is only reachable if every course carries the full 1.0 bonus and every grade is an A. A student with a normal mix of regular, honors and AP courses has a personal ceiling well below 5.0, so a 4.3 from a mostly-regular schedule can represent stronger grades than a 4.3 built on bonuses.',
+          'When a college application asks for your GPA “on a 5.0 scale”, report the weighted number your school prints on your transcript, exactly as printed. Do not rescale it yourself: admissions teams compare it against the school profile your counselor sends, which explains the bonus rules behind it.',
+        ],
+      },
+    ],
+    lookupTables: [
+      {
+        heading: 'Grade points by course level',
+        intro: `Every letter grade converted to points, with the starting bonuses used above (honors +${DEFAULT_BONUS.honors}, AP/IB +${DEFAULT_BONUS.ap.toFixed(1)}). An F earns no bonus. If your school uses different bonuses, the regular column still applies and the other two shift by the same amount.`,
+        columns: ['Letter grade', 'Regular', 'Honors', 'AP / IB'],
+        rows: GPA_LETTERS.map((l) => {
+          const pts = pointsForLetter(l) ?? 0;
+          const isF = l === 'F';
+          return [l, pts.toFixed(1), (pts + (isF ? 0 : DEFAULT_BONUS.honors)).toFixed(1), (pts + (isF ? 0 : DEFAULT_BONUS.ap)).toFixed(1)];
+        }),
+      },
+      {
+        heading: 'Straight As in six courses: weighted GPA by schedule',
+        intro: 'Six one-credit courses, an A in every one. Only the course levels change, which isolates exactly what the bonus points are worth.',
+        columns: ['Schedule', 'Weighted GPA'],
+        rows: [
+          ['6 regular', straightA(['regular', 'regular', 'regular', 'regular', 'regular', 'regular'])],
+          ['4 regular, 2 honors', straightA(['regular', 'regular', 'regular', 'regular', 'honors', 'honors'])],
+          ['4 regular, 2 AP', straightA(['regular', 'regular', 'regular', 'regular', 'ap', 'ap'])],
+          ['2 regular, 1 honors, 3 AP', straightA(['regular', 'regular', 'honors', 'ap', 'ap', 'ap'])],
+          ['6 AP', straightA(['ap', 'ap', 'ap', 'ap', 'ap', 'ap'])],
         ],
       },
     ],
@@ -103,11 +177,29 @@ export function buildWeightedGpaPage(): ToolPageEntry {
       },
       {
         question: 'Does this calculator save my courses?',
-        answer: 'No. Everything is calculated in your browser and nothing you enter is uploaded or stored.',
+        answer:
+          'Yes, on this device only. Your courses and bonus settings are stored in your own browser (local storage) so they are still there when you return, and you can clear them any time by resetting the example courses or clearing site data. Nothing is uploaded to a server or shared with anyone.',
+      },
+      {
+        question: 'What is a good weighted GPA?',
+        answer:
+          'It depends on your school’s ceiling. On a schedule where 5.0 is possible, a weighted GPA above 4.0 means mostly As with some advanced courses, and above 4.3 is strong at most schools. Because bonuses differ between schools, colleges judge the number against your school’s profile and the courses you chose, not against a national cutoff.',
+      },
+      {
+        question: 'Does a B in an AP class hurt my weighted GPA?',
+        answer:
+          'Less than most students fear. With a 1.0 AP bonus, a B in an AP course is worth 4.0 weighted points, the same as an A in a regular course. It lowers your unweighted GPA, but on the weighted number it is neutral compared with taking the easier class and earning an A.',
+      },
+      {
+        question: 'Should I enter semester grades or year grades?',
+        answer:
+          'Enter the grades that appear on your transcript, and use one consistent set. If your transcript lists final year grades, use those with the full course credits. If it lists each semester separately, enter each semester as its own row with its own credits.',
       },
     ],
     related: [
       { path: '/weighted-vs-unweighted-gpa/', label: 'Weighted vs unweighted GPA', blurb: 'What each one means, with a side-by-side example.' },
+      { path: '/semester-gpa-calculator/', label: 'Semester GPA calculator', blurb: 'One semester of courses on the 4.0 scale.' },
+      { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Combine your previous GPA with this semester.' },
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'Semester and cumulative GPA on the 4.0 scale.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Turn a percentage into a letter and GPA points.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Build a course percentage from every assessment.' },
@@ -166,6 +258,20 @@ export function buildWeightedVsUnweightedPage(): ToolPageEntry {
           'Use your school’s weighted GPA when it is the one used for class rank or honors, and your unweighted GPA when you want a like-for-like number across schools. To see both for your own courses, use the weighted GPA calculator and enter your school’s bonus points.',
         ],
       },
+      {
+        heading: 'Which GPA goes on your transcript and your applications?',
+        paragraphs: [
+          'Most transcripts print one official GPA, and at schools that weight grades it is usually the weighted one. Some transcripts print both. When an application asks for your GPA it also asks for the scale, so a 4.17 is reported as “4.17 on a 5.0 weighted scale”, never as a bare number.',
+          'Class rank is normally calculated from the weighted GPA, because rank is meant to reward students who took harder courses. Honor roll and Latin honors (cum laude, magna cum laude) vary: some schools use the weighted number, others set unweighted cutoffs. Your student handbook states which one your school uses.',
+        ],
+      },
+      {
+        heading: 'Can you convert a weighted GPA to an unweighted one?',
+        paragraphs: [
+          'Not from the headline number alone. A weighted 4.17 could be straight As with two AP bonuses, or a mix of As and Bs with more bonuses, and those two transcripts have different unweighted GPAs. The conversion only works course by course: remove each bonus, convert each grade back to the 4.0 scale and average again.',
+          'That is exactly what the weighted GPA calculator shows. Enter the same courses once and it reports both numbers, which is the honest way to “convert”: recompute from the grades, never estimate from the weighted total.',
+        ],
+      },
     ],
     lookupTables: [
       {
@@ -205,6 +311,16 @@ export function buildWeightedVsUnweightedPage(): ToolPageEntry {
         question: 'Is a weighted GPA better than an unweighted GPA?',
         answer:
           'Neither is better. A weighted GPA rewards taking harder courses, while an unweighted GPA is easier to compare across schools.',
+      },
+      {
+        question: 'Is a 4.2 weighted GPA good?',
+        answer:
+          'At most schools, yes. A 4.2 weighted usually means a mix of As and Bs in a schedule with several honors or AP courses, and it sits above the 4.0 ceiling of an unweighted scale because of the bonuses. How selective colleges read it depends on your school’s bonus rules and how demanding your course choices were, which is why they also look at the unweighted grades behind it.',
+      },
+      {
+        question: 'Can I convert my weighted GPA to an unweighted GPA?',
+        answer:
+          'Only by recalculating from your individual grades: remove the bonus from each course, convert each letter to the plain 4.0 scale and average with credits. There is no reliable shortcut from the weighted total alone, because the same weighted GPA can be built from different grade mixes. The weighted GPA calculator reports both numbers from the same course list.',
       },
     ],
     related: [
@@ -333,6 +449,215 @@ export function buildMissCalculatorPage(): ToolPageEntry {
       { path: '/grading-scale/25-questions/', label: '25-question chart', blurb: 'The full table for a test of exactly 25 items.' },
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Use marks instead of a head count, with bonus points.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Turn a percentage into a letter and GPA points.' },
+    ],
+  };
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Semester GPA calculator page                                        */
+/* ------------------------------------------------------------------ */
+
+const SEMESTER_COURSES: (WeightedCourse & { name: string })[] = [
+  { name: 'Biology', letter: 'A', credits: 4, level: 'regular' },
+  { name: 'English Composition', letter: 'A-', credits: 3, level: 'regular' },
+  { name: 'College Algebra', letter: 'B+', credits: 3, level: 'regular' },
+  { name: 'World History', letter: 'B', credits: 3, level: 'regular' },
+  { name: 'Intro Psychology', letter: 'A', credits: 2, level: 'regular' },
+];
+const semesterResult = calculateWeightedGpa(SEMESTER_COURSES, DEFAULT_BONUS)!;
+const semesterPoints = SEMESTER_COURSES.reduce((a, c) => a + (pointsForLetter(c.letter) ?? 0) * c.credits, 0);
+
+export function buildSemesterGpaPage(): ToolPageEntry {
+  return {
+    slug: 'semester-gpa-calculator',
+    path: '/semester-gpa-calculator/',
+    navLabel: 'Semester GPA calculator',
+    h1: 'Semester GPA Calculator',
+    title: 'Semester GPA Calculator — One Semester, 4.0 Scale',
+    metaDescription:
+      'Free semester GPA calculator: enter this semester’s courses, grades and credits to get your semester GPA on the 4.0 scale, with quality points shown.',
+    badge: 'Semester GPA',
+    intro: `Your semester GPA is the credit-weighted average of one semester’s grades on the 4.0 scale. Add each course with its grade and credits and the calculator does the quality-points maths for you. Example: five courses totalling ${semesterResult.totalCredits} credits give a semester GPA of ${semesterResult.unweighted.toFixed(2)}.`,
+    keywords: [
+      'semester gpa calculator',
+      'calculate semester gpa',
+      'term gpa calculator',
+      'gpa calculator for one semester',
+      'semester grade point average',
+    ],
+    featureList: [
+      'Letter grades on the full plus/minus scale',
+      'Credit-weighted quality points, shown in the result',
+      'Add up to 20 courses',
+      'Your courses are saved on this device only',
+      'Runs in your browser, nothing is uploaded',
+    ],
+    sections: [
+      {
+        heading: 'How to calculate your semester GPA',
+        paragraphs: [
+          'Convert each letter grade to grade points (A = 4.0, A- = 3.7, B+ = 3.3, B = 3.0 and so on), multiply by the course credits to get quality points, add the quality points together and divide by the total credits. That is the whole formula: semester GPA = total quality points ÷ total credits.',
+        ],
+        bullets: [
+          'Use final semester grades, not midterm estimates, for an official-style result.',
+          'Credits matter: a 4-credit course moves your GPA more than a 1-credit course with the same grade.',
+          'Courses graded pass/fail are normally excluded from GPA. Leave them out here too.',
+          'Repeated courses follow your school’s policy: some replace the first grade, some average both. Follow your catalog.',
+        ],
+      },
+      {
+        heading: 'Semester GPA vs cumulative GPA',
+        paragraphs: [
+          'The semester GPA covers one term only. Your cumulative GPA combines every semester, weighted by credits, and it moves more slowly as you accumulate credits: one strong semester lifts a first-year cumulative a lot and a final-year cumulative only a little.',
+          'To see where a semester leaves your overall record, use the cumulative GPA calculator with your previous GPA and credits.',
+        ],
+      },
+      {
+        heading: 'What semester GPA do you need?',
+        paragraphs: [
+          'Work backwards from your goal. If your cumulative GPA is below your target, the semester GPA you need is higher than the target, because the new credits are averaged with everything before them. The cumulative calculator shows the combined result for any semester GPA you try, so you can test targets before the semester starts.',
+        ],
+      },
+    ],
+    example: {
+      heading: 'Worked example: a five-course semester',
+      scenario: `Five courses, ${semesterResult.totalCredits} credits in total. Quality points are grade points × credits.`,
+      rows: [
+        ...SEMESTER_COURSES.map((c) => ({
+          label: `${c.name}: ${c.letter}, ${c.credits} credits`,
+          value: `${((pointsForLetter(c.letter) ?? 0) * c.credits).toFixed(1)} quality points`,
+        })),
+        { label: 'Total quality points', value: semesterPoints.toFixed(1) },
+        { label: 'Semester GPA', value: semesterResult.unweighted.toFixed(2) },
+      ],
+      takeaway: `${semesterPoints.toFixed(1)} quality points ÷ ${semesterResult.totalCredits} credits = ${semesterResult.unweighted.toFixed(2)}. The 4-credit A in Biology does more work than any other course on the list.`,
+    },
+    faqs: [
+      {
+        question: 'How do I calculate my semester GPA?',
+        answer:
+          'Turn each grade into 4.0-scale points, multiply by the course credits, add those quality points and divide by the total credits. The calculator above does each step for up to 20 courses.',
+      },
+      {
+        question: 'Do pass/fail courses count in semester GPA?',
+        answer:
+          'Usually not. Pass/fail courses normally earn credits without grade points, so they are excluded from both the quality points and the credit total in the GPA formula. Check your school’s policy, then leave those courses out of the calculator.',
+      },
+      {
+        question: 'Is a 3.5 semester GPA good?',
+        answer:
+          'A 3.5 is a B+/A- average and sits comfortably above the 3.0 that many scholarships, athletic eligibility rules and good-standing policies require. Whether it helps your cumulative GPA depends on the GPA and credit total you started the semester with.',
+      },
+      {
+        question: 'Does this calculator save my courses?',
+        answer:
+          'Yes, on this device only, in your browser. Nothing is uploaded. Clearing your browser’s site data removes the saved courses.',
+      },
+    ],
+    related: [
+      { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Add this semester to your previous GPA.' },
+      { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'The full GPA tool with semester and cumulative modes.' },
+      { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Add honors and AP/IB bonus points.' },
+      { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Percent to letter and GPA points.' },
+    ],
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* Cumulative GPA calculator page                                      */
+/* ------------------------------------------------------------------ */
+
+const CUM_PREV_GPA = 3.4;
+const CUM_PREV_CREDITS = 60;
+const CUM_SEM_GPA = 3.8;
+const CUM_SEM_CREDITS = 15;
+const cumCombined = roundTo((CUM_PREV_GPA * CUM_PREV_CREDITS + CUM_SEM_GPA * CUM_SEM_CREDITS) / (CUM_PREV_CREDITS + CUM_SEM_CREDITS), 2);
+
+export function buildCumulativeGpaPage(): ToolPageEntry {
+  return {
+    slug: 'cumulative-gpa-calculator',
+    path: '/cumulative-gpa-calculator/',
+    navLabel: 'Cumulative GPA calculator',
+    h1: 'Cumulative GPA Calculator',
+    title: 'Cumulative GPA Calculator — Add a Semester to Your GPA',
+    metaDescription:
+      'Free cumulative GPA calculator: combine your previous GPA and credits with this semester’s GPA to see your new cumulative GPA, and test the GPA you need.',
+    badge: 'Cumulative GPA',
+    intro: `Your cumulative GPA is every semester combined, weighted by credits. Enter your current cumulative GPA and credits plus this semester’s GPA and credits to see the new total. Example: a ${CUM_PREV_GPA.toFixed(1)} over ${CUM_PREV_CREDITS} credits plus a ${CUM_SEM_GPA.toFixed(1)} semester of ${CUM_SEM_CREDITS} credits gives a cumulative GPA of ${cumCombined.toFixed(2)}.`,
+    keywords: [
+      'cumulative gpa calculator',
+      'calculate cumulative gpa',
+      'overall gpa calculator',
+      'gpa needed calculator',
+      'raise my gpa calculator',
+    ],
+    featureList: [
+      'Combines previous GPA and this semester by credits',
+      'Test any semester GPA to plan a target',
+      'Works for high school and college credit totals',
+      'Runs in your browser, nothing is uploaded',
+    ],
+    sections: [
+      {
+        heading: 'How cumulative GPA is calculated',
+        paragraphs: [
+          'A cumulative GPA is a credit-weighted average of everything you have completed. The formula is: (previous GPA × previous credits + semester GPA × semester credits) ÷ total credits. Credits are the weights, which is why a semester moves the cumulative less and less as your credit total grows.',
+          'If you know your quality points instead, the same idea applies directly: cumulative GPA = total quality points ÷ total credits, across all semesters.',
+        ],
+      },
+      {
+        heading: 'What GPA do I need this semester?',
+        paragraphs: [
+          'Rearrange the same formula. The semester GPA you need = (target cumulative GPA × total credits after this semester − previous GPA × previous credits) ÷ this semester’s credits.',
+          `Example: with ${CUM_PREV_CREDITS} credits at ${CUM_PREV_GPA.toFixed(1)} and ${CUM_SEM_CREDITS} credits this semester, reaching a 3.50 cumulative needs a semester GPA of ${roundTo((3.5 * (CUM_PREV_CREDITS + CUM_SEM_CREDITS) - CUM_PREV_GPA * CUM_PREV_CREDITS) / CUM_SEM_CREDITS, 2).toFixed(2)}. If the number the formula asks for is above 4.0, the target cannot be reached in one semester and needs to be spread over more credits.`,
+        ],
+      },
+      {
+        heading: 'Why cumulative GPA moves slowly',
+        paragraphs: [
+          'After 60 credits, a 15-credit semester is only a fifth of your record, so even a perfect 4.0 semester moves the cumulative by a fraction of the gap. That is not a flaw in the maths: it is what makes a cumulative GPA a stable record. It also means early semesters carry unusual weight, and that a realistic multi-semester plan beats a single heroic term.',
+        ],
+      },
+    ],
+    example: {
+      heading: 'Worked example: adding a semester',
+      scenario: `Previous record: ${CUM_PREV_CREDITS} credits at a ${CUM_PREV_GPA.toFixed(1)} cumulative GPA. This semester: ${CUM_SEM_CREDITS} credits at ${CUM_SEM_GPA.toFixed(1)}.`,
+      rows: [
+        { label: 'Previous quality points', value: (CUM_PREV_GPA * CUM_PREV_CREDITS).toFixed(0) },
+        { label: 'Semester quality points', value: (CUM_SEM_GPA * CUM_SEM_CREDITS).toFixed(0) },
+        { label: 'Total credits', value: String(CUM_PREV_CREDITS + CUM_SEM_CREDITS) },
+        { label: 'New cumulative GPA', value: cumCombined.toFixed(2) },
+      ],
+      takeaway: `A ${CUM_SEM_GPA.toFixed(1)} semester lifts the cumulative from ${CUM_PREV_GPA.toFixed(2)} to ${cumCombined.toFixed(2)}: a gain of ${roundTo(cumCombined - CUM_PREV_GPA, 2).toFixed(2)} from ${CUM_SEM_CREDITS} credits against a ${CUM_PREV_CREDITS}-credit base.`,
+    },
+    faqs: [
+      {
+        question: 'How do I calculate my cumulative GPA?',
+        answer:
+          'Multiply your previous cumulative GPA by your previous credits, multiply this semester’s GPA by its credits, add the two results and divide by the combined credits. The calculator above does it in one step.',
+      },
+      {
+        question: 'What GPA do I need to raise my cumulative GPA to a target?',
+        answer:
+          'Needed semester GPA = (target × total credits after the semester − previous GPA × previous credits) ÷ this semester’s credits. If the result is above 4.0, the target is out of reach this semester and has to be spread over more credits. Try values in the calculator to see the combined result directly.',
+      },
+      {
+        question: 'Does a repeated course replace the old grade in cumulative GPA?',
+        answer:
+          'It depends on your school. Many colleges replace the first attempt’s grade in the GPA while keeping both attempts on the transcript; others average the attempts. Your catalog’s grade replacement policy decides, so compute your official number their way.',
+      },
+      {
+        question: 'Can cumulative GPA go down?',
+        answer:
+          'Yes. Any semester below your current cumulative average pulls it down, by an amount that depends on the credit share of the new semester. The same formula shows the drop before it happens, which is useful for testing worst cases.',
+      },
+    ],
+    related: [
+      { path: '/semester-gpa-calculator/', label: 'Semester GPA calculator', blurb: 'Work out one semester from its courses.' },
+      { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'The full GPA tool with semester and cumulative modes.' },
+      { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Add honors and AP/IB bonus points.' },
+      { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the exam score you need for your target grade.' },
     ],
   };
 }

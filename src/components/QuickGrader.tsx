@@ -18,6 +18,7 @@ import {
   DEFAULT_CUTOFFS,
   LetterBand,
   SCALE_PLUS_MINUS,
+  SCALE_SEVEN_POINT,
   scaleFromCutoffs,
 } from '../utils/academicMath';
 import {
@@ -119,7 +120,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         if (typeof saved.total === 'string' && validateQuestionCount(saved.total).value !== null) setTotalInput(saved.total);
         if (typeof saved.decimals === 'boolean') setShowDecimals(saved.decimals);
         if (typeof saved.half === 'boolean') setHalfPoints(saved.half);
-        if (saved.scale === 'standard' || saved.scale === 'plus') setScaleType(saved.scale);
+        if (saved.scale === 'standard' || saved.scale === 'plus' || saved.scale === 'seven') setScaleType(saved.scale);
         if (saved.cutoffs && typeof saved.cutoffs === 'object') {
           const drafts: CutoffDrafts = {
             A: String(saved.cutoffs.A ?? ''),
@@ -171,7 +172,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
 
   const decimals: DecimalPrecision = showDecimals ? 1 : 0;
   const bands: LetterBand[] = useMemo(
-    () => (scaleType === 'plus' ? SCALE_PLUS_MINUS : scaleFromCutoffs(appliedCutoffs)),
+    () => (scaleType === 'plus' ? SCALE_PLUS_MINUS : scaleType === 'seven' ? SCALE_SEVEN_POINT : scaleFromCutoffs(appliedCutoffs)),
     [scaleType, appliedCutoffs]
   );
   const customCutoffsActive =
@@ -424,7 +425,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
   };
 
   const lowestPassing = bands.length > 1 ? bands[bands.length - 2].min : 60;
-  const scaleLabel = scaleType === 'standard' ? 'Standard A–F' : 'Plus / minus';
+  const scaleLabel = scaleType === 'standard' ? 'Standard A–F' : scaleType === 'seven' ? '7-point scale' : 'Plus / minus';
   const selectedWrong = wrongNum;
 
   const advancedSummary = [
@@ -581,6 +582,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                       options={[
                         { value: 'standard', label: 'A, B, C, D, F', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
                         { value: 'plus', label: 'Plus / minus', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
+                        { value: 'seven', label: '7-point', onSelect: () => triggerHapticFeedback(DEFAULT_HAPTIC_DURATION) },
                       ]}
                     />
 
@@ -600,9 +602,13 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                         </button>
                         <p className={`${HELP_TEXT} m-0`}>Your cutoffs are remembered on this device only.</p>
                       </div>
-                    ) : (
+                    ) : scaleType === 'plus' ? (
                       <p className="text-sm text-slate-700 dark:text-slate-300 m-0">
                         Fixed plus/minus cutoffs: A+ 97, A 93, A- 90, B+ 87, B 83, B- 80, C+ 77, C 73, C- 70, D+ 67, D 63, D- 60.
+                      </p>
+                    ) : (
+                      <p className="text-sm text-slate-700 dark:text-slate-300 m-0">
+                        Fixed 7-point cutoffs used by many schools: A 93, B 86, C 79, D 72, F below 72.
                       </p>
                     )}
                   </div>

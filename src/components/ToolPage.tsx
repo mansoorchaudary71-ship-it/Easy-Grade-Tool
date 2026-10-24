@@ -11,6 +11,9 @@ import { GradeCurveTool } from './tools/GradeCurveTool';
 import { LetterGradeTool } from './tools/LetterGradeTool';
 import { AverageGradeTool } from './tools/AverageGradeTool';
 import { WeightedGpaTool } from './tools/WeightedGpaTool';
+import { SemesterGpaTool } from './tools/SemesterGpaTool';
+import { CumulativeGpaTool } from './tools/CumulativeGpaTool';
+import { ForSchoolsEmbedTool } from './tools/ForSchoolsEmbedTool';
 import { MissCalculatorTool } from './tools/MissCalculatorTool';
 import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
 import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
@@ -24,6 +27,9 @@ const TOOLS: Record<string, React.ComponentType> = {
   'letter-grade-calculator': LetterGradeTool,
   'average-grade-calculator': AverageGradeTool,
   'weighted-gpa-calculator': WeightedGpaTool,
+  'semester-gpa-calculator': SemesterGpaTool,
+  'cumulative-gpa-calculator': CumulativeGpaTool,
+  'for-schools': ForSchoolsEmbedTool,
   'how-many-questions-can-i-miss': MissCalculatorTool,
   'grading-scale': GradingScaleIndexTool,
 };
@@ -65,6 +71,11 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       />
 
       <ToolHeading badge={entry.navLabel} title={entry.h1} description={entry.intro} />
+
+      <p className="max-w-4xl text-sm text-slate-500 dark:text-slate-400 -mt-6 m-0">
+        {SITE_OWNER ? <>By <span className="font-semibold text-slate-700 dark:text-slate-200">{SITE_OWNER.name}</span>, {SITE_OWNER.jobTitle.toLowerCase()} · </> : null}
+        Last updated {formatDate(CONTENT_REVIEWED_ON)}
+      </p>
 
       {(entry.questions || Tool) && (
         <section aria-label={`${entry.h1} tool`} data-print-area data-print-title={entry.h1}>

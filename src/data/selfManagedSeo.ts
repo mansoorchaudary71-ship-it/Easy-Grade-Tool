@@ -19,10 +19,14 @@ export const SELF_MANAGED_SEO_PATHS: string[] = [
   '/weighted-vs-unweighted-gpa',
   '/how-many-questions-can-i-miss',
   '/grading-scale',
+  '/semester-gpa-calculator',
+  '/cumulative-gpa-calculator',
+  '/for-schools',
+  '/blog',
 ];
 
 /** Route prefixes whose pages render their own <SEO>. */
-export const SELF_MANAGED_SEO_PREFIXES: string[] = ['/easy-grade-calculator/', '/calculator/', '/grading-scale/'];
+export const SELF_MANAGED_SEO_PREFIXES: string[] = ['/easy-grade-calculator/', '/calculator/', '/grading-scale/', '/blog/'];
 
 export function isSelfManagedSeoPath(pathname: string): boolean {
   const clean = normalizePath(pathname);

@@ -10,7 +10,7 @@ export type ToolKey =
 
 export type CalculationMode = 'quick-grader' | 'points' | 'weighted';
 
-export type GradingScaleType = 'standard' | 'plus';
+export type GradingScaleType = 'standard' | 'plus' | 'seven';
 
 export interface AssessmentItem {
   id: number;

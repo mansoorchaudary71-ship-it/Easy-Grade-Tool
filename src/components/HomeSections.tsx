@@ -113,6 +113,30 @@ export const HomeSections: React.FC = () => {
 
   return (
     <div className="mt-10 print:hidden">
+      {/* 0. Quick answers: the lookups people search for most */}
+      <section aria-labelledby={`${baseId}-quick-answers`} className="cs-section pt-4">
+        <p className="cs-eyebrow">Quick answers</p>
+        <h2 id={`${baseId}-quick-answers`} className="cs-h2">Grade questions, answered instantly</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
+        <div className="grid sm:grid-cols-2 gap-3 max-w-4xl">
+          {[
+            { q: 'What grade is 17 out of 20?', a: '85% — a B on the standard scale.', path: '/test-grade-calculator/' },
+            { q: 'What grade is 44 out of 60?', a: '73.3% — a C on the standard scale.', path: '/test-grade-calculator/' },
+            { q: 'What grade is 9 out of 10?', a: '90% — an A on the standard scale.', path: '/grading-scale/10-questions/' },
+            { q: 'What grade is 23 out of 25?', a: '92% — an A on the standard scale.', path: '/grading-scale/25-questions/' },
+          ].map((item) => (
+            <Link
+              key={item.q}
+              to={item.path}
+              className="block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 no-underline hover:border-teal-600 transition-colors"
+            >
+              <span className="block font-bold text-slate-900 dark:text-white">{item.q}</span>
+              <span className="block text-sm text-slate-600 dark:text-slate-400">{item.a} Check any other score →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* 1. Explore calculators */}
       <section aria-labelledby={`${baseId}-explore`} className="cs-section pt-4">
         <p className="cs-eyebrow">Explore</p>
