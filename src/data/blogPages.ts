@@ -19,7 +19,7 @@ export function buildBlogIndexPage(): ToolPageEntry {
     h1: 'Grading Guides & Articles',
     title: 'Blog — Grading Guides & Teacher Tips | Easy Grade Tool',
     metaDescription:
-      'Practical guides from Easy Grade Tool: grade a stack of tests in 15 minutes, decide when to curve grades, and understand weighted GPA, semester GPA and grade scales.',
+      'Practical guides: grade a stack of tests in 15 minutes, decide when to curve grades, and understand weighted GPA, semester GPA and grade scales.',
     badge: 'Blog',
     schemaType: 'WebPage',
     intro:
@@ -83,9 +83,9 @@ export function buildGradeFasterPost(): ToolPageEntry {
     path: '/blog/how-to-grade-30-tests-in-15-minutes/',
     navLabel: 'Grade 30 tests in 15 minutes',
     h1: 'How to Grade a Stack of 30 Tests in 15 Minutes — Without Errors',
-    title: 'How to Grade a Stack of 30 Tests in 15 Minutes (Without Errors)',
+    title: 'How to Grade 30 Tests in 15 Minutes — Without Errors',
     metaDescription:
-      'Grading 30 tests by hand means redoing the same percentage maths 30 times. Build the grading chart once, count wrong answers, and read off every grade. Here is the workflow.',
+      'Grading 30 tests by hand repeats the same maths 30 times. Build the chart once, count wrong answers, read off every grade. The workflow, explained.',
     badge: 'Teacher guide',
     schemaType: 'WebPage',
     intro:
@@ -169,9 +169,9 @@ export function buildCurveGuidePost(): ToolPageEntry {
     path: '/blog/when-to-curve-grades/',
     navLabel: 'When to curve grades',
     h1: 'When to Curve Grades: A Teacher’s Guide to the Five Methods',
-    title: 'When to Curve Grades — The Five Methods and the Fairness Checks',
+    title: 'When to Curve Grades — Five Methods & Fairness Checks',
     metaDescription:
-      'Should you curve that test? The signs a test needs a curve, the five standard methods explained with numbers, when not to curve, and how to explain the curve to students.',
+      'Should you curve that test? The signs it needs a curve, the five methods with real numbers, when to leave scores alone, and how to explain it.',
     badge: 'Teacher guide',
     schemaType: 'WebPage',
     intro:

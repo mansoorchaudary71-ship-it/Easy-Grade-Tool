@@ -11,9 +11,9 @@ export function buildForSchoolsPage(): ToolPageEntry {
     path: '/for-schools/',
     navLabel: 'For schools',
     h1: 'Free Grade Calculators for Your School Website',
-    title: 'For Schools — Embed Free Grade Calculators on Your School Website',
+    title: 'Embed Free Grade Calculators — For Schools',
     metaDescription:
-      'Add a free EZ Grader, GPA or grade curve calculator to your school, district or classroom website. No ads in the tool, no sign-up, private by design. Copy the embed code.',
+      'Add a free EZ Grader or GPA calculator to your school website. No ads in the tool, no sign-up, nothing uploaded. Copy the embed code and paste it in.',
     badge: 'For schools & districts',
     intro:
       'Add a free EZ Grader chart or GPA calculator to your school, district or classroom website in about two minutes. No ads inside the calculator, no sign-up for students, and nothing anyone types is uploaded: every calculation runs in the visitor’s own browser. Pick a calculator above, copy the code, and paste it into any page.',

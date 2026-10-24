@@ -230,7 +230,7 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     h1: 'Grade Curve Calculator',
     title: 'Grade Curve Calculator — 5 Curving Methods Compared',
     metaDescription:
-      'Paste class test scores and curve them five ways: add flat points, lift the top score to 100, square-root curve, move the class average to a target, or apply a bell curve.',
+      'Paste class scores and curve them five ways: flat points, top score to 100, square root, target average or bell curve. Before-and-after letters included.',
     badge: 'For teachers and TAs',
     intro:
       'Paste the raw scores, choose a curving method and compare before and after: every score, the class mean and median, and the letter grade each student ends up with.',

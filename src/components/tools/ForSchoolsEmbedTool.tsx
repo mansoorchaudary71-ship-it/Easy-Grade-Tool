@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 import { BTN_PRIMARY, CARD, INPUT, LABEL } from './ui';
 
@@ -31,6 +31,12 @@ export const ForSchoolsEmbedTool: React.FC = () => {
   const [widthKey, setWidthKey] = useState('responsive');
   const [school, setSchool] = useState('');
   const [copied, setCopied] = useState<string | null>(null);
+  // The preview iframe src is set only after mount, so the prerendered page contains no
+  // crawlable ?embed=1 URL (avoids a parameterized duplicate of the chart page in indexes).
+  const [previewOn, setPreviewOn] = useState(false);
+  useEffect(() => {
+    setPreviewOn(true);
+  }, []);
 
   const choice = CHOICES.find((c) => c.key === choiceKey) ?? CHOICES[0];
   const width = WIDTHS.find((w) => w.key === widthKey) ?? WIDTHS[0];
@@ -113,7 +119,7 @@ export const ForSchoolsEmbedTool: React.FC = () => {
       <section aria-label="Live preview" className={`${CARD} space-y-4 print:hidden`}>
         <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Live preview</h2>
         <iframe
-          src={`${choice.path}?embed=1`}
+          src={previewOn ? `${choice.path}?embed=1` : undefined}
           width="100%"
           height={choice.height}
           style={{ border: '1px solid #e5e7eb', borderRadius: 12, maxWidth: 720 }}
