@@ -1,0 +1,178 @@
+{
+  "/": {
+    "hash": "a1ac7b8a8d06bf2c",
+    "lastmod": "2026-10-24"
+  },
+  "/grade-calculator/": {
+    "hash": "1368b1576142c97d",
+    "lastmod": "2026-10-24"
+  },
+  "/gpa-calculator/": {
+    "hash": "163441689f3c60fe",
+    "lastmod": "2026-10-24"
+  },
+  "/cgpa-to-percentage-calculator/": {
+    "hash": "e3bca4cae9245ab4",
+    "lastmod": "2026-10-24"
+  },
+  "/tip-calculator/": {
+    "hash": "69a83200591ff2bd",
+    "lastmod": "2026-10-24"
+  },
+  "/percentage-calculator/": {
+    "hash": "40c21491fda3a884",
+    "lastmod": "2026-10-24"
+  },
+  "/loan-calculator/": {
+    "hash": "47c753924c52ab11",
+    "lastmod": "2026-10-24"
+  },
+  "/mortgage-calculator/": {
+    "hash": "640d3945da49a100",
+    "lastmod": "2026-10-24"
+  },
+  "/password-generator/": {
+    "hash": "23a9b0e4465c6aa5",
+    "lastmod": "2026-10-24"
+  },
+  "/about/": {
+    "hash": "cc0300e4b859570d",
+    "lastmod": "2026-10-24"
+  },
+  "/privacy/": {
+    "hash": "ae02c806f4ad32f3",
+    "lastmod": "2026-10-23"
+  },
+  "/terms/": {
+    "hash": "b10e8913f9529190",
+    "lastmod": "2026-10-23"
+  },
+  "/final-exam-grade-calculator/": {
+    "hash": "0ee39793a52cd868",
+    "lastmod": "2026-10-24"
+  },
+  "/test-grade-calculator/": {
+    "hash": "62aafd37eb5b51af",
+    "lastmod": "2026-10-24"
+  },
+  "/grade-curve-calculator/": {
+    "hash": "22f08aa216ac9fad",
+    "lastmod": "2026-10-24"
+  },
+  "/letter-grade-calculator/": {
+    "hash": "e95a3231995a4030",
+    "lastmod": "2026-10-24"
+  },
+  "/average-grade-calculator/": {
+    "hash": "59190e5528e69220",
+    "lastmod": "2026-10-24"
+  },
+  "/weighted-gpa-calculator/": {
+    "hash": "1f207052f5fc7445",
+    "lastmod": "2026-10-24"
+  },
+  "/semester-gpa-calculator/": {
+    "hash": "035ae6250a52aa4a",
+    "lastmod": "2026-10-24"
+  },
+  "/cumulative-gpa-calculator/": {
+    "hash": "572f71043217afc9",
+    "lastmod": "2026-10-24"
+  },
+  "/for-schools/": {
+    "hash": "231c71beb2ff391e",
+    "lastmod": "2026-10-24"
+  },
+  "/blog/": {
+    "hash": "011ab1d6417f65ac",
+    "lastmod": "2026-10-24"
+  },
+  "/blog/how-to-grade-30-tests-in-15-minutes/": {
+    "hash": "1d2e795067f71b7f",
+    "lastmod": "2026-10-24"
+  },
+  "/blog/when-to-curve-grades/": {
+    "hash": "ece86769939037b3",
+    "lastmod": "2026-10-24"
+  },
+  "/weighted-vs-unweighted-gpa/": {
+    "hash": "89e8327f6e65cd36",
+    "lastmod": "2026-10-24"
+  },
+  "/how-many-questions-can-i-miss/": {
+    "hash": "2d7a13f0a350423b",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/": {
+    "hash": "6444a5b88b389e38",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/5-questions/": {
+    "hash": "af58fd6c28eb7638",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/10-questions/": {
+    "hash": "46439f407b81e4f9",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/12-questions/": {
+    "hash": "016f2eed778a6728",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/15-questions/": {
+    "hash": "a4c0f42025d270ec",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/16-questions/": {
+    "hash": "ac66e3bd4c260393",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/18-questions/": {
+    "hash": "fb6a9ebaff173fad",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/20-questions/": {
+    "hash": "18de8b7973f54c8d",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/25-questions/": {
+    "hash": "113354fb60905e89",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/30-questions/": {
+    "hash": "b904b07240c03f9c",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/35-questions/": {
+    "hash": "fd8d0911e19f73b3",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/40-questions/": {
+    "hash": "72c5a8dc882ce9a6",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/45-questions/": {
+    "hash": "a11aebe030862d99",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/50-questions/": {
+    "hash": "2473662467a38c10",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/60-questions/": {
+    "hash": "6c528785d20c0d09",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/75-questions/": {
+    "hash": "54bcf77351c8669f",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/80-questions/": {
+    "hash": "e50417c6f6c3aab7",
+    "lastmod": "2026-10-24"
+  },
+  "/grading-scale/100-questions/": {
+    "hash": "bd04cd1fdbad5ebb",
+    "lastmod": "2026-10-24"
+  }
+}
