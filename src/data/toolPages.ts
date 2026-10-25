@@ -3,7 +3,17 @@ import { buildAverageGradePage, buildGradingScaleIndexPage, buildQuestionCountPa
 import { GRADING_SCALE_SIZES } from './gradingScaleSizes';
 import { buildCumulativeGpaPage, buildMissCalculatorPage, buildSemesterGpaPage, buildWeightedGpaPage, buildWeightedVsUnweightedPage } from './gpaPages';
 import { buildForSchoolsPage } from './forSchoolsPage';
-import { buildBlogIndexPage, buildCurveGuidePost, buildGradeFasterPost } from './blogPages';
+import {
+  buildBlogIndexPage,
+  buildCurveGuidePost,
+  buildGradeFasterPost,
+  buildGradingSystemsPost,
+  buildHighSchoolVsCollegePost,
+} from './blogPages';
+import { buildGpaToLetterPage, buildLetterToGpaPage } from './gpaLetterPages';
+import { buildCollegeGpaPage, buildHighSchoolGpaPage } from './schoolGpaPages';
+import { buildFinalPlannerPage } from './finalPlannerPage';
+import { buildCgpaUniversityPages } from './cgpaUniversityPages';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, applyCurve, calculateTestGrade, computeStats, percentToLetter, roundTo } from '../utils/academicMath';
 
 /**
@@ -476,6 +486,8 @@ const CORE_PAGES: Record<CoreToolPageSlug, ToolPageEntry> = {
     related: [
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'Combine letters and credits into semester and cumulative GPA.' },
       { path: '/cgpa-to-percentage-calculator/', label: 'CGPA to percentage', blurb: '10-point, 5-point and 4-point conversions by university.' },
+      { path: '/gpa-to-letter-grade/', label: 'GPA to letter grade', blurb: 'Convert a GPA back to its letter grade.' },
+      { path: '/letter-grade-to-gpa/', label: 'Letter grade to GPA', blurb: 'What each letter is worth in grade points.' },
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Get the percentage first, then the letter.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Build the course percentage from every assessment.' },
     ],
@@ -533,9 +545,17 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
   'blog': buildBlogIndexPage(),
   'blog/how-to-grade-30-tests-in-15-minutes': buildGradeFasterPost(),
   'blog/when-to-curve-grades': buildCurveGuidePost(),
+  'blog/grading-systems-explained': buildGradingSystemsPost(),
+  'blog/high-school-vs-college-gpa': buildHighSchoolVsCollegePost(),
   'weighted-vs-unweighted-gpa': buildWeightedVsUnweightedPage(),
   'how-many-questions-can-i-miss': buildMissCalculatorPage(),
   'grading-scale': buildGradingScaleIndexPage(),
+  'gpa-to-letter-grade': buildGpaToLetterPage(),
+  'letter-grade-to-gpa': buildLetterToGpaPage(),
+  'high-school-gpa-calculator': buildHighSchoolGpaPage(),
+  'college-gpa-calculator': buildCollegeGpaPage(),
+  'final-grade-planner': buildFinalPlannerPage(),
+  ...Object.fromEntries(buildCgpaUniversityPages().map((entry) => [entry.slug, entry] as const)),
   ...Object.fromEntries(GRADING_SCALE_SIZES.map((n) => {
     const entry = buildQuestionCountPage(n);
     return [entry.slug, entry] as const;

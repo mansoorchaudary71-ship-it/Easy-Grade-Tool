@@ -2,7 +2,44 @@
 <html lang="en">
   <head>
     <!-- Stale-asset recovery: reloads once if a hashed /assets/ file from an older deploy 404s -->
-    <script src="/asset-recovery.js"></script>
+        <script>
+      /* Stale-asset recovery — inlined (was /asset-recovery.js) so it is not a separate render-blocking request.
+         If a hashed /assets/ script or stylesheet from a previous deploy 404s, reload the page ONCE with a
+         cache-busting query so the CDN returns fresh HTML; the query is removed again right after. */
+      (function () {
+        var KEY = 'egt-asset-recovery';
+        var PARAM = '_r';
+
+        // Clean the cache-busting parameter after a recovery reload.
+        try {
+          var url = new URL(window.location.href);
+          if (url.searchParams.has(PARAM)) {
+            url.searchParams.delete(PARAM);
+            window.history.replaceState(null, '', url.pathname + url.search + url.hash);
+          }
+        } catch (e) { /* ignore */ }
+
+        window.addEventListener(
+          'error',
+          function (event) {
+            var el = event && event.target;
+            if (!el || (el.tagName !== 'SCRIPT' && el.tagName !== 'LINK')) return;
+            var src = el.src || el.href || '';
+            if (src.indexOf('/assets/') === -1) return;
+            try {
+              if (window.sessionStorage.getItem(KEY)) return; // only one attempt per tab session
+              window.sessionStorage.setItem(KEY, String(Date.now()));
+            } catch (e) {
+              return; // storage unavailable: do not risk a reload loop
+            }
+            var next = new URL(window.location.href);
+            next.searchParams.set(PARAM, String(Date.now()));
+            window.location.replace(next.toString());
+          },
+          true
+        );
+      })();
+    </script>
     <!-- Google tag (gtag.js): the loader below injects gtag.js after first paint -->
     <script>
   window.dataLayer = window.dataLayer || [];

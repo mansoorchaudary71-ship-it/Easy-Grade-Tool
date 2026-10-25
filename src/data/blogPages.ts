@@ -1,5 +1,14 @@
 import type { ToolPageEntry } from './toolPages';
-import { applyCurve, computeStats, roundTo } from '../utils/academicMath';
+import {
+  SCALE_PLUS_MINUS,
+  SCALE_SEVEN_POINT,
+  SCALE_STANDARD,
+  applyCurve,
+  computeStats,
+  percentToLetter,
+  roundTo,
+} from '../utils/academicMath';
+import { calculateWeightedGpa } from '../utils/gpaMath';
 
 /**
  * /blog/ — the on-site content hub. Posts are ToolPage entries with schemaType 'WebPage' and no tool,
@@ -32,6 +41,7 @@ export function buildBlogIndexPage(): ToolPageEntry {
         paragraphs: [
           '“How to Grade a Stack of 30 Tests in 15 Minutes” is the workflow teachers ask about most: build the chart once, then grade by lookup instead of redoing the same division thirty times.',
           '“When to Curve Grades” walks through the five curving methods, the signs that a test actually needs one, and the fairness checks to run before curved grades are posted.',
+          '“Grading Systems Explained” compares every system a student is likely to meet — A–F, plus/minus, 7-point, pass/fail, credit/no credit and standards-based — with the same scores graded under each. “High School GPA vs College GPA” explains what actually changes after graduation: credits, weighting, and why the same grades produce different GPAs.',
         ],
       },
       {
@@ -71,6 +81,8 @@ export function buildBlogIndexPage(): ToolPageEntry {
     related: [
       { path: '/blog/how-to-grade-30-tests-in-15-minutes/', label: 'How to Grade a Stack of 30 Tests in 15 Minutes', blurb: 'The chart-first workflow that turns grading into lookup.' },
       { path: '/blog/when-to-curve-grades/', label: 'When to Curve Grades: A Teacher’s Guide', blurb: 'Five methods, the fairness checks, and when to leave scores alone.' },
+      { path: '/blog/grading-systems-explained/', label: 'Grading Systems Explained', blurb: 'A–F, pass/fail, standards-based and ungrading, compared.' },
+      { path: '/blog/high-school-vs-college-gpa/', label: 'High School GPA vs College GPA', blurb: 'Credits, weighting and what changes after graduation.' },
       { path: '/for-schools/', label: 'For Schools: free embeds', blurb: 'Put these calculators on your own school website.' },
       { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Honors and AP/IB bonuses, side-by-side results.' },
     ],
@@ -242,6 +254,232 @@ export function buildCurveGuidePost(): ToolPageEntry {
       { path: '/blog/how-to-grade-30-tests-in-15-minutes/', label: 'Grade 30 Tests in 15 Minutes', blurb: 'The chart-first grading workflow.' },
       { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Percentage and letter for a single test.' },
       { path: '/for-schools/', label: 'For Schools: free embeds', blurb: 'Put these calculators on your school website.' },
+    ],
+  };
+}
+
+/* -------------------------------------------------------------------------- */
+/* New guides (2026-10-25): grading systems + HS vs college GPA. Every number */
+/* is computed with percentToLetter / calculateWeightedGpa, never typed.      */
+/* -------------------------------------------------------------------------- */
+
+const sysScores = [92, 85, 78, 68];
+const sysTableRows = sysScores.map((s) => [
+  `${s}%`,
+  percentToLetter(s, SCALE_STANDARD).letter,
+  percentToLetter(s, SCALE_PLUS_MINUS).letter,
+  percentToLetter(s, SCALE_SEVEN_POINT).letter,
+]);
+
+export function buildGradingSystemsPost(): ToolPageEntry {
+  return {
+    slug: 'blog/grading-systems-explained',
+    path: '/blog/grading-systems-explained/',
+    navLabel: 'Grading systems explained',
+    h1: 'Grading Systems Explained: A–F, Pass/Fail, Standards-Based & More',
+    title: 'Grading Systems Explained — A–F, Pass/Fail, Standards-Based',
+    metaDescription:
+      'The grading systems US schools use — A–F, plus/minus, 7-point, pass/fail, standards-based and ungrading — compared on the same scores.',
+    badge: 'Teacher guide',
+    schemaType: 'WebPage',
+    intro:
+      'A grade is a translation: a student’s work goes in, a symbol comes out, and the symbol only means something if everyone reading it shares the same dictionary. This guide compares the dictionaries schools actually use, grades the same scores under each, and explains when each system helps and when it hides information.',
+    keywords: [
+      'grading systems explained',
+      'types of grading systems',
+      'a-f grading system',
+      'pass fail grading',
+      'standards-based grading',
+      'mastery grading vs traditional',
+    ],
+    featureList: [
+      'A–F, plus/minus and 7-point scales compared',
+      'Pass/fail, credit/no credit and satisfactory systems',
+      'Standards-based, mastery, contract and specifications grading',
+      'The same scores graded under every system',
+    ],
+    sections: [
+      {
+        heading: 'The five grading systems US schools use most',
+        paragraphs: [
+          'The A–F letter system is the default: A for excellent, B for good, C for satisfactory, D for passing but weak, F for failing, with cutoffs usually at 90/80/70/60. The plus/minus variant splits each letter (A-, B+, B-) so a 91 and a 99 stop sharing the same symbol. The 7-point variant, common in middle and high schools, moves A up to 93 and compresses the bands below it — the same 91% that earns an A on a 10-point scale earns a B on a 7-point one, which is why the scale matters as much as the score.',
+          'Pass/fail drops letters entirely: work either meets the bar or it does not. Credit/no credit and satisfactory/unsatisfactory are the same idea with different labels, used for electives, internships and courses where ranking students would distort the learning. The trade is information for safety: nobody can tell a strong pass from a bare pass, which is the point when the goal is trying something hard without GPA risk.',
+        ],
+      },
+      {
+        heading: 'Standards-based grading: report the skill, not the average',
+        paragraphs: [
+          'Standards-based grading replaces one course grade with a report per learning standard: a student can be exceeding in argumentation, meeting in evidence and approaching in conventions, all in the same essay. Averages disappear, so one bad week in September stops dragging down a December grade, and retakes measure the current skill instead of the old one. It demands more from teachers — every standard needs its own scale and evidence — and it confuses readers who expect a single letter, which is why schools that adopt it usually publish a conversion guide alongside it.',
+        ],
+      },
+      {
+        heading: 'The alternatives: mastery, contract, specifications, ungrading',
+        paragraphs: [
+          'Mastery grading lets students revise until they demonstrate the skill, with the grade reflecting the final state rather than the first attempt. Contract grading agrees the grade in advance: complete the listed work to the listed standard and the grade follows. Specifications grading (specs grading) grades bundles of work pass/fail against published specs, with the bundle chosen deciding the maximum grade. Ungrading drops grades during the course in favour of feedback and self-assessment, with a final grade negotiated or assigned at the end. All four trade simple comparability for a closer link between the grade and what the student can actually do.',
+        ],
+      },
+      {
+        heading: 'How to choose a grading system',
+        paragraphs: [
+          'Match the system to the decision the grade must support. If the grade feeds a GPA, a transcript or a transfer, use a system with fine distinctions and published cutoffs — A–F or plus/minus — because readers need comparability. If the grade must encourage risk-taking in an elective or a first attempt at a hard skill, pass/fail protects that. If the grade must tell a student exactly what to improve, standards-based reporting beats any single letter. And whatever system you choose, publish its cutoffs before the course starts: a grading system students cannot read in advance is not a system, it is a surprise.',
+        ],
+      },
+    ],
+    lookupTables: [
+      {
+        heading: 'The same scores under three letter scales',
+        intro: 'Computed with the same scales the letter grade calculator uses. Note how 91% changes letter between scales.',
+        columns: ['Score', 'A–F (90/80/70/60)', 'Plus/minus', '7-point (93/85/77/70)'],
+        rows: sysTableRows,
+      },
+    ],
+    example: {
+      heading: 'Worked example: one score, three letters',
+      scenario: 'A student scores 91% on a test. The letter depends entirely on the school’s scale.',
+      rows: [
+        { label: 'A–F scale (90/80/70/60)', value: percentToLetter(91, SCALE_STANDARD).letter },
+        { label: 'Plus/minus scale', value: percentToLetter(91, SCALE_PLUS_MINUS).letter },
+        { label: '7-point scale (93/85/77/70)', value: percentToLetter(91, SCALE_SEVEN_POINT).letter },
+      ],
+      takeaway:
+        'Same work, three different letters. Always state the scale beside a letter grade — without it, the letter is ambiguous.',
+    },
+    faqs: [
+      {
+        question: 'What is the most common grading system in the US?',
+        answer:
+          'The A–F letter system with 90/80/70/60 cutoffs, with plus/minus variants common in colleges and 7-point variants common in middle and high schools. Pass/fail appears mainly for electives, and standards-based grading is growing in K-12 without replacing letters on transcripts.',
+      },
+      {
+        question: 'What is standards-based grading?',
+        answer:
+          'Reporting achievement per learning standard instead of one averaged course grade. A student can exceed one standard, meet another and approach a third, and retakes measure current skill rather than averaging old failures in.',
+      },
+      {
+        question: 'Is pass/fail better than letter grades?',
+        answer:
+          'For different goals. Pass/fail protects risk-taking and reduces GPA anxiety, but hides distinctions readers of a transcript may need. It suits electives and exploratory courses; it suits a major’s core requirements less well.',
+      },
+      {
+        question: 'Can a school switch grading systems mid-year?',
+        answer:
+          'It can, but it should publish the new cutoffs and a conversion for work already graded, because students planned under the old rules. Retroactive changes to already-awarded grades are where switches become unfair.',
+      },
+    ],
+    related: [
+      { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Percent to letter on every scale in this guide.' },
+      { path: '/blog/when-to-curve-grades/', label: 'When to Curve Grades', blurb: 'Five methods and the fairness checks.' },
+      { path: '/gpa-to-letter-grade/', label: 'GPA to letter grade', blurb: 'Convert a GPA back to its letter.' },
+      { path: '/for-schools/', label: 'For Schools: free embeds', blurb: 'Put these calculators on your own school website.' },
+    ],
+  };
+}
+
+const hsVsCourses = [
+  { name: 'AP Calculus', letter: 'A', credits: 1, level: 'ap' as const },
+  { name: 'Honors English', letter: 'B+', credits: 1, level: 'honors' as const },
+  { name: 'US History', letter: 'A', credits: 1, level: 'regular' as const },
+  { name: 'AP Biology', letter: 'B', credits: 1, level: 'ap' as const },
+  { name: 'Spanish II', letter: 'A', credits: 1, level: 'regular' as const },
+];
+const hsVsResult = calculateWeightedGpa(hsVsCourses, { honors: 0.5, ap: 1.0 })!;
+const collegeVsCourses = hsVsCourses.map((c, i) => ({
+  ...c,
+  credits: [2, 4, 3, 4, 2][i],
+  level: 'regular' as const,
+}));
+const collegeVsResult = calculateWeightedGpa(collegeVsCourses, { honors: 0.5, ap: 1.0 })!;
+
+export function buildHighSchoolVsCollegePost(): ToolPageEntry {
+  return {
+    slug: 'blog/high-school-vs-college-gpa',
+    path: '/blog/high-school-vs-college-gpa/',
+    navLabel: 'High school vs college GPA',
+    h1: 'High School GPA vs College GPA: What Actually Changes',
+    title: 'High School GPA vs College GPA — Credits, Weighting & Targets',
+    metaDescription:
+      'High school GPA vs college GPA: why the same grades give different GPAs — credit hours, AP and honors weighting, cumulative maths, and the targets that matter in each.',
+    badge: 'Student guide',
+    schemaType: 'WebPage',
+    intro:
+      'Students arrive at college expecting their GPA to behave the way it did at school, and it does not: credits replace equal-weighted courses, weighting rules change, and the cumulative maths gets slower every semester. This guide shows exactly what changes, with the same grades computed both ways.',
+    keywords: [
+      'high school gpa vs college gpa',
+      'college gpa vs high school gpa',
+      'how is college gpa different',
+      'weighted gpa high school vs college',
+      'does high school gpa matter in college',
+    ],
+    featureList: [
+      'The same grades computed as HS weighted, HS unweighted and college GPA',
+      'Credit hours explained with real numbers',
+      'AP and honors weighting, and where it stops applying',
+      'Cumulative GPA behaviour by year',
+    ],
+    sections: [
+      {
+        heading: 'The three differences that matter',
+        paragraphs: [
+          'First, credits. High school courses usually count equally — one credit each — so every grade pulls the average equally. College courses carry different credit hours, so a 4-credit A outweighs a 2-credit A by double. Second, weighting. High schools add bonuses for honors and AP courses; colleges generally do not weight by course difficulty in the GPA itself (a college A is 4.0 whether the course was introductory or advanced), though admissions readers absolutely notice rigor separately. Third, the record itself: high school GPA is often reported per year and recomputed by colleges, while college GPA is one cumulative figure that follows you across all four years.',
+        ],
+      },
+      {
+        heading: 'Why the same grades give different GPAs',
+        paragraphs: [
+          'Take five grades — A, B+, A, B, A — and compute them three ways. As an unweighted high school GPA they average 3.66. Add the usual honors (+0.5) and AP (+1.0) bonuses and the weighted high school GPA is 4.16. As a college GPA with credit hours 2/4/3/4/2 and no difficulty bonuses, the same letters give 3.55, because the credits — not the course labels — decide the weight. The letters never changed; only the weighting rules did.',
+        ],
+      },
+      {
+        heading: 'Cumulative GPA slows down every year',
+        paragraphs: [
+          'In high school, each year is a fresh average of that year’s courses, and colleges often recompute from the transcript anyway. In college, every semester joins one cumulative average, so the same strong semester moves a first-year cumulative far more than a final-year one. That is why early semesters deserve disproportionate attention: a weak first year is not erased by a strong final year, it is diluted by it — slowly.',
+        ],
+      },
+      {
+        heading: 'What to aim for, in each system',
+        paragraphs: [
+          'In high school, aim for the strongest unweighted GPA you can pair with the hardest courses you can handle — colleges read both numbers together, and a slightly lower GPA with AP rigor usually beats a perfect GPA with none. In college, aim for consistency in high-credit courses first, because credits are the lever: one A in a 4-credit course is worth two As in 2-credit courses. And in both systems, check the catalog: thresholds for good standing, scholarships and program entry are set by institutions, not by any national table.',
+        ],
+      },
+    ],
+    example: {
+      heading: 'Worked example: the same five grades, three GPAs',
+      scenario: 'Grades A, B+, A, B, A — as a high school record (with AP/honors bonuses) and as a college record (credit hours 2/4/3/4/2, no bonuses).',
+      rows: [
+        { label: 'High school unweighted GPA', value: hsVsResult.unweighted.toFixed(2) },
+        { label: 'High school weighted GPA', value: hsVsResult.weighted.toFixed(2) },
+        { label: 'College GPA (credit-weighted)', value: collegeVsResult.unweighted.toFixed(2) },
+      ],
+      takeaway:
+        'Identical letters, three different GPAs. The difference is entirely in the weighting rules — which is why a GPA without its system attached is an incomplete number.',
+    },
+    faqs: [
+      {
+        question: 'Does my high school GPA matter in college?',
+        answer:
+          'For admission, yes — colleges read it alongside course rigor and test scores where used. Once enrolled, your college GPA starts fresh: high school grades do not enter the college cumulative figure.',
+      },
+      {
+        question: 'Is college GPA harder to raise than high school GPA?',
+        answer:
+          'Usually, because of cumulative maths: each new semester is averaged with all previous credits, so the more credits banked, the slower the cumulative moves. High school yearly averages reset the denominator each year.',
+      },
+      {
+        question: 'Do AP courses boost college GPA?',
+        answer:
+          'Not directly: colleges generally do not add AP bonuses to the GPA itself. AP work can earn college credit, which changes the courses you take, but an A in a college course is 4.0 regardless of its difficulty.',
+      },
+      {
+        question: 'What GPA should I aim for in college?',
+        answer:
+          'Around 3.0 keeps most scholarships and programs open; 3.5 and above is strong for competitive graduate programs. The binding thresholds are your school’s and program’s own — check the catalog, then use the target-GPA solver to plan semesters.',
+      },
+    ],
+    related: [
+      { path: '/high-school-gpa-calculator/', label: 'High school GPA calculator', blurb: 'Weighted and unweighted, side by side.' },
+      { path: '/college-gpa-calculator/', label: 'College GPA calculator', blurb: 'Credit-weighted GPA for college courses.' },
+      { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Combine semesters into one GPA.' },
+      { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Honors and AP/IB bonuses.' },
     ],
   };
 }

@@ -39,6 +39,36 @@ for _n in GRADING_SCALE_SIZES:
         f"Each answer is {round(100 / _n, 2):g}%. Percent and letter for every score",
     )
 
+# Cards for the 2026-10-25 competitor-gap pages (kept in the script so a
+# future --missing run regenerates them; existing PNGs are never overwritten).
+CARDS.update({
+    "og-cards/gpa-to-letter-grade-1200x630.png": ("GPA to Letter\nGrade Converter", "Convert any GPA to its letter on the 4.0 scale"),
+    "og-cards/letter-grade-to-gpa-1200x630.png": ("Letter Grade\nto GPA Converter", "What each letter is worth in grade points"),
+    "og-cards/high-school-gpa-calculator-1200x630.png": ("High School\nGPA Calculator", "Weighted and unweighted GPA, side by side"),
+    "og-cards/college-gpa-calculator-1200x630.png": ("College\nGPA Calculator", "Credit-weighted GPA on the 4.0 scale"),
+    "og-cards/final-grade-planner-1200x630.png": ("Final Grade\nPlanner", "What every class needs on its final exam"),
+    "og-cards/blog-grading-systems-explained-1200x630.png": ("Grading Systems\nExplained", "A-F, pass/fail, standards-based and more"),
+    "og-cards/blog-high-school-vs-college-gpa-1200x630.png": ("High School GPA\nvs College GPA", "Credits, weighting and what changes after graduation"),
+})
+
+# One card per verified university CGPA page. Read from
+# src/data/cgpaUniversities.ts so the list matches the pages exactly: only
+# verified entries, excluding the generic 'normal' standard formula.
+_uni_src = open(os.path.join(os.path.dirname(__file__), "..", "src", "data", "cgpaUniversities.ts"), encoding="utf8").read()
+for _m in re.finditer(
+    r"id:\s*'([^']+)'.*?name:\s*'([^']+)'.*?formulaLabel:\s*'([^']+)'.*?verified:\s*(true|false)",
+    _uni_src,
+    re.S,
+):
+    _id, _name, _formula, _verified = _m.groups()
+    if _verified != "true" or _id == "normal":
+        continue
+    _short = re.sub(r"\s*\(.*$", "", _name).strip()
+    CARDS[f"og-cards/cgpa-to-percentage-{_id}-1200x630.png"] = (
+        f"{_short} CGPA\nto Percentage",
+        f"{_formula}. Free converter with the university formula",
+    )
+
 def gradient(w, h, c1, c2):
     img = Image.new("RGB", (w, h), c1)
     px = img.load()

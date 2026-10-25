@@ -202,6 +202,8 @@ export function buildWeightedGpaPage(): ToolPageEntry {
       { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Combine your previous GPA with this semester.' },
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'Semester and cumulative GPA on the 4.0 scale.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Turn a percentage into a letter and GPA points.' },
+      { path: '/high-school-gpa-calculator/', label: 'High school GPA calculator', blurb: 'Weighted and unweighted GPA, side by side.' },
+      { path: '/college-gpa-calculator/', label: 'College GPA calculator', blurb: 'Credit-weighted GPA for college courses.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Build a course percentage from every assessment.' },
     ],
   };
@@ -327,6 +329,7 @@ export function buildWeightedVsUnweightedPage(): ToolPageEntry {
       { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Enter your courses and your school’s bonus points.' },
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'Semester and cumulative GPA on the 4.0 scale.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Percent to letter and GPA points.' },
+      { path: '/high-school-gpa-calculator/', label: 'High school GPA calculator', blurb: 'Weighted and unweighted GPA, side by side.' },
       { path: '/grade-calculator/', label: 'Weighted grade calculator', blurb: 'Build a course percentage from every assessment.' },
     ],
   };
@@ -519,6 +522,24 @@ export function buildSemesterGpaPage(): ToolPageEntry {
           'Work backwards from your goal. If your cumulative GPA is below your target, the semester GPA you need is higher than the target, because the new credits are averaged with everything before them. The cumulative calculator shows the combined result for any semester GPA you try, so you can test targets before the semester starts.',
         ],
       },
+      {
+        heading: 'Incompletes and deferred grades',
+        paragraphs: [
+          'An incomplete, usually shown as an I on a transcript, is not a grade yet — it is a deadline. Most schools exclude an incomplete from the GPA until the work is finished, and the course only enters the average once a real letter replaces it. The risk is the lapse rule: if the work is not completed by the school’s deadline, the incomplete often converts to an F automatically, and from that moment it counts like any other failing grade. If you carry an incomplete, leave the course out of this calculator until it resolves, and confirm the lapse date with your instructor in writing.',
+        ],
+      },
+      {
+        heading: 'Midterm grades are not your semester GPA',
+        paragraphs: [
+          'Midterm grades are progress reports, and at most schools they never reach the transcript. They are useful warnings — a midterm C tells you where the semester is heading — but they carry no credits and no grade points, so they cannot be averaged into a semester GPA. The common mistake is to enter midterm letters here and treat the result as official; wait for final grades, or label any midterm-based figure clearly as a projection. If your school does record midterm grades on the transcript, it will say so in the catalog, and that is the exception, not the rule.',
+        ],
+      },
+      {
+        heading: 'Reading a semester GPA on a transcript',
+        paragraphs: [
+          'A transcript usually prints two numbers per term: the term GPA for that semester and the cumulative GPA to date. The term GPA is exactly what this calculator computes. The cumulative figure next to it is the running average across all terms, and the two can differ sharply — a strong term after a weak start lifts the term GPA a lot and the cumulative only a little. Transcripts also separate attempted hours from earned hours, so a withdrawn course may appear in attempted hours without contributing grade points. When a transcript number disagrees with this calculator, the usual causes are a repeated course handled differently, a pass/fail course included or excluded, or rounding to two decimals.',
+        ],
+      },
     ],
     example: {
       heading: 'Worked example: a five-course semester',
@@ -554,12 +575,34 @@ export function buildSemesterGpaPage(): ToolPageEntry {
         answer:
           'Yes, on this device only, in your browser. Nothing is uploaded. Clearing your browser’s site data removes the saved courses.',
       },
+      {
+        question: 'Do midterm grades affect my GPA?',
+        answer:
+          'At most schools, no. Midterm grades are progress reports that do not reach the transcript and carry no grade points, so they are not averaged into a semester GPA. Use final grades here for an official-style result, and treat any midterm-based figure as a projection.',
+      },
+      {
+        question: 'Why is my transcript GPA different from this calculator?',
+        answer:
+          'The usual causes are a repeated course handled under a different policy, a pass/fail course included or excluded, a course the school weights differently, or rounding to two decimals. If none of those explains it, compare the transcript’s attempted and earned hours against the courses you entered — a missing or extra course is the most common cause.',
+      },
+      {
+        question: 'Can I use this calculator for quarter-system schools?',
+        answer:
+          'Yes — the formula is identical, because a quarter GPA is also quality points divided by credits. The only difference is the credit unit: quarter credits are smaller than semester credits, roughly two-thirds of one, so a 5-credit quarter course converts to about 3.33 semester credits for transfer. Within one quarter, though, just enter the quarter courses and quarter credits as they are.',
+      },
+      {
+        question: 'What is a term GPA? Is it the same as a semester GPA?',
+        answer:
+          'Term GPA is the general name for exactly this figure — the GPA of one academic term, whether that term is a semester, a quarter or a trimester. Semester GPA is the same calculation with the term named. If your school runs quarters, your term GPA is your quarter GPA, computed the same way.',
+      },
     ],
     related: [
       { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Add this semester to your previous GPA.' },
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'The full GPA tool with semester and cumulative modes.' },
       { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Add honors and AP/IB bonus points.' },
       { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: 'Percent to letter and GPA points.' },
+      { path: '/high-school-gpa-calculator/', label: 'High school GPA calculator', blurb: 'Weighted and unweighted GPA, side by side.' },
+      { path: '/college-gpa-calculator/', label: 'College GPA calculator', blurb: 'Credit-weighted GPA for college courses.' },
     ],
   };
 }
@@ -658,6 +701,8 @@ export function buildCumulativeGpaPage(): ToolPageEntry {
       { path: '/gpa-calculator/', label: 'GPA calculator', blurb: 'The full GPA tool with semester and cumulative modes.' },
       { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Add honors and AP/IB bonus points.' },
       { path: '/final-exam-grade-calculator/', label: 'Final exam calculator', blurb: 'Find the exam score you need for your target grade.' },
+      { path: '/final-grade-planner/', label: 'Final grade planner', blurb: 'What every class needs on its final exam.' },
+      { path: '/college-gpa-calculator/', label: 'College GPA calculator', blurb: 'Credit-weighted GPA for college courses.' },
     ],
   };
 }

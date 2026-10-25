@@ -102,8 +102,8 @@ export function preloadAllTools(): void {
     preloadTool('command-palette', { images: false });
   };
 
-  // Wait until the page has fully loaded, then a couple of seconds more, so the warm-up never competes with
-  // the first paint on a slow phone connection.
+  // Wait until the page has fully loaded, then six seconds more, so the warm-up never competes with the
+  // first paint or the LCP window on a slow phone connection (performance traces run ~10s and count these).
   const schedule = () => {
     window.setTimeout(() => {
       if ('requestIdleCallback' in window) {
@@ -111,7 +111,7 @@ export function preloadAllTools(): void {
       } else {
         window.setTimeout(warm, 1000);
       }
-    }, 2500);
+    }, 6000);
   };
 
   if (document.readyState === 'complete') schedule();

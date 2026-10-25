@@ -17,6 +17,12 @@ import { ForSchoolsEmbedTool } from './tools/ForSchoolsEmbedTool';
 import { MissCalculatorTool } from './tools/MissCalculatorTool';
 import { GradingScaleIndexTool } from './tools/GradingScaleIndexTool';
 import { QuestionCountChartTool } from './tools/QuestionCountChartTool';
+import { GpaLetterTool } from './tools/GpaLetterTool';
+import type { SemesterGpaRow } from './tools/SemesterGpaTool';
+import type { WeightedGpaRow } from './tools/WeightedGpaTool';
+import { FinalPlannerTool } from './tools/FinalPlannerTool';
+import { UniversityCgpaTool } from './tools/UniversityCgpaTool';
+import { CGPA_UNIVERSITY_PAGES } from '../data/cgpaUniversityPages';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
 import { ToolGuideKey } from '../data/toolGuideContent';
@@ -32,7 +38,51 @@ const TOOLS: Record<string, React.ComponentType> = {
   'for-schools': ForSchoolsEmbedTool,
   'how-many-questions-can-i-miss': MissCalculatorTool,
   'grading-scale': GradingScaleIndexTool,
+  'gpa-to-letter-grade': GpaLetterTool,
+  'letter-grade-to-gpa': () => <GpaLetterTool defaultDirection="letterToGpa" />,
+  // Wrappers with their own default rows and storage keys, so these pages
+  // never render the same tool defaults — or read the same saved rows — as
+  // the weighted / semester pages they complement.
+  'high-school-gpa-calculator': () => (
+    <WeightedGpaTool
+      startRows={HIGH_SCHOOL_ROWS}
+      storageKey="egt-high-school-gpa-v1"
+      inputsLabel="High school GPA inputs"
+    />
+  ),
+  'college-gpa-calculator': () => (
+    <SemesterGpaTool
+      startRows={COLLEGE_ROWS}
+      storageKey="egt-college-gpa-v1"
+      inputsLabel="College GPA inputs"
+    />
+  ),
+  'final-grade-planner': FinalPlannerTool,
 };
+
+const HIGH_SCHOOL_ROWS: WeightedGpaRow[] = [
+  { id: 1, name: 'AP Calculus', letter: 'A', credits: '1', level: 'ap' },
+  { id: 2, name: 'Honors English', letter: 'B+', credits: '1', level: 'honors' },
+  { id: 3, name: 'US History', letter: 'A', credits: '1', level: 'regular' },
+  { id: 4, name: 'AP Biology', letter: 'B', credits: '1', level: 'ap' },
+  { id: 5, name: 'Spanish II', letter: 'A', credits: '1', level: 'regular' },
+];
+
+const COLLEGE_ROWS: SemesterGpaRow[] = [
+  { id: 1, name: 'Biology', letter: 'A', credits: '4' },
+  { id: 2, name: 'English Composition', letter: 'A-', credits: '3' },
+  { id: 3, name: 'College Algebra', letter: 'B+', credits: '3' },
+  { id: 4, name: 'History', letter: 'B', credits: '3' },
+  { id: 5, name: 'Art', letter: 'A', credits: '2' },
+];
+
+/** One converter per verified university, with that university's formula baked in. */
+const UNIVERSITY_TOOLS: Record<string, React.ComponentType> = Object.fromEntries(
+  CGPA_UNIVERSITY_PAGES.map((uni) => [
+    `cgpa-to-percentage/${uni.id}`,
+    () => <UniversityCgpaTool university={uni} />,
+  ]),
+);
 
 /** Pages that have a long-form guide. Generated pages carry their own sections instead. */
 const GUIDES: Record<string, ToolGuideKey> = {
@@ -50,7 +100,7 @@ const formatDate = (iso: string) =>
 
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
-  const Tool: React.ComponentType | undefined = TOOLS[slug];
+  const Tool: React.ComponentType | undefined = TOOLS[slug] ?? UNIVERSITY_TOOLS[slug];
   const guideKey = GUIDES[slug];
   // Same ids the prerender step uses for the FAQPage schema, so visible FAQs and structured data always match.
   const faqItems = entry.faqs.map((f, i) => ({ id: `${slug}-faq-${i}`, category: slug, question: f.question, answer: f.answer }));

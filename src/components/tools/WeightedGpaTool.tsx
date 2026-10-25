@@ -12,13 +12,15 @@ import {
 } from '../../utils/gpaMath';
 import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, RESULT_BOX } from './ui';
 
-interface Row {
+export interface WeightedGpaRow {
   id: number;
   name: string;
   letter: string;
   credits: string;
   level: CourseLevel;
 }
+
+type Row = WeightedGpaRow;
 
 const MAX_ROWS = 20;
 
@@ -30,7 +32,7 @@ const START_ROWS: Row[] = [
 
 const SELECT = `${INPUT} appearance-auto cursor-pointer`;
 
-const STORAGE_KEY = 'egt-weighted-gpa-v1';
+const DEFAULT_STORAGE_KEY = 'egt-weighted-gpa-v1';
 
 interface SavedState {
   rows: Row[];
@@ -38,9 +40,9 @@ interface SavedState {
   ap: string;
 }
 
-function loadSaved(): SavedState | null {
+function loadSaved(storageKey: string): SavedState | null {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(storageKey);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as SavedState;
     if (!Array.isArray(parsed.rows) || parsed.rows.length === 0 || parsed.rows.length > MAX_ROWS) return null;
@@ -61,16 +63,29 @@ function parseBonus(raw: string): { value: number | null; error: string | null }
   return { value: n, error: null };
 }
 
-export const WeightedGpaTool: React.FC = () => {
-  const [rows, setRows] = useState<Row[]>(START_ROWS);
-  const [nextId, setNextId] = useState(4);
+export interface WeightedGpaToolProps {
+  /** Default rows when nothing is saved yet (defaults to the weighted set). */
+  startRows?: WeightedGpaRow[];
+  /** Own storage key, so pages that reuse this tool never share saved rows. */
+  storageKey?: string;
+  inputsLabel?: string;
+}
+
+export const WeightedGpaTool: React.FC<WeightedGpaToolProps> = ({
+  startRows,
+  storageKey = DEFAULT_STORAGE_KEY,
+  inputsLabel = 'Weighted GPA inputs',
+}) => {
+  const initialRows = startRows ?? START_ROWS;
+  const [rows, setRows] = useState<Row[]>(initialRows);
+  const [nextId, setNextId] = useState(initialRows.length + 1);
   const [honorsRaw, setHonorsRaw] = useState(String(DEFAULT_BONUS.honors));
   const [apRaw, setApRaw] = useState(String(DEFAULT_BONUS.ap));
   const hydrated = useRef(false);
 
   // Restore courses saved on this device (after mount, so prerendered HTML and hydration match).
   useEffect(() => {
-    const saved = loadSaved();
+    const saved = loadSaved(storageKey);
     if (saved) {
       setRows(saved.rows);
       setNextId(Math.max(...saved.rows.map((r) => r.id)) + 1);
@@ -78,22 +93,22 @@ export const WeightedGpaTool: React.FC = () => {
       setApRaw(saved.ap);
     }
     hydrated.current = true;
-  }, []);
+  }, [storageKey]);
 
   // Save on this device only: nothing is uploaded, and clearing site data removes it.
   useEffect(() => {
     if (!hydrated.current) return;
     try {
       const state: SavedState = { rows, honors: honorsRaw, ap: apRaw };
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      window.localStorage.setItem(storageKey, JSON.stringify(state));
     } catch {
       /* storage blocked: the calculator still works, courses just are not remembered */
     }
-  }, [rows, honorsRaw, apRaw]);
+  }, [rows, honorsRaw, apRaw, storageKey]);
 
   const reset = () => {
-    setRows(START_ROWS);
-    setNextId(4);
+    setRows(initialRows);
+    setNextId(initialRows.length + 1);
     setHonorsRaw(String(DEFAULT_BONUS.honors));
     setApRaw(String(DEFAULT_BONUS.ap));
   };
@@ -127,7 +142,7 @@ export const WeightedGpaTool: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <section aria-label="Weighted GPA inputs" className={`${CARD} space-y-6 print:hidden`}>
+      <section aria-label={inputsLabel} className={`${CARD} space-y-6 print:hidden`}>
         <div className="grid sm:grid-cols-2 gap-4 max-w-xl">
           <div>
             <label htmlFor="wg-honors" className={LABEL}>Honors bonus</label>

@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import { getToolKeyFromPath, CONTACT_EMAIL, TOOL_PATHS } from '../data/constants';
 import { NAV_ITEMS } from '../data/navItems';
+import { CGPA_UNIVERSITY_PAGES } from '../data/cgpaUniversityPages';
 import { isSamePath } from '../utils/paths';
 import { ToolKey } from '../types';
 import { preloadTool } from '../utils/toolPreloader';
@@ -120,6 +121,15 @@ const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string 
   { label: 'Blog', title: 'Grading guides and articles', path: '/blog/' },
   { label: 'Grade 30 Tests in 15 Minutes', title: 'How to grade a stack of 30 tests in 15 minutes', path: '/blog/how-to-grade-30-tests-in-15-minutes/' },
   { label: 'When to Curve Grades', title: 'When to curve grades: a teacher’s guide', path: '/blog/when-to-curve-grades/' },
+  { label: 'Grading Systems Explained', title: 'Grading systems explained: A–F, pass/fail, standards-based and more', path: '/blog/grading-systems-explained/' },
+  { label: 'High School vs College GPA', title: 'High school GPA vs college GPA: what actually changes', path: '/blog/high-school-vs-college-gpa/' },
+  // One link per verified university CGPA page, generated from the same data
+  // as the pages so the footer can never drift out of sync with them.
+  ...CGPA_UNIVERSITY_PAGES.map((u) => ({
+    label: `${u.name.split(' (')[0]} CGPA to %`,
+    title: `${u.name} CGPA to percentage`,
+    path: `/cgpa-to-percentage/${u.id}/`,
+  })),
 ];
 
 export const Footer: React.FC<FooterProps> = ({

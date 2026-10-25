@@ -4,15 +4,17 @@ import { parseStrictNumber } from '../../utils/academicMath';
 import { GPA_LETTERS, calculateWeightedGpa, pointsForLetter } from '../../utils/gpaMath';
 import { BTN_PRIMARY, CARD, ERROR_TEXT, INPUT, LABEL, RESULT_BOX } from './ui';
 
-interface Row {
+export interface SemesterGpaRow {
   id: number;
   name: string;
   letter: string;
   credits: string;
 }
 
+type Row = SemesterGpaRow;
+
 const MAX_ROWS = 20;
-const STORAGE_KEY = 'egt-semester-gpa-v1';
+const DEFAULT_STORAGE_KEY = 'egt-semester-gpa-v1';
 
 const START_ROWS: Row[] = [
   { id: 1, name: 'Biology', letter: 'A', credits: '4' },
@@ -22,9 +24,9 @@ const START_ROWS: Row[] = [
 
 const SELECT = `${INPUT} appearance-auto cursor-pointer`;
 
-function loadSaved(): Row[] | null {
+function loadSaved(storageKey: string): Row[] | null {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(storageKey);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Row[];
     if (!Array.isArray(parsed) || parsed.length === 0 || parsed.length > MAX_ROWS) return null;
@@ -37,28 +39,41 @@ function loadSaved(): Row[] | null {
   }
 }
 
-export const SemesterGpaTool: React.FC = () => {
-  const [rows, setRows] = useState<Row[]>(START_ROWS);
-  const [nextId, setNextId] = useState(4);
+export interface SemesterGpaToolProps {
+  /** Default rows when nothing is saved yet (defaults to the semester set). */
+  startRows?: SemesterGpaRow[];
+  /** Own storage key, so pages that reuse this tool never share saved rows. */
+  storageKey?: string;
+  inputsLabel?: string;
+}
+
+export const SemesterGpaTool: React.FC<SemesterGpaToolProps> = ({
+  startRows,
+  storageKey = DEFAULT_STORAGE_KEY,
+  inputsLabel = 'Semester GPA inputs',
+}) => {
+  const initialRows = startRows ?? START_ROWS;
+  const [rows, setRows] = useState<Row[]>(initialRows);
+  const [nextId, setNextId] = useState(initialRows.length + 1);
   const hydrated = useRef(false);
 
   useEffect(() => {
-    const saved = loadSaved();
+    const saved = loadSaved(storageKey);
     if (saved) {
       setRows(saved);
       setNextId(Math.max(...saved.map((r) => r.id)) + 1);
     }
     hydrated.current = true;
-  }, []);
+  }, [storageKey]);
 
   useEffect(() => {
     if (!hydrated.current) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
+      window.localStorage.setItem(storageKey, JSON.stringify(rows));
     } catch {
       /* storage blocked: the calculator still works */
     }
-  }, [rows]);
+  }, [rows, storageKey]);
 
   const parsedRows = rows.map((r) => {
     const credits = parseStrictNumber(r.credits);
@@ -88,13 +103,13 @@ export const SemesterGpaTool: React.FC = () => {
     setNextId((n) => n + 1);
   };
   const reset = () => {
-    setRows(START_ROWS);
-    setNextId(4);
+    setRows(initialRows);
+    setNextId(initialRows.length + 1);
   };
 
   return (
     <div className="space-y-6">
-      <section aria-label="Semester GPA inputs" className={`${CARD} space-y-6 print:hidden`}>
+      <section aria-label={inputsLabel} className={`${CARD} space-y-6 print:hidden`}>
         <ul className="space-y-4 list-none p-0 m-0" aria-label="Courses">
           {parsedRows.map((p, i) => {
             const r = p.row;

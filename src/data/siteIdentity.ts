@@ -25,6 +25,6 @@ export const SITE_OWNER: SitePerson | null = {
 export const ACADEMIC_REVIEWER: (SitePerson & { credential: string }) | null = null;
 
 /** ISO date (YYYY-MM-DD) the formulas and grading tables were last checked. Bump when you re-verify. */
-export const CONTENT_REVIEWED_ON = '2026-10-24';
+export const CONTENT_REVIEWED_ON = '2026-10-25';
 
 export const CORRECTIONS_EMAIL = 'support@easygradetool.com';

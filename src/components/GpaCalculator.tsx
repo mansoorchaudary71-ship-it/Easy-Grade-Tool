@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from './SlashLink';
 import { Plus, X, Download, Printer } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -40,17 +40,72 @@ const GRADE_OPTIONS = [
   'F',
 ];
 
+/** Courses and settings are saved on this device only (same pattern as the semester GPA tool). */
+const STORAGE_KEY = 'egt-gpa-calculator-v1';
+
+interface SavedGpaState {
+  courses: CourseItem[];
+  aPlusValue: 4.0 | 4.33;
+  priorCumulativeGpa: string;
+  priorCreditsEarned: string;
+}
+
+function loadSaved(): SavedGpaState | null {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as SavedGpaState;
+    if (!parsed || !Array.isArray(parsed.courses) || parsed.courses.length === 0 || parsed.courses.length > 50) return null;
+    const courses = parsed.courses.filter(
+      (c) => c && typeof c.name === 'string' && typeof c.credits === 'string' && typeof c.grade === 'string',
+    ) as CourseItem[];
+    if (!courses.length) return null;
+    return {
+      courses,
+      aPlusValue: parsed.aPlusValue === 4.33 ? 4.33 : 4.0,
+      priorCumulativeGpa: typeof parsed.priorCumulativeGpa === 'string' ? parsed.priorCumulativeGpa : '',
+      priorCreditsEarned: typeof parsed.priorCreditsEarned === 'string' ? parsed.priorCreditsEarned : '',
+    };
+  } catch {
+    return null;
+  }
+}
+
 export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
   setToast,
   hideHeading = false,
   hideSeo = false,
 }) => {
-  const [courses, setCourses] = useState<CourseItem[]>(INITIAL_COURSES);
+  const [courses, setCourses] = useState<CourseItem[]>(() => loadSaved()?.courses ?? INITIAL_COURSES);
 
   // Settings & Global Inputs
-  const [aPlusValue, setAPlusValue] = useState<4.0 | 4.33>(4.0);
-  const [priorCumulativeGpa, setPriorCumulativeGpa] = useState<string>('');
-  const [priorCreditsEarned, setPriorCreditsEarned] = useState<string>('');
+  const [aPlusValue, setAPlusValue] = useState<4.0 | 4.33>(() => loadSaved()?.aPlusValue ?? 4.0);
+  const [priorCumulativeGpa, setPriorCumulativeGpa] = useState<string>(() => loadSaved()?.priorCumulativeGpa ?? '');
+  const [priorCreditsEarned, setPriorCreditsEarned] = useState<string>(() => loadSaved()?.priorCreditsEarned ?? '');
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ courses, aPlusValue, priorCumulativeGpa, priorCreditsEarned }),
+      );
+    } catch {
+      // Storage unavailable (private mode, disabled): the calculator still works.
+    }
+  }, [courses, aPlusValue, priorCumulativeGpa, priorCreditsEarned]);
+
+  const handleClearSaved = () => {
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Ignore storage errors.
+    }
+    setCourses(INITIAL_COURSES);
+    setAPlusValue(4.0);
+    setPriorCumulativeGpa('');
+    setPriorCreditsEarned('');
+    setToast?.('Saved courses cleared.');
+  };
 
   // Grade point mapping based on aPlusValue
   const getGradeValue = (grade: string): number => {
@@ -342,13 +397,23 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             </AnimatePresence>
           </div>
 
-          <button
-            type="button"
-            className="mt-6 bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
-            onClick={handleAddCourse}
-          >
-            <Plus className="w-4 h-4" aria-hidden="true" /> Add course
-          </button>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              className="bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
+              onClick={handleAddCourse}
+            >
+              <Plus className="w-4 h-4" aria-hidden="true" /> Add course
+            </button>
+            <button
+              type="button"
+              className="rounded-full font-bold px-6 py-3 text-xs sm:text-sm cursor-pointer border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-rose-400 hover:text-rose-600 transition-colors"
+              onClick={handleClearSaved}
+            >
+              Clear saved courses
+            </button>
+            <span className="text-xs text-slate-500 dark:text-slate-400">Your courses are saved on this device only.</span>
+          </div>
         </section>
 
         {/* Output: Instantly calculate and display Semester and Cumulative GPA as clear text */}

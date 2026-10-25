@@ -23,10 +23,15 @@ export const SELF_MANAGED_SEO_PATHS: string[] = [
   '/cumulative-gpa-calculator',
   '/for-schools',
   '/blog',
+  '/gpa-to-letter-grade',
+  '/letter-grade-to-gpa',
+  '/high-school-gpa-calculator',
+  '/college-gpa-calculator',
+  '/final-grade-planner',
 ];
 
 /** Route prefixes whose pages render their own <SEO>. */
-export const SELF_MANAGED_SEO_PREFIXES: string[] = ['/easy-grade-calculator/', '/calculator/', '/grading-scale/', '/blog/'];
+export const SELF_MANAGED_SEO_PREFIXES: string[] = ['/easy-grade-calculator/', '/calculator/', '/grading-scale/', '/blog/', '/cgpa-to-percentage/'];
 
 export function isSelfManagedSeoPath(pathname: string): boolean {
   const clean = normalizePath(pathname);

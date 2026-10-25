@@ -262,6 +262,12 @@ export const ProgrammaticCalculatorView: React.FC<ProgrammaticCalculatorViewProp
               CGPA to Percentage
             </Link>
             <Link
+              to="/final-grade-planner"
+              className="inline-flex items-center min-h-[48px] px-5 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
+            >
+              Final Grade Planner
+            </Link>
+            <Link
               to="/"
               className="inline-flex items-center min-h-[48px] px-5 py-2 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-teal-500 hover:text-teal-600 dark:hover:text-teal-400 transition-all shadow-2xs"
             >

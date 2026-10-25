@@ -20,6 +20,7 @@ import { GradeCalculator } from './components/GradeCalculator';
 import { NotFound } from './components/NotFound';
 import { isSelfManagedSeoPath } from './data/selfManagedSeo';
 import { isGradingScaleParam } from './data/gradingScaleSizes';
+import { CGPA_UNIVERSITY_PAGES } from './data/cgpaUniversityPages';
 import { LEGACY_REDIRECTS } from './data/legacyRedirects';
 import { Footer } from './components/Footer';
 import { SEOHead } from './components/SEOHead';
@@ -63,6 +64,14 @@ const GradingScaleRoute: React.FC<{ ToolPage: React.ComponentType<{ slug: string
   const { size } = useParams();
   if (!isGradingScaleParam(size)) return <Navigate to="/grading-scale/" replace />;
   return <ToolPage slug={`grading-scale/${size}`} />;
+};
+
+const CgpaUniversityRoute: React.FC<{ ToolPage: React.ComponentType<{ slug: string }> }> = ({ ToolPage }) => {
+  const { uni } = useParams();
+  if (!uni || !CGPA_UNIVERSITY_PAGES.some((u) => u.id === uni)) {
+    return <Navigate to="/cgpa-to-percentage-calculator/" replace />;
+  }
+  return <ToolPage slug={`cgpa-to-percentage/${uni}`} />;
 };
 
 function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
@@ -247,6 +256,14 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/blog" element={<CompToolPage slug="blog" />} />
               <Route path="/blog/how-to-grade-30-tests-in-15-minutes" element={<CompToolPage slug="blog/how-to-grade-30-tests-in-15-minutes" />} />
               <Route path="/blog/when-to-curve-grades" element={<CompToolPage slug="blog/when-to-curve-grades" />} />
+              <Route path="/blog/grading-systems-explained" element={<CompToolPage slug="blog/grading-systems-explained" />} />
+              <Route path="/blog/high-school-vs-college-gpa" element={<CompToolPage slug="blog/high-school-vs-college-gpa" />} />
+              <Route path="/gpa-to-letter-grade" element={<CompToolPage slug="gpa-to-letter-grade" />} />
+              <Route path="/letter-grade-to-gpa" element={<CompToolPage slug="letter-grade-to-gpa" />} />
+              <Route path="/high-school-gpa-calculator" element={<CompToolPage slug="high-school-gpa-calculator" />} />
+              <Route path="/college-gpa-calculator" element={<CompToolPage slug="college-gpa-calculator" />} />
+              <Route path="/final-grade-planner" element={<CompToolPage slug="final-grade-planner" />} />
+              <Route path="/cgpa-to-percentage/:uni" element={<CgpaUniversityRoute ToolPage={CompToolPage} />} />
               <Route path="/weighted-vs-unweighted-gpa" element={<CompToolPage slug="weighted-vs-unweighted-gpa" />} />
               <Route path="/how-many-questions-can-i-miss" element={<CompToolPage slug="how-many-questions-can-i-miss" />} />
               <Route path="/grading-scale" element={<CompToolPage slug="grading-scale" />} />
