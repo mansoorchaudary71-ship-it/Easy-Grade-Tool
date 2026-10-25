@@ -78,7 +78,7 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 const ghostControl =
   'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0F1114] transition-colors duration-150 hover:bg-[#F0F6FF] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
 
-/** Dark pill call to action (same role as "Log in" in the reference). White in dark mode. */
+/** Solid pill call to action (the "Sign up" slot in the Dribbble-style header). Colour unchanged. White in dark mode. */
 const ctaPill =
   'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#0056D2] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#00419E] active:scale-[0.98] dark:bg-[#4F9CFF] dark:text-[#0B1220] dark:hover:bg-[#7DB6FF]';
 
@@ -98,6 +98,21 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  /*
+    Dribbble's header morphs on scroll: at the top it shows only the logo,
+    nav links and buttons, and once the page is scrolled a search pill
+    appears in the header row. Same here: the pill mounts once the page is
+    scrolled past the banner. Initial state (false) matches the prerendered
+    HTML, so hydration never flashes.
+  */
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 160);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const isMac = useMemo(() => {
@@ -133,11 +148,15 @@ export const Navbar: React.FC<NavbarProps> = ({
     <MotionConfig reducedMotion="user">
       <header className="relative print:hidden">
         {/*
-          One row, same structure as the reference header:
-          logo | search pill (grows) | grouped menus | text link | dark pill | theme.
-          Below lg the menus, text link and pill move into the hamburger drawer.
+          One row, Dribbble-style structure:
+          at the top: logo | plain-text nav links | text link | solid pill | theme.
+          once scrolled: the grey search pill appears between logo and nav.
+          Below xl the nav links and text link move into the hamburger drawer;
+          below lg the search icon opens the palette (the pill is desktop only).
+          Colours are unchanged: the same site blue (#0056D2) for the pill,
+          focus rings and hovers as before — no Dribbble pink anywhere.
         */}
-        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-2 px-4 sm:px-6 lg:h-[72px] lg:gap-4 lg:px-8 xl:gap-5">
+        <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-2 px-4 sm:px-6 lg:h-20 lg:gap-4 lg:px-8 xl:gap-5">
           {/* ------------------------------ Logo ------------------------------ */}
           <div className="flex min-w-0 shrink-0 items-center gap-1 sm:gap-3">
             {/* Hamburger: below xl only. Opens the grouped tools drawer. */}
@@ -168,20 +187,23 @@ export const Navbar: React.FC<NavbarProps> = ({
             </Link>
           </div>
 
-          {/* ------------------------------ Search pill (lg and up) ------------------------------ */}
+          {/* ------------------------------ Search pill, on scroll only (Dribbble morph) ------------------------------ */}
           {/*
+            Grey filled pill with the magnifier inside, as on the reference.
             The pill is the entry point to the command palette (which owns the real search UI).
             Click, Enter, or the first typed character hands off to the palette.
           */}
-          <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[360px]">
-            <div className="flex h-12 items-center rounded-full border border-[#8A94A6] bg-white pl-5 pr-1 transition-colors duration-200 hover:border-[#0F1114] focus-within:border-[#0056D2] focus-within:ring-1 focus-within:ring-[#0056D2] dark:border-slate-500 dark:bg-white/[0.06]">
+          {scrolled && (
+          <div className="header-search-in hidden min-w-0 flex-1 lg:block lg:max-w-[300px]">
+            <div className="flex h-12 items-center gap-2 rounded-full bg-[#F3F3F4] pl-4 pr-4 transition-colors duration-200 hover:bg-[#E7E7E9] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#0056D2] dark:bg-white/[0.06] dark:hover:bg-white/10 dark:focus-within:bg-white/[0.08] dark:focus-within:ring-[#4F9CFF]">
+              <Search className="size-[18px] shrink-0 text-[#6E6D7A] dark:text-slate-400" strokeWidth={ICON_STROKE} aria-hidden="true" />
               <input
                 type="text"
                 readOnly
                 role="searchbox"
                 autoComplete="off"
                 spellCheck={false}
-                placeholder="What do you want to calculate?"
+                placeholder="Search calculators..."
                 aria-label={`Search calculators (${shortcutLabel})`}
                 title={`Switch calculators with the command palette (${shortcutLabel})`}
                 onClick={onOpenCommandPalette}
@@ -197,45 +219,45 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="header-search-field h-full min-w-0 flex-1 cursor-pointer truncate bg-transparent text-[15px] font-normal tracking-[-0.011em] text-[#0F1114] outline-none placeholder:text-[#6E6D7A] 2xl:text-base dark:text-slate-100 dark:placeholder:text-slate-400"
               />
               <span
-                className="mr-3 hidden shrink-0 text-[15px] font-semibold tracking-[-0.011em] text-[#3A3546] 2xl:inline dark:text-slate-300"
+                className="hidden shrink-0 text-[15px] font-semibold tracking-[-0.011em] text-[#6E6D7A] 2xl:inline dark:text-slate-400"
                 aria-hidden="true"
               >
                 {shortcutLabel}
               </span>
-              <button
-                type="button"
-                onClick={onOpenCommandPalette}
-                onTouchStart={() => preloadTool('command-palette')}
-                onMouseEnter={() => preloadTool('command-palette')}
-                aria-label={`Open calculator search (${shortcutLabel})`}
-                className={`inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#0056D2] text-white transition-colors duration-150 hover:bg-[#00419E] active:scale-95 ${headerFocusRing}`}
-              >
-                <Search className="size-[18px]" strokeWidth={ICON_STROKE} aria-hidden="true" />
-              </button>
             </div>
           </div>
+          )}
 
-          {/* ------------------------------ Quick Grade, then the three group menus ------------------------------ */}
-          {/* Quick Grade pill: sits right after the search bar (lg and up) */}
-          <Link
-            to={PRIMARY_NAV_ITEM.path}
-            onClick={() => {
-              if (isSamePath(TOOL_PATHS[PRIMARY_NAV_ITEM.toolKey], PRIMARY_NAV_ITEM.path)) onSelectTool(PRIMARY_NAV_ITEM.toolKey);
-            }}
-            onMouseEnter={warmPrimary}
-            onFocus={warmPrimary}
-            onTouchStart={warmPrimary}
-            aria-current={primaryActive ? 'page' : undefined}
-            title={PRIMARY_NAV_ITEM.title}
-            className={`${ctaPill} ${headerFocusRing} hidden lg:inline-flex`}
-          >
-            {PRIMARY_NAV_ITEM.label}
-          </Link>
-
+          {/* ------------------------------ Plain-text group menus (Dribbble-style) ------------------------------ */}
           <ToolNavBar onSelectTool={onSelectTool} />
 
           {/* ------------------------------ Right cluster ------------------------------ */}
-          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2 xl:gap-3">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-2 xl:gap-3">
+            {/* For Schools: plain text link in the "Log in" slot. */}
+            <Link
+              to="/for-schools/"
+              title="Embed free grade calculators on your school website"
+              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#0056D2] xl:inline-flex ${headerFocusRing} dark:text-slate-100 dark:hover:text-[#4F9CFF]`}
+            >
+              For Schools
+            </Link>
+
+            {/* Quick Grade: solid pill in the "Sign up" slot (colour unchanged). */}
+            <Link
+              to={PRIMARY_NAV_ITEM.path}
+              onClick={() => {
+                if (isSamePath(TOOL_PATHS[PRIMARY_NAV_ITEM.toolKey], PRIMARY_NAV_ITEM.path)) onSelectTool(PRIMARY_NAV_ITEM.toolKey);
+              }}
+              onMouseEnter={warmPrimary}
+              onFocus={warmPrimary}
+              onTouchStart={warmPrimary}
+              aria-current={primaryActive ? 'page' : undefined}
+              title={PRIMARY_NAV_ITEM.title}
+              className={`${ctaPill} ${headerFocusRing} hidden lg:inline-flex`}
+            >
+              {PRIMARY_NAV_ITEM.label}
+            </Link>
+
             {/* Search icon: below lg only (the pill takes over from lg) */}
             <button
               type="button"

@@ -10,9 +10,11 @@ interface SiteHeaderProps {
 
 /**
  * The single, global site chrome, mounted once in App.tsx above <Routes>.
- * ONE sticky header row (the old "For Teachers / For Students / For Everyone" utility bar is gone):
- *   logo | search | Quick Grade | Grade tools | GPA and percentages | Everyday tools | theme switch
+ * ONE sticky header row, Dribbble-style layout:
+ *   at the top: logo | Grade tools | GPA and percentages | Everyday tools | For Schools | Quick Grade | theme switch
+ *   once scrolled: a grey search pill appears between the logo and the nav links.
  * Surface: flat white with a hairline underneath (.elev-chrome).
+ * Colours are unchanged: the site blue stays the primary throughout.
  */
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool, onOpenCommandPalette }) => {
   return (
