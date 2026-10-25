@@ -135,7 +135,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
   const getTierRowBg = (letter: string) => {
     if (letter.startsWith('A')) {
-      return 'bg-[#DBEAFE] hover:bg-[#CDD4E8] border border-[#DDD6FE]/50';
+      return 'bg-[#EDE9FE] hover:bg-[#DDD6FE] border border-[#DDD6FE]/50';
     }
     if (letter.startsWith('B')) {
       return 'bg-[#D6E1FF] hover:bg-[#C8D6FF] border border-[#A5BCF0]/50';
@@ -233,7 +233,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
           {/* Quick Metrics & Actions */}
           <div className="flex flex-col justify-between space-y-4">
-            <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
+            <div className="bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
               <span className="text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
                 Points Per Question
               </span>

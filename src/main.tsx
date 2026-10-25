@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
 import './index.css';
+import './styles/mona-sans.css';
 import './styles/a11y-touch.css';
 import './styles/premium.css';
 import './styles/ux-refactor.css';

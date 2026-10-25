@@ -17,16 +17,16 @@ html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 92px); }
 html.dark .site-chrome { border-bottom-color: rgb(255 255 255 / 0.08); }
 
 /* 3. Primary CTA = flat blue-600 / blue-700.
-   premium.css painted `bg-[#2563EB]` buttons with a gradient that starts at #3B82F6, where white text is only 3.7:1.
+   premium.css painted `bg-[#7C3AED]` buttons with a gradient that starts at #8B5CF6, where white text is only 3.7:1.
    A flat fill keeps every primary button at 5.2:1 (hover 6.7:1) in both themes. */
-.premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled) {
+.premium-surface :is(button, a)[class~="bg-[#7C3AED]"]:not([aria-pressed]):not(:disabled) {
   background-image: none;
-  background-color: #2563EB;
+  background-color: #7C3AED;
   box-shadow: 0 1px 2px rgb(15 23 42 / 0.18);
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled):hover {
-    background-color: #1D4ED8;
+  .premium-surface :is(button, a)[class~="bg-[#7C3AED]"]:not([aria-pressed]):not(:disabled):hover {
+    background-color: #6D28D9;
     translate: 0 0;
     box-shadow: 0 2px 6px rgb(15 23 42 / 0.22);
   }

@@ -9,6 +9,8 @@
      - warm off-white canvas (#FBF9F6), pale-violet bands (#F5F3FF) to separate sections
      - pill buttons, 16px cards, hairline borders instead of shadows
      - serif display headlines (Typeform/Calendly editorial serif), Inter for all UI text
+       [superseded 2026-10-25 by the premium redesign: Mona Sans is now the
+       sole typeface, Dribbble-style — see section 11]
      - dark plum footer band (Typeform plum-black, Calendly/Asana dark footers)
      - a thin utility bar above the main header, an "Explore" menu, one big search field
      - left-aligned page banners, card grids, a tabbed "what brings you here" block, a multi-column footer
@@ -137,25 +139,25 @@ html:not(.dark) main :is(a:not([class*="bg-"]):not([class*="text-"]):not(.cs-btn
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 .cs-btn-primary { background: var(--cs-blue); color: #fff !important; }
-.cs-btn-primary:hover { background: var(--cs-blue-hover); }
+.cs-btn-primary:hover { background: var(--cs-blue-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(109, 40, 217, 0.28); }
+.cs-btn:active { transform: translateY(0) scale(0.97); }
 html.dark .cs-btn-primary { color: #0B1220 !important; }
 .cs-btn-outline { background: transparent; color: var(--cs-blue) !important; border-color: var(--cs-blue); }
-.cs-btn-outline:hover { background: var(--cs-tint); }
+.cs-btn-outline:hover { background: var(--cs-tint); transform: translateY(-1px); }
 .cs-btn:disabled { opacity: 0.6; cursor: wait; }
 
 .cs-input {
   width: 100%;
   min-height: 48px;
   padding: 0 1rem;
-  border-radius: var(--cs-radius-btn);
+  border-radius: 12px;
   border: 1px solid var(--cs-field);
   background: #fff;
   color: var(--cs-ink);
   font-size: 1rem;
-  border-radius: 9999px;
   padding-inline: 1.25rem;
 }
 html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
@@ -169,25 +171,28 @@ html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
   border-radius: var(--cs-radius-card);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
-.cs-card:hover { border-color: #B9C6DB; box-shadow: 0 6px 20px rgba(15, 17, 20, 0.08); }
+.cs-card:hover { border-color: #C4B5FD; box-shadow: 0 6px 20px rgba(109, 40, 217, 0.10); }
 /* Link hubs lift on hover (Canva template cards / ClassDojo role cards);
    calculator forms never lift, so results and inputs stay put. */
-.cs-cat:hover { transform: translateY(-2px); }
+/* Link hubs: no lift on hover (Canva gallery restraint) — the border tint
+   and the arrow nudge below carry the affordance; .cs-card:hover supplies
+   the violet border + soft shadow. */
+.cs-cat:hover { transform: none; }
 html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
 
 .cs-section { padding-block: 2.5rem; }
-@media (min-width: 768px) { .cs-section { padding-block: 4rem; } }
+@media (min-width: 768px) { .cs-section { padding-block: 6rem; } }
 .cs-h2 {
   margin: 0 0 0.5rem;
   font-family: var(--app-font-serif);
-  font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--cs-ink);
 }
 .cs-lead { margin: 0 0 1.75rem; max-width: 42rem; font-size: 1.0625rem; line-height: 1.55; color: var(--cs-muted); }
-.cs-eyebrow { margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 600; color: var(--cs-blue); letter-spacing: 0.08em; text-transform: uppercase; }
+.cs-eyebrow { margin: 0 0 0.5rem; font-size: 0.6875rem; font-weight: 700; color: var(--cs-blue); letter-spacing: 0.12em; text-transform: uppercase; }
 
 /* --------------------------------------------------------------------------
    3. Header: utility bar + main row
@@ -240,6 +245,9 @@ html.dark .elev-chrome {
 @media (prefers-reduced-motion: reduce) {
   .header-search-in { animation: none; }
 }
+/* Scrolled header (Calendly): the sticky chrome gains a soft shadow once
+   the page moves, so the header floats over content instead of sitting flat. */
+.elev-chrome.is-scrolled { box-shadow: 0 8px 24px rgba(15, 17, 20, 0.10); }
 /* Header nav buttons, Dribbble-style: plain semibold text links with a
    chevron, no outline chip. The active page's group reads in the site blue.
    Colours are unchanged — the same --cs-blue / --cs-ink tokens as before. */
@@ -276,13 +284,24 @@ html.dark .elev-chrome {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: var(--cs-tint);
+  background: linear-gradient(135deg, var(--cs-tint-2), var(--cs-tint));
   border: 1px solid var(--cs-border);
   border-radius: var(--cs-radius-card);
   padding: 1.5rem 1.25rem;
+  animation: cs-fade-up 0.45s ease both;
+  /* Aurora halo (Typeform): one disciplined violet glow, echoing the footer
+     orbs — the banner floats instead of sitting flat on the canvas. */
+  box-shadow: 0 24px 50px -24px rgba(109, 40, 217, 0.28);
 }
-@media (min-width: 640px) { .cs-banner { padding: 2rem 2.25rem; } }
-@media (min-width: 1024px) { .cs-banner { padding: 2.5rem 3rem; } }
+@keyframes cs-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-banner { animation: none; }
+}
+@media (min-width: 640px) { .cs-banner { padding: 2.5rem 2.5rem; } }
+@media (min-width: 1024px) { .cs-banner { padding: 3rem 3.5rem; } }
 /* Decorative SVG lines (see components/DecorLines.tsx) */
 .cs-lines { color: var(--cs-blue); opacity: 0.22; display: block; }
 html.dark .cs-lines { opacity: 0.28; }
@@ -295,10 +314,10 @@ html.dark .cs-lines { opacity: 0.28; }
   margin: 0;
   max-width: 46rem;
   font-family: var(--app-font-serif);
-  font-size: clamp(1.75rem, 1.25rem + 1.8vw, 2.75rem);
-  line-height: 1.12;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: clamp(2.25rem, 1.6rem + 2.2vw, 3.5rem);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--cs-ink);
 }
 .cs-banner-sub {
@@ -317,11 +336,11 @@ html.dark .cs-lines { opacity: 0.28; }
    -------------------------------------------------------------------------- */
 .cs-cat-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
 @media (min-width: 768px) { .cs-cat-grid { grid-template-columns: repeat(3, 1fr); } }
-.cs-cat { display: flex; flex-direction: column; padding: 1.5rem; }
+.cs-cat { display: flex; flex-direction: column; padding: 1.5rem; border-radius: 20px; }
 .cs-cat-icon {
   display: inline-flex; align-items: center; justify-content: center;
   width: 3rem; height: 3rem; margin-bottom: 1rem;
-  border-radius: 16px; background: var(--cs-tint-2); color: var(--cs-blue);
+  border-radius: 9999px; background: var(--cs-tint-2); color: var(--cs-blue);
 }
 .cs-cat h3 { margin: 0 0 0.375rem; font-size: 1.25rem; font-weight: 700; color: var(--cs-ink); letter-spacing: -0.015em; }
 .cs-cat p { margin: 0 0 1rem; font-size: 0.9375rem; line-height: 1.5; color: var(--cs-muted); }
@@ -335,7 +354,11 @@ html.dark .cs-lines { opacity: 0.28; }
 .cs-cat li:first-child a { border-top: 0; }
 .cs-cat li a:hover { color: var(--cs-blue) !important; }
 .cs-card-link { margin-top: auto; display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; color: var(--cs-blue); text-decoration: none; min-height: 44px; }
+.cs-card-link svg, .cs-cat li a svg { transition: transform 0.15s ease; }
+/* Circular arrow chip (Asana link cards): the arrow rides in a tinted disc. */
+.cs-card-link svg { background: var(--cs-tint-2); border-radius: 9999px; padding: 5px; width: 26px; height: 26px; }
 .cs-card-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cs-card-link:hover svg, .cs-cat li a:hover svg { transform: translateX(3px); }
 
 .cs-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
 .cs-tab {
@@ -346,8 +369,8 @@ html.dark .cs-lines { opacity: 0.28; }
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .cs-tab:hover { background: var(--cs-tint); border-color: var(--cs-blue); }
-.cs-tab[aria-selected="true"] { background: var(--cs-blue); border-color: var(--cs-blue); color: #fff; }
-html.dark .cs-tab[aria-selected="true"] { color: #0B1220; }
+.cs-tab[aria-selected="true"] { background: var(--cs-tint-2); border-color: transparent; color: var(--cs-ink); box-shadow: 0 2px 10px rgba(109, 40, 217, 0.12); }
+html.dark .cs-tab[aria-selected="true"] { background: rgba(167, 139, 250, 0.18); border-color: transparent; color: #EDE9FE; }
 .cs-panel {
   display: grid; gap: 1.5rem; padding: 1.5rem;
   background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card);
@@ -541,4 +564,17 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
    Deliberately NOT changed: grade-tier colours in GradeVisualProgressBar
    (emerald/amber/orange/rose/indigo are grade semantics, not brand);
    the logo SVG brand mark (navy + gold); calculator layout and behaviour.
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   11. Premium redesign (2026-10-25) — the user judged the rebrand as only
+   ~5% of the reference sites, and asked for a real component-level redesign
+   with Dribbble's font style. This supersedes section 10's serif display:
+   Mona Sans (self-hosted, OFL) is now the SOLE typeface for body, UI and
+   headlines, Dribbble-style — mid-weights for labels, 700/800 tight-tracked
+   display headlines, compact density. The violet identity from section 10
+   is kept; what changes here is everything around it: banner scale and
+   background, card hover physics, field radius, button press states,
+   result typography, tab shadows, entrance motion, and section rhythm.
+   See CHANGES-ui-ux-premium-redesign-2026-10-25.md for the full list.
    -------------------------------------------------------------------------- */

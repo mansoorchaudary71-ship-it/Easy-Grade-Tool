@@ -397,7 +397,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
           </div>
 
           {/* Animated Circular Progress Gauge - Master Output */}
-          <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
+          <div className="bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
             <div className="gpa-gauge-container">
               <svg
                 className="gpa-gauge-svg"

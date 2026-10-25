@@ -9,9 +9,9 @@ export const CARD =
 export const LABEL =
   'text-xs font-semibold tracking-widest text-slate-700 dark:text-slate-300 uppercase block mb-1.5';
 export const INPUT =
-  'w-full h-12 min-h-[48px] bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-stone-900 dark:text-white rounded-2xl px-4 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-[#6D28D9]/40 dark:focus:ring-[#A78BFA]/50 transition-all font-bold text-lg text-center placeholder:text-slate-500 dark:placeholder:text-slate-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none';
+  'w-full h-12 min-h-[48px] bg-white dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 text-stone-900 dark:text-white rounded-xl px-4 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-[#6D28D9]/40 dark:focus:ring-[#A78BFA]/50 transition-all font-bold text-lg text-center placeholder:text-slate-500 dark:placeholder:text-slate-400 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none';
 export const BTN_PRIMARY =
-  'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#6D28D9] hover:bg-[#5B21B6] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md shadow-[#6D28D9]/25 px-6 py-3 text-sm cursor-pointer';
+  'inline-flex items-center justify-center gap-2 min-h-[48px] bg-[#6D28D9] hover:bg-[#5B21B6] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md shadow-[#6D28D9]/25 px-6 py-3 text-sm cursor-pointer transition-all hover:-translate-y-px hover:shadow-lg active:translate-y-0 active:scale-[0.97]';
 export const PILL_ON =
   'inline-flex items-center justify-center min-h-[48px] bg-[#6D28D9] hover:bg-[#5B21B6] dark:bg-[#A78BFA] dark:text-slate-950 text-white rounded-full font-bold px-5 py-3 text-sm cursor-pointer';
 export const PILL_OFF =

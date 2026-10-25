@@ -1,7 +1,7 @@
 @import "./fonts.css";
 @import "tailwindcss";
 
-/* Brand palette: the former teal scale is re-mapped to the #4c5985 family (600 = #4c5985). */
+/* Brand palette: the teal scale is re-mapped to violet downstream (coursera.css re-points --color-teal-* at the violet scale; this @theme block is overridden there). */
 @theme {
   --color-teal-50: #f3f5fa;
   --color-teal-100: #e4e8f3;
@@ -47,8 +47,10 @@
   --destructive-foreground: 0 0% 100%;
 
   /* Typography tokens */
-  --app-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --app-font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --app-font-sans: 'Mona Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Sole typeface, per Dribbble's system: the serif display face from the
+     violet rebrand is retired — every headline now uses Mona Sans too. */
+  --app-font-serif: 'Mona Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --app-font-mono: ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, Consolas, monospace;
 
   /* Modern Elevation Tokens */
@@ -62,10 +64,10 @@
   --duration-fast: 160ms;
   --duration-normal: 220ms;
 
-  /* Default tool theme (unified academic teal) - optimized for WCAG AA/AAA */
-  --tool-primary: 226 27% 41%;
-  --tool-deep: 226 27% 31%;
-  --tool-soft: 226 30% 91%;
+  /* Default tool theme (unified violet) - optimized for WCAG AA/AAA */
+  --tool-primary: 262 70% 50%;
+  --tool-deep: 262 71% 41%;
+  --tool-soft: 250 100% 97%;
   --tool-accent: 38 92% 50%;
   --tool-on-primary: 0 0% 100%;
 }
@@ -103,9 +105,9 @@
   --shadow-drawer: -12px 0 45px -4px rgba(0, 0, 0, 0.7);
 
   /* Dark mode default tool tint */
-  --tool-primary: 226 48% 72%;
-  --tool-deep: 226 32% 56%;
-  --tool-soft: 226 25% 23%;
+  --tool-primary: 255 92% 76%;
+  --tool-deep: 255 85% 68%;
+  --tool-soft: 262 30% 20%;
   --tool-accent: 38 92% 54%;
   --tool-on-primary: 224 71% 4%;
 }
@@ -119,9 +121,9 @@
 .tool-theme-loan,
 .tool-theme-mortgage,
 .tool-theme-password {
-  --tool-primary: 226 27% 41%;
-  --tool-deep: 226 27% 31%;
-  --tool-soft: 226 30% 91%;
+  --tool-primary: 262 70% 50%;
+  --tool-deep: 262 71% 41%;
+  --tool-soft: 250 100% 97%;
   --tool-accent: 38 92% 50%;
   --tool-on-primary: 0 0% 100%;
 }
@@ -142,9 +144,9 @@
 .dark.tool-theme-mortgage,
 .dark .tool-theme-password,
 .dark.tool-theme-password {
-  --tool-primary: 226 48% 72%;
-  --tool-deep: 226 32% 56%;
-  --tool-soft: 226 25% 23%;
+  --tool-primary: 255 92% 76%;
+  --tool-deep: 255 85% 68%;
+  --tool-soft: 262 30% 20%;
   --tool-accent: 38 92% 54%;
   --tool-on-primary: 224 71% 4%;
 }
@@ -562,7 +564,7 @@ h1 {
 .tool-heading .tool-title {
   max-width: 740px;
   color: #1f2937;
-  font: 700 clamp(36px, 5vw, 56px)/1.08 var(--app-font-serif);
+  font: 800 clamp(36px, 5vw, 56px)/1.05 var(--app-font-serif);
   letter-spacing: -0.04em;
   margin: 10px 0 14px;
   text-wrap: balance;
@@ -1094,7 +1096,7 @@ input[type="text"].field-input,
   border: 2px solid transparent;
   background: #F0F2F5;
   color: var(--color-stone-900, #1c1917);
-  border-radius: 9999px; /* rounded-full */
+  border-radius: 12px;
   outline: none;
   padding: 14px 20px;
   font-size: 15px;
@@ -3761,7 +3763,7 @@ input[type="number"]:focus {
 }
 
 .tool-big-number {
-  font: 600 clamp(42px, 5.5vw, 68px)/0.96 'Inter', sans-serif;
+  font: 700 clamp(42px, 5.5vw, 68px)/0.96 var(--app-font-sans);
   letter-spacing: -0.04em;
   margin: 18px 0 12px;
   color: hsl(var(--foreground));
@@ -4286,6 +4288,9 @@ input[type="number"]:focus {
   font-weight: 600;
   flex-shrink: 0;
 }
+
+.faq-toggle svg { transition: transform var(--duration-fast) var(--ease-spring); }
+.faq-item.is-open .faq-toggle svg { transform: rotate(180deg); }
 
 .faq-answer {
   padding: 0 48px 22px 24px;
@@ -6661,7 +6666,7 @@ input[type="number"]:focus {
   pointer-events: none;
   background:
     radial-gradient(120% 85% at 8% -10%, rgb(var(--glow-spec) / var(--glow-spec-a)) 0%, transparent 58%),
-    radial-gradient(90% 70% at 105% 110%, hsl(var(--tool-primary, 226 27% 41%) / var(--glow-tint-a)) 0%, transparent 62%);
+    radial-gradient(90% 70% at 105% 110%, hsl(var(--tool-primary, 262 70% 50%) / var(--glow-tint-a)) 0%, transparent 62%);
   box-shadow: inset 0 1px 0 rgb(var(--glow-spec) / var(--glow-edge-a));
   opacity: 1;
   transition: opacity 0.35s ease;

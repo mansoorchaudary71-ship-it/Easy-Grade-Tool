@@ -61,7 +61,7 @@ const FOOTER_PREMIUM_CSS = `
 .ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
 .ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(109,40,217,.5);animation:ft-drift 11s ease-in-out infinite}
 .ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(167,139,250,.28);animation:ft-drift 14s ease-in-out infinite reverse}
-.ft-title-accent{background:linear-gradient(90deg,#c4b5fd,#bfdbfe 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ft-title-accent{background:linear-gradient(90deg,#c4b5fd,#ddd6fe 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .ft-float{animation:ft-float 6s ease-in-out infinite}
 .ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
 .ft-spark:nth-of-type(2){animation-delay:.9s}.ft-spark:nth-of-type(3){animation-delay:1.7s}
@@ -543,7 +543,7 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <>
-      <footer className="site-footer relative w-full mt-16 font-sans" aria-label="Site footer">
+      <footer className="site-footer relative mt-16 mb-4 mx-3 sm:mx-6 rounded-[28px] overflow-hidden font-sans" aria-label="Site footer">
         <style dangerouslySetInnerHTML={{ __html: FOOTER_PREMIUM_CSS }} />
         {/* Newsletter band (Coursera-style pale-blue strip above the link columns). Backed by POST /api/subscribe */}
         <section aria-label="Newsletter" className="cs-news">

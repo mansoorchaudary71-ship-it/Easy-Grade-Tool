@@ -1,0 +1,14 @@
+/* Dribbble-style type: Mona Sans, self-hosted (SIL Open Font License 1.1,
+   see public/fonts/MonaSans-OFL.txt). Mona Sans is the sole typeface of
+   Dribbble's product UI — a geometric humanist sans used from tiny meta
+   labels to large hero headlines — so this file replaces Inter as the
+   primary face and the serif display face from the earlier rebrand.
+   Variable font, weight 200-900, latin subset (101 KB woff2); Inter stays
+   in the stack as fallback and still covers any non-latin glyphs. */
+@font-face {
+  font-family: 'Mona Sans';
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url(/fonts/MonaSans.woff2) format('woff2');
+}

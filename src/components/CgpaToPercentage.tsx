@@ -1001,7 +1001,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
             </div>
 
             {/* Primary Percentage Readout with Lightweight Inline SVG Donut Visual */}
-            <div className="p-5 rounded-[28px] bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 shadow-sm mb-5">
+            <div className="p-5 rounded-[28px] bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 shadow-sm mb-5">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="text-center sm:text-left">
                   <div className="font-mono text-4xl sm:text-5xl font-extrabold tracking-tight text-teal-950 dark:text-teal-100 tabular-nums">
@@ -1283,7 +1283,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
               </div>
             </div>
 
-            <div className="lg:col-span-5 p-5 rounded-[28px] bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 shadow-sm space-y-4">
+            <div className="lg:col-span-5 p-5 rounded-[28px] bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 shadow-sm space-y-4">
               <div className="text-xs font-semibold uppercase tracking-widest text-teal-800 dark:text-teal-300">
                 Cumulative Multi-Semester Result
               </div>

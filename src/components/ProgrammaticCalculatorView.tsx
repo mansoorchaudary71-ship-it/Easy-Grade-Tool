@@ -42,7 +42,7 @@ const FinalExamTargetSolver: React.FC<{ setToast: (msg: string) => void }> = ({ 
   const tone =
     result.status === 'unreachable'
       ? 'bg-[#F9D6E1] dark:bg-rose-950/60 border-[#EDA3BB] dark:border-rose-800/60'
-      : 'bg-[#DBEAFE] dark:bg-teal-950/60 border-[#DDD6FE] dark:border-teal-800/60 shadow-sm';
+      : 'bg-[#EDE9FE] dark:bg-teal-950/60 border-[#DDD6FE] dark:border-teal-800/60 shadow-sm';
 
   let headline = '—';
   let message = 'Fill in all three boxes to see the score you need.';

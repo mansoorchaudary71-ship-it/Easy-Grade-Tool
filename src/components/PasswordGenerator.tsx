@@ -144,7 +144,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 space-y-6"
         >
           {/* Password Display - Primary Master Output */}
-          <div className="relative p-5 rounded-[28px] bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 shadow-sm flex items-center justify-center" aria-live="polite">
+          <div className="relative p-5 rounded-[28px] bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 shadow-sm flex items-center justify-center" aria-live="polite">
             <span className="font-mono text-base sm:text-xl font-extrabold tracking-wider text-teal-950 dark:text-teal-100 break-all select-all block text-center px-8">
               {password}
             </span>

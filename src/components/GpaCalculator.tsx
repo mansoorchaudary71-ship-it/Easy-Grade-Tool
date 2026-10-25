@@ -420,7 +420,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
         <section aria-label="GPA Results Summary" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between" aria-live="polite">
           <div className="space-y-5">
             {/* Semester GPA - Master Output Container */}
-            <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
                 Semester GPA
               </span>
