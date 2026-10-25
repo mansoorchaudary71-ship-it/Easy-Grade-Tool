@@ -6,7 +6,7 @@
    What is copied from the reference (coursera.org), without copying any of its content or artwork:
      - one confident blue (#0056D2) for every primary action and link
      - white canvas, pale-blue bands (#F0F6FF) to separate sections
-     - 8px corners on buttons and fields, 16px on cards, hairline borders instead of shadows
+     - pill buttons, 16px cards, hairline borders instead of shadows
      - a thin utility bar above the main header, an "Explore" menu, one big search field
      - left-aligned page banners, card grids, a tabbed "what brings you here" block, a multi-column footer
    Only colour, border, radius, shadow and type are touched for existing components; layout of the
@@ -26,7 +26,7 @@
   --cs-field: #8A94A6;
   --cs-white: #FFFFFF;
   --cs-radius-btn: 9999px; /* pill buttons everywhere (Dribbble-style) */
-  --cs-radius-card: 24px;
+  --cs-radius-card: 16px; /* one card radius everywhere: banners, cards, panels, trust tiles */
   --cs-container: 1280px;
   --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #0056D2;
 
@@ -49,6 +49,20 @@
   --color-teal-800: #003e9c;
   --color-teal-900: #002f78;
   --color-teal-950: #001f52;
+  /* Same re-point for the blue scale (2026-10-25 unification): every blue-*
+     utility site-wide — buttons, links, rings, segmented pills, chart accents —
+     now resolves to the one brand blue instead of Tailwind's default blue-600. */
+  --color-blue-50: #f0f6ff;
+  --color-blue-100: #e3eeff;
+  --color-blue-200: #c4dbff;
+  --color-blue-300: #94bcff;
+  --color-blue-400: #5b94f0;
+  --color-blue-500: #2a6fdc;
+  --color-blue-600: #0056d2;
+  --color-blue-700: #00419e;
+  --color-blue-800: #003e9c;
+  --color-blue-900: #002f78;
+  --color-blue-950: #001f52;
 }
 html [class*="tool-theme-"] {
   --tool-primary: 217 100% 41%;
@@ -150,13 +164,16 @@ html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
   background: var(--cs-white);
   border: 1px solid var(--cs-border);
   border-radius: var(--cs-radius-card);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 .cs-card:hover { border-color: #B9C6DB; box-shadow: 0 6px 20px rgba(15, 17, 20, 0.08); }
+/* Link hubs lift on hover (Canva template cards / ClassDojo role cards);
+   calculator forms never lift, so results and inputs stay put. */
+.cs-cat:hover { transform: translateY(-2px); }
 html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
 
 .cs-section { padding-block: 2.5rem; }
-@media (min-width: 768px) { .cs-section { padding-block: 3.5rem; } }
+@media (min-width: 768px) { .cs-section { padding-block: 4rem; } }
 .cs-h2 {
   margin: 0 0 0.5rem;
   font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
@@ -166,7 +183,7 @@ html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: 
   color: var(--cs-ink);
 }
 .cs-lead { margin: 0 0 1.75rem; max-width: 42rem; font-size: 1.0625rem; line-height: 1.55; color: var(--cs-muted); }
-.cs-eyebrow { margin: 0 0 0.5rem; font-size: 0.875rem; font-weight: 600; color: var(--cs-blue); letter-spacing: 0; }
+.cs-eyebrow { margin: 0 0 0.5rem; font-size: 0.8125rem; font-weight: 600; color: var(--cs-blue); letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* --------------------------------------------------------------------------
    3. Header: utility bar + main row
@@ -357,7 +374,7 @@ html.dark .cs-tab[aria-selected="true"] { color: #0B1220; }
 .cs-news { padding-block: 2.5rem 0.5rem; }
 .cs-news-card {
   position: relative; overflow: hidden; isolation: isolate;
-  background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: 32px;
+  background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card);
 }
 .cs-news-card > .cs-lines { position: absolute; z-index: 0; }
 .cs-news-lines { inset: 0; width: 100%; height: 100%; }
@@ -471,3 +488,29 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 .cs-chip:hover { border-color: var(--cs-blue); background: var(--cs-tint-2); color: var(--cs-blue) !important; }
+
+/* --------------------------------------------------------------------------
+   9. Seven-site UI/UX unification (2026-10-25) — patterns picked, colours NOT
+   Observed live (read-only) on intercom.com, calendly.com, typeform.com,
+   canva.com, asana.com, classdojo.com and dribbble.com (header checked
+   2026-10-25). The unity rule: every picked pattern is rendered in THIS
+   file's one blue (#0056D2 / dark #4F9CFF) and one radius system, so the
+   site reads as one product, not seven. Concretely in this file + tools/ui.ts:
+     - Buttons: one pill triad — solid brand-blue primary, white hairline
+       secondary, plain arrow link (Typeform's triad + Asana/Calendly pills).
+       Old second blue (#2563EB) and sand/brown pills are gone.
+     - Cards: one card — white, 16px radius, hairline border, soft shadow;
+       link hubs lift 2px on hover (Canva template cards, ClassDojo role
+       cards). Calculator forms never lift.
+     - Fields: neutral grey fill, white + brand-blue ring on focus
+       (Typeform focus clarity, Dribbble's #F3F3F4 field grey).
+     - Type: tracked uppercase eyebrow kickers (Typeform/Asana/Calendly),
+       tight headline tracking (Intercom/Asana), one section rhythm.
+     - Tabs: pill switcher with solid-blue active state (Asana).
+   Deliberately NOT copied, because each would break unity: Canva's
+   multi-hue gradients, Typeform's lime + dark plum canvas + serif display,
+   ClassDojo's purple + mascots, Asana's coral/lavender, Calendly's navy,
+   Intercom's black buttons, Dribbble's pink search button, and any
+   product-specific flow (chat launcher, booking flows). Dark mode keeps
+   resolving to the same blue family via the teal/blue token aliases above.
+   -------------------------------------------------------------------------- */

@@ -283,7 +283,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                   step="0.01"
                   min="0"
                   max={aPlusValue === 4.33 ? 4.33 : 4.0}
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={priorCumulativeGpa}
                   onChange={(e) => setPriorCumulativeGpa(e.target.value)}
                 />
@@ -302,7 +302,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                   step="0.5"
                   min="0"
                   max="300"
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={priorCreditsEarned}
                   onChange={(e) => setPriorCreditsEarned(e.target.value)}
                 />
@@ -336,7 +336,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                     <input aria-label="Course name" placeholder="Course name (e.g. Biology 101)"
                       id={`course-name-${course.id}`}
                       type="text"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm text-left sm:text-center placeholder:text-slate-400"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm text-left sm:text-center placeholder:text-slate-400"
                       value={course.name}
                       onChange={(e) => handleUpdateCourse(course.id, 'name', e.target.value)}
                     />
@@ -359,7 +359,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                       </label>
                       <select
                         id={`course-credits-${course.id}`}
-                        className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-2.5 h-12 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold font-mono text-center text-base sm:text-sm cursor-pointer"
+                        className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-2.5 h-12 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold font-mono text-center text-base sm:text-sm cursor-pointer"
                         value={course.credits}
                         onChange={(e) => handleUpdateCourse(course.id, 'credits', e.target.value)}
                         aria-label={`${course.name || 'Course'} credits`}
@@ -379,7 +379,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                       </label>
                       <select
                         id={`course-grade-${course.id}`}
-                        className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-2.5 h-12 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm cursor-pointer"
+                        className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-2.5 h-12 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm cursor-pointer"
                         value={course.grade}
                         onChange={(e) => handleUpdateCourse(course.id, 'grade', e.target.value)}
                         aria-label={`${course.name || 'Course'} grade`}
@@ -400,7 +400,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <button
               type="button"
-              className="bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
+              className="bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
               onClick={handleAddCourse}
             >
               <Plus className="w-4 h-4" aria-hidden="true" /> Add course
@@ -478,7 +478,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                     setToast?.('Use Export GPA PDF to save a printable transcript.');
                   }
                 }}
-                className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
+                className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
               >
                 <Printer className="w-4 h-4" aria-hidden="true" />
                 <span>Print Result</span>

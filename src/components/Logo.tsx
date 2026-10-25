@@ -181,7 +181,7 @@ export const LogoLockup: React.FC<LogoLockupProps> = ({
         <path
           d={WORDMARK.tool.d}
           fill={accentFill}
-          className={accentFill ? undefined : 'fill-[#2563EB] dark:fill-teal-400'}
+          className={accentFill ? undefined : 'fill-[#0056D2] dark:fill-teal-400'}
         />
       </g>
     </svg>
@@ -201,7 +201,7 @@ export const LogoLockup: React.FC<LogoLockupProps> = ({
  * accent uses brand blue (lighter blue on dark surfaces).
  */
 const ThinWordmark: React.FC<{ className?: string; onDark?: boolean }> = ({ className, onDark = false }) => {
-  const accent = onDark ? 'stroke-blue-400' : 'stroke-[#2563EB] dark:stroke-blue-400';
+  const accent = onDark ? 'stroke-blue-400' : 'stroke-[#0056D2] dark:stroke-blue-400';
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

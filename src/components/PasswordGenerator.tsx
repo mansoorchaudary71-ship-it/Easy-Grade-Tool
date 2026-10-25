@@ -167,7 +167,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <button
               type="button"
-              className="bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
+              className="bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
               onClick={handleGenerate}
             >
               <RefreshCw className="w-4 h-4" aria-hidden="true" />
@@ -211,7 +211,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
                 min="4"
                 max="128"
                 step="1"
-                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                 value={length}
                 onChange={(e) => setLength(e.target.value)}
                 placeholder="12"
@@ -226,7 +226,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
               <input
                 id="numbers-to-include"
                 type="text"
-                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm placeholder:text-slate-400"
+                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm placeholder:text-slate-400"
                 value={numbersToInclude}
                 onChange={(e) => setNumbersToInclude(e.target.value)}
                 placeholder="23456789"
@@ -244,7 +244,7 @@ export const PasswordGenerator: React.FC<PasswordGeneratorProps> = ({ setToast }
               <input
                 id="symbols-to-include"
                 type="text"
-                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm placeholder:text-slate-400"
+                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm placeholder:text-slate-400"
                 value={symbolsToInclude}
                 onChange={(e) => setSymbolsToInclude(e.target.value)}
                 placeholder="!@#$%^&*_-+="

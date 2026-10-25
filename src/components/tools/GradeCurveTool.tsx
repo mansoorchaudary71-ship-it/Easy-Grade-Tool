@@ -78,7 +78,7 @@ export const GradeCurveTool: React.FC = () => {
             autoCapitalize="off"
             autoCorrect="off"
             aria-describedby="gc-scores-help"
-            className="w-full bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
+            className="w-full bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
             spellCheck={false}
           />
           <p id="gc-scores-help" className="text-sm text-slate-600 dark:text-slate-300 mt-1.5 m-0">

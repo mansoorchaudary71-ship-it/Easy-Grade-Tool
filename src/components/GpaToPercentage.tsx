@@ -494,7 +494,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
         <div className="mt-6 flex flex-col gap-2.5">
           <button
             type="button"
-            className="w-full min-h-[48px] py-3 px-6 rounded-full bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
+            className="w-full min-h-[48px] py-3 px-6 rounded-full bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
             onClick={handleCopy}
             title="Copy percentage and GPA conversion result"
             aria-label="Copy percentage conversion result"

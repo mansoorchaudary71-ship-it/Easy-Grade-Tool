@@ -105,7 +105,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
                 aria-label="Percentage X"
                 value={calc1X}
                 onChange={(e) => setCalc1X(e.target.value)}
-                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
+                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
               />
               <span>% of</span>
               <input
@@ -115,7 +115,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
                 aria-label="Base value Y"
                 value={calc1Y}
                 onChange={(e) => setCalc1Y(e.target.value)}
-                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
+                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
               />
               <span>?</span>
             </div>
@@ -138,7 +138,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
                 aria-label="Value X"
                 value={calc2X}
                 onChange={(e) => setCalc2X(e.target.value)}
-                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
+                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
               />
               <span>is what percent of</span>
               <input
@@ -148,7 +148,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
                 aria-label="Total value Y"
                 value={calc2Y}
                 onChange={(e) => setCalc2Y(e.target.value)}
-                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
+                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
               />
               <span>?</span>
             </div>
@@ -172,7 +172,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
                 aria-label="Initial value X"
                 value={calc3X}
                 onChange={(e) => setCalc3X(e.target.value)}
-                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
+                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
               />
               <span>to</span>
               <input
@@ -182,7 +182,7 @@ export const PercentageCalculator: React.FC<PercentageCalculatorProps> = () => {
                 aria-label="Final value Y"
                 value={calc3Y}
                 onChange={(e) => setCalc3Y(e.target.value)}
-                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
+                className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center w-28 sm:w-32 text-base"
               />
               <span>?</span>
             </div>

@@ -59,8 +59,8 @@ const FOOTER_PREMIUM_CSS = `
   background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
   background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%)}
 .ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
-.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(37,99,235,.5);animation:ft-drift 11s ease-in-out infinite}
-.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(96,165,250,.28);animation:ft-drift 14s ease-in-out infinite reverse}
+.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(0,86,210,.5);animation:ft-drift 11s ease-in-out infinite}
+.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(91,148,240,.28);animation:ft-drift 14s ease-in-out infinite reverse}
 .ft-title-accent{background:linear-gradient(90deg,#93c5fd,#bfdbfe 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .ft-float{animation:ft-float 6s ease-in-out infinite}
 .ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
@@ -69,13 +69,13 @@ const FOOTER_PREMIUM_CSS = `
   background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .25s,background .25s,border-color .25s}
-.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(96,165,250,.9);box-shadow:0 0 0 4px rgba(37,99,235,.35),0 10px 30px -10px rgba(37,99,235,.6)}
+.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(91,148,240,.9);box-shadow:0 0 0 4px rgba(0,86,210,.35),0 10px 30px -10px rgba(0,86,210,.6)}
 .ft-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
   font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#3b82f6 0%,#2563eb 55%,#1d4ed8 100%);background-size:160% 160%;background-position:0% 50%;
-  box-shadow:0 10px 24px -8px rgba(37,99,235,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
+  box-shadow:0 10px 24px -8px rgba(0,86,210,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
 .ft-btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;transform:skewX(-20deg);
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:ft-shine 5s ease-in-out infinite}
-.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(37,99,235,.9),0 0 0 4px rgba(37,99,235,.22),inset 0 1px 0 rgba(255,255,255,.28)}
+.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(0,86,210,.9),0 0 0 4px rgba(0,86,210,.22),inset 0 1px 0 rgba(255,255,255,.28)}
 .ft-btn:active:not(:disabled){scale:.96;translate:0 0;transition-duration:.1s,.1s,.2s,.5s}
 .ft-btn:disabled{opacity:.75;cursor:wait}
 .ft-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}

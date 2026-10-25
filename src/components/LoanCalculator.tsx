@@ -290,7 +290,7 @@ export const PaymentResultCard: React.FC<PaymentResultCardProps> = ({
                   setToast?.(`Could not generate ${title} PDF.`);
                 }
               }}
-              className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-full bg-[#2563EB] hover:bg-[#1D4ED8] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
+              className="flex-1 min-h-[44px] inline-flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-full bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
             >
               <Download className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Export PDF</span>
@@ -380,7 +380,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
                   inputMode="decimal"
                   min="0"
                   step="100"
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   placeholder="25000"
@@ -401,7 +401,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
                   min="0"
                   max="100"
                   step="0.1"
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={interestRate}
                   onChange={(e) => setInterestRate(e.target.value)}
                   placeholder="7.5"
@@ -424,7 +424,7 @@ export const LoanCalculator: React.FC<LoanCalculatorProps> = ({ setToast }) => {
                 min="1"
                 max="50"
                 step="1"
-                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                 value={termYears}
                 onChange={(e) => setTermYears(e.target.value)}
                 placeholder="5"

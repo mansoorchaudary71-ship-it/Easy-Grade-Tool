@@ -178,7 +178,7 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
         <div className="relative flex-1 min-w-0 flex items-center">
           <input
             id={id}
-            className={`smart-calc-input w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/15 text-center font-mono font-bold text-base sm:text-lg outline-none tabular-nums placeholder:text-slate-400 transition-all duration-200 ${className}`}
+            className={`smart-calc-input w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 text-center font-mono font-bold text-base sm:text-lg outline-none tabular-nums placeholder:text-slate-400 transition-all duration-200 ${className}`}
             type="number"
             inputMode={inputMode}
             step={step}
