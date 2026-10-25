@@ -43,12 +43,12 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
   if (typeof document === 'undefined') return null;
 
   const rowBase =
-    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-semibold tracking-[-0.011em] no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#0056D2] dark:focus-visible:ring-[#4F9CFF]';
+    'flex min-h-12 items-center gap-3 rounded-xl px-3 text-base font-semibold tracking-[-0.011em] no-underline outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#6D28D9] dark:focus-visible:ring-[#A78BFA]';
   const rowClass = (active: boolean) =>
     `${rowBase} ${
       active
-        ? 'bg-[#F0F6FF] text-[#0F1114] dark:bg-white/10 dark:text-white'
-        : 'text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-100 dark:hover:bg-white/10'
+        ? 'bg-[#F5F3FF] text-[#0F1114] dark:bg-white/10 dark:text-white'
+        : 'text-[#0F1114] hover:bg-[#F5F3FF] dark:text-slate-100 dark:hover:bg-white/10'
     }`;
 
   const renderItem = (item: NavItem) => {
@@ -98,7 +98,7 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
             type="button"
             onClick={onClose}
             aria-label="Close menu"
-            className="-mr-2 inline-flex size-12 cursor-pointer items-center justify-center rounded-full text-[#0F1114] hover:bg-[#F0F6FF] dark:text-slate-200 dark:hover:bg-white/10"
+            className="-mr-2 inline-flex size-12 cursor-pointer items-center justify-center rounded-full text-[#0F1114] hover:bg-[#F5F3FF] dark:text-slate-200 dark:hover:bg-white/10"
           >
             <X className="size-5" aria-hidden="true" />
           </button>
@@ -111,7 +111,7 @@ export const MobileNavDrawer: React.FC<MobileNavDrawerProps> = ({
               onClose();
               onOpenSearch();
             }}
-            className="mb-3 flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-full bg-[#F0F6FF] px-4 text-left text-base font-normal tracking-[-0.011em] text-[#6E6D7A] hover:bg-[#EBEBF0] dark:bg-white/[0.08] dark:text-slate-300 dark:hover:bg-white/15"
+            className="mb-3 flex min-h-12 w-full cursor-pointer items-center gap-3 rounded-full bg-[#F5F3FF] px-4 text-left text-base font-normal tracking-[-0.011em] text-[#6E6D7A] hover:bg-[#EBEBF0] dark:bg-white/[0.08] dark:text-slate-300 dark:hover:bg-white/15"
           >
             <Search className="size-5 shrink-0" aria-hidden="true" />
             <span className="flex-1">What do you want to calculate?</span>

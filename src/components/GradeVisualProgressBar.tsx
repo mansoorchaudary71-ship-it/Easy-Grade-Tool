@@ -403,7 +403,7 @@ export const GradeVisualProgressBar: React.FC<GradeVisualProgressBarProps> = ({
           >
             <span style={{ color: percent < 60 ? '#ef4444' : undefined }}>F</span>
             <span style={{ color: percent >= 60 && percent < 70 ? '#f59e0b' : undefined }}>D</span>
-            <span style={{ color: percent >= 70 && percent < 80 ? '#3b82f6' : undefined }}>C</span>
+            <span style={{ color: percent >= 70 && percent < 80 ? '#8b5cf6' : undefined }}>C</span>
             <span style={{ color: percent >= 80 && percent < 90 ? '#14b8a6' : undefined }}>B</span>
             <span style={{ color: percent >= 90 ? '#10b981' : undefined }}>A</span>
           </div>

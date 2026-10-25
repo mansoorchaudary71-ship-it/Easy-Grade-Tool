@@ -46,7 +46,7 @@ export const CutoffFields: React.FC<CutoffFieldsProps> = ({ idPrefix, drafts, on
             onChange={(e) => onChange(grade, e.target.value)}
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `${idPrefix}-error` : undefined}
-            className={`w-full min-h-[48px] bg-[#F4F6F9] dark:bg-slate-800 border text-stone-900 dark:text-white rounded-[20px] px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-[#0056D2] focus:border-[#0056D2] font-mono font-bold text-center text-base transition-all ${
+            className={`w-full min-h-[48px] bg-[#F4F6F9] dark:bg-slate-800 border text-stone-900 dark:text-white rounded-[20px] px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-[#6D28D9] focus:border-[#6D28D9] font-mono font-bold text-center text-base transition-all ${
               error ? 'border-rose-500 ring-2 ring-rose-400/60' : 'border-stone-200/80 dark:border-slate-700'
             }`}
           />

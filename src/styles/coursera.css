@@ -1,12 +1,15 @@
 /* ==========================================================================
-   Coursera-inspired design system for Easy Grade Tool.
+   Design system for Easy Grade Tool (violet rebrand, 2026-10-25).
    Imported LAST in main.tsx (after typography.css). Unlayered on purpose, so it wins over
-   Tailwind utilities and the older sand / slate rules in index.css, premium.css, ux-refactor.css.
+   Tailwind utilities and the older rules in index.css, premium.css, ux-refactor.css.
 
-   What is copied from the reference (coursera.org), without copying any of its content or artwork:
-     - one confident blue (#0056D2) for every primary action and link
-     - white canvas, pale-blue bands (#F0F6FF) to separate sections
+   The new identity, built from the best of Intercom, Calendly, Typeform, Canva,
+   Asana, ClassDojo and Dribbble — rendered as ONE system, not seven:
+     - one confident violet (#6D28D9, dark #A78BFA) for every primary action and link
+     - warm off-white canvas (#FBF9F6), pale-violet bands (#F5F3FF) to separate sections
      - pill buttons, 16px cards, hairline borders instead of shadows
+     - serif display headlines (Typeform/Calendly editorial serif), Inter for all UI text
+     - dark plum footer band (Typeform plum-black, Calendly/Asana dark footers)
      - a thin utility bar above the main header, an "Explore" menu, one big search field
      - left-aligned page banners, card grids, a tabbed "what brings you here" block, a multi-column footer
    Only colour, border, radius, shadow and type are touched for existing components; layout of the
@@ -14,55 +17,55 @@
    ========================================================================== */
 
 :root {
-  --cs-blue: #0056D2;
-  --cs-blue-hover: #00419E;
-  --cs-blue-ink: #003E9C;
-  --cs-tint: #F0F6FF;
-  --cs-tint-2: #E3EEFF;
-  --cs-ink: #0F1114;
+  --cs-blue: #6D28D9;
+  --cs-blue-hover: #5B21B6;
+  --cs-blue-ink: #4C1D95;
+  --cs-tint: #F5F3FF;
+  --cs-tint-2: #EDE9FE;
+  --cs-ink: #1E1727;
   --cs-text: #1F2937;
   --cs-muted: #4F5D75;
-  --cs-border: #DDE3EC;
+  --cs-border: #E7E5E4;
   --cs-field: #8A94A6;
   --cs-white: #FFFFFF;
   --cs-radius-btn: 9999px; /* pill buttons everywhere (Dribbble-style) */
   --cs-radius-card: 16px; /* one card radius everywhere: banners, cards, panels, trust tiles */
   --cs-container: 1280px;
-  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #0056D2;
+  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #6D28D9;
 
-  /* Re-point the older palettes at the Coursera blue so every existing accent follows */
-  --ds-blue: #0056D2;
-  --ds-blue-hover: #00419E;
-  --primary: 217 100% 41%;
-  --accent: 217 100% 41%;
+  /* Re-point the older palettes at the brand violet so every existing accent follows */
+  --ds-blue: #6D28D9;
+  --ds-blue-hover: #5B21B6;
+  --primary: 263 70% 50%;
+  --accent: 263 70% 50%;
   --ds-shadow-cta: none;
-  --ds-shadow-cta-hover: 0 4px 12px rgba(0, 86, 210, 0.28);
+  --ds-shadow-cta-hover: 0 4px 12px rgba(109, 40, 217, 0.28);
   --el-ambient: none;
-  --color-teal-50: #f0f6ff;
-  --color-teal-100: #e3eeff;
-  --color-teal-200: #c4dbff;
-  --color-teal-300: #94bcff;
-  --color-teal-400: #5b94f0;
-  --color-teal-500: #2a6fdc;
-  --color-teal-600: #0056d2;
-  --color-teal-700: #00419e;
-  --color-teal-800: #003e9c;
-  --color-teal-900: #002f78;
-  --color-teal-950: #001f52;
+  --color-teal-50: #f5f3ff;
+  --color-teal-100: #ede9fe;
+  --color-teal-200: #ddd6fe;
+  --color-teal-300: #c4b5fd;
+  --color-teal-400: #a78bfa;
+  --color-teal-500: #8b5cf6;
+  --color-teal-600: #7c3aed;
+  --color-teal-700: #6d28d9;
+  --color-teal-800: #5b21b6;
+  --color-teal-900: #4c1d95;
+  --color-teal-950: #2e1065;
   /* Same re-point for the blue scale (2026-10-25 unification): every blue-*
      utility site-wide — buttons, links, rings, segmented pills, chart accents —
-     now resolves to the one brand blue instead of Tailwind's default blue-600. */
-  --color-blue-50: #f0f6ff;
-  --color-blue-100: #e3eeff;
-  --color-blue-200: #c4dbff;
-  --color-blue-300: #94bcff;
-  --color-blue-400: #5b94f0;
-  --color-blue-500: #2a6fdc;
-  --color-blue-600: #0056d2;
-  --color-blue-700: #00419e;
-  --color-blue-800: #003e9c;
-  --color-blue-900: #002f78;
-  --color-blue-950: #001f52;
+     now resolves to the brand violet instead of Tailwind's default blue. */
+  --color-blue-50: #f5f3ff;
+  --color-blue-100: #ede9fe;
+  --color-blue-200: #ddd6fe;
+  --color-blue-300: #c4b5fd;
+  --color-blue-400: #a78bfa;
+  --color-blue-500: #8b5cf6;
+  --color-blue-600: #7c3aed;
+  --color-blue-700: #6d28d9;
+  --color-blue-800: #5b21b6;
+  --color-blue-900: #4c1d95;
+  --color-blue-950: #2e1065;
 }
 html [class*="tool-theme-"] {
   --tool-primary: 217 100% 41%;
@@ -71,18 +74,18 @@ html [class*="tool-theme-"] {
 }
 
 html.dark {
-  --cs-blue: #4F9CFF;
-  --cs-blue-hover: #7DB6FF;
-  --cs-blue-ink: #9CC7FF;
-  --cs-tint: rgba(79, 156, 255, 0.10);
-  --cs-tint-2: rgba(79, 156, 255, 0.18);
+  --cs-blue: #A78BFA;
+  --cs-blue-hover: #C4B5FD;
+  --cs-blue-ink: #DDD6FE;
+  --cs-tint: rgba(167, 139, 250, 0.10);
+  --cs-tint-2: rgba(167, 139, 250, 0.18);
   --cs-ink: #F4F7FB;
   --cs-text: #D7DEE9;
   --cs-muted: #A5B1C4;
   --cs-border: rgba(255, 255, 255, 0.12);
   --cs-field: #6B7A92;
-  --cs-white: #131C31;
-  --cs-focus: 0 0 0 2px #0F172A, 0 0 0 4px #4F9CFF;
+  --cs-white: #1E1727;
+  --cs-focus: 0 0 0 2px #0F172A, 0 0 0 4px #A78BFA;
 }
 
 /* --------------------------------------------------------------------------
@@ -91,7 +94,7 @@ html.dark {
 html:not(.dark) body,
 html:not(.dark) .app-shell,
 html:not(.dark) .premium-surface {
-  background-color: #FFFFFF;
+  background-color: #FBF9F6;
 }
 html:not(.dark) body {
   color: var(--cs-text);
@@ -176,6 +179,7 @@ html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: 
 @media (min-width: 768px) { .cs-section { padding-block: 4rem; } }
 .cs-h2 {
   margin: 0 0 0.5rem;
+  font-family: var(--app-font-serif);
   font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem);
   line-height: 1.2;
   font-weight: 700;
@@ -290,6 +294,7 @@ html.dark .cs-lines { opacity: 0.28; }
 .cs-banner-title {
   margin: 0;
   max-width: 46rem;
+  font-family: var(--app-font-serif);
   font-size: clamp(1.75rem, 1.25rem + 1.8vw, 2.75rem);
   line-height: 1.12;
   font-weight: 700;
@@ -348,7 +353,7 @@ html.dark .cs-tab[aria-selected="true"] { color: #0B1220; }
   background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card);
 }
 @media (min-width: 768px) { .cs-panel { grid-template-columns: 1.1fr 1fr; padding: 2rem 2.5rem; align-items: center; } }
-.cs-panel h3 { margin: 0 0 0.5rem; font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem); font-weight: 700; letter-spacing: -0.02em; color: var(--cs-ink); }
+.cs-panel h3 { margin: 0 0 0.5rem; font-family: var(--app-font-serif); font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem); font-weight: 700; letter-spacing: -0.02em; color: var(--cs-ink); }
 .cs-panel p { margin: 0 0 1.25rem; font-size: 1.0625rem; line-height: 1.55; color: var(--cs-muted); }
 .cs-panel-links { display: grid; gap: 0.625rem; margin: 0; padding: 0; list-style: none; }
 .cs-panel-links a {
@@ -358,7 +363,7 @@ html.dark .cs-tab[aria-selected="true"] { color: #0B1220; }
   font-weight: 600; color: var(--cs-ink) !important; text-decoration: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(0, 86, 210, 0.12); color: var(--cs-blue) !important; }
+.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(109, 40, 217, 0.12); color: var(--cs-blue) !important; }
 
 .cs-trust { display: grid; gap: 1rem; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .cs-trust { grid-template-columns: repeat(2, 1fr); } }
@@ -382,7 +387,7 @@ html.dark .cs-tab[aria-selected="true"] { color: #0B1220; }
 .cs-news-plane { right: 1.25rem; bottom: 0.75rem; width: 6.5rem; height: auto; opacity: 0.5; }
 .cs-news-inner { position: relative; z-index: 1; display: grid; gap: 1.5rem; padding: 2rem 1.5rem 4.25rem; align-items: center; }
 @media (min-width: 768px) { .cs-news-inner { grid-template-columns: 1fr 1fr; gap: 3rem; padding: 3rem 3rem 3.5rem; } }
-.cs-news-title { margin: 0 0 0.5rem; font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--cs-ink); }
+.cs-news-title { margin: 0 0 0.5rem; font-family: var(--app-font-serif); font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: var(--cs-ink); }
 .cs-news-sub { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--cs-muted); }
 .cs-news-form { display: flex; flex-direction: column; gap: 0.75rem; }
 @media (min-width: 480px) { .cs-news-form { flex-direction: row; } }
@@ -431,15 +436,15 @@ html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .too
   box-shadow: 0 0 0 1px var(--cs-blue);
 }
 
-/* Primary buttons: flat Coursera blue (drops the gradient, glow and lift) */
-.premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled),
+/* Primary buttons: flat violet (drops the gradient, glow and lift) */
+.premium-surface :is(button, a)[class~="bg-[#6D28D9]"]:not([aria-pressed]):not(:disabled),
 .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled) {
   background-image: none;
   background-color: var(--cs-blue);
   box-shadow: none;
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class~="bg-[#2563EB]"]:not([aria-pressed]):not(:disabled):hover,
+  .premium-surface :is(button, a)[class~="bg-[#6D28D9]"]:not([aria-pressed]):not(:disabled):hover,
   .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled):hover {
     translate: 0 0;
     background-color: var(--cs-blue-hover);
@@ -490,7 +495,9 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
 .cs-chip:hover { border-color: var(--cs-blue); background: var(--cs-tint-2); color: var(--cs-blue) !important; }
 
 /* --------------------------------------------------------------------------
-   9. Seven-site UI/UX unification (2026-10-25) — patterns picked, colours NOT
+   9. Seven-site UI/UX unification (2026-10-25) — SUPERSEDED by section 10
+   (violet rebrand). Kept for history; the rules below still stand except
+   where section 10's tokens override them. Patterns picked, colours NOT
    Observed live (read-only) on intercom.com, calendly.com, typeform.com,
    canva.com, asana.com, classdojo.com and dribbble.com (header checked
    2026-10-25). The unity rule: every picked pattern is rendered in THIS
@@ -513,4 +520,25 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
    Intercom's black buttons, Dribbble's pink search button, and any
    product-specific flow (chat launcher, booking flows). Dark mode keeps
    resolving to the same blue family via the teal/blue token aliases above.
+   -------------------------------------------------------------------------- */
+
+/* --------------------------------------------------------------------------
+   10. Violet rebrand (2026-10-25) — the user asked for a VISIBLE replacement
+   of the old UI, including colour and font style, after the section-9
+   unification (same blue, same shapes) looked unchanged on the live site.
+   This supersedes the blue identity; the "primary unchanged" rule from the
+   header task no longer applies — the user explicitly authorised the change.
+   New system, still one unit:
+     - Violet primary #6D28D9 / dark #A78BFA (ClassDojo/Canva violet,
+       deepened for white-text contrast); teal + blue utility scales and
+       every #0056D2/#00419E/#4F9CFF literal re-pointed at it.
+     - Warm canvas #FBF9F6 (Calendly) with white floating cards.
+     - Serif display headlines via --app-font-serif (Typeform/Calendly
+       editorial serif; system stack, no new download): banner titles,
+       section H2s, panel + newsletter titles. All UI text stays Inter.
+     - Dark plum footer gradient #1E1727 → #4C1D95 (Typeform plum-black).
+     - Fields: white fill + slate border + violet focus ring (Calendly).
+   Deliberately NOT changed: grade-tier colours in GradeVisualProgressBar
+   (emerald/amber/orange/rose/indigo are grade semantics, not brand);
+   the logo SVG brand mark (navy + gold); calculator layout and behaviour.
    -------------------------------------------------------------------------- */

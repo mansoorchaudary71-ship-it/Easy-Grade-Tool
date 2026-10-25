@@ -135,7 +135,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
   const getTierRowBg = (letter: string) => {
     if (letter.startsWith('A')) {
-      return 'bg-[#DBEAFE] hover:bg-[#CDD4E8] border border-[#BFDBFE]/50';
+      return 'bg-[#DBEAFE] hover:bg-[#CDD4E8] border border-[#DDD6FE]/50';
     }
     if (letter.startsWith('B')) {
       return 'bg-[#D6E1FF] hover:bg-[#C8D6FF] border border-[#A5BCF0]/50';
@@ -176,7 +176,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               max="1000"
               value={totalQuestionsInput}
               onChange={(e) => setTotalQuestionsInput(e.target.value)}
-              className="w-full h-14 bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg sm:text-2xl font-mono text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="w-full h-14 bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-[#6D28D9] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg sm:text-2xl font-mono text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               placeholder="20"
             />
             {/* Quick Presets */}
@@ -233,7 +233,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
           {/* Quick Metrics & Actions */}
           <div className="flex flex-col justify-between space-y-4">
-            <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#BFDBFE] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
+            <div className="bg-[#DBEAFE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
               <span className="text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
                 Points Per Question
               </span>
@@ -255,7 +255,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               <button
                 type="button"
                 onClick={handlePrint}
-                className="inline-flex items-center justify-center gap-1.5 py-2.5 px-6 bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
+                className="inline-flex items-center justify-center gap-1.5 py-2.5 px-6 bg-[#6D28D9] hover:bg-[#5B21B6] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>Print Chart</span>
@@ -328,7 +328,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               placeholder="Search wrong answers..."
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
-              className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full pl-10 pr-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-xs placeholder:text-slate-400"
+              className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full pl-10 pr-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#6D28D9] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-xs placeholder:text-slate-400"
             />
           </div>
         </div>

@@ -1,306 +1,306 @@
 {
   "/": {
-    "hash": "b851fc64298c3029",
+    "hash": "1599863eeafa1ce5",
     "lastmod": "2026-10-25"
   },
   "/grade-calculator/": {
-    "hash": "6d9e35facd6c01d4",
+    "hash": "4871116a3421116e",
     "lastmod": "2026-10-25"
   },
   "/gpa-calculator/": {
-    "hash": "2433118c9346779a",
+    "hash": "db3a728680d7d77f",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage-calculator/": {
-    "hash": "01938a151ed49b16",
+    "hash": "099069bbb3e9aed3",
     "lastmod": "2026-10-25"
   },
   "/tip-calculator/": {
-    "hash": "1c20c4748f56ab1c",
+    "hash": "3b2afbf034201879",
     "lastmod": "2026-10-25"
   },
   "/percentage-calculator/": {
-    "hash": "0d54a78f2c7c0bad",
+    "hash": "1498c1cb395f4723",
     "lastmod": "2026-10-25"
   },
   "/loan-calculator/": {
-    "hash": "30d2ee4ce7ec16fd",
+    "hash": "b4a262560e68749b",
     "lastmod": "2026-10-25"
   },
   "/mortgage-calculator/": {
-    "hash": "8c459cb14b9c75f2",
+    "hash": "f35bb6b7568fc6e3",
     "lastmod": "2026-10-25"
   },
   "/password-generator/": {
-    "hash": "29ebccfc77aaaddb",
+    "hash": "156ae05eb07af093",
     "lastmod": "2026-10-25"
   },
   "/about/": {
-    "hash": "5b5416711fe432ec",
+    "hash": "97aaf94de93d9b50",
     "lastmod": "2026-10-25"
   },
   "/privacy/": {
-    "hash": "4edfb693ed8272e1",
+    "hash": "ed47be605417df72",
     "lastmod": "2026-10-25"
   },
   "/terms/": {
-    "hash": "1cbd655c51031ad4",
+    "hash": "ba2a3647f905ec20",
     "lastmod": "2026-10-25"
   },
   "/final-exam-grade-calculator/": {
-    "hash": "cb0395a8e8f279f4",
+    "hash": "ebd83af99ae786aa",
     "lastmod": "2026-10-25"
   },
   "/test-grade-calculator/": {
-    "hash": "5410b4d32d404d4d",
+    "hash": "73d89ddf62b0eaf0",
     "lastmod": "2026-10-25"
   },
   "/grade-curve-calculator/": {
-    "hash": "92579a9c39faf324",
+    "hash": "214c644ce87d37ec",
     "lastmod": "2026-10-25"
   },
   "/letter-grade-calculator/": {
-    "hash": "a4999dce548e6868",
+    "hash": "cb8c2c03c31dfc3c",
     "lastmod": "2026-10-25"
   },
   "/average-grade-calculator/": {
-    "hash": "da9c612c5d832cf5",
+    "hash": "2cc8cfca968de966",
     "lastmod": "2026-10-25"
   },
   "/weighted-gpa-calculator/": {
-    "hash": "340422f450990fd9",
+    "hash": "cebd54d143ab9007",
     "lastmod": "2026-10-25"
   },
   "/semester-gpa-calculator/": {
-    "hash": "a9b34dd96faf6afd",
+    "hash": "5a7a1eb02a8ef16c",
     "lastmod": "2026-10-25"
   },
   "/cumulative-gpa-calculator/": {
-    "hash": "66d399350281445e",
+    "hash": "2e2ebc68a8fc3441",
     "lastmod": "2026-10-25"
   },
   "/for-schools/": {
-    "hash": "1449dd06dad6fe12",
+    "hash": "122f13b1ce9fa95e",
     "lastmod": "2026-10-25"
   },
   "/blog/": {
-    "hash": "4f1d7e5b9c3af496",
+    "hash": "cb1db1423b3593f9",
     "lastmod": "2026-10-25"
   },
   "/blog/how-to-grade-30-tests-in-15-minutes/": {
-    "hash": "d34f1015ee397d0f",
+    "hash": "d355ec36cc34e44c",
     "lastmod": "2026-10-25"
   },
   "/blog/when-to-curve-grades/": {
-    "hash": "cd6188221c71bae6",
+    "hash": "2af4956c8ba62772",
     "lastmod": "2026-10-25"
   },
   "/blog/grading-systems-explained/": {
-    "hash": "6e9107c23f1fa77d",
+    "hash": "4f2aa91de7c93a1b",
     "lastmod": "2026-10-25"
   },
   "/blog/high-school-vs-college-gpa/": {
-    "hash": "910ded554cfcdc48",
+    "hash": "19f3e7e85ab7da45",
     "lastmod": "2026-10-25"
   },
   "/weighted-vs-unweighted-gpa/": {
-    "hash": "cbf545c97b65222a",
+    "hash": "32fdf854771ca075",
     "lastmod": "2026-10-25"
   },
   "/how-many-questions-can-i-miss/": {
-    "hash": "24ead9931ee4d867",
+    "hash": "83c74615e80da1f5",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/": {
-    "hash": "393adba53a4fa662",
+    "hash": "4d1c25e04d889d89",
     "lastmod": "2026-10-25"
   },
   "/gpa-to-letter-grade/": {
-    "hash": "ec136731d7a56721",
+    "hash": "eb03b652a37c92c9",
     "lastmod": "2026-10-25"
   },
   "/letter-grade-to-gpa/": {
-    "hash": "a016e92d8785f13c",
+    "hash": "a3496fb81ebfb755",
     "lastmod": "2026-10-25"
   },
   "/high-school-gpa-calculator/": {
-    "hash": "33a297464ec7e139",
+    "hash": "11b9f565e17c4f85",
     "lastmod": "2026-10-25"
   },
   "/college-gpa-calculator/": {
-    "hash": "7fe462b8a5ddbedb",
+    "hash": "73c098ff9a744913",
     "lastmod": "2026-10-25"
   },
   "/final-grade-planner/": {
-    "hash": "2f94182f18c1906f",
+    "hash": "34f9207b74e7de56",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/vtu/": {
-    "hash": "39e03bc0fb9449f6",
+    "hash": "66217a1acf7eb0d3",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/mumbai-university/": {
-    "hash": "a60a48e9d6a083d8",
+    "hash": "24561a5bf953f36b",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/makaut/": {
-    "hash": "16512a1a3d233f37",
+    "hash": "50058d80f2213b0a",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/gtu/": {
-    "hash": "d980826058868e24",
+    "hash": "d34a657ba65babab",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/sppu/": {
-    "hash": "d936d604a7ba2def",
+    "hash": "9b8e32592f6c73a7",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/aicte/": {
-    "hash": "40d1125ec2cc1f9c",
+    "hash": "47fd9c690a269e9a",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/aktu/": {
-    "hash": "341bc0a0d6028dea",
+    "hash": "479eb7c3be0d2aa4",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/amity-university/": {
-    "hash": "72716a8859acb0b6",
+    "hash": "31636547ca57f7f4",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/amravati-university/": {
-    "hash": "6e81bbd37daae0f0",
+    "hash": "b2e30346505efd93",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/anna-university/": {
-    "hash": "fbb347bb30c2db54",
+    "hash": "3ca6f5cd078f34e7",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/bhu/": {
-    "hash": "f036e42023fde2ea",
+    "hash": "2d065134060876f7",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/bangalore-university/": {
-    "hash": "9f5b8ccb137fb2ab",
+    "hash": "1967f3b01fe42691",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/bput/": {
-    "hash": "b730442e8a102214",
+    "hash": "c6cc3a729b3df56e",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/bits-pilani/": {
-    "hash": "392a1ddd37b099d5",
+    "hash": "888dff1652c3cb36",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/cbse/": {
-    "hash": "3d58379025f33b43",
+    "hash": "bb07b77a090edac3",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/delhi-university/": {
-    "hash": "f025e587a68029ed",
+    "hash": "192a2f6f8272a9a2",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/delhi-university-cbcs/": {
-    "hash": "c4c5eb2e230537ee",
+    "hash": "a71e63860687de35",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/bamu/": {
-    "hash": "761cadb0c830e5f1",
+    "hash": "99c75db5c12c51ab",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/jntu/": {
-    "hash": "9fe5bfdeaf486b93",
+    "hash": "6fcfcb8aff4e7f09",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/ktu/": {
-    "hash": "7842678117b539e0",
+    "hash": "80df0c0abd7969ea",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/mumbai-university-eng/": {
-    "hash": "28dd191083297e3f",
+    "hash": "88b58a6e7b3eae56",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/pune-university-direct/": {
-    "hash": "7184c60b5ebc7074",
+    "hash": "19427aa7425f3bae",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/rgpv/": {
-    "hash": "da912b9ad9e1bb6a",
+    "hash": "0a07c1d5ae5308b6",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/srm-university/": {
-    "hash": "79659aa683b1b63a",
+    "hash": "654ad76abc825f58",
     "lastmod": "2026-10-25"
   },
   "/cgpa-to-percentage/vit/": {
-    "hash": "306ec74d68e6e359",
+    "hash": "238d91c08bf74b09",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/5-questions/": {
-    "hash": "8198aa9db8596321",
+    "hash": "e2c998cdf618d4dd",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/10-questions/": {
-    "hash": "9b1b4601b7d7400d",
+    "hash": "a436cb88d0a61432",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/12-questions/": {
-    "hash": "d03a53536159be10",
+    "hash": "1729e666ae0c9762",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/15-questions/": {
-    "hash": "c63a43c4165e02af",
+    "hash": "e81e78e52f722071",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/16-questions/": {
-    "hash": "c560d786be8a9249",
+    "hash": "35d9d014e914f44d",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/18-questions/": {
-    "hash": "ee1964d62498e918",
+    "hash": "8486efb93a186799",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/20-questions/": {
-    "hash": "20852620d6b52fb0",
+    "hash": "87bef9a860d05608",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/25-questions/": {
-    "hash": "d2cb0fea70d09b25",
+    "hash": "8b6ca76cb0a0c206",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/30-questions/": {
-    "hash": "d3631f0271ea9992",
+    "hash": "9d7a5193af4a8efc",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/35-questions/": {
-    "hash": "211fc290381e0bb6",
+    "hash": "bd2b40050e254bc4",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/40-questions/": {
-    "hash": "028d14956da0a3f2",
+    "hash": "58b4d211de8bd9e1",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/45-questions/": {
-    "hash": "16222983da096c8b",
+    "hash": "b65ee5e8cd38d42c",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/50-questions/": {
-    "hash": "7167f9b2f1b2767e",
+    "hash": "8acef81fa41a679b",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/60-questions/": {
-    "hash": "14bfae6dafc5e110",
+    "hash": "9d745933e07b4338",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/75-questions/": {
-    "hash": "2eda7b551ceff617",
+    "hash": "512aa7ae0791fe69",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/80-questions/": {
-    "hash": "941623eec65e3410",
+    "hash": "e6410ebc297028bd",
     "lastmod": "2026-10-25"
   },
   "/grading-scale/100-questions/": {
-    "hash": "01bb441caebc93c6",
+    "hash": "b464a96a913f1b29",
     "lastmod": "2026-10-25"
   }
 }

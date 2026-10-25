@@ -39,7 +39,7 @@
   --popover-border: 220 14% 91%;
 
   /* 10% High-Contrast Brand Accent */
-  --primary: 226 27% 41%;
+  --primary: 263 70% 50%;
   --primary-foreground: 0 0% 100%;
   --accent: 38 92% 50%;
   --accent-foreground: 0 0% 100%;
@@ -48,7 +48,7 @@
 
   /* Typography tokens */
   --app-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --app-font-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --app-font-serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   --app-font-mono: ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, Consolas, monospace;
 
   /* Modern Elevation Tokens */
@@ -90,7 +90,7 @@
   --popover-border: 224 25% 16%;
 
   /* 10% High-Contrast Brand Accent */
-  --primary: 226 48% 72%;
+  --primary: 255 92% 76%;
   --primary-foreground: 224 71% 4%;
   --accent: 38 92% 54%;
   --accent-foreground: 224 71% 4%;
@@ -1113,8 +1113,8 @@ input[type="text"].field-input:focus,
 .field-input:focus,
 .tool-input:focus {
   background: #ffffff !important;
-  border-color: #2563eb !important; /* Blue-600 outline as shown in reference */
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15) !important;
+  border-color: #6d28d9 !important; /* Violet-700 focus outline */
+  box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.15) !important;
   outline: none !important;
 }
 
@@ -1152,18 +1152,18 @@ input[type="number"]:hover {
 .field-input:focus,
 .tool-input:focus,
 input[type="number"]:focus {
-  border-color: #2563eb;
+  border-color: #6d28d9;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.15);
   outline: none;
 }
 
 .dark .field-input:focus,
 .dark .tool-input:focus,
 .dark input[type="number"]:focus {
-  border-color: #3b82f6;
+  border-color: #a78bfa;
   background: #0f172a;
-  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.25);
   outline: none;
 }
 
