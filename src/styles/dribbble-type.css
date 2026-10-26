@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Dribbble type — thin weight scale (2026-10-26)
+   Imported LAST in main.tsx, after nova2.css. Unlayered on purpose, so it
+   wins over Tailwind's layered utilities and over every earlier type rule
+   at equal specificity.
+
+   What "Dribbble's font style" means here, and why the family does not change:
+   Dribbble's product UI typeface is Mona Sans — which this site already
+   self-hosts as its sole typeface (see styles/mona-sans.css, SIL OFL 1.1).
+   What made Dribbble read "a little thin" next to this site was never the
+   family; it was the weight. Dribbble's documented system runs Mona Sans
+   400–800, its headlines read as full bold rather than extra-bold/black,
+   and its nav, labels, and body text read regular-to-medium. This site was
+   running 800-weight banners and 700-weight buttons/labels everywhere.
+
+   The fix is one rung down across the whole scale, so relative hierarchy
+   is preserved — the heaviest thing on the page is still the heaviest,
+   it is just lighter:
+     800 (extra-bold) -> 700 (bold)
+     700 (bold)       -> 600 (semibold)
+     600 (semibold)   -> 500 (medium)
+     500 (medium)     -> 400 (regular)
+     400 (regular)    -> unchanged
+   Sizes, line-heights, colours, and layout are untouched; only weight,
+   display tracking, and font smoothing change. No component file is edited,
+   so this layer applies to every tool, page, and card uniformly.
+   ========================================================================== */
+
+/* 1. Tailwind weight utilities, stepped down one rung (958 uses site-wide). */
+.font-black { font-weight: 700; }
+.font-extrabold { font-weight: 700; }
+.font-bold { font-weight: 600; }
+.font-semibold { font-weight: 500; }
+.font-medium { font-weight: 400; }
+
+/* 2. Bold semantics: emphasis stays visible, one rung lighter. */
+b, strong { font-weight: 600; }
+th { font-weight: 600; }
+
+/* 3. Headings: full-bold display, semibold sections, medium subheads. */
+h1 { font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-weight: 600; letter-spacing: -0.02em; }
+h3 { font-weight: 600; letter-spacing: -0.015em; }
+h4, h5, h6 { font-weight: 500; }
+
+/* 4. Display/banner titles: 800 -> 700, with more open tracking so the
+      large sizes read light instead of dense. */
+.cs-banner-title,
+.chrome-bar-title,
+.hero-title,
+.ft-news-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* 5. Named section/card titles that carried their own 700/800 rules. */
+.cs-h2,
+.cs-news-title,
+.cs-cat h3,
+.cs-panel h3,
+.cs-trust-item h3,
+.nova2-pain-card h3,
+.nova2-foot-journey-title {
+  font-weight: 600;
+}
+.nova2-planner-title { font-weight: 600; }
+
+/* 6. Labels, eyebrows, tabs, and small UI text: one rung lighter. */
+.cs-eyebrow,
+.cs-popular-label,
+.cs-utility-link[aria-current="page"],
+.cs-card-link,
+.nova2-shelf-list a {
+  font-weight: 500;
+}
+.cs-tab,
+.nova2-shelf-tab {
+  font-weight: 500;
+}
+.nova2-planner-field input { font-weight: 500; }
+.nova2-foot-journey .step-no { font-weight: 700; }
+
+/* 7. Rendering: antialiased strokes read thinner, especially on macOS. */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
