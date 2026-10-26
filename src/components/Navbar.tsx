@@ -1,10 +1,9 @@
 import React, { useMemo, useEffect, useState } from 'react';
 import { Link } from './SlashLink';
-import { Sun, Moon, Search, Menu } from 'lucide-react';
-import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/react';
+import { Search, Menu } from 'lucide-react';
+import { MotionConfig } from 'motion/react';
 import { ToolKey } from '../types';
 import { useLocation } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
 import { preloadTool } from '../utils/toolPreloader';
 import { preloadForPath } from '../utils/lazyRoutes';
 import { Logo } from './Logo';
@@ -24,7 +23,7 @@ interface NavbarProps {
 const ICON_STROKE = 2;
 
 /* -------------------------------------------------------------------------- */
-/* Icons                                                                       */
+/* Icons */
 /* -------------------------------------------------------------------------- */
 
 /** Small inline shield-with-check used inside the "100% Private" badge. */
@@ -45,45 +44,20 @@ const PrivacyShieldIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-/**
- * Dedicated "System" theme icon: one circle split down the middle.
- * Left half = sun (with rays), right half = moon (solid half-disc).
- */
-const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={ICON_STROKE}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    aria-hidden="true"
-    focusable="false"
-  >
-    {/* Disc outline */}
-    <circle cx="12" cy="12" r="5" />
-    {/* Moon half (right) */}
-    <path d="M12 7a5 5 0 0 1 0 10Z" fill="currentColor" />
-    {/* Sun rays (left only) */}
-    <path d="M12 2.5v2M12 19.5v2M4.6 12H2.5M6.3 6.3 4.9 4.9M6.3 17.7l-1.4 1.4" />
-  </svg>
-);
-
 /* -------------------------------------------------------------------------- */
-/* Shared class strings                                                        */
+/* Shared class strings */
 /* -------------------------------------------------------------------------- */
 
 /** Round ghost buttons (hamburger, search icon on small screens, theme switch): no border, grey chip on hover. */
 const ghostControl =
-  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0F1114] transition-colors duration-150 hover:bg-[#EEF4FF] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
+  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0F1114] transition-colors duration-150 hover:bg-[#EEF2FF] active:scale-95 ';
 
 /** Solid pill call to action (the "Sign up" slot in the Dribbble-style header). Colour unchanged. White in dark mode. */
 const ctaPill =
-  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#0056D2] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#00419E] active:scale-[0.98] dark:bg-[#6EA8FF] dark:text-[#0B1220] dark:hover:bg-[#BFD7FF]';
+  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#2457F5] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#1A41C9] active:scale-[0.98] ';
 
 /* -------------------------------------------------------------------------- */
-/* Component                                                                   */
+/* Component */
 /* -------------------------------------------------------------------------- */
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -91,8 +65,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onSelectTool,
   onOpenCommandPalette,
 }) => {
-  const { theme, resolvedTheme, setTheme } = useTheme();
-  const prefersReducedMotion = useReducedMotion();
   const location = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -123,18 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     );
   }, [mounted]);
 
-  const cycleTheme = () => {
-    if (theme === 'system') {
-      setTheme('light');
-    } else if (theme === 'light') {
-      setTheme('dark');
-    } else {
-      setTheme('system');
-    }
-  };
-
   const shortcutLabel = isMac ? '⌘K' : 'Ctrl+K';
-  const themeLabel = theme.charAt(0).toUpperCase() + theme.slice(1);
 
   const isStaticPage = ['/about', '/privacy', '/terms', '/methodology'].some((p) => location.pathname.startsWith(p));
   const primaryActive = !isStaticPage && isSamePath(location.pathname, PRIMARY_NAV_ITEM.path);
@@ -155,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           For Schools text link stays visible from lg (it is the embed
           programme, so it earns a permanent header slot).
           Below lg the search icon opens the palette (the pill is desktop only).
-          Colours follow the NOVA system: brand blue (#0056D2) for the pill,
+          Colours follow the NOVA system: brand blue (#2457F5) for the pill,
           focus rings and hovers — no Dribbble pink anywhere.
         */}
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-2 px-4 sm:px-6 lg:h-20 lg:gap-4 lg:px-8 xl:gap-5">
@@ -197,8 +158,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           */}
           {scrolled && (
           <div className="header-search-in hidden min-w-0 flex-1 lg:block lg:max-w-[300px]">
-            <div className="flex h-12 items-center gap-2 rounded-full bg-[#F3F3F4] pl-4 pr-4 transition-colors duration-200 hover:bg-[#E7E7E9] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#0056D2] dark:bg-white/[0.06] dark:hover:bg-white/10 dark:focus-within:bg-white/[0.08] dark:focus-within:ring-[#6EA8FF]">
-              <Search className="size-[18px] shrink-0 text-[#6E6D7A] dark:text-slate-400" strokeWidth={ICON_STROKE} aria-hidden="true" />
+            <div className="flex h-12 items-center gap-2 rounded-full bg-[#F3F3F4] pl-4 pr-4 transition-colors duration-200 hover:bg-[#E7E7E9] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#2457F5] ">
+              <Search className="size-[18px] shrink-0 text-[#6E6D7A] " strokeWidth={ICON_STROKE} aria-hidden="true" />
               <input
                 type="text"
                 readOnly
@@ -218,10 +179,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onOpenCommandPalette();
                   }
                 }}
-                className="header-search-field h-full min-w-0 flex-1 cursor-pointer truncate bg-transparent text-[15px] font-normal tracking-[-0.011em] text-[#0F1114] outline-none placeholder:text-[#6E6D7A] 2xl:text-base dark:text-slate-100 dark:placeholder:text-slate-400"
+                className="header-search-field h-full min-w-0 flex-1 cursor-pointer truncate bg-transparent text-[15px] font-normal tracking-[-0.011em] text-[#0F1114] outline-none placeholder:text-[#6E6D7A] 2xl:text-base "
               />
               <span
-                className="hidden shrink-0 text-[15px] font-semibold tracking-[-0.011em] text-[#6E6D7A] 2xl:inline dark:text-slate-400"
+                className="hidden shrink-0 text-[15px] font-semibold tracking-[-0.011em] text-[#6E6D7A] 2xl:inline "
                 aria-hidden="true"
               >
                 {shortcutLabel}
@@ -239,7 +200,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Link
               to="/for-schools/"
               title="Embed free grade calculators on your school website"
-              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#0056D2] lg:inline-flex ${headerFocusRing} dark:text-slate-100 dark:hover:text-[#6EA8FF]`}
+              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#2457F5] lg:inline-flex ${headerFocusRing} `}
             >
               For Schools
             </Link>
@@ -278,40 +239,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               role="img"
               aria-label="100% Private: everything runs in your browser"
               title="100% Private: everything runs in your browser"
-              className="hidden size-11 items-center justify-center text-[#6E6D7A] min-[1700px]:inline-flex dark:text-slate-400"
+              className="hidden size-11 items-center justify-center text-[#6E6D7A] min-[1700px]:inline-flex "
             >
               <PrivacyShieldIcon className="size-5" />
             </div>
-
-            {/* Theme switcher: System -> Light -> Dark (icon-only to keep the header clean) */}
-            <button
-              type="button"
-              onClick={cycleTheme}
-              aria-label={`Current theme: ${theme}. Click to switch theme.`}
-              title={`Theme: ${themeLabel} (Click to cycle)`}
-              className={`${ghostControl} ${headerFocusRing}`}
-            >
-              <span className="relative inline-flex size-5 items-center justify-center">
-                <AnimatePresence mode="wait" initial={false}>
-                  <motion.span
-                    key={theme === 'system' ? 'system' : resolvedTheme}
-                    className="inline-flex"
-                    initial={prefersReducedMotion ? false : { opacity: 0, rotate: -60, scale: 0.7 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, rotate: 60, scale: 0.7 }}
-                    transition={{ duration: 0.18, ease: 'easeOut' }}
-                  >
-                    {theme === 'system' ? (
-                      <SunMoonSplitIcon className="size-5" />
-                    ) : resolvedTheme === 'dark' ? (
-                      <Moon className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
-                    ) : (
-                      <Sun className="size-5" strokeWidth={ICON_STROKE} aria-hidden="true" />
-                    )}
-                  </motion.span>
-                </AnimatePresence>
-              </span>
-            </button>
           </div>
         </div>
       </header>

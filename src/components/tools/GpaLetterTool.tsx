@@ -121,7 +121,7 @@ export const GpaLetterTool: React.FC<GpaLetterToolProps> = ({ defaultDirection =
             </select>
           </div>
         )}
-        <p className="text-sm text-slate-600 dark:text-slate-400 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Schools differ: some value A+ at 4.33 and some use whole letters only. The A–F tab covers
           whole-letter schools; check your school’s scale for official transcripts.
         </p>
@@ -130,30 +130,30 @@ export const GpaLetterTool: React.FC<GpaLetterToolProps> = ({ defaultDirection =
       <section aria-label="Conversion result" className={RESULT_BOX}>
         {direction === 'gpaToLetter' ? (
           gpaResult?.kind === 'exact' ? (
-            <p className="m-0 text-lg font-bold text-slate-900 dark:text-white">
+            <p className="m-0 text-lg font-bold text-slate-900 ">
               {gpaParsed!.toFixed(2)} GPA = {gpaResult.letters.join(' / ')} on the {scaleKey === 'plus' ? 'plus / minus' : 'A–F'} scale.
             </p>
           ) : gpaResult?.kind === 'between' ? (
-            <p className="m-0 text-lg font-bold text-slate-900 dark:text-white">
+            <p className="m-0 text-lg font-bold text-slate-900 ">
               {gpaParsed!.toFixed(2)} GPA falls between {gpaResult.lower.letters.join(' / ')} ({gpaResult.lower.points.toFixed(2)}) and{' '}
               {gpaResult.upper.letters.join(' / ')} ({gpaResult.upper.points.toFixed(2)}).
             </p>
           ) : gpaResult ? (
-            <p className="m-0 text-lg font-bold text-slate-900 dark:text-white">
+            <p className="m-0 text-lg font-bold text-slate-900 ">
               {gpaParsed!.toFixed(2)} GPA = {gpaResult.letters.join(' / ')} — the {gpaResult.kind === 'top' ? 'highest' : 'lowest'} grade on this scale.
             </p>
           ) : (
-            <p className="m-0 text-slate-600 dark:text-slate-400">Enter a GPA between 0 and 4.0 to convert it.</p>
+            <p className="m-0 text-slate-600 ">Enter a GPA between 0 and 4.0 to convert it.</p>
           )
         ) : letterPoints !== null ? (
-          <p className="m-0 text-lg font-bold text-slate-900 dark:text-white">
+          <p className="m-0 text-lg font-bold text-slate-900 ">
             {safeLetter} = {letterPoints.toFixed(2)} grade points on the {scaleKey === 'plus' ? 'plus / minus' : 'A–F'} scale.
           </p>
         ) : (
-          <p className="m-0 text-slate-600 dark:text-slate-400">Pick a letter grade to see its grade points.</p>
+          <p className="m-0 text-slate-600 ">Pick a letter grade to see its grade points.</p>
         )}
         {direction === 'gpaToLetter' && gpaResult?.kind === 'between' && (
-          <p className="m-0 mt-2 text-sm text-slate-600 dark:text-slate-400">
+          <p className="m-0 mt-2 text-sm text-slate-600 ">
             A GPA is an average, so it rarely lands exactly on a letter’s point value. Your transcript
             shows the letter; this tells you which two letters your average sits between.
           </p>
@@ -161,20 +161,20 @@ export const GpaLetterTool: React.FC<GpaLetterToolProps> = ({ defaultDirection =
       </section>
 
       <section aria-label="Grade point table" className="max-w-4xl">
-        <h3 className="text-base font-bold text-slate-900 dark:text-white m-0 mb-2">
+        <h3 className="text-base font-bold text-slate-900 m-0 mb-2">
           {scaleKey === 'plus' ? 'Plus / minus' : 'A–F'} scale: letter to grade points
         </h3>
-        <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
-          <table className="w-full text-left text-sm border-collapse bg-white dark:bg-slate-900">
+        <div className="overflow-x-auto rounded-2xl border border-slate-200 ">
+          <table className="w-full text-left text-sm border-collapse bg-white ">
             <thead>
-              <tr className="bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+              <tr className="bg-slate-50 text-slate-800 ">
                 <th scope="col" className="px-4 py-2.5 font-bold">Letter</th>
                 <th scope="col" className="px-4 py-2.5 font-bold">Grade points</th>
               </tr>
             </thead>
             <tbody>
               {steps.map((s) => (
-                <tr key={s.points} className="border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+                <tr key={s.points} className="border-t border-slate-200 text-slate-900 ">
                   <th scope="row" className="px-4 py-2 font-bold">{s.letters.join(' / ')}</th>
                   <td className="px-4 py-2 font-mono tabular-nums">{s.points.toFixed(2)}</td>
                 </tr>

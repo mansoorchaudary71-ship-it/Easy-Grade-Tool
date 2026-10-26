@@ -34,11 +34,11 @@ import {
 // Zero CLS loading placeholder for lazy routes
 const CalculatorSkeleton: React.FC = () => (
   <div className="w-full max-w-5xl mx-auto py-8 px-4 animate-pulse" aria-hidden="true">
-    <div className="h-8 w-60 bg-slate-200 dark:bg-slate-800 rounded-2xl mb-3" />
-    <div className="h-4 w-96 max-w-full bg-slate-200/70 dark:bg-slate-800/70 rounded-lg mb-8" />
+    <div className="h-8 w-60 bg-slate-200 rounded-2xl mb-3" />
+    <div className="h-4 w-96 max-w-full bg-slate-200/70 rounded-lg mb-8" />
     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-      <div className="md:col-span-7 min-h-[32rem] bg-slate-200/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-800/80" />
-      <div className="md:col-span-5 min-h-[32rem] bg-slate-200/50 dark:bg-slate-800/50 rounded-3xl border border-slate-200/80 dark:border-slate-800/80" />
+      <div className="md:col-span-7 min-h-[32rem] bg-slate-200/50 rounded-3xl border border-slate-200/80 " />
+      <div className="md:col-span-5 min-h-[32rem] bg-slate-200/50 rounded-3xl border border-slate-200/80 " />
     </div>
   </div>
 );
@@ -221,7 +221,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
       <main id="main-content" ref={mainRef} tabIndex={-1} className={`main-wrap premium-surface tool-theme-${activeTool} w-full max-w-full overflow-x-clip px-4 sm:px-6 focus:outline-none`}>
         <div className="tool-transition-container w-full max-w-full">
           {isEmbed && (
-            <p className="text-center text-sm text-slate-500 dark:text-slate-400 pt-3 m-0">
+            <p className="text-center text-sm text-slate-500 pt-3 m-0">
               Free grading tools by{' '}
               <a href="https://www.easygradetool.com/" target="_top" rel="noopener" className="font-semibold underline">
                 Easy Grade Tool

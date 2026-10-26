@@ -38,14 +38,14 @@ export interface GradeCalculatorProps {
 }
 
 const ROW_INPUT =
-  'w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 dark:placeholder:text-slate-400';
-const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1 text-center';
+  'w-full min-h-[48px] bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-4 py-3 focus:bg-white focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm font-mono text-center placeholder:text-slate-500 ';
+const ROW_LABEL = 'block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1 text-center';
 const BTN_SOLID =
   'bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-sm px-6 py-3 min-h-[48px] transition-all inline-flex items-center justify-center gap-2 text-sm cursor-pointer active:scale-95';
 const BTN_SOFT =
-  'bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-sm inline-flex items-center justify-center gap-2 cursor-pointer transition-colors py-3 px-5 min-h-[48px] active:scale-95';
+  'bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm text-sm inline-flex items-center justify-center gap-2 cursor-pointer transition-colors py-3 px-5 min-h-[48px] active:scale-95';
 const REMOVE_BTN =
-  'w-12 h-12 min-w-[48px] min-h-[48px] rounded-2xl text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 bg-slate-100/90 hover:bg-rose-50 dark:bg-slate-800/90 dark:hover:bg-rose-950/40 border border-slate-200/70 dark:border-slate-700/70 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
+  'w-12 h-12 min-w-[48px] min-h-[48px] rounded-2xl text-slate-600 hover:text-rose-700 bg-slate-100/90 hover:bg-rose-50 border border-slate-200/70 transition-colors flex items-center justify-center cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed';
 
 /** Semantic grade colours (A/B green, C amber, D/F rose). Shared with the Quick Chart; see utils/gradeTone.ts. */
 const letterTone = (letter: string) => `${gradeTone(letter).surface} border`;
@@ -252,15 +252,15 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       {calcTab === 'quick-chart' ? (
         <div id="panel-quick-chart" className="w-full max-w-full pt-1">
           <QuickGrader setToast={setToast} />
-          <nav aria-label="Grading scale charts by test size" className="mt-8 rounded-[28px] bg-white dark:bg-slate-900 border border-white/80 dark:border-slate-800 p-5 sm:p-6 print:hidden">
-            <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 m-0">Ready-made grading scale charts</h2>
-            <p className="text-sm text-slate-700 dark:text-slate-300 mt-1 mb-4">Pick your test size for the percentage and letter grade of every score.</p>
+          <nav aria-label="Grading scale charts by test size" className="mt-8 rounded-[28px] bg-white border border-white/80 p-5 sm:p-6 print:hidden">
+            <h2 className="text-lg font-bold text-slate-800 m-0">Ready-made grading scale charts</h2>
+            <p className="text-sm text-slate-700 mt-1 mb-4">Pick your test size for the percentage and letter grade of every score.</p>
             <ul className="m-0 p-0 list-none flex flex-wrap gap-2">
               {GRADING_SCALE_SIZES.map((n) => (
                 <li key={n}>
                   <Link
                     to={gradingScalePath(n)}
-                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] px-4 rounded-full border border-stone-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold text-stone-800 dark:text-slate-100 hover:border-teal-600 no-underline"
+                    className="inline-flex items-center justify-center min-h-[48px] min-w-[48px] px-4 rounded-full border border-stone-200 bg-white text-sm font-semibold text-stone-800 hover:border-teal-600 no-underline"
                   >
                     {n}
                     <span className="sr-only">-question grading scale</span>
@@ -268,7 +268,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                 </li>
               ))}
               <li>
-                <Link to="/grading-scale/" className="inline-flex items-center min-h-[48px] px-4 rounded-full text-sm font-bold text-teal-800 dark:text-teal-300 hover:underline no-underline">
+                <Link to="/grading-scale/" className="inline-flex items-center min-h-[48px] px-4 rounded-full text-sm font-bold text-teal-800 hover:underline no-underline">
                   All charts &rarr;
                 </Link>
               </li>
@@ -286,14 +286,14 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           <AmbientAura />
 
           {/* Left: assessments */}
-          <section aria-label="Assessments Table" className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative p-6 sm:p-8 space-y-5 sm:space-y-6">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/60 dark:border-slate-800">
+          <section aria-label="Assessments Table" className="bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative p-6 sm:p-8 space-y-5 sm:space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/60 ">
               <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">Assessments</span>
-                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 block mb-1">Assessments</span>
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight m-0">
                   {courseName ? courseName : 'Weighted & Points Calculator'}
                 </h2>
-                <p className="text-slate-700 dark:text-slate-300 font-medium text-sm mt-1 m-0">
+                <p className="text-slate-700 font-medium text-sm mt-1 m-0">
                   Add assignments, quizzes, and exams to calculate your current standing. Leave the score empty for work that is not graded yet.
                 </p>
               </div>
@@ -322,7 +322,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
             </div>
 
             {/* Desktop column headers */}
-            <div className="hidden sm:grid grid-cols-12 gap-2 text-xs font-semibold tracking-wider text-slate-700 dark:text-slate-300 uppercase px-1">
+            <div className="hidden sm:grid grid-cols-12 gap-2 text-xs font-semibold tracking-wider text-slate-700 uppercase px-1">
               <span className={mode === 'weighted' ? 'col-span-5' : 'col-span-6'}>Assignment</span>
               <span className="col-span-2 text-center">Score</span>
               <span className="col-span-2 text-center">Out Of</span>
@@ -345,12 +345,12 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       animate={{ opacity: 1, x: 0, y: 0 }}
                       exit={{ opacity: 0, x: 18, height: 0, overflow: 'hidden', transition: { duration: 0.18, ease: [0.16, 1, 0.3, 1] } }}
                       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                      className="bg-white/80 dark:bg-slate-900/80 sm:bg-transparent sm:dark:bg-transparent border border-slate-200/90 dark:border-slate-800/90 sm:border-0 rounded-2xl sm:rounded-none p-3.5 sm:p-0 shadow-xs sm:shadow-none sm:grid sm:grid-cols-12 sm:gap-2 sm:items-center sm:py-1 space-y-2.5 sm:space-y-0"
+                      className="bg-white/80 sm:bg-transparent border border-slate-200/90 sm:border-0 rounded-2xl sm:rounded-none p-3.5 sm:p-0 shadow-xs sm:shadow-none sm:grid sm:grid-cols-12 sm:gap-2 sm:items-center sm:py-1 space-y-2.5 sm:space-y-0"
                     >
                       <div className={mode === 'weighted' ? 'sm:col-span-5' : 'sm:col-span-6'}>
                         <div className="flex items-end gap-2">
                           <div className="flex-1 min-w-0">
-                            <label htmlFor={`assess-name-${item.id}`} className="block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-1">
+                            <label htmlFor={`assess-name-${item.id}`} className="block sm:hidden text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1">
                               Assignment
                             </label>
                             <input
@@ -359,7 +359,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                               id={`assess-name-${item.id}`}
                               type="text"
                               enterKeyHint="next"
-                              className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 dark:placeholder:text-slate-400"
+                              className="w-full min-h-[48px] bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3 focus:bg-white focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-bold text-base sm:text-sm placeholder:text-slate-500 "
                               value={item.name}
                               onChange={(e) => handleUpdateItem(item.id, 'name', e.target.value)}
                             />
@@ -441,7 +441,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       </div>
 
                       {(issue || ignored) && (
-                        <p className={`sm:col-span-12 text-sm m-0 ${issue ? 'text-rose-700 dark:text-rose-400 font-semibold' : 'text-slate-600 dark:text-slate-400'}`} role={issue ? 'alert' : undefined}>
+                        <p className={`sm:col-span-12 text-sm m-0 ${issue ? 'text-rose-700 font-semibold' : 'text-slate-600 '}`} role={issue ? 'alert' : undefined}>
                           {issue || `${rowName} is not counted yet because the score is empty.`}
                         </p>
                       )}
@@ -452,7 +452,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
             </div>
 
             {mode === 'weighted' && hasResult && (
-              <p className={`text-sm m-0 font-medium ${weightsTotal === 100 ? 'text-emerald-800 dark:text-emerald-300' : 'text-amber-800 dark:text-amber-300'}`}>
+              <p className={`text-sm m-0 font-medium ${weightsTotal === 100 ? 'text-emerald-800 ' : 'text-amber-800 '}`}>
                 Weights total {weightsTotal}%.{' '}
                 {weightsTotal === 100
                   ? 'Your weights add up to 100%.'
@@ -473,17 +473,17 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
           </section>
 
           {/* Right: results and target simulator */}
-          <section aria-label="Grade Results and Target Calculator" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative p-6 sm:p-8 flex flex-col justify-between">
+          <section aria-label="Grade Results and Target Calculator" className="result-panel bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative p-6 sm:p-8 flex flex-col justify-between">
             <div className="space-y-6">
-              <div className={`${hasResult ? letterTone(gradeResult.letterGrade) : 'bg-stone-100 dark:bg-slate-800/60 border border-stone-200/60 dark:border-slate-700/60'} rounded-[24px] p-4 space-y-3`}>
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block">Current Grade</span>
+              <div className={`${hasResult ? letterTone(gradeResult.letterGrade) : 'bg-stone-100 border border-stone-200/60 '} rounded-[24px] p-4 space-y-3`}>
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 block">Current Grade</span>
 
                 {/* The only live region in the results: one short line. */}
                 <div
                   role="status"
                   aria-live="polite"
                   aria-atomic="true"
-                  className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3"
+                  className="bg-white border border-stone-100 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3"
                 >
                   {hasResult ? (
                     <>
@@ -495,14 +495,14 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       </span>
                     </>
                   ) : (
-                    <p className="m-0 text-sm font-semibold text-slate-700 dark:text-slate-200">Enter at least one score to see your grade.</p>
+                    <p className="m-0 text-sm font-semibold text-slate-700 ">Enter at least one score to see your grade.</p>
                   )}
                 </div>
 
                 {hasResult && (
-                  <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl p-3 shadow-sm">
+                  <div className="bg-white border border-stone-100 rounded-xl p-3 shadow-sm">
                     <GradeVisualProgressBar percent={Math.min(100, gradeResult.percentage)} letter={gradeResult.letterGrade} />
-                    <p className="text-sm text-slate-700 dark:text-slate-300 font-medium mt-2 m-0 text-center sm:text-left">
+                    <p className="text-sm text-slate-700 font-medium mt-2 m-0 text-center sm:text-left">
                       Based on {gradeResult.validItemCount} counted row{gradeResult.validItemCount === 1 ? '' : 's'} ({mode === 'weighted' ? 'weighted' : 'points-based'}).
                       {ignoredCount > 0 ? ` ${ignoredCount} row${ignoredCount === 1 ? ' is' : 's are'} not counted.` : ''}
                     </p>
@@ -511,15 +511,15 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               </div>
 
               {/* Target Final Exam Simulator */}
-              <div className="bg-white dark:bg-slate-800/60 rounded-[24px] border border-stone-200/80 dark:border-slate-700 shadow-sm p-5 space-y-4">
+              <div className="bg-white rounded-[24px] border border-stone-200/80 shadow-sm p-5 space-y-4">
                 <div className="flex items-center gap-2">
-                  <Target className="w-4 h-4 text-blue-700 dark:text-blue-300" aria-hidden="true" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">Target Final Exam Simulator</span>
+                  <Target className="w-4 h-4 text-blue-700 " aria-hidden="true" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-700 ">Target Final Exam Simulator</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor="target-grade-input" className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
+                    <label htmlFor="target-grade-input" className="text-xs font-semibold uppercase tracking-wider text-slate-700 block mb-1">
                       Desired Grade (%)
                     </label>
                     <input
@@ -528,13 +528,13 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       inputMode="decimal"
                       enterKeyHint="next"
                       placeholder="90"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-4 py-3 focus:bg-white focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={targetGrade}
                       onChange={(e) => setTargetGrade(e.target.value)}
                     />
                   </div>
                   <div>
-                    <label htmlFor="final-weight-input" className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300 block mb-1">
+                    <label htmlFor="final-weight-input" className="text-xs font-semibold uppercase tracking-wider text-slate-700 block mb-1">
                       Final Exam Weight (%)
                     </label>
                     <input
@@ -543,7 +543,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                       inputMode="decimal"
                       enterKeyHint="done"
                       placeholder="20"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-4 py-3 focus:bg-white focus:border-transparent focus:ring-2 focus:ring-teal-500/40 transition-all font-extrabold text-2xl text-center font-mono placeholder:text-slate-500"
                       value={finalWeight}
                       onChange={(e) => setFinalWeight(e.target.value)}
                     />
@@ -552,22 +552,22 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
 
                 <div role="status" aria-live="polite" aria-atomic="true">
                   {!hasResult ? (
-                    <p className="m-0 text-sm text-slate-700 dark:text-slate-300">Add at least one scored row first, then the simulator can work out what you need.</p>
+                    <p className="m-0 text-sm text-slate-700 ">Add at least one scored row first, then the simulator can work out what you need.</p>
                   ) : targetSimulation && targetSimulation.status === 'invalid' ? (
-                    <ul className="m-0 pl-5 list-disc text-sm text-rose-700 dark:text-rose-400">
+                    <ul className="m-0 pl-5 list-disc text-sm text-rose-700 ">
                       {targetSimulation.errors.map((e) => (
                         <li key={e}>{e}</li>
                       ))}
                     </ul>
                   ) : targetSimulation ? (
-                    <div className="bg-[#E0E4F0] dark:bg-teal-950/60 border border-teal-200/60 dark:border-teal-800/60 rounded-[24px] p-4 space-y-2">
-                      <div className="bg-white dark:bg-slate-800/90 border border-stone-100 dark:border-slate-700 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3">
-                        <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">Required on Final:</span>
-                        <strong className="text-2xl font-extrabold text-teal-950 dark:text-teal-100 font-mono">
+                    <div className="bg-[#E0E4F0] border border-teal-200/60 rounded-[24px] p-4 space-y-2">
+                      <div className="bg-white border border-stone-100 rounded-xl px-3.5 py-2.5 shadow-sm flex items-center justify-between gap-3">
+                        <span className="text-sm font-semibold text-slate-700 ">Required on Final:</span>
+                        <strong className="text-2xl font-extrabold text-teal-950 font-mono">
                           {targetSimulation.status === 'secured' ? '0%' : `${(Math.round(targetSimulation.required * 10) / 10).toFixed(1)}%`}
                         </strong>
                       </div>
-                      <p className="text-sm text-slate-800 dark:text-slate-200 m-0 px-1">
+                      <p className="text-sm text-slate-800 m-0 px-1">
                         {targetSimulation.status === 'secured'
                           ? 'Already secured: you reach this target even with 0% on the final.'
                           : targetSimulation.status === 'unreachable'
@@ -581,13 +581,13 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                 <div className="pt-1">
                   <Link
                     to="/final-exam-grade-calculator/"
-                    className="inline-flex items-center min-h-[48px] gap-1.5 text-sm font-bold text-teal-800 dark:text-teal-300 hover:text-teal-900 dark:hover:text-teal-200 hover:underline transition-colors"
+                    className="inline-flex items-center min-h-[48px] gap-1.5 text-sm font-bold text-teal-800 hover:text-teal-900 hover:underline transition-colors"
                   >
                     <span>Need more detail? Open the Final Exam Grade Calculator &rarr;</span>
                   </Link>
                 </div>
 
-                <div className="pt-4 border-t border-slate-200/60 dark:border-slate-800 flex flex-wrap items-center gap-2 print:hidden">
+                <div className="pt-4 border-t border-slate-200/60 flex flex-wrap items-center gap-2 print:hidden">
                   <button
                     type="button"
                     onClick={() => {

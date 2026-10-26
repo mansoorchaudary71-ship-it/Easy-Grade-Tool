@@ -43,42 +43,42 @@ const GOOD: GradeTone = {
   label: 'Strong',
   Icon: CheckCircle2,
   badge:
-    'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950 dark:text-emerald-200 dark:border-emerald-700',
-  surface: 'bg-emerald-50 border-emerald-200 dark:bg-emerald-950/50 dark:border-emerald-800',
-  text: 'text-emerald-800 dark:text-emerald-300',
-  textSoft: 'text-emerald-800 dark:text-emerald-300',
-  rule: 'border-l-emerald-600 dark:border-l-emerald-400',
-  row: 'bg-emerald-50/70 dark:bg-emerald-950/30',
+    'bg-emerald-100 text-emerald-900 border-emerald-300 ',
+  surface: 'bg-emerald-50 border-emerald-200 ',
+  text: 'text-emerald-800 ',
+  textSoft: 'text-emerald-800 ',
+  rule: 'border-l-emerald-600 ',
+  row: 'bg-emerald-50/70 ',
 };
 
 const FAIR: GradeTone = {
   key: 'fair',
   label: 'Fair',
   Icon: AlertTriangle,
-  badge: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950 dark:text-amber-200 dark:border-amber-700',
-  surface: 'bg-amber-50 border-amber-200 dark:bg-amber-950/50 dark:border-amber-800',
-  text: 'text-amber-900 dark:text-amber-300',
-  textSoft: 'text-amber-900 dark:text-amber-300',
-  rule: 'border-l-amber-500 dark:border-l-amber-400',
-  row: 'bg-amber-50/70 dark:bg-amber-950/30',
+  badge: 'bg-amber-100 text-amber-900 border-amber-300 ',
+  surface: 'bg-amber-50 border-amber-200 ',
+  text: 'text-amber-900 ',
+  textSoft: 'text-amber-900 ',
+  rule: 'border-l-amber-500 ',
+  row: 'bg-amber-50/70 ',
 };
 
 const POOR: GradeTone = {
   key: 'poor',
   label: 'Needs work',
   Icon: XCircle,
-  badge: 'bg-rose-100 text-rose-900 border-rose-300 dark:bg-rose-950 dark:text-rose-200 dark:border-rose-700',
-  surface: 'bg-rose-50 border-rose-200 dark:bg-rose-950/50 dark:border-rose-800',
-  text: 'text-rose-800 dark:text-rose-300',
-  textSoft: 'text-rose-800 dark:text-rose-300',
-  rule: 'border-l-rose-600 dark:border-l-rose-400',
-  row: 'bg-rose-50/70 dark:bg-rose-950/30',
+  badge: 'bg-rose-100 text-rose-900 border-rose-300 ',
+  surface: 'bg-rose-50 border-rose-200 ',
+  text: 'text-rose-800 ',
+  textSoft: 'text-rose-800 ',
+  rule: 'border-l-rose-600 ',
+  row: 'bg-rose-50/70 ',
 };
 
 /** Neutral tone for "no result yet". */
 export const NEUTRAL_TONE = {
-  surface: 'bg-slate-50 border-slate-200 dark:bg-slate-800/60 dark:border-slate-700',
-  text: 'text-slate-800 dark:text-slate-100',
+  surface: 'bg-slate-50 border-slate-200 ',
+  text: 'text-slate-800 ',
 } as const;
 
 /** Maps any letter grade ("A", "A+", "B-", "C", "D+", "F") to its tone. Unknown letters count as "poor". */

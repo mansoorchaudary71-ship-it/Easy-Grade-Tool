@@ -31,11 +31,11 @@ export const QuestionCountChartTool: React.FC<{ questions: number }> = ({ questi
       <section aria-label={`${questions}-question score chart`} className={CARD}>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <caption className="text-left text-xs font-semibold uppercase tracking-widest text-slate-700 dark:text-slate-300 pb-2">
+            <caption className="text-left text-xs font-semibold uppercase tracking-widest text-slate-700 pb-2">
               Score chart for {questions} questions ({plus ? 'plus/minus' : 'standard A–F'})
             </caption>
             <thead>
-              <tr className="text-left text-slate-600 dark:text-slate-300">
+              <tr className="text-left text-slate-600 ">
                 <th scope="col" className="py-2 pr-3">Wrong</th>
                 <th scope="col" className="py-2 pr-3">Correct</th>
                 <th scope="col" className="py-2 pr-3">Percent</th>
@@ -44,7 +44,7 @@ export const QuestionCountChartTool: React.FC<{ questions: number }> = ({ questi
             </thead>
             <tbody>
               {rows.map((r) => (
-                <tr key={r.wrong} className="border-t border-slate-200/70 dark:border-slate-800">
+                <tr key={r.wrong} className="border-t border-slate-200/70 ">
                   <th scope="row" className="py-2 pr-3 font-bold font-mono">{r.wrong}</th>
                   <td className="py-2 pr-3 font-mono">{r.correct}</td>
                   <td className="py-2 pr-3 font-mono">{r.formattedPercentage}%</td>

@@ -117,15 +117,15 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
           {label && (
             <label
               htmlFor={id}
-              className="text-xs font-semibold tracking-wider text-slate-800 dark:text-slate-200 uppercase flex items-center gap-1.5 cursor-pointer"
+              className="text-xs font-semibold tracking-wider text-slate-800 uppercase flex items-center gap-1.5 cursor-pointer"
             >
               <span>{label}</span>
-              {unit && <span className="text-slate-600 dark:text-slate-400 font-mono font-normal">({unit})</span>}
+              {unit && <span className="text-slate-600 font-mono font-normal">({unit})</span>}
             </label>
           )}
           <div className="flex items-center gap-2 ml-auto">
             {sublabel && (
-              <span className="text-xs font-medium tracking-wider text-slate-600 dark:text-slate-400 uppercase">
+              <span className="text-xs font-medium tracking-wider text-slate-600 uppercase">
                 {sublabel}
               </span>
             )}
@@ -178,7 +178,7 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
         <div className="relative flex-1 min-w-0 flex items-center">
           <input
             id={id}
-            className={`smart-calc-input w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 text-center font-mono font-bold text-base sm:text-lg outline-none tabular-nums placeholder:text-slate-400 transition-all duration-200 ${className}`}
+            className={`smart-calc-input w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 text-center font-mono font-bold text-base sm:text-lg outline-none tabular-nums placeholder:text-slate-400 transition-all duration-200 ${className}`}
             type="number"
             inputMode={inputMode}
             step={step}
@@ -199,7 +199,7 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
           )}
         </div>
 
-        {/* Increment Stepper Buttons (Primary Action: bg-[#1A1C1E] hover:bg-black text-white rounded-full font-bold shadow-md) */}
+        {/* Increment Stepper Buttons (Primary Action: bg-[#2457F5] hover:bg-[#1A41C9] text-white rounded-full font-bold shadow-md) */}
         {showSteppers &&
           [...sortedSteps].reverse().map((stepVal) => {
             const isMax = typeof max === 'number' && isValidNum && numVal >= max;
@@ -207,7 +207,7 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
               <button
                 key={`plus-${stepVal}`}
                 type="button"
-                className="smart-stepper-btn stepper-btn-plus px-4 py-2.5 min-w-[44px] min-h-[44px] bg-[#1A1C1E] hover:bg-black text-white rounded-full font-bold shadow-md flex items-center justify-center font-mono text-xs transition-colors duration-150 disabled:opacity-30 disabled:pointer-events-none select-none touch-manipulation flex-shrink-0 cursor-pointer active:scale-95"
+                className="smart-stepper-btn stepper-btn-plus px-4 py-2.5 min-w-[44px] min-h-[44px] bg-[#2457F5] hover:bg-[#1A41C9] text-white rounded-full font-bold shadow-md flex items-center justify-center font-mono text-xs transition-colors duration-150 disabled:opacity-30 disabled:pointer-events-none select-none touch-manipulation flex-shrink-0 cursor-pointer active:scale-95"
                 onClick={() => handleAdjust(stepVal)}
                 disabled={disabled || isMax}
                 title={`Increase by ${stepVal}`}
@@ -257,7 +257,7 @@ export const SmartCalculatorInput: React.FC<SmartCalculatorInputProps> = ({
                 type="button"
                 className={`preset-btn text-xs px-4 py-1.5 font-mono transition-all touch-manipulation cursor-pointer ${
                   isActive
-                    ? 'bg-[#1A1C1E] text-white rounded-full font-bold shadow-sm'
+                    ? 'bg-[#2457F5] text-white rounded-full font-bold shadow-sm'
                     : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm'
                 }`}
                 onClick={() => {

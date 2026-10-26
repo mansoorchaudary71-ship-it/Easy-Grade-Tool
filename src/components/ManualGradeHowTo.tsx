@@ -224,33 +224,33 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
         id="manual-grade-calculation-guide"
         itemScope
         itemType="https://schema.org/HowTo"
-        className={`manual-grade-guide mt-12 bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans ${className}`}
+        className={`manual-grade-guide mt-12 bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl p-6 sm:p-10 font-sans ${className}`}
         aria-labelledby={`${baseId}-howto-heading`}
       >
         {/* Eyebrow & Main Title */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/60 dark:border-slate-800/80">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/60 ">
           <div>
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono mb-1.5">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-600 font-mono mb-1.5">
               <BookOpen className="w-4 h-4" aria-hidden="true" />
               <span>Step-by-Step Tutorial &amp; Math Formulas</span>
             </div>
             <h2
               id={`${baseId}-howto-heading`}
               itemProp="name"
-              className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight"
+              className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight"
             >
               How to Manually Calculate a Grade (Step-by-Step)
             </h2>
             <p
               itemProp="description"
-              className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-2 max-w-2xl leading-relaxed"
+              className="text-sm sm:text-base text-slate-600 mt-2 max-w-2xl leading-relaxed"
             >
               Learn the exact mathematical formulas to compute weighted course grades, total points averages, and needed final exam scores by hand—or verify your Easy Grade Calculator results with confidence.
             </p>
           </div>
 
           <div className="shrink-0 flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-teal-50/80 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-teal-50/80 text-teal-700 border border-teal-200/60 ">
               <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
               <span>~5 min read</span>
             </span>
@@ -331,12 +331,12 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
         {activeTab === 'weighted' && (
           <div className="mt-6 space-y-6">
             {/* Quick Formula Banner */}
-            <div className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/60 dark:border-slate-800/80 shadow-sm rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div className="bg-white/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
               <div>
-                <div className="text-xs font-bold text-teal-800 dark:text-teal-300 uppercase tracking-wide">
+                <div className="text-xs font-bold text-teal-800 uppercase tracking-wide">
                   Master Weighted Formula
                 </div>
-                <div className="font-mono text-sm sm:text-base font-semibold text-teal-950 dark:text-teal-100 mt-1">
+                <div className="font-mono text-sm sm:text-base font-semibold text-teal-950 mt-1">
                   Final Grade % = Σ (Category Score % × Category Weight) ÷ Total Active Weight
                 </div>
               </div>
@@ -348,7 +348,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
                     'weighted-master'
                   )
                 }
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full bg-white dark:bg-slate-800 text-teal-700 dark:text-teal-300 border border-slate-200/60 dark:border-slate-700 hover:bg-teal-50 dark:hover:bg-slate-700 transition-colors cursor-pointer self-start md:self-center shadow-xs"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-full bg-white text-teal-700 border border-slate-200/60 hover:bg-teal-50 transition-colors cursor-pointer self-start md:self-center shadow-xs"
               >
                 {copiedFormula === 'weighted-master' ? (
                   <>
@@ -373,39 +373,39 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
                   itemProp="step"
                   itemScope
                   itemType="https://schema.org/HowToStep"
-                  className="bg-white/70 dark:bg-slate-800/60 backdrop-blur-md border border-white/60 dark:border-slate-800 shadow-sm rounded-3xl p-6 transition-all hover:shadow-md"
+                  className="bg-white/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl p-6 transition-all hover:shadow-md"
                 >
                   <meta itemProp="position" content={String(step.stepNumber)} />
                   <div className="flex items-start gap-4">
                     {/* Step Number Badge */}
-                    <div className="shrink-0 w-8 h-8 rounded-full bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 font-bold text-sm flex items-center justify-center shadow-xs">
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-[#2457F5] text-white font-bold text-sm flex items-center justify-center shadow-xs">
                       {step.stepNumber}
                     </div>
 
                     <div className="flex-1 min-w-0">
                       <h3
                         itemProp="name"
-                        className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight"
+                        className="text-base sm:text-lg font-bold text-slate-900 tracking-tight"
                       >
                         {step.name}
                       </h3>
                       <p
                         itemProp="text"
-                        className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-2 leading-relaxed"
+                        className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed"
                       >
                         {step.text}
                       </p>
 
                       {/* Formula callout if present */}
                       {step.formula && (
-                        <div className="mt-3 p-3.5 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border border-slate-200/60 dark:border-slate-800 rounded-2xl flex items-center justify-between gap-3 shadow-xs">
-                          <code className="text-xs sm:text-sm font-mono text-teal-800 dark:text-teal-300 font-semibold overflow-x-auto">
+                        <div className="mt-3 p-3.5 bg-white/90 backdrop-blur-sm border border-slate-200/60 rounded-2xl flex items-center justify-between gap-3 shadow-xs">
+                          <code className="text-xs sm:text-sm font-mono text-teal-800 font-semibold overflow-x-auto">
                             {step.formula}
                           </code>
                           <button
                             type="button"
                             onClick={() => handleCopy(step.formula!, step.id)}
-                            className="text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800"
+                            className="text-slate-400 hover:text-teal-600 min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full transition-colors cursor-pointer hover:bg-slate-100 "
                             title="Copy formula"
                             aria-label={`Copy formula for ${step.name}`}
                           >
@@ -420,14 +420,14 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
 
                       {/* Example Box */}
                       {step.example && (
-                        <div className="mt-3 p-3 bg-teal-50/40 dark:bg-teal-950/20 border-l-4 border-teal-500 rounded-r-lg text-xs sm:text-sm text-teal-950 dark:text-teal-200 font-sans whitespace-pre-line leading-relaxed">
+                        <div className="mt-3 p-3 bg-teal-50/40 border-l-4 border-teal-500 rounded-r-lg text-xs sm:text-sm text-teal-950 font-sans whitespace-pre-line leading-relaxed">
                           {step.example}
                         </div>
                       )}
 
                       {/* Optional Tip */}
                       {step.tip && (
-                        <div className="mt-2 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1.5 italic">
+                        <div className="mt-2 text-xs text-gray-500 flex items-center gap-1.5 italic">
                           <HelpCircle className="w-3.5 h-3.5 text-teal-600 shrink-0" />
                           <span>{step.tip}</span>
                         </div>
@@ -443,28 +443,28 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
         {/* Tab 2: Points-Based Grading */}
         {activeTab === 'points' && (
           <div className="mt-6 space-y-5">
-            <div className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/60 dark:border-slate-800/80 shadow-sm rounded-3xl p-6">
-              <div className="text-xs font-bold text-teal-800 dark:text-teal-300 uppercase tracking-wide">
+            <div className="bg-white/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl p-6">
+              <div className="text-xs font-bold text-teal-800 uppercase tracking-wide">
                 Points-Based Formula
               </div>
-              <div className="font-mono text-base font-semibold text-teal-950 dark:text-teal-100 mt-1">
+              <div className="font-mono text-base font-semibold text-teal-950 mt-1">
                 Course Grade % = (Total Points Earned ÷ Total Points Possible) × 100
               </div>
             </div>
 
-            <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
               <p>
                 In a points-based grading system, every point has equal mathematical value regardless of the assignment type. Follow these 3 simple steps:
               </p>
               <ol className="list-decimal pl-5 space-y-2.5">
                 <li>
-                  <strong className="text-slate-900 dark:text-white font-semibold">Sum Total Points Earned:</strong> Add all points received across every homework, quiz, lab, and exam (e.g., 450 points).
+                  <strong className="text-slate-900 font-semibold">Sum Total Points Earned:</strong> Add all points received across every homework, quiz, lab, and exam (e.g., 450 points).
                 </li>
                 <li>
-                  <strong className="text-slate-900 dark:text-white font-semibold">Sum Total Points Possible:</strong> Add the maximum possible points for all assignments graded to date (e.g., 500 points).
+                  <strong className="text-slate-900 font-semibold">Sum Total Points Possible:</strong> Add the maximum possible points for all assignments graded to date (e.g., 500 points).
                 </li>
                 <li>
-                  <strong className="text-slate-900 dark:text-white font-semibold">Divide and Multiply by 100:</strong> Divide earned by possible points: (450 ÷ 500) × 100 = <strong>90.0% (A)</strong>.
+                  <strong className="text-slate-900 font-semibold">Divide and Multiply by 100:</strong> Divide earned by possible points: (450 ÷ 500) × 100 = <strong>90.0% (A)</strong>.
                 </li>
               </ol>
             </div>
@@ -474,30 +474,30 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
         {/* Tab 3: Target Final Exam Score */}
         {activeTab === 'final-exam' && (
           <div className="mt-6 space-y-5">
-            <div className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-white/60 dark:border-slate-800/80 shadow-sm rounded-3xl p-6">
-              <div className="text-xs font-bold text-teal-800 dark:text-teal-300 uppercase tracking-wide">
+            <div className="bg-white/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl p-6">
+              <div className="text-xs font-bold text-teal-800 uppercase tracking-wide">
                 Target Final Exam Score Formula
               </div>
-              <div className="font-mono text-base font-semibold text-teal-950 dark:text-teal-100 mt-1">
+              <div className="font-mono text-base font-semibold text-teal-950 mt-1">
                 Required Exam Score = [Target Grade - (Current Grade × Current Weight)] ÷ Final Exam Weight
               </div>
             </div>
 
-            <div className="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+            <div className="space-y-4 text-sm sm:text-base text-slate-600 leading-relaxed">
               <p>
                 To calculate the minimum score you need on your final exam to achieve a specific target course grade:
               </p>
-              <div className="p-6 bg-white/70 dark:bg-slate-800/60 backdrop-blur-md border border-white/60 dark:border-slate-800 shadow-sm rounded-3xl space-y-2.5 text-xs sm:text-sm">
-                <div className="font-bold text-slate-900 dark:text-white">Walkthrough Scenario:</div>
-                <ul className="list-disc pl-5 space-y-1 text-slate-600 dark:text-slate-300">
-                  <li>Current Course Grade: <strong className="text-slate-900 dark:text-white">86.0%</strong></li>
-                  <li>Final Exam Weight: <strong className="text-slate-900 dark:text-white">25%</strong> (0.25)</li>
-                  <li>Target Grade Desired: <strong className="text-slate-900 dark:text-white">90.0%</strong> (Letter grade A)</li>
+              <div className="p-6 bg-white/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl space-y-2.5 text-xs sm:text-sm">
+                <div className="font-bold text-slate-900 ">Walkthrough Scenario:</div>
+                <ul className="list-disc pl-5 space-y-1 text-slate-600 ">
+                  <li>Current Course Grade: <strong className="text-slate-900 ">86.0%</strong></li>
+                  <li>Final Exam Weight: <strong className="text-slate-900 ">25%</strong> (0.25)</li>
+                  <li>Target Grade Desired: <strong className="text-slate-900 ">90.0%</strong> (Letter grade A)</li>
                 </ul>
-                <div className="pt-2 font-mono text-teal-700 dark:text-teal-300 font-semibold">
+                <div className="pt-2 font-mono text-teal-700 font-semibold">
                   Required Score = [90 - (86 × 0.75)] ÷ 0.25 = [90 - 64.5] ÷ 0.25 = <strong>102.0%</strong>
                 </div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">
+                <div className="text-xs text-slate-500 ">
                   (In this example, an A would require extra credit, or a 90% target would need to be adjusted.)
                 </div>
               </div>
@@ -506,16 +506,16 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
         )}
 
         {/* Footer Action Card */}
-        <div className="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="mt-8 pt-6 border-t border-slate-200/60 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 flex items-center justify-center shrink-0 shadow-sm">
+            <div className="w-10 h-10 rounded-2xl bg-[#2457F5] text-white flex items-center justify-center shrink-0 shadow-sm">
               <Calculator className="w-5 h-5" aria-hidden="true" />
             </div>
             <div>
-              <div className="text-sm font-bold text-slate-900 dark:text-white">
+              <div className="text-sm font-bold text-slate-900 ">
                 Prefer Instant Automation?
               </div>
-              <div className="text-xs font-medium text-slate-600 dark:text-slate-300">
+              <div className="text-xs font-medium text-slate-600 ">
                 Calculate weighted grades and test target scores in real-time with our tool above.
               </div>
             </div>
@@ -527,7 +527,7 @@ export const ManualGradeHowTo: React.FC<ManualGradeHowToProps> = ({
               onUseCalculatorClick ||
               (() => window.scrollTo({ top: 0, behavior: 'smooth' }))
             }
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white rounded-full shadow-lg shadow-slate-900/20 transition-all cursor-pointer shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-bold text-white bg-[#2457F5] hover:bg-[#1A41C9] rounded-full shadow-lg shadow-[#2457F5]/20 transition-all cursor-pointer shrink-0"
           >
             <span>Use Online Grade Calculator</span>
             <ArrowRight className="w-4 h-4" aria-hidden="true" />

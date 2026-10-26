@@ -1120,9 +1120,9 @@ export async function setupServer() {
             );
             const notFoundBody = `
               <div class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans">
-                <span class="text-xs font-mono font-bold tracking-widest uppercase text-teal-700 dark:text-teal-400 mb-2">Error 404</span>
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">Page Not Found</h1>
-                <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-8 leading-relaxed">
+                <span class="text-xs font-mono font-bold tracking-widest uppercase text-teal-700 mb-2">Error 404</span>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Page Not Found</h1>
+                <p class="text-sm sm:text-base text-slate-600 max-w-md mx-auto mb-8 leading-relaxed">
                   The calculator or page you requested could not be found. Please check the address or return to our calculation suite.
                 </p>
                 <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-teal-700 hover:bg-teal-800 text-white text-sm font-bold shadow-sm transition-all active:scale-95">

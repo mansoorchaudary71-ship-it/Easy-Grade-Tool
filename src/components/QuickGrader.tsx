@@ -64,24 +64,24 @@ const COMMON_QUESTION_PRESETS = [10, 20, 25, 50, 100];
 /* 60-30-10: neutral canvas (60%), white / slate cards and borders (30%), ONE blue-600 accent (10%) for primary actions.
    White on blue-600 is 5.2:1 and white on blue-700 (hover) is 6.7:1, so both pass WCAG AA for text. */
 const BTN_SOLID =
-  'inline-flex items-center justify-center gap-2 min-h-[48px] min-w-[44px] bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-sm px-6 py-3 text-sm transition-colors cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-blue-400 dark:focus-visible:ring-offset-slate-900';
+  'inline-flex items-center justify-center gap-2 min-h-[48px] min-w-[44px] bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-sm px-6 py-3 text-sm transition-colors cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-white ';
 const BTN_OUTLINE =
-  'inline-flex items-center justify-center gap-2 min-h-[48px] min-w-[44px] bg-white dark:bg-slate-900 text-blue-800 dark:text-blue-300 border-2 border-blue-600 dark:border-blue-400 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-full font-bold px-6 py-3 text-sm transition-colors cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400';
+  'inline-flex items-center justify-center gap-2 min-h-[48px] min-w-[44px] bg-white text-blue-800 border-2 border-blue-600 hover:bg-blue-50 rounded-full font-bold px-6 py-3 text-sm transition-colors cursor-pointer active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ';
 const BTN_SOFT =
-  'inline-flex items-center justify-center gap-2 min-h-[48px] min-w-[44px] bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-5 py-3 text-sm transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400';
+  'inline-flex items-center justify-center gap-2 min-h-[48px] min-w-[44px] bg-white text-slate-800 border border-slate-300 hover:bg-slate-100 rounded-full font-semibold shadow-sm px-5 py-3 text-sm transition-colors cursor-pointer active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ';
 const STEP_BTN =
-  'w-12 h-12 min-w-[48px] shrink-0 inline-flex items-center justify-center rounded-full bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-2 border-slate-500 dark:border-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm cursor-pointer transition-colors active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400';
+  'w-12 h-12 min-w-[48px] shrink-0 inline-flex items-center justify-center rounded-full bg-white text-slate-900 border-2 border-slate-500 hover:bg-slate-100 shadow-sm cursor-pointer transition-colors active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ';
 /* Inputs: a 2px slate-500 border (4.8:1 on white) so the field edge passes the 3:1 non-text contrast rule. */
 const FIELD =
-  'w-full h-12 min-h-[48px] bg-white dark:bg-slate-800 border-2 border-slate-500 dark:border-slate-400 text-slate-900 dark:text-white rounded-full px-4 py-0 leading-none focus:border-blue-600 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-600/30 dark:focus:ring-blue-400/40 focus:outline-none transition-colors font-bold text-lg text-center placeholder:text-slate-600 dark:placeholder:text-slate-300';
-const FIELD_LABEL = 'text-sm font-semibold text-slate-800 dark:text-slate-100';
-const HELP_TEXT = 'text-xs text-slate-600 dark:text-slate-300';
+  'w-full h-12 min-h-[48px] bg-white border-2 border-slate-500 text-slate-900 rounded-full px-4 py-0 leading-none focus:border-blue-600 focus:ring-2 focus:ring-blue-600/30 focus:outline-none transition-colors font-bold text-lg text-center placeholder:text-slate-600 ';
+const FIELD_LABEL = 'text-sm font-semibold text-slate-800 ';
+const HELP_TEXT = 'text-xs text-slate-600 ';
 /** INPUT card: white, light border, flat. The cards a person types into. */
 const CARD_INPUT =
-  'bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm relative p-4 sm:p-6';
+  'bg-white rounded-3xl border border-slate-200 shadow-sm relative p-4 sm:p-6';
 /** OUTPUT card: tinted, stronger shadow and a 4px accent rule on top, so results read as a different layer from the inputs. */
 const CARD_OUTPUT =
-  'bg-slate-100 dark:bg-slate-800 rounded-3xl border border-slate-300 border-t-4 border-t-blue-600 dark:border-slate-600 dark:border-t-blue-400 shadow-lg shadow-slate-900/10 dark:shadow-black/30 relative p-4 sm:p-6';
+  'bg-slate-100 rounded-3xl border border-slate-300 border-t-4 border-t-blue-600 shadow-lg shadow-slate-900/10 relative p-4 sm:p-6';
 
 const formatStep = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 
@@ -448,9 +448,9 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
       <div className="flex flex-col gap-6 min-w-0">
         {/* 1. Setup card (input) */}
         <section aria-label="Test Configuration" className={`${CARD_INPUT} overflow-visible flex flex-col gap-6 print:hidden`}>
-          <div className="pb-4 border-b border-slate-200 dark:border-slate-700">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight m-0">Test configuration</h2>
-            <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base mt-1 m-0">
+          <div className="pb-4 border-b border-slate-200 ">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight m-0">Test configuration</h2>
+            <p className="text-slate-700 text-sm sm:text-base mt-1 m-0">
               Set the number of questions, then grade one student at a time or print the chart.
             </p>
           </div>
@@ -476,7 +476,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                   inputMode="numeric"
                   enterKeyHint="done"
                   autoComplete="off"
-                  className={`${FIELD} ${totalCheck.error ? 'border-rose-600 dark:border-rose-400 focus:border-rose-600' : ''}`}
+                  className={`${FIELD} ${totalCheck.error ? 'border-rose-600 focus:border-rose-600' : ''}`}
                   value={totalInput}
                   onChange={(e) => setTotalInput(e.target.value)}
                   placeholder="10"
@@ -488,7 +488,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 </button>
               </div>
               {totalCheck.error && (
-                <p id="num-questions-error" role="alert" className="m-0 text-sm font-semibold text-rose-700 dark:text-rose-300">
+                <p id="num-questions-error" role="alert" className="m-0 text-sm font-semibold text-rose-700 ">
                   {totalCheck.error} Showing the chart for {total} questions until this is fixed.
                 </p>
               )}
@@ -537,30 +537,30 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
             </div>
             <a
               href="#ez-print-section"
-              className="md:hidden self-start text-sm font-semibold text-blue-700 dark:text-blue-300 underline underline-offset-2 min-h-[44px] inline-flex items-center"
+              className="md:hidden self-start text-sm font-semibold text-blue-700 underline underline-offset-2 min-h-[44px] inline-flex items-center"
             >
               Jump to the chart ↓
             </a>
 
             {/* Advanced settings: folded away by default (Miller's Law). Scale, decimal precision, cutoffs, half points. */}
-            <div className="rounded-2xl border border-slate-300 dark:border-slate-600">
+            <div className="rounded-2xl border border-slate-300 ">
               <button
                 type="button"
                 id="advanced-settings-toggle"
                 aria-expanded={advancedOpen}
                 aria-controls="advanced-settings-panel"
                 onClick={() => setAdvancedOpen((v) => !v)}
-                className="flex w-full min-h-[56px] cursor-pointer items-center justify-between gap-3 rounded-2xl px-4 py-2 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400"
+                className="flex w-full min-h-[56px] cursor-pointer items-center justify-between gap-3 rounded-2xl px-4 py-2 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 "
               >
                 <span className="flex min-w-0 items-center gap-3">
-                  <SlidersHorizontal className="w-5 h-5 shrink-0 text-slate-700 dark:text-slate-200" aria-hidden="true" />
+                  <SlidersHorizontal className="w-5 h-5 shrink-0 text-slate-700 " aria-hidden="true" />
                   <span className="min-w-0">
-                    <span className="block text-sm font-semibold text-slate-900 dark:text-slate-50">Advanced settings</span>
-                    <span className="block truncate text-xs text-slate-600 dark:text-slate-300">{advancedSummary}</span>
+                    <span className="block text-sm font-semibold text-slate-900 ">Advanced settings</span>
+                    <span className="block truncate text-xs text-slate-600 ">{advancedSummary}</span>
                   </span>
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 shrink-0 text-slate-700 dark:text-slate-200 transition-transform duration-200 motion-reduce:transition-none ${advancedOpen ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 shrink-0 text-slate-700 transition-transform duration-200 motion-reduce:transition-none ${advancedOpen ? 'rotate-180' : ''}`}
                   aria-hidden="true"
                 />
               </button>
@@ -570,7 +570,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                   id="advanced-settings-panel"
                   role="group"
                   aria-labelledby="advanced-settings-toggle"
-                  className="flex flex-col gap-6 border-t border-slate-200 dark:border-slate-700 px-4 pb-5 pt-4"
+                  className="flex flex-col gap-6 border-t border-slate-200 px-4 pb-5 pt-4"
                 >
                   <div className="flex flex-col gap-3">
                     <p className={`${FIELD_LABEL} m-0`}>Grading scale</p>
@@ -603,17 +603,17 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                         <p className={`${HELP_TEXT} m-0`}>Your cutoffs are remembered on this device only.</p>
                       </div>
                     ) : scaleType === 'plus' ? (
-                      <p className="text-sm text-slate-700 dark:text-slate-300 m-0">
+                      <p className="text-sm text-slate-700 m-0">
                         Fixed plus/minus cutoffs: A+ 97, A 93, A- 90, B+ 87, B 83, B- 80, C+ 77, C 73, C- 70, D+ 67, D 63, D- 60.
                       </p>
                     ) : (
-                      <p className="text-sm text-slate-700 dark:text-slate-300 m-0">
+                      <p className="text-sm text-slate-700 m-0">
                         Fixed 7-point cutoffs used by many schools: A 93, B 86, C 79, D 72, F below 72.
                       </p>
                     )}
                   </div>
 
-                  <div className="flex flex-col gap-3 border-t border-slate-200 dark:border-slate-700 pt-5">
+                  <div className="flex flex-col gap-3 border-t border-slate-200 pt-5">
                     <p className={`${FIELD_LABEL} m-0`}>Decimal precision</p>
                     <SegmentedControl
                       ariaLabel="Decimal precision"
@@ -649,15 +649,15 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
 
             <div className="grid grid-cols-2 gap-3 pt-1">
               <div className={`${NEUTRAL_TONE.surface} rounded-2xl p-4 border`}>
-                <span className="text-sm font-semibold text-slate-800 dark:text-slate-100 block">Each worth</span>
-                <strong className="text-lg font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">
+                <span className="text-sm font-semibold text-slate-800 block">Each worth</span>
+                <strong className="text-lg font-bold text-slate-900 font-mono mt-0.5 block">
                   {pointsPerQuestion.toFixed(pointsPerQuestion % 1 === 0 ? 0 : 2)}%
                 </strong>
                 <span className={HELP_TEXT}>Value per question</span>
               </div>
               <div className={`${NEUTRAL_TONE.surface} rounded-2xl p-4 border`}>
-                <span className="text-sm font-semibold text-slate-800 dark:text-slate-100 block">Lowest passing grade</span>
-                <strong className="text-lg font-bold text-slate-900 dark:text-white font-mono mt-0.5 block">≥ {lowestPassing}%</strong>
+                <span className="text-sm font-semibold text-slate-800 block">Lowest passing grade</span>
+                <strong className="text-lg font-bold text-slate-900 font-mono mt-0.5 block">≥ {lowestPassing}%</strong>
                 <span className={HELP_TEXT}>Below this is an F</span>
               </div>
             </div>
@@ -672,8 +672,8 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           className={`${CARD_INPUT} space-y-5 print:hidden`}
         >
           <div className="flex items-center gap-2">
-            <UserRound className="w-5 h-5 text-slate-700 dark:text-slate-200" aria-hidden="true" />
-            <h2 className="text-xl font-bold text-slate-900 dark:text-slate-50 tracking-tight m-0">Grade one student</h2>
+            <UserRound className="w-5 h-5 text-slate-700 " aria-hidden="true" />
+            <h2 className="text-xl font-bold text-slate-900 tracking-tight m-0">Grade one student</h2>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -692,7 +692,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 autoComplete="off"
                 value={wrongInput}
                 onChange={(e) => setWrongInput(e.target.value)}
-                className={`${FIELD} ${wrongCheck.error ? 'border-rose-600 dark:border-rose-400 focus:border-rose-600' : ''}`}
+                className={`${FIELD} ${wrongCheck.error ? 'border-rose-600 focus:border-rose-600' : ''}`}
                 aria-invalid={wrongCheck.error ? true : undefined}
                 aria-describedby={wrongCheck.error ? 'student-wrong-error' : undefined}
               />
@@ -701,7 +701,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               </button>
             </div>
             {wrongCheck.error && (
-              <p id="student-wrong-error" role="alert" className="m-0 text-sm font-semibold text-rose-700 dark:text-rose-300">
+              <p id="student-wrong-error" role="alert" className="m-0 text-sm font-semibold text-rose-700 ">
                 {wrongCheck.error}
               </p>
             )}
@@ -717,18 +717,18 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           >
             {student && studentTone && StudentIcon ? (
               <div className="space-y-3">
-                <p className="m-0 text-sm font-semibold text-slate-800 dark:text-slate-100">
+                <p className="m-0 text-sm font-semibold text-slate-800 ">
                   {formatStep(total - (wrongNum ?? 0))} of {total} correct
                 </p>
                 <div className="flex items-end justify-between gap-4">
                   <div>
-                    <span className="text-sm font-semibold text-slate-800 dark:text-slate-100 block">Score</span>
+                    <span className="text-sm font-semibold text-slate-800 block">Score</span>
                     <strong className={`block text-5xl sm:text-6xl font-extrabold leading-none font-mono tabular-nums ${studentTone.text}`}>
                       {student.formattedPercentage}%
                     </strong>
                   </div>
                   <div className="text-right">
-                    <span className="text-sm font-semibold text-slate-800 dark:text-slate-100 block">Grade</span>
+                    <span className="text-sm font-semibold text-slate-800 block">Grade</span>
                     <strong className={`block text-6xl sm:text-7xl font-black leading-none ${studentTone.text}`}>{student.letter}</strong>
                   </div>
                 </div>
@@ -757,10 +757,10 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           </p>
 
           {students.length > 0 && (
-            <div className="border-t border-slate-200 dark:border-slate-700 pt-5 space-y-3">
+            <div className="border-t border-slate-200 pt-5 space-y-3">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-base font-bold text-slate-900 dark:text-slate-50 m-0">Class tally</h3>
-                <span className="text-sm text-slate-700 dark:text-slate-300">
+                <h3 className="text-base font-bold text-slate-900 m-0">Class tally</h3>
+                <span className="text-sm text-slate-700 ">
                   {students.length} student{students.length === 1 ? '' : 's'} · average{' '}
                   <strong className="font-mono">{tally.average.toFixed(1)}%</strong>
                 </span>
@@ -818,10 +818,10 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         <div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight m-0">
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight m-0">
                 Quick chart · {total}-question test
               </h2>
-              <p className="text-slate-700 dark:text-slate-300 text-sm mt-1 m-0">
+              <p className="text-slate-700 text-sm mt-1 m-0">
                 Scores for 0 to {total} wrong answers
                 {halfPoints && total <= 200 ? ', in half-point steps' : ''}.
               </p>
@@ -861,7 +861,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           <div className="my-4 print:hidden">
             <label htmlFor="filter-wrong-answers" className="sr-only">Filter by wrong answers</label>
             <div className="relative group">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 dark:text-slate-300 group-focus-within:text-blue-700 dark:group-focus-within:text-blue-300 transition-colors pointer-events-none">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600 group-focus-within:text-blue-700 transition-colors pointer-events-none">
                 <Hash className="w-4 h-4" aria-hidden="true" />
               </span>
               <input
@@ -875,13 +875,13 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                 onChange={(e) => setFilterInput(e.target.value)}
                 aria-invalid={filterCheck.error ? true : undefined}
                 aria-describedby={filterCheck.error ? 'filter-error' : undefined}
-                className="w-full min-h-[48px] bg-white dark:bg-slate-900 border-2 border-slate-500 dark:border-slate-400 text-slate-900 dark:text-white rounded-full py-3 pl-11 pr-24 focus:border-blue-600 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-600/30 focus:outline-none transition-colors font-semibold text-base placeholder:text-slate-600 dark:placeholder:text-slate-300"
+                className="w-full min-h-[48px] bg-white border-2 border-slate-500 text-slate-900 rounded-full py-3 pl-11 pr-24 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/30 focus:outline-none transition-colors font-semibold text-base placeholder:text-slate-600 "
               />
               {filterInput && (
                 <button
                   type="button"
                   onClick={() => setFilterInput('')}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] px-4 text-sm font-semibold text-slate-800 dark:text-slate-100 cursor-pointer rounded-full hover:bg-slate-200 dark:hover:bg-slate-700"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 min-h-[44px] min-w-[44px] px-4 text-sm font-semibold text-slate-800 cursor-pointer rounded-full hover:bg-slate-200 "
                   aria-label="Clear filter"
                 >
                   Clear
@@ -889,7 +889,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               )}
             </div>
             {filterCheck.error && (
-              <p id="filter-error" role="alert" className="m-0 mt-2 text-sm font-semibold text-rose-700 dark:text-rose-300">
+              <p id="filter-error" role="alert" className="m-0 mt-2 text-sm font-semibold text-rose-700 ">
                 {filterCheck.error}
               </p>
             )}
@@ -910,10 +910,10 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
             )}
 
             {hasMoreItems && (
-              <div className="print:hidden flex flex-col sm:flex-row items-center justify-between gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-300 dark:border-slate-600 shadow-xs">
-                <div className="text-sm text-slate-700 dark:text-slate-300 font-medium text-center sm:text-left">
-                  Showing <strong className="text-slate-900 dark:text-white font-mono">{Math.min(renderedCount, totalCalculatedItems)}</strong> of{' '}
-                  <strong className="text-slate-900 dark:text-white font-mono">{totalCalculatedItems}</strong> rows.
+              <div className="print:hidden flex flex-col sm:flex-row items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-300 shadow-xs">
+                <div className="text-sm text-slate-700 font-medium text-center sm:text-left">
+                  Showing <strong className="text-slate-900 font-mono">{Math.min(renderedCount, totalCalculatedItems)}</strong> of{' '}
+                  <strong className="text-slate-900 font-mono">{totalCalculatedItems}</strong> rows.
                 </div>
                 <div className="flex items-center gap-2 flex-wrap justify-center">
                   <button type="button" onClick={handleShowMore} className={BTN_SOLID}>
@@ -936,14 +936,14 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
             {letterGroups.length === 0 && (
               <div
                 role="status"
-                className="py-10 px-6 text-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 shadow-xs flex flex-col items-center justify-center space-y-3 my-2"
+                className="py-10 px-6 text-center rounded-2xl bg-white border border-slate-300 shadow-xs flex flex-col items-center justify-center space-y-3 my-2"
               >
-                <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-600 flex items-center justify-center">
-                  <SearchX className="w-6 h-6 text-slate-700 dark:text-slate-300" aria-hidden="true" />
+                <div className="w-12 h-12 rounded-2xl bg-slate-100 border border-slate-300 flex items-center justify-center">
+                  <SearchX className="w-6 h-6 text-slate-700 " aria-hidden="true" />
                 </div>
                 <div className="space-y-1">
-                  <p className="font-bold text-slate-900 dark:text-slate-50 text-base m-0">No matching wrong-answer count</p>
-                  <p className="text-sm text-slate-700 dark:text-slate-300 max-w-xs mx-auto m-0">
+                  <p className="font-bold text-slate-900 text-base m-0">No matching wrong-answer count</p>
+                  <p className="text-sm text-slate-700 max-w-xs mx-auto m-0">
                     {filterInput
                       ? `There is no row for "${filterInput}" wrong answers. Enter a value from 0 to ${total}.`
                       : 'No results match your current settings.'}

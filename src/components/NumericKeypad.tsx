@@ -180,13 +180,13 @@ export const NumericKeypad: React.FC<NumericKeypadProps> = ({ className = '' }) 
             getTargetInput();
             setIsOpen(true);
           }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-teal-800/95 hover:bg-teal-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 shadow-xl shadow-teal-900/25 backdrop-blur-md border border-white/20 text-xs font-semibold tracking-wide transition-all transform hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-teal-800/95 hover:bg-teal-800 text-white shadow-xl shadow-teal-900/25 backdrop-blur-md border border-white/20 text-xs font-semibold tracking-wide transition-all transform hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
           title="Open tactile numeric keypad with haptic vibration"
           aria-label="Open tactile numeric keypad"
         >
-          <Calculator className="w-4 h-4 text-blue-300 dark:text-white" />
+          <Calculator className="w-4 h-4 text-blue-300 " />
           <span>Numeric Keypad</span>
-          <span className="flex items-center gap-0.5 text-xs text-blue-200 dark:text-blue-100 bg-white/10 px-1.5 py-0.5 rounded-md font-mono">
+          <span className="flex items-center gap-0.5 text-xs text-blue-200 bg-white/10 px-1.5 py-0.5 rounded-md font-mono">
             <Vibrate className="w-2.5 h-2.5" />
             20ms
           </span>
@@ -195,16 +195,16 @@ export const NumericKeypad: React.FC<NumericKeypadProps> = ({ className = '' }) 
 
       {/* Expanded Keypad Drawer / Card */}
       {isOpen && (
-        <div className="w-[300px] sm:w-[320px] rounded-3xl overflow-hidden p-5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-slate-100 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.12)] animate-in fade-in slide-in-from-bottom-5 duration-200">
+        <div className="w-[300px] sm:w-[320px] rounded-3xl overflow-hidden p-5 bg-white/95 backdrop-blur-xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] animate-in fade-in slide-in-from-bottom-5 duration-200">
           {/* Header Bar */}
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/60 dark:border-slate-800/80">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/60 ">
             <div className="flex items-center gap-2">
-              <Calculator className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-              <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
+              <Calculator className="w-4 h-4 text-blue-600 " />
+              <span className="text-xs font-bold text-slate-900 uppercase tracking-wider font-mono">
                 Tactile Keypad
               </span>
               <span
-                className="inline-flex items-center gap-1 text-xs font-mono px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 font-semibold"
+                className="inline-flex items-center gap-1 text-xs font-mono px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold"
                 title="Haptic feedback: 20ms vibration on keypress"
               >
                 <Vibrate className="w-2.5 h-2.5 animate-pulse" />
@@ -218,7 +218,7 @@ export const NumericKeypad: React.FC<NumericKeypadProps> = ({ className = '' }) 
                 triggerHapticFeedback(DEFAULT_HAPTIC_DURATION);
                 setIsOpen(false);
               }}
-              className="w-7 h-7 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors cursor-pointer"
+              className="w-7 h-7 rounded-full flex items-center justify-center text-slate-500 hover:text-slate-800 hover:bg-black/5 transition-colors cursor-pointer"
               aria-label="Close keypad"
             >
               <X className="w-4 h-4" />
@@ -226,11 +226,11 @@ export const NumericKeypad: React.FC<NumericKeypadProps> = ({ className = '' }) 
           </div>
 
           {/* Target Display Preview */}
-          <div className="mb-3 px-3.5 py-2 rounded-xl bg-white/90 dark:bg-slate-800/90 border border-white dark:border-slate-700/60 shadow-xs flex items-center justify-between">
-            <span className="text-xs font-medium text-slate-500 dark:text-slate-400 truncate max-w-[140px]">
+          <div className="mb-3 px-3.5 py-2 rounded-xl bg-white/90 border border-white shadow-xs flex items-center justify-between">
+            <span className="text-xs font-medium text-slate-500 truncate max-w-[140px]">
               {activeLabel}
             </span>
-            <span className="font-mono font-bold text-slate-900 dark:text-white text-base truncate">
+            <span className="font-mono font-bold text-slate-900 text-base truncate">
               {currentVal !== '' ? currentVal : '0'}
             </span>
           </div>
@@ -241,10 +241,10 @@ export const NumericKeypad: React.FC<NumericKeypadProps> = ({ className = '' }) 
               const Icon = btn.icon;
 
               let btnStyle =
-                'bg-white/95 dark:bg-slate-800/90 text-slate-800 dark:text-white border-white dark:border-slate-700/60 shadow-sm hover:bg-blue-50 dark:hover:bg-slate-700';
+                'bg-white/95 text-slate-800 border-white shadow-sm hover:bg-blue-50 ';
               if (btn.special) {
                 btnStyle =
-                  'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200/60 dark:border-slate-700/50 shadow-xs hover:bg-slate-200 dark:hover:bg-slate-700';
+                  'bg-slate-100 text-slate-600 border-slate-200/60 shadow-xs hover:bg-slate-200 ';
               }
               if (btn.action) {
                 btnStyle =

@@ -70,8 +70,8 @@ export const TestGradeTool: React.FC = () => {
           </div>
         </div>
 
-        <details className="group rounded-2xl border border-stone-200 dark:border-slate-700 px-4">
-          <summary className="flex items-center min-h-[48px] cursor-pointer text-sm font-semibold text-slate-800 dark:text-slate-200 select-none">
+        <details className="group rounded-2xl border border-stone-200 px-4">
+          <summary className="flex items-center min-h-[48px] cursor-pointer text-sm font-semibold text-slate-800 select-none">
             Bonus points or late penalty (optional)
           </summary>
           <div className="grid grid-cols-2 gap-4 pb-4 pt-1">
@@ -100,32 +100,32 @@ export const TestGradeTool: React.FC = () => {
           <>
             <div className={`${RESULT_BOX} flex flex-wrap items-center justify-between gap-4`} role="status" aria-live="polite" aria-atomic="true">
               <div>
-                <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Your test grade</span>
-                <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">
+                <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Your test grade</span>
+                <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">
                   {roundTo(result.percent, 1)}%
                 </strong>
               </div>
               <div className="text-right">
-                <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Letter · GPA points</span>
-                <strong className="text-3xl font-extrabold text-teal-950 dark:text-teal-100">{band.letter}</strong>
-                <span className="ml-2 text-lg font-bold text-teal-900 dark:text-teal-200 font-mono">{band.gpa.toFixed(1)}</span>
+                <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Letter · GPA points</span>
+                <strong className="text-3xl font-extrabold text-teal-950 ">{band.letter}</strong>
+                <span className="ml-2 text-lg font-bold text-teal-900 font-mono">{band.gpa.toFixed(1)}</span>
               </div>
             </div>
             {result.warnings.map((w) => (
               <p key={w} className={WARN_TEXT} role="status">{w}</p>
             ))}
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">
+            <p className="text-sm text-slate-700 m-0">
               {result.adjustedEarned} of {poss} points after adjustments
               {result.missed > 0 ? ` · ${roundTo(result.missed, 2)} points missed before bonus` : ''}.
             </p>
 
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <caption className="text-left text-xs font-semibold uppercase tracking-widest text-slate-700 dark:text-slate-300 pb-2">
+                <caption className="text-left text-xs font-semibold uppercase tracking-widest text-slate-700 pb-2">
                   Points needed on this test
                 </caption>
                 <thead>
-                  <tr className="text-left text-slate-600 dark:text-slate-300">
+                  <tr className="text-left text-slate-600 ">
                     <th scope="col" className="py-2 pr-3">Grade</th>
                     <th scope="col" className="py-2 pr-3">Minimum</th>
                     <th scope="col" className="py-2 pr-3">Points needed</th>
@@ -134,11 +134,11 @@ export const TestGradeTool: React.FC = () => {
                 </thead>
                 <tbody>
                   {needed.map((n) => (
-                    <tr key={n.letter} className="border-t border-slate-200/70 dark:border-slate-800">
+                    <tr key={n.letter} className="border-t border-slate-200/70 ">
                       <th scope="row" className="py-2 pr-3 font-bold">{n.letter}</th>
                       <td className="py-2 pr-3 font-mono">{n.min}%</td>
                       <td className="py-2 pr-3 font-mono">{n.pts}</td>
-                      <td className={`py-2 font-mono ${n.delta <= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-700 dark:text-slate-300'}`}>
+                      <td className={`py-2 font-mono ${n.delta <= 0 ? 'text-emerald-700 ' : 'text-slate-700 '}`}>
                         {n.delta <= 0 ? 'at or above' : `${n.delta} short`}
                       </td>
                     </tr>

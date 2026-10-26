@@ -115,7 +115,7 @@ export const SemesterGpaTool: React.FC<SemesterGpaToolProps> = ({
             const r = p.row;
             const n = i + 1;
             return (
-              <li key={r.id} className="grid grid-cols-2 sm:grid-cols-[1.4fr_1fr_1fr_auto] gap-3 items-end rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
+              <li key={r.id} className="grid grid-cols-2 sm:grid-cols-[1.4fr_1fr_1fr_auto] gap-3 items-end rounded-2xl border border-slate-200 p-4">
                 <div className="col-span-2 sm:col-span-1">
                   <label htmlFor={`sg-name-${r.id}`} className={LABEL}>Course {n}</label>
                   <input id={`sg-name-${r.id}`} className={INPUT} type="text" enterKeyHint="next" value={r.name} placeholder="Optional name"
@@ -135,7 +135,7 @@ export const SemesterGpaTool: React.FC<SemesterGpaToolProps> = ({
                 </div>
                 <button type="button" onClick={() => remove(r.id)} disabled={rows.length === 1}
                   aria-label={`Remove course ${n}`}
-                  className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 disabled:opacity-40 cursor-pointer">
+                  className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full text-slate-600 hover:text-rose-700 disabled:opacity-40 cursor-pointer">
                   <Trash2 className="w-5 h-5" aria-hidden="true" />
                 </button>
                 {p.error && <p id={`sg-credits-err-${r.id}`} className={`${ERROR_TEXT} col-span-2 sm:col-span-4`} role="alert">Course {n}: {p.error}</p>}
@@ -149,11 +149,11 @@ export const SemesterGpaTool: React.FC<SemesterGpaToolProps> = ({
             <Plus className="w-4 h-4" aria-hidden="true" />
             <span>Add course</span>
           </button>
-          <button type="button" onClick={reset} className="text-sm font-semibold text-slate-600 dark:text-slate-300 underline underline-offset-2 cursor-pointer">
+          <button type="button" onClick={reset} className="text-sm font-semibold text-slate-600 underline underline-offset-2 cursor-pointer">
             Reset to the example courses
           </button>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Leave out pass/fail courses: they earn credits but no grade points. Your courses are saved on this device only, in your browser. Nothing is uploaded.
         </p>
       </section>
@@ -162,22 +162,22 @@ export const SemesterGpaTool: React.FC<SemesterGpaToolProps> = ({
         {result ? (
           <div className={`${RESULT_BOX} grid sm:grid-cols-3 gap-4 text-center`} role="status" aria-live="polite" aria-atomic="true">
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Semester GPA</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{result.unweighted.toFixed(2)}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Semester GPA</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{result.unweighted.toFixed(2)}</strong>
             </div>
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Quality points</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{qualityPoints.toFixed(1)}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Quality points</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{qualityPoints.toFixed(1)}</strong>
             </div>
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Total credits</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{result.totalCredits}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Total credits</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{result.totalCredits}</strong>
             </div>
           </div>
         ) : (
           <p className={ERROR_TEXT} role="status">Fix the highlighted fields to see your semester GPA.</p>
         )}
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Results are estimates. Your school’s rounding, grade replacement and pass/fail policies decide your official semester GPA.
         </p>
       </section>

@@ -158,7 +158,7 @@ export const WeightedGpaTool: React.FC<WeightedGpaToolProps> = ({
               aria-describedby={ap.error ? 'wg-ap-err' : 'wg-bonus-help'} />
             {ap.error && <p id="wg-ap-err" className={`${ERROR_TEXT} mt-1.5`} role="alert">{ap.error}</p>}
           </div>
-          <p id="wg-bonus-help" className="sm:col-span-2 text-sm text-slate-600 dark:text-slate-300 m-0">
+          <p id="wg-bonus-help" className="sm:col-span-2 text-sm text-slate-600 m-0">
             Bonus points are added to the 4.0 points of each honors or AP/IB course. Use the values your school publishes: they differ from school to school. A course graded F gets no bonus.
           </p>
         </div>
@@ -168,7 +168,7 @@ export const WeightedGpaTool: React.FC<WeightedGpaToolProps> = ({
             const r = p.row;
             const n = i + 1;
             return (
-              <li key={r.id} className="grid grid-cols-2 sm:grid-cols-[1.4fr_1fr_1fr_0.8fr_auto] gap-3 items-end rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
+              <li key={r.id} className="grid grid-cols-2 sm:grid-cols-[1.4fr_1fr_1fr_0.8fr_auto] gap-3 items-end rounded-2xl border border-slate-200 p-4">
                 <div className="col-span-2 sm:col-span-1">
                   <label htmlFor={`wg-name-${r.id}`} className={LABEL}>Course {n}</label>
                   <input id={`wg-name-${r.id}`} className={INPUT} type="text" enterKeyHint="next" value={r.name} placeholder="Optional name"
@@ -196,7 +196,7 @@ export const WeightedGpaTool: React.FC<WeightedGpaToolProps> = ({
                 </div>
                 <button type="button" onClick={() => remove(r.id)} disabled={rows.length === 1}
                   aria-label={`Remove course ${n}`}
-                  className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full text-slate-600 dark:text-slate-300 hover:text-rose-700 dark:hover:text-rose-400 disabled:opacity-40 cursor-pointer">
+                  className="min-h-[48px] min-w-[48px] inline-flex items-center justify-center rounded-full text-slate-600 hover:text-rose-700 disabled:opacity-40 cursor-pointer">
                   <Trash2 className="w-5 h-5" aria-hidden="true" />
                 </button>
                 {p.error && <p id={`wg-credits-err-${r.id}`} className={`${ERROR_TEXT} col-span-2 sm:col-span-5`} role="alert">Course {n}: {p.error}</p>}
@@ -210,11 +210,11 @@ export const WeightedGpaTool: React.FC<WeightedGpaToolProps> = ({
             <Plus className="w-4 h-4" aria-hidden="true" />
             <span>Add course</span>
           </button>
-          <button type="button" onClick={reset} className="text-sm font-semibold text-slate-600 dark:text-slate-300 underline underline-offset-2 cursor-pointer">
+          <button type="button" onClick={reset} className="text-sm font-semibold text-slate-600 underline underline-offset-2 cursor-pointer">
             Reset to the example courses
           </button>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Your courses are saved on this device only, in your browser, so they are here when you come back. Nothing is uploaded or shared.
         </p>
       </section>
@@ -223,21 +223,21 @@ export const WeightedGpaTool: React.FC<WeightedGpaToolProps> = ({
         {result ? (
           <div className={`${RESULT_BOX} grid sm:grid-cols-2 gap-4`} role="status" aria-live="polite" aria-atomic="true">
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Weighted GPA</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{result.weighted.toFixed(2)}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Weighted GPA</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{result.weighted.toFixed(2)}</strong>
             </div>
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Unweighted GPA</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{result.unweighted.toFixed(2)}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Unweighted GPA</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{result.unweighted.toFixed(2)}</strong>
             </div>
-            <p className="sm:col-span-2 text-sm text-teal-950 dark:text-teal-100 m-0">
+            <p className="sm:col-span-2 text-sm text-teal-950 m-0">
               {result.courseCount} course{result.courseCount === 1 ? '' : 's'}, {result.totalCredits} credit{result.totalCredits === 1 ? '' : 's'}. The weighted GPA is {(result.weighted - result.unweighted).toFixed(2)} higher because of the bonus points.
             </p>
           </div>
         ) : (
           <p className={ERROR_TEXT} role="status">Fix the highlighted fields to see your GPA.</p>
         )}
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Results are estimates. Your school sets the official bonus points, credit values and rounding, and a college may recalculate your GPA with its own rules.
         </p>
       </section>

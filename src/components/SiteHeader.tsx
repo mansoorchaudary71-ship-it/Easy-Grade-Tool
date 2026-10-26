@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar } from './Navbar';
+import { MobileDock } from './MobileDock';
 import { ToolKey } from '../types';
 
 interface SiteHeaderProps {
@@ -11,10 +12,10 @@ interface SiteHeaderProps {
 /**
  * The single, global site chrome, mounted once in App.tsx above <Routes>.
  * ONE sticky header row, Dribbble-style layout:
- *   at the top: logo | Grade tools | GPA and percentages | Everyday tools | For Schools | Quick Grade | theme switch
+ *   at the top: logo | Grade tools | GPA and percentages | Everyday tools | For Schools | Quick Grade
  *   once scrolled: a grey search pill appears between the logo and the nav links.
- * Surface: flat white with a hairline underneath (.elev-chrome); once the
- * page scrolls, the chrome gains a soft shadow so it floats over content.
+ * Surface (Lumen): a frosted-white floating bar; once the page scrolls it gains a soft shadow so it
+ * floats over content. Below lg a floating bottom dock (<MobileDock />) carries thumb-reach navigation.
  */
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool, onOpenCommandPalette }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -25,9 +26,12 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return (
-    <div className={`elev-chrome sticky top-0 z-50 isolate print:hidden${scrolled ? ' is-scrolled' : ''}`} data-site-chrome>
-      <Navbar activeTool={activeTool} onSelectTool={onSelectTool} onOpenCommandPalette={onOpenCommandPalette} />
-    </div>
+    <>
+      <div className={`elev-chrome lm-chrome sticky top-0 z-50 isolate print:hidden${scrolled ? ' is-scrolled' : ''}`} data-site-chrome>
+        <Navbar activeTool={activeTool} onSelectTool={onSelectTool} onOpenCommandPalette={onOpenCommandPalette} />
+      </div>
+      <MobileDock onOpenSearch={onOpenCommandPalette} />
+    </>
   );
 };
 

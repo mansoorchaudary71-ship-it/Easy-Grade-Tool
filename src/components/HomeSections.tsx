@@ -152,10 +152,10 @@ export const HomeSections: React.FC<{ onOpenCommandPalette?: () => void }> = ({ 
             <Link
               key={item.q}
               to={item.path}
-              className="block rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 no-underline hover:border-teal-600 transition-colors"
+              className="block rounded-2xl border border-slate-200 bg-white p-4 no-underline hover:border-teal-600 transition-colors"
             >
-              <span className="block font-bold text-slate-900 dark:text-white">{item.q}</span>
-              <span className="block text-sm text-slate-600 dark:text-slate-400">{item.a} Check any other score →</span>
+              <span className="block font-bold text-slate-900 ">{item.q}</span>
+              <span className="block text-sm text-slate-600 ">{item.a} Check any other score →</span>
             </Link>
           ))}
         </div>

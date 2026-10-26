@@ -33,7 +33,7 @@ export const CutoffFields: React.FC<CutoffFieldsProps> = ({ idPrefix, drafts, on
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
       {(['A', 'B', 'C', 'D'] as const).map((grade) => (
         <div key={grade} className="flex flex-col gap-1.5">
-          <label htmlFor={`${idPrefix}-${grade}`} className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <label htmlFor={`${idPrefix}-${grade}`} className="text-xs font-semibold text-slate-700 ">
             {grade} starts at (%)
           </label>
           <input
@@ -46,15 +46,15 @@ export const CutoffFields: React.FC<CutoffFieldsProps> = ({ idPrefix, drafts, on
             onChange={(e) => onChange(grade, e.target.value)}
             aria-invalid={error ? true : undefined}
             aria-describedby={error ? `${idPrefix}-error` : undefined}
-            className={`w-full min-h-[48px] bg-[#F4F6F9] dark:bg-slate-800 border text-stone-900 dark:text-white rounded-[20px] px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-[#0056D2] focus:border-[#0056D2] font-mono font-bold text-center text-base transition-all ${
-              error ? 'border-rose-500 ring-2 ring-rose-400/60' : 'border-stone-200/80 dark:border-slate-700'
+            className={`w-full min-h-[48px] bg-[#F4F6F9] border text-stone-900 rounded-[20px] px-4 py-3 focus:bg-white focus:ring-2 focus:ring-[#2457F5] focus:border-[#2457F5] font-mono font-bold text-center text-base transition-all ${
+              error ? 'border-rose-500 ring-2 ring-rose-400/60' : 'border-stone-200/80 '
             }`}
           />
         </div>
       ))}
     </div>
     {error && (
-      <p id={`${idPrefix}-error`} role="alert" className="m-0 text-sm font-semibold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900/50 rounded-2xl p-3">
+      <p id={`${idPrefix}-error`} role="alert" className="m-0 text-sm font-semibold text-rose-700 bg-rose-50 border border-rose-200 rounded-2xl p-3">
         {error}
       </p>
     )}

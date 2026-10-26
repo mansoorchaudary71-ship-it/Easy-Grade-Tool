@@ -111,15 +111,15 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
       role="group"
       aria-label={groups.length === 1 ? groups[0].heading : 'Tools'}
       style={{ top: pos.top, left: pos.left, width: Math.min(isMega ? MEGA_WIDTH : SINGLE_WIDTH, window.innerWidth - MARGIN * 2) }}
-      className={`fixed z-[9999] max-h-[calc(100vh-96px)] origin-top-left overflow-y-auto overscroll-contain cs-mega rounded-xl border border-[#0F1114]/10 bg-white p-2 ${isMega ? 'grid grid-cols-3 gap-x-2 p-4' : ''} shadow-[0_12px_32px_rgba(13,12,34,0.10)] transition duration-150 ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-[#161B2E] dark:shadow-black/40 ${
+      className={`fixed z-[9999] max-h-[calc(100vh-96px)] origin-top-left overflow-y-auto overscroll-contain cs-mega rounded-xl border border-[#0F1114]/10 bg-white p-2 ${isMega ? 'grid grid-cols-3 gap-x-2 p-4' : ''} shadow-[0_12px_32px_rgba(13,12,34,0.10)] transition duration-150 ease-out motion-reduce:transition-none ${
         shown ? 'translate-y-0 scale-100 opacity-100' : '-translate-y-1 scale-[0.98] opacity-0'
       }`}
     >
       {groups.map((group, gi) => (
-        <section key={group.id} aria-labelledby={`tools-menu-${group.id}`} className={!isMega && gi > 0 ? 'mt-1.5 border-t border-[#0F1114]/8 pt-1.5 dark:border-white/10' : ''}>
+        <section key={group.id} aria-labelledby={`tools-menu-${group.id}`} className={!isMega && gi > 0 ? 'mt-1.5 border-t border-[#0F1114]/8 pt-1.5 ' : ''}>
           <h2
             id={`tools-menu-${group.id}`}
-            className={groups.length === 1 ? 'sr-only' : 'm-0 px-3 pb-2 pt-1 text-sm font-bold text-[#0F1114] dark:text-white'}
+            className={groups.length === 1 ? 'sr-only' : 'm-0 px-3 pb-2 pt-1 text-sm font-bold text-[#0F1114] '}
           >
             {group.heading}
           </h2>
@@ -139,17 +139,17 @@ export const ToolsMenu: React.FC<ToolsMenuProps> = ({ groups, currentPath, ancho
                     onFocus={() => void preloadForPath(item.path)}
                     aria-current={active ? 'page' : undefined}
                     title={item.title}
-                    className={`group flex min-h-11 items-center gap-3 rounded-full px-4 text-[15px] font-semibold no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#0056D2] dark:focus-visible:ring-[#6EA8FF] ${
+                    className={`group flex min-h-11 items-center gap-3 rounded-full px-4 text-[15px] font-semibold no-underline outline-none transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-[#2457F5] ${
                       active
-                        ? 'bg-[#EEF4FF] text-[#0F1114] dark:bg-white/10 dark:text-white'
-                        : 'text-[#0F1114] hover:bg-[#EEF4FF] dark:text-slate-100 dark:hover:bg-white/10'
+                        ? 'bg-[#EEF2FF] text-[#0F1114] '
+                        : 'text-[#0F1114] hover:bg-[#EEF2FF] '
                     }`}
                   >
                     <span
                       className={`inline-flex size-8 shrink-0 items-center justify-center rounded-lg ${
                         active
-                          ? 'bg-[#E4EDFB] text-[#0056D2] dark:bg-[#0056D2]/25 dark:text-[#93B4FB]'
-                          : 'bg-[#EEF4FF] text-[#3A3546] dark:bg-white/10 dark:text-slate-200'
+                          ? 'bg-[#E4EDFB] text-[#2457F5] '
+                          : 'bg-[#EEF2FF] text-[#3A3546] '
                       }`}
                     >
                       <Icon className="size-4" strokeWidth={2} aria-hidden="true" />

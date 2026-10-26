@@ -213,8 +213,8 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         steps={JOURNEY_STEPS[slug] ?? (slug.startsWith('cgpa-to-percentage/') ? CGPA_STEPS : undefined)}
       />
 
-      <p className="max-w-4xl text-sm text-slate-500 dark:text-slate-400 -mt-6 m-0">
-        {SITE_OWNER ? <>By <span className="font-semibold text-slate-700 dark:text-slate-200">{SITE_OWNER.name}</span>, {SITE_OWNER.jobTitle.toLowerCase()} · </> : null}
+      <p className="max-w-4xl text-sm text-slate-500 -mt-6 m-0">
+        {SITE_OWNER ? <>By <span className="font-semibold text-slate-700 ">{SITE_OWNER.name}</span>, {SITE_OWNER.jobTitle.toLowerCase()} · </> : null}
         Last updated {formatDate(CONTENT_REVIEWED_ON)}
       </p>
 
@@ -226,12 +226,12 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
 
       {entry.lookupTables?.map((table) => (
         <section key={table.heading} aria-label={table.heading} className="max-w-4xl space-y-3">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{table.heading}</h2>
-          {table.intro && <p className="text-base text-slate-700 dark:text-slate-300 leading-relaxed m-0">{table.intro}</p>}
-          <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
-            <table className="w-full text-left text-sm border-collapse bg-white dark:bg-slate-900">
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 m-0">{table.heading}</h2>
+          {table.intro && <p className="text-base text-slate-700 leading-relaxed m-0">{table.intro}</p>}
+          <div className="overflow-x-auto rounded-2xl border border-slate-200 ">
+            <table className="w-full text-left text-sm border-collapse bg-white ">
               <thead>
-                <tr className="bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                <tr className="bg-slate-50 text-slate-800 ">
                   {table.columns.map((c) => (
                     <th key={c} scope="col" className="px-4 py-2.5 font-bold">{c}</th>
                   ))}
@@ -239,7 +239,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
               </thead>
               <tbody>
                 {table.rows.map((row) => (
-                  <tr key={row.join('|')} className="border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+                  <tr key={row.join('|')} className="border-t border-slate-200 text-slate-900 ">
                     {row.map((cell, i) =>
                       i === 0 ? (
                         <th key={i} scope="row" className="px-4 py-2 font-bold">{cell}</th>
@@ -261,12 +261,12 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         <div className="max-w-4xl space-y-8">
           {entry.sections.map((section) => (
             <section key={section.heading} className="space-y-3">
-              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{section.heading}</h2>
+              <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 m-0">{section.heading}</h2>
               {section.paragraphs.map((para) => (
-                <p key={para} className="text-base text-slate-700 dark:text-slate-300 leading-relaxed m-0">{para}</p>
+                <p key={para} className="text-base text-slate-700 leading-relaxed m-0">{para}</p>
               ))}
               {section.bullets && (
-                <ul className="m-0 pl-5 list-disc text-base text-slate-700 dark:text-slate-300 space-y-1">
+                <ul className="m-0 pl-5 list-disc text-base text-slate-700 space-y-1">
                   {section.bullets.map((b) => (
                     <li key={b}>{b}</li>
                   ))}
@@ -274,18 +274,18 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
               )}
             </section>
           ))}
-          <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 space-y-3">
-            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white m-0">{entry.example.heading}</h2>
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">{entry.example.scenario}</p>
+          <section className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 m-0">{entry.example.heading}</h2>
+            <p className="text-sm text-slate-700 m-0">{entry.example.scenario}</p>
             <dl className="m-0 grid sm:grid-cols-2 gap-x-6 gap-y-2">
               {entry.example.rows.map((row) => (
-                <div key={row.label} className="flex items-baseline justify-between gap-3 border-b border-slate-200/70 dark:border-slate-800 py-1.5">
-                  <dt className="text-sm text-slate-700 dark:text-slate-300">{row.label}</dt>
-                  <dd className="m-0 font-bold font-mono text-slate-900 dark:text-white">{row.value}</dd>
+                <div key={row.label} className="flex items-baseline justify-between gap-3 border-b border-slate-200/70 py-1.5">
+                  <dt className="text-sm text-slate-700 ">{row.label}</dt>
+                  <dd className="m-0 font-bold font-mono text-slate-900 ">{row.value}</dd>
                 </div>
               ))}
             </dl>
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0">{entry.example.takeaway}</p>
+            <p className="text-sm text-slate-700 m-0">{entry.example.takeaway}</p>
           </section>
         </div>
       )}
@@ -295,24 +295,24 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       </div>
 
       <section aria-label="Related calculators" className="space-y-3 print:hidden content-auto">
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Related grade calculators</h2>
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 m-0">Related grade calculators</h2>
         <ul className="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
           {entry.related.map((r) => (
             <li key={r.path}>
               <Link
                 to={r.path}
-                className="glow-surface block h-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 hover:border-teal-600 transition-colors no-underline"
+                className="glow-surface block h-full rounded-2xl border border-slate-200 bg-white p-4 hover:border-teal-600 transition-colors no-underline"
               >
-                <span className="block font-bold text-slate-900 dark:text-white">{r.label}</span>
-                <span className="block text-sm text-slate-600 dark:text-slate-400">{r.blurb}</span>
+                <span className="block font-bold text-slate-900 ">{r.label}</span>
+                <span className="block text-sm text-slate-600 ">{r.blurb}</span>
               </Link>
             </li>
           ))}
         </ul>
       </section>
 
-      <footer className="max-w-3xl text-xs text-slate-500 dark:text-slate-400 flex items-start gap-2 print:hidden">
-        <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5 text-teal-700 dark:text-teal-400" aria-hidden="true" />
+      <footer className="max-w-3xl text-xs text-slate-500 flex items-start gap-2 print:hidden">
+        <ShieldCheck className="w-4 h-4 shrink-0 mt-0.5 text-teal-700 " aria-hidden="true" />
         <p className="m-0">
           {SITE_OWNER ? `Built and maintained by ${SITE_OWNER.name}, Easy Grade Tool.` : 'Built and maintained by the Easy Grade Tool team.'}
           {ACADEMIC_REVIEWER ? ` Academic review: ${ACADEMIC_REVIEWER.name}, ${ACADEMIC_REVIEWER.credential}.` : ''}{' '}

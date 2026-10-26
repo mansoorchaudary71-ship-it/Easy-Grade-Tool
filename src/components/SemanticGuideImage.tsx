@@ -40,7 +40,7 @@ export const SemanticGuideImage: React.FC<SemanticGuideImageProps> = ({
 
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-2xl border border-slate-200/70 dark:border-slate-800 bg-slate-100 dark:bg-slate-900/60 shadow-xs aspect-[3/2] ${className}`}
+      className={`relative w-full overflow-hidden rounded-2xl border border-slate-200/70 bg-slate-100 shadow-xs aspect-[3/2] ${className}`}
       style={{
         backgroundImage: isLoaded ? 'none' : `url("${placeholder}")`,
         backgroundSize: 'cover',

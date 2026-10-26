@@ -57,8 +57,8 @@ export const UniversityCgpaTool: React.FC<UniversityCgpaToolProps> = ({ universi
           />
           {error && <p className={ERROR_TEXT}>{error}</p>}
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-400 m-0">
-          Formula: <strong className="text-slate-900 dark:text-white">{university.formulaLabel}</strong>
+        <p className="text-sm text-slate-600 m-0">
+          Formula: <strong className="text-slate-900 ">{university.formulaLabel}</strong>
           <br />
           {university.sourceNote}
         </p>
@@ -67,19 +67,19 @@ export const UniversityCgpaTool: React.FC<UniversityCgpaToolProps> = ({ universi
       <section aria-label="Conversion result" className={RESULT_BOX}>
         {percentage !== null ? (
           <>
-            <p className="m-0 text-lg font-bold text-slate-900 dark:text-white">
+            <p className="m-0 text-lg font-bold text-slate-900 ">
               {parsed!.toFixed(2)} CGPA at {university.name} = {percentage.toFixed(2)}%.
             </p>
             {backToCgpa !== null && (
-              <p className="m-0 mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <p className="m-0 mt-2 text-sm text-slate-600 ">
                 Check: {percentage.toFixed(2)}% converts back to {backToCgpa.toFixed(2)} CGPA.
               </p>
             )}
           </>
         ) : (
-          <p className="m-0 text-slate-600 dark:text-slate-400">Enter a CGPA between 0 and 10 to convert it.</p>
+          <p className="m-0 text-slate-600 ">Enter a CGPA between 0 and 10 to convert it.</p>
         )}
-        <p className="m-0 mt-3 text-sm text-slate-600 dark:text-slate-400">
+        <p className="m-0 mt-3 text-sm text-slate-600 ">
           University ordinances change. For an official transcript, confirm the current formula with
           the university — this page follows the ordinance noted above.
         </p>

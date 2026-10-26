@@ -69,22 +69,22 @@ export const MissCalculatorTool: React.FC = () => {
         {total !== null && maxWrong !== null && atMax !== null && each !== null ? (
           <>
             <div className={RESULT_BOX} role="status" aria-live="polite" aria-atomic="true">
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">
                 To get {targetValue === 'custom' ? `${minPercent}% or higher` : `${/^[AEFHILMNORSX]/i.test(targetValue) ? 'an' : 'a'} ${targetValue} (${minPercent}% or higher)`}
               </span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">
                 miss up to {maxWrong}
               </strong>
-              <p className="text-sm text-teal-950 dark:text-teal-100 mt-2 m-0">
+              <p className="text-sm text-teal-950 mt-2 m-0">
                 On a {total}-question test each question is worth {each}%. Missing {maxWrong} leaves {atMax}%.
                 {maxWrong < total ? ` Missing ${maxWrong + 1} leaves ${roundTo(((total - maxWrong - 1) / total) * 100, 1)}%, below the cutoff.` : ''}
               </p>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm border-collapse">
-                <caption className="text-left font-bold text-slate-900 dark:text-white pb-2">Most you can miss for each grade on a {total}-question test</caption>
+                <caption className="text-left font-bold text-slate-900 pb-2">Most you can miss for each grade on a {total}-question test</caption>
                 <thead>
-                  <tr className="text-slate-700 dark:text-slate-300">
+                  <tr className="text-slate-700 ">
                     <th scope="col" className="py-2 pr-4">Grade</th>
                     <th scope="col" className="py-2 pr-4">Minimum</th>
                     <th scope="col" className="py-2 pr-4">Most you can miss</th>
@@ -93,7 +93,7 @@ export const MissCalculatorTool: React.FC = () => {
                 </thead>
                 <tbody>
                   {table.map((r) => (
-                    <tr key={r.letter} className="border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100">
+                    <tr key={r.letter} className="border-t border-slate-200 text-slate-900 ">
                       <th scope="row" className="py-2 pr-4 font-bold">{r.letter}</th>
                       <td className="py-2 pr-4 font-mono">{r.min}%</td>
                       <td className="py-2 pr-4 font-mono">{r.maxWrong}</td>
@@ -107,7 +107,7 @@ export const MissCalculatorTool: React.FC = () => {
         ) : (
           <p className={ERROR_TEXT} role="status">Enter the number of questions and a valid target to see how many you can miss.</p>
         )}
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           This uses the common {plus ? 'plus/minus' : '90/80/70/60'} scale. Your teacher or school may use different cutoffs, so check your syllabus.
         </p>
       </section>

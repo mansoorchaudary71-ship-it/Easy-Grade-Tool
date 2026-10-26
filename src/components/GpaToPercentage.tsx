@@ -193,17 +193,17 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
       {/* Left Input Configuration Card */}
       <section
         aria-label="GPA Conversion Inputs"
-        className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col gap-6"
+        className="bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8 flex flex-col gap-6"
       >
-        <div className="tool-card-head flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-5 border-b border-slate-200/60 dark:border-slate-800">
+        <div className="tool-card-head flex-col sm:flex-row items-start sm:items-center justify-between gap-3 pb-5 border-b border-slate-200/60 ">
           <div>
-            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 uppercase block mb-1">
               Converter
             </span>
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0 flex items-center gap-2">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight m-0 flex items-center gap-2">
               <span>{conversionDirection === 'gpa-to-pct' ? 'GPA to Percentage' : 'Percentage to GPA'}</span>
             </h2>
-            <p className="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base mt-1 m-0">
+            <p className="text-slate-600 font-medium text-sm sm:text-base mt-1 m-0">
               Calculate dynamically from either angle with zero latency and instant tuning.
             </p>
           </div>
@@ -211,7 +211,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
           {/* Direction Switcher Button */}
           <button
             type="button"
-            className="bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-2 transition-all inline-flex items-center gap-2 text-xs flex-shrink-0 cursor-pointer"
+            className="bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm px-4 py-2 transition-all inline-flex items-center gap-2 text-xs flex-shrink-0 cursor-pointer"
             onClick={handleToggleDirection}
             title="Switch conversion direction"
             aria-label="Switch between GPA to Percentage and Percentage to GPA"
@@ -276,7 +276,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
 
           {/* Scale Selection Dropdown */}
           <div className="flex flex-col gap-2">
-            <label htmlFor="gpa-scale-select" className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase">
+            <label htmlFor="gpa-scale-select" className="text-xs font-semibold tracking-widest text-slate-600 uppercase">
               GPA Scale System
             </label>
             <select
@@ -301,13 +301,13 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
 
           {/* Custom Scale Input (When selected) */}
           {selectedScalePreset === 'custom' && (
-            <div className="flex flex-col gap-2 bg-[#F8F9FA] dark:bg-slate-800/60 rounded-[24px] border border-stone-100 dark:border-slate-800 p-4">
-              <label htmlFor="custom-scale-val" className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase">
+            <div className="flex flex-col gap-2 bg-[#F8F9FA] rounded-[24px] border border-stone-100 p-4">
+              <label htmlFor="custom-scale-val" className="text-xs font-semibold tracking-widest text-slate-600 uppercase">
                 Enter Custom Maximum Scale:
               </label>
               <input
                 id="custom-scale-val"
-                className="w-full bg-[#F4F6F9] dark:bg-slate-800/90 border border-stone-200/80 dark:border-slate-700 text-stone-900 dark:text-white rounded-[20px] px-4 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-500/20 transition-all font-bold text-center text-base sm:text-sm shadow-inner placeholder:text-slate-400"
+                className="w-full bg-[#F4F6F9] border border-stone-200/80 text-stone-900 rounded-[20px] px-4 py-3.5 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all font-bold text-center text-base sm:text-sm shadow-inner placeholder:text-slate-400"
                 type="number"
                 inputMode="decimal"
                 min="0.1"
@@ -321,7 +321,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
 
           {/* Quick Preset Scale Chips */}
           <div className="flex flex-col gap-2 pt-1">
-            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 uppercase">
               Quick Scale Presets:
             </span>
             <SegmentedControl
@@ -343,9 +343,9 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
         </div>
 
         {/* Formula Explainer Footer */}
-        <div className="border-t border-slate-200/60 dark:border-slate-800 mt-5 pt-5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+        <div className="border-t border-slate-200/60 mt-5 pt-5 flex items-center justify-between text-xs text-slate-500 ">
           <div className="flex items-center gap-1.5">
-            <span className="font-semibold text-slate-700 dark:text-slate-300">Formula:</span>
+            <span className="font-semibold text-slate-700 ">Formula:</span>
             <span>
               {conversionDirection === 'gpa-to-pct' ? '(GPA ÷ Scale) × 100' : '(Percent ÷ 100) × Scale'}
             </span>
@@ -357,12 +357,12 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
       {/* Right Result Card with Animated Circular Gauge */}
       <section
         aria-label="GPA Conversion Result"
-        className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between"
+        className="result-panel bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between"
         aria-live="polite"
       >
         <div>
           <div className="flex items-center justify-between mb-4">
-            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 uppercase">
               {conversionDirection === 'gpa-to-pct' ? 'Converted Percentage' : 'Equivalent GPA'}
             </span>
             <div className="relative">
@@ -397,7 +397,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
           </div>
 
           {/* Animated Circular Progress Gauge - Master Output */}
-          <div className="bg-[#E4EDFB] dark:bg-teal-950/60 border border-[#C9DCF7] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm my-4">
+          <div className="bg-[#E4EDFB] border border-[#D5DEFF] rounded-[28px] p-5 shadow-sm my-4">
             <div className="gpa-gauge-container">
               <svg
                 className="gpa-gauge-svg"
@@ -435,17 +435,17 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
               <div className="gpa-gauge-center">
                 {conversionDirection === 'gpa-to-pct' ? (
                   <div className="flex items-baseline justify-center">
-                    <span className="text-4xl sm:text-5xl font-extrabold font-mono text-teal-950 dark:text-teal-100 tracking-tight">
+                    <span className="text-4xl sm:text-5xl font-extrabold font-mono text-teal-950 tracking-tight">
                       <AnimatedCounter value={calculatedPercent} decimals={1} duration={350} />
                     </span>
-                    <span className="text-xl font-bold font-mono text-teal-800 dark:text-teal-300 ml-1">%</span>
+                    <span className="text-xl font-bold font-mono text-teal-800 ml-1">%</span>
                   </div>
                 ) : (
                   <div className="flex items-baseline justify-center">
-                    <span className="text-4xl sm:text-5xl font-extrabold font-mono text-teal-950 dark:text-teal-100 tracking-tight">
+                    <span className="text-4xl sm:text-5xl font-extrabold font-mono text-teal-950 tracking-tight">
                       <AnimatedCounter value={calculatedGpa} decimals={2} duration={350} />
                     </span>
-                    <span className="text-lg font-bold font-mono text-teal-700/80 dark:text-teal-300/80 ml-1">/{activeScale}</span>
+                    <span className="text-lg font-bold font-mono text-teal-700/80 ml-1">/{activeScale}</span>
                   </div>
                 )}
 
@@ -458,7 +458,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
 
           {/* Result Remark & Linear Progress Bar */}
           <div className="mt-4 flex flex-col gap-2">
-            <div className="w-full bg-slate-200/80 dark:bg-slate-800 rounded-full h-2.5 overflow-hidden">
+            <div className="w-full bg-slate-200/80 rounded-full h-2.5 overflow-hidden">
               <div
                 className="h-full rounded-full transition-all duration-500 ease-out"
                 style={{
@@ -468,7 +468,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
               />
             </div>
 
-            <div className="p-4 rounded-[20px] border border-black/5 dark:border-slate-800 text-xs leading-relaxed bg-[#F8F9FA] dark:bg-slate-800/60 text-stone-800 dark:text-stone-200">
+            <div className="p-4 rounded-[20px] border border-black/5 text-xs leading-relaxed bg-[#F8F9FA] text-stone-800 ">
               <div className="flex items-center gap-1.5 font-bold mb-0.5">
                 <TrendingUp className="w-3.5 h-3.5 flex-shrink-0" />
                 <span>Conversion Assessment:</span>
@@ -479,13 +479,13 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
 
           {/* Quick Metrics Comparison Table */}
           <div className="grid grid-cols-2 gap-3 mt-4">
-            <div className="bg-[#FFE8C2] dark:bg-amber-950/55 rounded-[20px] p-4 border border-black/5 dark:border-amber-800/50 shadow-xs text-center">
-              <strong className="block text-xl font-bold text-slate-800 dark:text-white font-mono">{calculatedGpa.toFixed(2)}</strong>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Equivalent GPA</span>
+            <div className="bg-[#FFE8C2] rounded-[20px] p-4 border border-black/5 shadow-xs text-center">
+              <strong className="block text-xl font-bold text-slate-800 font-mono">{calculatedGpa.toFixed(2)}</strong>
+              <span className="text-xs text-slate-500 font-medium">Equivalent GPA</span>
             </div>
-            <div className="bg-[#D6E1FF] dark:bg-blue-950/55 rounded-[20px] p-4 border border-black/5 dark:border-blue-800/50 shadow-xs text-center">
-              <strong className="block text-xl font-bold text-slate-800 dark:text-white font-mono">{calculatedPercent.toFixed(1)}%</strong>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Percentage</span>
+            <div className="bg-[#D6E1FF] rounded-[20px] p-4 border border-black/5 shadow-xs text-center">
+              <strong className="block text-xl font-bold text-slate-800 font-mono">{calculatedPercent.toFixed(1)}%</strong>
+              <span className="text-xs text-slate-500 font-medium">Percentage</span>
             </div>
           </div>
         </div>
@@ -494,7 +494,7 @@ export const GpaToPercentage: React.FC<GpaToPercentageProps> = ({ setToast }) =>
         <div className="mt-6 flex flex-col gap-2.5">
           <button
             type="button"
-            className="w-full min-h-[48px] py-3 px-6 rounded-full bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
+            className="w-full min-h-[48px] py-3 px-6 rounded-full bg-[#2457F5] hover:bg-[#1A41C9] text-white font-bold shadow-md text-sm flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-95"
             onClick={handleCopy}
             title="Copy percentage and GPA conversion result"
             aria-label="Copy percentage conversion result"

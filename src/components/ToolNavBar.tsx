@@ -17,12 +17,12 @@ export const ICON_STROKE = 2;
 
 /** Focus ring shared by the header controls (Coursera blue, offset follows the theme). */
 export const headerFocusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-[#0056D2] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-[#6EA8FF] dark:focus-visible:ring-offset-[#0F172A]';
+  'outline-none focus-visible:ring-2 focus-visible:ring-[#2457F5] focus-visible:ring-offset-2 focus-visible:ring-offset-white ';
 
 /** Header text link style: 16px semibold, near-black ink, pale-blue chip on hover. */
 export const headerTextBase =
   'relative inline-flex h-11 shrink-0 cursor-pointer select-none items-center gap-1 whitespace-nowrap rounded-full px-4 text-base font-semibold no-underline touch-manipulation transition-colors duration-150 [-webkit-tap-highlight-color:transparent]';
-export const headerTextIdle = 'text-[#0F1114] hover:bg-[#EEF4FF] dark:text-slate-100 dark:hover:bg-white/10';
+export const headerTextIdle = 'text-[#0F1114] hover:bg-[#EEF2FF] ';
 
 const STATIC_PREFIXES = ['/about', '/privacy', '/terms', '/methodology'];
 

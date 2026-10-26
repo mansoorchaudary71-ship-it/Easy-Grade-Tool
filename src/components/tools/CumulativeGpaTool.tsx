@@ -73,7 +73,7 @@ export const CumulativeGpaTool: React.FC = () => {
           {field('cg-sem-gpa', 'This semester’s GPA', semGpaRaw, setSemGpaRaw, semGpa)}
           {field('cg-sem-credits', 'This semester’s credits', semCreditsRaw, setSemCreditsRaw, semCredits)}
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Find your previous GPA and credits on your transcript or student portal. Do not have this semester’s GPA yet? Use the semester GPA calculator first, or try target grades here to plan.
         </p>
       </section>
@@ -82,12 +82,12 @@ export const CumulativeGpaTool: React.FC = () => {
         {combined ? (
           <div className={`${RESULT_BOX} grid sm:grid-cols-2 gap-4 text-center`} role="status" aria-live="polite" aria-atomic="true">
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">New cumulative GPA</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{combined.gpa.toFixed(2)}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">New cumulative GPA</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{combined.gpa.toFixed(2)}</strong>
             </div>
             <div>
-              <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Total credits</span>
-              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{combined.totalCredits}</strong>
+              <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Total credits</span>
+              <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{combined.totalCredits}</strong>
             </div>
           </div>
         ) : (
@@ -99,20 +99,20 @@ export const CumulativeGpaTool: React.FC = () => {
         </div>
         {target.value !== null && needed !== null && (
           needed > 4 ? (
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0" role="status">
+            <p className="text-sm text-slate-700 m-0" role="status">
               Reaching {target.value.toFixed(2)} this semester would need a semester GPA of {needed.toFixed(2)}, which is above the 4.0 maximum. Spread the goal over more credits, or raise the semester credit load.
             </p>
           ) : needed <= 0 ? (
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0" role="status">
+            <p className="text-sm text-slate-700 m-0" role="status">
               Your previous GPA is already at or above {target.value.toFixed(2)}, so any passing semester keeps you there.
             </p>
           ) : (
-            <p className="text-sm text-slate-700 dark:text-slate-300 m-0" role="status">
+            <p className="text-sm text-slate-700 m-0" role="status">
               To finish at {target.value.toFixed(2)}, this semester needs a GPA of at least <strong>{needed.toFixed(2)}</strong>.
             </p>
           )
         )}
-        <p className="text-sm text-slate-600 dark:text-slate-300 m-0">
+        <p className="text-sm text-slate-600 m-0">
           Results are estimates. Grade replacement for repeated courses and your school’s rounding decide the official cumulative GPA.
         </p>
       </section>

@@ -312,7 +312,7 @@ export interface GuideArticleProps {
 function renderInline(text: string): React.ReactNode {
   return text.split('**').map((part, i) =>
     i % 2 === 1 ? (
-      <strong key={i} className="font-semibold text-slate-900 dark:text-white">
+      <strong key={i} className="font-semibold text-slate-900 ">
         {part}
       </strong>
     ) : (
@@ -325,19 +325,19 @@ function renderBlock(block: GuideBlock, index: number): React.ReactNode {
   switch (block.type) {
     case 'h2':
       return (
-        <h2 key={index} className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+        <h2 key={index} className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
           {block.text}
         </h2>
       );
     case 'h3':
       return (
-        <h3 key={index} className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+        <h3 key={index} className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
           {block.text}
         </h3>
       );
     case 'ol':
       return (
-        <ol key={index} className="list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+        <ol key={index} className="list-decimal pl-6 space-y-2 text-slate-600 leading-relaxed mb-4">
           {block.items.map((item, i) => (
             <li key={i}>{renderInline(item)}</li>
           ))}
@@ -345,7 +345,7 @@ function renderBlock(block: GuideBlock, index: number): React.ReactNode {
       );
     case 'ul':
       return (
-        <ul key={index} className="list-disc pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+        <ul key={index} className="list-disc pl-6 space-y-2 text-slate-600 leading-relaxed mb-4">
           {block.items.map((item, i) => (
             <li key={i}>{renderInline(item)}</li>
           ))}
@@ -353,7 +353,7 @@ function renderBlock(block: GuideBlock, index: number): React.ReactNode {
       );
     default:
       return (
-        <p key={index} className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+        <p key={index} className="text-slate-600 leading-relaxed mb-4">
           {renderInline(block.text)}
         </p>
       );
@@ -368,8 +368,8 @@ export const GuideArticle: React.FC<GuideArticleProps> = ({ article, className =
   const titleId = `${article.id}-title`;
   return (
     <section className={`seo-content w-full ${className}`} aria-labelledby={titleId}>
-      <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md dark:from-slate-900/80 dark:to-slate-800/70 border border-white/60 dark:border-white/10 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
-        <h2 id={titleId} className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight">
+      <article className="seo-article bg-gradient-to-r from-slate-50/80 to-blue-50/70 backdrop-blur-md border border-white/60 shadow-sm rounded-3xl p-6 sm:p-10 font-sans">
+        <h2 id={titleId} className="text-3xl font-bold mb-6 text-slate-800 tracking-tight">
           {article.title}
         </h2>
 

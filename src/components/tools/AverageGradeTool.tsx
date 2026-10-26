@@ -40,15 +40,15 @@ export const AverageGradeTool: React.FC = () => {
             autoCapitalize="off"
             autoCorrect="off"
             spellCheck={false}
-            className="w-full bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
+            className="w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-2xl px-4 py-3 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
           />
           {parsed.notes.map((n) => (
-            <p key={n} className="text-sm text-slate-600 dark:text-slate-300 mt-1 m-0" role="status">{n}</p>
+            <p key={n} className="text-sm text-slate-600 mt-1 m-0" role="status">{n}</p>
           ))}
           {parsed.rejected.length > 0 && (
             <div className="mt-2" role="status">
               <p className={WARN_TEXT}>Left out {parsed.rejected.length} value{parsed.rejected.length > 1 ? 's' : ''}:</p>
-              <ul className="m-0 mt-1 pl-5 text-sm text-amber-800 dark:text-amber-300 list-disc">
+              <ul className="m-0 mt-1 pl-5 text-sm text-amber-800 list-disc">
                 {parsed.rejected.slice(0, 6).map((r, i) => (
                   <li key={`${r.token}-${i}`}><span className="font-mono">{r.token}</span> ({r.reason})</li>
                 ))}
@@ -74,12 +74,12 @@ export const AverageGradeTool: React.FC = () => {
           <>
             <div className={`${RESULT_BOX} flex flex-wrap items-center justify-between gap-4`} role="status" aria-live="polite" aria-atomic="true">
               <div>
-                <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Average of {parsed.scores.length} score{parsed.scores.length === 1 ? '' : 's'}</span>
-                <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tabular-nums">{roundTo(percent, 1)}%</strong>
+                <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Average of {parsed.scores.length} score{parsed.scores.length === 1 ? '' : 's'}</span>
+                <strong className="text-4xl sm:text-5xl font-extrabold text-teal-950 font-mono tabular-nums">{roundTo(percent, 1)}%</strong>
               </div>
               <div className="text-right">
-                <span className="text-xs font-semibold tracking-widest text-teal-900 dark:text-teal-300 uppercase block">Grade</span>
-                <strong className="text-4xl font-extrabold text-teal-950 dark:text-teal-100">{band.letter}</strong>
+                <span className="text-xs font-semibold tracking-widest text-teal-900 uppercase block">Grade</span>
+                <strong className="text-4xl font-extrabold text-teal-950 ">{band.letter}</strong>
               </div>
             </div>
             <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3 m-0">
@@ -89,9 +89,9 @@ export const AverageGradeTool: React.FC = () => {
                 ['Highest', stats.max],
                 ['Lowest', stats.min],
               ].map(([label, val]) => (
-                <div key={label as string} className="rounded-2xl bg-[#F0F2F5] dark:bg-slate-800 p-3 text-center">
-                  <dt className="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">{label as string}</dt>
-                  <dd className="m-0 text-xl font-extrabold font-mono text-slate-900 dark:text-white">{roundTo(val as number, 2)}</dd>
+                <div key={label as string} className="rounded-2xl bg-[#F0F2F5] p-3 text-center">
+                  <dt className="text-xs font-semibold uppercase tracking-wider text-slate-700 ">{label as string}</dt>
+                  <dd className="m-0 text-xl font-extrabold font-mono text-slate-900 ">{roundTo(val as number, 2)}</dd>
                 </div>
               ))}
             </dl>

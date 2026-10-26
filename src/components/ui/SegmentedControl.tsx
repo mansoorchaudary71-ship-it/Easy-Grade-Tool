@@ -35,7 +35,7 @@ interface SegmentedControlProps<T extends string | number> {
 }
 
 const focusRing =
-  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900';
+  'outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 focus-visible:ring-offset-white ';
 
 /**
  * Accessible segmented control with a fluid, sliding background (Framer Motion layout animation).
@@ -61,12 +61,12 @@ export function SegmentedControl<T extends string | number>({
 
   const isTrack = variant === 'track';
   const wrapClass = isTrack
-    ? `${fill ? 'grid' : 'inline-flex'} items-center gap-1 rounded-full border border-gray-200/70 bg-slate-100/80 p-1 dark:border-white/10 dark:bg-slate-800/80 ${className}`
+    ? `${fill ? 'grid' : 'inline-flex'} items-center gap-1 rounded-full border border-gray-200/70 bg-slate-100/80 p-1 ${className}`
     : `flex flex-wrap items-center gap-2 ${className}`;
 
   const pillClass = isTrack
-    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-blue-600 dark:shadow-[0_8px_18px_-6px_rgba(0,86,210,0.6)]'
-    : 'absolute inset-0 -z-10 rounded-full bg-blue-600 shadow-[0_8px_18px_-6px_rgba(0,86,210,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
+    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] '
+    : 'absolute inset-0 -z-10 rounded-full bg-blue-600 shadow-[0_8px_18px_-6px_rgba(36, 87, 245,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
 
   return (
     <LayoutGroup id={groupId}>
@@ -77,16 +77,16 @@ export function SegmentedControl<T extends string | number>({
         style={fill ? { gridTemplateColumns: `repeat(${options.length}, minmax(0, 1fr))` } : undefined}
       >
         {prefix && (
-          <span className="pl-3 pr-1 text-xs font-semibold text-slate-600 dark:text-slate-300">{prefix}</span>
+          <span className="pl-3 pr-1 text-xs font-semibold text-slate-600 ">{prefix}</span>
         )}
         {options.map((opt) => {
           const active = value === opt.value && !opt.disabledSelection;
           const activeText = isTrack
-            ? 'font-bold text-blue-800 dark:text-white'
+            ? 'font-bold text-blue-800 '
             : 'font-bold text-white';
           const inactiveText = isTrack
-            ? 'font-semibold text-slate-700 hover:text-blue-800 dark:text-slate-300 dark:hover:text-blue-400'
-            : 'font-semibold text-slate-700 hover:text-blue-700 dark:text-slate-200 dark:hover:text-blue-400 border border-slate-300 bg-white dark:border-slate-500 dark:bg-slate-800';
+            ? 'font-semibold text-slate-700 hover:text-blue-800 '
+            : 'font-semibold text-slate-700 hover:text-blue-700 border border-slate-300 bg-white ';
           return (
             <button
               key={String(opt.value)}

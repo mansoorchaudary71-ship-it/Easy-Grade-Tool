@@ -81,7 +81,7 @@ export const ForSchoolsEmbedTool: React.FC = () => {
 
   const SELECT = `${INPUT} appearance-auto cursor-pointer`;
   const CODEBOX =
-    'w-full bg-[#F7F4EF] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 font-mono text-sm break-all';
+    'w-full bg-[#F7F4EF] border-2 border-transparent text-stone-900 rounded-2xl px-4 py-3 font-mono text-sm break-all';
 
   return (
     <div className="space-y-6">
@@ -110,14 +110,14 @@ export const ForSchoolsEmbedTool: React.FC = () => {
           <label htmlFor="fs-code" className={LABEL}>Your embed code</label>
           <textarea id="fs-code" className={`${CODEBOX} text-left`} rows={4} readOnly value={embedCode} onFocus={(e) => e.target.select()} />
           <div className="mt-3">{copyBtn('embed', embedCode, 'Copy embed code')}</div>
-          <p className="text-sm text-slate-600 dark:text-slate-300 mt-3 m-0">
+          <p className="text-sm text-slate-600 mt-3 m-0">
             Paste the code into any page on your school, district or classroom website. The embedded view shows only the calculator, with no site navigation. The small credit line under it is part of the free licence.
           </p>
         </div>
       </section>
 
       <section aria-label="Live preview" className={`${CARD} space-y-4 print:hidden`}>
-        <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Live preview</h2>
+        <h2 className="text-xl font-bold tracking-tight text-slate-900 m-0">Live preview</h2>
         <iframe
           src={previewOn ? `${choice.path}?embed=1` : undefined}
           width="100%"
@@ -130,8 +130,8 @@ export const ForSchoolsEmbedTool: React.FC = () => {
 
       <section aria-label="Announcement kit" className={`${CARD} space-y-6 print:hidden`}>
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white m-0">Announce it: poster and newsletter text</h2>
-          <p className="text-sm text-slate-600 dark:text-slate-300 m-0 mt-1">Ready-made wording for a classroom poster, school newsletter or parent email.</p>
+          <h2 className="text-xl font-bold tracking-tight text-slate-900 m-0">Announce it: poster and newsletter text</h2>
+          <p className="text-sm text-slate-600 m-0 mt-1">Ready-made wording for a classroom poster, school newsletter or parent email.</p>
         </div>
         <div>
           <label htmlFor="fs-poster" className={LABEL}>Poster / noticeboard text</label>

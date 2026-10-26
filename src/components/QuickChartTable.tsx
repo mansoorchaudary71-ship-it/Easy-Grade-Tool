@@ -34,9 +34,9 @@ interface QuickChartTableProps {
 const formatStep = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 
 const TH_BASE =
-  'px-3 py-2.5 text-xs font-semibold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 border-b border-slate-300 dark:border-slate-600';
+  'px-3 py-2.5 text-xs font-semibold text-slate-800 bg-slate-100 border-b border-slate-300 ';
 /** Sticky header cells: each <th> sticks (more reliable than sticking the <thead>/<tr> across browsers). */
-const TH_STICKY = 'sticky top-0 z-20 shadow-[0_1px_0_0_rgb(148_163_184/0.6)] dark:shadow-[0_1px_0_0_rgb(71_85_105)]';
+const TH_STICKY = 'sticky top-0 z-20 shadow-[0_1px_0_0_rgb(148_163_184/0.6)] ';
 
 interface RowProps {
   item: QuickChartItem;
@@ -53,16 +53,16 @@ const ChartRow = memo<RowProps>(({ item, total, selected, onPick, printView }) =
   const correct = formatStep(total - item.wrong);
 
   const rowClass = `${tone.row} ${
-    selected ? 'outline outline-2 -outline-offset-2 outline-blue-600 dark:outline-blue-400' : ''
-  } ${onPick ? 'cursor-pointer hover:brightness-[0.97] dark:hover:brightness-110' : ''}`;
+    selected ? 'outline outline-2 -outline-offset-2 outline-blue-600 ' : ''
+  } ${onPick ? 'cursor-pointer hover:brightness-[0.97] ' : ''}`;
 
-  const cellBorder = 'border-b border-slate-200 dark:border-slate-700/70';
+  const cellBorder = 'border-b border-slate-200 ';
 
   return (
     <tr className={`ez-chart-row ${rowClass}`} onClick={onPick ? () => onPick(item.wrong) : undefined}>
       <th
         scope="row"
-        className={`border-l-4 ${tone.rule} ${cellBorder} p-0 text-left text-sm font-medium text-slate-900 dark:text-slate-100`}
+        className={`border-l-4 ${tone.rule} ${cellBorder} p-0 text-left text-sm font-medium text-slate-900 `}
       >
         {onPick ? (
           <button
@@ -73,10 +73,10 @@ const ChartRow = memo<RowProps>(({ item, total, selected, onPick, printView }) =
               e.stopPropagation();
               onPick(item.wrong);
             }}
-            className="ez-chart-pick flex min-h-11 w-full min-w-[44px] cursor-pointer items-center px-3 py-2 text-left font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400"
+            className="ez-chart-pick flex min-h-11 w-full min-w-[44px] cursor-pointer items-center px-3 py-2 text-left font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-600 "
           >
             <span className="font-mono tabular-nums">{formatStep(item.wrong)}</span>
-            <span className="ml-1 font-medium text-slate-700 dark:text-slate-300">wrong</span>
+            <span className="ml-1 font-medium text-slate-700 ">wrong</span>
           </button>
         ) : (
           <span className="flex min-h-9 items-center px-3 py-1.5 font-semibold">
@@ -85,9 +85,9 @@ const ChartRow = memo<RowProps>(({ item, total, selected, onPick, printView }) =
           </span>
         )}
       </th>
-      <td className={`${cellBorder} px-3 py-2 text-right font-mono text-sm tabular-nums text-slate-800 dark:text-slate-200`}>
+      <td className={`${cellBorder} px-3 py-2 text-right font-mono text-sm tabular-nums text-slate-800 `}>
         {correct}
-        <span className="text-slate-600 dark:text-slate-400">/{total}</span>
+        <span className="text-slate-600 ">/{total}</span>
       </td>
       <td className={`${cellBorder} px-3 py-2 text-right font-mono text-base font-bold tabular-nums ${tone.text}`}>
         {item.text}%
@@ -191,7 +191,7 @@ export const QuickChartTable: React.FC<QuickChartTableProps> = ({
     <ScrollableTableContainer
       ariaLabel={`Quick grade chart for ${aOrAn(total)} ${total}-question test`}
       maxHeightClassName={maxHeightClassName}
-      className="rounded-xl border border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-900"
+      className="rounded-xl border border-slate-300 bg-white "
     >
       {table}
     </ScrollableTableContainer>

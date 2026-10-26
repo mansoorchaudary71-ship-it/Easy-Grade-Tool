@@ -5,8 +5,8 @@
 
    The new identity, built from the best of Intercom, Calendly, Typeform, Canva,
    Asana, ClassDojo and Dribbble — rendered as ONE system, not seven:
-     - one confident violet (#0056D2, dark #6EA8FF) for every primary action and link
-     - warm off-white canvas (#FBF9F6), pale-violet bands (#EEF4FF) to separate sections
+     - one confident violet (#2457F5, dark #6EA8FF) for every primary action and link
+     - warm off-white canvas (#FBF9F6), pale-violet bands (#EEF2FF) to separate sections
      - pill buttons, 16px cards, hairline borders instead of shadows
      - serif display headlines (Typeform/Calendly editorial serif), Inter for all UI text
        [superseded 2026-10-25 by the premium redesign: Mona Sans is now the
@@ -19,10 +19,10 @@
    ========================================================================== */
 
 :root {
-  --cs-blue: #0056D2;
-  --cs-blue-hover: #00419E;
+  --cs-blue: #2457F5;
+  --cs-blue-hover: #1A41C9;
   --cs-blue-ink: #4C1D95;
-  --cs-tint: #EEF4FF;
+  --cs-tint: #EEF2FF;
   --cs-tint-2: #E4EDFB;
   --cs-ink: #1E1727;
   --cs-text: #1F2937;
@@ -33,76 +33,46 @@
   --cs-radius-btn: 9999px; /* pill buttons everywhere (Dribbble-style) */
   --cs-radius-card: 16px; /* one card radius everywhere: banners, cards, panels, trust tiles */
   --cs-container: 1280px;
-  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #0056D2;
+  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #2457F5;
 
   /* Re-point the older palettes at the brand violet so every existing accent follows */
-  --ds-blue: #0056D2;
-  --ds-blue-hover: #00419E;
+  --ds-blue: #2457F5;
+  --ds-blue-hover: #1A41C9;
   --primary: 263 70% 50%;
   --accent: 263 70% 50%;
   --ds-shadow-cta: none;
-  --ds-shadow-cta-hover: 0 4px 12px rgba(0, 86, 210, 0.28);
+  --ds-shadow-cta-hover: 0 4px 12px rgba(36, 87, 245, 0.28);
   --el-ambient: none;
-  --color-teal-50: #eef4ff;
+  --color-teal-50: #EEF2FF;
   --color-teal-100: #e4edfb;
-  --color-teal-200: #c9dcf7;
+  --color-teal-200: #D5DEFF;
   --color-teal-300: #bfd7ff;
   --color-teal-400: #6ea8ff;
   --color-teal-500: #8b5cf6;
-  --color-teal-600: #0056d2;
-  --color-teal-700: #0056d2;
-  --color-teal-800: #00419e;
+  --color-teal-600: #2457F5;
+  --color-teal-700: #2457F5;
+  --color-teal-800: #1A41C9;
   --color-teal-900: #4c1d95;
   --color-teal-950: #2e1065;
   /* Same re-point for the blue scale (2026-10-25 unification): every blue-*
      utility site-wide — buttons, links, rings, segmented pills, chart accents —
      now resolves to the brand violet instead of Tailwind's default blue. */
-  --color-blue-50: #eef4ff;
+  --color-blue-50: #EEF2FF;
   --color-blue-100: #e4edfb;
-  --color-blue-200: #c9dcf7;
+  --color-blue-200: #D5DEFF;
   --color-blue-300: #bfd7ff;
   --color-blue-400: #6ea8ff;
   --color-blue-500: #8b5cf6;
-  --color-blue-600: #0056d2;
-  --color-blue-700: #0056d2;
-  --color-blue-800: #00419e;
+  --color-blue-600: #2457F5;
+  --color-blue-700: #2457F5;
+  --color-blue-800: #1A41C9;
   --color-blue-900: #4c1d95;
   --color-blue-950: #2e1065;
 }
 html [class*="tool-theme-"] {
-  --tool-primary: 217 100% 41%;
+  --tool-primary: 227 91% 55%;
   --tool-deep: 217 100% 31%;
   --tool-soft: 214 100% 97%;
-}
-
-html.dark {
-  --cs-blue: #6EA8FF;
-  --cs-blue-hover: #BFD7FF;
-  --cs-blue-ink: #C9DCF7;
-  --cs-tint: rgba(110, 168, 255, 0.10);
-  --cs-tint-2: rgba(110, 168, 255, 0.18);
-  --cs-ink: #F4F7FB;
-  --cs-text: #D7DEE9;
-  --cs-muted: #A5B1C4;
-  --cs-border: rgba(255, 255, 255, 0.12);
-  --cs-field: #6B7A92;
-  --cs-white: #1E1727;
-  --cs-focus: 0 0 0 2px #0F172A, 0 0 0 4px #6EA8FF;
-}
-
-/* --------------------------------------------------------------------------
-   1. Canvas: plain white, like the reference
-   -------------------------------------------------------------------------- */
-html:not(.dark) body,
-html:not(.dark) .app-shell,
-html:not(.dark) .premium-surface {
-  background-color: #FBF9F6;
-}
-html:not(.dark) body {
-  color: var(--cs-text);
-}
-html:not(.dark) main :is(a:not([class*="bg-"]):not([class*="text-"]):not(.cs-btn):not(.cs-card-link)) {
-  color: var(--cs-blue);
 }
 
 /* Visible, consistent keyboard focus */
@@ -142,9 +112,8 @@ html:not(.dark) main :is(a:not([class*="bg-"]):not([class*="text-"]):not(.cs-btn
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 .cs-btn-primary { background: var(--cs-blue); color: #fff !important; }
-.cs-btn-primary:hover { background: var(--cs-blue-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0, 86, 210, 0.28); }
+.cs-btn-primary:hover { background: var(--cs-blue-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(36, 87, 245, 0.28); }
 .cs-btn:active { transform: translateY(0) scale(0.97); }
-html.dark .cs-btn-primary { color: #0B1220 !important; }
 .cs-btn-outline { background: transparent; color: var(--cs-blue) !important; border-color: var(--cs-blue); }
 .cs-btn-outline:hover { background: var(--cs-tint); transform: translateY(-1px); }
 .cs-btn:disabled { opacity: 0.6; cursor: wait; }
@@ -160,7 +129,6 @@ html.dark .cs-btn-primary { color: #0B1220 !important; }
   font-size: 1rem;
   padding-inline: 1.25rem;
 }
-html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
 .cs-input::placeholder { color: var(--cs-muted); }
 .cs-input:hover { border-color: var(--cs-ink); }
 .cs-input:focus { border-color: var(--cs-blue); box-shadow: 0 0 0 1px var(--cs-blue); outline: none; }
@@ -171,14 +139,13 @@ html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
   border-radius: var(--cs-radius-card);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
-.cs-card:hover { border-color: #BFD7FF; box-shadow: 0 6px 20px rgba(0, 86, 210, 0.10); }
+.cs-card:hover { border-color: #BFD7FF; box-shadow: 0 6px 20px rgba(36, 87, 245, 0.10); }
 /* Link hubs lift on hover (Canva template cards / ClassDojo role cards);
    calculator forms never lift, so results and inputs stay put. */
 /* Link hubs: no lift on hover (Canva gallery restraint) — the border tint
    and the arrow nudge below carry the affordance; .cs-card:hover supplies
    the violet border + soft shadow. */
 .cs-cat:hover { transform: none; }
-html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: none; }
 
 .cs-section { padding-block: 2.5rem; }
 @media (min-width: 768px) { .cs-section { padding-block: 6rem; } }
@@ -223,18 +190,6 @@ html.dark .cs-card:hover { border-color: rgba(255, 255, 255, 0.25); box-shadow: 
   height: 3px;
   border-radius: 3px 3px 0 0;
   background: var(--cs-blue);
-}
-
-/* The header surface itself: white, no bottom border, no sheen — like the
-   reference, the sticky header blends into the white page (overrides .elev-chrome). */
-html:not(.dark) .elev-chrome {
-  background-color: #FFFFFF;
-  border-bottom: none;
-  box-shadow: none;
-}
-html.dark .elev-chrome {
-  border-bottom: none;
-  box-shadow: none;
 }
 /* Search pill entrance when the header morphs on scroll. */
 @keyframes header-search-in {
@@ -291,7 +246,7 @@ html.dark .elev-chrome {
   animation: cs-fade-up 0.45s ease both;
   /* Aurora halo (Typeform): one disciplined violet glow, echoing the footer
      orbs — the banner floats instead of sitting flat on the canvas. */
-  box-shadow: 0 24px 50px -24px rgba(0, 86, 210, 0.28);
+  box-shadow: 0 24px 50px -24px rgba(36, 87, 245, 0.28);
 }
 @keyframes cs-fade-up {
   from { opacity: 0; transform: translateY(10px); }
@@ -304,7 +259,6 @@ html.dark .elev-chrome {
 @media (min-width: 1024px) { .cs-banner { padding: 3rem 3.5rem; } }
 /* Decorative SVG lines (see components/DecorLines.tsx) */
 .cs-lines { color: var(--cs-blue); opacity: 0.22; display: block; }
-html.dark .cs-lines { opacity: 0.28; }
 .cs-banner-lines { position: absolute; z-index: -1; top: 0; right: 0; height: 100%; width: min(70%, 640px); }
 .cs-squiggle { width: 5.5rem; height: 0.6rem; margin: 0 0 0.9rem; opacity: 0.9; }
 .cs-panel-arcs { position: absolute; right: 0; bottom: 0; width: 14rem; height: 14rem; }
@@ -369,8 +323,7 @@ html.dark .cs-lines { opacity: 0.28; }
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .cs-tab:hover { background: var(--cs-tint); border-color: var(--cs-blue); }
-.cs-tab[aria-selected="true"] { background: var(--cs-tint-2); border-color: transparent; color: var(--cs-ink); box-shadow: 0 2px 10px rgba(0, 86, 210, 0.12); }
-html.dark .cs-tab[aria-selected="true"] { background: rgba(110, 168, 255, 0.18); border-color: transparent; color: #E4EDFB; }
+.cs-tab[aria-selected="true"] { background: var(--cs-tint-2); border-color: transparent; color: var(--cs-ink); box-shadow: 0 2px 10px rgba(36, 87, 245, 0.12); }
 .cs-panel {
   display: grid; gap: 1.5rem; padding: 1.5rem;
   background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card);
@@ -386,7 +339,7 @@ html.dark .cs-tab[aria-selected="true"] { background: rgba(110, 168, 255, 0.18);
   font-weight: 600; color: var(--cs-ink) !important; text-decoration: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(0, 86, 210, 0.12); color: var(--cs-blue) !important; }
+.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(36, 87, 245, 0.12); color: var(--cs-blue) !important; }
 
 .cs-trust { display: grid; gap: 1rem; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .cs-trust { grid-template-columns: repeat(2, 1fr); } }
@@ -418,39 +371,7 @@ html.dark .cs-tab[aria-selected="true"] { background: rgba(110, 168, 255, 0.18);
 .cs-news-fine a { color: var(--cs-blue) !important; font-weight: 600; }
 .cs-footer-panel { background: var(--cs-white); }
 .cs-footer-bottom { border-top: 1px solid var(--cs-border); }
-html:not(.dark) .site-footer { background: #fff; }
-
-/* --------------------------------------------------------------------------
-   7. Existing calculators: recolour + reshape through attribute selectors
-   (Beats the sand rules in ux-refactor.css because it comes later with the same specificity.)
-   -------------------------------------------------------------------------- */
-/* Cards: hairline border, 16px corners, no sheen, no heavy shadow */
-html:not(.dark) main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"], [class*="rounded-[36px]"])[class*="bg-white"]:not(.cs-banner) {
-  border: 1px solid var(--cs-border);
-  border-radius: var(--cs-radius-card);
-  box-shadow: none;
-  background-image: none;
-}
-html.dark main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"])[class*="dark:bg-slate-"]:not(.cs-banner) {
-  border-radius: var(--cs-radius-card);
-  background-image: none;
-}
 main [class*="rounded-[24px]"] { border-radius: var(--cs-radius-card); }
-
-/* Pill buttons and fields keep the fully rounded shape their Tailwind classes give them (rounded-full). */
-
-/* Fields: white, 1px grey border, blue focus (Coursera form style) */
-html:not(.dark) :is(
-  input[type="number"], input[type="text"], input[type="email"], input[type="search"],
-  input[type="url"], input[type="tel"], input[type="password"], textarea, select, .field-input, .tool-input
-):not(.elev-pill):not(.header-search-field) {
-  background-color: #FFFFFF;
-  border: 1px solid var(--cs-field);
-  box-shadow: none;
-}
-html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .tool-input):not(.elev-pill):not(.header-search-field):hover {
-  border-color: var(--cs-ink);
-}
 .premium-surface :is(
   input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]), textarea, select
 ):focus {
@@ -460,23 +381,20 @@ html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .too
 }
 
 /* Primary buttons: flat violet (drops the gradient, glow and lift) */
-.premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled),
+.premium-surface :is(button, a)[class~="bg-[#2457F5]"]:not([aria-pressed]):not(:disabled),
 .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled) {
   background-image: none;
   background-color: var(--cs-blue);
   box-shadow: none;
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled):hover,
+  .premium-surface :is(button, a)[class~="bg-[#2457F5]"]:not([aria-pressed]):not(:disabled):hover,
   .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled):hover {
     translate: 0 0;
     background-color: var(--cs-blue-hover);
     box-shadow: none;
   }
 }
-
-/* Links inside long-form guides */
-html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue); text-underline-offset: 3px; }
 
 @media print {
   .cs-news, .cs-footer-panel { display: none !important; }
@@ -524,7 +442,7 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
    Observed live (read-only) on intercom.com, calendly.com, typeform.com,
    canva.com, asana.com, classdojo.com and dribbble.com (header checked
    2026-10-25). The unity rule: every picked pattern is rendered in THIS
-   file's one blue (#0056D2 / dark #4F9CFF) and one radius system, so the
+   file's one blue (#2457F5 / dark #4F9CFF) and one radius system, so the
    site reads as one product, not seven. Concretely in this file + tools/ui.ts:
      - Buttons: one pill triad — solid brand-blue primary, white hairline
        secondary, plain arrow link (Typeform's triad + Asana/Calendly pills).
@@ -552,9 +470,9 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
    This supersedes the blue identity; the "primary unchanged" rule from the
    header task no longer applies — the user explicitly authorised the change.
    New system, still one unit:
-     - Violet primary #0056D2 / dark #6EA8FF (ClassDojo/Canva violet,
+     - Violet primary #2457F5 / dark #6EA8FF (ClassDojo/Canva violet,
        deepened for white-text contrast); teal + blue utility scales and
-       every #0056D2/#00419E/#4F9CFF literal re-pointed at it.
+       every #2457F5/#1A41C9/#4F9CFF literal re-pointed at it.
      - Warm canvas #FBF9F6 (Calendly) with white floating cards.
      - Serif display headlines via --app-font-serif (Typeform/Calendly
        editorial serif; system stack, no new download): banner titles,

@@ -4,8 +4,6 @@ import {
   X,
   CornerDownLeft,
   Check,
-  Sun,
-  Moon,
   GraduationCap,
   Lightbulb,
   Percent,
@@ -17,7 +15,6 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { ToolKey } from '../types';
-import { useTheme } from '../context/ThemeContext';
 import { preloadTool } from '../utils/toolPreloader';
 import { Logo } from './Logo';
 import { useNavigate } from 'react-router-dom';
@@ -265,7 +262,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   const listRef = useRef<HTMLUListElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
-  const { theme, resolvedTheme, setTheme } = useTheme();
   const routerNavigate = useNavigate();
 
   // Detect Mac OS for modifier key symbol
@@ -277,28 +273,8 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
   }, []);
 
   // Quick actions
-  const quickActions: PaletteActionItem[] = useMemo(() => {
-    return [
-      {
-        type: 'action',
-        key: 'action-theme',
-        label: 'Toggle Theme',
-        title: 'Cycle Color Theme',
-        description: `Currently ${theme} (${resolvedTheme} mode). Click to cycle light, dark, or system.`,
-        category: 'Quick Actions',
-        icon: resolvedTheme === 'dark' ? Sun : Moon,
-        keywords: ['theme', 'dark mode', 'light mode', 'system theme', 'appearance', 'toggle dark', 'colors'],
-        action: () => {
-          const next = theme === 'system' ? 'light' : theme === 'light' ? 'dark' : 'system';
-          setTheme(next);
-          if (setToast) {
-            setToast(`Theme set to ${next.charAt(0).toUpperCase() + next.slice(1)}`);
-          }
-        },
-        badge: theme,
-      },
-    ];
-  }, [theme, resolvedTheme, setTheme, setToast]);
+  // Quick actions: the site is light-mode only, so there is no theme action to offer.
+  const quickActions: PaletteActionItem[] = useMemo(() => [], []);
 
   // Extra academic pages (not in the 8 legacy tool slots)
   const pageItems: PaletteActionItem[] = useMemo(
@@ -659,7 +635,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="command-palette-shortcut-pill hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer border-0"
+              className="command-palette-shortcut-pill hover:bg-slate-200 transition-colors cursor-pointer border-0"
               title="Close Command Palette"
             >
               <kbd>esc</kbd>

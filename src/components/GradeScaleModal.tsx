@@ -120,7 +120,7 @@ const GradeScaleModalDialog: React.FC<{
   return createPortal(
     <div
       id="grade-scale-modal"
-      className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm transition-opacity duration-200 ease-out ${
+      className={`fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#0E1424]/35 backdrop-blur-sm transition-opacity duration-200 ease-out ${
         isMounted ? 'opacity-100' : 'opacity-0'
       }`}
       role="dialog"
@@ -128,20 +128,20 @@ const GradeScaleModalDialog: React.FC<{
       aria-labelledby="scale-modal-title"
     >
       <div
-        className={`w-full max-w-md bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none p-6 sm:p-7 space-y-5 transition-all duration-200 ease-out font-sans max-h-[90vh] overflow-y-auto ${
+        className={`w-full max-w-md bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 sm:p-7 space-y-5 transition-all duration-200 ease-out font-sans max-h-[90vh] overflow-y-auto ${
           isMounted ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-1'
         }`}
       >
-        <div className="flex items-center justify-between pb-3 border-b border-slate-200/70 dark:border-slate-800">
+        <div className="flex items-center justify-between pb-3 border-b border-slate-200/70 ">
           <div className="flex items-center gap-2">
-            <Settings2 className="w-5 h-5 text-stone-800 dark:text-stone-100" />
-            <h3 id="scale-modal-title" className="text-lg font-bold text-slate-800 dark:text-slate-100">
+            <Settings2 className="w-5 h-5 text-stone-800 " />
+            <h3 id="scale-modal-title" className="text-lg font-bold text-slate-800 ">
               Grade Scale Settings
             </h3>
           </div>
           <button
             type="button"
-            className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
             onClick={onClose}
             aria-label="Close grade scale settings"
           >
@@ -151,16 +151,16 @@ const GradeScaleModalDialog: React.FC<{
 
         {/* Scale Type */}
         <div className="space-y-2">
-          <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+          <label className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">
             Scale System
           </label>
-          <div className="grid grid-cols-2 gap-2 p-1 rounded-full bg-stone-100/80 dark:bg-slate-800 border border-stone-200 dark:border-slate-700">
+          <div className="grid grid-cols-2 gap-2 p-1 rounded-full bg-stone-100/80 border border-stone-200 ">
             <button
               type="button"
               className={`rounded-full text-xs cursor-pointer ${
                 draftScaleType === 'standard'
-                  ? 'bg-[#0056D2] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-2 shadow-sm'
-                  : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-4 py-2 transition-all'
+                  ? 'bg-[#2457F5] text-white rounded-full font-bold px-4 py-2 shadow-sm'
+                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm px-4 py-2 transition-all'
               }`}
               onClick={() => setDraftScaleType('standard')}
             >
@@ -170,8 +170,8 @@ const GradeScaleModalDialog: React.FC<{
               type="button"
               className={`rounded-full text-xs cursor-pointer ${
                 draftScaleType === 'plus'
-                  ? 'bg-[#0056D2] dark:bg-teal-600 text-white rounded-full font-bold px-4 py-2 shadow-sm'
-                  : 'bg-white dark:bg-slate-800 text-stone-700 dark:text-slate-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 rounded-full font-semibold shadow-sm px-4 py-2 transition-all'
+                  ? 'bg-[#2457F5] text-white rounded-full font-bold px-4 py-2 shadow-sm'
+                  : 'bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm px-4 py-2 transition-all'
               }`}
               onClick={() => setDraftScaleType('plus')}
             >
@@ -184,17 +184,17 @@ const GradeScaleModalDialog: React.FC<{
         {draftScaleType === 'standard' && (
           <div className="space-y-3 pt-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-700 dark:text-slate-200 block">
+              <span className="text-xs font-bold text-slate-700 block">
                 Minimum Percentage Thresholds:
               </span>
-              <span className="text-xs font-mono font-medium text-slate-500 dark:text-slate-400">
+              <span className="text-xs font-mono font-medium text-slate-500 ">
                 A &gt; B &gt; C &gt; D &gt; F
               </span>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {(['A', 'B', 'C', 'D'] as const).map((grade) => (
                 <div key={grade} className="flex flex-col gap-1.5">
-                  <label htmlFor={`thresh-${grade}`} className="text-xs font-semibold font-mono text-slate-500 dark:text-slate-400">
+                  <label htmlFor={`thresh-${grade}`} className="text-xs font-semibold font-mono text-slate-500 ">
                     Grade {grade} (Min %)
                   </label>
                   <input
@@ -202,7 +202,7 @@ const GradeScaleModalDialog: React.FC<{
                     type="number"
                     min="0"
                     max="100"
-                    className={`w-full min-h-[44px] bg-[#F4F6F9] dark:bg-slate-800 border border-stone-200/80 dark:border-slate-700 text-stone-900 dark:text-white rounded-[20px] px-4 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-[#0056D2] focus:border-[#0056D2] shadow-inner font-mono font-bold text-center transition-all duration-200 text-base sm:text-sm ${
+                    className={`w-full min-h-[44px] bg-[#F4F6F9] border border-stone-200/80 text-stone-900 rounded-[20px] px-4 py-3.5 focus:bg-white focus:ring-2 focus:ring-[#2457F5] focus:border-[#2457F5] shadow-inner font-mono font-bold text-center transition-all duration-200 text-base sm:text-sm ${
                       thresholdValidationError
                         ? 'border-rose-400 ring-2 ring-rose-400'
                         : ''
@@ -221,7 +221,7 @@ const GradeScaleModalDialog: React.FC<{
             </div>
 
             {thresholdValidationError && (
-              <div className="text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50/90 dark:bg-rose-950/60 border border-rose-200/80 dark:border-rose-900/50 rounded-2xl p-2.5 flex items-start gap-2 animate-in fade-in duration-150">
+              <div className="text-xs font-semibold text-rose-600 bg-rose-50/90 border border-rose-200/80 rounded-2xl p-2.5 flex items-start gap-2 animate-in fade-in duration-150">
                 <span className="shrink-0 text-sm">⚠️</span>
                 <span className="leading-snug">{thresholdValidationError}</span>
               </div>
@@ -229,10 +229,10 @@ const GradeScaleModalDialog: React.FC<{
           </div>
         )}
 
-        <div className="pt-3 border-t border-slate-200/70 dark:border-slate-800 flex items-center justify-between">
+        <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between">
           <button
             type="button"
-            className="text-xs font-semibold px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 hover:bg-stone-50 dark:hover:bg-slate-700 text-stone-700 dark:text-slate-200 border border-stone-200 dark:border-slate-700 shadow-sm transition-all cursor-pointer"
+            className="text-xs font-semibold px-5 py-2.5 rounded-full bg-white hover:bg-stone-50 text-stone-700 border border-stone-200 shadow-sm transition-all cursor-pointer"
             onClick={() => {
               setDraftThresholds({ A: 90, B: 80, C: 70, D: 60 });
               setDraftScaleType('standard');
@@ -246,8 +246,8 @@ const GradeScaleModalDialog: React.FC<{
             disabled={!!thresholdValidationError}
             className={`text-xs font-bold py-2.5 px-6 rounded-full shadow-md transition-all ${
               thresholdValidationError
-                ? 'bg-slate-300 dark:bg-slate-700 text-slate-500 dark:text-slate-400 cursor-not-allowed opacity-60'
-                : 'bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white cursor-pointer active:scale-95'
+                ? 'bg-slate-300 text-slate-500 cursor-not-allowed opacity-60'
+                : 'bg-[#2457F5] hover:bg-[#1A41C9] text-white cursor-pointer active:scale-95'
             }`}
             onClick={handleSave}
           >

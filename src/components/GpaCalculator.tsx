@@ -239,15 +239,15 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
         <AmbientAura />
 
         {/* Course Rows & Global Settings */}
-        <section aria-label="Course Rows and Settings" className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 space-y-6">
+        <section aria-label="Course Rows and Settings" className="bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8 space-y-6">
           {/* Global Settings: A+ Grade Value Toggle */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/60 dark:border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-200/60 ">
             <div>
-              <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-400 uppercase block mb-1">
+              <span className="text-xs font-semibold tracking-widest text-slate-600 uppercase block mb-1">
                 Semester Plan
               </span>
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-slate-100 tracking-tight m-0">Your Courses</h2>
-              <p className="text-slate-600 dark:text-slate-300 font-medium text-sm sm:text-base mt-1 m-0">Credits make high-hour classes count proportionally.</p>
+              <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight m-0">Your Courses</h2>
+              <p className="text-slate-600 font-medium text-sm sm:text-base mt-1 m-0">Credits make high-hour classes count proportionally.</p>
             </div>
 
             {/* A+ grade value toggle (4.0 or 4.33) */}
@@ -265,13 +265,13 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </div>
 
           {/* Optional Prior Cumulative Inputs with Generous 8px-Grid Spacing */}
-          <div className="bg-white dark:bg-slate-900/60 rounded-[24px] border border-stone-200/80 dark:border-slate-800 shadow-sm p-6 sm:p-8 space-y-5">
-            <span className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase block mb-1">
+          <div className="bg-white rounded-[24px] border border-stone-200/80 shadow-sm p-6 sm:p-8 space-y-5">
+            <span className="text-xs font-semibold tracking-widest text-slate-600 uppercase block mb-1">
               Optional: Prior Cumulative Inputs
             </span>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2.5">
-                <label htmlFor="prior-gpa" className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase">
+                <label htmlFor="prior-gpa" className="text-xs font-semibold tracking-widest text-slate-600 uppercase">
                   Prior cumulative GPA
                 </label>
                 <input
@@ -283,14 +283,14 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                   step="0.01"
                   min="0"
                   max={aPlusValue === 4.33 ? 4.33 : 4.0}
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={priorCumulativeGpa}
                   onChange={(e) => setPriorCumulativeGpa(e.target.value)}
                 />
               </div>
 
               <div className="flex flex-col gap-2.5">
-                <label htmlFor="prior-credits" className="text-xs font-semibold tracking-widest text-slate-600 dark:text-slate-300 uppercase">
+                <label htmlFor="prior-credits" className="text-xs font-semibold tracking-widest text-slate-600 uppercase">
                   Prior credits earned
                 </label>
                 <input
@@ -302,7 +302,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                   step="0.5"
                   min="0"
                   max="300"
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={priorCreditsEarned}
                   onChange={(e) => setPriorCreditsEarned(e.target.value)}
                 />
@@ -311,8 +311,8 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           </div>
 
           {/* Courses Section Divider with Increased Vertical Margin */}
-          <div className="my-8 pt-4 border-t border-slate-200/60 dark:border-slate-800">
-            <div className="course-head text-xs font-semibold tracking-widest text-slate-500 dark:text-slate-400 uppercase">
+          <div className="my-8 pt-4 border-t border-slate-200/60 ">
+            <div className="course-head text-xs font-semibold tracking-widest text-slate-500 uppercase">
               <span>Course</span>
               <span>Credits</span>
               <span>Grade</span>
@@ -336,13 +336,13 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                     <input aria-label="Course name" placeholder="Course name (e.g. Biology 101)"
                       id={`course-name-${course.id}`}
                       type="text"
-                      className="w-full min-h-[48px] bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm text-left sm:text-center placeholder:text-slate-400"
+                      className="w-full min-h-[48px] bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-3.5 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-sm text-left sm:text-center placeholder:text-slate-400"
                       value={course.name}
                       onChange={(e) => handleUpdateCourse(course.id, 'name', e.target.value)}
                     />
                     <button
                       type="button"
-                      className="p-2 rounded-full text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors cursor-pointer"
+                      className="p-2 rounded-full text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                       aria-label={`Remove ${course.name || 'course'}`}
                       disabled={courses.length === 1}
                       onClick={() => handleRemoveCourse(course.id)}
@@ -354,12 +354,12 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                   <div className="course-row-details">
                     {/* Credits Selection: Simple dropdown menu (0.5 to 6.0) */}
                     <div className="field-group">
-                      <label htmlFor={`course-credits-${course.id}`} className="field-sublabel text-xs font-semibold tracking-widest text-slate-500 dark:text-slate-400 uppercase">
+                      <label htmlFor={`course-credits-${course.id}`} className="field-sublabel text-xs font-semibold tracking-widest text-slate-500 uppercase">
                         Credits
                       </label>
                       <select
                         id={`course-credits-${course.id}`}
-                        className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-2.5 h-12 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold font-mono text-center text-base sm:text-sm cursor-pointer"
+                        className="bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-2.5 h-12 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold font-mono text-center text-base sm:text-sm cursor-pointer"
                         value={course.credits}
                         onChange={(e) => handleUpdateCourse(course.id, 'credits', e.target.value)}
                         aria-label={`${course.name || 'Course'} credits`}
@@ -374,12 +374,12 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
 
                     {/* Grade Dropdown (A+, A, A-, B+, B, B-, C+, C, C-, D+, D, D-, F) */}
                     <div className="field-group">
-                      <label htmlFor={`course-grade-${course.id}`} className="field-sublabel text-xs font-semibold tracking-widest text-slate-500 dark:text-slate-400 uppercase">
+                      <label htmlFor={`course-grade-${course.id}`} className="field-sublabel text-xs font-semibold tracking-widest text-slate-500 uppercase">
                         Grade
                       </label>
                       <select
                         id={`course-grade-${course.id}`}
-                        className="bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-2.5 h-12 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm cursor-pointer"
+                        className="bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-2.5 h-12 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-center text-base sm:text-sm cursor-pointer"
                         value={course.grade}
                         onChange={(e) => handleUpdateCourse(course.id, 'grade', e.target.value)}
                         aria-label={`${course.name || 'Course'} grade`}
@@ -400,55 +400,55 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <button
               type="button"
-              className="bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
+              className="bg-[#2457F5] hover:bg-[#1A41C9] text-white rounded-full font-bold shadow-md px-6 py-3 transition-all inline-flex items-center justify-center gap-2 text-xs sm:text-sm cursor-pointer active:scale-95"
               onClick={handleAddCourse}
             >
               <Plus className="w-4 h-4" aria-hidden="true" /> Add course
             </button>
             <button
               type="button"
-              className="rounded-full font-bold px-6 py-3 text-xs sm:text-sm cursor-pointer border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-rose-400 hover:text-rose-600 transition-colors"
+              className="rounded-full font-bold px-6 py-3 text-xs sm:text-sm cursor-pointer border border-slate-300 text-slate-600 hover:border-rose-400 hover:text-rose-600 transition-colors"
               onClick={handleClearSaved}
             >
               Clear saved courses
             </button>
-            <span className="text-xs text-slate-500 dark:text-slate-400">Your courses are saved on this device only.</span>
+            <span className="text-xs text-slate-500 ">Your courses are saved on this device only.</span>
           </div>
         </section>
 
         {/* Output: Instantly calculate and display Semester and Cumulative GPA as clear text */}
-        <section aria-label="GPA Results Summary" className="result-panel bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between" aria-live="polite">
+        <section aria-label="GPA Results Summary" className="result-panel bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8 flex flex-col justify-between" aria-live="polite">
           <div className="space-y-5">
             {/* Semester GPA - Master Output Container */}
-            <div className="bg-[#E4EDFB] dark:bg-teal-950/60 border border-[#C9DCF7] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
-              <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
+            <div className="bg-[#E4EDFB] border border-[#D5DEFF] rounded-[28px] p-5 shadow-sm">
+              <span className="text-xs font-semibold tracking-widest text-teal-800 uppercase block">
                 Semester GPA
               </span>
-              <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 dark:text-teal-100 font-mono tracking-tight mt-2 flex items-baseline gap-1.5">
+              <div className="text-3xl sm:text-4xl font-extrabold text-teal-950 font-mono tracking-tight mt-2 flex items-baseline gap-1.5">
                 <span>{semesterGpa.toFixed(2)}</span>
-                <span className="text-sm font-medium text-teal-700/80 dark:text-teal-400">/ {aPlusValue === 4.33 ? '4.33' : '4.0'}</span>
+                <span className="text-sm font-medium text-teal-700/80 ">/ {aPlusValue === 4.33 ? '4.33' : '4.0'}</span>
               </div>
-              <div className="bg-white/90 dark:bg-slate-900/80 rounded-2xl shadow-xs p-3 mt-3 flex items-center justify-between text-xs text-teal-900 dark:text-teal-200 font-medium">
+              <div className="bg-white/90 rounded-2xl shadow-xs p-3 mt-3 flex items-center justify-between text-xs text-teal-900 font-medium">
                 <span>{semesterCredits.toFixed(1)} Semester Credits</span>
                 <span>{semesterQualityPoints.toFixed(1)} Quality Points</span>
               </div>
             </div>
 
             {/* Cumulative GPA - Master Output Container */}
-            <div className="bg-[#D6E1FF] dark:bg-blue-950/60 border border-[#A5BCF0] dark:border-blue-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#D6E1FF] border border-[#A5BCF0] rounded-[28px] p-5 shadow-sm">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold tracking-widest text-blue-900 dark:text-blue-300 uppercase">
+                <span className="text-xs font-semibold tracking-widest text-blue-900 uppercase">
                   Cumulative GPA
                 </span>
                 {hasPriorHistory && (
-                  <span className="text-xs font-semibold text-blue-900 dark:text-blue-200 px-3 py-1 rounded-full bg-white dark:bg-slate-900 border border-[#A5BCF0] dark:border-blue-800/60 shadow-xs">
+                  <span className="text-xs font-semibold text-blue-900 px-3 py-1 rounded-full bg-white border border-[#A5BCF0] shadow-xs">
                     Includes Prior History
                   </span>
                 )}
               </div>
-              <div className="text-3xl sm:text-4xl font-extrabold text-blue-950 dark:text-blue-100 font-mono tracking-tight mt-2 flex items-baseline gap-1.5">
+              <div className="text-3xl sm:text-4xl font-extrabold text-blue-950 font-mono tracking-tight mt-2 flex items-baseline gap-1.5">
                 <span>{cumulativeGpa.toFixed(2)}</span>
-                <span className="text-sm font-medium text-blue-800/80 dark:text-blue-400">
+                <span className="text-sm font-medium text-blue-800/80 ">
                   / {aPlusValue === 4.33 ? '4.33' : '4.0'}
                 </span>
               </div>
@@ -456,18 +456,18 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
 
             {/* Secondary Metric Tabs */}
             <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="bg-[#FFE8C2] dark:bg-amber-950/55 rounded-[24px] p-4 border border-black/5 dark:border-amber-800/50 shadow-xs">
-                <strong className="block text-xl font-bold text-slate-800 dark:text-white">{totalCumulativeCredits.toFixed(1)}</strong>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total credits</span>
+              <div className="bg-[#FFE8C2] rounded-[24px] p-4 border border-black/5 shadow-xs">
+                <strong className="block text-xl font-bold text-slate-800 ">{totalCumulativeCredits.toFixed(1)}</strong>
+                <span className="text-xs text-slate-500 font-medium">Total credits</span>
               </div>
-              <div className="bg-[#F8F9FA] dark:bg-slate-800/60 rounded-[24px] p-4 border border-black/5 dark:border-slate-700/60 shadow-xs">
-                <strong className="block text-xl font-bold text-slate-800 dark:text-white">{courses.length}</strong>
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Semester courses</span>
+              <div className="bg-[#F8F9FA] rounded-[24px] p-4 border border-black/5 shadow-xs">
+                <strong className="block text-xl font-bold text-slate-800 ">{courses.length}</strong>
+                <span className="text-xs text-slate-500 font-medium">Semester courses</span>
               </div>
             </div>
 
             {/* Export GPA PDF & Print Controls */}
-            <div className="pt-4 border-t border-slate-100/80 dark:border-slate-800 flex flex-wrap items-center gap-2.5 print:hidden">
+            <div className="pt-4 border-t border-slate-100/80 flex flex-wrap items-center gap-2.5 print:hidden">
               <button
                 type="button"
                 onClick={() => {
@@ -478,7 +478,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                     setToast?.('Use Export GPA PDF to save a printable transcript.');
                   }
                 }}
-                className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
+                className="flex-1 min-h-[46px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#2457F5] hover:bg-[#1A41C9] text-white font-bold shadow-md text-xs sm:text-sm transition-all cursor-pointer active:scale-95"
               >
                 <Printer className="w-4 h-4" aria-hidden="true" />
                 <span>Print Result</span>
@@ -501,7 +501,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
                     setToast?.('Could not generate GPA PDF.');
                   }
                 }}
-                className="min-h-[46px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-200 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700 font-semibold shadow-xs text-xs transition-all cursor-pointer active:scale-95"
+                className="min-h-[46px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 font-semibold shadow-xs text-xs transition-all cursor-pointer active:scale-95"
               >
                 <Download className="w-3.5 h-3.5" aria-hidden="true" />
                 <span>Export GPA PDF</span>
@@ -515,7 +515,7 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
       <ContentSection labelledBy="gpa-guide-title">
           <h2
             id="gpa-guide-title"
-            className="text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight"
+            className="text-3xl font-bold mb-6 text-slate-800 tracking-tight"
           >
             How to Calculate GPA: Grade Point Average for College &amp; University
           </h2>
@@ -527,127 +527,127 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             />
           </div>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            An essential metric for academic evaluation, the Grade Point Average (GPA) plays a pivotal role in a student&apos;s educational journey. <strong className="font-semibold text-slate-900 dark:text-white">Understanding how to calculate GPA is crucial for every college and university student, especially when considering how different institutions approach semester and cumulative calculations.</strong> This guide demystifies the GPA calculation process, providing clarity on how to convert letter grades and credit hours into an accurate grade-point average. Need to calculate an individual course grade first? Use our <Link to="/grade-calculator" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link> or <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            An essential metric for academic evaluation, the Grade Point Average (GPA) plays a pivotal role in a student&apos;s educational journey. <strong className="font-semibold text-slate-900 ">Understanding how to calculate GPA is crucial for every college and university student, especially when considering how different institutions approach semester and cumulative calculations.</strong> This guide demystifies the GPA calculation process, providing clarity on how to convert letter grades and credit hours into an accurate grade-point average. Need to calculate an individual course grade first? Use our <Link to="/grade-calculator" className="text-teal-700 font-semibold underline hover:text-teal-600">Weighted Grade Calculator</Link> or <Link to="/" className="text-teal-700 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             Understanding GPA
           </h2>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             What is GPA?
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            GPA, or Grade Point Average, is a standardized numerical representation of a student&apos;s academic achievement across a term or degree program. <strong className="font-semibold text-slate-900 dark:text-white">It serves as a comprehensive metric that reflects the credit-weighted average of all grades earned across various courses.</strong> Each letter grade, such as an A, B, C, D, or F, is assigned a specific point value, and these grade points—including pluses and minuses—are then used in the calculation. This system allows for a consistent evaluation of a student&apos;s performance throughout their high school, college, or university enrollment.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            GPA, or Grade Point Average, is a standardized numerical representation of a student&apos;s academic achievement across a term or degree program. <strong className="font-semibold text-slate-900 ">It serves as a comprehensive metric that reflects the credit-weighted average of all grades earned across various courses.</strong> Each letter grade, such as an A, B, C, D, or F, is assigned a specific point value, and these grade points—including pluses and minuses—are then used in the calculation. This system allows for a consistent evaluation of a student&apos;s performance throughout their high school, college, or university enrollment.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Importance of Grade Point Average
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            The Grade Point Average holds significant importance across higher education and career placement. <strong className="font-semibold text-slate-900 dark:text-white">A student&apos;s GPA can impact college admissions, scholarship eligibility, academic honors, and future employment opportunities, highlighting the importance of maintaining strong semester and cumulative averages.</strong> Many institutions set a minimum GPA for academic good standing, and a higher GPA opens doors to honors programs, financial aid, and graduate school admissions.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            The Grade Point Average holds significant importance across higher education and career placement. <strong className="font-semibold text-slate-900 ">A student&apos;s GPA can impact college admissions, scholarship eligibility, academic honors, and future employment opportunities, highlighting the importance of maintaining strong semester and cumulative averages.</strong> Many institutions set a minimum GPA for academic good standing, and a higher GPA opens doors to honors programs, financial aid, and graduate school admissions.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Types of GPAs: Weighted vs. Unweighted
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            When considering how to calculate GPA, it is crucial to understand the distinction between weighted GPA and unweighted GPA. <strong className="font-semibold text-slate-900 dark:text-white">An unweighted GPA calculates the grade point average on a standard 4.0 scale, where an A always equates to 4.0 grade points regardless of course difficulty. Conversely, a weighted GPA considers course rigor, assigning additional points (often on a 5.0 scale) to Advanced Placement (AP), IB, or Honors classes.</strong> This means that a student can earn more quality points for an A in an AP course than for an A in a standard course.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            When considering how to calculate GPA, it is crucial to understand the distinction between weighted GPA and unweighted GPA. <strong className="font-semibold text-slate-900 ">An unweighted GPA calculates the grade point average on a standard 4.0 scale, where an A always equates to 4.0 grade points regardless of course difficulty. Conversely, a weighted GPA considers course rigor, assigning additional points (often on a 5.0 scale) to Advanced Placement (AP), IB, or Honors classes.</strong> This means that a student can earn more quality points for an A in an AP course than for an A in a standard course.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             Calculating GPA
           </h2>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Step-by-Step Calculation Process
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            The process to calculate GPA involves several clear steps to reflect a student&apos;s academic achievement accurately. First, gather all coursework, credit hours, and letter grade information for the semester. <strong className="font-semibold text-slate-900 dark:text-white">Assign numerical grade points to each letter grade earned in a course on the 4.0 GPA scale (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0). Next, multiply these grade points by the number of credit hours for each course to determine the quality points for that course.</strong> Sum the quality points for all courses in the term, and divide that total by the total number of credit hours attempted to arrive at your GPA. You can review the full mathematical derivation in our <Link to="/about" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Academic Grading Methodology</Link>.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            The process to calculate GPA involves several clear steps to reflect a student&apos;s academic achievement accurately. First, gather all coursework, credit hours, and letter grade information for the semester. <strong className="font-semibold text-slate-900 ">Assign numerical grade points to each letter grade earned in a course on the 4.0 GPA scale (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0). Next, multiply these grade points by the number of credit hours for each course to determine the quality points for that course.</strong> Sum the quality points for all courses in the term, and divide that total by the total number of credit hours attempted to arrive at your GPA. You can review the full mathematical derivation in our <Link to="/about" className="text-teal-700 font-semibold underline hover:text-teal-600">Academic Grading Methodology</Link>.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Semester GPA Calculator and Cumulative GPA Calculator
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            To simplify the calculation process and avoid manual errors, <strong className="font-semibold text-slate-900 dark:text-white">a GPA calculator is an invaluable tool for any high school, college, or university student.</strong> This digital tool automates the steps involved in calculating your GPA, allowing you to input letter grades and corresponding credit hours for each course and immediately see both semester and cumulative results.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            To simplify the calculation process and avoid manual errors, <strong className="font-semibold text-slate-900 ">a GPA calculator is an invaluable tool for any high school, college, or university student.</strong> This digital tool automates the steps involved in calculating your GPA, allowing you to input letter grades and corresponding credit hours for each course and immediately see both semester and cumulative results.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Factors Influencing GPA Calculation
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Several institutional rules can influence the final GPA calculation beyond basic grade points. A college or university may use a plus/minus grading scale (where an A- equals 3.7 and a B+ equals 3.3). <strong className="font-semibold text-slate-900 dark:text-white">The credit weight of specific courses, such as 4-credit lab sciences versus 1-credit seminars, also causes high-credit classes to have a much larger impact on your semester and cumulative GPA.</strong> Additionally, pass/fail, audit, or withdrawn courses are typically excluded from the GPA denominator.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            Several institutional rules can influence the final GPA calculation beyond basic grade points. A college or university may use a plus/minus grading scale (where an A- equals 3.7 and a B+ equals 3.3). <strong className="font-semibold text-slate-900 ">The credit weight of specific courses, such as 4-credit lab sciences versus 1-credit seminars, also causes high-credit classes to have a much larger impact on your semester and cumulative GPA.</strong> Additionally, pass/fail, audit, or withdrawn courses are typically excluded from the GPA denominator.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             Weighted vs Unweighted GPA
           </h2>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             Weighted vs unweighted GPA is the most common point of confusion on a high school transcript. Both start from the same letter grades; they differ in whether course difficulty adds extra points.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Unweighted GPA Meaning
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             An unweighted GPA is the plain 4.0-scale average: an A is worth 4.0 in every course, whether it is a regular, honors or AP class. The unweighted GPA meaning is simple: it measures the grades you earned, not how hard the courses were. The calculator above produces an unweighted GPA (with an optional 4.33 value for A+).
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             What Is the Difference Between Weighted and Unweighted GPA?
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             A weighted GPA adds bonus points for harder courses, commonly +0.5 for honors and +1.0 for AP or IB, so an A in an AP class can count as 5.0 and the scale tops out at 5.0 instead of 4.0. An unweighted GPA ignores difficulty. For example, a student with an A in AP Biology (5.0 weighted), a B in English (3.0) and an A in Algebra (4.0) has a weighted GPA of (5.0 + 3.0 + 4.0) ÷ 3 = 4.0, but an unweighted GPA of (4.0 + 3.0 + 4.0) ÷ 3 = 3.67.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Weighted GPA Calculator: How to Calculate a Weighted GPA
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             To calculate a weighted GPA, add your school&apos;s bonus to the grade points of each weighted course, multiply by the credits, and divide the total by the total credits as usual. This calculator works on the 4.0 scale, so for a weighted result add the bonus to the weighted courses by hand and average as described above. Use your school&apos;s own weighting table, because bonus values differ from district to district.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             How Does Weighted GPA Affect College Admissions?
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             Colleges look at the number and the context around it. Many admissions offices recalculate GPA on their own scale, often unweighted, or focus on the grades you earned in the most demanding courses your school offered. A weighted GPA shows course rigor, but it is not directly comparable between schools because weighting systems differ. Strong grades in challenging classes help most, and the school profile your counselor sends explains how your school weights courses.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             High School GPA Calculator
           </h2>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             A high school GPA calculator works like a college one, except that courses usually carry equal credit and many schools report both a weighted and an unweighted GPA. Enter each course with its letter grade and credit value above to see your semester GPA, then add your prior GPA and credits for the cumulative figure.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             How Do I Calculate My High School GPA?
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             Convert each final course grade to grade points, multiply by the credit value (use 1 when every course is worth the same), add the results and divide by the total credits. If a school lists only whole-letter grades, A = 4.0, B = 3.0, C = 2.0, D = 1.0 and F = 0.0.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Calculate GPA: High School Step by Step
           </h3>
 
-          <ol className="list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <ol className="list-decimal pl-6 space-y-2 text-slate-600 leading-relaxed mb-4">
             <li>List every course for the term with its final letter grade.</li>
             <li>Convert each letter to grade points on your school&apos;s scale.</li>
             <li>Multiply the grade points by each course&apos;s credit value.</li>
@@ -655,11 +655,11 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             <li>Enter the same courses in the calculator above to check your result.</li>
           </ol>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             GPA Scale 4.0 High School Chart
           </h3>
 
-          <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <ul className="list-disc pl-5 space-y-2 text-slate-600 leading-relaxed mb-4">
             <li>A (90–100%): 4.0, with A- worth 3.7</li>
             <li>B (80–89%): 3.0, with B+ worth 3.3 and B- worth 2.7</li>
             <li>C (70–79%): 2.0, with C+ worth 2.3 and C- worth 1.7</li>
@@ -667,109 +667,109 @@ export const GpaCalculator: React.FC<GpaCalculatorProps> = ({
             <li>F (below 60%): 0.0</li>
           </ul>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             The percentage ranges follow the common 10-point scale. Your school may use different cutoffs, so check them with the 
-            <Link to="/letter-grade-calculator/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Letter Grade Calculator</Link>.
+            <Link to="/letter-grade-calculator/" className="text-teal-700 font-semibold underline hover:text-teal-600">Letter Grade Calculator</Link>.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             What GPA Do I Need to Get Into College?
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+          <p className="text-slate-600 leading-relaxed mb-4">
             There is no single number. Community colleges and other open-admission schools often have no GPA cutoff, many state universities report a middle range of roughly 3.0 to 3.8, and the most selective colleges typically admit students with GPAs close to 4.0 unweighted. Check each school&apos;s published admitted-student profile, because course rigor, test policy and intended major also matter.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             GPA and Course Grades
           </h2>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Grade Points Assignment
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            The foundation of the GPA system lies in the precise assignment of grade points to each letter grade a student earns. <strong className="font-semibold text-slate-900 dark:text-white">On a standard 4.0 GPA scale, an &quot;A&quot; is assigned 4.0 points, a &quot;B&quot; receives 3.0 points, a &quot;C&quot; gets 2.0 points, a &quot;D&quot; is given 1.0 point, and an &quot;F&quot; receives 0.0 points.</strong> These numerical equivalents provide a standardized method of evaluating academic achievement across courses and academic terms.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            The foundation of the GPA system lies in the precise assignment of grade points to each letter grade a student earns. <strong className="font-semibold text-slate-900 ">On a standard 4.0 GPA scale, an &quot;A&quot; is assigned 4.0 points, a &quot;B&quot; receives 3.0 points, a &quot;C&quot; gets 2.0 points, a &quot;D&quot; is given 1.0 point, and an &quot;F&quot; receives 0.0 points.</strong> These numerical equivalents provide a standardized method of evaluating academic achievement across courses and academic terms.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Quality Points Calculator: How Quality Points Work
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Quality points represent the weighted value of a grade in a course relative to its credit load. <strong className="font-semibold text-slate-900 dark:text-white">To determine quality points for a course, multiply the grade points for the letter grade earned (including pluses and minuses) by the number of credit hours for that course.</strong> For example, an &quot;A&quot; (4.0 grade points) in a 3-credit course yields 12.0 quality points (4.0 × 3). Summing quality points across all courses and dividing by total credits produces your final GPA.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            Quality points represent the weighted value of a grade in a course relative to its credit load. <strong className="font-semibold text-slate-900 ">To determine quality points for a course, multiply the grade points for the letter grade earned (including pluses and minuses) by the number of credit hours for that course.</strong> For example, an &quot;A&quot; (4.0 grade points) in a 3-credit course yields 12.0 quality points (4.0 × 3). Summing quality points across all courses and dividing by total credits produces your final GPA.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Impact of Course Weight on GPA
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            The credit weight and rigor of a course significantly impact a student&apos;s GPA. <strong className="font-semibold text-slate-900 dark:text-white">Courses designated as more rigorous, such as Advanced Placement (AP) or honors classes, are often assigned additional weight in high school systems, while in college, 4-credit and 5-credit courses carry proportionally greater weight than 2-credit electives.</strong> Prioritizing high-credit courses is one of the most effective ways to protect and raise your GPA.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            The credit weight and rigor of a course significantly impact a student&apos;s GPA. <strong className="font-semibold text-slate-900 ">Courses designated as more rigorous, such as Advanced Placement (AP) or honors classes, are often assigned additional weight in high school systems, while in college, 4-credit and 5-credit courses carry proportionally greater weight than 2-credit electives.</strong> Prioritizing high-credit courses is one of the most effective ways to protect and raise your GPA.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             Cumulative GPA and Overall Performance
           </h2>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             What is Cumulative GPA?
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            <strong className="font-semibold text-slate-900 dark:text-white">The cumulative GPA represents the overall credit-weighted average of a student&apos;s performance across all courses completed throughout their entire academic career at an institution.</strong> Unlike a semester GPA, which only considers grades from a single term, the cumulative GPA combines prior cumulative quality points and credits with current semester coursework.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            <strong className="font-semibold text-slate-900 ">The cumulative GPA represents the overall credit-weighted average of a student&apos;s performance across all courses completed throughout their entire academic career at an institution.</strong> Unlike a semester GPA, which only considers grades from a single term, the cumulative GPA combines prior cumulative quality points and credits with current semester coursework.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Tracking GPA Over Time
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            <strong className="font-semibold text-slate-900 dark:text-white">Tracking your GPA over time helps you monitor academic progress and maintain good academic standing for scholarships and degree requirements.</strong> By calculating your projected GPA before finals week, you can see how each course grade affects your cumulative standing and allocate study time strategically.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            <strong className="font-semibold text-slate-900 ">Tracking your GPA over time helps you monitor academic progress and maintain good academic standing for scholarships and degree requirements.</strong> By calculating your projected GPA before finals week, you can see how each course grade affects your cumulative standing and allocate study time strategically.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Strategies for Improving Overall GPA
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Improving your overall GPA requires consistent effort across academic terms. Key strategies include prioritizing courses with higher credit hours, calculating needed exam scores using our <Link to="/final-exam-grade-calculator/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Final Exam Grade Calculator</Link>, scoring individual quizzes with the <Link to="/" className="text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>, and utilizing office hours early in the semester. <strong className="font-semibold text-slate-900 dark:text-white">Students should also check institutional grade-forgiveness policies for retaking courses where they received a low grade, as replacing a low mark can substantially boost cumulative GPA.</strong>
+          <p className="text-slate-600 leading-relaxed mb-4">
+            Improving your overall GPA requires consistent effort across academic terms. Key strategies include prioritizing courses with higher credit hours, calculating needed exam scores using our <Link to="/final-exam-grade-calculator/" className="text-teal-700 font-semibold underline hover:text-teal-600">Final Exam Grade Calculator</Link>, scoring individual quizzes with the <Link to="/" className="text-teal-700 font-semibold underline hover:text-teal-600">Quick Grade Chart</Link>, and utilizing office hours early in the semester. <strong className="font-semibold text-slate-900 ">Students should also check institutional grade-forgiveness policies for retaking courses where they received a low grade, as replacing a low mark can substantially boost cumulative GPA.</strong>
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight">
             GPA in College and University
           </h2>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             Understanding Transcripts and GPAs
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            <strong className="font-semibold text-slate-900 dark:text-white">Official academic transcripts detail a student&apos;s enrollment history, including all courses taken, letter grades received, credit hours, semester GPAs, and cumulative GPA.</strong> Understanding how your registrar computes term and cumulative averages is vital when transferring credits, applying for internships, or preparing graduate school applications.
+          <p className="text-slate-600 leading-relaxed mb-4">
+            <strong className="font-semibold text-slate-900 ">Official academic transcripts detail a student&apos;s enrollment history, including all courses taken, letter grades received, credit hours, semester GPAs, and cumulative GPA.</strong> Understanding how your registrar computes term and cumulative averages is vital when transferring credits, applying for internships, or preparing graduate school applications.
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             GPA Requirements for Different Programs
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            GPA requirements vary across academic departments and degree programs. Most undergraduate programs require a minimum cumulative GPA of 2.0 on a 4.0 scale to maintain good academic standing and graduate, while competitive majors in engineering, nursing, business, and computer science often require a 2.5 to 3.2 major GPA. <strong className="font-semibold text-slate-900 dark:text-white">Students should review their department&apos;s specific plus/minus grading rules and major GPA prerequisites each semester.</strong>
+          <p className="text-slate-600 leading-relaxed mb-4">
+            GPA requirements vary across academic departments and degree programs. Most undergraduate programs require a minimum cumulative GPA of 2.0 on a 4.0 scale to maintain good academic standing and graduate, while competitive majors in engineering, nursing, business, and computer science often require a 2.5 to 3.2 major GPA. <strong className="font-semibold text-slate-900 ">Students should review their department&apos;s specific plus/minus grading rules and major GPA prerequisites each semester.</strong>
           </p>
 
-          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100">
+          <h3 className="text-xl font-medium mt-6 mb-3 text-slate-900 ">
             GPA Guidelines for Honors and Graduate Programs
           </h3>
 
-          <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
-            Honors designations and graduate programs set higher GPA benchmarks to recognize sustained academic excellence. Dean&apos;s List and Latin honors (Cum Laude, Magna Cum Laude, Summa Cum Laude) typically begin between 3.50 and 3.85 cumulative GPA. <strong className="font-semibold text-slate-900 dark:text-white">Graduate and professional schools generally look for an undergraduate GPA of 3.0 to 3.7+ alongside strong upper-division coursework.</strong>
+          <p className="text-slate-600 leading-relaxed mb-4">
+            Honors designations and graduate programs set higher GPA benchmarks to recognize sustained academic excellence. Dean&apos;s List and Latin honors (Cum Laude, Magna Cum Laude, Summa Cum Laude) typically begin between 3.50 and 3.85 cumulative GPA. <strong className="font-semibold text-slate-900 ">Graduate and professional schools generally look for an undergraduate GPA of 3.0 to 3.7+ alongside strong upper-division coursework.</strong>
           </p>
 
-          <div className="mt-8 p-5 rounded-2xl bg-teal-100/80 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="mt-8 p-5 rounded-2xl bg-teal-100/80 border border-teal-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+              <h3 className="text-base font-bold text-slate-900 ">
                 Need to Convert a 10.0, 5.0, or 4.0 CGPA to Percentage?
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
                 Use our dedicated <strong>CGPA to Percentage Calculator</strong> with 30+ verified Indian and international university ordinances (VTU, Mumbai University, MAKAUT, GTU, SPPU, Anna University, BHU, and CBSE × 9.5).
               </p>
             </div>

@@ -78,21 +78,21 @@ export const GradeCurveTool: React.FC = () => {
             autoCapitalize="off"
             autoCorrect="off"
             aria-describedby="gc-scores-help"
-            className="w-full bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
+            className="w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-2xl px-4 py-3 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
             spellCheck={false}
           />
-          <p id="gc-scores-help" className="text-sm text-slate-600 dark:text-slate-300 mt-1.5 m-0">
+          <p id="gc-scores-help" className="text-sm text-slate-600 mt-1.5 m-0">
             Plain numbers only. Use a dot or a comma for decimals, for example 88.5.
           </p>
           {notes.map((n) => (
-            <p key={n} className="text-sm text-slate-600 dark:text-slate-300 mt-1 m-0" role="status">{n}</p>
+            <p key={n} className="text-sm text-slate-600 mt-1 m-0" role="status">{n}</p>
           ))}
           {rejected.length > 0 && (
             <div className="mt-2" role="status">
               <p className={WARN_TEXT}>
                 Left out {rejected.length} value{rejected.length > 1 ? 's' : ''}:
               </p>
-              <ul className="m-0 mt-1 pl-5 text-sm text-amber-800 dark:text-amber-300 list-disc">
+              <ul className="m-0 mt-1 pl-5 text-sm text-amber-800 list-disc">
                 {rejected.slice(0, 6).map((r, i) => (
                   <li key={`${r.token}-${i}`}><span className="font-mono">{r.token}</span> ({r.reason})</li>
                 ))}
@@ -148,7 +148,7 @@ export const GradeCurveTool: React.FC = () => {
               <label htmlFor="gc-bell-sd" className={LABEL}>Spread (std. deviation)</label>
               <input id="gc-bell-sd" className={INPUT} type="text" inputMode="decimal" enterKeyHint="done" value={bellSd} onChange={(e) => setBellSd(e.target.value)} />
             </div>
-            <p className="w-full text-sm text-slate-600 dark:text-slate-300 m-0">
+            <p className="w-full text-sm text-slate-600 m-0">
               Scores are rescaled so the class average becomes the bell curve average, keeping every student&apos;s rank order. A spread of 10 puts most students within about 20 points of the average.
             </p>
           </div>
@@ -180,9 +180,9 @@ export const GradeCurveTool: React.FC = () => {
                 ['Median before', before.median],
                 ['Median after', after.median],
               ].map(([label, val]) => (
-                <div key={label as string} className="glow-surface rounded-2xl bg-[#E4EDFB] dark:bg-teal-950/60 border border-[#C9DCF7] dark:border-teal-800/60 p-3">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-teal-900 dark:text-teal-300 block">{label as string}</span>
-                  <strong className="text-xl font-extrabold font-mono text-teal-950 dark:text-teal-100">{roundTo(val as number, 1)}</strong>
+                <div key={label as string} className="glow-surface rounded-2xl bg-[#E4EDFB] border border-[#D5DEFF] p-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-teal-900 block">{label as string}</span>
+                  <strong className="text-xl font-extrabold font-mono text-teal-950 ">{roundTo(val as number, 1)}</strong>
                 </div>
               ))}
             </div>
@@ -190,8 +190,8 @@ export const GradeCurveTool: React.FC = () => {
             <div className="overflow-x-auto max-h-[28rem] overflow-y-auto">
               <table className="w-full text-sm">
                 <caption className="sr-only">Raw and curved scores</caption>
-                <thead className="sticky top-0 bg-white dark:bg-slate-900">
-                  <tr className="text-left text-slate-600 dark:text-slate-300">
+                <thead className="sticky top-0 bg-white ">
+                  <tr className="text-left text-slate-600 ">
                     <th scope="col" className="py-2 pr-3">#</th>
                     <th scope="col" className="py-2 pr-3">Raw</th>
                     <th scope="col" className="py-2 pr-3">Curved</th>
@@ -204,13 +204,13 @@ export const GradeCurveTool: React.FC = () => {
                     const delta = roundTo(curved[i] - s, 1);
                     const tone =
                       delta > 0
-                        ? 'text-emerald-700 dark:text-emerald-400'
+                        ? 'text-emerald-700 '
                         : delta < 0
-                        ? 'text-rose-700 dark:text-rose-400'
-                        : 'text-slate-600 dark:text-slate-300';
+                        ? 'text-rose-700 '
+                        : 'text-slate-600 ';
                     return (
-                      <tr key={i} className="border-t border-slate-200/70 dark:border-slate-800">
-                        <td className="py-2 pr-3 text-slate-600 dark:text-slate-400 font-mono">{i + 1}</td>
+                      <tr key={i} className="border-t border-slate-200/70 ">
+                        <td className="py-2 pr-3 text-slate-600 font-mono">{i + 1}</td>
                         <td className="py-2 pr-3 font-mono">{roundTo(s, 1)}</td>
                         <td className="py-2 pr-3 font-mono font-bold">{roundTo(curved[i], 1)}</td>
                         <td className={`py-2 pr-3 font-mono ${tone}`}>{delta > 0 ? '+' : ''}{delta}</td>
@@ -222,7 +222,7 @@ export const GradeCurveTool: React.FC = () => {
               </table>
             </div>
             {scores.length > MAX_ROWS && (
-              <p className="text-sm text-slate-600 dark:text-slate-300 m-0">Showing the first {MAX_ROWS} of {scores.length} scores. Statistics use all of them.</p>
+              <p className="text-sm text-slate-600 m-0">Showing the first {MAX_ROWS} of {scores.length} scores. Statistics use all of them.</p>
             )}
           </>
         )}

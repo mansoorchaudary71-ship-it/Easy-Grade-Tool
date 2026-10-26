@@ -135,7 +135,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
   const getTierRowBg = (letter: string) => {
     if (letter.startsWith('A')) {
-      return 'bg-[#E4EDFB] hover:bg-[#C9DCF7] border border-[#C9DCF7]/50';
+      return 'bg-[#E4EDFB] hover:bg-[#D5DEFF] border border-[#D5DEFF]/50';
     }
     if (letter.startsWith('B')) {
       return 'bg-[#D6E1FF] hover:bg-[#C8D6FF] border border-[#A5BCF0]/50';
@@ -161,12 +161,12 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
       {/* 2. Top Controls & Configuration Card */}
       <section
         aria-label="Test Parameters and Grading Settings"
-        className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8 space-y-6"
+        className="bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8 space-y-6"
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Number of Questions */}
           <div className="space-y-2">
-            <label htmlFor="quick-total-questions" className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+            <label htmlFor="quick-total-questions" className="block text-xs font-bold uppercase tracking-wider text-slate-700 ">
               Total Questions
             </label>
             <input
@@ -176,12 +176,12 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               max="1000"
               value={totalQuestionsInput}
               onChange={(e) => setTotalQuestionsInput(e.target.value)}
-              className="w-full h-14 bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-0 leading-none focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg sm:text-2xl font-mono text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="w-full h-14 bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full px-5 py-0 leading-none focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg sm:text-2xl font-mono text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               placeholder="20"
             />
             {/* Quick Presets */}
             <div className="flex items-center gap-1.5 pt-1 flex-wrap">
-              <span className="text-xs font-semibold text-slate-600 dark:text-slate-400">Presets:</span>
+              <span className="text-xs font-semibold text-slate-600 ">Presets:</span>
               <SegmentedControl
                 ariaLabel="Question count presets"
                 variant="chips"
@@ -201,7 +201,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
           {/* Scale Type & Precision */}
           <div className="space-y-4">
             <div>
-              <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+              <span className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
                 Grading Scale
               </span>
               <SegmentedControl
@@ -218,8 +218,8 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             </div>
 
             {/* Decimal Toggle */}
-            <div className="flex items-center justify-between bg-white dark:bg-slate-800/60 rounded-[24px] border border-stone-200/80 dark:border-slate-700 shadow-sm p-4">
-              <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+            <div className="flex items-center justify-between bg-white rounded-[24px] border border-stone-200/80 shadow-sm p-4">
+              <span className="text-xs font-semibold text-slate-700 ">
                 Show Decimal Percentages
               </span>
               <input
@@ -233,11 +233,11 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
           {/* Quick Metrics & Actions */}
           <div className="flex flex-col justify-between space-y-4">
-            <div className="bg-[#E4EDFB] dark:bg-teal-950/60 border border-[#C9DCF7] dark:border-teal-800/60 rounded-[24px] p-4 text-center shadow-sm">
-              <span className="text-xs font-bold uppercase tracking-wider text-teal-800 dark:text-teal-300 block">
+            <div className="bg-[#E4EDFB] border border-[#D5DEFF] rounded-[24px] p-4 text-center shadow-sm">
+              <span className="text-xs font-bold uppercase tracking-wider text-teal-800 block">
                 Points Per Question
               </span>
-              <span className="text-2xl sm:text-3xl font-extrabold text-teal-950 dark:text-teal-100 font-mono block mt-0.5">
+              <span className="text-2xl sm:text-3xl font-extrabold text-teal-950 font-mono block mt-0.5">
                 {pointsPerQuestion.toFixed(showDecimals ? 2 : 1)}%
               </span>
             </div>
@@ -246,7 +246,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               <button
                 type="button"
                 onClick={() => setShowCutoffEditor((prev) => !prev)}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-5 bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm text-xs transition-all cursor-pointer"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-5 bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm text-xs transition-all cursor-pointer"
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" />
                 <span>{showCutoffEditor ? 'Hide Cutoffs' : 'Adjust Cutoffs'}</span>
@@ -255,7 +255,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               <button
                 type="button"
                 onClick={handlePrint}
-                className="inline-flex items-center justify-center gap-1.5 py-2.5 px-6 bg-[#0056D2] hover:bg-[#00419E] dark:bg-teal-600 dark:hover:bg-teal-500 text-white rounded-full font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
+                className="inline-flex items-center justify-center gap-1.5 py-2.5 px-6 bg-[#2457F5] hover:bg-[#1A41C9] text-white rounded-full font-bold shadow-md text-xs transition-all cursor-pointer active:scale-95"
               >
                 <Printer className="w-3.5 h-3.5" />
                 <span>Print Chart</span>
@@ -266,15 +266,15 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
 
         {/* Optional Inline Cutoff Adjustment Section */}
         {showCutoffEditor && (
-          <div className="pt-5 border-t border-slate-200 dark:border-slate-800 space-y-4">
+          <div className="pt-5 border-t border-slate-200 space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 ">
                 Standard Cutoff Thresholds (%)
               </span>
               <button
                 type="button"
                 onClick={handleResetThresholds}
-                className="inline-flex items-center gap-1 text-xs bg-white dark:bg-slate-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-slate-700 hover:bg-stone-50 dark:hover:bg-slate-700/60 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1 text-xs bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 rounded-full font-semibold shadow-sm px-4 py-1.5 transition-all cursor-pointer"
               >
                 <RotateCcw className="w-3 h-3" />
                 <span>Reset Defaults</span>
@@ -282,8 +282,8 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {(['A', 'B', 'C', 'D'] as const).map((grade) => (
-                <div key={grade} className="p-3 bg-[#F8F9FA] dark:bg-slate-800/60 rounded-[24px] border border-stone-100 dark:border-slate-800">
-                  <label htmlFor={`cutoff-${grade}`} className="text-xs font-bold text-slate-600 dark:text-slate-400 block mb-1">
+                <div key={grade} className="p-3 bg-[#F8F9FA] rounded-[24px] border border-stone-100 ">
+                  <label htmlFor={`cutoff-${grade}`} className="text-xs font-bold text-slate-600 block mb-1">
                     Grade {grade} Min (%)
                   </label>
                   <input
@@ -296,7 +296,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
                       const val = parseInt(e.target.value, 10) || 0;
                       setThresholds((prev) => ({ ...prev, [grade]: val }));
                     }}
-                    className="w-full min-h-[44px] bg-[#F4F6F9] dark:bg-slate-800/90 border border-stone-200/80 dark:border-slate-700 text-stone-900 dark:text-white rounded-[20px] px-4 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:ring-2 focus:ring-blue-500/20 transition-all font-bold text-base sm:text-sm font-mono text-center shadow-inner"
+                    className="w-full min-h-[44px] bg-[#F4F6F9] border border-stone-200/80 text-stone-900 rounded-[20px] px-4 py-3.5 focus:bg-white focus:ring-2 focus:ring-blue-500/20 transition-all font-bold text-base sm:text-sm font-mono text-center shadow-inner"
                   />
                 </div>
               ))}
@@ -308,15 +308,15 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
       {/* 3. Search Filter & Grading Table Card */}
       <section
         aria-label="Grading Chart Table and Search"
-        className="bg-white dark:bg-slate-900 rounded-[32px] border border-white/80 dark:border-slate-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-none relative overflow-hidden p-6 sm:p-8"
+        className="bg-white rounded-[32px] border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden p-6 sm:p-8"
       >
         {/* Table Toolbar */}
-        <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="p-4 sm:p-6 border-b border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+            <h2 className="text-lg font-bold text-slate-900 ">
               Grading Chart Table ({totalQuestions} Total Questions)
             </h2>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-slate-500 ">
               Showing percentage and letter grade based on number of missed questions.
             </p>
           </div>
@@ -328,7 +328,7 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
               placeholder="Search wrong answers..."
               value={searchFilter}
               onChange={(e) => setSearchFilter(e.target.value)}
-              className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full pl-10 pr-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-xs placeholder:text-slate-400"
+              className="w-full bg-[#F0F2F5] border-2 border-transparent text-stone-900 rounded-full pl-10 pr-4 py-3 focus:bg-white focus:border-[#2457F5] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-base sm:text-xs placeholder:text-slate-400"
             />
           </div>
         </div>
@@ -339,9 +339,9 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
           tableWrapperClassName="max-h-[520px] overflow-y-auto"
         >
           <table className="w-full min-w-[460px] text-left border-separate border-spacing-y-1.5 text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/90 sticky top-0 z-20 border-b border-slate-200 dark:border-slate-700 font-mono text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 backdrop-blur-xs">
+            <thead className="bg-slate-50 sticky top-0 z-20 border-b border-slate-200 font-mono text-xs uppercase tracking-wider text-slate-500 backdrop-blur-xs">
               <tr>
-                <th className="py-3 px-4 sm:px-6 sticky left-0 z-30 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-xs min-w-[130px] rounded-l-2xl">Wrong Answers</th>
+                <th className="py-3 px-4 sm:px-6 sticky left-0 z-30 bg-slate-50/95 backdrop-blur-xs min-w-[130px] rounded-l-2xl">Wrong Answers</th>
                 <th className="py-3 px-4 sm:px-6 whitespace-nowrap">Correct Questions</th>
                 <th className="py-3 px-4 sm:px-6 whitespace-nowrap">Score (%)</th>
                 <th className="py-3 px-4 sm:px-6 text-right whitespace-nowrap rounded-r-2xl">Letter Grade</th>
@@ -379,37 +379,37 @@ export const QuickGradeCalculator: React.FC<QuickGradeCalculatorProps> = ({ setT
       </section>
 
       {/* 4. Educational Guide & Calculation Methodology Text */}
-      <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 dark:from-slate-900 dark:to-slate-800/60 rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-4">
-        <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 text-sm font-bold">
+      <div className="bg-gradient-to-br from-slate-50 to-blue-50/50 rounded-3xl border border-slate-200 p-6 sm:p-8 space-y-4">
+        <div className="flex items-center gap-2 text-teal-700 text-sm font-bold">
           <BookOpen className="w-4 h-4" />
           <span>How Easy Grade Calculator Works</span>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+        <h3 className="text-xl font-bold text-slate-900 ">
           Calculation Formula &amp; Scoring Principles
         </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        <p className="text-sm text-slate-600 leading-relaxed">
           The Easy Grade Calculator (EZ Grader) automatically converts raw test question results into an exact percentage score and letter grade.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700/80 space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
               Percentage Formula
             </span>
-            <code className="text-sm font-mono font-bold text-teal-600 dark:text-teal-400 block">
+            <code className="text-sm font-mono font-bold text-teal-600 block">
               Grade (%) = ((Total - Wrong) / Total) × 100
             </code>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               Subtracts incorrect answers from total points, divided by total questions.
             </p>
           </div>
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-700/80 space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">
+          <div className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-1">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 block">
               Points Per Item
             </span>
-            <code className="text-sm font-mono font-bold text-teal-600 dark:text-teal-400 block">
+            <code className="text-sm font-mono font-bold text-teal-600 block">
               Weight = 100 / Total Questions
             </code>
-            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+            <p className="text-xs text-slate-500 mt-1">
               For a 20-question quiz, every missed question subtracts exactly 5.0% from the grade.
             </p>
           </div>

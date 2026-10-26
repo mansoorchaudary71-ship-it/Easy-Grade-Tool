@@ -51,44 +51,43 @@ export interface FooterProps {
 
 
 const FOOTER_PREMIUM_CSS = `
-.ft-news{position:relative;isolation:isolate;overflow:hidden;color:#fff;
-  background:linear-gradient(120deg,#1E1727 0%,#1E1727 45%,#4c1d95 100%);background-size:220% 220%;
-  animation:ft-grad 16s ease-in-out infinite,ft-rise .7s cubic-bezier(.2,.8,.2,1) both;
-  box-shadow:0 30px 70px -24px rgba(15,23,42,.75),inset 0 0 0 1px rgba(255,255,255,.1)}
-.ft-news::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.35;
-  background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
+/* Light newsletter band: pale aurora wash, white glass controls, brand-blue action. No dark surfaces. */
+.ft-news{position:relative;isolation:isolate;overflow:hidden;color:#0E1424;
+  background:radial-gradient(60% 90% at 8% 0%,#E6EDFF 0%,rgba(230,237,255,0) 70%),radial-gradient(50% 80% at 100% 100%,#FFEFE3 0%,rgba(255,239,227,0) 70%),radial-gradient(40% 70% at 70% 0%,#EFE8FF 0%,rgba(239,232,255,0) 70%),#FFFFFF;
+  animation:ft-rise .7s cubic-bezier(.2,.8,.2,1) both;
+  border:1px solid #E3E8F8;box-shadow:0 30px 70px -36px rgba(36,87,245,.35),0 1px 0 rgba(255,255,255,.9) inset}
+.ft-news::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(rgba(36,87,245,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(36,87,245,.06) 1px,transparent 1px);
   background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%)}
-.ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
-.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(0,86,210,.5);animation:ft-drift 11s ease-in-out infinite}
-.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(110,168,255,.28);animation:ft-drift 14s ease-in-out infinite reverse}
-.ft-title-accent{background:linear-gradient(90deg,#bfd7ff,#c9dcf7 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(54px);pointer-events:none}
+.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(36,87,245,.16);animation:ft-drift 11s ease-in-out infinite}
+.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(255,160,102,.2);animation:ft-drift 14s ease-in-out infinite reverse}
+.ft-title-accent{background:linear-gradient(90deg,#2457F5,#6F5BFF 70%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .ft-float{animation:ft-float 6s ease-in-out infinite}
 .ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
 .ft-spark:nth-of-type(2){animation-delay:.9s}.ft-spark:nth-of-type(3){animation-delay:1.7s}
-.ft-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .7rem;border-radius:9999px;font-size:.72rem;font-weight:600;color:rgba(255,255,255,.92);
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-.ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .25s,background .25s,border-color .25s}
-.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(110,168,255,.9);box-shadow:0 0 0 4px rgba(0,86,210,.35),0 10px 30px -10px rgba(0,86,210,.6)}
+.ft-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .75rem;border-radius:9999px;font-size:.72rem;font-weight:600;color:#1B2340;
+  background:rgba(255,255,255,.85);border:1px solid #E1E7FB;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:#fff;border:1px solid #DDE4F8;
+  box-shadow:0 8px 24px -16px rgba(36,87,245,.35);transition:box-shadow .25s,border-color .25s}
+.ft-form:focus-within{border-color:#2457F5;box-shadow:0 0 0 4px rgba(36,87,245,.16),0 12px 30px -14px rgba(36,87,245,.45)}
 .ft-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
-  font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#8b5cf6 0%,#0056d2 55%,#0056d2 100%);background-size:160% 160%;background-position:0% 50%;
-  box-shadow:0 10px 24px -8px rgba(0,86,210,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
+  font-weight:700;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#2457F5 0%,#4F7BFF 100%);
+  box-shadow:0 10px 24px -10px rgba(36,87,245,.65),inset 0 1px 0 rgba(255,255,255,.25);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease}
 .ft-btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;transform:skewX(-20deg);
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:ft-shine 5s ease-in-out infinite}
-.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(0,86,210,.9),0 0 0 4px rgba(0,86,210,.22),inset 0 1px 0 rgba(255,255,255,.28)}
-.ft-btn:active:not(:disabled){scale:.96;translate:0 0;transition-duration:.1s,.1s,.2s,.5s}
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:ft-shine 5s ease-in-out infinite}
+.ft-btn:hover:not(:disabled){translate:0 -1.5px;box-shadow:0 16px 34px -10px rgba(36,87,245,.75),0 0 0 4px rgba(36,87,245,.14),inset 0 1px 0 rgba(255,255,255,.3)}
+.ft-btn:active:not(:disabled){scale:.96;translate:0 0;transition-duration:.1s,.1s,.2s}
 .ft-btn:disabled{opacity:.75;cursor:wait}
-.ft-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ft-btn:focus-visible{outline:3px solid #2457F5;outline-offset:2px}
 .ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
 .ft-msg{animation:ft-pop .35s cubic-bezier(.2,1.2,.3,1) both}
 .ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .85rem;border-radius:9999px;cursor:pointer;
-  font-size:12px;font-weight:700;color:#00419e;background:#eef4ff;border:1px solid #c9dcf7;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
-.dark .ft-more-btn{color:#bfd0ff;background:rgb(30 41 59);border-color:rgb(71 85 105)}
-.ft-more-btn:hover{background:#0056D2;color:#fff;border-color:#0056D2;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(0,86,210,.9)}
-.ft-more-btn:focus-visible{outline:3px solid #0056D2;outline-offset:2px}
+  font-size:12px;font-weight:700;color:#1A41C9;background:#EEF2FF;border:1px solid #D5DEFF;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+.ft-more-btn:hover{background:#2457F5;color:#fff;border-color:#2457F5;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(36,87,245,.9)}
+.ft-more-btn:focus-visible{outline:3px solid #2457F5;outline-offset:2px}
 .ft-more-chev{transition:transform .25s}
 .ft-more-in{animation:ft-reveal .28s cubic-bezier(.2,.8,.2,1) both}
-@keyframes ft-grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 @keyframes ft-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes ft-drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(28px,18px) scale(1.12)}}
 @keyframes ft-float{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-10px) rotate(1.5deg)}}
@@ -535,11 +534,11 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   // Shared footer styles (single place to tweak the look)
-  const colHeadCls = 'text-base font-bold text-[#0F1114] dark:text-white m-0 mb-4';
+  const colHeadCls = 'text-base font-bold text-[#0F1114] m-0 mb-4';
   const linkCls =
-    'inline-flex items-center min-h-[28px] text-left text-sm font-normal text-[#4F5D75] dark:text-slate-400 hover:text-[#0056D2] hover:underline underline-offset-4 dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
+    'inline-flex items-center min-h-[28px] text-left text-sm font-normal text-[#4F5D75] hover:text-[#2457F5] hover:underline underline-offset-4 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-[#EEF4FF] dark:bg-slate-800 text-[#0056D2] dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] transition-colors cursor-pointer active:scale-95';
+    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-[#EEF2FF] text-[#2457F5] hover:bg-[#2457F5] hover:text-white transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
@@ -621,7 +620,7 @@ export const Footer: React.FC<FooterProps> = ({
         </section>
 
         {/* White footer panel */}
-        <div className="cs-footer-panel relative pt-12 md:pt-14 dark:bg-slate-900 transition-colors">
+        <div className="cs-footer-panel relative pt-12 md:pt-14 transition-colors">
           <DecorLines variant="divider" className="cs-divider" />
           <div className="cs-container">
             {/* Journey band (Asana grouped directory, journey form): the same
@@ -651,7 +650,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <span className="sr-only">Easy Grade Tool Home</span>
                 </Link>
 
-                <p className="text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs m-0">
+                <p className="text-[13px] text-slate-500 leading-relaxed max-w-xs m-0">
                   An offline-first, private-by-design calculation suite built for students, educators, and everyday planning. Fast, accurate, and completely tracker-free.
                 </p>
 
@@ -726,7 +725,7 @@ export const Footer: React.FC<FooterProps> = ({
                                 // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
                                 if (tool.toolKey && isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
                               }}
-                              className={`${linkCls} no-underline ${isActive ? '!text-[#0056D2] dark:!text-blue-300 font-bold' : ''}`}
+                              className={`${linkCls} no-underline ${isActive ? '!text-[#2457F5] font-bold' : ''}`}
                               aria-current={isActive ? 'page' : undefined}
                               title={tool.title}
                             >
@@ -799,7 +798,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title={`Copy direct email address: ${CONTACT_EMAIL}`}
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#0056D2] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#2457F5] text-white flex items-center justify-center shrink-0">
                         {copiedEmail ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Mail className="w-3.5 h-3.5" aria-hidden="true" />}
                       </span>
                       <span className="break-all">{copiedEmail ? 'Copied!' : CONTACT_EMAIL}</span>
@@ -816,7 +815,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title="Send a message or feedback directly to the engineering team via backend"
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#0056D2] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#2457F5] text-white flex items-center justify-center shrink-0">
                         <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                       </span>
                       <span>Contact &amp; Feedback</span>
@@ -829,27 +828,27 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Bottom bar */}
           <div className="cs-footer-bottom">
-            <div className="cs-container py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
+            <div className="cs-container py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 ">
               <p className="m-0 text-center md:text-left">
                 &copy; {currentYear} Easy Grade Tool. Free client-side calculation suite. Engineered with{' '}
                 <Heart className="w-3 h-3 text-rose-500 fill-rose-500 inline -mt-0.5" aria-hidden="true" /> for students and educators.
               </p>
-              <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium text-slate-600 dark:text-slate-300">
+              <nav aria-label="Legal" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-medium text-slate-600 ">
                 <Link
                   to="/about"
                   onClick={scrollToTop}
                   onMouseEnter={() => preloadTool('about')}
                   onFocus={() => preloadTool('about')}
                   onTouchStart={() => preloadTool('about')}
-                  className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors"
+                  className="no-underline hover:text-[#2457F5] transition-colors"
                   title="Learn about our grading methodology, GPA formulas, and project mission"
                 >
                   About &amp; Methodology
                 </Link>
-                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors" title="Read our Privacy Policy">
+                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#2457F5] transition-colors" title="Read our Privacy Policy">
                   Privacy Policy
                 </Link>
-                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors" title="View Terms of Service & Educational Disclaimer">
+                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#2457F5] transition-colors" title="View Terms of Service & Educational Disclaimer">
                   Terms of Service
                 </Link>
               </nav>
@@ -859,11 +858,11 @@ export const Footer: React.FC<FooterProps> = ({
       </footer>
 
       {/* ========================================================================= */}
-      {/* MODAL 1: CONTACT & FEEDBACK (Submits to POST /api/contact)                */}
+      {/* MODAL 1: CONTACT & FEEDBACK (Submits to POST /api/contact) */}
       {/* ========================================================================= */}
       {activeModal === 'contact' && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0E1424]/35 backdrop-blur-xs animate-in fade-in duration-150"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveModal(null);
           }}
@@ -874,28 +873,28 @@ export const Footer: React.FC<FooterProps> = ({
             aria-modal="true"
             aria-labelledby={contactTitleId}
             tabIndex={-1}
-            className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
+            className="relative w-full max-w-lg bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
           >
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/70 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center shrink-0">
                 <MessageSquare className="w-5 h-5" />
               </div>
               <div>
-                <h3 id={contactTitleId} className="text-base font-bold text-slate-900 dark:text-white">Contact &amp; Feedback</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <h3 id={contactTitleId} className="text-base font-bold text-slate-900 ">Contact &amp; Feedback</h3>
+                <p className="text-xs text-slate-500 ">
                   Send questions, formula inquiries, or feedback directly to our team at{' '}
                   <a
                     href={`mailto:${CONTACT_EMAIL}`}
-                    className="font-medium text-teal-600 dark:text-teal-400 underline underline-offset-2 hover:text-teal-700 dark:hover:text-teal-300"
+                    className="font-medium text-teal-600 underline underline-offset-2 hover:text-teal-700 "
                   >
                     {CONTACT_EMAIL}
                   </a>.
@@ -905,11 +904,11 @@ export const Footer: React.FC<FooterProps> = ({
 
             {contactSuccess ? (
               <div className="py-8 text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Message Sent!</h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto">{contactSuccess}</p>
+                <h4 className="text-sm font-bold text-slate-900 ">Message Sent!</h4>
+                <p className="text-xs text-slate-600 max-w-sm mx-auto">{contactSuccess}</p>
               </div>
             ) : (
               <form onSubmit={handleContactSubmit} className="space-y-4">
@@ -917,7 +916,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <div
                     id={contactErrorId}
                     role="alert"
-                    className="p-3 text-xs text-rose-700 bg-rose-50 dark:bg-rose-950/60 dark:text-rose-300 rounded-xl border border-rose-200 dark:border-rose-800 flex items-center gap-2"
+                    className="p-3 text-xs text-rose-700 bg-rose-50 rounded-xl border border-rose-200 flex items-center gap-2"
                   >
                     <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span>{contactError}</span>
@@ -926,7 +925,7 @@ export const Footer: React.FC<FooterProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor={contactNameId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor={contactNameId} className="block text-xs font-semibold text-slate-700 mb-1">
                       Your Name
                     </label>
                     <input
@@ -935,12 +934,12 @@ export const Footer: React.FC<FooterProps> = ({
                       value={contactName}
                       onChange={(e) => setContactName(e.target.value)}
                       placeholder="e.g. Alex Chen"
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor={contactEmailId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor={contactEmailId} className="block text-xs font-semibold text-slate-700 mb-1">
                       Email Address <span className="text-rose-500">*</span>
                     </label>
                     <input
@@ -952,20 +951,20 @@ export const Footer: React.FC<FooterProps> = ({
                       required
                       aria-required="true"
                       aria-describedby={contactError ? contactErrorId : undefined}
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor={contactSubjectId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor={contactSubjectId} className="block text-xs font-semibold text-slate-700 mb-1">
                     Subject / Category
                   </label>
                   <select
                     id={contactSubjectId}
                     value={contactSubject}
                     onChange={(e) => setContactSubject(e.target.value)}
-                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                   >
                     <option value="General Feedback">General Feedback</option>
                     <option value="Grading Formula Question">Grading Formula Question</option>
@@ -976,7 +975,7 @@ export const Footer: React.FC<FooterProps> = ({
                 </div>
 
                 <div>
-                  <label htmlFor={contactMessageId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor={contactMessageId} className="block text-xs font-semibold text-slate-700 mb-1">
                     Your Message <span className="text-rose-500">*</span>
                   </label>
                   <textarea
@@ -988,7 +987,7 @@ export const Footer: React.FC<FooterProps> = ({
                     required
                     aria-required="true"
                     aria-describedby={contactError ? contactErrorId : undefined}
-                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-500 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all resize-none"
+                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all resize-none"
                   />
                 </div>
 
@@ -996,7 +995,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="text-xs font-mono text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors flex items-center gap-1 cursor-pointer"
+                    className="text-xs font-mono text-slate-500 hover:text-slate-800 transition-colors flex items-center gap-1 cursor-pointer"
                     title={`Copy direct email address: ${CONTACT_EMAIL}`}
                   >
                     <Mail className="w-3.5 h-3.5" />
@@ -1007,14 +1006,14 @@ export const Footer: React.FC<FooterProps> = ({
                     <button
                       type="button"
                       onClick={() => setActiveModal(null)}
-                      className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
+                      className="px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={contactLoading}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
                     >
                       {contactLoading ? (
                         <>
@@ -1037,11 +1036,11 @@ export const Footer: React.FC<FooterProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* MODAL 2: REPORT ISSUE / BUG (Submits to POST /api/report-issue)           */}
+      {/* MODAL 2: REPORT ISSUE / BUG (Submits to POST /api/report-issue) */}
       {/* ========================================================================= */}
       {activeModal === 'reportIssue' && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0E1424]/35 backdrop-blur-xs animate-in fade-in duration-150"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveModal(null);
           }}
@@ -1052,24 +1051,24 @@ export const Footer: React.FC<FooterProps> = ({
             aria-modal="true"
             aria-labelledby={issueTitleHeaderId}
             tabIndex={-1}
-            className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
+            className="relative w-full max-w-lg bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
           >
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950/70 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
                 <Bug className="w-5 h-5" />
               </div>
               <div>
-                <h3 id={issueTitleHeaderId} className="text-base font-bold text-slate-900 dark:text-white">Report an Issue</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <h3 id={issueTitleHeaderId} className="text-base font-bold text-slate-900 ">Report an Issue</h3>
+                <p className="text-xs text-slate-500 ">
                   Encountered a calculation rounding issue or broken feature? Let us know.
                 </p>
               </div>
@@ -1077,11 +1076,11 @@ export const Footer: React.FC<FooterProps> = ({
 
             {issueSuccess ? (
               <div className="py-8 text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Issue Logged!</h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto">{issueSuccess}</p>
+                <h4 className="text-sm font-bold text-slate-900 ">Issue Logged!</h4>
+                <p className="text-xs text-slate-600 max-w-sm mx-auto">{issueSuccess}</p>
               </div>
             ) : (
               <form onSubmit={handleReportIssueSubmit} className="space-y-4">
@@ -1089,7 +1088,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <div
                     id={issueErrorId}
                     role="alert"
-                    className="p-3 text-xs text-rose-700 bg-rose-50 dark:bg-rose-950/60 dark:text-rose-300 rounded-xl border border-rose-200 dark:border-rose-800 flex items-center gap-2"
+                    className="p-3 text-xs text-rose-700 bg-rose-50 rounded-xl border border-rose-200 flex items-center gap-2"
                   >
                     <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span>{issueError}</span>
@@ -1098,14 +1097,14 @@ export const Footer: React.FC<FooterProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor={issueToolId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor={issueToolId} className="block text-xs font-semibold text-slate-700 mb-1">
                       Affected Calculator
                     </label>
                     <select
                       id={issueToolId}
                       value={issueTool}
                       onChange={(e) => setIssueTool(e.target.value)}
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                     >
                       <option value="Quick Grade">Quick Grade Calculator</option>
                       <option value="GPA Calculator">GPA Calculator</option>
@@ -1119,7 +1118,7 @@ export const Footer: React.FC<FooterProps> = ({
                   </div>
 
                   <div>
-                    <label htmlFor={issueSummaryId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor={issueSummaryId} className="block text-xs font-semibold text-slate-700 mb-1">
                       Issue Summary
                     </label>
                     <input
@@ -1128,13 +1127,13 @@ export const Footer: React.FC<FooterProps> = ({
                       value={issueTitle}
                       onChange={(e) => setIssueTitle(e.target.value)}
                       placeholder="e.g. Weighted curve rounding discrepancy"
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor={issueDescriptionId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor={issueDescriptionId} className="block text-xs font-semibold text-slate-700 mb-1">
                     Details &amp; Steps to Reproduce <span className="text-rose-500">*</span>
                   </label>
                   <textarea
@@ -1146,12 +1145,12 @@ export const Footer: React.FC<FooterProps> = ({
                     required
                     aria-required="true"
                     aria-describedby={issueError ? issueErrorId : undefined}
-                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all resize-none"
+                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all resize-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor={issueEmailId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor={issueEmailId} className="block text-xs font-semibold text-slate-700 mb-1">
                     Your Email (optional, for follow-up)
                   </label>
                   <input
@@ -1160,7 +1159,7 @@ export const Footer: React.FC<FooterProps> = ({
                     value={issueEmail}
                     onChange={(e) => setIssueEmail(e.target.value)}
                     placeholder="student@university.edu"
-                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                   />
                 </div>
 
@@ -1168,14 +1167,14 @@ export const Footer: React.FC<FooterProps> = ({
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
-                    className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
+                    className="px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={issueLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
                   >
                     {issueLoading ? (
                       <>
@@ -1197,11 +1196,11 @@ export const Footer: React.FC<FooterProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* MODAL 3: REQUEST A FEATURE (Submits to POST /api/suggest-feature)          */}
+      {/* MODAL 3: REQUEST A FEATURE (Submits to POST /api/suggest-feature) */}
       {/* ========================================================================= */}
       {activeModal === 'suggestFeature' && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0E1424]/35 backdrop-blur-xs animate-in fade-in duration-150"
           onClick={(e) => {
             if (e.target === e.currentTarget) setActiveModal(null);
           }}
@@ -1212,24 +1211,24 @@ export const Footer: React.FC<FooterProps> = ({
             aria-modal="true"
             aria-labelledby={featureTitleHeaderId}
             tabIndex={-1}
-            className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
+            className="relative w-full max-w-lg bg-white rounded-2xl border border-slate-200 shadow-2xl overflow-hidden p-6 sm:p-7 outline-none"
           >
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="absolute top-5 right-5 p-1 rounded-full text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/70 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
                 <PlusCircle className="w-5 h-5" />
               </div>
               <div>
-                <h3 id={featureTitleHeaderId} className="text-base font-bold text-slate-900 dark:text-white">Request a Calculator or Feature</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <h3 id={featureTitleHeaderId} className="text-base font-bold text-slate-900 ">Request a Calculator or Feature</h3>
+                <p className="text-xs text-slate-500 ">
                   Suggest a new grading scale, formula system, or calculator type.
                 </p>
               </div>
@@ -1237,11 +1236,11 @@ export const Footer: React.FC<FooterProps> = ({
 
             {featureSuccess ? (
               <div className="py-8 text-center space-y-3">
-                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 flex items-center justify-center">
+                <div className="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-sm font-bold text-slate-900 dark:text-white">Feature Submitted!</h4>
-                <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto">{featureSuccess}</p>
+                <h4 className="text-sm font-bold text-slate-900 ">Feature Submitted!</h4>
+                <p className="text-xs text-slate-600 max-w-sm mx-auto">{featureSuccess}</p>
               </div>
             ) : (
               <form onSubmit={handleSuggestFeatureSubmit} className="space-y-4">
@@ -1249,7 +1248,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <div
                     id={featureErrorId}
                     role="alert"
-                    className="p-3 text-xs text-rose-700 bg-rose-50 dark:bg-rose-950/60 dark:text-rose-300 rounded-xl border border-rose-200 dark:border-rose-800 flex items-center gap-2"
+                    className="p-3 text-xs text-rose-700 bg-rose-50 rounded-xl border border-rose-200 flex items-center gap-2"
                   >
                     <AlertTriangle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span>{featureError}</span>
@@ -1258,7 +1257,7 @@ export const Footer: React.FC<FooterProps> = ({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label htmlFor={featureNameId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor={featureNameId} className="block text-xs font-semibold text-slate-700 mb-1">
                       Feature / Tool Name <span className="text-rose-500">*</span>
                     </label>
                     <input
@@ -1270,19 +1269,19 @@ export const Footer: React.FC<FooterProps> = ({
                       required
                       aria-required="true"
                       aria-describedby={featureError ? featureErrorId : undefined}
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor={featureCategoryId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                    <label htmlFor={featureCategoryId} className="block text-xs font-semibold text-slate-700 mb-1">
                       Category
                     </label>
                     <select
                       id={featureCategoryId}
                       value={featureCategory}
                       onChange={(e) => setFeatureCategory(e.target.value)}
-                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                      className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                     >
                       <option value="New Grading Scale">New Grading Scale</option>
                       <option value="New Calculator Type">New Calculator Type</option>
@@ -1293,7 +1292,7 @@ export const Footer: React.FC<FooterProps> = ({
                 </div>
 
                 <div>
-                  <label htmlFor={featureDescriptionId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor={featureDescriptionId} className="block text-xs font-semibold text-slate-700 mb-1">
                     Description &amp; Why It&apos;s Useful <span className="text-rose-500">*</span>
                   </label>
                   <textarea
@@ -1305,12 +1304,12 @@ export const Footer: React.FC<FooterProps> = ({
                     required
                     aria-required="true"
                     aria-describedby={featureError ? featureErrorId : undefined}
-                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all resize-none"
+                    className="w-full px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all resize-none"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor={featureEmailId} className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  <label htmlFor={featureEmailId} className="block text-xs font-semibold text-slate-700 mb-1">
                     Your Email (optional, for roadmap notification)
                   </label>
                   <input
@@ -1319,7 +1318,7 @@ export const Footer: React.FC<FooterProps> = ({
                     value={featureEmail}
                     onChange={(e) => setFeatureEmail(e.target.value)}
                     placeholder="you@school.edu"
-                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-700/90 text-slate-900 dark:text-white shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.04)] focus:outline-none focus:border-teal-600 dark:focus:border-teal-500 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 dark:hover:border-slate-600 transition-all"
+                    className="w-full min-h-[44px] px-3.5 py-2.5 text-base sm:text-xs rounded-xl bg-white border border-slate-200/90 text-slate-900 shadow-[0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_1px_rgba(255,255,255,0.9)] focus:outline-none focus:border-teal-600 focus:ring-4 focus:ring-teal-500/15 hover:border-slate-300 transition-all"
                   />
                 </div>
 
@@ -1327,14 +1326,14 @@ export const Footer: React.FC<FooterProps> = ({
                   <button
                     type="button"
                     onClick={() => setActiveModal(null)}
-                    className="px-3 py-1.5 text-xs font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full cursor-pointer"
+                    className="px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-full cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={featureLoading}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 dark:bg-teal-600 dark:hover:bg-teal-500 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-white bg-teal-700 hover:bg-teal-800 rounded-full transition-all cursor-pointer shadow-xs disabled:opacity-60"
                   >
                     {featureLoading ? (
                       <>

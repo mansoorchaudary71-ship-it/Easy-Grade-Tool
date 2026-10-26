@@ -7,26 +7,21 @@
                   60-30-10 (warm off-white / slate-900 canvas, white + slate cards, light-brown accent in the chrome)
    ========================================================================== */
 
-/* 1. Canvas = the 60%. slate-50 in light mode, slate-900 (#0F172A) in dark mode. */
-html:not(.dark) body { background-color: #FAF9F7; color: #0F172A; }
-html.dark body { background-color: #0F172A; color: #F1F5F9; }
-
 /* 2. Header is now ONE row (the second tab row is gone), so anchors need less clearance. */
 html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 92px); }
 .site-chrome { border-bottom: 1px solid rgb(122 97 73 / 0.16); }
-html.dark .site-chrome { border-bottom-color: rgb(255 255 255 / 0.08); }
 
 /* 3. Primary CTA = flat blue-600 / blue-700.
-   premium.css painted `bg-[#0056D2]` buttons with a gradient that starts at #8B5CF6, where white text is only 3.7:1.
+   premium.css painted `bg-[#2457F5]` buttons with a gradient that starts at #8B5CF6, where white text is only 3.7:1.
    A flat fill keeps every primary button at 5.2:1 (hover 6.7:1) in both themes. */
-.premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled) {
+.premium-surface :is(button, a)[class~="bg-[#2457F5]"]:not([aria-pressed]):not(:disabled) {
   background-image: none;
-  background-color: #0056D2;
+  background-color: #2457F5;
   box-shadow: 0 1px 2px rgb(15 23 42 / 0.18);
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled):hover {
-    background-color: #0056D2;
+  .premium-surface :is(button, a)[class~="bg-[#2457F5]"]:not([aria-pressed]):not(:disabled):hover {
+    background-color: #2457F5;
     translate: 0 0;
     box-shadow: 0 2px 6px rgb(15 23 42 / 0.22);
   }
@@ -38,7 +33,6 @@ html.dark .site-chrome { border-bottom-color: rgb(255 255 255 / 0.08); }
 
 /* 5. Keyboard focus: one consistent, high-contrast ring (3:1 against both canvases). */
 :focus-visible { outline: 2px solid #7A6149; outline-offset: 2px; }
-html.dark :focus-visible { outline-color: #D6BEA0; }
 .ez-chart-pick:focus-visible { outline-offset: -2px; }
 
 /* 6. Quick Chart table: keep header cells opaque while sticky, and give sticky cells a stacking context. */
@@ -58,41 +52,6 @@ html.dark :focus-visible { outline-color: #D6BEA0; }
     border: 0 !important; background: transparent !important; color: #000 !important;
   }
   [data-scroll-shadow] { display: none !important; }
-}
-
-/* 8. One UI layer: pure white fields in light mode with a 1px low-opacity edge and a small contact shadow
-   (a hairline keeps them legible on the slate-50 canvas). Focus keeps the blue ring from index.css and the
-   :focus-visible rule above; dark mode keeps its own field colours. .elev-pill (header search) styles itself. */
-html:not(.dark) :is(
-  input[type="number"], input[type="text"], input[type="email"], input[type="search"],
-  input[type="url"], input[type="tel"], input[type="password"],
-  textarea, select, .field-input, .tool-input
-):not(.elev-pill) {
-  background-color: #FFFFFF;
-  border-color: rgb(122 97 73 / 0.2);
-  box-shadow: none;
-}
-html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .tool-input):not(.elev-pill):hover {
-  border-color: rgb(122 97 73 / 0.42);
-}
-
-/* 9. Content cards. Every large white / slate card (rounded-3xl, 28px, 32px) inside <main> stays pure white with a 1px warm edge,
-   one barely-there ambient shadow, and the localized corner sheen from premium.css (--sheen-*). The name bar (.chrome-bar) has its own. */
-html:not(.dark) main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"])[class*="bg-white"]:not(.chrome-bar) {
-  border-color: rgb(122 97 73 / 0.14);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  background-image: var(--sheen-img);
-  background-size: var(--sheen-size);
-  background-position: var(--sheen-pos);
-  background-repeat: no-repeat;
-}
-html.dark main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"])[class*="dark:bg-slate-"]:not(.chrome-bar) {
-  border-color: rgb(255 255 255 / 0.08);
-  box-shadow: none;
-  background-image: var(--sheen-img);
-  background-size: var(--sheen-size);
-  background-position: var(--sheen-pos);
-  background-repeat: no-repeat;
 }
 @media print {
   main :is([class*="rounded-3xl"], [class*="rounded-[28px]"], [class*="rounded-[32px]"]) { box-shadow: none !important; }

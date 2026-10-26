@@ -15,13 +15,13 @@ const MORE = [
   { to: '/cgpa-to-percentage-calculator/', title: 'CGPA to percentage', text: '10, 5 and 4-point conversions by university.' },
 ];
 
-const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight';
-const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight';
-const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100';
-const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const OL = 'list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const A = 'text-teal-700 dark:text-teal-400 font-semibold underline hover:text-teal-600';
+const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 tracking-tight';
+const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight';
+const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 ';
+const P = 'text-slate-600 leading-relaxed mb-4';
+const UL = 'list-disc pl-5 space-y-2 text-slate-600 leading-relaxed mb-4';
+const OL = 'list-decimal pl-6 space-y-2 text-slate-600 leading-relaxed mb-4';
+const A = 'text-teal-700 font-semibold underline hover:text-teal-600';
 
 const HOME_FAQ_HEADING: FaqHeading = {
   eyebrow: 'Quick Grade FAQs',
@@ -176,13 +176,13 @@ export const QuickGradeGuide: React.FC = () => (
     </ContentSection>
 
     <div className="guide-shell print:hidden space-y-3" style={{ marginTop: '3rem' }}>
-      <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white m-0">More grade calculators</h2>
+      <h2 className="text-2xl font-bold tracking-tight text-slate-900 m-0">More grade calculators</h2>
       <ul className="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
         {MORE.map((m) => (
           <li key={m.to}>
-            <Link to={m.to} className="glow-surface block h-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 hover:border-teal-600 transition-colors no-underline">
-              <span className="block font-bold text-slate-900 dark:text-white">{m.title}</span>
-              <span className="block text-sm text-slate-600 dark:text-slate-400">{m.text}</span>
+            <Link to={m.to} className="glow-surface block h-full rounded-2xl border border-slate-200 bg-white p-4 hover:border-teal-600 transition-colors no-underline">
+              <span className="block font-bold text-slate-900 ">{m.title}</span>
+              <span className="block text-sm text-slate-600 ">{m.text}</span>
             </Link>
           </li>
         ))}

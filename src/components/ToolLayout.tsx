@@ -35,7 +35,7 @@ export const ToolLayout: React.FC<ToolLayoutProps> = ({
       {educationalContent && (
         <section
           aria-label="Educational Guide"
-          className="w-full bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-3xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-sm"
+          className="w-full bg-white/80 backdrop-blur-md rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm"
         >
           {educationalContent}
         </section>

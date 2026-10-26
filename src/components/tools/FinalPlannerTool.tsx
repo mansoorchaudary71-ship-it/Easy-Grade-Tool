@@ -62,7 +62,7 @@ export const FinalPlannerTool: React.FC = () => {
   return (
     <div className="space-y-6">
       <section aria-label="Final exam planner" className={`${CARD} space-y-5 print:hidden`}>
-        <p className="text-sm text-slate-600 dark:text-slate-400 m-0">
+        <p className="text-sm text-slate-600 m-0">
           One row per class: your current grade, how much the final exam counts, and the grade you
           want. The planner solves for the final-exam score each class needs — and tells you
           honestly when a target is already secured or out of reach.
@@ -71,7 +71,7 @@ export const FinalPlannerTool: React.FC = () => {
           {rows.map((row, i) => {
             const result = results[i].result;
             return (
-              <div key={row.id} className="grid gap-3 sm:grid-cols-[1.2fr_1fr_1fr_1fr_auto] sm:items-end border border-slate-200 dark:border-slate-800 rounded-2xl p-4">
+              <div key={row.id} className="grid gap-3 sm:grid-cols-[1.2fr_1fr_1fr_1fr_auto] sm:items-end border border-slate-200 rounded-2xl p-4">
                 <div>
                   <label className={LABEL} htmlFor={`planner-name-${row.id}`}>Class</label>
                   <input
@@ -115,7 +115,7 @@ export const FinalPlannerTool: React.FC = () => {
                 <button
                   type="button"
                   aria-label={`Remove ${row.name || 'class'}`}
-                  className="justify-self-end rounded-xl border border-slate-200 dark:border-slate-800 px-3 py-2 text-slate-500 hover:text-rose-600"
+                  className="justify-self-end rounded-xl border border-slate-200 px-3 py-2 text-slate-500 hover:text-rose-600"
                   onClick={() => remove(row.id)}
                 >
                   <Trash2 className="w-4 h-4" />
@@ -124,7 +124,7 @@ export const FinalPlannerTool: React.FC = () => {
                   <p className={`${ERROR_TEXT} sm:col-span-5`}>Use numbers only: grades 0–100, final weight 0–100.</p>
                 )}
                 {result.status === 'no-weight' && (
-                  <p className="sm:col-span-5 m-0 text-sm text-slate-600 dark:text-slate-400">
+                  <p className="sm:col-span-5 m-0 text-sm text-slate-600 ">
                     The final has no weight here, so this class’s grade is already decided by its current grade.
                   </p>
                 )}
@@ -138,13 +138,13 @@ export const FinalPlannerTool: React.FC = () => {
       </section>
 
       <section aria-label="Planner results" className={RESULT_BOX}>
-        <p className="m-0 text-lg font-bold text-slate-900 dark:text-white">
+        <p className="m-0 text-lg font-bold text-slate-900 ">
           {solvable > 0 ? `${onTrack} of ${solvable} classes on track` : 'Fill in a class to see what its final needs.'}
         </p>
         <ul className="m-0 mt-3 space-y-2 list-none p-0">
           {results.map(({ row, result }) => (
-            <li key={row.id} className="text-base text-slate-700 dark:text-slate-300">
-              <span className="font-semibold text-slate-900 dark:text-white">{row.name || 'Unnamed class'}: </span>
+            <li key={row.id} className="text-base text-slate-700 ">
+              <span className="font-semibold text-slate-900 ">{row.name || 'Unnamed class'}: </span>
               {result.status === 'secured' && <>target already secured — even a 0% on the final keeps it.</>}
               {result.status === 'possible' && <>you need <strong>{result.required!.toFixed(1)}%</strong> on the final.</>}
               {result.status === 'impossible' && (

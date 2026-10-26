@@ -15,16 +15,16 @@ export const NotFound: React.FC = () => {
         <title>404 — Page Not Found | Easy Grade Tool</title>
         <meta name="robots" content="noindex, follow" />
       </Helmet>
-      <div className="w-16 h-16 rounded-3xl bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 flex items-center justify-center mb-4 shadow-sm">
+      <div className="w-16 h-16 rounded-3xl bg-amber-100 text-amber-700 flex items-center justify-center mb-4 shadow-sm">
         <AlertCircle className="w-8 h-8" aria-hidden="true" />
       </div>
-      <span className="text-xs font-mono font-bold tracking-widest uppercase text-teal-700 dark:text-teal-400 mb-2">
+      <span className="text-xs font-mono font-bold tracking-widest uppercase text-teal-700 mb-2">
         Error 404
       </span>
-      <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
         Page Not Found
       </h1>
-      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-md mx-auto mb-8 leading-relaxed">
+      <p className="text-sm sm:text-base text-slate-600 max-w-md mx-auto mb-8 leading-relaxed">
         The calculator or page you requested could not be found. Please check the address or return to our calculation suite.
       </p>
       <Link

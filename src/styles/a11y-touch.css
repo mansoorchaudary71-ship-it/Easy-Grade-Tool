@@ -65,20 +65,6 @@
   line-height: 1.35;
 }
 
-/* Contrast: slate-400 / stone-400 text on light backgrounds is about 2.5:1, below the 4.5:1 minimum */
-html:not(.dark) .text-slate-400,
-html:not(.dark) .text-stone-400,
-html:not(.dark) .text-gray-400 {
-  color: #475569;
-}
-html:not(.dark) .text-stone-500 {
-  color: #57534e;
-}
-html:not(.dark) .placeholder\:text-slate-400::placeholder,
-html:not(.dark) .placeholder\:text-stone-400::placeholder {
-  color: #64748b;
-}
-
 /* Sticky headers keep clear of the notch when installed as a PWA */
 html {
   scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 72px);

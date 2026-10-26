@@ -27,14 +27,14 @@ export const UpdatePrompt: React.FC = () => {
     <div
       role="status"
       aria-live="polite"
-      className="fixed left-3 right-3 sm:left-auto sm:right-4 sm:max-w-sm z-[9000] flex items-center gap-3 rounded-2xl bg-slate-900 text-white shadow-2xl px-4 py-3 print:hidden"
+      className="fixed left-3 right-3 sm:left-auto sm:right-4 sm:max-w-sm z-[9000] flex items-center gap-3 rounded-3xl bg-white text-[#0E1424] border border-[#E6E9F2] shadow-[0_24px_60px_-20px_rgba(36,87,245,0.35)] px-4 py-3 print:hidden"
       style={{ bottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
     >
       <span className="text-sm font-medium flex-1">A new version is ready.</span>
       <button
         type="button"
         onClick={() => apply()}
-        className="min-h-[48px] px-5 rounded-full bg-white text-slate-900 text-sm font-bold cursor-pointer"
+        className="min-h-[48px] px-5 rounded-full bg-[#2457F5] text-white text-sm font-bold cursor-pointer hover:bg-[#1A41C9] transition-colors"
       >
         Reload
       </button>

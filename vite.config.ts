@@ -47,7 +47,7 @@ export default defineConfig({
         name: 'Easy Grade Tool',
         short_name: 'Easy Grade Tool',
         description: 'Free grade calculators for students and teachers: quick grade chart, weighted grades, final exam score, test grade, curve, letter grade, GPA and CGPA.',
-        theme_color: '#F3F4F6',
+        theme_color: '#FAFBFF',
         background_color: '#ffffff',
         lang: 'en-US',
         dir: 'ltr',

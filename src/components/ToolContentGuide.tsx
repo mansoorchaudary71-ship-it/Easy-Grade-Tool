@@ -4,12 +4,12 @@ import { SemanticGuideImage } from './SemanticGuideImage';
 import { ContentSection } from './GuideShell';
 
 /** Same type scale as the homepage / weighted guide (QuickGradeGuide.tsx, EducationalGuide.tsx). */
-const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 dark:text-slate-100 tracking-tight';
-const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 dark:text-white tracking-tight';
-const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 dark:text-slate-100';
-const P = 'text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const OL = 'list-decimal pl-6 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
-const UL = 'list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed mb-4';
+const H2_MAIN = 'text-3xl font-bold mb-6 text-slate-800 tracking-tight';
+const H2 = 'text-2xl font-semibold mt-8 mb-4 text-slate-900 tracking-tight';
+const H3 = 'text-xl font-medium mt-6 mb-3 text-slate-900 ';
+const P = 'text-slate-600 leading-relaxed mb-4';
+const OL = 'list-decimal pl-6 space-y-2 text-slate-600 leading-relaxed mb-4';
+const UL = 'list-disc pl-5 space-y-2 text-slate-600 leading-relaxed mb-4';
 
 const Runs: React.FC<{ runs: GuideRun[] }> = ({ runs }) => (
   <>

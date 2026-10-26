@@ -69,7 +69,7 @@ export const ScrollableTableContainer: React.FC<ScrollableTableContainerProps> =
         tabIndex={0}
         role="region"
         aria-label={ariaLabel}
-        className={`overflow-x-auto ${verticalScroll} rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 dark:focus-visible:ring-blue-400 ${tableWrapperClassName}`}
+        className={`overflow-x-auto ${verticalScroll} rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${tableWrapperClassName}`}
       >
         {children}
       </div>
@@ -78,7 +78,7 @@ export const ScrollableTableContainer: React.FC<ScrollableTableContainerProps> =
       <div
         aria-hidden="true"
         data-scroll-shadow="left"
-        className={`pointer-events-none absolute inset-y-0 left-0 w-5 rounded-l-xl bg-gradient-to-r from-slate-900/25 to-transparent transition-opacity duration-200 motion-reduce:transition-none dark:from-black/60 print:hidden ${
+        className={`pointer-events-none absolute inset-y-0 left-0 w-5 rounded-l-xl bg-gradient-to-r from-slate-900/25 to-transparent transition-opacity duration-200 motion-reduce:transition-none print:hidden ${
           canScrollLeft ? 'opacity-100' : 'opacity-0'
         }`}
       />
@@ -87,7 +87,7 @@ export const ScrollableTableContainer: React.FC<ScrollableTableContainerProps> =
       <div
         aria-hidden="true"
         data-scroll-shadow="right"
-        className={`pointer-events-none absolute inset-y-0 right-0 w-5 rounded-r-xl bg-gradient-to-l from-slate-900/25 to-transparent transition-opacity duration-200 motion-reduce:transition-none dark:from-black/60 print:hidden ${
+        className={`pointer-events-none absolute inset-y-0 right-0 w-5 rounded-r-xl bg-gradient-to-l from-slate-900/25 to-transparent transition-opacity duration-200 motion-reduce:transition-none print:hidden ${
           canScrollRight ? 'opacity-100' : 'opacity-0'
         }`}
       />
