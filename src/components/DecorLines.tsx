@@ -6,12 +6,13 @@ import React from 'react';
  * the site's existing blue palette in light and dark mode.
  *
  *   waves   - flowing parallel curves, for banners and the newsletter card
+ *   rings   - thin concentric circles, for the tool-name banner (replaces waves there; stroke 1, thinner than waves' 1.5)
  *   arcs    - concentric quarter arcs, for corners of cards
  *   squiggle - a short hand-drawn underline, to sit under a section heading
  *   divider - a long gentle wave, used as a section separator
  *   plane   - paper plane with a dashed flight path (newsletter illustration)
  */
-export type DecorVariant = 'waves' | 'arcs' | 'squiggle' | 'divider' | 'plane';
+export type DecorVariant = 'waves' | 'rings' | 'arcs' | 'squiggle' | 'divider' | 'plane';
 
 interface DecorLinesProps {
   variant: DecorVariant;
@@ -37,6 +38,23 @@ export const DecorLines: React.FC<DecorLinesProps> = ({ variant, className = '' 
         <path d="M-10 124 C 90 54, 170 184, 280 104 S 470 24, 610 84" />
         <path d="M-10 102 C 90 32, 170 162, 280 82 S 470 2, 610 62" />
         <path d="M-10 80 C 90 10, 170 140, 280 60 S 470 -20, 610 40" />
+      </svg>
+    );
+  }
+
+  if (variant === 'rings') {
+    /* Thin concentric circles centred on the right edge, so the banner shows
+       sweeping circular lines sweeping in from the right — the same placement
+       and sizing class (cs-banner-lines) the waves used. Stroke 1: deliberately
+       thinner than waves (1.5) and squiggle (2.5). */
+    return (
+      <svg className={cls} viewBox="0 0 600 240" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" focusable="false" {...common} strokeWidth={1}>
+        <circle cx="600" cy="120" r="50" />
+        <circle cx="600" cy="120" r="105" />
+        <circle cx="600" cy="120" r="160" />
+        <circle cx="600" cy="120" r="215" />
+        <circle cx="600" cy="120" r="270" />
+        <circle cx="600" cy="120" r="325" />
       </svg>
     );
   }
