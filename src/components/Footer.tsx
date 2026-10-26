@@ -624,6 +624,16 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="cs-footer-panel relative pt-12 md:pt-14 dark:bg-slate-900 transition-colors">
           <DecorLines variant="divider" className="cs-divider" />
           <div className="cs-container">
+            {/* Journey band (Asana grouped directory, journey form): the same
+                four-step flow as the homepage, so every page offers the path
+                from scores to a plan — not just a list of links. */}
+            <nav aria-label="From scores to a plan" className="nova2-foot-journey">
+              <p className="nova2-foot-journey-title">From scores to a plan:</p>
+              <Link to="/test-grade-calculator/"><span className="step-no" aria-hidden="true">1</span>Grade a test</Link>
+              <Link to="/grading-scale/"><span className="step-no" aria-hidden="true">2</span>Check the scale</Link>
+              <Link to="/gpa-calculator/"><span className="step-no" aria-hidden="true">3</span>Track the GPA</Link>
+              <Link to="/final-grade-planner/"><span className="step-no" aria-hidden="true">4</span>Plan the finish</Link>
+            </nav>
             <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 pb-12">
               {/* Brand */}
               <div className="col-span-2 md:col-span-4 space-y-5">

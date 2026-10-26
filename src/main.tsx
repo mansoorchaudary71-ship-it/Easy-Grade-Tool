@@ -10,6 +10,7 @@ import './styles/ux-refactor.css';
 import './styles/typography.css';
 import './styles/coursera.css';
 import './styles/nova.css';
+import './styles/nova2.css';
 import { preloadForPath } from './utils/lazyRoutes';
 import { installPrintFocus } from './utils/printFocus';
 

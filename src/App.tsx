@@ -230,8 +230,8 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
           )}
           <Suspense fallback={<CalculatorSkeleton />}>
             <Routes>
-              <Route path="/" element={<CompGrade setToast={setToastMessage} />} />
-              <Route path="/grade-calculator" element={<CompGrade setToast={setToastMessage} />} />
+              <Route path="/" element={<CompGrade setToast={setToastMessage} onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />} />
+              <Route path="/grade-calculator" element={<CompGrade setToast={setToastMessage} onOpenCommandPalette={() => setIsCommandPaletteOpen(true)} />} />
               <Route path="/gpa-calculator" element={<CompGpa setToast={setToastMessage} />} />
               <Route path="/cgpa-to-percentage-calculator" element={<CompCgpa setToast={setToastMessage} />} />
               <Route path="/tip-calculator" element={<CompTip setToast={setToastMessage} />} />

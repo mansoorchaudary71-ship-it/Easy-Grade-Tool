@@ -89,15 +89,19 @@ const TRUST: { icon: typeof Calculator; title: string; text: string }[] = [
 
 /**
  * Landing sections shown under the Quick Grade tool on the home page (Coursera-style):
- *   1. "Explore calculators" category cards   2. "What brings you here today?" tabs   3. "Why people choose" tiles
+ *   1. "Explore calculators" tabbed shelves  2. "What brings you here today?" tabs   3. "Why people choose" tiles
  * Server-render safe (no window access while rendering). Headings start at h2: the page's single h1 lives in <ToolHeading />.
+ * onOpenCommandPalette is wired from App through GradeCalculator; when absent the
+ * escape hatch falls back to an anchor link to the shelves.
  */
-export const HomeSections: React.FC = () => {
+export const HomeSections: React.FC<{ onOpenCommandPalette?: () => void }> = ({ onOpenCommandPalette }) => {
   const baseId = useId();
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const persona = PERSONAS[active];
   const PersonaIcon = persona.icon;
+  const [shelfActive, setShelfActive] = useState(0);
+  const shelfRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const onTabKey = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     let next = index;
@@ -109,6 +113,18 @@ export const HomeSections: React.FC = () => {
     e.preventDefault();
     setActive(next);
     tabRefs.current[next]?.focus();
+  };
+
+  const onShelfKey = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let next = index;
+    if (e.key === 'ArrowRight') next = (index + 1) % TOOL_GROUPS.length;
+    else if (e.key === 'ArrowLeft') next = (index - 1 + TOOL_GROUPS.length) % TOOL_GROUPS.length;
+    else if (e.key === 'Home') next = 0;
+    else if (e.key === 'End') next = TOOL_GROUPS.length - 1;
+    else return;
+    e.preventDefault();
+    setShelfActive(next);
+    shelfRefs.current[next]?.focus();
   };
 
   return (
@@ -158,40 +174,68 @@ export const HomeSections: React.FC = () => {
         </ol>
       </section>
 
-      {/* 2. Explore calculators */}
-      <section aria-labelledby={`${baseId}-explore`} className="cs-section pt-4">
+      {/* 2. Explore calculators — tabbed shelves (Typeform shelves + Asana switcher).
+          Every panel is rendered and only hidden, so no homepage link is lost from
+          the prerendered HTML; tabs only switch which shelf is visible. */}
+      <section aria-labelledby={`${baseId}-explore`} className="cs-section pt-4" id="nova2-explore">
         <p className="cs-eyebrow">Explore</p>
         <h2 id={`${baseId}-explore`} className="cs-h2">Calculators for every kind of grade and number</h2>
         <DecorLines variant="squiggle" className="cs-squiggle" />
-        <p className="cs-lead">Pick a category, or press Ctrl+K to search every tool.</p>
-        <div className="cs-cat-grid">
-          {TOOL_GROUPS.map((group) => {
+        <p className="cs-lead">Pick a shelf, or press Ctrl+K to search every tool.</p>
+        <div role="tablist" aria-label="Calculator categories" className="nova2-shelf-tabs">
+          {TOOL_GROUPS.map((group, i) => {
             const meta = CATEGORY_META[group.id] ?? { icon: Calculator, blurb: '' };
             const Icon = meta.icon;
             return (
-              <article key={group.id} className="cs-card cs-cat">
-                <span className="cs-cat-icon" aria-hidden="true"><Icon className="size-6" strokeWidth={2} /></span>
-                <h3>{group.heading}</h3>
-                <p>{meta.blurb}</p>
-                <ul>
-                  {group.items.map((item) => (
-                    <li key={item.path}>
-                      <Link to={item.path} title={item.title} onMouseEnter={() => void preloadForPath(item.path)} onFocus={() => void preloadForPath(item.path)}>
-                        <span>{item.label}</span>
-                        <ArrowRight className="size-4 shrink-0 opacity-60" aria-hidden="true" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                {group.items[0] && (
-                  <Link to={group.items[0].path} className="cs-card-link">
-                    Start with {group.items[0].label} <ArrowRight className="size-4" aria-hidden="true" />
-                  </Link>
-                )}
-              </article>
+              <button
+                key={group.id}
+                ref={(el) => { shelfRefs.current[i] = el; }}
+                type="button"
+                role="tab"
+                id={`${baseId}-shelf-tab-${group.id}`}
+                aria-selected={shelfActive === i}
+                aria-controls={`${baseId}-shelf-panel-${group.id}`}
+                tabIndex={shelfActive === i ? 0 : -1}
+                onClick={() => setShelfActive(i)}
+                onKeyDown={(e) => onShelfKey(e, i)}
+                className="nova2-shelf-tab"
+              >
+                <Icon className="size-5" strokeWidth={2} aria-hidden="true" />
+                {group.heading}
+              </button>
             );
           })}
         </div>
+        {TOOL_GROUPS.map((group, i) => {
+          const meta = CATEGORY_META[group.id] ?? { icon: Calculator, blurb: '' };
+          return (
+            <div
+              key={group.id}
+              role="tabpanel"
+              id={`${baseId}-shelf-panel-${group.id}`}
+              aria-labelledby={`${baseId}-shelf-tab-${group.id}`}
+              hidden={shelfActive !== i}
+              className="nova2-shelf-panel"
+            >
+              <p className="cs-lead">{meta.blurb}</p>
+              <ul className="nova2-shelf-list">
+                {group.items.map((item) => (
+                  <li key={item.path}>
+                    <Link to={item.path} title={item.title} onMouseEnter={() => void preloadForPath(item.path)} onFocus={() => void preloadForPath(item.path)}>
+                      <span>{item.label}</span>
+                      <ArrowRight className="size-4 shrink-0 opacity-60" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              {group.items[0] && (
+                <Link to={group.items[0].path} className="cs-card-link">
+                  Start with {group.items[0].label} <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+              )}
+            </div>
+          );
+        })}
       </section>
 
       {/* 3. What's new: genuinely new tools, dated, all linking to real pages */}
@@ -260,7 +304,37 @@ export const HomeSections: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. Why people choose Easy Grade Tool */}
+      {/* 5. Why grading eats your Sunday — pain, agitation, solution (Asana).
+          No statistics: every pain is a plain, verifiable frustration, and the
+          fix line states only what the tools actually do. */}
+      <section aria-labelledby={`${baseId}-pain`} className="cs-section">
+        <p className="cs-eyebrow">Why grading eats your Sunday</p>
+        <h2 id={`${baseId}-pain`} className="cs-h2">Sound familiar?</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
+        <ul className="nova2-pain-grid">
+          <li className="nova2-pain-card">
+            <h3>Grades live in five places</h3>
+            <p>One spreadsheet, one gradebook, one stack of papers — and none of them agree with each other.</p>
+          </li>
+          <li className="nova2-pain-card">
+            <h3>One wrong weight ruins the average</h3>
+            <p>A final worth 30% typed as 3% quietly changes every student&apos;s grade, and nobody notices until report cards.</p>
+          </li>
+          <li className="nova2-pain-card">
+            <h3>“What do I need on the final?” — again</h3>
+            <p>Every student asks it, and every answer means recomputing the whole course grade by hand.</p>
+          </li>
+        </ul>
+        <div className="nova2-pain-fix">
+          <p><strong>This is exactly what Easy Grade Tool is built to fix:</strong> type the numbers once, get the answer instantly — no sign-up, no spreadsheet, no student data stored.</p>
+          <Link to="/grade-calculator/" className="cs-btn cs-btn-primary">
+            Start with the weighted grade calculator
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      {/* 6. Why people choose Easy Grade Tool */}
       <section aria-labelledby={`${baseId}-why`} className="cs-section pb-2">
         <h2 id={`${baseId}-why`} className="cs-h2">Why people choose Easy Grade Tool</h2>
         <DecorLines variant="squiggle" className="cs-squiggle" />
@@ -276,6 +350,23 @@ export const HomeSections: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* 7. Escape hatch (Typeform): for visitors who fit no shelf, search wins. */}
+      <section aria-labelledby={`${baseId}-escape`} className="cs-section pb-2">
+        <div className="nova2-escape">
+          <h2 id={`${baseId}-escape`} className="cs-h2">Looking for a specific calculator?</h2>
+          <p>Search every tool by name — faster than browsing the shelves.</p>
+          {onOpenCommandPalette ? (
+            <button type="button" onClick={onOpenCommandPalette} className="cs-btn cs-btn-primary">
+              Search calculators (Ctrl+K)
+            </button>
+          ) : (
+            <a href="#nova2-explore" className="cs-btn cs-btn-primary">
+              Browse all calculators
+            </a>
+          )}
         </div>
       </section>
     </div>

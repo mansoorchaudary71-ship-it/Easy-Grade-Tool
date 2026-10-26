@@ -151,8 +151,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           One row, Dribbble-style structure:
           at the top: logo | plain-text nav links | text link | solid pill | theme.
           once scrolled: the grey search pill appears between logo and nav.
-          Below xl the nav links and text link move into the hamburger drawer;
-          below lg the search icon opens the palette (the pill is desktop only).
+          Below xl the group nav links move into the hamburger drawer; the
+          For Schools text link stays visible from lg (it is the embed
+          programme, so it earns a permanent header slot).
+          Below lg the search icon opens the palette (the pill is desktop only).
           Colours follow the NOVA system: brand blue (#0056D2) for the pill,
           focus rings and hovers — no Dribbble pink anywhere.
         */}
@@ -233,11 +235,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* ------------------------------ Right cluster ------------------------------ */}
           <div className="flex shrink-0 items-center gap-1 sm:gap-2 xl:gap-3">
-            {/* For Schools: plain text link in the "Log in" slot. */}
+            {/* For Schools: plain text link in the "Log in" slot. Visible from lg. */}
             <Link
               to="/for-schools/"
               title="Embed free grade calculators on your school website"
-              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#0056D2] xl:inline-flex ${headerFocusRing} dark:text-slate-100 dark:hover:text-[#6EA8FF]`}
+              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#0056D2] lg:inline-flex ${headerFocusRing} dark:text-slate-100 dark:hover:text-[#6EA8FF]`}
             >
               For Schools
             </Link>

@@ -23,6 +23,8 @@ import { GRADING_SCALE_SIZES, gradingScalePath } from '../data/gradingScaleSizes
 
 export interface GradeCalculatorProps {
   setToast: (msg: string) => void;
+  /** Opens the command palette. Wired from App so the homepage escape hatch can search every tool. */
+  onOpenCommandPalette?: () => void;
   initialItems?: AssessmentItem[];
   initialMode?: CalculationMode;
   initialScale?: GradingScaleType;
@@ -49,8 +51,56 @@ const REMOVE_BTN =
 const letterTone = (letter: string) => `${gradeTone(letter).surface} border`;
 const letterBadge = (letter: string) => `${gradeTone(letter).badge} border`;
 
+const fmt1 = (v: number) => String(Math.round(v * 10) / 10);
+
+/**
+ * Mini final-exam planner embedded in the home banner (Intercom pattern:
+ * a calculator as marketing content, not just a link to one). It reuses the
+ * verified solveFinalExam maths — including its honest "unreachable" case —
+ * and links to the full final-exam calculator for the detailed version.
+ * Prefilled with an example so the banner answers on first paint; every
+ * field is editable. Server-render safe (plain useState defaults).
+ */
+const HomeFinalPlanner: React.FC = () => {
+  const [current, setCurrent] = useState('84');
+  const [weight, setWeight] = useState('30');
+  const [target, setTarget] = useState('85');
+  const result = useMemo(
+    () => solveFinalExam({ current, target, weight }),
+    [current, target, weight],
+  );
+  return (
+    <div className="nova2-planner print:hidden" aria-label="What do I need on the final exam?">
+      <p className="nova2-planner-title">What do I need on the final? Try it here:</p>
+      <div className="nova2-planner-fields">
+        <div className="nova2-planner-field">
+          <label htmlFor="nova2-current">Current grade (%)</label>
+          <input id="nova2-current" type="number" inputMode="decimal" min={0} max={200} value={current} onChange={(e) => setCurrent(e.target.value)} />
+        </div>
+        <div className="nova2-planner-field">
+          <label htmlFor="nova2-weight">Final exam weight (%)</label>
+          <input id="nova2-weight" type="number" inputMode="decimal" min={0} max={100} value={weight} onChange={(e) => setWeight(e.target.value)} />
+        </div>
+        <div className="nova2-planner-field">
+          <label htmlFor="nova2-target">Grade you want (%)</label>
+          <input id="nova2-target" type="number" inputMode="decimal" min={0} max={200} value={target} onChange={(e) => setTarget(e.target.value)} />
+        </div>
+      </div>
+      <p className="nova2-planner-result" role="status">
+        {result.status === 'invalid' && (result.errors[0] ?? 'Enter all three numbers.')}
+        {result.status === 'secured' && (<>Already there — even a 0 on the final keeps you at or above <strong>{fmt1(Number(target))}%</strong>.</>)}
+        {result.status === 'unreachable' && (<><span className="warn">Not possible, honestly:</span> even 100% on the final only reaches <strong>{fmt1(result.maxPossible)}%</strong>. Lower the target, or raise your current grade first.</>)}
+        {result.status === 'ok' && (<>You need <strong>{fmt1(result.required)}%</strong> on the final to finish at {fmt1(Number(target))}%.</>)}
+        {' '}
+        <Link to="/final-exam-grade-calculator/" className="font-bold no-underline hover:underline">Open the full planner →</Link>
+      </p>
+    </div>
+  );
+};
+
 export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
   setToast,
+  onOpenCommandPalette,
   initialItems,
   initialMode,
   initialScale = 'standard',
@@ -193,6 +243,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
                   <Link to="/tip-calculator/" className="cs-chip">Tip</Link>
                 </div>
               </div>
+              <HomeFinalPlanner />
             </>
           )}
         </ToolHeading>
@@ -223,7 +274,7 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
               </li>
             </ul>
           </nav>
-          {isHomeRoute && <HomeSections />}
+          {isHomeRoute && <HomeSections onOpenCommandPalette={onOpenCommandPalette} />}
         </div>
       ) : (
         <div
