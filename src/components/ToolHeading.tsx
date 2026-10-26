@@ -11,6 +11,11 @@ interface ToolHeadingProps {
   /** Optional extra content under the description (call-to-action buttons, quick facts). */
   children?: React.ReactNode;
   headingTag?: 'h1' | 'h2';
+  /** Hide the "how it works" journey stepper (info/legal pages). Calculators show it. */
+  hideSteps?: boolean;
+  /** Page-specific journey steps. When omitted, the generic calculator steps are used.
+      ToolPage passes its own steps so the banner text stays unique per page (CHK-08). */
+  steps?: { title: string; sub: string }[];
 }
 
 /**
@@ -27,7 +32,14 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
   action,
   children,
   headingTag = 'h1',
+  hideSteps = false,
+  steps,
 }) => {
+  const journeySteps = steps ?? [
+    { title: 'Enter your numbers', sub: 'Type scores, grades or credits.' },
+    { title: 'See the answer instantly', sub: 'Results update as you type.' },
+    { title: 'Keep it, no sign-up', sub: 'Print it, save it as PDF, come back any time.' },
+  ];
   const descText = description || copy;
   const eyebrowText = badge || eyebrow;
   const HeadingTag = headingTag;
@@ -40,6 +52,13 @@ export const ToolHeading: React.FC<ToolHeadingProps> = ({
         <HeadingTag className="cs-banner-title [text-wrap:balance]">{title}</HeadingTag>
         {descText && <p className="cs-banner-sub">{descText}</p>}
         {children}
+        {!hideSteps && (
+          <ol className="nova-steps" aria-label="How it works">
+            {journeySteps.map((s) => (
+              <li key={s.title}><strong>{s.title}</strong><span>{s.sub}</span></li>
+            ))}
+          </ol>
+        )}
       </div>
       {action && <div className="relative z-10 shrink-0">{action}</div>}
     </div>

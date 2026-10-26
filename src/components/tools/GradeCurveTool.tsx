@@ -78,7 +78,7 @@ export const GradeCurveTool: React.FC = () => {
             autoCapitalize="off"
             autoCorrect="off"
             aria-describedby="gc-scores-help"
-            className="w-full bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#6D28D9] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
+            className="w-full bg-[#F0F2F5] dark:bg-slate-800 border-2 border-transparent text-stone-900 dark:text-white rounded-2xl px-4 py-3 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-mono text-base"
             spellCheck={false}
           />
           <p id="gc-scores-help" className="text-sm text-slate-600 dark:text-slate-300 mt-1.5 m-0">
@@ -180,7 +180,7 @@ export const GradeCurveTool: React.FC = () => {
                 ['Median before', before.median],
                 ['Median after', after.median],
               ].map(([label, val]) => (
-                <div key={label as string} className="glow-surface rounded-2xl bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 p-3">
+                <div key={label as string} className="glow-surface rounded-2xl bg-[#E4EDFB] dark:bg-teal-950/60 border border-[#C9DCF7] dark:border-teal-800/60 p-3">
                   <span className="text-xs font-semibold uppercase tracking-wider text-teal-900 dark:text-teal-300 block">{label as string}</span>
                   <strong className="text-xl font-extrabold font-mono text-teal-950 dark:text-teal-100">{roundTo(val as number, 1)}</strong>
                 </div>

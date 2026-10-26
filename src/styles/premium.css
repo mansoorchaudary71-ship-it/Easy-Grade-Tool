@@ -3,7 +3,7 @@
 
    Palette
      --ds-slate  #1E293B  Deep Royal Slate: header, page banners, newsletter banner, dark-mode surfaces
-     --ds-blue   #7C3AED  Violet: every primary CTA, active pill and key highlight
+     --ds-blue   #0056D2  Violet: every primary CTA, active pill and key highlight
    Imported AFTER index.css and a11y-touch.css (see main.tsx). Unlayered rules here win over Tailwind
    utilities, so this file only touches colour, shadow, border, transition and motion (never layout).
    ========================================================================== */
@@ -11,8 +11,8 @@
 :root {
   --ds-slate: #1E293B;
   --ds-slate-deep: #0F172A;
-  --ds-blue: #7C3AED;
-  --ds-blue-hover: #6D28D9;
+  --ds-blue: #0056D2;
+  --ds-blue-hover: #0056D2;
   --ds-edge: rgba(255, 255, 255, 0.1);
 
   /* Glide curve for sliding pills / hover lifts, springy overshoot for tap release */
@@ -21,18 +21,18 @@
 
   /* Soft ambient elevation */
   --ds-shadow-card: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 2px 4px rgba(15, 23, 42, 0.04), 0 18px 44px -20px rgba(15, 23, 42, 0.28);
-  --ds-shadow-cta: 0 8px 20px -6px rgba(109, 40, 217, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  --ds-shadow-cta-hover: 0 16px 32px -8px rgba(109, 40, 217, 0.7), 0 0 0 4px rgba(109, 40, 217, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --ds-shadow-cta: 0 8px 20px -6px rgba(0, 86, 210, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  --ds-shadow-cta-hover: 0 16px 32px -8px rgba(0, 86, 210, 0.7), 0 0 0 4px rgba(0, 86, 210, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 
-  /* The former indigo/teal scale is now the violet scale (600 = #7C3AED) */
+  /* The former indigo/teal scale is now the violet scale (600 = #0056D2) */
   --color-teal-50: #eff6ff;
-  --color-teal-100: #ede9fe;
-  --color-teal-200: #ddd6fe;
-  --color-teal-300: #c4b5fd;
-  --color-teal-400: #a78bfa;
+  --color-teal-100: #e4edfb;
+  --color-teal-200: #c9dcf7;
+  --color-teal-300: #bfd7ff;
+  --color-teal-400: #6ea8ff;
   --color-teal-500: #8b5cf6;
-  --color-teal-600: #7c3aed;
-  --color-teal-700: #6d28d9;
+  --color-teal-600: #0056d2;
+  --color-teal-700: #0056d2;
   --color-teal-800: #1e40af;
   --color-teal-900: #4c1d95;
   --color-teal-950: #172554;
@@ -101,34 +101,34 @@ html :is(button, [role="button"], [role="tab"], summary, .preset-btn, a[class*="
 }
 
 /* ==========================================================================
-   2. Primary CTA (#7C3AED): gradient, glow, hover lift
+   2. Primary CTA (#0056D2): gradient, glow, hover lift
    ========================================================================== */
-.premium-surface :is(button, a)[class~="bg-[#7C3AED]"]:not([aria-pressed]):not(:disabled) {
-  background-image: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 52%, #6D28D9 100%);
+.premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled) {
+  background-image: linear-gradient(135deg, #8B5CF6 0%, #0056D2 52%, #0056D2 100%);
   background-size: 170% 170%;
   background-position: 0% 50%;
   box-shadow: var(--ds-shadow-cta);
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class~="bg-[#7C3AED]"]:not([aria-pressed]):not(:disabled):hover {
+  .premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled):hover {
     translate: 0 -1.5px;
     background-position: 100% 50%;
     box-shadow: var(--ds-shadow-cta-hover);
   }
 }
-.premium-surface :is(button, a)[class~="bg-[#7C3AED]"]:not([aria-pressed]):not(:disabled):active {
+.premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled):active {
   translate: 0 0;
-  box-shadow: 0 4px 10px -4px rgba(109, 40, 217, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 10px -4px rgba(0, 86, 210, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
 
 /* Secondary / chip buttons: lift and turn violet on hover */
 @media (hover: hover) {
   .premium-surface .preset-btn:not([aria-pressed="true"]):not(.text-white):hover {
     translate: 0 -2px;
-    color: #6D28D9;
+    color: #0056D2;
   }
   .dark .premium-surface .preset-btn:not([aria-pressed="true"]):not(.text-white):hover {
-    color: #C4B5FD;
+    color: #BFD7FF;
   }
 }
 
@@ -188,12 +188,12 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
 }
 
 /* Result panels rise in softly and carry a violet glow */
-.premium-surface [class*="bg-[#EDE9FE]"] {
-  border-color: #DDD6FE;
-  box-shadow: 0 14px 34px -16px rgba(109, 40, 217, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+.premium-surface [class*="bg-[#E4EDFB]"] {
+  border-color: #C9DCF7;
+  box-shadow: 0 14px 34px -16px rgba(0, 86, 210, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
   animation: premium-rise 0.38s var(--ds-ease) both;
 }
-.dark .premium-surface [class*="bg-[#EDE9FE]"] {
+.dark .premium-surface [class*="bg-[#E4EDFB]"] {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 14px 34px -16px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
@@ -255,17 +255,17 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
 
 .hero-badge {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  color: #6D28D9;
-  background-color: rgba(109, 40, 217, 0.1);
-  border: 1px solid rgba(109, 40, 217, 0.24);
+  color: #0056D2;
+  background-color: rgba(0, 86, 210, 0.1);
+  border: 1px solid rgba(0, 86, 210, 0.24);
 }
-.hero-badge-dot { background-color: #7C3AED; box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.18); }
+.hero-badge-dot { background-color: #0056D2; box-shadow: 0 0 0 3px rgba(0, 86, 210, 0.18); }
 .dark .hero-badge {
-  color: #C4B5FD;
-  background-color: rgba(167, 139, 250, 0.16);
-  border-color: rgba(167, 139, 250, 0.3);
+  color: #BFD7FF;
+  background-color: rgba(110, 168, 255, 0.16);
+  border-color: rgba(110, 168, 255, 0.3);
 }
-.dark .hero-badge-dot { background-color: #A78BFA; box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2); }
+.dark .hero-badge-dot { background-color: #6EA8FF; box-shadow: 0 0 0 3px rgba(110, 168, 255, 0.2); }
 
 /* Texture: brown stroke lines, kept very low-opacity */
 .hero-lines { color: #8A5A38; }
@@ -483,9 +483,9 @@ html.dark .preset-btn:not(.active):not([data-active="true"]):not(.text-white):ho
    5. Motion preferences + print
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  .premium-surface [class*="bg-[#EDE9FE]"] { animation: none; }
+  .premium-surface [class*="bg-[#E4EDFB]"] { animation: none; }
   .premium-surface .preset-btn:hover,
-  .premium-surface :is(button, a)[class~="bg-[#7C3AED]"]:hover { translate: none; }
+  .premium-surface :is(button, a)[class~="bg-[#0056D2]"]:hover { translate: none; }
 }
 @media print {
   .premium-surface * { box-shadow: none !important; animation: none !important; }

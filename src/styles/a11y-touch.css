@@ -25,7 +25,7 @@
 .skip-link:focus,
 .skip-link:focus-visible {
   top: calc(env(safe-area-inset-top, 0px) + 12px);
-  outline: 3px solid #c4b5fd;
+  outline: 3px solid #bfd7ff;
   outline-offset: 2px;
 }
 

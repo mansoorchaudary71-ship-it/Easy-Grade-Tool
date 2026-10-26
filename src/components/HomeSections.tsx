@@ -15,15 +15,15 @@ import { preloadForPath } from '../utils/lazyRoutes';
 const CATEGORY_META: Record<string, { icon: typeof Calculator; blurb: string }> = {
   grades: {
     icon: Calculator,
-    blurb: 'Weighted grades, the score you need on the final, curves, test scores and letter grades.',
+    blurb: 'Sunday-night grade math, done in 30 seconds: weighted grades, the score you need on the final, curves, test scores and letter grades.',
   },
   gpa: {
     icon: GraduationCap,
-    blurb: 'GPA, weighted GPA, CGPA to percentage and everyday percentage maths.',
+    blurb: 'Stop guessing your GPA: GPA, weighted GPA, CGPA to percentage and everyday percentage maths, worked out instantly.',
   },
   everyday: {
     icon: Banknote,
-    blurb: 'Tip, loan and mortgage calculators, plus a password generator that never leaves your device.',
+    blurb: 'Everyday maths without the spreadsheet: tip, loan and mortgage calculators, plus a password generator that never leaves your device.',
   },
 };
 
@@ -113,6 +113,14 @@ export const HomeSections: React.FC = () => {
 
   return (
     <div className="mt-10 print:hidden">
+      {/* Outcome ticker: verified results and facts, scrolling under the hero */}
+      <div className="nova-ticker" aria-label="Example results">
+        <div className="nova-ticker-track">
+          <span>17 out of 20 = 85% — a B&nbsp;&nbsp;•&nbsp;&nbsp;3.60 semester GPA, worked example&nbsp;&nbsp;•&nbsp;&nbsp;0 sign-ups&nbsp;&nbsp;•&nbsp;&nbsp;0 student data stored&nbsp;&nbsp;•&nbsp;&nbsp;Print or save as PDF&nbsp;&nbsp;•&nbsp;&nbsp;76 free pages&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+          <span aria-hidden="true">17 out of 20 = 85% — a B&nbsp;&nbsp;•&nbsp;&nbsp;3.60 semester GPA, worked example&nbsp;&nbsp;•&nbsp;&nbsp;0 sign-ups&nbsp;&nbsp;•&nbsp;&nbsp;0 student data stored&nbsp;&nbsp;•&nbsp;&nbsp;Print or save as PDF&nbsp;&nbsp;•&nbsp;&nbsp;76 free pages&nbsp;&nbsp;•&nbsp;&nbsp;</span>
+        </div>
+      </div>
+
       {/* 0. Quick answers: the lookups people search for most */}
       <section aria-labelledby={`${baseId}-quick-answers`} className="cs-section pt-4">
         <p className="cs-eyebrow">Quick answers</p>
@@ -137,7 +145,20 @@ export const HomeSections: React.FC = () => {
         </div>
       </section>
 
-      {/* 1. Explore calculators */}
+      {/* 1. From scores to a plan: the grading journey, as linked steps */}
+      <section aria-labelledby={`${baseId}-flow`} className="cs-section pt-4">
+        <p className="cs-eyebrow">How it flows</p>
+        <h2 id={`${baseId}-flow`} className="cs-h2">From scores to a plan, in four steps</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
+        <ol className="nova-flow">
+          <li><Link to="/test-grade-calculator/"><strong>Grade a test</strong><span>Percentage and letter grade for any score.</span></Link></li>
+          <li><Link to="/grading-scale/"><strong>Check the scale</strong><span>Every wrong-answer row, at a glance.</span></Link></li>
+          <li><Link to="/gpa-calculator/"><strong>Track the GPA</strong><span>Semester, cumulative, weighted — all in one place.</span></Link></li>
+          <li><Link to="/final-grade-planner/"><strong>Plan the finish</strong><span>What each class needs to hit your target.</span></Link></li>
+        </ol>
+      </section>
+
+      {/* 2. Explore calculators */}
       <section aria-labelledby={`${baseId}-explore`} className="cs-section pt-4">
         <p className="cs-eyebrow">Explore</p>
         <h2 id={`${baseId}-explore`} className="cs-h2">Calculators for every kind of grade and number</h2>
@@ -173,7 +194,25 @@ export const HomeSections: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. What brings you here today? */}
+      {/* 3. What's new: genuinely new tools, dated, all linking to real pages */}
+      <section aria-labelledby={`${baseId}-new`} className="cs-section">
+        <p className="cs-eyebrow">What&apos;s new</p>
+        <h2 id={`${baseId}-new`} className="cs-h2">New tools, added October 2026</h2>
+        <DecorLines variant="squiggle" className="cs-squiggle" />
+        <ul className="nova-new">
+          <li>
+            <Link to="/final-grade-planner/"><strong>Final-grade planner</strong><span>Plan up to 10 classes — and see impossible targets flagged honestly.</span></Link>
+          </li>
+          <li>
+            <Link to="/high-school-gpa-calculator/"><strong>High-school &amp; college GPA calculators</strong><span>Built for each system&apos;s own rules, with worked examples.</span></Link>
+          </li>
+          <li>
+            <Link to="/cgpa-to-percentage-calculator/"><strong>Per-university CGPA converters</strong><span>25 verified university formulas, no invented conversions.</span></Link>
+          </li>
+        </ul>
+      </section>
+
+      {/* 4. What brings you here today? */}
       <section aria-labelledby={`${baseId}-who`} className="cs-section">
         <h2 id={`${baseId}-who`} className="cs-h2">What brings you here today?</h2>
         <DecorLines variant="squiggle" className="cs-squiggle" />
@@ -221,7 +260,7 @@ export const HomeSections: React.FC = () => {
         </div>
       </section>
 
-      {/* 3. Why people choose Easy Grade Tool */}
+      {/* 5. Why people choose Easy Grade Tool */}
       <section aria-labelledby={`${baseId}-why`} className="cs-section pb-2">
         <h2 id={`${baseId}-why`} className="cs-h2">Why people choose Easy Grade Tool</h2>
         <DecorLines variant="squiggle" className="cs-squiggle" />

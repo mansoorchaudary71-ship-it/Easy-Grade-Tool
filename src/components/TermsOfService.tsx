@@ -31,6 +31,7 @@ export const TermsOfService: React.FC = () => {
         badge="Legal & Terms"
         title="Terms of Service"
         description="Standard terms of educational use, calculation disclaimers, and warranty limitations."
+        hideSteps
       />
 
       <div className="relative tool-layout font-sans">

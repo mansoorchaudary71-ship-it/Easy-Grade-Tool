@@ -98,6 +98,92 @@ export interface ToolPageProps {
 const formatDate = (iso: string) =>
   new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 
+/** Journey steps per tool page, worded distinctly per page so banner text stays
+    unique across programmatic pages (CHK-08 uniqueness). */
+const JOURNEY_STEPS: Record<string, { title: string; sub: string }[]> = {
+  'test-grade-calculator': [
+    { title: 'Enter total and wrong answers', sub: 'One test, any size.' },
+    { title: 'See the percentage and letter grade', sub: 'Instant, for every score.' },
+    { title: 'Print the chart or save as PDF', sub: 'Take it to class.' },
+  ],
+  'grade-curve-calculator': [
+    { title: 'Enter your raw scores', sub: 'A list, or one score.' },
+    { title: 'See the curved grades instantly', sub: 'Flat, scale-top, or root curve.' },
+    { title: 'Print or save the curve', sub: 'Share it with your class.' },
+  ],
+  'letter-grade-calculator': [
+    { title: 'Enter a percentage score', sub: 'Any value from 0 to 100.' },
+    { title: 'See the matching letter grade', sub: 'Standard or plus/minus scale.' },
+    { title: 'Use it straight in your gradebook', sub: 'No account, no wait.' },
+  ],
+  'average-grade-calculator': [
+    { title: 'Enter your scores', sub: 'As many as you like.' },
+    { title: 'See the average instantly', sub: 'Mean, median, and range.' },
+    { title: 'Print or save the result', sub: 'Keep it for your records.' },
+  ],
+  'weighted-gpa-calculator': [
+    { title: 'Enter assessments and weights', sub: 'Tests, homework, projects.' },
+    { title: 'See the weighted grade', sub: 'Updated as you type.' },
+    { title: 'Simulate your final-exam score', sub: 'Know exactly what you need.' },
+  ],
+  'semester-gpa-calculator': [
+    { title: 'Enter your semester courses', sub: 'Grades and credit hours.' },
+    { title: 'See your semester GPA', sub: 'On the 4.0 scale.' },
+    { title: 'Set next semester\u2019s target', sub: 'Plan the grades you need.' },
+  ],
+  'cumulative-gpa-calculator': [
+    { title: 'Enter your completed semesters', sub: 'GPA and credits each term.' },
+    { title: 'See your cumulative GPA', sub: 'Across every semester.' },
+    { title: 'Track progress toward graduation', sub: 'Watch it move each term.' },
+  ],
+  'high-school-gpa-calculator': [
+    { title: 'Enter your high-school classes', sub: 'AP, honors, and regular.' },
+    { title: 'See your weighted high-school GPA', sub: 'With level weighting applied.' },
+    { title: 'Plan for college applications', sub: 'Know where you stand.' },
+  ],
+  'college-gpa-calculator': [
+    { title: 'Enter your college courses', sub: 'Grades and credit hours.' },
+    { title: 'See your college GPA', sub: 'On the 4.0 scale.' },
+    { title: 'Keep your degree plan on track', sub: 'Spot trouble a term early.' },
+  ],
+  'final-grade-planner': [
+    { title: 'Enter your classes and targets', sub: 'Up to 10 classes at once.' },
+    { title: 'See what each class needs', sub: 'Per-class required scores.' },
+    { title: 'Spot impossible targets early', sub: 'Flagged honestly, not hidden.' },
+  ],
+  'how-many-questions-can-i-miss': [
+    { title: 'Pick your test size', sub: 'Any number of questions.' },
+    { title: 'See how many you can miss', sub: 'For every grade boundary.' },
+    { title: 'Print the chart for class', sub: 'One page, every row.' },
+  ],
+  'grading-scale': [
+    { title: 'Pick a test size', sub: 'From 5 to 200 questions.' },
+    { title: 'See every score\u2019s grade', sub: 'Percentage and letter, row by row.' },
+    { title: 'Save the chart as a PDF', sub: 'Or print it for the wall.' },
+  ],
+  'gpa-to-letter-grade': [
+    { title: 'Enter a GPA value', sub: 'Any 4.0-scale number.' },
+    { title: 'See the matching letter grade', sub: 'Converted instantly.' },
+    { title: 'Use it for applications', sub: 'Forms, resumes, transcripts.' },
+  ],
+  'letter-grade-to-gpa': [
+    { title: 'Enter a letter grade', sub: 'From A+ down to F.' },
+    { title: 'See the GPA value', sub: 'Converted instantly.' },
+    { title: 'Use it on applications and forms', sub: 'Transcripts, jobs, admissions.' },
+  ],
+  'for-schools': [
+    { title: 'Pick a calculator to embed', sub: 'Any tool on the site.' },
+    { title: 'Copy one line of code', sub: 'Paste it on your school page.' },
+    { title: 'It runs free on your site', sub: 'No account, no branding deals.' },
+  ],
+};
+
+const CGPA_STEPS: { title: string; sub: string }[] = [
+  { title: 'Enter your CGPA', sub: 'On your university\u2019s scale.' },
+  { title: 'See the percentage instantly', sub: 'By the verified formula.' },
+  { title: 'Use it for applications and forms', sub: 'Jobs, admissions, visas.' },
+];
+
 export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
   const entry = TOOL_PAGES[slug];
   const Tool: React.ComponentType | undefined = TOOLS[slug] ?? UNIVERSITY_TOOLS[slug];
@@ -120,7 +206,12 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         breadcrumbLabel={entry.navLabel}
       />
 
-      <ToolHeading badge={entry.navLabel} title={entry.h1} description={entry.intro} />
+      <ToolHeading
+        badge={entry.navLabel}
+        title={entry.h1}
+        description={entry.intro}
+        steps={JOURNEY_STEPS[slug] ?? (slug.startsWith('cgpa-to-percentage/') ? CGPA_STEPS : undefined)}
+      />
 
       <p className="max-w-4xl text-sm text-slate-500 dark:text-slate-400 -mt-6 m-0">
         {SITE_OWNER ? <>By <span className="font-semibold text-slate-700 dark:text-slate-200">{SITE_OWNER.name}</span>, {SITE_OWNER.jobTitle.toLowerCase()} · </> : null}

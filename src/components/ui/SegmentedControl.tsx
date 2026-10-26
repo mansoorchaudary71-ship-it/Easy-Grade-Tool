@@ -65,8 +65,8 @@ export function SegmentedControl<T extends string | number>({
     : `flex flex-wrap items-center gap-2 ${className}`;
 
   const pillClass = isTrack
-    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-blue-600 dark:shadow-[0_8px_18px_-6px_rgba(109,40,217,0.6)]'
-    : 'absolute inset-0 -z-10 rounded-full bg-blue-600 shadow-[0_8px_18px_-6px_rgba(109,40,217,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
+    ? 'absolute inset-0 -z-10 rounded-full border border-gray-200/70 bg-white shadow-[0_4px_12px_-4px_rgba(15,23,42,0.25)] dark:border-white/10 dark:bg-blue-600 dark:shadow-[0_8px_18px_-6px_rgba(0,86,210,0.6)]'
+    : 'absolute inset-0 -z-10 rounded-full bg-blue-600 shadow-[0_8px_18px_-6px_rgba(0,86,210,0.6),inset_0_1px_0_rgba(255,255,255,0.2)] ring-1 ring-inset ring-white/10';
 
   return (
     <LayoutGroup id={groupId}>

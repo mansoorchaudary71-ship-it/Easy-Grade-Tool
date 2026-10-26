@@ -5,8 +5,8 @@
 
    The new identity, built from the best of Intercom, Calendly, Typeform, Canva,
    Asana, ClassDojo and Dribbble — rendered as ONE system, not seven:
-     - one confident violet (#6D28D9, dark #A78BFA) for every primary action and link
-     - warm off-white canvas (#FBF9F6), pale-violet bands (#F5F3FF) to separate sections
+     - one confident violet (#0056D2, dark #6EA8FF) for every primary action and link
+     - warm off-white canvas (#FBF9F6), pale-violet bands (#EEF4FF) to separate sections
      - pill buttons, 16px cards, hairline borders instead of shadows
      - serif display headlines (Typeform/Calendly editorial serif), Inter for all UI text
        [superseded 2026-10-25 by the premium redesign: Mona Sans is now the
@@ -19,11 +19,11 @@
    ========================================================================== */
 
 :root {
-  --cs-blue: #6D28D9;
-  --cs-blue-hover: #5B21B6;
+  --cs-blue: #0056D2;
+  --cs-blue-hover: #00419E;
   --cs-blue-ink: #4C1D95;
-  --cs-tint: #F5F3FF;
-  --cs-tint-2: #EDE9FE;
+  --cs-tint: #EEF4FF;
+  --cs-tint-2: #E4EDFB;
   --cs-ink: #1E1727;
   --cs-text: #1F2937;
   --cs-muted: #4F5D75;
@@ -33,39 +33,39 @@
   --cs-radius-btn: 9999px; /* pill buttons everywhere (Dribbble-style) */
   --cs-radius-card: 16px; /* one card radius everywhere: banners, cards, panels, trust tiles */
   --cs-container: 1280px;
-  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #6D28D9;
+  --cs-focus: 0 0 0 2px #fff, 0 0 0 4px #0056D2;
 
   /* Re-point the older palettes at the brand violet so every existing accent follows */
-  --ds-blue: #6D28D9;
-  --ds-blue-hover: #5B21B6;
+  --ds-blue: #0056D2;
+  --ds-blue-hover: #00419E;
   --primary: 263 70% 50%;
   --accent: 263 70% 50%;
   --ds-shadow-cta: none;
-  --ds-shadow-cta-hover: 0 4px 12px rgba(109, 40, 217, 0.28);
+  --ds-shadow-cta-hover: 0 4px 12px rgba(0, 86, 210, 0.28);
   --el-ambient: none;
-  --color-teal-50: #f5f3ff;
-  --color-teal-100: #ede9fe;
-  --color-teal-200: #ddd6fe;
-  --color-teal-300: #c4b5fd;
-  --color-teal-400: #a78bfa;
+  --color-teal-50: #eef4ff;
+  --color-teal-100: #e4edfb;
+  --color-teal-200: #c9dcf7;
+  --color-teal-300: #bfd7ff;
+  --color-teal-400: #6ea8ff;
   --color-teal-500: #8b5cf6;
-  --color-teal-600: #7c3aed;
-  --color-teal-700: #6d28d9;
-  --color-teal-800: #5b21b6;
+  --color-teal-600: #0056d2;
+  --color-teal-700: #0056d2;
+  --color-teal-800: #00419e;
   --color-teal-900: #4c1d95;
   --color-teal-950: #2e1065;
   /* Same re-point for the blue scale (2026-10-25 unification): every blue-*
      utility site-wide — buttons, links, rings, segmented pills, chart accents —
      now resolves to the brand violet instead of Tailwind's default blue. */
-  --color-blue-50: #f5f3ff;
-  --color-blue-100: #ede9fe;
-  --color-blue-200: #ddd6fe;
-  --color-blue-300: #c4b5fd;
-  --color-blue-400: #a78bfa;
+  --color-blue-50: #eef4ff;
+  --color-blue-100: #e4edfb;
+  --color-blue-200: #c9dcf7;
+  --color-blue-300: #bfd7ff;
+  --color-blue-400: #6ea8ff;
   --color-blue-500: #8b5cf6;
-  --color-blue-600: #7c3aed;
-  --color-blue-700: #6d28d9;
-  --color-blue-800: #5b21b6;
+  --color-blue-600: #0056d2;
+  --color-blue-700: #0056d2;
+  --color-blue-800: #00419e;
   --color-blue-900: #4c1d95;
   --color-blue-950: #2e1065;
 }
@@ -76,18 +76,18 @@ html [class*="tool-theme-"] {
 }
 
 html.dark {
-  --cs-blue: #A78BFA;
-  --cs-blue-hover: #C4B5FD;
-  --cs-blue-ink: #DDD6FE;
-  --cs-tint: rgba(167, 139, 250, 0.10);
-  --cs-tint-2: rgba(167, 139, 250, 0.18);
+  --cs-blue: #6EA8FF;
+  --cs-blue-hover: #BFD7FF;
+  --cs-blue-ink: #C9DCF7;
+  --cs-tint: rgba(110, 168, 255, 0.10);
+  --cs-tint-2: rgba(110, 168, 255, 0.18);
   --cs-ink: #F4F7FB;
   --cs-text: #D7DEE9;
   --cs-muted: #A5B1C4;
   --cs-border: rgba(255, 255, 255, 0.12);
   --cs-field: #6B7A92;
   --cs-white: #1E1727;
-  --cs-focus: 0 0 0 2px #0F172A, 0 0 0 4px #A78BFA;
+  --cs-focus: 0 0 0 2px #0F172A, 0 0 0 4px #6EA8FF;
 }
 
 /* --------------------------------------------------------------------------
@@ -142,7 +142,7 @@ html:not(.dark) main :is(a:not([class*="bg-"]):not([class*="text-"]):not(.cs-btn
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 .cs-btn-primary { background: var(--cs-blue); color: #fff !important; }
-.cs-btn-primary:hover { background: var(--cs-blue-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(109, 40, 217, 0.28); }
+.cs-btn-primary:hover { background: var(--cs-blue-hover); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(0, 86, 210, 0.28); }
 .cs-btn:active { transform: translateY(0) scale(0.97); }
 html.dark .cs-btn-primary { color: #0B1220 !important; }
 .cs-btn-outline { background: transparent; color: var(--cs-blue) !important; border-color: var(--cs-blue); }
@@ -171,7 +171,7 @@ html.dark .cs-input { background: rgba(255, 255, 255, 0.06); }
   border-radius: var(--cs-radius-card);
   transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
-.cs-card:hover { border-color: #C4B5FD; box-shadow: 0 6px 20px rgba(109, 40, 217, 0.10); }
+.cs-card:hover { border-color: #BFD7FF; box-shadow: 0 6px 20px rgba(0, 86, 210, 0.10); }
 /* Link hubs lift on hover (Canva template cards / ClassDojo role cards);
    calculator forms never lift, so results and inputs stay put. */
 /* Link hubs: no lift on hover (Canva gallery restraint) — the border tint
@@ -291,7 +291,7 @@ html.dark .elev-chrome {
   animation: cs-fade-up 0.45s ease both;
   /* Aurora halo (Typeform): one disciplined violet glow, echoing the footer
      orbs — the banner floats instead of sitting flat on the canvas. */
-  box-shadow: 0 24px 50px -24px rgba(109, 40, 217, 0.28);
+  box-shadow: 0 24px 50px -24px rgba(0, 86, 210, 0.28);
 }
 @keyframes cs-fade-up {
   from { opacity: 0; transform: translateY(10px); }
@@ -369,8 +369,8 @@ html.dark .cs-lines { opacity: 0.28; }
   transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 .cs-tab:hover { background: var(--cs-tint); border-color: var(--cs-blue); }
-.cs-tab[aria-selected="true"] { background: var(--cs-tint-2); border-color: transparent; color: var(--cs-ink); box-shadow: 0 2px 10px rgba(109, 40, 217, 0.12); }
-html.dark .cs-tab[aria-selected="true"] { background: rgba(167, 139, 250, 0.18); border-color: transparent; color: #EDE9FE; }
+.cs-tab[aria-selected="true"] { background: var(--cs-tint-2); border-color: transparent; color: var(--cs-ink); box-shadow: 0 2px 10px rgba(0, 86, 210, 0.12); }
+html.dark .cs-tab[aria-selected="true"] { background: rgba(110, 168, 255, 0.18); border-color: transparent; color: #E4EDFB; }
 .cs-panel {
   display: grid; gap: 1.5rem; padding: 1.5rem;
   background: var(--cs-tint); border: 1px solid var(--cs-border); border-radius: var(--cs-radius-card);
@@ -386,7 +386,7 @@ html.dark .cs-tab[aria-selected="true"] { background: rgba(167, 139, 250, 0.18);
   font-weight: 600; color: var(--cs-ink) !important; text-decoration: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(109, 40, 217, 0.12); color: var(--cs-blue) !important; }
+.cs-panel-links a:hover { border-color: var(--cs-blue); box-shadow: 0 4px 14px rgba(0, 86, 210, 0.12); color: var(--cs-blue) !important; }
 
 .cs-trust { display: grid; gap: 1rem; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .cs-trust { grid-template-columns: repeat(2, 1fr); } }
@@ -460,14 +460,14 @@ html:not(.dark) :is(input[type="number"], input[type="text"], .field-input, .too
 }
 
 /* Primary buttons: flat violet (drops the gradient, glow and lift) */
-.premium-surface :is(button, a)[class~="bg-[#6D28D9]"]:not([aria-pressed]):not(:disabled),
+.premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled),
 .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled) {
   background-image: none;
   background-color: var(--cs-blue);
   box-shadow: none;
 }
 @media (hover: hover) {
-  .premium-surface :is(button, a)[class~="bg-[#6D28D9]"]:not([aria-pressed]):not(:disabled):hover,
+  .premium-surface :is(button, a)[class~="bg-[#0056D2]"]:not([aria-pressed]):not(:disabled):hover,
   .premium-surface :is(button, a)[class~="bg-blue-600"]:not([aria-pressed]):not(:disabled):hover {
     translate: 0 0;
     background-color: var(--cs-blue-hover);
@@ -552,7 +552,7 @@ html:not(.dark) main :is(article, .prose) a:not([class]) { color: var(--cs-blue)
    This supersedes the blue identity; the "primary unchanged" rule from the
    header task no longer applies — the user explicitly authorised the change.
    New system, still one unit:
-     - Violet primary #6D28D9 / dark #A78BFA (ClassDojo/Canva violet,
+     - Violet primary #0056D2 / dark #6EA8FF (ClassDojo/Canva violet,
        deepened for white-text contrast); teal + blue utility scales and
        every #0056D2/#00419E/#4F9CFF literal re-pointed at it.
      - Warm canvas #FBF9F6 (Calendly) with white floating cards.

@@ -88,7 +88,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
                   inputMode="decimal"
                   min="0"
                   step="0.01"
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#6D28D9] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={billAmount}
                   onChange={(e) => setBillAmount(e.target.value)}
                   onKeyDown={handleNumericKeyDownHaptic}
@@ -110,7 +110,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
                   min="0"
                   max="100"
                   step="1"
-                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#6D28D9] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                  className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                   value={tipPercent}
                   onChange={(e) => setTipPercent(e.target.value)}
                   onKeyDown={handleNumericKeyDownHaptic}
@@ -156,7 +156,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
                 inputMode="numeric"
                 min="1"
                 step="1"
-                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#6D28D9] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
+                className="w-full bg-[#F0F2F5] dark:bg-slate-800/90 border-2 border-transparent text-stone-900 dark:text-white rounded-full px-5 py-3.5 focus:bg-white dark:focus:bg-slate-900 focus:border-[#0056D2] focus:ring-4 focus:ring-blue-500/15 transition-all font-bold text-lg text-center placeholder:text-slate-400"
                 value={people}
                 onChange={(e) => setPeople(e.target.value)}
                 onKeyDown={handleNumericKeyDownHaptic}
@@ -173,7 +173,7 @@ export const TipCalculator: React.FC<TipCalculatorProps> = () => {
           aria-live="polite"
         >
           <div>
-            <div className="bg-[#EDE9FE] dark:bg-teal-950/60 border border-[#DDD6FE] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
+            <div className="bg-[#E4EDFB] dark:bg-teal-950/60 border border-[#C9DCF7] dark:border-teal-800/60 rounded-[28px] p-5 shadow-sm">
               <span className="text-xs font-semibold tracking-widest text-teal-800 dark:text-teal-300 uppercase block">
                 Each person pays
               </span>

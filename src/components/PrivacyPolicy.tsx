@@ -35,6 +35,7 @@ export const PrivacyPolicy: React.FC = () => {
         badge="Legal & Privacy"
         title="Privacy Policy"
         description="Transparent disclosure of how our calculation suite operates locally in your browser and how voluntary form submissions are processed and stored."
+        hideSteps
       />
 
       <div className="relative tool-layout font-sans">

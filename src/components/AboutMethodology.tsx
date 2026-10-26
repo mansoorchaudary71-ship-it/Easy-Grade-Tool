@@ -38,6 +38,7 @@ export const AboutMethodology: React.FC = () => {
         badge="About & Methodology"
         title="Grading Formulas & Academic Methodology"
         description="Clear, transparent explanations of the mathematical models behind our weighted grade, cumulative GPA, and test scoring calculators."
+        hideSteps
       />
 
       <div className="relative tool-layout font-sans">

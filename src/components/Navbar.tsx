@@ -76,11 +76,11 @@ const SunMoonSplitIcon: React.FC<{ className?: string }> = ({ className }) => (
 
 /** Round ghost buttons (hamburger, search icon on small screens, theme switch): no border, grey chip on hover. */
 const ghostControl =
-  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0F1114] transition-colors duration-150 hover:bg-[#F5F3FF] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
+  'inline-flex size-11 shrink-0 cursor-pointer items-center justify-center rounded-full text-[#0F1114] transition-colors duration-150 hover:bg-[#EEF4FF] active:scale-95 dark:text-slate-100 dark:hover:bg-white/10';
 
 /** Solid pill call to action (the "Sign up" slot in the Dribbble-style header). Colour unchanged. White in dark mode. */
 const ctaPill =
-  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#6D28D9] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#5B21B6] active:scale-[0.98] dark:bg-[#A78BFA] dark:text-[#0B1220] dark:hover:bg-[#C4B5FD]';
+  'relative h-11 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-[#0056D2] px-5 text-base font-semibold text-white no-underline transition-colors duration-150 hover:bg-[#00419E] active:scale-[0.98] dark:bg-[#6EA8FF] dark:text-[#0B1220] dark:hover:bg-[#BFD7FF]';
 
 /* -------------------------------------------------------------------------- */
 /* Component                                                                   */
@@ -153,8 +153,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           once scrolled: the grey search pill appears between logo and nav.
           Below xl the nav links and text link move into the hamburger drawer;
           below lg the search icon opens the palette (the pill is desktop only).
-          Colours are unchanged: the same site blue (#6D28D9) for the pill,
-          focus rings and hovers as before — no Dribbble pink anywhere.
+          Colours follow the NOVA system: brand blue (#0056D2) for the pill,
+          focus rings and hovers — no Dribbble pink anywhere.
         */}
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-2 px-4 sm:px-6 lg:h-20 lg:gap-4 lg:px-8 xl:gap-5">
           {/* ------------------------------ Logo ------------------------------ */}
@@ -195,7 +195,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           */}
           {scrolled && (
           <div className="header-search-in hidden min-w-0 flex-1 lg:block lg:max-w-[300px]">
-            <div className="flex h-12 items-center gap-2 rounded-full bg-[#F3F3F4] pl-4 pr-4 transition-colors duration-200 hover:bg-[#E7E7E9] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#6D28D9] dark:bg-white/[0.06] dark:hover:bg-white/10 dark:focus-within:bg-white/[0.08] dark:focus-within:ring-[#A78BFA]">
+            <div className="flex h-12 items-center gap-2 rounded-full bg-[#F3F3F4] pl-4 pr-4 transition-colors duration-200 hover:bg-[#E7E7E9] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#0056D2] dark:bg-white/[0.06] dark:hover:bg-white/10 dark:focus-within:bg-white/[0.08] dark:focus-within:ring-[#6EA8FF]">
               <Search className="size-[18px] shrink-0 text-[#6E6D7A] dark:text-slate-400" strokeWidth={ICON_STROKE} aria-hidden="true" />
               <input
                 type="text"
@@ -237,7 +237,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Link
               to="/for-schools/"
               title="Embed free grade calculators on your school website"
-              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#6D28D9] xl:inline-flex ${headerFocusRing} dark:text-slate-100 dark:hover:text-[#A78BFA]`}
+              className={`hidden h-11 shrink-0 items-center whitespace-nowrap px-3 text-base font-semibold text-[#0F1114] no-underline transition-colors duration-150 hover:text-[#0056D2] xl:inline-flex ${headerFocusRing} dark:text-slate-100 dark:hover:text-[#6EA8FF]`}
             >
               For Schools
             </Link>

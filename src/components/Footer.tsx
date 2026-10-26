@@ -59,9 +59,9 @@ const FOOTER_PREMIUM_CSS = `
   background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);
   background-size:34px 34px;-webkit-mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%);mask-image:radial-gradient(ellipse at 30% 20%,#000 0%,transparent 70%)}
 .ft-orb{position:absolute;z-index:-1;border-radius:9999px;filter:blur(46px);pointer-events:none}
-.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(109,40,217,.5);animation:ft-drift 11s ease-in-out infinite}
-.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(167,139,250,.28);animation:ft-drift 14s ease-in-out infinite reverse}
-.ft-title-accent{background:linear-gradient(90deg,#c4b5fd,#ddd6fe 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.ft-orb-a{width:15rem;height:15rem;left:-4rem;top:-5rem;background:rgba(0,86,210,.5);animation:ft-drift 11s ease-in-out infinite}
+.ft-orb-b{width:17rem;height:17rem;right:-5rem;bottom:-7rem;background:rgba(110,168,255,.28);animation:ft-drift 14s ease-in-out infinite reverse}
+.ft-title-accent{background:linear-gradient(90deg,#bfd7ff,#c9dcf7 60%,#ffffff);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .ft-float{animation:ft-float 6s ease-in-out infinite}
 .ft-spark{transform-box:fill-box;transform-origin:center;animation:ft-twinkle 2.8s ease-in-out infinite}
 .ft-spark:nth-of-type(2){animation-delay:.9s}.ft-spark:nth-of-type(3){animation-delay:1.7s}
@@ -69,23 +69,23 @@ const FOOTER_PREMIUM_CSS = `
   background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .ft-form{display:flex;align-items:center;gap:.4rem;padding:.4rem;border-radius:9999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:box-shadow .25s,background .25s,border-color .25s}
-.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(167,139,250,.9);box-shadow:0 0 0 4px rgba(109,40,217,.35),0 10px 30px -10px rgba(109,40,217,.6)}
+.ft-form:focus-within{background:rgba(255,255,255,.14);border-color:rgba(110,168,255,.9);box-shadow:0 0 0 4px rgba(0,86,210,.35),0 10px 30px -10px rgba(0,86,210,.6)}
 .ft-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:0 1.35rem;border:0;border-radius:9999px;cursor:pointer;flex-shrink:0;
-  font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#8b5cf6 0%,#7c3aed 55%,#6d28d9 100%);background-size:160% 160%;background-position:0% 50%;
-  box-shadow:0 10px 24px -8px rgba(109,40,217,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
+  font-weight:800;font-size:.85rem;color:#fff;background:linear-gradient(135deg,#8b5cf6 0%,#0056d2 55%,#0056d2 100%);background-size:160% 160%;background-position:0% 50%;
+  box-shadow:0 10px 24px -8px rgba(0,86,210,.7),inset 0 1px 0 rgba(255,255,255,.22);transition:translate .3s cubic-bezier(.32,.72,0,1),scale .38s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease,background-position .5s cubic-bezier(.32,.72,0,1)}
 .ft-btn::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;transform:skewX(-20deg);
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);animation:ft-shine 5s ease-in-out infinite}
-.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(109,40,217,.9),0 0 0 4px rgba(109,40,217,.22),inset 0 1px 0 rgba(255,255,255,.28)}
+.ft-btn:hover:not(:disabled){translate:0 -1.5px;background-position:100% 50%;box-shadow:0 16px 34px -8px rgba(0,86,210,.9),0 0 0 4px rgba(0,86,210,.22),inset 0 1px 0 rgba(255,255,255,.28)}
 .ft-btn:active:not(:disabled){scale:.96;translate:0 0;transition-duration:.1s,.1s,.2s,.5s}
 .ft-btn:disabled{opacity:.75;cursor:wait}
 .ft-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
 .ft-btn .ft-arrow{transition:transform .2s}.ft-btn:hover:not(:disabled) .ft-arrow{transform:translateX(3px)}
 .ft-msg{animation:ft-pop .35s cubic-bezier(.2,1.2,.3,1) both}
 .ft-more-btn{display:inline-flex;align-items:center;gap:.35rem;min-height:36px;padding:.3rem .85rem;border-radius:9999px;cursor:pointer;
-  font-size:12px;font-weight:700;color:#5b21b6;background:#f5f3ff;border:1px solid #ddd6fe;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
+  font-size:12px;font-weight:700;color:#00419e;background:#eef4ff;border:1px solid #c9dcf7;transition:background .2s,color .2s,transform .2s,box-shadow .2s}
 .dark .ft-more-btn{color:#bfd0ff;background:rgb(30 41 59);border-color:rgb(71 85 105)}
-.ft-more-btn:hover{background:#6D28D9;color:#fff;border-color:#6D28D9;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(109,40,217,.9)}
-.ft-more-btn:focus-visible{outline:3px solid #6D28D9;outline-offset:2px}
+.ft-more-btn:hover{background:#0056D2;color:#fff;border-color:#0056D2;transform:translateY(-1px);box-shadow:0 8px 18px -10px rgba(0,86,210,.9)}
+.ft-more-btn:focus-visible{outline:3px solid #0056D2;outline-offset:2px}
 .ft-more-chev{transition:transform .25s}
 .ft-more-in{animation:ft-reveal .28s cubic-bezier(.2,.8,.2,1) both}
 @keyframes ft-grad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
@@ -537,9 +537,9 @@ export const Footer: React.FC<FooterProps> = ({
   // Shared footer styles (single place to tweak the look)
   const colHeadCls = 'text-base font-bold text-[#0F1114] dark:text-white m-0 mb-4';
   const linkCls =
-    'inline-flex items-center min-h-[28px] text-left text-sm font-normal text-[#4F5D75] dark:text-slate-400 hover:text-[#6D28D9] hover:underline underline-offset-4 dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
+    'inline-flex items-center min-h-[28px] text-left text-sm font-normal text-[#4F5D75] dark:text-slate-400 hover:text-[#0056D2] hover:underline underline-offset-4 dark:hover:text-blue-300 transition-colors cursor-pointer bg-transparent border-0 p-0';
   const iconBtnCls =
-    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-[#F5F3FF] dark:bg-slate-800 text-[#6D28D9] dark:text-slate-200 hover:bg-[#6D28D9] hover:text-white dark:hover:bg-[#6D28D9] transition-colors cursor-pointer active:scale-95';
+    'size-11 min-h-[44px] min-w-[44px] inline-flex items-center justify-center rounded-full bg-[#EEF4FF] dark:bg-slate-800 text-[#0056D2] dark:text-slate-200 hover:bg-[#0056D2] hover:text-white dark:hover:bg-[#0056D2] transition-colors cursor-pointer active:scale-95';
 
   return (
     <>
@@ -716,7 +716,7 @@ export const Footer: React.FC<FooterProps> = ({
                                 // Skip for pages that share a tool key (e.g. Weighted/Final Exam) so we never jump back to Home.
                                 if (tool.toolKey && isSamePath(TOOL_PATHS[tool.toolKey], tool.path)) onSelectTool?.(tool.toolKey);
                               }}
-                              className={`${linkCls} no-underline ${isActive ? '!text-[#6D28D9] dark:!text-blue-300 font-bold' : ''}`}
+                              className={`${linkCls} no-underline ${isActive ? '!text-[#0056D2] dark:!text-blue-300 font-bold' : ''}`}
                               aria-current={isActive ? 'page' : undefined}
                               title={tool.title}
                             >
@@ -789,7 +789,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title={`Copy direct email address: ${CONTACT_EMAIL}`}
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#6D28D9] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#0056D2] text-white flex items-center justify-center shrink-0">
                         {copiedEmail ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Mail className="w-3.5 h-3.5" aria-hidden="true" />}
                       </span>
                       <span className="break-all">{copiedEmail ? 'Copied!' : CONTACT_EMAIL}</span>
@@ -806,7 +806,7 @@ export const Footer: React.FC<FooterProps> = ({
                       className={`${linkCls} gap-2.5`}
                       title="Send a message or feedback directly to the engineering team via backend"
                     >
-                      <span className="w-6 h-6 rounded-md bg-[#6D28D9] text-white flex items-center justify-center shrink-0">
+                      <span className="w-6 h-6 rounded-md bg-[#0056D2] text-white flex items-center justify-center shrink-0">
                         <MessageSquare className="w-3.5 h-3.5" aria-hidden="true" />
                       </span>
                       <span>Contact &amp; Feedback</span>
@@ -831,15 +831,15 @@ export const Footer: React.FC<FooterProps> = ({
                   onMouseEnter={() => preloadTool('about')}
                   onFocus={() => preloadTool('about')}
                   onTouchStart={() => preloadTool('about')}
-                  className="no-underline hover:text-[#6D28D9] dark:hover:text-blue-300 transition-colors"
+                  className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors"
                   title="Learn about our grading methodology, GPA formulas, and project mission"
                 >
                   About &amp; Methodology
                 </Link>
-                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#6D28D9] dark:hover:text-blue-300 transition-colors" title="Read our Privacy Policy">
+                <Link to="/privacy" onClick={scrollToTop} className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors" title="Read our Privacy Policy">
                   Privacy Policy
                 </Link>
-                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#6D28D9] dark:hover:text-blue-300 transition-colors" title="View Terms of Service & Educational Disclaimer">
+                <Link to="/terms" onClick={scrollToTop} className="no-underline hover:text-[#0056D2] dark:hover:text-blue-300 transition-colors" title="View Terms of Service & Educational Disclaimer">
                   Terms of Service
                 </Link>
               </nav>

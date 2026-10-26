@@ -9,6 +9,7 @@ import './styles/premium.css';
 import './styles/ux-refactor.css';
 import './styles/typography.css';
 import './styles/coursera.css';
+import './styles/nova.css';
 import { preloadForPath } from './utils/lazyRoutes';
 import { installPrintFocus } from './utils/printFocus';
 

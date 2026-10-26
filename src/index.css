@@ -1115,8 +1115,8 @@ input[type="text"].field-input:focus,
 .field-input:focus,
 .tool-input:focus {
   background: #ffffff !important;
-  border-color: #6d28d9 !important; /* Violet-700 focus outline */
-  box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.15) !important;
+  border-color: #0056d2 !important; /* Violet-700 focus outline */
+  box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.15) !important;
   outline: none !important;
 }
 
@@ -1154,18 +1154,18 @@ input[type="number"]:hover {
 .field-input:focus,
 .tool-input:focus,
 input[type="number"]:focus {
-  border-color: #6d28d9;
+  border-color: #0056d2;
   background: #ffffff;
-  box-shadow: 0 0 0 4px rgba(109, 40, 217, 0.15);
+  box-shadow: 0 0 0 4px rgba(0, 86, 210, 0.15);
   outline: none;
 }
 
 .dark .field-input:focus,
 .dark .tool-input:focus,
 .dark input[type="number"]:focus {
-  border-color: #a78bfa;
+  border-color: #6ea8ff;
   background: #0f172a;
-  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.25);
+  box-shadow: 0 0 0 4px rgba(110, 168, 255, 0.25);
   outline: none;
 }
 
