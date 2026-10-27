@@ -21,6 +21,76 @@ export interface ToolFaqConfig {
 
 export const WEIGHTED_COURSE_FAQS: FAQItem[] = [
   {
+    id: 'weighted-calc-weighted-average',
+    category: 'weighted',
+    question: 'How does a grade calculator weighted average work?',
+    answer:
+      'Each category percentage is multiplied by its syllabus weight and the products are added. With homework 90% at 30%, quizzes 80% at 20% and exams 70% at 50%, the weighted average is 27 + 16 + 35 = 78%.',
+  },
+  {
+    id: 'weighted-weight-grades',
+    category: 'weighted',
+    question: 'How do I weight grades when categories count for different amounts?',
+    answer:
+      'Write each weight as a decimal, multiply it by the category percentage and add the results. The weights should total 1.00; if they total less because some work is still ungraded, divide by the weights used so far.',
+  },
+  {
+    id: 'weighted-mark-calculator',
+    category: 'weighted',
+    question: 'Is there a weighted mark calculator for scores out of different totals?',
+    answer:
+      'Yes. Each assessment takes its own points earned and points possible, so a 45 out of 50 and a 18 out of 20 can sit in the same list. The page turns each into a percentage before applying the weight.',
+  },
+  {
+    id: 'weighted-average-for-grades',
+    category: 'weighted',
+    question: 'What is the formula for a weighted average for grades?',
+    answer:
+      'Weighted average = (score₁ × weight₁ + score₂ × weight₂ + …) ÷ total of the weights used. A 92 at 40% and an 80 at 60% give (36.8 + 48) ÷ 1.00 = 84.8%.',
+  },
+  {
+    id: 'weighted-weightage-marks',
+    category: 'weighted',
+    question: 'Can this work as a weightage marks calculator?',
+    answer:
+      'Yes. Weightage is the share a component carries in the final mark, so a paper with 30% weightage and a score of 70% contributes 21 marks to the course total. Enter the weightage in the weight column and the contribution is calculated.',
+  },
+  {
+    id: 'weighted-how-to-calculate',
+    category: 'weighted',
+    question: 'How do I calculate weighted grade totals when some scores are missing?',
+    answer:
+      'To calculate weighted grade results with missing scores, include only the categories that have a mark, add their weighted points and divide by the sum of those weights. The result is the current grade, and the final exam calculator shows what the rest of the course needs.',
+  },
+  {
+    id: 'weighted-free-calculator',
+    category: 'weighted',
+    question: 'Is there a calculator for weighted grades that is free to use?',
+    answer:
+      'Yes. The tool is free, works on phones and computers, and needs no account. It also functions as a calculator with weighted grades and a letter result, so the same screen gives the percentage, the letter and the target score.',
+  },
+  {
+    id: 'weighted-test-calculator',
+    category: 'weighted',
+    question: 'Can a weighted test calculator handle a midterm worth 30%?',
+    answer:
+      'Yes. Add the midterm with a weight of 30 and its score, then add the other categories so the weights total 100. A 78% midterm adds 23.4 points to the course grade, which is a weighted score calculation like any other.',
+  },
+  {
+    id: 'weighted-online-grade-calculator',
+    category: 'weighted',
+    question: 'What is an online grade calculator for a whole course?',
+    answer:
+      'It is a tool that combines every graded item into one course percentage. This one is built for weighted syllabi and reports the letter as well. To calculate grade totals for classes graded by total points, switch to Points mode.',
+  },
+  {
+    id: 'weighted-work-out-grade',
+    category: 'weighted',
+    question: 'How to work out grade percentages when weights differ between categories?',
+    answer:
+      'Convert each category to a percentage, multiply by its weight and add everything up. That is how to work out grade results for any weighted syllabus, and the calculator shows each category’s contribution next to the total.',
+  },
+  {
     id: 'weighted-syllabus-formula',
     category: 'weighted',
     question: 'What is the exact formula for a weighted course grade?',
@@ -322,6 +392,62 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
     ctaText: 'Add your semester courses above to see your cumulative GPA and quality points update in real time.',
     items: [
       {
+        id: 'gpa-how-4-scale',
+        category: 'gpa',
+        question: 'How to calculate your GPA on a 4.0 scale?',
+        answer:
+          'Turn each letter into grade points (A = 4.0, B = 3.0, C = 2.0, D = 1.0, F = 0.0), multiply by the course credits, add the results and divide by the total credits. For example, an A in a 3-credit course, a B+ in a 4-credit course and a B in a 3-credit course give 12 + 13.2 + 9 = 34.2 quality points over 10 credits, a GPA of 3.42.',
+      },
+      {
+        id: 'gpa-from-percentages',
+        category: 'gpa',
+        question: 'How to calculate my GPA if only percentages are known?',
+        answer:
+          'Convert each percentage to a letter first, using the school’s scale, then follow the usual steps. The letter grade calculator and the letter grade to GPA converter handle that first step, and the results can be typed straight into this page.',
+      },
+      {
+        id: 'gpa-calculate-by-hand',
+        category: 'gpa',
+        question: 'How do I calculate GPA from semester grades without a tool?',
+        answer:
+          'List each course with its credits and grade points, multiply the two, add the products and divide by the credits. Anyone who needs to calculate a GPA this way for a transcript can check the answer against the calculator above.',
+      },
+      {
+        id: 'gpa-how-i-calculate',
+        category: 'gpa',
+        question: 'How I calculate my GPA when a transcript shows plus and minus grades?',
+        answer:
+          'Use the plus/minus values the school publishes, commonly A− = 3.7, B+ = 3.3, B− = 2.7 and so on. Switching the calculator to the plus/minus scale applies those values automatically, and the GPA compute step is still one credit-weighted average.',
+      },
+      {
+        id: 'gpa-with-grades',
+        category: 'gpa',
+        question: 'Is there a GPA calculator with grades instead of percentages?',
+        answer:
+          'Yes. Each course row accepts a letter grade, so a student can type A, B+ or C− directly. A percentage can be entered instead and the page converts it using the chosen scale.',
+      },
+      {
+        id: 'gpa-average-calculator',
+        category: 'gpa',
+        question: 'Is this an average GPA calculator?',
+        answer:
+          'In practice, yes. It averages grade points, weighted by credit hours, across every course entered. That is different from a simple mean, because a 4-credit course counts more than a 1-credit course.',
+      },
+      {
+        id: 'gpa-meter',
+        category: 'gpa',
+        question: 'What is a GPA meter?',
+        answer:
+          'The phrase is an informal way to ask where a GPA stands right now. The result card on this page shows the GPA, the quality points behind it and the total credits, which is the quickest read-out of a student’s standing.',
+      },
+      {
+        id: 'gpa-score-calculator',
+        category: 'gpa',
+        question: 'How does a score GPA calculator treat test percentages?',
+        answer:
+          'A score GPA calculator first converts the percentage into a letter on the chosen scale and then into grade points. Because the cutoffs differ, an 86% can be a B on the standard scale (3.0 points) and a B on the plus/minus scale too, but 87% becomes a B+ (3.3 points) only on the plus/minus scale.',
+      },
+      {
         id: 'gpa-calculation',
         category: 'gpa',
         question: 'How do I calculate my GPA?',
@@ -464,6 +590,62 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
     ctaText: 'Select your grading scale and university above to compute your exact percentage and download an official PDF report.',
     items: [
       {
+        id: 'cgpa-75',
+        category: 'cgpa',
+        question: 'What is 7.5 CGPA in percentage?',
+        answer:
+          'Using the common CGPA × 9.5 conversion, 7.5 CGPA in percentage is 7.5 × 9.5 = 71.25%. The university’s own regulation overrides the standard multiplier, so pick the institution in the calculator when it is listed.',
+      },
+      {
+        id: 'cgpa-52',
+        category: 'cgpa',
+        question: 'What is 5.2 CGPA in percentage, and how does CGPA 5.2 to percentage differ from 5.4?',
+        answer:
+          'Applying the × 9.5 rule, 5.2 CGPA in percentage is 49.4%. For comparison, CGPA 5.4 to percentage is 51.3%, so each 0.2 of CGPA is worth 1.9 percentage points under this formula.',
+      },
+      {
+        id: 'cgpa-575',
+        category: 'cgpa',
+        question: 'How to convert 5.75 CGPA to percentage?',
+        answer:
+          'Multiply by 9.5: 5.75 × 9.5 = 54.625, which rounds to 54.63%. Most boards and universities round to one or two decimals, so the printed figure can differ slightly between institutions.',
+      },
+      {
+        id: 'cgpa-reverse',
+        category: 'cgpa',
+        question: 'How can 64.8 percentage in CGPA be worked out?',
+        answer:
+          'Reverse the multiplier: 64.8 ÷ 9.5 = 6.82 CGPA on the 10-point scale. The reverse direction has the same caveat as the forward one: an institution with its own formula uses that formula.',
+      },
+      {
+        id: 'cgpa-10-point',
+        category: 'cgpa',
+        question: 'How to convert CGPA to percentage on a 10 point scale?',
+        answer:
+          'Convert CGPA to percentage on a 10 point scale with the formula the institution publishes. The most widespread one is percentage = CGPA × 9.5, and a few universities use CGPA × 10 instead, so a result should be compared with the official ordinance.',
+      },
+      {
+        id: 'cgpa-out-of-4',
+        category: 'cgpa',
+        question: 'How to convert CGPA into percentage out of 4?',
+        answer:
+          'A 4-point CGPA is not converted with the 9.5 multiplier, which belongs to the 10-point system. Many 4-point institutions publish no percentage rule at all; a plain ratio such as CGPA ÷ 4 × 100 is only a rough comparison, not an official conversion, so ask the registrar if a percentage is required.',
+      },
+      {
+        id: 'cgpa-srm',
+        category: 'cgpa',
+        question: 'Is there an SRM CGPA calculator?',
+        answer:
+          'Yes. SRM Institute of Science and Technology states that percentage equals CGPA × 10, so an 8.2 CGPA is 82%. Choose SRM in the university list and the calculator applies that rule.',
+      },
+      {
+        id: 'cgpa-qpa',
+        category: 'cgpa',
+        question: 'Is there a QPA to GPA calculator?',
+        answer:
+          'QPA stands for quality point average, the name some universities use for what others call GPA. Where the QPA uses the same 4.0 grade points, the number is the same and the GPA calculator can be used directly; a school that defines QPA differently publishes its own rule.',
+      },
+      {
         id: 'how-to-convert-cgpa-to-percentage',
         category: 'cgpa',
         question: 'How do I convert my 10-point CGPA to a percentage?',
@@ -514,6 +696,34 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
       'Answers to common tipping dilemmas, pre-tax versus post-tax gratuities, mental calculation tricks, and group bill splits.',
     ctaText: 'Use the tip percentage selector and split fields above for instant, fair per-person amounts.',
     items: [
+      {
+        id: 'tip-gratuity-calculator',
+        category: 'tip',
+        question: 'What is a gratuity calculator?',
+        answer:
+          'It is another name for a tip calculator: it multiplies the bill by the tip percentage and, when needed, splits the total between several people. Gratuity is simply the formal word for a tip.',
+      },
+      {
+        id: 'tip-gratuity-math',
+        category: 'tip',
+        question: 'What is gratuity in math?',
+        answer:
+          'Gratuity math is percentage math. The gratuity equals the bill times the rate, so 18% of $60.00 is 0.18 × 60 = $10.80, and the total to pay is $70.80.',
+      },
+      {
+        id: 'tip-tax-gratuity',
+        category: 'tip',
+        question: 'Is there a tax gratuity calculator that tips on the pre-tax amount?',
+        answer:
+          'Many diners tip on the pre-tax subtotal, which is a matter of habit rather than a rule. To do that here, enter the subtotal before tax as the bill, then add the sales tax yourself afterwards.',
+      },
+      {
+        id: 'tip-america',
+        category: 'tip',
+        question: 'What is a normal rate on a tip calculator America would use?',
+        answer:
+          'For table service in the United States, 15% to 20% of the pre-tax bill is the common range, with 18% a frequent default. Counter service, delivery and bars follow different habits, so the calculator lets the percentage be changed.',
+      },
       {
         id: 'standard-tip-percentage',
         category: 'tip',
@@ -572,6 +782,13 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
       'Step-by-step answers on how to calculate a percentage, percentage increase and decrease, percentage difference, reverse percentage, marks and grades.',
     ctaText: 'Use the percentage calculators above to compute increases, decreases, and fractions instantly.',
     items: [
+      {
+        id: 'pct-grading',
+        category: 'percentage',
+        question: 'Can it work as a grading percentage calculator?',
+        answer:
+          'Yes. Enter the points earned and the points possible and the percentage appears. For a graded test with a letter, the test grade calculator adds the scale.',
+      },
       {
         id: 'percentage-change-formula',
         category: 'math',
@@ -735,6 +952,13 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
       'Answers on how a loan calculator works, car and personal loan payments, total interest, amortization, APR, extra payments and paying a loan off early.',
     ctaText: 'Adjust your loan amount, APR or term above to see your monthly payment and interest breakdown.',
     items: [
+      {
+        id: 'loan-provisional-quote',
+        category: 'loan',
+        question: 'Is the result a provisional loan quote?',
+        answer:
+          'No. The result is an estimate of the monthly payment and total interest from the amount, rate and term entered. A provisional loan quote from a lender also reflects fees and a rate set after a credit check, so the two figures can differ.',
+      },
       {
         id: 'monthly-loan-formula',
         category: 'loan',
@@ -956,6 +1180,34 @@ export const TOOL_FAQS: Record<ToolKey, ToolFaqConfig> = {
       'Best practices for generating high-entropy passwords, password manager security, and protecting digital accounts against credential stuffing.',
     ctaText: 'Use the password generator above to create cryptographically strong passwords with custom length and symbols.',
     items: [
+      {
+        id: 'pw-random-maker',
+        category: 'password',
+        question: 'Is this a random password maker?',
+        answer:
+          'Yes. It builds each password from random characters chosen in the browser, using the length and character types selected. Nothing typed or generated is sent to a server.',
+      },
+      {
+        id: 'pw-easy-generator',
+        category: 'password',
+        question: 'Is there an easy random password generator that needs no account?',
+        answer:
+          'Yes. Pick a length, tick the character types and press generate. There is nothing to install and no sign-up step, and the password can be copied in one tap.',
+      },
+      {
+        id: 'pw-generate-online',
+        category: 'password',
+        question: 'Is it safe to generate a password online?',
+        answer:
+          'It is safe when the page creates the password locally and does not transmit it. This generator uses the browser’s own secure random source, so the result never leaves the device. As with any password, store it in a password manager.',
+      },
+      {
+        id: 'pw-create-random',
+        category: 'password',
+        question: 'How long should a random password be?',
+        answer:
+          'To create random password strings that are hard to guess, length matters most: 12 characters is a sensible minimum for ordinary accounts and 16 or more suits email, banking and password-manager master passwords.',
+      },
       {
         id: 'cryptographic-security',
         category: 'security',

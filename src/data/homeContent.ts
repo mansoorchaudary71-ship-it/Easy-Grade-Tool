@@ -93,4 +93,53 @@ export const HOME_FAQS: FAQItem[] = [
     answer:
       'Subtract the wrong answers from the number of questions, divide by the number of questions and multiply by 100. Missing 3 questions on a 25-question test gives 22 ÷ 25 × 100 = 88%.',
   },
+  {
+    id: 'home-spelling-variants',
+    category: 'quick-grade',
+    question: 'Is EasyGradeCalculator the same as EasyGrade, EasyGrader or EZgrade?',
+    answer:
+      'Yes. These are different spellings of one free grading tool. Teachers who type ez grade and students who look for an easy grades calculator all want the same thing: a chart that turns the number of questions on a test into percentages and letter grades.',
+  },
+  {
+    id: 'home-free-online',
+    category: 'quick-grade',
+    question: 'Is there a free easy grader online?',
+    answer:
+      'Yes. This is a free easy grader online with nothing to install, no account and no limit on how many tests are checked. It also turns up as an online easy grader, an easy online grader or an easy grader free online, and it works as a free EZ grader on a phone as well as a laptop. Students who ask for an EZ grader free of charge, an EZ grader online free or an online easy grader free of sign-ups land on the same page.',
+  },
+  {
+    id: 'home-free-grader',
+    category: 'quick-grade',
+    question: 'Is there a free grader that works without sign-up?',
+    answer:
+      'Yes. This page runs in the browser, so scores can be checked straight away. For anyone who wants a free grading calculator or a grading calculator free of subscriptions, the main tools are the test-size chart, the weighted grade calculator and the GPA calculator.',
+  },
+  {
+    id: 'home-teacher-tool',
+    category: 'teachers',
+    question: 'Is this a grade calculator for teachers and a teacher grading tool?',
+    answer:
+      'Yes. Teachers use it as a grading calculator for teachers with a stack of papers, as a teacher grade calculator for a class list and as a teacher grading calculator for quizzes. Some describe it as a teachers grading calculator or a teacher easy grader, others as a grading helper. A teacher calculator for grades and a teacher percentage calculator both come down to the same chart and the same percentage formula.',
+  },
+  {
+    id: 'home-quick-names',
+    category: 'quick-grade',
+    question: 'Is this the same as QuickGrade, a quick grader or quick grading?',
+    answer:
+      'Yes. Whether it is called a quick grader, an easy quick grader or quick grading, the idea is the same: enter the number of questions and read the grade for each wrong-answer count. A QuickGrade calculator needs no setup.',
+  },
+  {
+    id: 'home-calculator-names',
+    category: 'quick-grade',
+    question: 'Can it be used as an easy grader calculator or an EZ grader calculator?',
+    answer:
+      'Yes. An easy grader calculator, an EZ grader calculator and an EZ grade calculator are the same tool, and so are an easy grading calculator, an online grading calculator and an online grader calculator. It is also a calculator for grading any test, a grades calculator, a grade checker for a single score and a grade calculator easy enough to use between classes. People who type ezgrader online, online ezgrader or grade calculator ez grader get the same chart.',
+  },
+  {
+    id: 'home-half-points',
+    category: 'quick-grade',
+    question: 'Does the easy grade calculator with half points option save time?',
+    answer:
+      'Yes. Turning on half points lets a half-credit answer count as half of a full question, so partial marks can be entered without changing the chart. The easy grade calculator with half points handles whole stacks of tests without a second spreadsheet.',
+  },
 ];

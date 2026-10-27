@@ -134,6 +134,83 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
     },
     customFaqs: [
       {
+        id: 'faq-final-what-need-get',
+        category: 'final-exam',
+        question: 'What do I need to get on my final if I have 84% and the exam is worth 25%?',
+        answer:
+          'With 84% on the 75% already marked, the course so far contributes 63.0 points. A final of 68% reaches an 80% B, a final of 100% tops out at 88%, and a 90% A is out of reach because it would need 108%. A final of 0% would leave 63.0%.',
+      },
+      {
+        id: 'faq-final-what-can-get',
+        category: 'final-exam',
+        question: 'What can I get on my final if the course grade is 84% with a 25% exam?',
+        answer:
+          'The range runs from 63.0% (a zero on the exam) to 88.0% (a perfect exam). Every point on the final moves the course grade by 0.25 points, so a final of 80% finishes the course at 83.0%.',
+      },
+      {
+        id: 'faq-final-have-to-make',
+        category: 'final-exam',
+        question: 'What do I have to make on my final to keep a C?',
+        answer:
+          'Take the target minus the points already earned and divide by the exam weight. For a 70% C with 84% earned on the first 75% of the course, (70 − 63) ÷ 0.25 = 28%, so any final of 28% or higher keeps the C.',
+      },
+      {
+        id: 'faq-final-fail',
+        category: 'final-exam',
+        question: 'If I have a 95 in a class and fail the final, what happens to my grade?',
+        answer:
+          'It depends on the exam weight. With a final worth 20% and a failing 50 on it, a 95 becomes 0.80 × 95 + 0.20 × 50 = 86%. With a final worth 30% the same 50 gives 81.5%. Even a zero on a 20% final leaves 76%.',
+      },
+      {
+        id: 'faq-final-what-did-i-get',
+        category: 'final-exam',
+        question: 'What did I get on my final if only the course grade was posted?',
+        answer:
+          'Reverse the formula: exam score = (course grade − current grade × (1 − weight)) ÷ weight. A posted 82% with an 80% grade before a 25% final gives (82 − 60) ÷ 0.25 = 88% on the exam.',
+      },
+      {
+        id: 'faq-final-how-much-worth',
+        category: 'final-exam',
+        question: 'How much are final exams worth in a typical course?',
+        answer:
+          'Many syllabi give the final between 10% and 30% of the course, though some courses use 40% or more and others skip an exam entirely. The syllabus lists the exact figure, and the calculator takes it as the weight.',
+      },
+      {
+        id: 'faq-final-grade-after',
+        category: 'final-exam',
+        question: 'What is my grade after final exams are marked and the weights are different?',
+        answer:
+          'Multiply every category by its weight, add the exam’s weighted points and read the total. The calculator does this for any mix of weights, and it can also show the letter that the total earns.',
+      },
+      {
+        id: 'faq-final-min-grade-pass',
+        category: 'final-exam',
+        question: 'What is the minimum grade to pass a course?',
+        answer:
+          'Many schools pass at 60% (a D), many programs require 70% (a C) for major courses, and graduate programs often set 80%. Use that number as the target and the calculator shows the exam score needed.',
+      },
+      {
+        id: 'faq-final-calc-needed-pass',
+        category: 'final-exam',
+        question: 'How to calculate grade needed to pass the exam without a calculator?',
+        answer:
+          'Compute required score = (pass mark − current grade × (1 − weight)) ÷ weight. If the pass mark is 60, the current grade is 70 and the exam is worth 40%, the answer is (60 − 42) ÷ 0.40 = 45%.',
+      },
+      {
+        id: 'faq-final-calc-my-exam',
+        category: 'final-exam',
+        question: 'Can I calculate my final exam if the weight is given in points?',
+        answer:
+          'Yes. Turn the points into a percentage by dividing the exam points by the course total: a 200-point exam in a 1,000-point course is a 20% weight. Then enter 20 as the weight.',
+      },
+      {
+        id: 'faq-final-calculate-final-mark',
+        category: 'final-exam',
+        question: 'How do I calculate final mark and final score for a course with several exams?',
+        answer:
+          'To work out totals across several exams, treat each exam as a weighted category. The same method will calculate final score totals for a midterm plus a final, with their weights added to the coursework weight.',
+      },
+      {
         id: 'faq-final-how-to-calculate',
         category: 'final-exam',
         question: 'How do I calculate my final grade?',

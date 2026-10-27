@@ -14,6 +14,7 @@ import { buildGpaToLetterPage, buildLetterToGpaPage } from './gpaLetterPages';
 import { buildCollegeGpaPage, buildHighSchoolGpaPage } from './schoolGpaPages';
 import { buildFinalPlannerPage } from './finalPlannerPage';
 import { buildCgpaUniversityPages } from './cgpaUniversityPages';
+import { applySeoExtras } from './seoExtras';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, applyCurve, calculateTestGrade, computeStats, percentToLetter, roundTo } from '../utils/academicMath';
 
 /**
@@ -561,6 +562,9 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
     return [entry.slug, entry] as const;
   })),
 };
+
+// Keyword-mapped sections, lookup tables and FAQs (SEO round 2026-10-26)
+applySeoExtras(TOOL_PAGES);
 
 // Every page gets its own share card: public/og-cards/<slug with / replaced by ->-1200x630.png
 for (const entry of Object.values(TOOL_PAGES)) {

@@ -265,6 +265,25 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
         'Recalculate after every graded assignment, or when your instructor drops a score.',
         'If the result is above 100%, talk to your instructor early rather than after the exam.',
       ),
+
+      h2('Other Names for the Final Exam Solver'),
+      p(
+        'Students look for this tool under many names, and they all describe the same calculation. A final test calculator and a finals score calculator both solve for the exam score; a finals exam calculator, a test final calculator and a final calculator exam search land on the same page. An online final exam calculator like this one works in any browser, including on a phone in the library.',
+      ),
+      p(
+        'Some people think of it as a final grade calculator with exam weighting, others as a final test grade calculator, a final test score calculator or a final score calculator for a single class. Anyone who types grade calculator final exam, exam final grade calculator or exam score calculator is after the same thing: the number to aim for on the last paper.',
+      ),
+      p(
+        'Questions about passing lead to the exam pass calculator and exam calculator percentage views, which are the same formula with the pass mark as the target. A final exam percentage calculator, a final exam calculator grade or an exam mark calculator simply reports that result in percent. A weighted exam calculator is the right label when the exam is only one of several weighted parts, and a grading calculator final stage adds the letter at the end.',
+      ),
+
+      h2('How to Calculate Your Final Exam Result'),
+      p(
+        'To calculate final exam outcomes, work out the course total twice: once with the lowest exam score a student might get, and once with the highest. The gap between the two is the real range of the course grade, and it is often smaller than expected. A quiz-heavy course with a 15% exam moves the course grade by only 0.15 points for each exam point.',
+      ),
+      p(
+        'Students who want to calculate my final standing before results are posted can do the same in reverse once the course grade appears. The final percentage of the course is the weighted total of every category, so a posted grade, the current grade and the exam weight are enough to recover the exam score.',
+      ),
     ],
   },
 
