@@ -477,11 +477,27 @@ function semesterExtras(): SeoExtra {
 }
 
 function collegeExtras(): SeoExtra {
+  const lab = (4 * 3.7 + 1 * 4.0) / 5;
   return {
+    sections: [
+      {
+        heading: 'What Counts and What Does Not on a University Transcript',
+        paragraphs: [
+          'University transcripts hold a few entries that behave differently from ordinary letter grades. Pass/fail courses usually earn credit without touching the average, a withdrawal (W) is normally ignored, and an incomplete (I) stays out until the instructor posts a final mark. Transfer credits often arrive without grade points at all, so the GPA that a student sees on a new campus may start from zero even with a full year of credit.',
+          `Credit hours do the heavy lifting. A 4-credit lecture with a 3.7 and a 1-credit lab with a 4.0 combine as (4 × 3.7 + 1 × 4.0) ÷ 5 = ${f2(lab)}, not the plain mean of 3.85. The bigger course pulls the result toward its own grade.`,
+        ],
+      },
+      {
+        heading: 'Honors Cutoffs and Standing',
+        paragraphs: [
+          'Dean’s list and Latin honors are set by each institution, often somewhere between 3.5 and 3.9 depending on the level of distinction and the college. Academic probation commonly begins below 2.0. Because these lines move from school to school, the student handbook is the document to check before planning around a particular number.',
+        ],
+      },
+    ],
     faqs: [
-      faq('How to calculate college GPA?', 'Multiply each course’s grade points by its credit hours, add the results and divide by the total credit hours. A 4-credit A (16 points) counts twice as much as a 2-credit A (8 points).'),
-      faq('What is a collegiate GPA calculator?', 'It is a GPA calculator built for credit-hour courses, with semester and cumulative results. Collegiate calculators normally use the unweighted 4.0 scale with optional plus/minus steps.'),
-      faq('Is there a college grade calculator GPA tool for a single course?', 'Yes. The weighted grade calculator gives the percentage and letter for one course, and the grade points from that letter feed this GPA calculator.'),
+      faq('How to calculate college GPA?', 'List each course with its credit hours, convert each letter to grade points, multiply, and divide the grand total by the credits attempted. A 4-credit A carries twice the weight of a 2-credit A.'),
+      faq('What is a collegiate GPA calculator?', 'It is a GPA tool built around credit hours, with a semester result and a running cumulative result. Collegiate calculators normally use the unweighted 4.0 scale with optional plus/minus steps.'),
+      faq('Is there a college grade calculator GPA tool for one course?', 'Yes. The weighted grade calculator finds a single course’s percentage and letter, and that letter supplies the grade points for this page.'),
     ],
   };
 }
