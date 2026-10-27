@@ -186,6 +186,11 @@ export function scaleExtras(n: number, path: string): SeoExtra {
         `Aiming for ${take(k)} means getting at least ${needed(n, target)} questions right, so no more than ${n - needed(n, target)} can be wrong.`
       );
     } else if (/^if (there are|you have) \d+ questions( on a test)?$/.test(k)) {
+      const prior = faqs.find((f) => f.question.endsWith(', how is the grade worked out?'));
+      if (prior) {
+        prior.answer += ` The same method covers “${cap(take(k))}” as well.`;
+        continue;
+      }
       faqs.push({
         question: `${cap(take(k))}, how is the grade worked out?`,
         answer: `Divide the number of correct answers by ${n} and multiply by 100. Each question moves the grade by ${f2(per)} percentage points, so 1 wrong answer scores ${f1(pct(n - 1, n))}% and 2 wrong answers score ${f1(pct(n - 2, n))}%.`,
