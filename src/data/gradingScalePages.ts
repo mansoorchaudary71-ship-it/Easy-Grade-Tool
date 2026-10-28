@@ -1,5 +1,6 @@
 import type { ToolPageEntry, ToolPageFaq, ToolPageRelated } from './toolPages';
 import { GRADING_SCALE_SIZES, aOrAn, gradingScalePath, gradingScaleSlug } from './gradingScaleSizes';
+import { SEO_KEYWORDS_BY_PATH } from './seoKeywordMap';
 import {
   SCALE_PLUS_MINUS,
   SCALE_STANDARD,
@@ -16,6 +17,10 @@ import { buildQuickChart } from '../utils/gradeCalculations';
  * calculators use, so the text can never disagree with the tool. Each size gets different computed
  * numbers, different "how many can I miss" thresholds and size-specific guidance, so the pages are
  * not templated copies of each other.
+ * Strengthened 2026-10-28 for the pages sitting at search positions 8-10: search-phrased titles,
+ * printable meta descriptions, grade-curve and letter-grade related links, a minimum-correct
+ * section, and a pass-mark FAQ on every size except the two (60 and 20 questions) where the
+ * 2026-10-26 keyword round already adds a passing-score FAQ, all computed per size.
  */
 
 const fmt = (x: number, d = 2): string => String(Number(x.toFixed(d)));
@@ -79,6 +84,17 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     allowParts.push(missPhrase(w, letter));
   }
 
+  // Lowest correct count that still earns each letter. Whole-question scores move in
+  // steps, so each letter starts at a count, not an exact percentage. Computed from the
+  // same chart rows, so the numbers can never disagree with the tool.
+  const minCorrectByLetter = (['A', 'B', 'C', 'D'] as const).map((letter) => {
+    const w = maxWrong[letter];
+    return { letter, correct: w === null ? null : n - w, pct: w === null ? null : rowFor(w).formattedPercentage };
+  });
+  const passW = maxWrong['D'];
+  const passCorrect = passW === null ? null : n - passW;
+  const passPct = passW === null ? null : rowFor(passW).formattedPercentage;
+
   const idx = GRADING_SCALE_SIZES.indexOf(n);
   const prev = idx > 0 ? GRADING_SCALE_SIZES[idx - 1] : null;
   const next = idx < GRADING_SCALE_SIZES.length - 1 ? GRADING_SCALE_SIZES[idx + 1] : null;
@@ -88,7 +104,9 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
   related.push(
     { path: '/grading-scale/', label: 'All grading scale charts', blurb: 'Pick any test size from 5 to 100 questions.' },
     { path: '/', label: 'Quick Grade calculator', blurb: 'Grade a whole class and print a chart for any size.' },
-    { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Points earned out of points possible, with bonus points.' }
+    { path: '/test-grade-calculator/', label: 'Test grade calculator', blurb: 'Points earned out of points possible, with bonus points.' },
+    { path: '/grade-curve-calculator/', label: 'Grade curve calculator', blurb: `See how a curve would shift every score on ${aOrAn(n)} ${n}-question test.` },
+    { path: '/letter-grade-calculator/', label: 'Letter grade calculator', blurb: `Turn any ${n}-question score into a letter grade and GPA points.` }
   );
 
   const faqs: ToolPageFaq[] = [
@@ -112,13 +130,25 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
     },
   ];
 
+  // The 2026-10-26 keyword round (seoExtras, applied later in toolPages.ts) already
+  // adds a passing-score FAQ on the sizes whose keyword map contains one (60 and 20
+  // questions). A second pass FAQ there would duplicate it, so this one is added only
+  // on the other sizes.
+  const hasPassKeyword = (SEO_KEYWORDS_BY_PATH[gradingScalePath(n)] ?? []).some((k) => /passing score/.test(k));
+  if (!hasPassKeyword && passCorrect !== null && passPct !== null) {
+    faqs.push({
+      question: `What score do I need to pass ${aOrAn(n)} ${n}-question test?`,
+      answer: `On the common 90/80/70/60 scale, passing starts at a D, which needs 60% or more. On ${aOrAn(n)} ${n}-question test that means at least ${passCorrect} correct (${passPct}%). Anything below that is an F. Some teachers set the pass line higher, so check the syllabus.`,
+    });
+  }
+
   return {
     slug: gradingScaleSlug(n),
     path: gradingScalePath(n),
     navLabel: `${n} Questions`,
     h1: `${n}-Question Grading Scale`,
-    title: `${n}-Question Test Grading Scale & Score Chart`,
-    metaDescription: `${n}-question grading scale: each answer is worth ${fmt(p, 2)}%. See the percentage and letter grade for every score, for example ${exampleWrong} wrong = ${ex.formattedPercentage}%.`,
+    title: `Grading Scale for ${n} Questions: Percent & Letter Chart`,
+    metaDescription: `${n}-question grading scale: each answer is worth ${fmt(p, 2)}%. Percentage and letter grade for every score, e.g. ${exampleWrong} wrong = ${ex.formattedPercentage}%. Printable, free.`,
     badge: `${n}-question test`,
     intro: `Each question on ${aOrAn(n)} ${n}-question test is worth ${fmt(p, 2)}%. On the common 90/80/70/60 scale you can miss ${allowParts.join(', ')}. The chart below shows the percentage and letter grade for every number of wrong answers from 0 to ${n}.`,
     questions: n,
@@ -148,6 +178,17 @@ export function buildQuestionCountPage(n: number): ToolPageEntry {
           const r = rowFor(w);
           return `${plural(w, 'wrong answer', 'wrong answers')} (${n - w} correct) = ${r.formattedPercentage}%, grade ${r.letter}`;
         }),
+      },
+      {
+        heading: `Minimum correct answers on ${aOrAn(n)} ${n}-question test`,
+        paragraphs: [
+          `Because only whole-question scores are possible, each letter starts at a specific count rather than an exact percentage. On ${aOrAn(n)} ${n}-question test the lowest score that still earns each letter is:`,
+        ],
+        bullets: minCorrectByLetter.map(({ letter, correct, pct }) =>
+          correct === null
+            ? `${letter}: not reachable with whole questions`
+            : `${letter}: at least ${correct} correct (${pct}%)`
+        ),
       },
       {
         heading: `Rounding and partial credit on ${n} questions`,

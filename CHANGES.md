@@ -1,99 +1,99 @@
-# Easy Grade Tool — Audit Fixes (2026-10-24)
+# CHANGES — GSC rectification, built on the latest repo (2026-10-28)
 
-Implements the fixes from the full technical + content audit of 2026-10-24 against your top-10 competitors.
-**This package contains ONLY the changed and new files** (33 files), each in its correct repo-relative path.
-Extract over your repo root, review the diff in GitHub Desktop / VS Code, commit, and deploy as usual
-(`npm run build` — the build regenerates `public/sitemap.xml`, which is also included here already updated).
+## Base
+Built on the repo zip sent 2026-10-28, which already contains: NOVA II +
+dribbble-type (imported last, correct order), the MobileDock removal, and the
+2026-10-26 keyword SEO round (seoKeywordMap + seoExtras: per-size FAQs and
+sections built from real Search Console queries). This package does NOT redo
+any of that — it only strengthens the grading-scale template on top of it.
 
-**Verification done before packaging:** `npm ci` + `npm run build` on this exact code —
-all math checks pass, all page checks pass, and the post-build launch audit passes **17/17 (CHK-01…CHK-17)**.
-One pre-existing TypeScript error in `src/utils/toolPreloader.ts` exists in your original code too
-(your build does not run `tsc`, so it does not block anything) — left untouched.
+## Files changed (1)
+- `src/data/gradingScalePages.ts` — only this file.
 
----
+## What changed (template-wide, all 17 grading-scale size pages)
+1. **Titles** — now use the phrasing people actually search:
+   `Grading Scale for 16 Questions: Percent & Letter Chart`
+   (was: `16-Question Test Grading Scale & Score Chart`). All titles stay
+   under 65 characters and unique per page.
+2. **Meta descriptions** — now end with the computed example plus
+   "Printable, free", e.g. for 16 questions:
+   "16-question grading scale: each answer is worth 6.25%. Percentage and
+   letter grade for every score, e.g. 2 wrong = 87.5%. Printable, free."
+   All descriptions stay under 175 characters and unique per page.
+3. **Internal links** — the "Related grade calculators" block grows from 5 to 7
+   links with size-specific blurbs: added `/grade-curve-calculator/` and
+   `/letter-grade-calculator/` alongside the existing neighbour sizes, index,
+   Quick Grade and test-grade links.
+4. **New section** — "Minimum correct answers on a/an N-question test": the
+   lowest correct count that still earns each letter, computed from the same
+   chart math (e.g. 16 questions: A needs at least 15 correct, 93.8%; pass
+   starts at 10 correct, 62.5%). This ladder does not duplicate anything the
+   keyword round adds — it adds the achieved percentages.
+5. **New FAQ, conditional** — "What score do I need to pass a/an N-question
+   test?" with the computed pass mark per size, added on every size EXCEPT
+   60 and 20 questions, where the keyword round already adds a passing-score
+   FAQ. Adding a second one there would have duplicated it, so the template
+   checks the keyword map and skips those two sizes.
 
-## What changed, gap by gap
+## What was deliberately NOT changed, and why (from the fresh GSC report)
+- **Other high-impression pages were not churned.** Final-exam (355
+  impressions @ 30.78), average-grade (257 @ 32.98), grade-calculator
+  (159 @ 28.51), gpa-calculator (178 @ 18.71) and the grading-scale index
+  (126 @ 51.06) sit at positions 18–51. Their titles are already
+  keyword-strong (final-exam title checked: "Final Exam Grade Calculator —
+  What Score Do You Need?"). Those positions are an authority/competition
+  problem, not a title defect, so changing their titles would be churn
+  without evidence. The boundary pages at positions 7–11 are where title +
+  depth + links can actually move the needle, and they are all covered by
+  this template change.
+- **No noindex anywhere.** Checked against Google's 2026-10-26 guidance
+  ("only index content meant for search"): every sitemap page earns
+  impressions, and nothing on the site is link-shared user-generated content,
+  so no page qualifies for removal from the index.
+- **No invented numbers.** Every new number is computed from the same chart
+  functions the calculators use.
 
-### 1. /for-schools/ embed programme — NEW (audit gap #1, highest ROI)
-- `src/data/forSchoolsPage.ts` (new), `src/components/tools/ForSchoolsEmbedTool.tsx` (new):
-  page with a working configurator (5 calculators × width × school name) that generates embed code,
-  plus a poster text and newsletter blurb with copy buttons, the plain-language free licence
-  (credit line stays), and a privacy section.
-- Embed mode: `src/App.tsx` now supports `?embed=1` — header, footer and update prompt are not rendered,
-  a small "Free grading tools by Easy Grade Tool" credit bar shows inside the frame, and `src/index.css`
-  gained `.embed-mode` rules that hide everything on a tool page except the tool itself.
-- Note: embeds work on GitHub Pages as-is. If you later put Cloudflare in front with `public/_headers`,
-  change `frame-ancestors 'self'` or embeds will be blocked.
+## What the fresh GSC report actually showed
+- The daily chart in the new export is IDENTICAL to the previous one:
+  Oct 4–25 only, 5,390 impressions / 17 clicks. Oct 26–27 data has still not
+  landed (Search Console lags ~2 days), so whether the Oct 24–25 dip
+  rebounded is STILL unanswered — the next export should show it.
+- The full page table (3-month view) confirms the boundary cluster is wider
+  than the top 5: 15 questions 213 @ 9.71, 75 questions 201 @ 9.64,
+  30 questions 81 @ 9.94, 50 questions 245 @ 11.09, 60 questions 237 @ 10.03,
+  100 questions 183 @ 10.27, 40 questions 16 @ 7.69, 12 questions 128 @ 7.79 —
+  all covered by this template change.
+- The query table confirms the title choice: "grading scale for 16
+  questions" (12 @ 8.83) is now matched exactly by the new title, and the
+  "how many can I miss / how much is each question worth" queries are
+  already answered by the keyword-round FAQs on those pages.
 
-### 2. Weighted GPA page depth (audit gap #2) — 1,014 → ~2,020 words
-`src/data/gpaPages.ts`: added a full six-course worked example (all numbers computed by the site's own
-`calculateWeightedGpa`, so they can never drift), a complete grade-points table by course level
-(regular / honors / AP-IB), a "straight A's by schedule" table, a "how many AP classes for a 4.5" section,
-a common-mistakes section, and a 5.0-ceiling section; +4 FAQs. Bonus-table numbers are generated, not typed.
-`weighted-vs-unweighted-gpa` also expanded (~830 → ~1,230 words): transcript/application guidance,
-weighted→unweighted conversion explained, +2 FAQs.
+## Verification (2026-10-28, on the sent repo copy)
+- The sent repo copy builds clean here (exit 0, launch audit 17/17) BEFORE
+  this change — see the deploy note below.
+- After this change: clean build exit 0, launch audit 17/17 PASS, including
+  CHK-03 (page SEO), CHK-08 (content uniqueness), CHK-10 (FAQ schema matches
+  visible text) and CHK-11 (no duplicate titles). The pre-build scale-page
+  check (no FAQ answer repeated across pages) also passes.
+- Built-page spot-checks: 16 questions shows the new title, meta, section,
+  pass FAQ and curve link; 35 questions shows the new title and pass FAQ;
+  60 and 20 questions show the new section and the keyword round's own
+  passing-score FAQ, with this package's pass FAQ correctly ABSENT (0 matches).
 
-### 3. New calculator pages (audit gap #3)
-- `/semester-gpa-calculator/` — `src/components/tools/SemesterGpaTool.tsx` (new) + page content in
-  `gpaPages.ts`. Course rows, quality points shown, pass/fail guidance.
-- `/cumulative-gpa-calculator/` — `src/components/tools/CumulativeGpaTool.tsx` (new) + content.
-  Combines previous GPA/credits with this semester, plus a "target GPA → semester GPA needed" solver
-  that honestly reports when a target needs > 4.0 in one semester.
-- Both wired everywhere: routes (`App.tsx`), SEO self-management list (`selfManagedSeo.ts`), preloads
-  (`lazyRoutes.ts`), nav + tools menu (`navItems.ts`), footer links (`Footer.tsx`), sitemap (automatic).
+## Upload
+Upload THIS zip alone to the repo root, then push. Do NOT also upload the
+earlier strengthen zip from today (egt-strengthen-top-pages-...): it contains
+an older version of this same file with an unconditional pass FAQ, which
+would reintroduce a duplicate pass FAQ on the 60- and 20-question pages.
 
-### 4. Save-on-device (audit gap #4)
-- `WeightedGpaTool.tsx` and the new `SemesterGpaTool.tsx` now persist courses + bonus settings in the
-  browser's local storage (this device only, nothing uploaded), with a Reset-to-example button.
-  The weighted GPA FAQ that used to say "nothing is stored" was rewritten to match.
-  (The homepage Quick Grader already persisted its settings — verified in your code, no change needed.)
+## Deploy-failure note (important)
+This repo copy builds perfectly here, so the 2026-10-27 build failures
+(commits 9516a55 and fa14199) are NOT caused by anything in these files.
+The failure came from files added after this copy, or from the upload
+itself. If your GitHub HEAD is newer than this copy, send a fresh download
+(or the build-log error lines) and the failure can be diagnosed exactly.
+Uploading this package does not by itself resolve that failure.
 
-### 5. Grade curve: bell curve added (audit gap #6)
-- `src/utils/academicMath.ts`: new `bell` method (z-score rescale onto a chosen average + spread,
-  rank order preserved), with validation. `GradeCurveTool.tsx`: Bell curve option + average/spread inputs.
-- Copy updated honestly everywhere it claimed "four methods / never lowers a score"
-  (`src/data/toolPages.ts`, `src/data/toolGuideContent.ts`): four methods never lower a score;
-  the bell curve can, and the copy now says so.
-- (Square-root curve already existed in your code — verified, no change needed.)
-
-### 6. 7-point scale preset (audit gap #5)
-- `src/utils/academicMath.ts`: `SCALE_SEVEN_POINT` (A 93 / B 86 / C 79 / D 72).
-- `src/types.ts` (`GradingScaleType` now includes `'seven'`), `src/data/constants.ts`
-  (`GRADING_SCALES.seven`), `QuickGrader.tsx` (third option in Advanced → Grading scale, persisted
-  like the others, correct label in results), `src/utils/pdfExport.ts` (PDF headers handle the new scale).
-
-### 7. Author byline + updated date on every tool page (audit gap #8)
-- `src/components/ToolPage.tsx`: visible byline under each page heading —
-  "By Muhammad Mansoor Haidar, owner and developer · Last updated October 24, 2026"
-  (your pages already had a small print footer credit; it is now prominent at the top too).
-- `src/data/siteIdentity.ts`: `CONTENT_REVIEWED_ON` bumped to 2026-10-24 (the build's math
-  verification re-checked every formula as part of this work).
-
-### 8. Blog / content hub (audit gap #7) — NEW
-- `/blog/` index + two full guides as prerendered pages (`src/data/blogPages.ts`, new):
-  "How to Grade a Stack of 30 Tests in 15 Minutes" (your campaign guest post, expanded for your own
-  domain — it now builds YOUR authority instead of Telegraph's) and "When to Curve Grades"
-  (all example numbers computed by `applyCurve` at build time).
-- Linked from the footer (every page), the For Schools page, and each other.
-
-### 9. Homepage Quick Answers (audit quick win)
-- `src/components/HomeSections.tsx`: new top section with the four most-searched lookups
-  (17/20 = 85% B, 44/60 = 73.3% C, 9/10 = 90% A, 23/25 = 92% A), each linking to the tool that checks any score.
-
-### 10. Sitemap + OG cards
-- `public/sitemap.xml` + `scripts/sitemap-hashes.json`: regenerated by the build — 6 new URLs included.
-- 6 new files in `public/og-cards/`: **placeholder copies** of existing cards so social shares resolve.
-  Run your `scripts/generate_og_cards.py` when convenient to replace them with branded cards.
-
-## Already in your code (audit corrections — no change made)
-- CSV export on the homepage grader already existed (plus PDF export) — audit gap #9 does not apply to Quick Grade.
-- Off-topic tools (tip/loan/mortgage/password) are already visually separated into a "utility" group in
-  nav and menus by your earlier fixes. Fully removing them from the homepage Tools menu is a bigger
-  design call — left for you; the internal separation already limits topical dilution.
-
-## Not in this package (next steps, in audit order)
-- GPA ↔ letter programmatic conversion pages and HS/college GPA landing pages (cluster expansion).
-- A multi-class final-exam planner.
-- A short explainer video for the homepage / YouTube.
-- Save-on-device for the main `/gpa-calculator/` page (its state model is larger; the weighted,
-  semester and homepage tools now persist, which covers the most-used flows).
+## No ranking guarantee
+This gives the boundary pages a better shot at holding page 1; movement, if
+any, takes days to weeks and shows up in Search Console, not overnight.
