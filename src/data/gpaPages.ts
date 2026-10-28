@@ -45,6 +45,7 @@ export function buildWeightedGpaPage(): ToolPageEntry {
     intro: `A weighted GPA adds bonus points for harder courses, so an A in an AP class can count above 4.0. Add each course with your school’s bonus and see your weighted and unweighted GPA side by side. Example: an A in AP Calculus, a B in Honors English and an A in US History give a weighted GPA of ${exampleResult.weighted.toFixed(2)} and an unweighted GPA of ${exampleResult.unweighted.toFixed(2)}.`,
     keywords: [
       'weighted gpa calculator',
+      'weighted grade calculator',
       'high school gpa calculator',
       'ap gpa calculator',
       'honors gpa calculator',
@@ -59,6 +60,14 @@ export function buildWeightedGpaPage(): ToolPageEntry {
       'Runs in your browser, nothing is uploaded',
     ],
     sections: [
+      {
+        heading: 'Weighted grade vs weighted GPA: the same word, two jobs',
+        paragraphs: [
+          'Teachers and students use "weighted" for two different calculations, and mixing them up is the most common weighted-grade error. A weighted grade weights assessments inside one course — homework at 20%, quizzes at 30%, tests at 50% — and produces a course percent. A weighted GPA weights courses across a transcript — bonus points for honors, AP or IB — and produces a grade-point average above 4.0.',
+          'This page does the second job: it takes course letters and credits, adds bonus points, and returns a weighted GPA. For the first job, use the weighted grade calculator, which takes assessment scores and weights inside a single course and returns a percent. The category grade calculator sits between the two: it weights categories of work inside one course, then reports the course grade.',
+          'The tell is the unit. If the answer should be a percent for one course, you need weights on assessments. If the answer should be a GPA for a whole transcript, you need bonus points on courses. Same word, different inputs, different answers.',
+        ],
+      },
       {
         heading: 'How to calculate a weighted GPA',
         paragraphs: [
@@ -272,6 +281,14 @@ export function buildWeightedVsUnweightedPage(): ToolPageEntry {
         paragraphs: [
           'Not from the headline number alone. A weighted 4.17 could be straight As with two AP bonuses, or a mix of As and Bs with more bonuses, and those two transcripts have different unweighted GPAs. The conversion only works course by course: remove each bonus, convert each grade back to the 4.0 scale and average again.',
           'That is exactly what the weighted GPA calculator shows. Enter the same courses once and it reports both numbers, which is the honest way to “convert”: recompute from the grades, never estimate from the weighted total.',
+        ],
+      },
+      {
+        heading: 'When the two GPAs tell opposite stories',
+        paragraphs: [
+          'The two numbers can rank two students in opposite orders, and that is the clearest proof that they measure different things. Take two students with four courses each. The first takes four regular courses and earns four As: unweighted 4.00, weighted 4.00. The second takes four AP courses with a 1.0 bonus and earns two As and two Bs: unweighted ' +
+            `${((4.0 + 4.0 + 3.0 + 3.0) / 4).toFixed(2)}, weighted ${((5.0 + 5.0 + 4.0 + 4.0) / 4).toFixed(2)}.`,
+          'Read the weighted column and the second student wins; read the unweighted column and the first student wins. Neither ranking is dishonest — the weighted column rewards course difficulty, the unweighted column rewards raw grades. A college that recalculates GPAs on its own table is, in effect, choosing which of those two stories to believe, which is why the same transcript can look stronger at one college than at another.',
         ],
       },
     ],

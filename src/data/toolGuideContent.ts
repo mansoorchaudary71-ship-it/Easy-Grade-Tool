@@ -455,6 +455,8 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       p('Add the difference between the maximum score and the highest raw score: curved score = raw score + (maximum − highest score). If the best score was 85 out of 100, everyone gains 15 points.'),
       h3('What is a square root grade curve?'),
       p('For a 100-point test, curved score = 10 × √raw score. A 64 becomes 80 and a 36 becomes 60, so low scores gain the most and the spread of the class narrows. A cube-root curve works the same way with a stronger lift, but this calculator offers the square root.'),
+      h3('What is a cube-root grade curve?'),
+      p('The cube-root curve is the square-root curve with a stronger lift: curved score = 100 × the cube root of (raw score ÷ 100). On a 100-point test a raw 27 becomes 64.6, a raw 64 becomes 86.2 and a raw 8 becomes 43.1. A raw score in the twenties lands in the sixties, while a raw score already in the eighties barely moves, so the ranking stays the same but the gaps between students shrink sharply. Use it only when the test itself was misjudged — an ambiguous question, a topic taught late, a paper set too long. On a fair test it over-rewards low scores and flattens distinctions the grades were meant to keep.'),
       h3('How does a bell curve work?'),
       p('Turn each score into a z-score, (score − class mean) ÷ standard deviation, then rebuild it on the distribution you want: new score = target average + target spread × z. The rank order is untouched, but the class is stretched or squeezed onto a normal-looking spread. Choose the Bell curve method above and set the average (75 is a common target) and the spread (10 puts most students between 55 and 95).'),
       h3('How do you curve grades using the class average?'),
@@ -493,6 +495,17 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       ),
       p(
         'Capping at the maximum hides what happens at the top: scores of 97 and 99 can both become 100 after a +5 curve. View the uncapped values first, then decide what your gradebook should record.',
+      ),
+
+      h2('Explaining a Curve to a Class Without Losing Trust'),
+      p(
+        'A curve announced with the grades feels like a favour; a curve announced before the test feels like policy. State the method in the syllabus or on the paper itself — “scores will be curved to a class average of 78” — so students hear the rule before they hear their own result.',
+      ),
+      p(
+        'Show the before-and-after table, not just the final letters. When students can see that every score moved by the same rule, and that no one’s rank changed unless the method says so, the argument ends. Keep the raw score visible next to the curved one: hiding the raw score is what makes a fair curve look like grade inflation.',
+      ),
+      p(
+        'Never curve down silently. If the method would lower anyone’s score, say so in advance and explain why, or cap the curve at each student’s raw score. A curve that can only help is easy to defend; a curve that quietly takes points away is not.',
       ),
 
       h2('How to Grade on a Curve in Excel or Google Sheets'),
@@ -586,6 +599,10 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       p(
         'A 93% is an A on both common scales. It is a B only if your school uses a very high A cutoff such as 94 or 95.',
       ),
+      h3('Standard versus plus/minus: the same percent, different letters'),
+      p(
+        'The same percent can carry two different letters, and the difference is purely the scale. On the standard scale the bands are wide — A from 90, B from 80, C from 70, D from 60 — while the plus/minus scale splits each band into three. The worked comparison: 91% is an A on the standard scale and an A- on plus/minus; 83% is a B on both; 79% is a C on the standard scale and a C+ on plus/minus; 68% is a D on the standard scale and a D+ on plus/minus. The practical consequence is GPA points, not just letters: on the plus/minus scale a 91 earns 3.7 points while a 93 earns 4.0, so two students who both hold “an A” on the standard scale can differ by 0.3 GPA points.',
+      ),
       h3('What letter grade is 70%, and is a 30 out of 50 a bad grade?'),
       p(
         'A 70% (35 out of 50) is a C on the standard scale and a C- on the plus/minus scale. A 30 out of 50 is 60%, a D or a D-, which passes at most schools but only just. For comparison, 48 out of 50 is 96%, an A.',
@@ -636,6 +653,10 @@ export const TOOL_GUIDE_CONTENT: Record<ToolGuideKey, ToolGuideContent> = {
       h2('Why Your School’s Scale May Differ'),
       p(
         'Seven-point scales that start an A at 93, cutoffs at 94 or 95, and an A+ worth 4.3 all exist, and so do different rounding rules. When your syllabus lists cutoffs, they override any generic chart, including this one.',
+      ),
+      h3('How to check your school’s scale'),
+      p(
+        'The syllabus is the first place to look: most teachers print their scale on the first page. If it is not there, the student handbook or the registrar’s grading policy page carries the official version, and that version overrules any calculator’s default. Watch for the two common variants: the 7-point scale starts A at 93, B at 86, C at 79 and D at 72 — two to three points higher per band than the standard scale — and some schools run a 10-point scale with no plus/minus at all. If your school uses one of these and you grade against the standard scale, every boundary score will be wrong by a letter.',
       ),
 
       h2('From Letter Grade to GPA and Final Grade'),

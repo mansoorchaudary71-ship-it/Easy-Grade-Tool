@@ -22,6 +22,11 @@ import type { SemesterGpaRow } from './tools/SemesterGpaTool';
 import type { WeightedGpaRow } from './tools/WeightedGpaTool';
 import { FinalPlannerTool } from './tools/FinalPlannerTool';
 import { UniversityCgpaTool } from './tools/UniversityCgpaTool';
+import { QuizGradeTool } from './tools/QuizGradeTool';
+import { TargetGpaTool } from './tools/TargetGpaTool';
+import { GpaConverterTool } from './tools/GpaConverterTool';
+import { GradeCalculator } from './GradeCalculator';
+import type { AssessmentItem } from '../types';
 import { CGPA_UNIVERSITY_PAGES } from '../data/cgpaUniversityPages';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
@@ -58,7 +63,31 @@ const TOOLS: Record<string, React.ComponentType> = {
     />
   ),
   'final-grade-planner': FinalPlannerTool,
+  // Competitor-gap pages (2026-10-28). Assignment and points reuse the
+  // test-grade tool: both are points-based grading with different framing
+  // copy, and the tool already carries bonus and penalty inputs.
+  'quiz-grade-calculator': QuizGradeTool,
+  'target-gpa-calculator': TargetGpaTool,
+  'gpa-converter': GpaConverterTool,
+  'assignment-grade-calculator': TestGradeTool,
+  'points-grade-calculator': TestGradeTool,
+  'category-grade-calculator': () => (
+    <GradeCalculator
+      setToast={() => {}}
+      initialMode="weighted"
+      initialItems={CATEGORY_ROWS}
+      hideHeading
+      hideSeo
+    />
+  ),
 };
+
+const CATEGORY_ROWS: AssessmentItem[] = [
+  { id: 1, name: 'Homework', score: '85', max: '100', weight: '20' },
+  { id: 2, name: 'Quizzes', score: '90', max: '100', weight: '30' },
+  { id: 3, name: 'Midterm', score: '78', max: '100', weight: '20' },
+  { id: 4, name: 'Final', score: '88', max: '100', weight: '30' },
+];
 
 const HIGH_SCHOOL_ROWS: WeightedGpaRow[] = [
   { id: 1, name: 'AP Calculus', letter: 'A', credits: '1', level: 'ap' },
@@ -175,6 +204,36 @@ const JOURNEY_STEPS: Record<string, { title: string; sub: string }[]> = {
     { title: 'Pick a calculator to embed', sub: 'Any tool on the site.' },
     { title: 'Copy one line of code', sub: 'Paste it on your school page.' },
     { title: 'It runs free on your site', sub: 'No account, no branding deals.' },
+  ],
+  'target-gpa-calculator': [
+    { title: 'Enter your current GPA and credits', sub: 'Where you stand today.' },
+    { title: 'Set the target and remaining credits', sub: 'Where you want to finish.' },
+    { title: 'See the average you must hit', sub: 'Or the honest impossible flag.' },
+  ],
+  'quiz-grade-calculator': [
+    { title: 'Enter questions and misses', sub: 'Any quiz size, halves allowed.' },
+    { title: 'See the percent and letter grade', sub: 'Plus the miss allowance table.' },
+    { title: 'Check what one more miss costs', sub: 'Before the next quiz.' },
+  ],
+  'assignment-grade-calculator': [
+    { title: 'Enter points earned and possible', sub: 'Any assignment size.' },
+    { title: 'Add the late penalty and bonus', sub: 'Both applied at once.' },
+    { title: 'See the adjusted grade', sub: 'With the unadjusted score beside it.' },
+  ],
+  'points-grade-calculator': [
+    { title: 'Enter points earned and possible', sub: 'Any total, any subject.' },
+    { title: 'See the percent and letter grade', sub: 'Instant, no setup.' },
+    { title: 'Find the points for the next grade', sub: 'A concrete revision target.' },
+  ],
+  'category-grade-calculator': [
+    { title: 'Enter each category average', sub: 'Homework, quizzes, tests.' },
+    { title: 'Set the syllabus weights', sub: 'Copied from your course outline.' },
+    { title: 'See the course grade and contributions', sub: 'Which category drags it down.' },
+  ],
+  'gpa-converter': [
+    { title: 'Pick a conversion direction', sub: 'SGPA, CGPA, percent, or 4.0 GPA.' },
+    { title: 'Enter the value to convert', sub: 'One field, one answer.' },
+    { title: 'Check the university formula', sub: 'Before using it officially.' },
   ],
 };
 

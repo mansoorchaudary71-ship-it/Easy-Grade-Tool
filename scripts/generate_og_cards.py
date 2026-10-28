@@ -51,6 +51,17 @@ CARDS.update({
     "og-cards/blog-high-school-vs-college-gpa-1200x630.png": ("High School GPA\nvs College GPA", "Credits, weighting and what changes after graduation"),
 })
 
+# Cards for the 2026-10-28 competitor-gap pages (target GPA, quiz, assignment,
+# points, category, GPA converter).
+CARDS.update({
+    "og-cards/target-gpa-calculator-1200x630.png": ("Target GPA\nCalculator", "Plan the grades you need to reach your goal"),
+    "og-cards/quiz-grade-calculator-1200x630.png": ("Quiz Grade\nCalculator", "Score, percent and letter for any quiz"),
+    "og-cards/assignment-grade-calculator-1200x630.png": ("Assignment Grade\nCalculator", "Late penalties and extra credit included"),
+    "og-cards/points-grade-calculator-1200x630.png": ("Points Grade\nCalculator", "Points to percent and letter grade"),
+    "og-cards/category-grade-calculator-1200x630.png": ("Category Grade\nCalculator", "Weighted course grades by category"),
+    "og-cards/gpa-converter-1200x630.png": ("GPA Converter", "SGPA, CGPA, percentage and 4.0 GPA in one place"),
+})
+
 # One card per verified university CGPA page. Read from
 # src/data/cgpaUniversities.ts so the list matches the pages exactly: only
 # verified entries, excluding the generic 'normal' standard formula.

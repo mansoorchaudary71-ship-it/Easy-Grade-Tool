@@ -153,6 +153,7 @@ export function buildCgpaUniversityPages(): ToolPageEntry[] {
       },
       related: [
         { path: '/cgpa-to-percentage-calculator/', label: 'CGPA to percentage calculator', blurb: 'Every university and scale in one converter.' },
+        { path: '/gpa-converter/', label: 'GPA converter', blurb: 'SGPA, CGPA, percentage and 4.0 GPA in one place.' },
         { path: '/semester-gpa-calculator/', label: 'Semester GPA calculator', blurb: 'One semester of courses, grades and credits.' },
         { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Combine semesters into one cumulative GPA.' },
         { path: '/college-gpa-calculator/', label: 'College GPA calculator', blurb: 'Credit-weighted GPA for college courses.' },

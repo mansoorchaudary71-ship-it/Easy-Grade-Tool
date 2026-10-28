@@ -91,6 +91,8 @@ interface SavedState {
   scale?: GradingScaleType;
   half?: boolean;
   cutoffs?: CutoffDrafts;
+  /** Graded papers of the current class session. No names are ever stored — only wrong counts, percents and letters. */
+  tally?: StudentEntry[];
 }
 
 export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
@@ -108,6 +110,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
   // ---- One-student panel and class tally ----------------------------------------------------
   const [wrongInput, setWrongInput] = useState<string>('0');
   const [students, setStudents] = useState<StudentEntry[]>([]);
+  const wrongInputRef = useRef<HTMLInputElement>(null);
 
   const hydrated = useRef(false);
 
@@ -134,6 +137,22 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
             setAppliedCutoffs(parsed.cutoffs);
           }
         }
+        // Restore the class session itself: papers only, never names. Invalid
+        // rows are dropped and the rest are renumbered in graded order.
+        if (Array.isArray(saved.tally)) {
+          const restored: StudentEntry[] = [];
+          for (const row of saved.tally.slice(0, MAX_TALLY)) {
+            const r = row as Partial<StudentEntry>;
+            if (
+              typeof r.wrong === 'number' && Number.isFinite(r.wrong) &&
+              typeof r.percent === 'number' && Number.isFinite(r.percent) &&
+              typeof r.letter === 'string' && r.letter
+            ) {
+              restored.push({ n: restored.length + 1, wrong: r.wrong, percent: r.percent, letter: r.letter });
+            }
+          }
+          if (restored.length) setStudents(restored);
+        }
       }
     } catch {
       /* storage blocked or empty: defaults stay */
@@ -153,7 +172,9 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
     if (totalCheck.value !== null) setTotal(totalCheck.value);
   }, [totalCheck.value]);
 
-  // Save settings (cheap, only when something the teacher set changes).
+  // Save settings (cheap, only when something the teacher set changes). The
+  // graded-papers list is saved with them, on this device only, so a reload
+  // keeps the session; nothing is ever sent anywhere.
   useEffect(() => {
     if (!hydrated.current) return;
     try {
@@ -163,12 +184,13 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         half: halfPoints,
         scale: scaleType,
         cutoffs: cutoffsToDrafts(appliedCutoffs),
+        tally: students,
       };
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     } catch {
       /* storage blocked: the page still works, settings just are not remembered */
     }
-  }, [totalInput, totalCheck.value, total, showDecimals, halfPoints, scaleType, appliedCutoffs]);
+  }, [totalInput, totalCheck.value, total, showDecimals, halfPoints, scaleType, appliedCutoffs, students]);
 
   const decimals: DecimalPrecision = showDecimals ? 1 : 0;
   const bands: LetterBand[] = useMemo(
@@ -287,8 +309,11 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
         ? prev
         : [...prev, { n: prev.length + 1, wrong: wrongNum, percent: student.percentage, letter: student.letter }]
     );
-    setWrongInput('0');
+    // Save-and-next: clear the field and put the keyboard straight back in
+    // it, so the next paper is one typed number plus Enter away.
+    setWrongInput('');
     setToast?.(`Student ${students.length + 1} saved: ${student.formattedPercentage}% ${student.letter}`);
+    window.setTimeout(() => wrongInputRef.current?.focus(), 0);
   }, [wrongNum, student, students.length, setToast]);
 
   const onPanelKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -312,11 +337,15 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
   const tally = useMemo(() => {
     const counts: Record<string, number> = {};
     let sum = 0;
-    students.forEach((s) => {
+    let high = 0;
+    let low = 0;
+    students.forEach((s, i) => {
       counts[s.letter] = (counts[s.letter] || 0) + 1;
       sum += s.percent;
+      if (i === 0 || s.percent > high) high = s.percent;
+      if (i === 0 || s.percent < low) low = s.percent;
     });
-    return { counts, average: students.length ? sum / students.length : 0 };
+    return { counts, average: students.length ? sum / students.length : 0, high, low };
   }, [students]);
 
   const csvText = useMemo(() => {
@@ -451,7 +480,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           <div className="pb-4 border-b border-slate-200 ">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight m-0">Test configuration</h2>
             <p className="text-slate-700 text-sm sm:text-base mt-1 m-0">
-              Set the number of questions, then grade one student at a time or print the chart.
+              Set the number of questions, then grade a whole class one paper at a time, or print the chart.
             </p>
           </div>
 
@@ -664,16 +693,22 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           </div>
         </section>
 
-        {/* 2. Grade one student + class tally (input + live readout) */}
+        {/* 2. Class session: grade one paper at a time, with a running tally (input + live readout) */}
         <section
           id="student-panel"
-          aria-label="Grade one student"
+          aria-label="Class session"
           onKeyDown={onPanelKeyDown}
           className={`${CARD_INPUT} space-y-5 print:hidden`}
         >
-          <div className="flex items-center gap-2">
-            <UserRound className="w-5 h-5 text-slate-700 " aria-hidden="true" />
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight m-0">Grade one student</h2>
+          <div>
+            <div className="flex items-center gap-2">
+              <UserRound className="w-5 h-5 text-slate-700 " aria-hidden="true" />
+              <h2 className="text-xl font-bold text-slate-900 tracking-tight m-0">Class session</h2>
+            </div>
+            <p className="text-sm text-slate-700 mt-1 m-0">
+              Grade one paper at a time: enter wrong answers, press Enter, and the next paper is ready.
+              The session is saved on this device only — no names, nothing uploaded.
+            </p>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -686,6 +721,7 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
               </button>
               <input
                 id="student-wrong"
+                ref={wrongInputRef}
                 type="text"
                 inputMode={halfPoints ? 'decimal' : 'numeric'}
                 enterKeyHint="next"
@@ -759,10 +795,12 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
           {students.length > 0 && (
             <div className="border-t border-slate-200 pt-5 space-y-3">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-base font-bold text-slate-900 m-0">Class tally</h3>
+                <h3 className="text-base font-bold text-slate-900 m-0">Session summary</h3>
                 <span className="text-sm text-slate-700 ">
-                  {students.length} student{students.length === 1 ? '' : 's'} · average{' '}
-                  <strong className="font-mono">{tally.average.toFixed(1)}%</strong>
+                  {students.length} paper{students.length === 1 ? '' : 's'} · average{' '}
+                  <strong className="font-mono">{tally.average.toFixed(1)}%</strong> · highest{' '}
+                  <strong className="font-mono">{tally.high.toFixed(decimals)}%</strong> · lowest{' '}
+                  <strong className="font-mono">{tally.low.toFixed(decimals)}%</strong>
                 </span>
               </div>
               <ul className="m-0 p-0 list-none flex flex-wrap gap-2">
@@ -780,6 +818,30 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                     );
                   })}
               </ul>
+              <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+                <table className="w-full text-left text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 text-slate-800">
+                      <th scope="col" className="px-4 py-2.5 font-bold">Paper</th>
+                      <th scope="col" className="px-4 py-2.5 font-bold">Wrong</th>
+                      <th scope="col" className="px-4 py-2.5 font-bold">Correct</th>
+                      <th scope="col" className="px-4 py-2.5 font-bold">Score</th>
+                      <th scope="col" className="px-4 py-2.5 font-bold">Grade</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {students.map((s) => (
+                      <tr key={s.n} className="border-t border-slate-200 text-slate-900">
+                        <th scope="row" className="px-4 py-2 font-bold">{s.n}</th>
+                        <td className="px-4 py-2 font-mono tabular-nums">{formatStep(s.wrong)}</td>
+                        <td className="px-4 py-2 font-mono tabular-nums">{formatStep(total - s.wrong)}</td>
+                        <td className="px-4 py-2 font-mono tabular-nums">{s.percent.toFixed(decimals)}%</td>
+                        <td className="px-4 py-2 font-bold">{s.letter}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
               <div className="flex flex-wrap gap-3">
                 <button type="button" className={BTN_SOFT} onClick={downloadCsv}>
                   <Download className="w-4 h-4" aria-hidden="true" />
@@ -794,14 +856,14 @@ export const QuickGrader: React.FC<QuickGraderProps> = ({ setToast }) => {
                   className={BTN_SOFT}
                   onClick={() => {
                     setStudents([]);
-                    setToast?.('Class tally cleared.');
+                    setToast?.('Class session cleared.');
                   }}
                 >
                   <RotateCcw className="w-4 h-4" aria-hidden="true" />
-                  <span>Clear tally</span>
+                  <span>Clear session</span>
                 </button>
               </div>
-              <p className={`${HELP_TEXT} m-0`}>The tally lives in this tab only. It is never sent anywhere and is gone when you close the page.</p>
+              <p className={`${HELP_TEXT} m-0`}>The session is saved on this device only, so it survives a reload. It holds no names — only wrong counts, percents and letters — and is never sent anywhere.</p>
             </div>
           )}
         </section>

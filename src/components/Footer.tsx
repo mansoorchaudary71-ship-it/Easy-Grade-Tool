@@ -116,6 +116,14 @@ const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string 
   { label: 'How Many Can I Miss', title: 'How many questions can you miss calculator', path: '/how-many-questions-can-i-miss/' },
   { label: 'Semester GPA', title: 'Semester GPA calculator', path: '/semester-gpa-calculator/' },
   { label: 'Cumulative GPA', title: 'Cumulative GPA calculator', path: '/cumulative-gpa-calculator/' },
+  // Competitor-gap pages (2026-10-28): footer links keep every new page one
+  // click from the homepage, which the launch audit (CHK-16) enforces.
+  { label: 'Target GPA Calculator', title: 'Target GPA calculator — plan the grades you need', path: '/target-gpa-calculator/' },
+  { label: 'Quiz Grade Calculator', title: 'Quiz grade calculator — score, percent and letter grade', path: '/quiz-grade-calculator/' },
+  { label: 'Assignment Grade Calculator', title: 'Assignment grade calculator — late and extra credit', path: '/assignment-grade-calculator/' },
+  { label: 'Points Grade Calculator', title: 'Points grade calculator — points to percent and letter', path: '/points-grade-calculator/' },
+  { label: 'Category Grade Calculator', title: 'Category grade calculator — weighted course grades', path: '/category-grade-calculator/' },
+  { label: 'GPA Converter', title: 'GPA converter — SGPA, CGPA and percent in one place', path: '/gpa-converter/' },
   { label: 'For Schools', title: 'Embed free grade calculators on your school website', path: '/for-schools/' },
   { label: 'Blog', title: 'Grading guides and articles', path: '/blog/' },
   { label: 'Grade 30 Tests in 15 Minutes', title: 'How to grade a stack of 30 tests in 15 minutes', path: '/blog/how-to-grade-30-tests-in-15-minutes/' },

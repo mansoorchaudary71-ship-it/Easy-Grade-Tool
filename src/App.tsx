@@ -263,6 +263,12 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/high-school-gpa-calculator" element={<CompToolPage slug="high-school-gpa-calculator" />} />
               <Route path="/college-gpa-calculator" element={<CompToolPage slug="college-gpa-calculator" />} />
               <Route path="/final-grade-planner" element={<CompToolPage slug="final-grade-planner" />} />
+              <Route path="/target-gpa-calculator" element={<CompToolPage slug="target-gpa-calculator" />} />
+              <Route path="/quiz-grade-calculator" element={<CompToolPage slug="quiz-grade-calculator" />} />
+              <Route path="/assignment-grade-calculator" element={<CompToolPage slug="assignment-grade-calculator" />} />
+              <Route path="/points-grade-calculator" element={<CompToolPage slug="points-grade-calculator" />} />
+              <Route path="/category-grade-calculator" element={<CompToolPage slug="category-grade-calculator" />} />
+              <Route path="/gpa-converter" element={<CompToolPage slug="gpa-converter" />} />
               <Route path="/cgpa-to-percentage/:uni" element={<CgpaUniversityRoute ToolPage={CompToolPage} />} />
               <Route path="/weighted-vs-unweighted-gpa" element={<CompToolPage slug="weighted-vs-unweighted-gpa" />} />
               <Route path="/how-many-questions-can-i-miss" element={<CompToolPage slug="how-many-questions-can-i-miss" />} />

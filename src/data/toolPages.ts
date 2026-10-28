@@ -14,6 +14,7 @@ import { buildGpaToLetterPage, buildLetterToGpaPage } from './gpaLetterPages';
 import { buildCollegeGpaPage, buildHighSchoolGpaPage } from './schoolGpaPages';
 import { buildFinalPlannerPage } from './finalPlannerPage';
 import { buildCgpaUniversityPages } from './cgpaUniversityPages';
+import { COMPETITOR_GAP_PAGES } from './competitorGapPages';
 import { applySeoExtras } from './seoExtras';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, applyCurve, calculateTestGrade, computeStats, percentToLetter, roundTo } from '../utils/academicMath';
 
@@ -536,6 +537,49 @@ CORE_PAGES['grade-curve-calculator'].related.push({ path: '/average-grade-calcul
   });
 }
 
+// Competitor-gap revamps (2026-10-28): grade-curve and letter-grade pages
+// get new FAQs here. NOTE: both pages render a long-form guide instead of
+// entry.sections (ToolPage renders sections only for non-guide pages), so
+// the matching methods content lives as visible guide blocks in
+// toolGuideContent.ts — appending sections here would be invisible.
+{
+  CORE_PAGES['grade-curve-calculator'].faqs.push(
+    {
+      question: 'What is a cube-root grade curve?',
+      answer:
+        'A cube-root curve replaces each raw score with 100 times the cube root of the raw score divided by 100. On a 100-point test a raw 27 becomes about 64.6, a raw 64 becomes about 86.2 and a raw 8 becomes about 43.1. Low scores gain the most and the class spread narrows sharply, which suits a test that turned out far harder than intended.',
+    },
+    {
+      question: 'Does a curve ever lower grades?',
+      answer:
+        'It can, depending on the method: a bell-curve rescaling can lower scores above the mean when the class average is already high, and a top-score method that rescales to the highest paper can lower nothing but also helps no one at the top. Most teachers cap a curve so no student’s score falls below the raw score — a curve that can only help is far easier to defend to a class.',
+    },
+    {
+      question: 'Which curve method should a teacher choose?',
+      answer:
+        'Match the method to the problem. Flat points suit a uniformly hard test where everyone deserves the same lift. Top-score-to-100 suits a test where the best paper should define full marks. Square or cube root suits a test with many low scores that need lifting most. Target average suits a class that must land on a department average. Bell-curve rescaling suits a large class where the spread itself needs reshaping. Announce the method before the grades go out.',
+    },
+  );
+
+  CORE_PAGES['letter-grade-calculator'].faqs.push(
+    {
+      question: 'Is 91 an A or an A minus?',
+      answer:
+        'On the standard A–F scale, 91 is an A, because A covers 90–100%. On the plus/minus scale, 91 is an A−, because A covers 93–96.99% and A− covers 90–92.99%. The percent is the same; only the scale changes the letter, so check which scale your school uses before reporting the grade.',
+    },
+    {
+      question: 'Why do two schools give different letters for the same percent?',
+      answer:
+        'Because grading scales are local policy, not a universal standard. One school’s A starts at 90, another’s at 93 on a 7-point scale, and a third uses plus/minus splits inside every band. The percent is a fact; the letter is an interpretation of that fact under a particular school’s scale.',
+    },
+    {
+      question: 'Does plus/minus help or hurt GPA?',
+      answer:
+        'It depends on where your percents fall. Plus/minus rewards scores at the top of each band — a 97 earns 4.0 where the standard scale also gives 4.0, but an 87 earns 3.3 instead of a flat 3.0 for a B — and it penalises scores at the bottom of a band, where a 90 earns 3.7 instead of 4.0. Over a whole transcript the two systems roughly balance, but individual terms can swing either way.',
+    },
+  );
+}
+
 export const TOOL_PAGES: Record<string, ToolPageEntry> = {
   ...CORE_PAGES,
   'average-grade-calculator': buildAverageGradePage(),
@@ -556,6 +600,7 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
   'high-school-gpa-calculator': buildHighSchoolGpaPage(),
   'college-gpa-calculator': buildCollegeGpaPage(),
   'final-grade-planner': buildFinalPlannerPage(),
+  ...Object.fromEntries(COMPETITOR_GAP_PAGES.map((entry) => [entry.slug, entry] as const)),
   ...Object.fromEntries(buildCgpaUniversityPages().map((entry) => [entry.slug, entry] as const)),
   ...Object.fromEntries(GRADING_SCALE_SIZES.map((n) => {
     const entry = buildQuestionCountPage(n);

@@ -47,14 +47,15 @@ export function buildFinalPlannerPage(): ToolPageEntry {
     path: '/final-grade-planner/',
     navLabel: 'Final grade planner',
     h1: 'Final Grade Planner — Every Class, One Plan',
-    title: 'Final Grade Planner — What You Need on Each Final Exam',
+    title: 'Final Grade Calculator — What You Need on Every Final',
     metaDescription:
-      'Free final grade planner: enter every class’s current grade, final weight and target to see the final-exam score each class needs.',
+      'Free final grade calculator: enter every class’s current grade, final weight and target to see the final-exam score each class needs.',
     badge: 'Final exams',
     intro:
       'One final exam is a simple calculation. A whole finals week is not — each class has its own current grade, its own final weight and its own target. The planner solves all of them at once: what each final needs, which targets are already secured, and which are out of reach even with a perfect final.',
     keywords: [
       'final grade planner',
+      'final grade calculator',
       'final exam planner',
       'what grade do i need on my finals',
       'finals week calculator',

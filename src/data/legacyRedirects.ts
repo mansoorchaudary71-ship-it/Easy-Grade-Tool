@@ -33,7 +33,9 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/weighted-grade-calculator': '/grade-calculator/',
   '/curve-calculator': '/grade-curve-calculator/',
   '/test-score-calculator': '/test-grade-calculator/',
-  '/quiz-grade-calculator': '/test-grade-calculator/',
+  // NOTE 2026-10-28: the '/quiz-grade-calculator' alias was removed here
+  // because that path is now a real page (the quiz grade calculator), not
+  // an alias for the test grade calculator.
   '/easy-grader': '/',
   // Policy / methodology aliases
   '/privacy-policy': '/privacy/',

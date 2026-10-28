@@ -237,6 +237,13 @@ export function buildLetterToGpaPage(): ToolPageEntry {
           'Grade-point tables are institutional, not universal. The converter uses the common 4.0 table — A 4.0, A- 3.7, B+ 3.3, B 3.0, down to F 0.0 — but real tables diverge in three places: the A+ value (4.0 here, 4.33 at some schools), the plus/minus steps (a few schools use 3.5 for B+ or 3.67 for A-), and whether plus/minus letters exist at all. Two transcripts can therefore show identical letters with different GPAs, and neither is wrong. For anything official — a scholarship, an application, a transfer evaluation — recompute from your own school’s published table, and treat this converter as the common-case answer.',
         ],
       },
+      {
+        heading: 'A three-course average, letter by letter',
+        paragraphs: [
+          `Averaging letters means averaging their points, never the letters themselves — letters have no arithmetic. Take three courses graded A, B+ and C− on the plus/minus scale: their points are 4.0, 3.3 and 1.7. With equal credits the average is (4.0 + 3.3 + 1.7) ÷ 3 = ${((4.0 + 3.3 + 1.7) / 3).toFixed(2)}.`,
+          `Credits change the answer as soon as they differ. Put the A in a 4-credit course (16.0 quality points), the B+ in a 3-credit course (9.9) and the C− in a 2-credit course (3.4): the total is 29.3 quality points over 9 credits, giving ${((16.0 + 9.9 + 3.4) / 9).toFixed(2)} instead of ${((4.0 + 3.3 + 1.7) / 3).toFixed(2)}. The same three letters, two different GPAs — and the credited version is the one a transcript reports.`,
+        ],
+      },
     ],
     lookupTables: [
       {
@@ -294,6 +301,11 @@ export function buildLetterToGpaPage(): ToolPageEntry {
         question: 'Can I use this for graduate school applications?',
         answer:
           'As a starting point, yes, but graduate admissions often recompute. Many programs look at the GPA of your last 60 credits, or at a major-field GPA, rather than the overall figure. Convert your letters here to understand your standing, then check whether the program asks for an overall, major or last-60-credits GPA before submitting.',
+      },
+      {
+        question: 'How do I average letters that came from different schools?',
+        answer:
+          'Convert each letter on the scale of the school that awarded it, then average the resulting points with credits — never average the letters themselves, and never convert every letter on one school’s table. A B+ worth 3.3 at one school and 3.5 at another must enter the average at its own value, or the combined GPA is wrong before the division starts.',
       },
       {
         question: 'What if my school uses percentages instead of letters?',
