@@ -82,9 +82,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 160);
-    onScroll();
+    // Initial read is deferred until the browser is idle: reading scrollY during hydration forces a synchronous layout.
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    const idle = w.requestIdleCallback ? w.requestIdleCallback(onScroll, { timeout: 1500 }) : window.setTimeout(onScroll, 300);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      if (w.requestIdleCallback && w.cancelIdleCallback) w.cancelIdleCallback(idle); else window.clearTimeout(idle);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   const isMac = useMemo(() => {

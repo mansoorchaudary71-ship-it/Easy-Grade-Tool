@@ -46,7 +46,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-H9RJ2Q89XF');
-  // Load gtag.js after the page has painted (first interaction, or 3.5 s after load) so it never competes with
+  // Load gtag.js after the page has painted (first interaction, or 6 s after load) so it never competes with
   // the first render on slow mobile connections. Events queued above are sent as soon as it arrives.
   (function () {
     var started = false;
@@ -61,7 +61,7 @@
     ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (t) {
       window.addEventListener(t, load, { once: true, passive: true });
     });
-    window.addEventListener('load', function () { window.setTimeout(load, 3500); });
+    window.addEventListener('load', function () { window.setTimeout(load, 6000); });
   })();
 </script>
     <meta charset="UTF-8" />
@@ -84,7 +84,7 @@
     <link rel="canonical" href="https://www.easygradetool.com/" />
     
     <!-- Self-Hosted Critical Fonts Preload -->
-    <link rel="preload" href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/MonaSans.woff2" as="font" type="font/woff2" crossorigin />
 
     <meta property="og:title" content="Easy Grade Calculator: Test Score, Percent &amp; Letter Grade" />
     <meta property="og:description" content="Free easy grade calculator for teachers and students. Get every percentage and letter grade for any test size, with half points and a printable chart." />

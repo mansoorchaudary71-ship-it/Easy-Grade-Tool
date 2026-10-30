@@ -140,11 +140,13 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
   const firstRoute = useRef(true);
   const [routeAnnouncement, setRouteAnnouncement] = useState<string>('');
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    // First render: skip scrollTo. It forces a synchronous layout right after hydration (Lighthouse "Forced reflow"),
+    // and a fresh load already starts at the top (or at the browser's restored scroll position).
     if (firstRoute.current) {
       firstRoute.current = false;
       return;
     }
+    window.scrollTo({ top: 0, behavior: 'instant' });
     const frame = window.requestAnimationFrame(() => {
       mainRef.current?.focus({ preventScroll: true });
       const heading = document.querySelector('main h1');

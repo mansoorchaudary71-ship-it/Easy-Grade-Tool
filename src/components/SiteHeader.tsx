@@ -24,9 +24,14 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ activeTool, onSelectTool
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
+    // Initial read is deferred until the browser is idle: reading scrollY during hydration forces a synchronous layout.
+    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
+    const idle = w.requestIdleCallback ? w.requestIdleCallback(onScroll, { timeout: 1500 }) : window.setTimeout(onScroll, 300);
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      if (w.requestIdleCallback && w.cancelIdleCallback) w.cancelIdleCallback(idle); else window.clearTimeout(idle);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
   return (
     <div className={`elev-chrome lm-chrome sticky top-0 z-50 isolate print:hidden${scrolled ? ' is-scrolled' : ''}`} data-site-chrome>
