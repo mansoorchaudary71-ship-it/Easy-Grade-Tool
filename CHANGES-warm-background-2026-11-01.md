@@ -1,15 +1,16 @@
-# CHANGES — Warm background only — 2026-11-01 (v4 opacity reduction)
+# CHANGES — Warm background only — 2026-11-01 (v5 white)
 
 User instruction 2026-11-01 (replaces the Warm Paper / Warm Blend
 direction): ONLY the website's background becomes warm — nothing else
-changes. Do NOT upload the Warm Paper, Warm Blend, v1, v2, or v3
-background zips; this v4 package supersedes them.
+changes. Do NOT upload the Warm Paper, Warm Blend, v1, v2, v3, or v4
+background zips; this v5 package supersedes them.
 
-v4 change: cream opacity reduced — same classic cream `#FFFDD0` (hue
-57°, yellow family, no pink), now at 40% opacity over white, effective
-colour `#FFFEEC`: only a faint warm touch instead of a full cream
-wash. Nothing else changed between v3 and v4. To make it fainter
-still, change 0.4 to 0.25 in warm-background.css (one number).
+v5 change: background set to pure white `#FFFFFF`, per the user's
+latest instruction. This restores the site's original background
+exactly (the theme's own nova.css rule already painted the page
+white). The warm-background.css layer and its import stay in place as
+the single background control, so a future tint is still a one-value
+change in that file. Nothing else changed between v4 and v5.
 
 ## Files in this package (upload to repo root ALONE, then push)
 
@@ -23,10 +24,10 @@ still, change 0.4 to 0.25 in warm-background.css (one number).
 
 ## What changes (exactly one thing)
 
-- Page backdrop: white `#ffffff` → classic cream `#FFFDD0` at 40% opacity
-  over white (effective `#FFFEEC`, a faint warm touch), on `html` and
-  `html body` (the `html body` selector matches the current theme's
-  own rule in nova.css, so it wins by import order).
+- Page backdrop: pure white `#FFFFFF`, on `html` and `html body`
+  (the `html body` selector matches the current theme's own rule in
+  nova.css, so it wins by import order; the value now equals the
+  original theme value, restoring the original look).
 
 ## What does NOT change
 

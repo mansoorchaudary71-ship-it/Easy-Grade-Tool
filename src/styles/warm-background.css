@@ -7,13 +7,15 @@
    thing: it paints the page backdrop warm cream. No colours, fonts,
    buttons, cards, header, lines, or spacing are touched here.
 
-   Colour (corrected 2026-11-01, v4): classic cream #FFFDD0 at 40%
-   opacity over white — effective colour #FFFEEC, only a faint warm
-   touch. v1 (#FDF8F0, hue 37°) and v2 (#FDF6E3, hue 44°) both sat in
-   the orange-peach zone and read pink; v3 (#FFFDD0, hue 57°) fixed
-   the pink but was a full-strength cream wash. v4 keeps the same
-   cream hue and simply turns its opacity down. To make it fainter
-   still, change 0.4 to 0.25 in the two rules below (one number).
+   Colour (2026-11-01, v5): #FFFFFF — pure white, per the user's
+   instruction. This restores the site's original background exactly:
+   the theme's own rule in nova.css already painted the page white,
+   so this layer now simply repeats that value. The file and its
+   import stay in place as the single background control, so any
+   future tint is still a one-value change here.
+
+   History: v1 #FDF8F0 (peachy) → v2 #FDF6E3 (still peach zone) →
+   v3 #FFFDD0 classic cream → v4 #FFFDD0 at 40% opacity → v5 white.
 
    Why `html body` and not just `body`: the current theme paints the
    page with `html body { background-color: #ffffff; }` (nova.css),
@@ -28,9 +30,9 @@
    ========================================================================== */
 
 html {
-  background-color: rgba(255, 253, 208, 0.4);
+  background-color: #ffffff;
 }
 
 html body {
-  background-color: rgba(255, 253, 208, 0.4);
+  background-color: #ffffff;
 }
