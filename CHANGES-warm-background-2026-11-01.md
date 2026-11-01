@@ -1,13 +1,14 @@
-# CHANGES — Warm background only — 2026-11-01 (v2 colour correction)
+# CHANGES — Warm background only — 2026-11-01 (v3 colour correction)
 
 User instruction 2026-11-01 (replaces the Warm Paper / Warm Blend
 direction): ONLY the website's background becomes warm — nothing else
-changes. Do NOT upload the Warm Paper, Warm Blend, or v1 background
-zips; this v2 package supersedes them.
+changes. Do NOT upload the Warm Paper, Warm Blend, v1, or v2 background
+zips; this v3 package supersedes them.
 
-v2 correction: the v1 colour `#FDF8F0` leaned peach (hue 37°) and read
-slightly pink. v2 uses `#FDF6E3`, a golden warm cream (hue 44°) with no
-pink cast. Nothing else changed between v1 and v2.
+v3 correction: v2 (`#FDF6E3`, hue 44°) still read pink to the user,
+because 44° is still in the orange-peach zone. v3 uses `#FFFDD0`,
+classic cream (hue 57°, yellow family) — warm touch with no pink cast.
+Nothing else changed between v2 and v3.
 
 ## Files in this package (upload to repo root ALONE, then push)
 
@@ -21,7 +22,7 @@ pink cast. Nothing else changed between v1 and v2.
 
 ## What changes (exactly one thing)
 
-- Page backdrop: white `#ffffff` → golden warm cream `#FDF6E3`, on `html` and
+- Page backdrop: white `#ffffff` → classic cream `#FFFDD0`, on `html` and
   `html body` (the `html body` selector matches the current theme's
   own rule in nova.css, so it wins by import order).
 

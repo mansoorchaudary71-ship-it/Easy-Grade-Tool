@@ -7,10 +7,11 @@
    thing: it paints the page backdrop warm cream. No colours, fonts,
    buttons, cards, header, lines, or spacing are touched here.
 
-   Colour (corrected 2026-11-01, v2): #FDF6E3 — a golden warm cream.
-   The first version used #FDF8F0, which leans peach (hue 37°) and can
-   read slightly pink; #FDF6E3 leans golden-yellow (hue 44°) with no
-   pink cast.
+   Colour (corrected 2026-11-01, v3): #FFFDD0 — classic cream.
+   v1 (#FDF8F0, hue 37°) and v2 (#FDF6E3, hue 44°) both sat in the
+   orange-peach zone and still read pink to the user, so v3 moves
+   decisively into the yellow family (hue 57°): the colour literally
+   named "cream", warm touch with no pink cast.
 
    Why `html body` and not just `body`: the current theme paints the
    page with `html body { background-color: #ffffff; }` (nova.css),
@@ -25,9 +26,9 @@
    ========================================================================== */
 
 html {
-  background-color: #fdf6e3;
+  background-color: #fffdd0;
 }
 
 html body {
-  background-color: #fdf6e3;
+  background-color: #fffdd0;
 }
