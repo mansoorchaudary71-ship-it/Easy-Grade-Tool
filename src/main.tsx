@@ -12,6 +12,7 @@ import './styles/coursera.css';
 import './styles/nova.css';
 import './styles/nova2.css';
 import './styles/dribbble-type.css';
+import './styles/warm-background.css';
 import { preloadForPath } from './utils/lazyRoutes';
 import { installPrintFocus } from './utils/printFocus';
 

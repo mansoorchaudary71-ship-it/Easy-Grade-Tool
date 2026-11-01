@@ -1,0 +1,28 @@
+/* ==========================================================================
+   WARM BACKGROUND ONLY — Easy Grade Tool (2026-11-01).
+   Imported LAST in main.tsx.
+
+   User instruction 2026-11-01: ONLY the website's background becomes
+   warm — nothing else changes. This file therefore does exactly one
+   thing: it paints the page backdrop warm cream. No colours, fonts,
+   buttons, cards, header, lines, or spacing are touched here.
+
+   Why `html body` and not just `body`: the current theme paints the
+   page with `html body { background-color: #ffffff; }` (nova.css),
+   which beats a plain `body` rule on specificity. This rule matches
+   that specificity and wins by coming last in the import order.
+
+   What stays exactly as before: white cards, white/frosted header,
+   blue #2457F5 buttons and links, Mona Sans type, amber/blue accents,
+   grade-tier colours, and every layout rule. Print already forces a
+   white background via the existing print stylesheet, so printing is
+   unaffected by this change.
+   ========================================================================== */
+
+html {
+  background-color: #fdf8f0;
+}
+
+html body {
+  background-color: #fdf8f0;
+}
