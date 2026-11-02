@@ -253,12 +253,11 @@ html :is(button, [role="button"], [role="tab"], summary, .preset-btn, a[class*="
   background-position: var(--sheen-pos);
 }
 
-/* Header: transparent — no fill, no hairline, no shadow, so the page shows through.
-   (2026-11-02: changed from solid white + hairline at the owner's request.) */
+/* Header: completely flat, one 1px warm hairline underneath */
 .elev-chrome {
-  background-color: transparent;
+  background-color: #FFFFFF;
   background-image: none;
-  border-bottom: none;
+  border-bottom: 1px solid var(--el-edge);
   box-shadow: none;
 }
 

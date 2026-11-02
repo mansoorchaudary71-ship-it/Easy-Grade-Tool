@@ -114,3 +114,20 @@ upload THIS zip only.
   directly — `.elev-chrome` compiles to transparent with no border and no
   shadow, in both normal and scrolled states.
 
+## Rectified later the same evening: transparent header UNDONE
+
+At the owner's request ("undo above changes"), the transparent header is
+reverted. This zip supersedes the transparent-header zip — upload THIS zip
+only. The SEO changes from the earlier sections are KEPT; only the header
+returns to its original state.
+
+- `src/styles/premium.css`: `.elev-chrome` restored to solid white with the
+  1px warm hairline underneath, exactly as it was.
+- `src/styles/coursera.css`: `.elev-chrome.is-scrolled` shadow restored, so
+  the sticky bar floats over content again once the page moves.
+- Both files were diffed against the original repo copy and are byte-identical
+  to it — no residue of the transparent change remains.
+- Verification: clean build, 17/17 audit, built stylesheet checked directly —
+  the header compiles to solid white with its hairline and scrolled shadow again.
+
+
