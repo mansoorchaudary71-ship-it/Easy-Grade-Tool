@@ -200,9 +200,9 @@ html [class*="tool-theme-"] {
 @media (prefers-reduced-motion: reduce) {
   .header-search-in { animation: none; }
 }
-/* Scrolled header (Calendly): the sticky chrome gains a soft shadow once
-   the page moves, so the header floats over content instead of sitting flat. */
-.elev-chrome.is-scrolled { box-shadow: 0 8px 24px rgba(15, 17, 20, 0.10); }
+/* Scrolled header: no shadow, so the transparent header stays transparent once
+   the page moves (was a soft shadow that made the bar float over content). */
+.elev-chrome.is-scrolled { box-shadow: none; }
 /* Header nav buttons, Dribbble-style: plain semibold text links with a
    chevron, no outline chip. The active page's group reads in the site blue.
    Colours are unchanged — the same --cs-blue / --cs-ink tokens as before. */

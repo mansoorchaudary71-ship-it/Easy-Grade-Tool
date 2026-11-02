@@ -212,10 +212,10 @@ export const GradeCalculator: React.FC<GradeCalculatorProps> = ({
       {!hideHeading && (
         <ToolHeading
           badge={calcTab === 'quick-chart' ? 'Quick Grade' : 'Weighted Grade'}
-          title={calcTab === 'quick-chart' ? 'EZ Grader Chart & Easy Grade Calculator' : 'Weighted Grade & Final Exam Calculator'}
+          title={calcTab === 'quick-chart' ? 'Easy Grade Calculator & EZ Grader Chart' : 'Weighted Grade & Final Exam Calculator'}
           description={
             calcTab === 'quick-chart'
-              ? 'EZ grader chart online: enter the number of questions to see the percentage and letter grade for every number of wrong answers, then print the chart or save it as a PDF.'
+              ? 'This easy grade calculator and EZ grader chart online: enter the number of questions to see the percentage and letter grade for every number of wrong answers, then print the chart or save it as a PDF.'
               : 'Add your assessments, calculate weighted averages, and simulate the exact score needed on your final exam.'
           }
         >

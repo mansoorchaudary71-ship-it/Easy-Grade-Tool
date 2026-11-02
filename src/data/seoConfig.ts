@@ -52,7 +52,7 @@ export const OG_IMAGES: Record<ToolKey | 'default', string> = {
 export const OG_IMAGE_PLACEHOLDERS = OG_IMAGES;
 
 export const SEO_HOME: RouteSeoConfig = {
-  title: 'EZ Grader Chart & Easy Grade Calculator | Easy Grade Tool',
+  title: 'Easy Grade Calculator & EZ Grader Chart | Easy Grade Tool',
   description:
     'Free EZ grader chart and easy grade calculator. Enter the number of questions to see every score and letter grade, then print the chart or save a PDF.',
   canonicalPath: '/',

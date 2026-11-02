@@ -119,6 +119,13 @@ export const QuickGradeGuide: React.FC = () => (
           mark each paper by counting wrong answers and reading across. Use a calculator only for the cases a chart
           cannot cover, such as bonus points, weighted categories or a late penalty.
         </p>
+
+        <div className="my-6">
+          <SemanticGuideImage
+            toolKey="test-grade"
+            alt="Multiple-choice test score card with marked answers beside a result showing 42 out of 50, equal to 84 percent and grade B"
+          />
+        </div>
       </div>
 
       <div>
@@ -162,6 +169,13 @@ export const QuickGradeGuide: React.FC = () => (
           An online grade calculator takes any set of points and weights and computes one result at a time, so it is
           built for flexibility. Teachers usually want both, which is why they live side by side here.
         </p>
+
+        <div className="my-6">
+          <SemanticGuideImage
+            toolKey="gpa"
+            alt="Graduation cap and diploma beside an official university transcript, calculator and pen on a desk"
+          />
+        </div>
       </div>
 
       <div>
@@ -172,6 +186,13 @@ export const QuickGradeGuide: React.FC = () => (
           the final exam page to plan the last assessment, and take the letters to the GPA calculator for a semester
           or cumulative figure.
         </p>
+
+        <div className="my-6">
+          <SemanticGuideImage
+            toolKey="final-exam"
+            alt="Final exam checklist beside a gauge showing the score needed to get an A"
+          />
+        </div>
       </div>
     </ContentSection>
 

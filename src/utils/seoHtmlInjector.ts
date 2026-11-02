@@ -16,6 +16,7 @@ import { getToolPageByPath } from '../data/toolPages.ts';
 import { getFaqSchema, TOOL_FAQS, WEIGHTED_COURSE_FAQS, FAQItem } from '../components/FAQ.tsx';
 import { getHowToSchema } from '../components/ManualGradeHowTo.tsx';
 import { getCgpaHowToSchema } from '../components/CgpaEducationalGuide.tsx';
+import { getEducationalGuideSchema } from './guideArticleSchema.ts';
 
 function escapeHtmlAttr(str: string): string {
   return str
@@ -496,6 +497,16 @@ export function injectRouteSeoIntoHtml(rawHtml: string, rawPath: string): string
     const cgpaHowToSchema = getCgpaHowToSchema(BASE_CANONICAL_ORIGIN);
     scripts.push(
       `<script id="schema-org-cgpa-howto" type="application/ld+json">\n${JSON.stringify(cgpaHowToSchema, null, 2)}\n</script>`
+    );
+  }
+
+  // The homepage guide and the weighted calculator guide are Article content rendered by
+  // EducationalGuide. Emit the same Article JSON-LD in prerendered HTML so crawlers see it
+  // without JavaScript. The client-side sync reuses this tag by id, so it is never duplicated.
+  if (cleanPath === '/' || cleanPath === '/grade-calculator') {
+    const guideArticleSchema = getEducationalGuideSchema(BASE_CANONICAL_ORIGIN, cleanPath);
+    scripts.push(
+      `<script id="schema-org-guide-article" type="application/ld+json">\n${JSON.stringify(guideArticleSchema, null, 2)}\n</script>`
     );
   }
 
