@@ -23,6 +23,7 @@ import { isGradingScaleParam } from './data/gradingScaleSizes';
 import { CGPA_UNIVERSITY_PAGES } from './data/cgpaUniversityPages';
 import { LEGACY_REDIRECTS } from './data/legacyRedirects';
 import { Footer } from './components/Footer';
+import { PageExtras } from './components/PageExtras';
 import { SEOHead } from './components/SEOHead';
 import { preloadAllTools } from './utils/toolPreloader';
 import { normalizePath } from './utils/paths';
@@ -287,6 +288,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               {/* Fallback for unknown routes: render true 404 page, never home shell */}
               <Route path="*" element={<NotFound />} />
             </Routes>
+            {!isEmbed && <PageExtras pathname={location.pathname} />}
           </Suspense>
         </div>
       </main>

@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { BASE_CANONICAL_ORIGIN, OG_IMAGES, CONTACT_EMAIL, SITE_LAUNCH_DATE, SITE_LAST_MODIFIED } from '../data/seoConfig';
+import { buildArticleSchema, shouldHaveArticle } from '../utils/articleSchema';
 
 export interface SEOProps {
   /**
@@ -138,7 +139,7 @@ export const SEO: React.FC<SEOProps> = ({
 
   const isAppSchema = schemaType === 'WebApplication' || schemaType === 'SoftwareApplication';
 
-  const { webAppJson, breadcrumbJson, orgJson } = useMemo(() => {
+  const { webAppJson, breadcrumbJson, orgJson, articleJson } = useMemo(() => {
     const structuredData =
       schemaData ||
       {
@@ -201,14 +202,19 @@ export const SEO: React.FC<SEOProps> = ({
       logo: { '@type': 'ImageObject', url: `${BASE_CANONICAL_ORIGIN}/pwa-512x512.png`, width: 512, height: 512 },
     };
 
+    const article = shouldHaveArticle(resolvedCanonical)
+      ? buildArticleSchema({ url: resolvedCanonical, title, description, image: resolvedImage })
+      : null;
+
     return {
       webAppJson: JSON.stringify(structuredData, null, 2),
       breadcrumbJson: JSON.stringify(breadcrumb, null, 2),
       orgJson: JSON.stringify(organization, null, 2),
+      articleJson: article ? JSON.stringify(article, null, 2) : '',
     };
     // featureKey and schemaKey stand in for the array/object props so the memo is stable across renders.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resolvedCanonical, productName, crumbLabel, description, schemaType, normalizedCategory, featureKey, schemaKey]);
+  }, [resolvedCanonical, resolvedImage, title, productName, crumbLabel, description, schemaType, normalizedCategory, featureKey, schemaKey]);
 
   useEffect(() => {
     if (typeof document === 'undefined') return;
@@ -278,6 +284,15 @@ export const SEO: React.FC<SEOProps> = ({
     upsertJsonLd('schema-org-breadcrumb', breadcrumbJson);
     upsertJsonLd('schema-org-organization', orgJson);
 
+    // Article / BlogPosting JSON-LD (same payload the build writes into the static HTML).
+    // Removed again on About, Privacy and Terms so client-side navigation never leaves a stale one behind.
+    document.querySelector('script#schema-org-guide-article')?.remove();
+    if (articleJson) {
+      upsertJsonLd('schema-org-article', articleJson);
+    } else {
+      document.querySelector('script#schema-org-article')?.remove();
+    }
+
     // WebSite schema belongs to the home page only
     if (typeof window !== 'undefined' && window.location.pathname.replace(/\/+$/, '') !== '') {
       document.querySelector('script#schema-org-website')?.remove();
@@ -292,7 +307,7 @@ export const SEO: React.FC<SEOProps> = ({
     } else if (!path.endsWith('/cgpa-to-percentage-calculator')) {
       document.querySelector('script#schema-org-cgpa-howto')?.remove();
     }
-  }, [title, description, resolvedCanonical, resolvedImage, ogType, twitterCard, webAppJson, breadcrumbJson, orgJson]);
+  }, [title, description, resolvedCanonical, resolvedImage, ogType, twitterCard, webAppJson, breadcrumbJson, orgJson, articleJson]);
 
   return null;
 };

@@ -60,7 +60,7 @@ export const PROGRAMMATIC_SEO_REGISTRY: Record<string, ProgrammaticSeoEntry> = {
     summary:
       'Solve for the minimum score you must achieve on your cumulative or semester final exam to reach your goal letter grade.',
     intentContext:
-      'Instead of calculating what grade you currently have, this specialized final exam calculator solves the inverse equation. Enter your current course standing, your desired final class grade, and the percentage weight of your final exam to reveal your required target score.',
+      'Instead of calculating what grade you currently have, this specialized final exam grade calculator solves the inverse equation. Enter your current course standing, your desired final class grade, and the percentage weight of your final exam to reveal your required target score.',
     mode: 'weighted',
     scale: 'standard',
     courseName: 'Final Exam Preparation',

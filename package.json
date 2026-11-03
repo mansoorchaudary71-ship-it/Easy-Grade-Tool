@@ -20,7 +20,8 @@
     "preview": "vite preview",
     "clean": "node -e \"for (const f of ['dist','server.js']) require('fs').rmSync(f,{recursive:true,force:true})\"",
     "lint": "tsc --noEmit",
-    "verify:math": "tsx scripts/verify-academic-math.ts && tsx scripts/verify-scale-pages.ts"
+    "verify:math": "tsx scripts/verify-academic-math.ts && tsx scripts/verify-scale-pages.ts",
+    "figures": "tsx scripts/generate-figures.ts"
   },
   "dependencies": {
     "@google/genai": "2.4.0",

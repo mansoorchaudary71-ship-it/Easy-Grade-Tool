@@ -31,6 +31,8 @@ import { CGPA_UNIVERSITY_PAGES } from '../data/cgpaUniversityPages';
 import { FAQ, PAGE_FAQ_HEADINGS } from './FAQ';
 import { ToolContentGuide } from './ToolContentGuide';
 import { ToolGuideKey } from '../data/toolGuideContent';
+import { FigureGallery } from './FigureGallery';
+import { getRegistryFigures } from '../data/pageFigures';
 
 const TOOLS: Record<string, React.ComponentType> = {
   'test-grade-calculator': TestGradeTool,
@@ -349,6 +351,8 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
         </div>
       )}
 
+      <FigureGallery heading={`Charts and examples: ${entry.h1}`} figures={getRegistryFigures(entry)} />
+
       <div className="max-w-4xl content-auto">
         <FAQ tool="quick" items={faqItems} heading={entry.faqHeading ?? PAGE_FAQ_HEADINGS[slug]} />
       </div>
@@ -356,7 +360,7 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
       <section aria-label="Related calculators" className="space-y-3 print:hidden content-auto">
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 m-0">Related grade calculators</h2>
         <ul className="grid sm:grid-cols-2 gap-3 list-none p-0 m-0">
-          {entry.related.map((r) => (
+          {entry.related.slice(0, 5).map((r) => (
             <li key={r.path}>
               <Link
                 to={r.path}

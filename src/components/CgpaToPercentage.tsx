@@ -527,7 +527,7 @@ export const CgpaToPercentage: React.FC<CgpaToPercentageProps> = ({
         <ToolHeading
           badge="30+ University Formulas • 10.0 / 5.0 / 4.0 Scales"
           title="CGPA to Percentage Calculator"
-          description="Convert your 10.0, 5.0, or 4.0 scale CGPA into an exact percentage using verified university ordinances (VTU, Mumbai University, MAKAUT, GTU, SPPU, Anna University, BHU) or standard UGC/CBSE multipliers."
+          description="This CGPA to percentage calculator converts your 10.0, 5.0, or 4.0 scale CGPA into an exact percentage using verified university ordinances (VTU, Mumbai University, MAKAUT, GTU, SPPU, Anna University, BHU) or standard UGC/CBSE multipliers."
         />
       )}
 

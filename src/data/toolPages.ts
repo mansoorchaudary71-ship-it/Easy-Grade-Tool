@@ -16,6 +16,7 @@ import { buildFinalPlannerPage } from './finalPlannerPage';
 import { buildCgpaUniversityPages } from './cgpaUniversityPages';
 import { COMPETITOR_GAP_PAGES } from './competitorGapPages';
 import { applySeoExtras } from './seoExtras';
+import { applyOnPageSeo } from './onPageSeo';
 import { SCALE_PLUS_MINUS, SCALE_STANDARD, applyCurve, calculateTestGrade, computeStats, percentToLetter, roundTo } from '../utils/academicMath';
 
 /**
@@ -610,6 +611,9 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
 
 // Keyword-mapped sections, lookup tables and FAQs (SEO round 2026-10-26)
 applySeoExtras(TOOL_PAGES);
+
+// Exact primary keyword in title, H1 and first paragraph of every page (SEO round 2026-11-02)
+applyOnPageSeo(TOOL_PAGES);
 
 // Every page gets its own share card: public/og-cards/<slug with / replaced by ->-1200x630.png
 for (const entry of Object.values(TOOL_PAGES)) {
