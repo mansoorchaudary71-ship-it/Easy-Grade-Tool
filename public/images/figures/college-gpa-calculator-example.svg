@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Worked example: a five-course college semester</title>
+<desc id="d">Worked example for the college gpa calculator: Biology: A, 4 credits 16.0 quality points, English Composition: A-, 3 credits 11.1 quality points, College Algebra: B+, 3 credits 9.9 quality points, History: B, 3 credits 9.0 quality points,…</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="40" font-size="23" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Worked example: a five-course college semester</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">College GPA Calculator</text>
+<rect x="30" y="124" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="148" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Biology: A, 4 credits</text><text x="754" y="148" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >16.0 quality points</text>
+<rect x="30" y="164" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="188" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >English Composition: A-, 3 credits</text><text x="754" y="188" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >11.1 quality points</text>
+<rect x="30" y="204" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="228" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >College Algebra: B+, 3 credits</text><text x="754" y="228" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >9.9 quality points</text>
+<rect x="30" y="244" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="268" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >History: B, 3 credits</text><text x="754" y="268" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >9.0 quality points</text>
+<rect x="30" y="284" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="308" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Art: A, 2 credits</text><text x="754" y="308" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >8.0 quality points</text>
+<rect x="30" y="324" width="740" height="34" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/>
+<text x="46" y="348" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Total quality points</text><text x="754" y="348" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >54.0</text><text x="40" y="410" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Credit hours decide the result: the 4-credit A contributes more than the 2-credit A. Swap</text><text x="40" y="428" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >any grade or credit value and the GPA follows the same formula.</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

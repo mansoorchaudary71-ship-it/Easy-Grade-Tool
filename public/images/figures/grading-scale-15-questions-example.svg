@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Worked example: 2 wrong on a 15-question test</title>
+<desc id="d">Worked example for the grading scale for 15 questions: Correct answers 13 of 15, Percentage 86.7%, Standard A–F B, Plus/minus B.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="40" font-size="23" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Worked example: 2 wrong on a 15-question test</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Grading Scale for 15 Questions</text>
+<rect x="30" y="124" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="148" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Correct answers</text><text x="754" y="148" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >13 of 15</text>
+<rect x="30" y="170" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="194" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Percentage</text><text x="754" y="194" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >86.7%</text>
+<rect x="30" y="216" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="240" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Standard A–F</text><text x="754" y="240" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >B</text>
+<rect x="30" y="262" width="740" height="40" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/>
+<text x="46" y="286" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Plus/minus</text><text x="754" y="286" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >B</text><text x="40" y="410" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >(15 − 2) ÷ 15 × 100 = 86.67%, so the grade is 86.7% (B).</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Final exam grade formula</title>
+<desc id="d">Formula used by the final exam grade calculator: the needed score equals the target grade minus the current grade times the remaining weight, divided by the weight of the final exam.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Final exam grade formula</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Final Exam Grade Calculator</text>
+<rect x="30" y="130" width="740" height="118" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><text x="400" y="175" font-size="25" fill="#0f172a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-family="Consolas, Menlo, monospace">Needed = (Target − Current × (1 − w)) ÷ w</text><text x="400" y="219" font-size="25" fill="#0f172a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-family="Consolas, Menlo, monospace">w = weight of the final exam</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

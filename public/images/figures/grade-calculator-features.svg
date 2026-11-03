@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">What the weighted grade calculator covers</title>
+<desc id="d">Checklist of what the weighted grade calculator covers: any number of assessments with weights, weighted average and letter grade, score needed on the final exam, print or save the report.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >What the weighted grade calculator covers</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Weighted Grade Calculator</text>
+<circle cx="58" cy="143" r="14" fill="#0f766e"/>
+<path d="M51 143l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="149" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Any number of assessments with their own weights</text>
+<circle cx="58" cy="193" r="14" fill="#0f766e"/>
+<path d="M51 193l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="199" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Weighted average and letter grade</text>
+<circle cx="58" cy="243" r="14" fill="#0f766e"/>
+<path d="M51 243l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="249" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Score needed on the final exam</text>
+<circle cx="58" cy="293" r="14" fill="#0f766e"/>
+<path d="M51 293l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="299" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Print or save the report</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

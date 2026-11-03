@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Key points: Grading Scale for 15 Questions</title>
+<desc id="d">Checklist of key points for the grading scale for 15 questions: Score chart for 0 to 15 wrong answers, Standard A–F and plus/minus letter grades, Printable chart with no sign-up.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Key points: Grading Scale for 15 Questions</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Easy Grade Tool</text>
+<circle cx="58" cy="143" r="14" fill="#0f766e"/>
+<path d="M51 143l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="149" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Score chart for 0 to 15 wrong answers</text>
+<circle cx="58" cy="193" r="14" fill="#0f766e"/>
+<path d="M51 193l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="199" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Standard A–F and plus/minus letter grades</text>
+<circle cx="58" cy="243" r="14" fill="#0f766e"/>
+<path d="M51 243l5 5 9-10" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86" y="249" font-size="20" fill="#0f172a" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Printable chart with no sign-up</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

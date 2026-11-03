@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Worked example: SGPA 8.2, three directions</title>
+<desc id="d">Worked example for the gpa converter: SGPA to percentage (×10) 82.00%, Percentage to 4.0 GPA (÷25) 3.28, GPA back to percentage (×25) 82.00%.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Worked example: SGPA 8.2, three directions</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">GPA Converter</text>
+<rect x="30" y="124" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="148" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >SGPA to percentage (×10)</text><text x="754" y="148" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >82.00%</text>
+<rect x="30" y="170" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="194" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Percentage to 4.0 GPA (÷25)</text><text x="754" y="194" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >3.28</text>
+<rect x="30" y="216" width="740" height="40" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/>
+<text x="46" y="240" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >GPA back to percentage (×25)</text><text x="754" y="240" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >82.00%</text><text x="40" y="410" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >The round trip returns exactly to 82.00% here, because 82 ÷ 25 = 3.28 exactly. That is not</text><text x="40" y="428" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >guaranteed: convert from unrounded values, or rounding at each step compounds — 82.4%…</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>
