@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Tip calculator formula</title>
+<desc id="d">Tip calculator formulas: tip equals the bill times the tip percentage, and the amount per person equals bill plus tip divided by the number of people. Example: an 18% tip on $84.00 is $15.12.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Tip calculator formula</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Tip Calculator</text>
+<rect x="30" y="130" width="740" height="118" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><text x="400" y="175" font-size="25" fill="#0f172a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-family="Consolas, Menlo, monospace">Tip = bill × tip %</text><text x="400" y="219" font-size="25" fill="#0f172a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-family="Consolas, Menlo, monospace">Per person = (bill + tip) ÷ people</text><rect x="30" y="264" width="740" height="44" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/><text x="46" y="292" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >18% tip on $84.00</text><text x="754" y="292" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >$15.12</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

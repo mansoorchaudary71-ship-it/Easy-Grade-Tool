@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Percentage examples</title>
+<desc id="d">Percentage calculator examples: 15% of 240 36.0, 36 is what % of 240 15.0%, Change from 80 to 100 +25.0%, Change from 100 to 80 -20.0%.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Percentage examples</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Percentage Calculator</text>
+<rect x="30" y="124" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="148" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >15% of 240</text><text x="754" y="148" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >36.0</text>
+<rect x="30" y="170" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="194" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >36 is what % of 240</text><text x="754" y="194" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >15.0%</text>
+<rect x="30" y="216" width="740" height="40" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="240" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Change from 80 to 100</text><text x="754" y="240" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >+25.0%</text>
+<rect x="30" y="262" width="740" height="40" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/>
+<text x="46" y="286" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Change from 100 to 80</text><text x="754" y="286" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >-20.0%</text><text x="40" y="410" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Percent change is measured against the starting value.</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

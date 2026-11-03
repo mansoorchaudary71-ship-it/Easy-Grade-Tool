@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Worked example: a 28-question quiz</title>
+<desc id="d">Worked example for the how many questions can you miss: Hold an A (90%) 2 wrong, 92.9% left, Hold a B (80%) 5 wrong, 82.1% left, Hold a C (70%) 8 wrong, 71.4% left, Hold a D (60%) 11 wrong, 60.7% left, Hold an A- (90%) 2 wrong, 92.9% left,…</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Worked example: a 28-question quiz</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">How Many Questions Can You Miss</text>
+<rect x="30" y="124" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="148" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Hold an A (90%)</text><text x="754" y="148" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >2 wrong, 92.9% left</text>
+<rect x="30" y="164" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="188" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Hold a B (80%)</text><text x="754" y="188" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >5 wrong, 82.1% left</text>
+<rect x="30" y="204" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="228" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Hold a C (70%)</text><text x="754" y="228" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >8 wrong, 71.4% left</text>
+<rect x="30" y="244" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="268" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Hold a D (60%)</text><text x="754" y="268" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >11 wrong, 60.7% left</text>
+<rect x="30" y="284" width="740" height="34" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+<text x="46" y="308" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Hold an A- (90%)</text><text x="754" y="308" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >2 wrong, 92.9% left</text>
+<rect x="30" y="324" width="740" height="34" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/>
+<text x="46" y="348" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Hold a B+ (87%)</text><text x="754" y="348" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >3 wrong, 89.3% left</text><text x="40" y="410" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Going one past each limit costs a letter, so the room for an A on this quiz is only 2</text><text x="40" y="428" font-size="14" fill="#475569" font-weight="400" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >questions while the room for a C is 8.</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>

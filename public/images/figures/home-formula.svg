@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img" aria-labelledby="t d">
+<title id="t">Easy grade calculator formula</title>
+<desc id="d">Formula used by the easy grade calculator: percent equals questions minus wrong answers, divided by questions, times 100. Example: 20 questions with 3 wrong gives 85.0%, a B.</desc>
+<rect width="800" height="450" rx="18" fill="#f8fafc"/>
+<path d="M0 18a18 18 0 0 1 18-18h764a18 18 0 0 1 18 18v92H0z" fill="#0f766e"/>
+<text x="40" y="52" font-size="28" fill="#ffffff" font-weight="700" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >Easy grade calculator formula</text>
+<text x="40" y="98" font-size="15" fill="#99f6e4" font-weight="600" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" letter-spacing="1">Easy Grade Calculator</text>
+<rect x="30" y="130" width="740" height="74" rx="12" fill="#ffffff" stroke="#0f766e" stroke-width="2"/><text x="400" y="175" font-size="25" fill="#0f172a" font-weight="700" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-family="Consolas, Menlo, monospace">Percent = (questions − wrong) ÷ questions × 100</text><rect x="30" y="220" width="740" height="44" rx="8" fill="#ccfbf1" stroke="#cbd5e1"/><text x="46" y="248" font-size="18" fill="#475569" font-weight="500" text-anchor="start" font-family="Segoe UI, Helvetica, Arial, sans-serif" >20 questions, 3 wrong</text><text x="754" y="248" font-size="18" fill="#0f172a" font-weight="700" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >85.0% (B)</text>
+<text x="770" y="436" font-size="13" fill="#94a3b8" font-weight="600" text-anchor="end" font-family="Segoe UI, Helvetica, Arial, sans-serif" >easygradetool.com</text>
+</svg>
