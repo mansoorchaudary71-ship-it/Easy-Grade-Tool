@@ -130,6 +130,7 @@ const FOOTER_EXTRA_ACADEMIC_LINKS: { label: string; title: string; path: string 
   { label: 'When to Curve Grades', title: 'When to curve grades: a teacher’s guide', path: '/blog/when-to-curve-grades/' },
   { label: 'Grading Systems Explained', title: 'Grading systems explained: A–F, pass/fail, standards-based and more', path: '/blog/grading-systems-explained/' },
   { label: 'High School vs College GPA', title: 'High school GPA vs college GPA: what actually changes', path: '/blog/high-school-vs-college-gpa/' },
+  { label: 'Easy Grade Calculator Guide', title: 'Easy grade calculator guide: formulas, half points and what-if grades', path: '/blog/easy-grade-calculator-guide/' },
   // One link per verified university CGPA page, generated from the same data
   // as the pages so the footer can never drift out of sync with them.
   ...CGPA_UNIVERSITY_PAGES.map((u) => ({

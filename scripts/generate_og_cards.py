@@ -49,6 +49,7 @@ CARDS.update({
     "og-cards/final-grade-planner-1200x630.png": ("Final Grade\nPlanner", "What every class needs on its final exam"),
     "og-cards/blog-grading-systems-explained-1200x630.png": ("Grading Systems\nExplained", "A-F, pass/fail, standards-based and more"),
     "og-cards/blog-high-school-vs-college-gpa-1200x630.png": ("High School GPA\nvs College GPA", "Credits, weighting and what changes after graduation"),
+    "og-cards/blog-easy-grade-calculator-guide-1200x630.png": ("Easy Grade Calculator\nGuide", "Formulas, half points and what-if grades"),
 })
 
 # Cards for the 2026-10-28 competitor-gap pages (target GPA, quiz, assignment,

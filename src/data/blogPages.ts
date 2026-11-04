@@ -41,7 +41,7 @@ export function buildBlogIndexPage(): ToolPageEntry {
         paragraphs: [
           '“How to Grade a Stack of 30 Tests in 15 Minutes” is the workflow teachers ask about most: build the chart once, then grade by lookup instead of redoing the same division thirty times.',
           '“When to Curve Grades” walks through the five curving methods, the signs that a test actually needs one, and the fairness checks to run before curved grades are posted.',
-          '“Grading Systems Explained” compares every system a student is likely to meet — A–F, plus/minus, 7-point, pass/fail, credit/no credit and standards-based — with the same scores graded under each. “High School GPA vs College GPA” explains what actually changes after graduation: credits, weighting, and why the same grades produce different GPAs.',
+          '“Grading Systems Explained” compares every system a student is likely to meet — A–F, plus/minus, 7-point, pass/fail, credit/no credit and standards-based — with the same scores graded under each. “High School GPA vs College GPA” explains what actually changes after graduation: credits, weighting, and why the same grades produce different GPAs. The “Easy Grade Calculator Guide” covers the formulas, half points and what-if planning behind the everyday grading tools.',
         ],
       },
       {
@@ -83,6 +83,7 @@ export function buildBlogIndexPage(): ToolPageEntry {
       { path: '/blog/when-to-curve-grades/', label: 'When to Curve Grades: A Teacher’s Guide', blurb: 'Five methods, the fairness checks, and when to leave scores alone.' },
       { path: '/blog/grading-systems-explained/', label: 'Grading Systems Explained', blurb: 'A–F, pass/fail, standards-based and ungrading, compared.' },
       { path: '/blog/high-school-vs-college-gpa/', label: 'High School GPA vs College GPA', blurb: 'Credits, weighting and what changes after graduation.' },
+      { path: '/blog/easy-grade-calculator-guide/', label: 'Easy Grade Calculator Guide', blurb: 'Formulas, half points, what-if grades and quick answers.' },
       { path: '/for-schools/', label: 'For Schools: free embeds', blurb: 'Put these calculators on your own school website.' },
       { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Honors and AP/IB bonuses, side-by-side results.' },
     ],
@@ -480,6 +481,282 @@ export function buildHighSchoolVsCollegePost(): ToolPageEntry {
       { path: '/college-gpa-calculator/', label: 'College GPA calculator', blurb: 'Credit-weighted GPA for college courses.' },
       { path: '/cumulative-gpa-calculator/', label: 'Cumulative GPA calculator', blurb: 'Combine semesters into one GPA.' },
       { path: '/weighted-gpa-calculator/', label: 'Weighted GPA calculator', blurb: 'Honors and AP/IB bonuses.' },
+    ],
+  };
+}
+
+/* ---------- Easy grade calculator guide (keyword-mapped long-form post) ---------- */
+
+const egcRow = (earned: number, possible: number, label: string) => {
+  const pct = roundTo((earned / possible) * 100, 1);
+  return { label, value: `${pct}% — ${percentToLetter(pct, SCALE_STANDARD).letter}` };
+};
+
+const egcLookupRows = [0, 1, 2, 3, 4, 5, 6, 7, 8, 10].map((wrong) => {
+  const right = 20 - wrong;
+  const pct = roundTo((right / 20) * 100, 1);
+  return [String(wrong), `${right} out of 20`, `${pct}%`, percentToLetter(pct, SCALE_STANDARD).letter];
+});
+
+export function buildEasyGradeCalculatorGuidePost(): ToolPageEntry {
+  return {
+    slug: 'blog/easy-grade-calculator-guide',
+    path: '/blog/easy-grade-calculator-guide/',
+    navLabel: 'Easy grade calculator guide',
+    h1: 'Easy Grade Calculator Online: A Friendly Guide to Faster, Fairer Grading',
+    title: 'Easy Grade Calculator Online — A Free Guide for Teachers',
+    metaDescription:
+      'How an easy grade calculator online turns scores into percentages and letter grades: formulas, worked examples, half points and what-if planning.',
+    badge: 'Complete guide',
+    schemaType: 'WebPage',
+    intro:
+      'An easy grade calculator online does one small job very well: it takes the number of questions and the number of wrong answers, then hands back a percentage and a letter grade. Teachers lean on it to clear a pile of quizzes before the bell, and students use it to double-check a returned test. This guide walks through how the maths works, where the time savings come from, and which slip-ups quietly skew results.',
+    keywords: [
+      'easy grade calculator online',
+      'easy grade calculator free',
+      'easy grade calculator for teachers',
+      'easy grader for teachers',
+      'quick grade calculator',
+    ],
+    featureList: [
+      'Plain-English formulas with worked examples',
+      'Half points, points mode and what-if planning',
+      'Straight answers to the most common grade questions',
+    ],
+    sections: [
+      {
+        heading: 'What a grade calculator really does',
+        paragraphs: [
+          'Behind the friendly buttons sits one idea: a grade is a fraction wearing a percentage costume. Points earned divided by points possible, multiplied by 100, gives the percent, and a grading scale then turns that percent into a letter. A calculator repeats those steps the same way every single time, which is exactly why it earns more trust than mental arithmetic at the end of a long day.',
+        ],
+        subsections: [
+          {
+            heading: 'The formula in plain words',
+            paragraphs: [
+              'For a test where every question counts the same, the percent is (questions − wrong) ÷ questions × 100. A student who misses 2 questions on a 20-question quiz scores 18 ÷ 20 × 100 = 90%, an A on the common 90/80/70/60 scale. Miss 3 and the score becomes 85%, a B.',
+            ],
+          },
+          {
+            heading: 'Why a calculator beats doing it by hand',
+            paragraphs: [
+              'Long division is easy once and error-prone thirty times in a row. A simple grade calculator removes the repetition, keeps rounding consistent from the first paper to the last, and leaves teachers free to spend their attention on feedback instead of arithmetic.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Who gets the most out of a free grading tool',
+        paragraphs: [
+          'Grading tools attract three groups of people, and each group uses them a little differently. The searches that bring them in are telling: “easy grade calculator free” almost always means no sign-up, no paywall and no software to install, which is a fair standard to hold any tool to.',
+        ],
+        subsections: [
+          {
+            heading: 'Teachers with a stack of papers',
+            paragraphs: [
+              'An easy grade calculator for teachers earns its keep when one test goes to several classes. The chart is built once for the test length and the grading scale, printed or saved as a PDF, and every paper in every period is then graded by lookup: count the wrong answers, read across the row, write the result. An easy grader for teachers also keeps the scale identical across sections, so two students with the same score always receive the same grade.',
+            ],
+          },
+          {
+            heading: 'Students checking a result',
+            paragraphs: [
+              'A quick grade calculator works just as well on the other side of the desk. A student holding a quiz marked 14 out of 18 can see in seconds that it equals 77.8%, a C on the standard scale, and can then decide how much the next quiz needs to improve. Knowing the number early beats guessing at it.',
+            ],
+          },
+          {
+            heading: 'Parents and tutors',
+            paragraphs: [
+              'Parents and tutors use the same maths to sanity-check a report card or to set a realistic target before an exam. Because the steps are visible, a teacher grade calculator also works as a conversation starter: everyone can see how 17 out of 20 became 85%, instead of taking the number on faith.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Features that make grading faster',
+        paragraphs: [
+          'Not every calculator copes well with a real classroom. A few features separate the tools that get used every week from the ones abandoned after the first try.',
+        ],
+        subsections: [
+          {
+            heading: 'Entering correct answers or wrong answers',
+            paragraphs: [
+              'Some graders think in answers right, others in answers missed. People who type “easy grade calculator number correct” are usually after the first style: a quick way to enter how many answers a student got right and watch the percentage appear. Both routes land on the same result, because correct answers equal questions minus wrong answers, so the better choice is simply whichever matches how the test was marked.',
+            ],
+          },
+          {
+            heading: 'Half points for partial credit',
+            paragraphs: [
+              'An easy grade calculator with half points handles the answers that deserve something between full marks and zero. On a 20-question quiz, 17.5 correct works out to 87.5%, a B on the standard scale and a B+ on a plus/minus scale. Without half-point support, partial answers have to be rounded up or down one at a time, and those small decisions add up across a class.',
+            ],
+          },
+          {
+            heading: 'Points mode for uneven assignments',
+            paragraphs: [
+              'Not every assignment is built from equal questions. When the worth of each item varies, an easy grade calculator points setting works from points earned out of points possible instead: 42 out of 50 is 84%, a B, whether it came from five long answers or fifty short ones.',
+            ],
+          },
+          {
+            heading: 'Installing it like an app',
+            paragraphs: [
+              'Plenty of teachers grade on a phone or tablet in the staff room. An easy grade calculator app saves a trip to the browser bar, and Easy Grade Tool can be installed to the home screen and keeps working offline once the page has loaded, which helps in classrooms with unreliable wifi.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'A worked example from start to finish',
+        paragraphs: [
+          'Take a 15-question vocabulary quiz graded on the standard scale. One student misses 2 questions, so the score is 13 out of 15, which is 86.7% and a B. Another student misses 4, so 11 out of 15 gives 73.3%, a C. Both numbers come from the same two steps, subtract the misses and divide by the total, and a printed chart simply stores the answer for every possible number of misses.',
+          'Plus/minus scales shift the letters but never the percentages: 86.7% stays 86.7%, and the letter it earns depends on the school’s cutoffs. That is why checking the scale before grading matters more than any clever shortcut.',
+        ],
+      },
+      {
+        heading: 'Planning ahead with what-if grades',
+        paragraphs: [
+          'Grades are not only about looking back. For many students the most useful question points forward: what is still needed to finish the course on a particular grade?',
+        ],
+        subsections: [
+          {
+            heading: 'How a what if grade calculator works',
+            paragraphs: [
+              'A what if grade calculator reverses the usual formula. Take a course where coursework is worth 70% of the final grade and the current coursework average is 82%. To finish at 85%, the final exam, worth the remaining 30%, needs (85 − 0.7 × 82) ÷ 0.3 = 92%. Seeing that number in October is far more useful than discovering it in June.',
+            ],
+          },
+          {
+            heading: 'Single tests versus the whole course',
+            paragraphs: [
+              'A test grade calculator answers for one exam. A grade score calculator turns any single result into a percentage and a letter, which suits quizzes and homework. Whole-course questions, such as category weights or a final exam target, belong to the weighted and final-exam planners instead, and choosing the narrowest tool that fits the question keeps the answer clear.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Quick answers to questions people often ask',
+        paragraphs: [
+          'A handful of questions turn up again and again whenever grades come up. Short, honest answers to the four most common ones follow.',
+        ],
+        subsections: [
+          {
+            heading: 'How to easily calculate grade?',
+            paragraphs: [
+              'Divide the points earned by the points possible, multiply by 100, and compare the result with the grading scale. When every question counts the same, subtract the wrong answers from the total first: 17 correct out of 20 is 17 ÷ 20 × 100 = 85%, a B on the common 90/80/70/60 scale. A calculator repeats those steps instantly, and a printed chart does them once for every possible score.',
+            ],
+          },
+          {
+            heading: 'Is 75% a 2.5 GPA?',
+            paragraphs: [
+              'Usually not. On the common 4.0 scale, 75% is a C, and a C is worth 2.0 grade points. A plus/minus scale keeps 75% in the C band too (roughly 73% to 76%), so the value stays at 2.0. A 2.5 falls between a C+ (2.3) and a B- (2.7), so it tends to appear only when a school uses its own conversion table or averages several courses. The school’s published scale always has the final word.',
+            ],
+          },
+          {
+            heading: 'Is 7.6 CGPA first class?',
+            paragraphs: [
+              'In most Indian universities, yes. First class generally begins at around 60%, and a 7.6 CGPA converts to 72.2% under the common CGPA × 9.5 rule, which clears that line comfortably. It stays under the 75% mark many universities use for distinction, although a university that multiplies by 10 would read the same CGPA as 76%. The university’s own circular decides, and the CGPA to percentage calculator lists formulas for specific universities.',
+            ],
+          },
+          {
+            heading: 'What is 70% of a grade?',
+            paragraphs: [
+              'That depends on what is being asked. As a score, 70% is a C on the standard scale (the very bottom of the C band, and a C- on a plus/minus scale), worth 2.0 grade points. As a share of a number, 70% of 50 points is 35 points. As a weight, a category worth 70% of the final grade counts for more than twice as much as every other category put together.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Mistakes that quietly skew a grade',
+        paragraphs: [
+          'Most grading errors are small, boring and repeatable, which is what makes them dangerous. The usual suspects:',
+        ],
+        bullets: [
+          'Dividing by the wrong total, for example 19 instead of 20 after a question was dropped.',
+          'Rounding early on some papers and late on others.',
+          'Using the wrong scale, such as 90/80/70/60 for a class graded on a 7-point scale.',
+          'Treating half-credit answers as full or zero without telling anyone.',
+          'Dropping equal-weight chart results straight into a weighted course grade.',
+        ],
+        subsections: [
+          {
+            heading: 'One scale, one rounding rule, one chart',
+            paragraphs: [
+              'Consistent easy grade calculator grading removes most of these in a single move. When the whole stack shares one scale, one rounding rule and one chart, there is exactly one place an error could hide, and it can be checked before the first paper is marked.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'How to pick a tool that stays easy',
+        paragraphs: [
+          'The best grading tool is the one that fades into the background. A few quick checks show whether a calculator will do that.',
+        ],
+        subsections: [
+          {
+            heading: 'Look for plain answers',
+            paragraphs: [
+              'An easy to use calculator online should show how it reached the answer, not just the answer itself. A visible formula, a clear scale and a printable result make a real difference when a student or parent asks why a score became a particular letter.',
+            ],
+          },
+          {
+            heading: 'Choose teacher-first features',
+            paragraphs: [
+              'Searches for an easy grader calculator for teachers tend to be about speed and fairness: charts for any test length, custom cutoffs and no account to create. An easy grader calculator online that offers those, works on a phone and costs nothing is hard to beat. Some teachers say ez grade calculator, others say simple grade calculator, and the best tools answer to every name without making anyone learn new vocabulary.',
+            ],
+          },
+          {
+            heading: 'Test it on a real quiz',
+            paragraphs: [
+              'The simplest check is to run one past test through the tool and compare the result with a hand calculation. If the numbers match and the scale is the one the school uses, the tool is ready for the stack. The Quick Grade chart on the Easy Grade Tool homepage builds the chart for any test length from 1 to 1,000 questions and accepts custom cutoffs.',
+            ],
+          },
+        ],
+      },
+    ],
+    lookupTables: [
+      {
+        heading: 'Quick lookup: every score on a 20-question quiz',
+        intro: 'Standard 90/80/70/60 scale. Each row is worked out with the same formula the calculators use.',
+        columns: ['Wrong answers', 'Score', 'Percent', 'Letter'],
+        rows: egcLookupRows,
+      },
+    ],
+    example: {
+      heading: 'The numbers from this guide in one place',
+      scenario: 'Standard 90/80/70/60 scale. Every row is computed with the same formulas the calculators use.',
+      rows: [
+        egcRow(18, 20, '18 out of 20'),
+        egcRow(17, 20, '17 out of 20'),
+        egcRow(17.5, 20, '17.5 out of 20 (half points)'),
+        egcRow(14, 18, '14 out of 18'),
+        egcRow(42, 50, '42 out of 50'),
+      ],
+      takeaway: 'Every result comes from the same two steps: divide points earned by points possible, then read the letter from the scale.',
+    },
+    faqs: [
+      {
+        question: 'Is a grade calculator accurate enough for report cards?',
+        answer:
+          'The arithmetic is exact; what needs checking is the scale. A teacher grade calculator is only as accurate as the cutoffs loaded into it, so the safest habit is to match the scale to the school’s published policy and test one known score by hand before grading the whole stack.',
+      },
+      {
+        question: 'Does the calculator save student names or scores?',
+        answer:
+          'No. Results are worked out in the browser, and the tools need no account or sign-up, so nothing about a class has to be uploaded or stored to get an answer.',
+      },
+      {
+        question: 'How many questions can the chart cover?',
+        answer:
+          'The Quick Grade chart on the homepage builds a chart for any test from 1 to 1,000 questions with custom cutoffs, and the grading scale pages hold ready-made printable charts for common lengths from 5 to 100 questions.',
+      },
+      {
+        question: 'How does a single-score calculator differ from a GPA calculator?',
+        answer:
+          'A grade score calculator turns one result into a percentage and a letter. A GPA calculator averages the grade points from many courses, weighted by credits where needed. The first answers how a single test went, the second answers how the whole term is going.',
+      },
+    ],
+    related: [
+      { path: '/', label: 'Quick Grade chart', blurb: 'Build the chart for any test size, 1–1000 questions.' },
+      { path: '/test-grade-calculator/', label: 'Test score and letter grade', blurb: 'Points earned out of points possible, with bonus points.' },
+      { path: '/final-grade-planner/', label: 'Final exam planner', blurb: 'What each class needs on the final to reach a target.' },
+      { path: '/cgpa-to-percentage-calculator/', label: 'CGPA to percentage', blurb: 'Formulas for 10-point CGPA conversions.' },
+      { path: '/blog/how-to-grade-30-tests-in-15-minutes/', label: 'How to Grade a Stack of 30 Tests in 15 Minutes', blurb: 'The chart-first workflow that turns grading into lookup.' },
     ],
   };
 }

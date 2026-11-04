@@ -9,6 +9,7 @@ import {
   buildGradeFasterPost,
   buildGradingSystemsPost,
   buildHighSchoolVsCollegePost,
+  buildEasyGradeCalculatorGuidePost,
 } from './blogPages';
 import { buildGpaToLetterPage, buildLetterToGpaPage } from './gpaLetterPages';
 import { buildCollegeGpaPage, buildHighSchoolGpaPage } from './schoolGpaPages';
@@ -38,10 +39,18 @@ export interface ToolPageFaq {
   answer: string;
 }
 
+export interface ToolPageSubsection {
+  heading: string;
+  paragraphs: string[];
+  bullets?: string[];
+}
+
 export interface ToolPageSection {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
+  /** Optional H3 blocks rendered under the section's H2 (used by long blog guides). */
+  subsections?: ToolPageSubsection[];
 }
 
 /** A simple data table rendered as a real <table> (good for lookups and snippet-style answers). */
@@ -593,6 +602,7 @@ export const TOOL_PAGES: Record<string, ToolPageEntry> = {
   'blog/when-to-curve-grades': buildCurveGuidePost(),
   'blog/grading-systems-explained': buildGradingSystemsPost(),
   'blog/high-school-vs-college-gpa': buildHighSchoolVsCollegePost(),
+  'blog/easy-grade-calculator-guide': buildEasyGradeCalculatorGuidePost(),
   'weighted-vs-unweighted-gpa': buildWeightedVsUnweightedPage(),
   'how-many-questions-can-i-miss': buildMissCalculatorPage(),
   'grading-scale': buildGradingScaleIndexPage(),

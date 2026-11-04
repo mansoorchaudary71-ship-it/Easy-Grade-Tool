@@ -261,6 +261,7 @@ function AppMain({ syncComponents }: { syncComponents?: AppSyncComponents }) {
               <Route path="/blog/when-to-curve-grades" element={<CompToolPage slug="blog/when-to-curve-grades" />} />
               <Route path="/blog/grading-systems-explained" element={<CompToolPage slug="blog/grading-systems-explained" />} />
               <Route path="/blog/high-school-vs-college-gpa" element={<CompToolPage slug="blog/high-school-vs-college-gpa" />} />
+              <Route path="/blog/easy-grade-calculator-guide" element={<CompToolPage slug="blog/easy-grade-calculator-guide" />} />
               <Route path="/gpa-to-letter-grade" element={<CompToolPage slug="gpa-to-letter-grade" />} />
               <Route path="/letter-grade-to-gpa" element={<CompToolPage slug="letter-grade-to-gpa" />} />
               <Route path="/high-school-gpa-calculator" element={<CompToolPage slug="high-school-gpa-calculator" />} />

@@ -333,6 +333,21 @@ export const ToolPage: React.FC<ToolPageProps> = ({ slug }) => {
                   ))}
                 </ul>
               )}
+              {section.subsections?.map((sub) => (
+                <div key={sub.heading} className="space-y-2 pt-2">
+                  <h3 className="text-lg font-semibold tracking-tight text-slate-900 m-0">{sub.heading}</h3>
+                  {sub.paragraphs.map((para) => (
+                    <p key={para} className="text-base text-slate-700 leading-relaxed m-0">{para}</p>
+                  ))}
+                  {sub.bullets && (
+                    <ul className="m-0 pl-5 list-disc text-base text-slate-700 space-y-1">
+                      {sub.bullets.map((b) => (
+                        <li key={b}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </section>
           ))}
           <section className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3">
