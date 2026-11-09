@@ -14,6 +14,7 @@
     "postbuild": "tsx scripts/verify-launch.ts",
     "verify": "tsx scripts/verify-launch.ts",
     "check:live": "tsx scripts/check-live.ts",
+    "check:status": "tsx scripts/check-status.ts",
     "verify:selftest": "tsx scripts/verify-selftest.ts",
     "prerender": "tsx scripts/prerender.ts",
     "sitemap": "tsx scripts/generateSitemap.ts",
